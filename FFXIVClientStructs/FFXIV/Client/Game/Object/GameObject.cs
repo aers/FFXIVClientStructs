@@ -21,6 +21,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x70)] public byte EventState;
     [FieldOffset(0x78)] public uint EntityId;
     [FieldOffset(0x7C)] public uint LayoutId;
+    [FieldOffset(0x80)] public uint GimmickId;
     [FieldOffset(0x84)] public uint BaseId;
     [FieldOffset(0x88)] public uint OwnerId;
     [FieldOffset(0x8C)] public ushort ObjectIndex; // index in object table
@@ -97,11 +98,17 @@ public unsafe partial struct GameObject {
     [VirtualFunction(13)]
     public partial void DisableDraw();
 
+    [VirtualFunction(17)]
+    public partial void SetDrawObject(DrawObject* drawObject);
+
     [VirtualFunction(23)]
     public partial DrawObject* GetDrawObject();
 
+    [VirtualFunction(24)]
+    public partial CharacterBase* GetCharacterBase();
+
     [VirtualFunction(26)]
-    public partial void Highlight(ObjectHighlightColor color);
+    public partial void Highlight(ObjectHighlightColor color); // TODO: add missing "bool includeMount = true" arg
 
     /// <param name="outHandlers">Should point to array that can fit up to 32 pointers.</param>
     /// <returns>Num elements filled.</returns>
@@ -116,6 +123,9 @@ public unsafe partial struct GameObject {
 
     [VirtualFunction(47)]
     public partial uint GetNameId();
+
+    [VirtualFunction(53)]
+    public partial TargetType GetTargetType();
 
     [VirtualFunction(54)]
     public partial void PositionModified();
@@ -150,6 +160,9 @@ public unsafe partial struct GameObject {
     /// <returns><c>true</c> if the ray intersects with the game object; otherwise, <c>false</c>.</returns>
     [VirtualFunction(69)]
     public partial bool IntersectsRay(Ray* ray, Vector3* outHitPosition, bool* outModelChecked);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 B8")]
+    public partial Character.Character* GetAsCharacter();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
     public partial void SetDrawOffset(float x, float y, float z);
@@ -292,6 +305,16 @@ public enum BattleNpcSubKind : byte {
 
     /// <summary> Squadron, Trust, Duty Support </summary>
     NpcPartyMember = 9,
+}
+
+public enum TargetType {
+    NonPartyPc = 0,
+    Party = 1,
+    Alliance = 2,
+    Pet = 3,
+    Enemy = 4,
+    Minion = 5,
+    NpcOrObject = 6
 }
 
 [Flags]

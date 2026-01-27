@@ -60,6 +60,9 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(40)]
     public partial SoftKeyboardDeviceInterface* GetSoftKeyboardDeviceInterface();
 
+    [VirtualFunction(66)]
+    public partial void OnCursorTypeChange(AtkCursor.CursorType cursorType);
+
     // Component::GUI::AtkModuleInterface::AtkEventInterface
     // no explicit constructor, just an event interface 
     [GenerateInterop(isInherited: true)]
@@ -68,7 +71,11 @@ public unsafe partial struct AtkModuleInterface {
         [VirtualFunction(0)]
         public partial AtkValue* ReceiveEvent(AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind);
 
+        [VirtualFunction(1), Obsolete("Renamed to ReceiveEventWithResult")]
+        public partial AtkValue* ReceiveEvent2(AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind);
+
+        /// <remarks> Using FireCallbackWithResult, the return value is actually forwarded to the caller and might have a different ValueType besides bool. </remarks>
         [VirtualFunction(1)]
-        public partial AtkValue* ReceiveEvent2(AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind); // seems to handle user input validation? but... not always 🤔
+        public partial AtkValue* ReceiveEventWithResult(AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind);
     }
 }

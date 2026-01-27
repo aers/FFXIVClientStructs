@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -16,7 +15,6 @@ public unsafe partial struct AddonConfig {
 
     [FieldOffset(0x50)] public bool IsLoaded;
     [FieldOffset(0x58)] public AddonConfigDataSet* ActiveDataSet;
-    [FieldOffset(0x58), Obsolete("Use ActiveDataSet", true)] public AddonConfigDataSet* ModuleData;
     [FieldOffset(0x60)] public StdList<Pointer<AddonConfigDataSet>> DataSets;
 
     /// <summary>
@@ -68,7 +66,6 @@ public unsafe partial struct AddonConfig {
 [StructLayout(LayoutKind.Explicit, Size = 0xD4B8)]
 public unsafe partial struct AddonConfigDataSet {
     [FieldOffset(0x00)] public Utf8String Name;
-    [FieldOffset(0x00), Obsolete("Renamed to Name", true)] public Utf8String DefaultString;
     [FieldOffset(0x68)] public StdList<Pointer<AddonConfigEntry>> UsedAddonConfigEntries;
     [FieldOffset(0x78)] public StdList<Pointer<AddonConfigEntry>> UnusedAddonConfigEntries;
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray1053<AddonConfigEntry> _configEntries; // 111 (Default HudLayout?) + 942 (the amount of addons in RaptureAtkModule)

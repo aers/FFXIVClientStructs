@@ -73,13 +73,13 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? C1 EE ?? 41 B8")]
     public partial void SetHasSecondDyeChannel(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 32 D2 44 8B C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? B2 ?? EB")]
     public partial void SetIsMacro(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? C1 EF 08 45 33 C0")]
     public partial void SetIsGlamoured(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF 41 83 FC ?? 74")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 8D 45")]
     public partial void SetIsRecipe(bool enabled);
 
     [MemberFunction("44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1")]
@@ -125,7 +125,7 @@ public enum IconComponentFlags : uint {
     IsRecipe = 1 << 8,
     IsIconLoading = 1 << 9,
     IsBeingDragged = 1 << 10,
-    Unk2048 = 1 << 11,
+    Unk2048 = 1 << 11, // overrides DrawOrderIndex with one from RaptureAtkUnitManager
     IsDisabled = 1 << 12, // for example due to casting or having a window open that disables actions
     Unk8192 = 1 << 13,
 }

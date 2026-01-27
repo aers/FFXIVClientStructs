@@ -1,7 +1,6 @@
 using FFXIVClientStructs.FFXIV.Application.Network;
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Network;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.Text;
@@ -141,7 +140,7 @@ public unsafe partial struct CharaSelectCharacterEntry {
     [MemberFunction("0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0")]
     public partial bool IsNotLocked();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 56 49 8B CC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? 49 8B CD")]
     public partial bool IsInDifferentRegion();
 }
 

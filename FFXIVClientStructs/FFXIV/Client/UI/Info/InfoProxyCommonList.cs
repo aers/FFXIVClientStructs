@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
@@ -6,8 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 // Client::UI::Info::InfoProxyCommonList
 //   Client::UI::Info::InfoProxyPageInterface
 //     Client::UI::Info::InfoProxyInterface
+//   Client::Game::Character::CharacterManagerInterface
 [GenerateInterop(isInherited: true)]
-[Inherits<InfoProxyPageInterface>]
+[Inherits<InfoProxyPageInterface>, Inherits<CharacterManagerInterface>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 30", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct InfoProxyCommonList {

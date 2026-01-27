@@ -17,6 +17,9 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray490<Pointer<AgentInterface>> _agents;
     [FieldOffset(0xF70)] public AgentHelpers AgentHelpers;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 48 8B CE")]
+    public partial void Ctor(UIModule* uiModule);
+
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 }
@@ -517,7 +520,7 @@ public enum AgentId : uint {
     MKDRelicGrowth = 482,
     MKDRelicGrowth2 = 483,
     QuickPanel = 484,
-    Unk485 = 485, // new in 7.4
+    EventTutorial = 485,
     ConfigCharacterChatLogMiniTalk = 486,
     ToggleContextMenu = 487,
     Unk488 = 488, // new in 7.3

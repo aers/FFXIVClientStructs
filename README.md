@@ -27,11 +27,6 @@ This project would not be possible without significant work from many members of
 
 [Too many](https://github.com/aers/FFXIVClientStructs/graphs/contributors) to list.
 
-> [!IMPORTANT]
-> The following information will have slight inaccuracies due to generator changes introduced to the project with Dawntrail
-> 
-> This is in the process of being updated
-
 ## For Library Users
 
 ### Signature Resolution
@@ -273,7 +268,7 @@ Note that in this case the static address is a pointer, so the attribute argumen
 
 Since the instructions resolved from static address signatures are variable length, an offset argument is required to tell the resolver where to read the static address location from in the signature. This offset is usually to the first (0-indexed) ?? in your signature, but could be further away in some situations.
 
-### [VTableAddress]
+#### [VTableAddress]
 
 ```csharp
 public VTableAddressAttribute(string signature, int offset, bool isPointer = false)
@@ -303,7 +298,7 @@ public unsafe partial struct AddonRetainerTaskAskVirtualTable
 public static AddonRetainerTaskAskVirtualTable* StaticVirtualTablePointer => (AddonRetainerTaskAskVirtualTable*)Addresses.StaticVirtualTable.Value;
 ```
 
-#### Static Virtual Function Pointers
+##### Static Virtual Function Pointers
 
 If a struct is both annotated with `[VTableAddress(...)]` and has functions annotated with `[VirtualFunction(...)]`, the `StaticVTable` can then be used to get static addresses for those functions which can be used for staticly hooking the function call. For example:
 

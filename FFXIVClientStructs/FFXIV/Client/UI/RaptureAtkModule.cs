@@ -1,6 +1,6 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
@@ -24,9 +24,7 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [FieldOffset(0x82E0)] public GameUIScene UIScene;
-    [FieldOffset(0x82E0), Obsolete($"Renamed to {nameof(UIScene)}", true)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
     [FieldOffset(0x82E2)] public GameUIMode UIMode;
-    [FieldOffset(0x82E2), Obsolete($"Renamed to {nameof(UIMode)}", true)] public ushort UISetupStage; // unsure
 
     [FieldOffset(0x8378)] internal Utf8String Unk8358;
     [FieldOffset(0x83E0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
@@ -39,6 +37,8 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x8838), FixedSizeArray] internal FixedSizeArray942<AddonFactoryInfo> _addonFactories;
     [FieldOffset(0x11B68)] public StdVector<Utf8String> AddonNames;
     [FieldOffset(0x11B80)] public AddonConfig* AddonConfigPtr;
+
+    [FieldOffset(0x11B8A)] public AtkCursor.CursorType CursorType;
 
     // [FieldOffset(0x11B90)] public ProhibitModule ProhibitModule;
     [FieldOffset(0x11C28)] public int AudioClientRpcTagSize;
@@ -111,6 +111,9 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 49 8D 56 ?? 41 B0 01")]
     public partial void OpenDawnStory(uint contentFinderCondition);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 48 8B AC 24 ?? ?? ?? ?? 48 8D 4C 24")]
+    public partial void OpenLuaUI(int id, int* args, long argCount);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9B ?? ?? ?? ?? 48 8B CE")]
     public partial void OpenSatisfactionSupply(nint a2, uint satisfactionNPC, bool a4);
 
@@ -166,10 +169,30 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x74)] public uint IconId;
         [FieldOffset(0x78)] public uint StackSize;
         [FieldOffset(0x7C)] public byte EquipSlotCategory;
-        [FieldOffset(0x7D)] public byte AdditionalData; // if FilterGroup == 15
-        [FieldOffset(0x7E)] public byte LevelEquip;
-        [FieldOffset(0x7F)] public byte SubStatCategory;
-        [FieldOffset(0x80)] public short LevelItem;
+        [FieldOffset(0x7D)] public byte AdditionalDataCount;
+        /// <remarks>
+        /// Only set if FilterGroup == 15
+        /// </remarks>
+        [FieldOffset(0x7E)] public byte AdditionalData;
+        [FieldOffset(0x7F)] public byte LevelEquip;
+        [FieldOffset(0x80)] public byte SubStatCategory;
+        [FieldOffset(0x82)] public short LevelItem;
+        /// <remarks>
+        /// Only set if item contains a glamour and not FilterGroup == 15
+        /// </remarks>
+        [FieldOffset(0x84)] public uint GlamourId;
+
+        [VirtualFunction(0)]
+        public partial ItemCache* Dtor(byte freeFlags);
+
+        [VirtualFunction(1)]
+        public partial void Clear();
+
+        [VirtualFunction(2)]
+        public partial bool SetFromInventoryItem(InventoryItem* item);
+
+        [VirtualFunction(3)]
+        public partial void Update(uint itemId, [CExporterExcel("Item")] void* itemPtr, uint glamourId, [CExporterExcel("Item")] void* glamourItemPtr);
     }
 
     // Client::UI::RaptureAtkModule::InventoryCache
@@ -200,7 +223,6 @@ public unsafe partial struct RaptureAtkModule {
 
         /// <remarks> Set when the RetainerMarket inventory has been updated. </remarks>
         RetainerMarketInventoryUpdate = 1 << 2,
-        [Obsolete("Renamed to RetainerMarketInventoryUpdate", true)] RetainerUpdate = 1 << 2,
 
         /// <remarks> Unknown use case. </remarks>
         NameplateUpdate = 1 << 3,

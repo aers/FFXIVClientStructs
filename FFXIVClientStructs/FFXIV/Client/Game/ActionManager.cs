@@ -397,23 +397,30 @@ public enum ActionType : uint {
     Action,
     Item,
     EventItem,
-    [Obsolete("Renamed to EventItem", true)] KeyItem = 3,
     EventAction,
-    [Obsolete("Renamed to EventAction", true)] Ability = 4,
     GeneralAction,
     BuddyAction,
     MainCommand,
     Companion,
     CraftAction,
-    Unk_10, // Fishing per Sapphire? Something to do with items.
+    Unk10, // Fishing per Sapphire? Something to do with items.
     PetAction,
-    Unk_12, // Not in UseAction. Sapphire says CompanyAction, but not actually triggered.
+    Unk12, // Not in UseAction. Sapphire says CompanyAction, but not actually triggered.
     Mount,
     PvPAction,
     FieldMarker,
     ChocoboRaceAbility,
     ChocoboRaceItem,
-    Unk_18, // Not in UseAction (?)
+    Unk18, // Not in UseAction (?)
     BgcArmyAction,
     Ornament,
+
+    [Obsolete("Why are you using this without documenting it in CS?", true)]
+    Unk_10 = 10,
+
+    [Obsolete("Why are you using this without documenting it in CS?", true)]
+    Unk_12 = 12,
+
+    [Obsolete("Why are you using this without documenting it in CS?", true)]
+    Unk_18 = 18,
 }

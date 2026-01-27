@@ -1,7 +1,6 @@
 // ReSharper disable once CheckNamespace
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -15,8 +14,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0xA220)]
 public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x10)] public HousingFurnitureManager FurnitureManager;
-    [FieldOffset(0x10), Obsolete("Use FurnitureManager.FurnitureMemory or FurnitureVector", true), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
-    [FieldOffset(0x8968), Obsolete("Use FurnitureManager.HousingObjectManager", true)] public HousingObjectManager HousingObjectManager;
 
     [FieldOffset(0x9690)] public ExcelSheetWaiter* ItemExcelSheetWaiter;
     [FieldOffset(0x9698)] public ExcelSheet* ItemExcelSheet;

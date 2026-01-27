@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.SteamApi.Callbacks;
 
 namespace FFXIVClientStructs.FFXIV.Component.SteamApi;

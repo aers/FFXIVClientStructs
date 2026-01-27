@@ -77,7 +77,6 @@ public unsafe partial struct ToDoListNumberArray {
     // Bar color is only enabled for duty objectives, and only for objective type LargeColorBar
     [FieldOffset(157 * 4), FixedSizeArray] internal FixedSizeArray10<BarColor> _barColors;
 
-    [FieldOffset(167 * 4), Obsolete($"Renamed to {nameof(DutyCompletedObjectives)}", true)] public int CurrentDutyObjective;
     // bitfields, bit index is objective index
     [FieldOffset(167 * 4)] public uint DutyCompletedObjectives;
     [FieldOffset(168 * 4)] public uint ObjectiveFocusable;
@@ -137,18 +136,6 @@ public unsafe partial struct ToDoListNumberArray {
         /// <remarks> See <see cref="TodoType.LongBar"/>. </remarks>
         LongBar = 15,
 
-        // old values
-        [Obsolete($"Renamed to {nameof(Text)}", true)] None = 0,
-        [Obsolete($"Renamed to {nameof(Number)}", true)] SmallText = 1, // 2 also has this effect
-        [Obsolete($"Renamed to {nameof(Bar)}", true)] InlineBar = 3, // 4 also has this effect
-        [Obsolete($"Renamed to {nameof(TimeRemaining)}", true)] InlineTimer = 5,
-        [Obsolete($"Renamed to {nameof(LargeGrayText)}", true)] LargeText = 6, // 7 and 8 also have this effect
-        [Obsolete($"Renamed to {nameof(ProgressBar)}", true)] LargeBar = 9,
-        [Obsolete($"Renamed to {nameof(ColorableBar)}", true)] LargeBarColorable = 10,
-        [Obsolete($"Renamed to {nameof(LargeBlueText)}", true)] LargeText2 = 12, // Much like LargeText, but different for unknown reasons
-        [Obsolete($"Renamed to {nameof(LargeTimeRemaining)}", true)] LargeInlineTimer = 13,
-        [Obsolete($"Renamed to {nameof(JoinButton)}", true)] BigCheckbox = 14, // looks like level sync button
-        [Obsolete($"Renamed to {nameof(LongBar)}", true)] InlineBarLong = 15 // 16 also has this effect
     }
 
     public enum BarColor {

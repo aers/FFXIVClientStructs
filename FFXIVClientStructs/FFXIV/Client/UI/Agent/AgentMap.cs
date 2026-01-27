@@ -1,6 +1,5 @@
 using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -107,6 +106,9 @@ public unsafe partial struct AgentMap {
     // Specifically omits any MapMarkers with DataType == 3
     [MemberFunction("E8 ?? ?? ?? ?? 81 A5 ?? ?? ?? ?? ?? ?? ?? ?? 8B 8D ?? ?? ?? ?? C1 E9 15")]
     public partial void CreateMiniMapMarkers(bool omitAetherytes);
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 48 8D B1")]
+    public partial void UpdateEventMapMarkers(StdVector<Pointer<MapMarkerData>>* markerPtrs);
 
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
         if (MiniMapMarkerCount >= MiniMapMarkers.Length) return false;

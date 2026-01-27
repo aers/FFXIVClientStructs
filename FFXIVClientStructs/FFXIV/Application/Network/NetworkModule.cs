@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Network;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common;
 
 namespace FFXIVClientStructs.FFXIV.Application.Network;

@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
@@ -16,7 +15,7 @@ public unsafe partial struct EventHandler {
 
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
-    [FieldOffset(0x88)] public ulong SceneFlags;
+    [FieldOffset(0x88)] public ulong SceneFlags; // TODO: use SceneFlag enum
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 
@@ -48,9 +47,6 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(262)]
     public partial uint GetEventItemId();
-
-    [VirtualFunction(265), Obsolete($"Renamed to {nameof(GetDirectorTodos)}", true)]
-    public partial StdVector<EventHandlerObjective>* GetObjectives();
 
     [VirtualFunction(265)]
     public partial StdVector<DirectorTodo>* GetDirectorTodos();
@@ -465,4 +461,85 @@ public enum MaterializeEntryId : ushort {
     Desynth = 0x0000,
     Retrieve = 0x0001, // Materia Retrieval
     Purify = 0x0002, // Aetherial Reduction
+}
+
+// Taken from EventHandler lua definitions
+[Flags]
+public enum SceneFlag : ulong {
+    None = 0,
+
+    NoDefaultCamera = 1UL << 0,
+    FadeOut = 1UL << 1,
+    InvisENpc = 1UL << 2,
+    InvisEObj = 1UL << 3,
+    InvisBnpc = 1UL << 4,
+    InvisOtherPc = 1UL << 5,
+    InvisPartyPc = 1UL << 6,
+    InvisGatheringPoint = 1UL << 7,
+    InvisAetheryte = 1UL << 8,
+    InvisTreasure = 1UL << 9,
+    ConditionCutscene = 1UL << 10,
+    HideUi = 1UL << 11,
+    AutoLocCamera = 1UL << 12,
+    HideHotbar = 1UL << 13,
+    Invincible = 1UL << 14,
+    SilentEnterTerriEnv = 1UL << 15,
+    SilentEnterTerriBgm = 1UL << 16,
+    SilentEnterTerriSe = 1UL << 17,
+
+    DisableSkip = 1UL << 19,
+
+    HideFestival = 1UL << 21,
+    DisableStealth = 1UL << 22,
+    RollbackHideUi = 1UL << 23,
+    LockHud = 1UL << 24,
+    LockHotbar = 1UL << 25,
+    DisableCancelEmote = 1UL << 26,
+    InvisAoe = 1UL << 27,
+    InvisPartyBuddy = 1UL << 28,
+    InvisAlliancePc = 1UL << 29,
+    InvisAllianceBuddy = 1UL << 30,
+    InvisCompanion = 1UL << 31,
+    InvisWeapon = 1UL << 32,
+    FixStandObject = 1UL << 33,
+    FadeOutAfterEmote = 1UL << 34,
+
+    InvisHObj = 1UL << 36,
+
+    SilentEnterTerriAll = SilentEnterTerriEnv | SilentEnterTerriBgm | SilentEnterTerriSe,
+
+    // Does not contain InvisWeapon!
+    InvisAll = InvisENpc
+        | InvisEObj
+        | InvisBnpc
+        | InvisOtherPc
+        | InvisPartyPc
+        | InvisGatheringPoint
+        | InvisAetheryte
+        | InvisTreasure
+        | InvisAoe
+        | InvisPartyBuddy
+        | InvisAlliancePc
+        | InvisAllianceBuddy
+        | InvisCompanion,
+
+    SetBase = NoDefaultCamera
+        | FadeOut
+        | InvisEObj
+        | InvisBnpc
+        | InvisOtherPc
+        | InvisPartyPc
+        | InvisGatheringPoint
+        | InvisTreasure
+        | ConditionCutscene
+        | HideUi
+        | DisableStealth
+        | InvisAoe
+        | InvisPartyBuddy
+        | InvisAlliancePc
+        | InvisAllianceBuddy
+        | InvisCompanion,
+
+    SetEObjBase = SetBase & ~InvisEObj,
+    SetInvisBase = SetBase | InvisAll,
 }

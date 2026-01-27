@@ -18,6 +18,8 @@ public unsafe partial struct GameMain {
 
     [FieldOffset(0xB28)] public JobGaugeManager JobGaugeManager;
 
+    [FieldOffset(0xBA0)] public ContentsReplayManager ContentsReplayManager;
+
     [FieldOffset(0x4038)] public EmoteManager EmoteManager;
 
     [FieldOffset(0x40F0)] public void* CurrentContentFinderConditionRow;

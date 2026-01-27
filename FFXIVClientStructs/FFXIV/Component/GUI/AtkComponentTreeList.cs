@@ -14,6 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkComponentTreeList : ICreatable {
     [FieldOffset(0x1B0)] public StdVector<Pointer<AtkComponentTreeListItem>> Items;
 
+    [FieldOffset(0x1E8)] private float Unk1E8; // ScrollMultiplier?
     [FieldOffset(0x224)] public bool LayoutRefreshPending;
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 0F 57 C0")]
@@ -35,7 +36,19 @@ public unsafe partial struct AtkComponentTreeList : ICreatable {
         int uintValuesCountPerItem,
         int stringValuesCountPerItem,
         int itemCount,
-        nint a9);
+        ListComponentCallBackInterface* callBackInterface = null);
+
+    [Obsolete("Use LoadAtkValues with callBackInterface parameter")]
+    public void LoadAtkValues(
+        int atkValuesCount,
+        AtkValue* atkValues,
+        int uintValuesOffset,
+        int stringValuesOffset,
+        int uintValuesCountPerItem,
+        int stringValuesCountPerItem,
+        int itemCount,
+        nint a9)
+        => LoadAtkValues(atkValuesCount, atkValues, uintValuesOffset, stringValuesOffset, uintValuesCountPerItem, stringValuesCountPerItem, itemCount, (ListComponentCallBackInterface*)a9);
 
     /// <remarks>
     /// Expands the given group and collapses all other groups.<br/>

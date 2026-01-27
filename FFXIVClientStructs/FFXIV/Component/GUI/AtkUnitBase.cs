@@ -25,7 +25,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x108), FixedSizeArray] internal FixedSizeArray2<Pointer<AtkResNode>> _additionalFocusableNodes; // allow UnitBase to be focused. for example, yellow bar above ContentsFinder
     [FieldOffset(0x118)] public AtkComponentNode* CurrentDropDownOwnerNode;
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
-    [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
+    [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for show/hide transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
     [FieldOffset(0x180)] public StdVector<CStringPointer> CachedAtkValueStrings;
     /// <summary>
@@ -74,9 +74,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <summary>
     /// <code>
     /// 0b0000_0100 [0x4] = LoadUldByName was called<br/>
-    /// 0b0000_1000 [0x8] = Disable close transition<br/>
-    /// 0b0010_0000 [0x20] = Suppress open/close sounds<br/>
-    /// 0b0100_0000 [0x40] = Don't load/save AddonConfig
+    /// 0b0000_1000 [0x8] = Disable hide transition<br/>
+    /// 0b0010_0000 [0x20] = Disable show/hide sound effects<br/>
+    /// 0b0100_0000 [0x40] = Disable loading/saving AddonConfig
     /// </code>
     /// </summary>
     [FieldOffset(0x1A2)] public byte Flags1A2;
@@ -84,7 +84,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <code>
     /// 0b0000_0001 [0x1] = Enable title bar context menu<br/>
     /// 0b0010_0000 [0x20] = Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
-    /// 0b0100_0000 [0x40] = Make WindowCollisionNode non-interactable (no focus on click, not moving addon when dragged)
+    /// 0b0100_0000 [0x40] = Disable WindowCollisionNode interactivity (no focus on click, not moving the addon when dragged)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A3)] public byte Flags1A3;
@@ -96,25 +96,28 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A4)] public byte Flags1A4;
     /// <summary>
     /// <code>
-    /// 0b0010_0000 [0x20] = Populate TextNode texts (before OnSetup)<br/>
-    /// 0b0100_0000 [0x40] = Don't show on open
+    /// 0b0010_0000 [0x20] = Enable TextNodes to be populated (before OnSetup)<br/>
+    /// 0b0100_0000 [0x40] = Disable show on open
     /// </code>
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
     // 2 bytes padding
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
-    [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
-    [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1AC)] public uint ShowTransitionDuration;
+    [FieldOffset(0x1B0)] public uint HideTransitionDuration;
     [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
-    [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
+    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
+    /// <remarks> Used for dialogs, context menus and other windows that cause inputs to be blocked. Checked in <see cref="ShouldIgnoreInputs"/>. </remarks>
+    [FieldOffset(0x1B9)] public byte NumBlockingAddons;
     [FieldOffset(0x1BA)] private byte Unk1BA;
     [FieldOffset(0x1BB)] private byte Unk1BB;
-    [FieldOffset(0x1BC)] public float OpenTransitionScale;
-    [FieldOffset(0x1C0)] public float CloseTransitionScale;
+    [FieldOffset(0x1BC)] public float ShowTransitionScale;
+    [FieldOffset(0x1C0)] public float HideTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
     /// <summary>
     /// <code>
+    /// 0x4 = Enable Filter (Modal window)
     /// 0x800 = Disable "Scale Window" option in the title bar context menu
     /// </code>
     /// </summary>
@@ -137,20 +140,21 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
     /// <remarks> Index in <see cref="AtkUnitManager.HudAnchoringTable"/>. </remarks>
     [FieldOffset(0x1D2)] public sbyte HudAnchoringInfoIndex; // -1 = undefined
-    [FieldOffset(0x1D2), Obsolete("Renamed to HudAnchoringInfoIndex", true)] public byte Unk1D2;
     // 1 byte padding
     [FieldOffset(0x1D4)] public short X;
     [FieldOffset(0x1D6)] public short Y;
-    [FieldOffset(0x1D8)] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1DA)] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1DC)] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1DE)] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1E0)] public short OpenSoundEffectId;
+    [FieldOffset(0x1D8)] public short ShowTransitionOffsetX;
+    [FieldOffset(0x1DA)] public short ShowTransitionOffsetY;
+    [FieldOffset(0x1DC)] public short HideTransitionOffsetX;
+    [FieldOffset(0x1DE)] public short HideTransitionOffsetY;
+    [FieldOffset(0x1E0)] public short ShowSoundEffectId;
     [FieldOffset(0x1E2)] public ushort AtkValuesCount;
     [FieldOffset(0x1E4)] public ushort Id;
     [FieldOffset(0x1E6)] public ushort ParentId;
     [FieldOffset(0x1E8)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
-    [FieldOffset(0x1EA)] public ushort ContextMenuParentId;
+    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
+    /// <remarks> Used by context menus or other windows that cause interaction with the addon set here to be blocked. </remarks>
+    [FieldOffset(0x1EA)] public ushort BlockedParentId;
     [FieldOffset(0x1EC)] public byte CursorNavigationOwnIndex;
     [FieldOffset(0x1ED)] public byte Alpha;
     [FieldOffset(0x1EE)] public byte ShowHideFlags;
@@ -158,6 +162,16 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
+
+    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration")] public uint OpenTransitionDuration;
+    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration")] public uint CloseTransitionDuration;
+    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale")] public float OpenTransitionScale;
+    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale")] public float CloseTransitionScale;
+    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX")] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY")] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX")] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY")] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId")] public short OpenSoundEffectId;
 
     public uint DepthLayer {
         get => (Flags198 >> 16) & 0xF;
@@ -228,6 +242,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 8B 44 24 20")]
     public partial bool FireCallback(uint valueCount, AtkValue* values, bool close = false);
 
+    /// <remarks> Will call <see cref="AtkModuleInterface.AtkEventInterface.ReceiveEventWithResult(AtkValue*, AtkValue*, uint, ulong)"/> of the registered callback handler. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F8")]
+    public partial AtkValue* FireCallbackWithResult(AtkValue* returnValue, uint valueCount, AtkValue* values);
+
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
 
@@ -275,6 +293,12 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF BF")]
     public partial bool ClearOperationGuide(int index);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 44 0F B7 83"), GenerateStringOverloads]
+    public partial bool LoadAddonConfig(short* outWidth, short* outHeight, CStringPointer name, bool isInitialLoad);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF C6 44 24 ?? ?? 4C 8B C7"), GenerateStringOverloads]
+    public partial void SaveAddonConfig(CStringPointer name, bool a2, bool a3);
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
@@ -282,10 +306,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial bool Close(bool fireCallback);
 
     [VirtualFunction(5)]
-    public partial void Show(bool silenceOpenSoundEffect, uint unsetShowHideFlags);
+    public partial void Show(bool disableShowTransition, uint unsetShowHideFlags);
 
     [VirtualFunction(6)]
-    public partial void Hide(bool unkBool, bool callHideCallback, uint setShowHideFlags);
+    public partial void Hide(bool disableHideTransition, bool callCloseCallback, uint setShowHideFlags);
 
     [VirtualFunction(7)]
     public partial void SetPosition(short x, short y);
@@ -325,6 +349,11 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(20)]
     public partial void OnMove();
+
+    /// <remarks> Only called on the current <see cref="AtkCollisionManager.IntersectingAddon"/> for cursor types ChatPointer, Attack and Clickable. </remarks>
+    /// <returns> <see langword="true"/> when a custom sound effect was played, <see langword="false"/> when default should be played (Sound Effect 0). </returns>
+    [VirtualFunction(22)]
+    public partial bool HandleCursorTypeChange();
 
     [VirtualFunction(23)]
     public partial bool ShouldIgnoreInputs();
@@ -384,11 +413,21 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(54)]
     public partial void FireCloseCallback();
 
+    /// <remarks> Called after <see cref="OnSetup(uint, AtkValue*)"/> when entry in AddonConfig existed. </remarks>
+    [VirtualFunction(56)]
+    public partial void SetSizeFromConfig(float width, float height);
+
     [VirtualFunction(57)]
     public partial bool HandleCustomInput(AtkEventData.AtkInputData* inputData);
 
+    [VirtualFunction(59)]
+    public partial void OnFocusChange(bool isFocused);
+
     [VirtualFunction(60)]
     public partial void OnScreenSizeChange(int width, int height);
+
+    [VirtualFunction(61)]
+    public partial void OnConfigLoaded(bool isInitialLoad);
 
     [VirtualFunction(62)]
     public partial void OnMouseOver();

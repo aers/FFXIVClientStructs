@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // Client::Game::InstanceContent::PublicContentOccultCrescent

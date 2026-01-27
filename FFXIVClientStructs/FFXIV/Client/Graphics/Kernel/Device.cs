@@ -26,8 +26,8 @@ public unsafe partial struct Device {
     [FieldOffset(0x9C)] public int ColorFilter;
     [FieldOffset(0xA0)] public float ColorFilterRange;
 
-    [FieldOffset(0xAC)] public short FrameRateLimit;
-    // [FieldOffset(0xAE)] public short FrameRateLimit2; ?
+    [FieldOffset(0xA8)] public bool IsFrameRateLimited;
+    [FieldOffset(0xAE)] public short FrameRateLimit;
 
     // offset 0x758 contains render commands buffer
     // /// <summary>

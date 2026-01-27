@@ -22,14 +22,20 @@ public unsafe partial struct InventoryManager {
     [FieldOffset(0x1E10)] public InventoryType ItemLevelInventoryType;
 
     // Seems to be reused for FATE HandIns and Mail too??!
-    [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal; // 6th slot is Gil
-    [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote; // 6th slot is Gil
+    /// <remarks>
+    /// 6th slot is Gil
+    /// </remarks>
+    [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal;
+    /// <remarks>
+    /// 6th slot is Gil
+    /// </remarks>
+    [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote;
     [FieldOffset(0x2178)] private uint TradeUnk2178;
     [FieldOffset(0x217C)] public TradeState TradeLocalState;
     [FieldOffset(0x2180)] public TradeState TradeRemoteState;
     [FieldOffset(0x2184), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _tradePartnerName;
     [FieldOffset(0x21A4)] public uint TradePartnerEntityId;
-    [FieldOffset(0x21A8)] private bool TradeUnk21A8;
+    [FieldOffset(0x21A8)] private bool TradeLockedIn; // but why not just use TradeLocalState == TradeState.LockedIn SE?
     [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
     [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
 

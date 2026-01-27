@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
@@ -18,14 +17,12 @@ public unsafe partial struct Director {
     [FieldOffset(0x2E8)] public byte Sequence;
     [FieldOffset(0x2EA), FixedSizeArray] internal FixedSizeArray10<byte> _unionData; // I8A-I8J, UI8A-UI8J, Branch etc.
     [FieldOffset(0x2F8)] public Utf8String Title;
-    [FieldOffset(0x360), Obsolete("Renamed to Objective", true)] public Utf8String Description;
     [FieldOffset(0x360)] public Utf8String Objective; // name based on the Lua function "SetDirectorObjective"
     [FieldOffset(0x3C8)] public Utf8String ReliefText;
     // So far, the Content*Timestamps have been seen in Leves.
     // Dungeons and Frontlines do not use these.
     [FieldOffset(0x430)] public long DirectorStartTimestamp;
     [FieldOffset(0x438)] public long DirectorEndTimestamp;
-    [FieldOffset(0x440), Obsolete($"Use {nameof(DirectorTodos)}, or {nameof(GetDirectorTodos)}", true)] public StdVector<EventHandlerObjective> Objectives;
     [FieldOffset(0x440)] public StdVector<DirectorTodo> DirectorTodos; // name based on the Lua function "SetDirectorTodo", 10 objectives max
     [FieldOffset(0x458)] public uint EventItemId;
 
