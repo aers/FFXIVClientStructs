@@ -10550,7 +10550,7 @@ classes:
       0x1408709C0: IsReadyToDraw
       0x1408712E0: SetEventId
       0x140871350: SetFateId
-#oldfail       0x14082EF80: SetEventState
+      0x140871370: SetEventState
       0x140871AB0: GetAsCharacter
       0x140871AE0: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
       0x140871CB0: DistanceBetweenHitboxesXZ # static
