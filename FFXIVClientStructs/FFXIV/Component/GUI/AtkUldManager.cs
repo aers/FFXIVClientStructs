@@ -66,7 +66,7 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 86 ?? ?? ?? ?? 48 85 C0 74 21")]
     public partial void SetupComponentFromULDResourceHandle(byte* uldResourceOffset, uint componentId, ushort* timeline, AtkUldAsset* uldAsset, AtkUldPartsList* uldPartList, ushort assetNum, ushort partsNum, AtkResourceRendererManager* renderManager, bool unkResourceBool, bool keepHandle);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 81 7F ?? ?? ?? ?? ?? 4C 8B CB")]
     public partial void SetupComponentTimelineFromULDResourceHandle(byte* uldResourceOffset, uint componetId, AtkTimelineManager* atkTimeLineManager, AtkResNode* node);
 
@@ -83,7 +83,7 @@ public unsafe partial struct AtkUldManager {
     public partial int GetNodeCount(AtkResNode* node);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 04")]
-    public static partial void ReadAtkTextNodeData(AtkTextNode* node, byte* nodeData,bool unk);
+    public static partial void ReadAtkTextNodeData(AtkTextNode* node, byte* nodeData, bool unk);
 
     public AtkResNode* CreateAtkNode(NodeType type)
         => CreateAtkNode((uint)type);
