@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -115,4 +116,62 @@ public partial struct CommonSpawnData {
         [FieldOffset(0x4)] public float RemainingTime;
         [FieldOffset(0x8)] public uint SourceObjectId;
     }
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+public struct SpawnObjectPacket {
+    [FieldOffset(0x00)] public byte ObjectIndex;
+    [FieldOffset(0x01)] public byte ObjectKind;
+    [FieldOffset(0x02)] public byte TargetableStatus;
+    [FieldOffset(0x03)] public byte Visibility;
+    /// <remarks> <see cref="HousingObjectId"/> when <see cref="ObjectKind.HousingEventObject"/>. </remarks>
+    [FieldOffset(0x04)] public uint BaseId;
+    [FieldOffset(0x08)] public uint EntityId;
+    /// <remarks> Used for <see cref="ObjectKind.EventObj"/> or <see cref="ObjectKind.GatheringPoint"/>. </remarks>
+    [FieldOffset(0x0C)] public uint LayoutId;
+    /// <remarks> Used for <see cref="ObjectKind.EventObj"/>, or for <see cref="ObjectKind.HousingEventObject"/> as bool to decide whether it is a <see cref="HousingCombinedObject"/> (true) or a <see cref="HousingEventObject"/> (false). </remarks>
+    [FieldOffset(0x10)] public EventId EventId;
+    [FieldOffset(0x14)] public uint OwnerId;
+    /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
+    [FieldOffset(0x18)] public uint GimmickId;
+    [FieldOffset(0x1C)] public float Radius;
+    [FieldOffset(0x20)] private ushort Unk20; // SharedGroupTimelineState?
+    [FieldOffset(0x22)] public ushort Rotation;
+    /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
+    [FieldOffset(0x24)] public ushort FateId;
+    /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
+    [FieldOffset(0x26)] public byte EventState;
+    [FieldOffset(0x27)] private byte Unk27;
+    [FieldOffset(0x28)] private uint Unk28;
+    [FieldOffset(0x2C)] private uint Unk2C;
+    [FieldOffset(0x30)] private uint Unk30;
+    [FieldOffset(0x34)] public float PositionX;
+    [FieldOffset(0x38)] public float PositionY;
+    [FieldOffset(0x3C)] public float PositionZ;
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
+public partial struct SpawnTreasurePacket {
+    [FieldOffset(0x00)] public uint BaseId;
+    [FieldOffset(0x04)] public uint EntityId;
+    [FieldOffset(0x08)] public uint LayoutId;
+    [FieldOffset(0x0C)] public ushort Rotation;
+    [FieldOffset(0x0E)] public byte ObjectIndex;
+    [FieldOffset(0x0F)] public byte ItemCount;
+    [FieldOffset(0x10)] public byte EventState;
+    [FieldOffset(0x11)] public byte CofferKind;
+    [FieldOffset(0x12)] public byte Visibility;
+
+    [FieldOffset(0x14)] public float CountdownTime;
+    [FieldOffset(0x18)] public float CountdownStartTime;
+    [FieldOffset(0x1C)] public float ClaimTime;
+    [FieldOffset(0x20)] public EventId EventId;
+    [FieldOffset(0x24)] public uint ExportedSGRowId;
+    [FieldOffset(0x28)] public byte TargetableStatus;
+
+    [FieldOffset(0x2A)] public ushort PositionX;
+    [FieldOffset(0x2C)] public ushort PositionY;
+    [FieldOffset(0x2E)] public ushort PositionZ;
+    [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray16<uint> _lootableItemIds;
 }
