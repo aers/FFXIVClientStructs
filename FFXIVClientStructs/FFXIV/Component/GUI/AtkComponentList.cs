@@ -201,7 +201,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 4C 8B C5 48 8B D7")]
     public partial bool HandleFocusStop(AtkEvent* atkEvent, AtkEventData.AtkFocusData* data);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 4C 8B C5 48 8B D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? ?? ?? ?? 8B D7 48 8B CB FF 90")]
     public partial bool HandleButtonPress(AtkEvent* atkEvent, AtkEventData.AtkInputData* data, int itemIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 44 24 ?? 83 FB")]

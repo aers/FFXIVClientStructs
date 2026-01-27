@@ -296,7 +296,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 44 0F B7 83"), GenerateStringOverloads]
     public partial bool LoadAddonConfig(short* outWidth, short* outHeight, CStringPointer name, bool isInitialLoad);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 44 0F B7 83"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF C6 44 24 ?? ?? 4C 8B C7"), GenerateStringOverloads]
     public partial void SaveAddonConfig(CStringPointer name, bool a2, bool a3);
 
     [VirtualFunction(3)]
