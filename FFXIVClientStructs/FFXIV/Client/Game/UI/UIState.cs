@@ -259,7 +259,7 @@ public unsafe partial struct UIState {
         get {
             if (Control.Control.GetLocalPlayer() is not null and var lp) {
                 var pos = lp->Position;
-                return IsFlyHovering(&pos);
+                return GetIsAirDismountable(&pos);
             }
             return false;
         }
@@ -267,5 +267,5 @@ public unsafe partial struct UIState {
 
     /// <remarks>Only works for LocalPlayer. Use <see cref="IsAirDismountable"/> to not pass params.</remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 24 4D 85 F6")]
-    public partial bool IsFlyHovering(Vector3* position);
+    public partial bool GetIsAirDismountable(Vector3* position);
 }
