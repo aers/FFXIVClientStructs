@@ -2635,6 +2635,7 @@ classes:
       0x140B688F0: HasNextMapAllowanceTimestamp
       0x140B68910: GetNextMapAllowanceTimestamp
       0x140B68920: GetNextChallengeLogResetTimestamp
+      0x140B68590: GetIsAirDismountable
       0x1418E73D0: IsInstanceContentUnlocked   # static
       0x1418E7900: IsInstanceContentCompleted  # static
       0x1416BBCE0: IsPublicContentUnlocked   # static
