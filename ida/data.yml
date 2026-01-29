@@ -5965,6 +5965,7 @@ classes:
       0x140B9D940: HandleUpdateInventorySlotPacket
       0x140B9DDE0: HandleInventoryActionAckPacket
       0x140B9DFD0: HandleUpdatePartyPacket
+      0x140B9E3B0: HandleMarketBoardInfo
       0x140B9E7B0: HandleUpdateAllianceNormalPacket
       0x140B9E7F0: HandleUpdateAllianceSmallPacket
       0x140B9E830: HandleInitZonePacket
