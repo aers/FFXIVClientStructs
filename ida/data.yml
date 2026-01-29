@@ -5985,6 +5985,7 @@ classes:
       0x140B9F530: HandleUpdateAllianceSmallPositionsPacket
       0x140B9F9B0: HandleRSVDataPacket
       0x140B9F9D0: HandleRSFDataPacket
+      0x140B9F9F0: HandleMarketBoardInfo
       0x140B9FA30: HandleHuntingLogEntryPacket
       0x140B9FA70: HandleNPCYellPacket
       0x140B9FCA0: HandleFateProgressTabPacket
