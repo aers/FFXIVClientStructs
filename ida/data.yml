@@ -9281,7 +9281,7 @@ classes:
       212: IsDutyRaidFinderOpen
       214: ShowTalkSubtitle
       215: HideTalkSubtitle
-      218: ShowAdventureNotice
+      216: ShowAdventureNotice
       221: SetLinkshellCycle
       222: RotateLinkshellHistory
       223: SetCrossWorldLinkshellCycle
