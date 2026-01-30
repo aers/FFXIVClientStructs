@@ -13,6 +13,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 4F 28 48 89 07 E8 ?? ?? ?? ?? 48 C7 87", 3)]
 public unsafe partial struct AgentTryon {
     [FieldOffset(0x28)] public TryonCharaView CharaView;
+    [FieldOffset(0x360)] private byte Unknown360;
+    [FieldOffset(0x361)] private byte Unknown361;
+    [FieldOffset(0x362)] private byte Unknown362;
+    [FieldOffset(0x363)] private byte Unknown363;
+    [FieldOffset(0x364)] private byte Unknown364;
+    [FieldOffset(0x365)] private byte Unknown365;
+    [FieldOffset(0x366)] public bool SaveDeleteOutfit;
+    [FieldOffset(0x367)] public bool DisplayGear;
 
     /// <remarks> Opener AddonId can be left as 0. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB 5B 48 8B 49 10")]
