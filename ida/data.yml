@@ -4884,6 +4884,7 @@ classes:
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14092E5A0: ctor
+      0x140930440: LeaveParty
       0x140930870: DisbandParty
       0x140931480: ChangeOrder
       0x140933180: ModifyCountdown
