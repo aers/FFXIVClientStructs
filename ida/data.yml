@@ -3138,6 +3138,7 @@ classes:
     funcs:
       0x140B29590: RequestTitleList
       0x140B295E0: ReadPacket
+      0x140B29840: SetTitleUnlocked
       0x140B29870: IsTitleUnlocked
   Client::Game::UI::GCSupply:
     instances:
