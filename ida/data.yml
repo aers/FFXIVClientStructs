@@ -5988,6 +5988,7 @@ classes:
       0x140B9F9F0: HandleMarketBoardInfo
       0x140B9FA30: HandleHuntingLogEntryPacket
       0x140B9FA70: HandleNPCYellPacket
+      0x140B9FC30: HandleAchievementsPacket
       0x140B9FCA0: HandleFateProgressTabPacket
       0x140BA2890: HandleMapEffectPacket
       0x140BA2E70: HandleQuestManagerUnkArray2SecondHalfPacket

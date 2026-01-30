@@ -39,6 +39,9 @@ public unsafe partial struct Achievement {
     [MemberFunction("E8 ?? ?? ?? ?? 04 30 FF C3")]
     public partial bool IsComplete(int achievementId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C8 ?? ?? ?? FF 52 ?? 8B 54 24 ?? 48 8B C8")]
+    public partial void SetAchievementCompleted(uint achievementId);
+
     /// <summary> Check if the achievement data has been "loaded" from the server. </summary>
     /// <remarks>
     /// The achievement data will only load when requested (so, when a player goes into the achievements menu).
