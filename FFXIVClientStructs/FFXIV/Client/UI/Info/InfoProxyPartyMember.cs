@@ -17,4 +17,7 @@ public unsafe partial struct InfoProxyPartyMember {
     /// <param name="doUpdate">Runs some update function.</param>
     [MemberFunction("E8 ?? ?? ?? ?? B3 01 88 5C 24 60")]
     public partial void ChangeOrder(int selectedIndex, int targetIndex, bool doUpdate = true);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 88 B7 ?? ?? ?? ?? EB 0B C6 87 ?? ?? ?? ?? ??")]
+    public partial void DisbandParty();
 }

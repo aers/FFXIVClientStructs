@@ -1,7 +1,10 @@
+using static FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Telepo
 [GenerateInterop]
+[Inherits<AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct Telepo {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12", 3)]
@@ -9,6 +12,7 @@ public unsafe partial struct Telepo {
 
     [FieldOffset(0x10)] public StdVector<TeleportInfo> TeleportList;
     [FieldOffset(0x28)] public SelectUseTicketInvoker UseTicketInvoker;
+    [FieldOffset(0x51)] public bool ActiveTeleportRequest;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
     public partial bool Teleport(uint aetheryteId, byte subIndex);
