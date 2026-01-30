@@ -83,7 +83,7 @@ public unsafe partial struct Human {
     public partial byte SetupVisor(ushort modelId, bool visorState);
 
     [Obsolete("Use (HumanDrawData*, bool) instead")]
-    public partial bool UpdateDrawData(byte* data, bool skipEquipment);
+    public bool UpdateDrawData(byte* data, bool skipEquipment) => UpdateDrawData((HumanDrawData*)data, skipEquipment);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 BF ?? ?? ?? ?? ?? 75 34")]
     public partial bool UpdateDrawData(HumanDrawData* data, bool skipEquipmentArrays);
