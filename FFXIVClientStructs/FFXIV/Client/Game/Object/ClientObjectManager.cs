@@ -29,7 +29,7 @@ public unsafe partial struct ClientObjectManager {
     public partial uint CreateBattleCharacter(uint index = 0xFFFFFFFF, byte param = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 4D 85 C0")]
-    public partial GameObject* GetObjectByIndex(ushort id);
+    public partial GameObject* GetObjectByIndex(ushort id); // TODO: Change to return Character*
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B E8 4C 8D 35")]
     public partial uint GetIndexByObject(GameObject* character);
