@@ -82,13 +82,22 @@ public unsafe partial struct Human {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]
     public partial byte SetupVisor(ushort modelId, bool visorState);
 
-    // Updates the customize array and, if not skipEquipment the equip array.
-    // data needs to be 26 bytes if not skipEquipment and 66 bytes otherwise.
-    // Returns false and does nothing if the given race, sex or body type is not equal to the current one, 
-    // or if the race is Hyur and one tribe is Highlander and the other Midlander.
-    [MemberFunction("E8 ?? ?? ?? ?? 83 BF ?? ?? ?? ?? ?? 75 34")]
+    [Obsolete("Use (HumanDrawData*, bool) instead")]
     public partial bool UpdateDrawData(byte* data, bool skipEquipment);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 83 BF ?? ?? ?? ?? ?? 75 34")]
+    public partial bool UpdateDrawData(HumanDrawData* data, bool skipEquipmentArrays);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8B EA 48 81 C1")]
     public partial bool SetupFromCharacterData(byte* data);
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+public partial struct HumanDrawData
+{
+  [FieldOffset(0x00)] public CustomizeData CustomizeData;
+  [FieldOffset(0x1A)] private byte Unk1A;
+  [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipments;
+  [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<EquipmentModelId> _glasses;
 }
