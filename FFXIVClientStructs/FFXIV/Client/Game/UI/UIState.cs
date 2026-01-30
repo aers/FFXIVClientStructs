@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
+using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -250,4 +251,9 @@ public unsafe partial struct UIState {
         var timeStamp = GetNextChallengeLogResetTimestamp();
         return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
     }
+
+    /// <summary> Checks if the local player can dismount in the air. </summary>
+    /// <param name="outPosition"> The position on the ground below the player. </param>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 24 4D 85 F6")]
+    public partial bool GetIsAirDismountable(Vector3* outPosition);
 }
