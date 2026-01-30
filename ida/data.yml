@@ -620,6 +620,10 @@ classes:
     funcs:
       0x141C60290: ctor
       0x140339CC0: Finalizer
+  Application::Network::MyGameLoginCallback:
+    vtbls:
+      - ea: 0x1423A82A0
+        base: Application::Network::LobbyClient::LobbyRequestCallback
   Application::Network::LobbyClientModule:
     vtbls:
       - ea: 0x1423A8468
@@ -3007,7 +3011,7 @@ classes:
       0x140B081C0: GetCraftTypeLevel
       0x140B08350: GetNoteBookDivisionIdByRecipe
       0x140B08460: GetRecipeByIndex # (this, index)
-      0x140B084A0: FirstRecipeIndex
+      0x140B084A0: GetRecipeCount
       0x140B084E0: GetSelectedRecipe
       0x140B09150: Initialize
       0x140B0B2F0: CancelCraftingPassthrough
