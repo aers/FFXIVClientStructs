@@ -3047,7 +3047,7 @@ classes:
       - ea: 0x1420D0CC0
         base: Client::Game::UI::ScenarioTextReader
     funcs:
-      0x140361940: ctor
+      0x140B10E40: ctor
       0x140B1C190: AbandonQuest
       0x140B1D290: IsQuestAccepted
   Client::Game::UI::QuestUI:
