@@ -3,6 +3,7 @@ using static FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Telepo
+//   Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
