@@ -14,7 +14,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentPartyInvite {
     [FieldOffset(0x28)] public InfoProxyPartyInvite* InfoProxyPartyInvite;
     [FieldOffset(0x38)] public Utf8String InviterName;
-    // This has also the AddonId of both Yesno windows, but as the Agent already inherits the same var name from AgentInterface
-    // it is unclear how to properly name this one.
-    //[FieldOffset(0xA0)] public uint AddonId;
+    [FieldOffset(0xA0)] public uint ConfirmAddonId;
 }
