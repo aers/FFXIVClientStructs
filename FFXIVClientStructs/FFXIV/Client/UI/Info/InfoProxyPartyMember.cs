@@ -19,7 +19,7 @@ public unsafe partial struct InfoProxyPartyMember {
     public partial void ChangeOrder(int selectedIndex, int targetIndex, bool doUpdate = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 88 B7 ?? ?? ?? ?? EB 0B C6 87 ?? ?? ?? ?? ??")]
-    public partial void DisbandParty();
+    public static partial void DisbandParty();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 B8 ?? ?? ?? ??")]
     public partial byte LeaveParty();
