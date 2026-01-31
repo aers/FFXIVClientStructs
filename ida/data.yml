@@ -4803,6 +4803,8 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140935760: ctor
+    vfuncs:
+      13: RespondToInvitation
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x1420C6040
@@ -4940,7 +4942,6 @@ classes:
       0x140935F20: InviteToPartyContentId
       0x140935F40: InviteToPartyInInstanceByEntityId
       0x140935FF0: InviteToPartyInInstanceByContentId
-      0x1420C6390: AcceptInvitation
   Client::UI::Info::InfoProxyLinkshell:
     vtbls:
       - ea: 0x1420C63C0
