@@ -1521,6 +1521,16 @@ classes:
       0x14188EDD0: Terminate
 #oldfail       0x141831340: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
 #oldfail       0x141831380: StartOtherMode # (Balloon* this, ushort id) id same as above
+  Client::Game::NpcYellBalloon:
+    funcs:
+      0x14188EF20: Reset
+      0x14188EF80: Ctor
+      0x14188EFE0: Dtor
+      0x14188F040: Initialize # (this, chara*)
+      0x14188F090: Update
+      0x14188F370: OpenBalloon # (this, char*, float, bool, float, bool, bool, bool, byte)
+      0x14188F5F0: Reset2 # This is identical to Reset, but called from things outside of the class instead of from other member functions.
+      0x14188F630: CloseBalloon
   Client::Game::Fate::FateManager:
     instances:
       - ea: 0x1429EB2C0
@@ -3238,6 +3248,7 @@ classes:
       0x140D78CF0: Dtor
       0x140B61130: Initialize
       0x140B61930: Update
+      0x140B62210: HandleYell
   Client::Game::UI::CharaCard:
     instances:
       - ea: 0x1429E6C88
