@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.PartyInvite)]
 [GenerateInterop]
 [Inherits<InfoProxyInvitedList>, Inherits<InfoProxyInvitedInterface>]
-[VirtualTable("48 89 03 48 8D 05 ?? ?? ?? ?? 48 89 43 28 66 89 AB ?? ?? ?? ??", 6)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 43 ?? 66 89 AB", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct InfoProxyPartyInvite {
     [FieldOffset(0x03C)] public uint InviteTime;
