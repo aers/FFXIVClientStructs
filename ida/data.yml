@@ -7046,6 +7046,9 @@ classes:
       0x140436990: SetupIdsAndVfxScale
       0x14042DFB0: UpdateDrawData
       0x140433490: SetupVisor
+  Client::Graphics::Scene::Human::DrawData:
+    funcs:
+      0x14042D980: ctor
   Client::Graphics::Scene::Demihuman:
     vtbls:
       - ea: 0x142095CB0
