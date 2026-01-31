@@ -3034,17 +3034,17 @@ classes:
         base: Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>
   Client::Game::UI::ScenarioTextReader:
     vtbls:
-      - ea: 0x142068700
+      - ea: 0x1420D0CB0
   Client::Game::UI::Journal:
     instances:
       - ea: 0x1429D3640
     vtbls:
-      - ea: 0x142068710
+      - ea: 0x1420D0CC0
         base: Client::Game::UI::ScenarioTextReader
     funcs:
-      0x1409FB7F0: ctor
-      0x140A06B40: AbandonQuest
-      0x140A07BC0: IsQuestAccepted
+      0x140361940: ctor
+      0x140B1C190: AbandonQuest
+      0x140B1D290: IsQuestAccepted
   Client::Game::UI::QuestUI:
     instances:
       - ea: 0x1429D7DA8
