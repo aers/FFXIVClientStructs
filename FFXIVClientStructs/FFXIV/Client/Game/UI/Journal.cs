@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4768)]
 public unsafe partial struct Journal {
-    [StaticAddress("48 8B CE E8 ?? ?? ?? ?? 84 C0 75 35 41 8B CE", 4)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 66 89 83", 3)]
     public static partial Journal* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 35 41 8B CE")]
