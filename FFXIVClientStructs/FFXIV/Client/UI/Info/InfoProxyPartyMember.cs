@@ -22,5 +22,5 @@ public unsafe partial struct InfoProxyPartyMember {
     public partial bool DisbandParty();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 B8 ?? ?? ?? ??")]
-    public partial byte LeaveParty();
+    public partial bool LeaveParty();
 }
