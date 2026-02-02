@@ -54,10 +54,10 @@ public unsafe partial struct WKSManager {
 
     public bool IsMissionGolded(uint missionUnitId) => MissionGoldFlags.CheckBitInSpan(missionUnitId);
 
-    public enum MissionRank : ushort {
+    public enum MissionRank {
         None,
         Bronze,
         Silver,
-        Goild
+        Gold
     }
 }
