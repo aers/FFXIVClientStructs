@@ -12,7 +12,7 @@ public unsafe partial struct Journal {
     public partial bool IsQuestAccepted(ushort questId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 41 8B F8 8B DA 48 8B F1 E8 ?? ?? ?? ?? 48 8B C8")]
-    public partial void AbandonQuest(QuestType type, int questId);
+    public partial void AbandonQuest(QuestType type, uint questId);
 
     public enum QuestType {
         NormalQuest = 1,
