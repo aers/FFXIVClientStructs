@@ -7058,7 +7058,7 @@ classes:
       - ea: 0x142096028
         base: Client::Graphics::Scene::CharacterBase
     funcs:
-      0x14020AB20: ctor
+      0x1404393B0: ctor
   Client::Graphics::Scene::Monster:
     vtbls:
       - ea: 0x1420963A0
