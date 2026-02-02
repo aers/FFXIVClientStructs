@@ -13,4 +13,5 @@ public unsafe partial struct TerrainManager {
     [FieldOffset(0x020)] public ColliderStreamed* Collider;
     [FieldOffset(0x028), FixedSizeArray(isString: true)] internal FixedSizeArray260<byte> _path;
     [FieldOffset(0x12C)] public int State;
+    [FieldOffset(0x43C1)] public bool Wireframe;
 }
