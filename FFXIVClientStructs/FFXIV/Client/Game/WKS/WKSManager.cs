@@ -27,7 +27,7 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0xC20)] public ushort CurrentScore;
     [FieldOffset(0xC24)] public MissionRank CurrentRank;	
     [FieldOffset(0xC2A)] public ushort CollectedTotal;
-    [FieldOffset(0xC2C)] public ushort CollectedIndividual;
+    [FieldOffset(0xC2C)] public byte CollectedIndividual;
 
     [FieldOffset(0xC54)] public uint FishingBait;
 
