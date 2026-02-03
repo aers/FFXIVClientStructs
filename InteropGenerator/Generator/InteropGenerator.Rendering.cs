@@ -75,6 +75,12 @@ public sealed partial class InteropGenerator {
             token.ThrowIfCancellationRequested();
         }
 
+        // write bitfield accessors
+        if (!structInfo.BitFields.IsEmpty) {
+            RenderBitFields(structInfo, writer);
+            token.ThrowIfCancellationRequested();
+        }
+
         // write closing struct hierarchy
         for (var i = 0; i < structInfo.Hierarchy.Length; i++) {
             writer.DecreaseIndent();
@@ -438,5 +444,25 @@ public sealed partial class InteropGenerator {
         }
 
         return writer.ToString();
+    }
+
+    private static void RenderBitFields(StructInfo structInfo, IndentedTextWriter writer) {
+        foreach (BitFieldInfo bitField in structInfo.BitFields) {
+            foreach (string inheritedAttribute in bitField.InheritableAttributes)
+                writer.WriteLine(inheritedAttribute);
+
+            writer.WriteLine($"public {(bitField.IsPartial ? "partial " : "")}{bitField.Type} {bitField.Name}");
+            using (writer.WriteBlock()) {
+                if (bitField.Type == "bool") {
+                    if (bitField.HasGetter) writer.WriteLine($"get => BitOps.GetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index});");
+                    if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, value);");
+                }
+                else {
+                    string mask = $"BitOps.CreateLowBitMask<{bitField.BackingType}>({bitField.Length})";
+                    if (bitField.HasGetter) writer.WriteLine($"get => ({bitField.Type})BitOps.GetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask});");
+                    if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask}, ({bitField.BackingType})value);");
+                }
+            }
+        }
     }
 }
