@@ -4808,6 +4808,8 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140935760: ctor
+    vfuncs:
+      13: RespondToInvitation
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x1420C6040
@@ -4889,6 +4891,8 @@ classes:
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14092E5A0: ctor
+      0x140930440: LeaveParty
+      0x140930870: DisbandParty
       0x140931480: ChangeOrder
       0x140933180: ModifyCountdown
       0x140933290: CancelCountdown

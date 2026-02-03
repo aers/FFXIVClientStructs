@@ -24,6 +24,10 @@ public unsafe partial struct WKSManager {
 
     /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
     [FieldOffset(0xC18)] public ushort CurrentMissionUnitRowId;
+    [FieldOffset(0xC20)] public ushort CurrentScore;
+    [FieldOffset(0xC24)] public MissionRank CurrentRank;	
+    [FieldOffset(0xC2A)] public ushort CollectedTotal;
+    [FieldOffset(0xC2C)] public byte CollectedIndividual;
 
     [FieldOffset(0xC54)] public uint FishingBait;
 
@@ -49,4 +53,11 @@ public unsafe partial struct WKSManager {
     public bool IsMissionCompleted(uint missionUnitId) => MissionCompletionFlags.CheckBitInSpan(missionUnitId);
 
     public bool IsMissionGolded(uint missionUnitId) => MissionGoldFlags.CheckBitInSpan(missionUnitId);
+
+    public enum MissionRank {
+        None,
+        Bronze,
+        Silver,
+        Gold
+    }
 }
