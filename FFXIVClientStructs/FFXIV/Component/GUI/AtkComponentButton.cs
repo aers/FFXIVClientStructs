@@ -25,7 +25,7 @@ public unsafe partial struct AtkComponentButton : ICreatable {
 
     /// <remarks> Used by AtkComponentCheckBox and AtkComponentRadioButton. </remarks>
     public bool IsChecked {
-        get => (Flags & (1 << 18)) != 0;
+        get => BitOps.GetBit(Flags, 18);
         set => SetChecked(value);
     }
 

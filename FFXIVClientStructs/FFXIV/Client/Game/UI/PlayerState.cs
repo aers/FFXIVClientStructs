@@ -55,6 +55,8 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x164)] public byte BirthDay;
     [FieldOffset(0x165)] public byte FirstClass;
     [FieldOffset(0x166)] public byte StartTown;
+    [BitField<bool>(nameof(IsLegacy), 0)]
+    [BitField<bool>(nameof(IsWarriorOfLight), 1)]
     [FieldOffset(0x167)] public byte QuestSpecialFlags;
     [FieldOffset(0x168), FixedSizeArray] internal FixedSizeArray8<ushort> _activeFestivalIds;
     [FieldOffset(0x178), FixedSizeArray] internal FixedSizeArray8<ushort> _activeFestivalPhases;
@@ -241,9 +243,6 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x8E0)] public StdMap<uint, bool> TrackedTraitUnlocks;
     [FieldOffset(0x8F0)] public bool TrackedTraitUnlocksDirty;
     [FieldOffset(0x8F1)] public bool TrackedActionUnlocksDirty;
-
-    public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
-    public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
 
     public float GetDesynthesisLevel(uint classJobId)
         => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[(int)classJobId - 8] / 100f;
