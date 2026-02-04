@@ -14,19 +14,11 @@ public unsafe partial struct PerformanceModule {
     }
 
     [FieldOffset(0x48)] private ushort Unk48; // Version presumably. If 0, it migrates AssignAllNotesToKeyboard from FlagStatusModule or something like that.
+    [BitField<ushort>(nameof(BeatsPerMinute), 0, 9)]
+    [BitField<ushort>(nameof(BeatsPerMeasure), 9, 4)]
     [FieldOffset(0x4A)] public ushort BPMSetting;
     [FieldOffset(0x4C)] public PerformanceSetting1Flag Settings1;
     [FieldOffset(0x4D)] public PerformanceSetting2Flag Settings2;
-
-    public ushort BeatsPerMinute {
-        get => (ushort)(BPMSetting & 0x1FF);
-        set { BPMSetting = (ushort)((BPMSetting & ~0x1FF) | (value & 0x1FF)); }
-    }
-
-    public ushort BeatsPerMeasure {
-        get => (ushort)((BPMSetting & 0x1E00) >> 9);
-        set { BPMSetting = (ushort)((BPMSetting & ~0x1E00) | ((value << 9) & 0x1E00)); }
-    }
 
     [Flags]
     public enum PerformanceSetting1Flag : byte {

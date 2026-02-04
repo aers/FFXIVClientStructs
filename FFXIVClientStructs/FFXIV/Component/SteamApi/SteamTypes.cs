@@ -18,14 +18,14 @@ public partial struct SteamTypes {
         [FieldOffset(0x8)] public uint AppId;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct CSteamId {
+    public partial struct CSteamId {
+        [BitField<uint>(nameof(AccountId), 0, 32)]
+        [BitField<uint>(nameof(AccountInstance), 32, 20)]
+        [BitField<uint>(nameof(AccountType), 52, 4)]
+        [BitField<byte>(nameof(Universe), 56, 8)]
         [FieldOffset(0x0)] public ulong RawSteamId;
-
-        public byte Universe => (byte)((RawSteamId >> 56) & 0xFF);
-        public uint AccountId => (uint)(RawSteamId & 0xFFFFFFFF);
-        public uint AccountType => (byte)((RawSteamId >> 52) & 0xF);
-        public uint AccountInstance => (uint)((RawSteamId >> 32) & 0xFFFFF);
     }
 }
 

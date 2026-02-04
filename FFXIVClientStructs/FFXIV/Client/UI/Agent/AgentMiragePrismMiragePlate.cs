@@ -54,32 +54,12 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     public unsafe partial struct MiragePrismMiragePlateCharaView {
         [FieldOffset(0x318)] public bool IsUpdatePending;
 
+        [BitField<bool>(nameof(IsOtherEquipmentHidden), 0)]
+        [BitField<bool>(nameof(IsHatHidden), 1)]
+        [BitField<bool>(nameof(IsWeaponHidden), 2)]
+        [BitField<bool>(nameof(IsVisorToggled), 3)]
+        [BitField<bool>(nameof(IsWeaponDrawn), 4)]
         [FieldOffset(0x31C)] public uint Flags;
-
-        public bool IsOtherEquipmentHidden {
-            get => (Flags & 0x01) == 0x01;
-            set => Flags = (uint)(value ? Flags | 0x01 : Flags & ~0x01);
-        }
-
-        public bool IsHatHidden {
-            get => (Flags & 0x02) == 0x02;
-            set => Flags = (uint)(value ? Flags | 0x02 : Flags & ~0x02);
-        }
-
-        public bool IsWeaponHidden {
-            get => (Flags & 0x04) == 0x04;
-            set => Flags = (uint)(value ? Flags | 0x04 : Flags & ~0x04);
-        }
-
-        public bool IsVisorToggled {
-            get => (Flags & 0x08) == 0x08;
-            set => Flags = (uint)(value ? Flags | 0x08 : Flags & ~0x08);
-        }
-
-        public bool IsWeaponDrawn {
-            get => (Flags & 0x10) == 0x10;
-            set => Flags = (uint)(value ? Flags | 0x10 : Flags & ~0x10);
-        }
     }
 }
 

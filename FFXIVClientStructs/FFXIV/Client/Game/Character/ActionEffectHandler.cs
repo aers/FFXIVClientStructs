@@ -49,8 +49,9 @@ public unsafe partial struct ActionEffectHandler {
     /// <summary>
     /// Global result of a single action. Used in combination with target data: a list of GameObjectId's and sets of Effect's.
     /// </summary>
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct Header {
+    public partial struct Header {
         [FieldOffset(0x00)] public GameObjectId AnimationTargetId; // 'primary' target of the action; animation is played on this object
         [FieldOffset(0x08)] public uint ActionId;
         [FieldOffset(0x0C)] public uint GlobalSequence; // unique id of the action, monotonously increasing as the server is running
@@ -61,11 +62,16 @@ public unsafe partial struct ActionEffectHandler {
         [FieldOffset(0x1C)] public ushort SpellId;
         [FieldOffset(0x1E)] public byte AnimationVariation;
         [FieldOffset(0x1F)] public byte ActionType;
+        [BitField<bool>(nameof(ShowInLog), 0)]
+        [BitField<bool>(nameof(ForceAnimationLock), 1)]
         [FieldOffset(0x20)] public byte Flags;
         [FieldOffset(0x21)] public byte NumTargets;
 
-        public bool ShowInLog => (Flags & 1) != 0; // if this flag is set, the message will be printed to the action log when processing the action
-        public bool ForceAnimationLock => (Flags & 2) != 0; // if this flag is set, the animation lock is applied to caster even though SourceSequence == 0
+        /// <remarks> If this flag is set, the message will be printed to the action log when processing the action. </remarks>
+        public partial bool ShowInLog { get; set; }
+
+        /// <remarks> If this flag is set, the animation lock is applied to caster even though <c>SourceSequence == 0</c>. </remarks>
+        public partial bool ForceAnimationLock { get; set; }
     }
 
     /// <summary>

@@ -24,12 +24,11 @@ public unsafe partial struct InventoryNumberArray {
         [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray6<int> _data;
 
         [FieldOffset(0 * 4)] public uint IconId;
-        [FieldOffset(2 * 4)] internal int _stackCount;
+        [BitField<int>(nameof(StackCount), 16, 16)]
+        [FieldOffset(2 * 4)] internal uint _stackCount;
         [FieldOffset(3 * 4)] public ItemFlag ItemFlags;
         [FieldOffset(4 * 4)] public ItemDye DyeSlot0;
         [FieldOffset(5 * 4)] public ItemDye DyeSlot1;
-
-        public int StackCount => (_stackCount >> 16) & 0xFFFF;
 
         [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
@@ -80,9 +79,8 @@ public unsafe partial struct InventoryNumberArray {
     [StructLayout(LayoutKind.Explicit, Size = 3 * 4)]
     public partial struct InventoryCrystalNumberArray {
         [FieldOffset(0 * 4)] public uint IconId;
-        [FieldOffset(1 * 4)] internal int _stackCount;
+        [BitField<int>(nameof(StackCount), 16, 16)]
+        [FieldOffset(1 * 4)] internal uint _stackCount;
         [FieldOffset(2 * 4)] public uint CrystalIndex;
-
-        public int StackCount => (_stackCount >> 16) & 0xFFFF;
     }
 }

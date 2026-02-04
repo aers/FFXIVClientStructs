@@ -154,8 +154,9 @@ public unsafe partial struct HousingManager {
         => CurrentTerritory != null ? CurrentTerritory->GetTerritoryType() : HousingTerritoryType.None;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
+public partial struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     [FieldOffset(0x0), CExporterIgnore] public ulong Id;
     [FieldOffset(0x0)] public HouseUnit Unit;
     [FieldOffset(0x1)] private byte Unk1;
@@ -164,6 +165,8 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     /// - <c>0b0000_0000_0011_1111</c> (<c>0x0003F</c>) = WardIndex<br/>
     /// - <c>0b1111_1111_1100_0000</c> (<c>0xFFC06</c>) = Room
     /// </remarks>
+    [BitField<byte>(nameof(WardIndex), 0, 6)]
+    [BitField<short>(nameof(RoomNumber), 6, 10)]
     [FieldOffset(0x2)] public ushort Data2;
     [FieldOffset(0x4)] public ushort TerritoryTypeId;
     [FieldOffset(0x6)] public ushort WorldId;
@@ -171,8 +174,6 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     public bool IsApartment => Unit.IsApartment;
     public byte ApartmentDivision => Unit.ApartmentDivision;
     public byte PlotIndex => Unit.PlotIndex;
-    public byte WardIndex => (byte)(Data2 & 0x3F);
-    public short RoomNumber => (short)(Data2 >> 6);
     public bool IsWorkshop => RoomNumber == 0x3FF;
 
     public static implicit operator ulong(HouseId id) => id.Id;
@@ -186,19 +187,20 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     public int CompareTo(HouseId other) => Id.CompareTo(other);
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 1)]
-public struct HouseUnit : IEquatable<HouseUnit>, IComparable<HouseUnit> {
+public partial struct HouseUnit : IEquatable<HouseUnit>, IComparable<HouseUnit> {
     /// <remarks>
     /// Masked data:<br/>
     /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
     /// - <c>0b0111_1111</c> (<c>0x7F</c>) = Apartment Division (only if Apartment Flag is <c>true</c>)<br/>
     /// - <c>0b0111_1111</c> (<c>0x7F</c>) = PlotIndex (only if Apartment Flag is <c>false</c>)
     /// </remarks>
+    [BitField<byte>(nameof(ApartmentDivision), 0, 7)]
+    [BitField<byte>(nameof(PlotIndex), 0, 7)]
     [FieldOffset(0x0)] public byte Value;
 
-    public bool IsApartment => (Value & 0x80) != 0 && (byte)(Value & 0x7F) < 2;
-    public byte ApartmentDivision => (byte)(Value & 0x7F);
-    public byte PlotIndex => (byte)(Value & 0x7F);
+    public bool IsApartment => (Value & 0x80) != 0 && ApartmentDivision < 2;
 
     public static implicit operator byte(HouseUnit id) => id.Value;
     public static unsafe implicit operator HouseUnit(byte id) => *(HouseUnit*)&id;

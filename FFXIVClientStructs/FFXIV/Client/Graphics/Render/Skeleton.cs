@@ -46,10 +46,11 @@ public unsafe partial struct Skeleton {
     public Span<Bone> AttachBonesSpan => new(AttachBones, (int)AttachBoneCount);
     public Span<BoneIndexMask> BoneMasksSpan => new(AttachBoneMasks, (int)AttachBoneCount);
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x2)]
-    public struct BoneIndexMask {
+    public partial struct BoneIndexMask {
+        [BitField<ushort>(nameof(BoneIdx), 0, 12)]
+        [BitField<byte>(nameof(PartialSkeletonIdx), 12, 4)]
         [FieldOffset(0x0)] public ushort SkeletonIdxBoneIdx;
-        public readonly byte PartialSkeletonIdx => (byte)((SkeletonIdxBoneIdx >> 12) & 0xF);
-        public readonly ushort BoneIdx => (ushort)(SkeletonIdxBoneIdx & 0xFFF);
     }
 }

@@ -7,12 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [Inherits<Object>]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct DrawObject {
+    [BitField<bool>(nameof(IsCoveredFromRain), 4)]
     [FieldOffset(0x88)] public byte Flags;
-
-    public bool IsCoveredFromRain {
-        get => (Flags & 0x10) == 0x10;
-        set => Flags = (byte)(value ? Flags | 0x10 : Flags & ~0x10);
-    }
 
     public bool IsVisible {
         get => (Flags & 0x09) == 0x09; // Unsure why two bits and what exactly they mean.

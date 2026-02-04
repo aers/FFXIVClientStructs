@@ -48,10 +48,9 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x1208)] public ushort TempTellWorldId;
     [FieldOffset(0x120A)] public ushort TempTellReason;
 
+    [BitField<bool>(nameof(IsTextCommandUnavailable), 0)]
     [FieldOffset(0x1248)] public uint Flags;
     [FieldOffset(0x124C)] public uint ErrorData; // ??? seems to be a byte + flags
-
-    public bool IsTextCommandUnavailable => (Flags & 1) != 0;
 
     [MemberFunction("48 89 5C 24 ?? 41 56 48 83 EC ?? 80 B9 ?? ?? ?? ?? ?? 4C 8B F2")]
     public partial void ExecuteMacro(RaptureMacroModule.Macro* macro);

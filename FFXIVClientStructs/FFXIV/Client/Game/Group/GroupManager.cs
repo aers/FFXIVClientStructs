@@ -32,10 +32,12 @@ public unsafe partial struct GroupManager {
         [FieldOffset(0x7FD8)] public uint PartyLeaderIndex; // index of party leader in array
         [FieldOffset(0x7FDC)] public byte MemberCount;
 
+        [BitField<bool>(nameof(IsAlliance), 0)]
+        [BitField<bool>(nameof(IsSmallGroupAlliance), 1)]
         [FieldOffset(0x7FE1)] public byte AllianceFlags; // 0x01 == is alliance; 0x02 == alliance with 5 4-man groups rather than 2 8-man
 
-        public unsafe bool IsAlliance => (AllianceFlags & 1) != 0;
-        public unsafe bool IsSmallGroupAlliance => (AllianceFlags & 2) != 0; // alliance containing 6 groups of 4 members rather than 3x8
+        // TODO: confirm which comment is correct
+        // public unsafe bool IsSmallGroupAlliance => (AllianceFlags & 2) != 0; // alliance containing 6 groups of 4 members rather than 3x8
 
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? B0 01 E9 ?? ?? ?? ?? E8")]
         public partial bool IsEntityIdInParty(uint entityId);

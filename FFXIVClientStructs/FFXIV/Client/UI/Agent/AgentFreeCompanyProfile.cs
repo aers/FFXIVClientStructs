@@ -88,8 +88,9 @@ public enum GrandCompany : byte {
     ImmortalFlames = 3,
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct CrestData {
+public partial struct CrestData {
     //8 bits: Charge
     //6 bits: Ordinary
     //6 bits: Escutcheon
@@ -98,28 +99,12 @@ public struct CrestData {
     //7 bits unused
     //4 bits OrdinaryColor1
     //4 bits OrdinaryColor2
+    [BitField<byte>(nameof(Ordinary), 8, 6)]
+    [BitField<byte>(nameof(Escutcheon), 14, 6)]
+    [BitField<byte>(nameof(ChargeColor), 22, 3)]
+    [BitField<byte>(nameof(OrdinaryTincture1), 29, 4)]
+    [BitField<byte>(nameof(OrdinaryTincture2), 33, 4)]
     [FieldOffset(0x0), CExporterIgnore] public ulong Data;
     [FieldOffset(0x0)] public byte Charge;
     [FieldOffset(0x4)] public byte OrdinaryTinctures;
-
-    public byte Ordinary {
-        get => (byte)((Data >> 8) & 0x3F);
-        set => Data = (Data & 0xFFFFC0FF) + (ulong)((value & 0x3F) << 8);
-    }
-    public byte Escutcheon {
-        get => (byte)((Data >> 0xE) & 0x3F);
-        set => Data = (Data & 0xFFF03FFF) + (ulong)((value & 0x3F) << 0xE);
-    }
-    public byte ChargeColor {
-        get => (byte)((Data >> 0x16) & 0x7);
-        set => Data = (Data & 0xFE3FFFFF) + (ulong)((value & 0x7) << 0x16);
-    }
-    public byte OrdinaryTincture1 {
-        get => (byte)(OrdinaryTinctures & 0xF);
-        set => OrdinaryTinctures = (byte)((OrdinaryTinctures & 0xF0) + (value & 0x0F));
-    }
-    public byte OrdinaryTincture2 {
-        get => (byte)((OrdinaryTinctures >> 4) & 0xF);
-        set => OrdinaryTinctures = (byte)(((value & 0x0F) << 4) + (OrdinaryTinctures & 0x0F));
-    }
 }
