@@ -1519,14 +1519,14 @@ classes:
 #oldfail       0x141831380: StartOtherMode # (Balloon* this, ushort id) id same as above
   Client::Game::NpcYellBalloon:
     funcs:
-      0x14188EF20: Reset
-      0x14188EF80: Ctor
-      0x14188EFE0: Dtor
-      0x14188F040: Initialize # (this, chara*)
-      0x14188F090: Update
-      0x14188F370: OpenBalloon # (this, char*, float, bool, float, bool, bool, bool, byte)
-      0x14188F5F0: Reset2 # This is identical to Reset, but called from things outside of the class instead of from other member functions.
-      0x14188F630: CloseBalloon
+      0x141890800: Reset
+      0x141890860: Ctor
+      0x1418908C0: Dtor
+      0x141890920: Initialize # (this, chara*)
+      0x141890970: Update
+      0x141890C50: OpenBalloon # (this, char*, float, bool, float, bool, bool, bool, byte)
+      0x141890ED0: Reset2 # This is identical to Reset, but called from things outside of the class instead of from other member functions.
+      0x141890F10: CloseBalloon
   Client::Game::Fate::FateManager:
     instances:
       - ea: 0x1429EB2C0
@@ -3238,11 +3238,11 @@ classes:
     vtbls:
       - ea: 0x1420D1FA8
     funcs:
-      0x140B60FD0: ctor
-      0x140D78CF0: Dtor
-      0x140B61130: Initialize
-      0x140B61930: Update
-      0x140B62210: HandleYell
+      0x140B626D0: ctor
+      0x140D7A285: Dtor
+      0x140B62830: Initialize
+      0x140B63030: Update
+      0x140B63910: HandleYell
   Client::Game::UI::CharaCard:
     instances:
       - ea: 0x1429E6C88
