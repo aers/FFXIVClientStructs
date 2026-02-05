@@ -13,7 +13,7 @@ internal static class AnalyzerVerifier<TAnalyzer> where TAnalyzer : DiagnosticAn
                     GlobalUsings.GetSource,
                     source
                 },
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net90,
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net100,
                 AdditionalReferences = { MetadataReference.CreateFromFile(typeof(GenerateInteropAttribute).Assembly.Location) }
             }
         };
