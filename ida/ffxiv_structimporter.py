@@ -1337,6 +1337,9 @@ def get_time():
 def run():
     if not api.can_run():
         raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
+    
+    update_virt_func = api.should_update_virt_func()
+    update_member_func = api.should_update_member_func()
 
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
@@ -1372,7 +1375,7 @@ def run():
     for struct in yaml.structs:
         api.create_union(struct)
 
-    if api.should_update_virt_func():
+    if update_virt_func:
         for struct in yaml.structs:
             if struct.virtual_functions:
                 print(
@@ -1384,7 +1387,7 @@ def run():
                     if virt_func.return_type != None and virt_func.parameters != None:
                         api.update_virt_func(virt_func, struct)
 
-    if api.should_update_member_func():
+    if update_member_func:
         for struct in yaml.structs:
             if struct.member_functions != []:
                 print(
