@@ -5972,7 +5972,10 @@ classes:
       0x140B8F8A0: HandleActionEffect24Packet
       0x140B8F920: HandleActionEffect32Packet
       0x140B8F9A0: HandleActorControlPacket
-      0x140B9F040: HandleUpdateInventorySlotPacket
+      0x140B9F040: HandleInventoryItemUpdatePacket
+      0x140B9F240: HandleInventoryItemPacket
+      0x140B9F330: HandleInventoryItemCurrencyPacket
+      0x140B9F3C0: HandleInventoryItemSymbolicPacket
       0x140B9F4E0: HandleInventoryActionAckPacket
       0x140B9F6D0: HandleUpdatePartyPacket
       0x140B9FEB0: HandleUpdateAllianceNormalPacket
