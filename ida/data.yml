@@ -3239,7 +3239,7 @@ classes:
       - ea: 0x1420D1FA8
     funcs:
       0x140B626D0: ctor
-      0x140D7A285: Dtor
+      0x140D7A280: Dtor
       0x140B62830: Initialize
       0x140B63030: Update
       0x140B63910: HandleYell
