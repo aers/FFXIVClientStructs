@@ -12,6 +12,9 @@ public unsafe partial struct TitleList {
     [MemberFunction("E8 ?? ?? ?? ?? 89 6E 58")]
     public partial void RequestTitleList();
 
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 ?? B9")]
+    public partial void SetTitleUnlocked(ushort titleId);
+
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1A 8B CB")]
     public partial bool IsTitleUnlocked(ushort titleId);
 }

@@ -37,7 +37,9 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x458)] public ushort SelectedIndex;
         [FieldOffset(0x45F), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableNoteBookDivisions; // index is CraftType
         [FieldOffset(0x467), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableSecretNoteBookDivisions; // index is CraftType
-        public RecipeEntry* SelectedRecipe => Recipes + SelectedIndex;
+
+        public Span<RecipeEntry> RecipesSpan => new(Recipes, RecipeCount);
+        public RecipeEntry* SelectedRecipe => SelectedIndex < RecipeCount ? Recipes + SelectedIndex : null;
     }
 
     [GenerateInterop]

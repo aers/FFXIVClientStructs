@@ -1,4 +1,5 @@
 // ReSharper disable once CheckNamespace
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
@@ -38,6 +39,8 @@ public unsafe partial struct OutdoorTerritory {
 
     [FieldOffset(0x9BF0)] public HouseBuddy HouseBuddy;
 
+    [FieldOffset(0xA1A4), FixedSizeArray] internal FixedSizeArray62<HousingMapMarkerInfo> _housingMapMarkerInfos;
+
     [FieldOffset(0xA690)] public HousingGuestBookData GuestBook;
 
     /// <summary>
@@ -47,6 +50,19 @@ public unsafe partial struct OutdoorTerritory {
     /// <returns>IconId, or 0 if something went wrong</returns>
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC 30 0F B6 FA")]
     public partial int GetPlotIcon(byte plot);
+
+    /// <summary>
+    /// Mirrors the EXD layout of HousingMapMarkerInfo
+    /// </summary>
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct HousingMapMarkerInfo
+    {
+        [FieldOffset(0x0)] public float X;
+        [FieldOffset(0x4)] public float Y;
+        [FieldOffset(0x8)] public float Z;
+        [FieldOffset(0xC)] private float Unknown0;
+        [FieldOffset(0x10)] public ushort MapId;
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
