@@ -42,6 +42,7 @@ public unsafe partial struct CharaView : ICreatable {
     [FieldOffset(0x309)] public bool CharacterDataCopied;
     [FieldOffset(0x30A)] public bool CharacterLoaded;
 
+    [Obsolete("Incorrectly inherited by CharaViewPortrait. Do not call this; copy the code and adapt it to the correct type.", true)]
     public static CharaView* Create()
         => IMemorySpace.GetUISpace()->Create<CharaView>();
 
