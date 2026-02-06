@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Object;
-
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 // Client::Graphics::Scene::DrawObject
