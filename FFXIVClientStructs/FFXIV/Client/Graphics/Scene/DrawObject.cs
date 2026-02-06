@@ -13,7 +13,11 @@ public unsafe partial struct DrawObject {
     /// <summary>
     /// used in vanilla with Highlight Potential Targets, Housing object outlines. can be set by GameObject.Highlight
     /// </summary>
-    [FieldOffset(0x89)] public Outline OutlineFlags;
+    /// <remarks>
+    /// (&amp; 0xF0) >> 4 == ObjectHighlightColor
+    /// &amp; 0x0F == other state (3 = Default)
+    /// </remarks>
+    [FieldOffset(0x89)] public byte OutlineFlags;
 
     public bool IsVisible {
         get => (Flags & 0x09) == 0x09; // Unsure why two bits and what exactly they mean.
