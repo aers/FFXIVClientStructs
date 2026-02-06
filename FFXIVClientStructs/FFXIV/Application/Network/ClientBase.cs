@@ -4,8 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Application.Network;
 
 [GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public unsafe partial struct ClientBase
-{
+public unsafe partial struct ClientBase {
     [FieldOffset(0x0)] public Utf8String Host;
     [FieldOffset(0x68)] public ushort Port;
     [FieldOffset(0x6C)] public TransportLayers TransportLayer;
@@ -18,8 +17,7 @@ public unsafe partial struct ClientBase
     [FieldOffset(0x94)] public int KeepAliveInvervalZone;
 }
 
-public enum TransportLayers
-{
+public enum TransportLayers {
     TCP = 0,
     // why does it seem like UDP should be in here
     RUDP = 2,

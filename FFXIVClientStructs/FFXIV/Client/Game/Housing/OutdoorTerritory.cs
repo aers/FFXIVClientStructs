@@ -55,8 +55,7 @@ public unsafe partial struct OutdoorTerritory {
     /// Mirrors the EXD layout of HousingMapMarkerInfo
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
-    public struct HousingMapMarkerInfo
-    {
+    public struct HousingMapMarkerInfo {
         [FieldOffset(0x0)] public float X;
         [FieldOffset(0x4)] public float Y;
         [FieldOffset(0x8)] public float Z;
