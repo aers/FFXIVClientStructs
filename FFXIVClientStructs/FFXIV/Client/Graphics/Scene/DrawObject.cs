@@ -9,6 +9,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct DrawObject {
     [FieldOffset(0x88)] public byte Flags;
 
+    /// <summary>
+    /// used in vanilla with Highlight Potential Targets, Housing object outlines. can be set by GameObject.Highlight
+    /// </summary>
+    /// <remarks>
+    /// (&amp; 0xF0) >> 4 == ObjectHighlightColor
+    /// &amp; 0x0F == other state (3 = Default)
+    /// </remarks>
+    [FieldOffset(0x89)] public byte OutlineFlags;
+
     public bool IsCoveredFromRain {
         get => (Flags & 0x10) == 0x10;
         set => Flags = (byte)(value ? Flags | 0x10 : Flags & ~0x10);
