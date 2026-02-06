@@ -45,8 +45,21 @@ public unsafe partial struct PacketDispatcher {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 40 B8 00 00 00 E0")]
     public static partial void HandleEventPlayPacket(GameObjectId objectId, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 
+    [Obsolete("Use HandleInventoryItemUpdatePacket")]
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 0F B7 5A")]
     public static partial void HandleUpdateInventorySlotPacket(uint targetId, UpdateInventorySlotPacket* packet);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 0F B7 5A")]
+    public static partial void HandleInventoryItemUpdatePacket(uint targetId, InventoryItemPacket* packet);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 3D ?? ?? ?? ?? 75 ?? 48 8D 53")]
+    public static partial void HandleInventoryItemPacket(uint targetId, InventoryItemPacket* packet);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 F8 ?? 75 ?? 48 8D 53")]
+    public static partial void HandleInventoryItemCurrencyPacket(uint targetId, InventoryItemCurrencyPacket* packet);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5B ?? 48 85 DB 0F 85 ?? ?? ?? ?? 4D 85 FF")]
+    public static partial void HandleInventoryItemSymbolicPacket(uint targetId, InventoryItemSymbolicPacket* packet);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B DA 8B F9 0F B6 92")]
     public static partial void HandleSpawnPlayerPacket(uint targetId, SpawnPlayerPacket* packet);
