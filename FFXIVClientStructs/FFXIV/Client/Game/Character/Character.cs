@@ -12,11 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
     [FieldOffset(0x600)] public MovementStateOptions MovementState;
-    /// <summary>
-    /// <code>
-    /// 0b0010_0000 [0x20] = <see cref="IsSwimming"/>
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(IsSwimming), 5)] // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
     [FieldOffset(0x628)] public byte Flags628;
 
     [FieldOffset(0x630)] public EmoteController EmoteController;
@@ -28,7 +24,7 @@ public unsafe partial struct Character {
     [FieldOffset(0xA30)] public TimelineContainer Timeline;
     [FieldOffset(0xD80)] public LookAtContainer LookAt;
 
-    // 0x01 = OffhandDrawn
+    [BitField<bool>(nameof(IsOffhandDrawn), 0)]
     [FieldOffset(0x1980)] public byte WeaponFlags;
     [FieldOffset(0x1988)] public VfxContainer Vfx;
 
@@ -38,9 +34,9 @@ public unsafe partial struct Character {
     // 0x1AA8: start of some substructure
     [FieldOffset(0x1B28)] public ModelContainer ModelContainer;
 
-    // 0x01 = PartyMember
-    // 0x02 = AllianceMember
-    // 0x04 = Friend
+    [BitField<bool>(nameof(IsPartyMember), 0)]
+    [BitField<bool>(nameof(IsAllianceMember), 1)]
+    [BitField<bool>(nameof(IsFriend), 2)]
     [FieldOffset(0x1CE2)] public byte RelationFlags;
 
     // 0x40 = All attacks will be cancelled, character is doing the the 'winded' emote, used in e.g. 'Strange Bedfellows' and 'Combat Evolved' when quest expects an item to be used on the character
@@ -85,15 +81,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x2365)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x2366)] public byte GMRank;
 
-    public bool IsSwimming => (Flags628 & 0x20) != 0; // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
-    public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
-    public bool IsOffhandDrawn => (WeaponFlags & 0x1) != 0;
-    public bool InCombat => (CharacterData.Flags & 0x2) != 0;
-    public bool IsHostile => (CharacterData.Flags & 0x1) != 0;
+    public bool IsWeaponDrawn => Timeline.IsWeaponDrawn;
     public bool IsCasting => GetCastInfo() != null && GetCastInfo()->IsCasting;
-    public bool IsPartyMember => (RelationFlags & 0x1) != 0;
-    public bool IsAllianceMember => (RelationFlags & 0x2) != 0;
-    public bool IsFriend => (RelationFlags & 0x4) != 0;
 
     /// <summary>
     /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the

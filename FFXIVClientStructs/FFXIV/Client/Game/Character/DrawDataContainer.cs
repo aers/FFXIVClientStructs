@@ -15,22 +15,19 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
     [FieldOffset(0x220)] public CustomizeData CustomizeData;
 
+    [BitField<bool>(nameof(IsHatHidden), 0)]
     [FieldOffset(0x23E)] public byte Flags1;
+    [BitField<bool>(nameof(IsWeaponHidden), 0)]
+    [BitField<bool>(nameof(IsVisorToggled), 4)]
+    [BitField<bool>(nameof(VieraEarsHidden), 5)]
     [FieldOffset(0x23F)] public byte Flags2;
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
 
     [FieldOffset(0x258)] public CrestData FreeCompanyCrestData;
     [FieldOffset(0x260)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
-    [UnscopedRef]
-    public ref DrawObjectData Weapon(WeaponSlot slot) {
-        return ref WeaponData[(int)slot];
-    }
-
-    [UnscopedRef]
-    public ref EquipmentModelId Equipment(EquipmentSlot slot) {
-        return ref EquipmentModelIds[(int)slot];
-    }
+    [UnscopedRef] public ref DrawObjectData Weapon(WeaponSlot slot) => ref WeaponData[(int)slot];
+    [UnscopedRef] public ref EquipmentModelId Equipment(EquipmentSlot slot) => ref EquipmentModelIds[(int)slot];
 
     [MemberFunction("E8 ?? ?? ?? ?? B1 ?? 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
@@ -99,43 +96,20 @@ public unsafe partial struct DrawDataContainer {
         OffHand = 1,
         Unk = 2, // TODO: CraftTool?
     }
-
-    public bool IsHatHidden {
-        get => (Flags1 & 0x01) == 0x01;
-        set => Flags1 = (byte)(value ? Flags1 | 0x01 : Flags1 & ~0x01);
-    }
-
-    public bool IsWeaponHidden {
-        get => (Flags2 & 0x01) == 0x01;
-        set => Flags2 = (byte)(value ? Flags2 | 0x01 : Flags2 & ~0x01);
-    }
-
-    public bool IsVisorToggled {
-        get => (Flags2 & 0x10) == 0x10;
-        set => Flags2 = (byte)(value ? Flags2 | 0x10 : Flags2 & ~0x10);
-    }
-
-    public bool VieraEarsHidden {
-        get => (Flags2 & 0x20) == 0x20;
-        set => Flags2 = (byte)(value ? Flags2 | 0x20 : Flags2 & ~0x20);
-    }
 }
 
 // ctor E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct DrawObjectData {
     public const int Size = 0x70;
 
     [FieldOffset(0x00)] public WeaponModelId ModelId;
     [FieldOffset(0x18)] public DrawObject* DrawObject;
+    [BitField<bool>(nameof(IsHidden), 1)]
     [FieldOffset(0x60)] public byte State;
     [FieldOffset(0x62)] public ushort Flags1;
     [FieldOffset(0x64)] public byte Flags2;
-
-    public bool IsHidden {
-        get => (State & 0x02) == 0x02;
-        set => State = (byte)(value ? State | 0x02 : State & ~0x02);
-    }
 }
 
 [GenerateInterop]
@@ -150,45 +124,40 @@ public unsafe partial struct CustomizeData {
     [FieldOffset(0x04)] public byte Tribe;
     [FieldOffset(0x05)] public byte Face;
     [FieldOffset(0x06)] public byte Hairstyle;
-    // 0x07: Highlights
+    [BitField<bool>(nameof(Highlights), 7)]
+    [FieldOffset(0x07)] internal byte Data7;
     [FieldOffset(0x08)] public byte SkinColor;
     [FieldOffset(0x09)] public byte EyeColorRight;
     [FieldOffset(0x0A)] public byte HairColor;
     [FieldOffset(0x0B)] public byte HighlightsColor;
-    // 0x0C: FacialFeature1-7, LegacyTattoo
+    [BitField<bool>(nameof(FacialFeature1), 0)]
+    [BitField<bool>(nameof(FacialFeature2), 1)]
+    [BitField<bool>(nameof(FacialFeature3), 2)]
+    [BitField<bool>(nameof(FacialFeature4), 3)]
+    [BitField<bool>(nameof(FacialFeature5), 4)]
+    [BitField<bool>(nameof(FacialFeature6), 5)]
+    [BitField<bool>(nameof(FacialFeature7), 6)]
+    [BitField<bool>(nameof(LegacyTattoo), 7)]
+    [FieldOffset(0x0C)] internal byte DataC;
     [FieldOffset(0x0D)] public byte TattooColor;
     [FieldOffset(0x0E)] public byte Eyebrows;
     [FieldOffset(0x0F)] public byte EyeColorLeft;
-    // 0x10: EyeShape, SmallIris
+    [BitField<byte>(nameof(EyeShape), 0, 7)]
+    [BitField<bool>(nameof(SmallIris), 7)]
+    [FieldOffset(0x10)] internal byte Data10;
     [FieldOffset(0x11)] public byte Nose;
     [FieldOffset(0x12)] public byte Jaw;
-    // 0x13: Mouth, Lipstick
+    [BitField<byte>(nameof(Mouth), 0, 7)]
+    [BitField<bool>(nameof(Lipstick), 7)]
+    [FieldOffset(0x13)] internal byte Data13;
     [FieldOffset(0x14)] public byte LipColorFurPattern;
     [FieldOffset(0x15)] public byte MuscleMass;
     [FieldOffset(0x16)] public byte TailShape;
     [FieldOffset(0x17)] public byte BustSize;
-    // 0x18: FacePaint, FacePaintReversed
+    [BitField<byte>(nameof(FacePaint), 0, 7)]
+    [BitField<bool>(nameof(FacePaintReversed), 7)]
+    [FieldOffset(0x18)] internal byte Data18;
     [FieldOffset(0x19)] public byte FacePaintColor;
-
-    public bool Highlights => (byte)(Data[0x07] & 0b_1000_0000) != 0;
-
-    public bool FacialFeature1 => (byte)(Data[0x0C] & 0b_0000_0001) != 0;
-    public bool FacialFeature2 => (byte)(Data[0x0C] & 0b_0000_0010) != 0;
-    public bool FacialFeature3 => (byte)(Data[0x0C] & 0b_0000_0100) != 0;
-    public bool FacialFeature4 => (byte)(Data[0x0C] & 0b_0000_1000) != 0;
-    public bool FacialFeature5 => (byte)(Data[0x0C] & 0b_0001_0000) != 0;
-    public bool FacialFeature6 => (byte)(Data[0x0C] & 0b_0010_0000) != 0;
-    public bool FacialFeature7 => (byte)(Data[0x0C] & 0b_0100_0000) != 0;
-    public bool LegacyTattoo => (byte)(Data[0x0C] & 0b_1000_0000) != 0;
-
-    public byte EyeShape => (byte)(Data[0x10] & 0b_0111_1111);
-    public bool SmallIris => (byte)(Data[0x10] & 0b_1000_0000) != 0;
-
-    public byte Mouth => (byte)(Data[0x13] & 0b_0111_1111);
-    public bool Lipstick => (byte)(Data[0x13] & 0b_1000_0000) != 0;
-
-    public byte FacePaint => (byte)(Data[0x18] & 0b_0111_1111);
-    public bool FacePaintReversed => (byte)(Data[0x18] & 0b_1000_0000) != 0;
 
     public byte this[int idx] => Data[idx];
 

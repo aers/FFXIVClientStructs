@@ -28,78 +28,33 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for show/hide transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
     [FieldOffset(0x180)] public StdVector<CStringPointer> CachedAtkValueStrings;
-    /// <summary>
-    /// <code>
-    /// DepthLayer:<br/>
-    ///   Getter: (Flags180 >> 16) &amp; 0xF<br/>
-    ///   Mask: 0b0000_0000_0000_1111_0000_0000_0000_0000<br/>
-    /// <br/>
-    /// Visibility(?) Flags:<br/>
-    ///   Getter: (Flags180 >> 20) &amp; 0xF<br/>
-    ///   Mask: 0b0000_0000_1111_0000_0000_0000_0000_0000<br/>
-    ///   Values:
-    ///     0b0010 = Is visible<br/>
-    ///     0b0100 = Is hidden due to modal (like Retainer Menu)<br/>
-    /// <br/>
-    /// Applied Visibility(?) Flags:<br/>
-    ///   Getter: (Flags180 >> 24) &amp; 0xF<br/>
-    ///   Mask: 0b0000_1111_0000_0000_0000_0000_0000_0000<br/>
-    ///   Values: same as above<br/>
-    /// <br/>
-    /// UldLoadState:<br/>
-    ///   Getter: (Flags180 >> 28) &amp; 0xF<br/>
-    ///   Mask: 0b1111_0000_0000_0000_0000_0000_0000_0000<br/>
-    ///   Values:
-    ///     0 = Not loaded<br/>
-    ///     1 = UldResource loaded<br/>
-    ///     2 = UldManager finished loading the uld
-    /// </code>
-    /// </summary>
+    // Bits 0-7: unknown
+    // Bits 8-15: applied values of 0-7
+    // [BitField<byte>(nameof(DepthLayer), 16, 4)] // has custom setter
+    [BitField<AtkUnitBaseVisibilityState>(nameof(VisibilityState), 20, 4)]
+    [BitField<AtkUnitBaseVisibilityState>(nameof(AppliedVisibilityState), 24, 4)]
+    [BitField<AtkUnitBaseLoadState>(nameof(LoadState), 28, 4)]
     [FieldOffset(0x198)] public uint Flags198;
     // 4 bytes padding
-    /// <summary>
-    /// <code>
-    /// 0b1000_0000 [0x80] = Disable focusability
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(DisableFocusability), 7)]
     [FieldOffset(0x1A0)] public byte Flags1A0;
-    /// <summary>
-    /// <code>
-    /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)<br/>
-    /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu and prevents window from being closed via input (ESC or similar)
-    /// 0b0100_0000 [0x40] = Disable focus on show
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(IsReady), 0)]
+    [BitField<bool>(nameof(DisableUserClose), 2)]
+    [BitField<bool>(nameof(DisableFocusOnShow), 6)]
     [FieldOffset(0x1A1)] public byte Flags1A1;
-    /// <summary>
-    /// <code>
-    /// 0b0000_0100 [0x4] = LoadUldByName was called<br/>
-    /// 0b0000_1000 [0x8] = Disable hide transition<br/>
-    /// 0b0010_0000 [0x20] = Disable show/hide sound effects<br/>
-    /// 0b0100_0000 [0x40] = Disable loading/saving AddonConfig
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(WasLoadUldByNameCalled), 2)]
+    [BitField<bool>(nameof(DisableHideTransition), 3)]
+    [BitField<bool>(nameof(DisableShowHideSoundEffects), 5)]
+    [BitField<bool>(nameof(DisableAddonConfig), 6)]
     [FieldOffset(0x1A2)] public byte Flags1A2;
-    /// <summary>
-    /// <code>
-    /// 0b0000_0001 [0x1] = Enable title bar context menu<br/>
-    /// 0b0010_0000 [0x20] = Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
-    /// 0b0100_0000 [0x40] = Disable WindowCollisionNode interactivity (no focus on click, not moving the addon when dragged)
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(EnableTitleBarContextMenu), 0)]
+    // Bit 5: Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
+    // Bit 6: Disable WindowCollisionNode interactivity (no focus on click, not moving the addon when dragged)
     [FieldOffset(0x1A3)] public byte Flags1A3;
-    /// <summary>
-    /// <code>
-    /// 0b0100_0000 [0x40] = Unknown, enables whatever <see cref="HudAnchoringInfoIndex"/> does
-    /// </code>
-    /// </summary>
+    // Bit 6: Unknown, enables whatever HudAnchoringInfoIndex does
     [FieldOffset(0x1A4)] public byte Flags1A4;
-    /// <summary>
-    /// <code>
-    /// 0b0010_0000 [0x20] = Enable TextNodes to be populated (before OnSetup)<br/>
-    /// 0b0100_0000 [0x40] = Disable show on open
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(EnableTextNodePopulation), 5)]
+    [BitField<bool>(nameof(DisableShowOnOpen), 6)]
     [FieldOffset(0x1A5)] public byte Flags1A5;
     // 2 bytes padding
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
@@ -107,7 +62,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1B0)] public uint HideTransitionDuration;
     [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
-    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
     /// <remarks> Used for dialogs, context menus and other windows that cause inputs to be blocked. Checked in <see cref="ShouldIgnoreInputs"/>. </remarks>
     [FieldOffset(0x1B9)] public byte NumBlockingAddons;
     [FieldOffset(0x1BA)] private byte Unk1BA;
@@ -115,12 +69,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1BC)] public float ShowTransitionScale;
     [FieldOffset(0x1C0)] public float HideTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
-    /// <summary>
-    /// <code>
-    /// 0x4 = Enable Filter (Modal window)
-    /// 0x800 = Disable "Scale Window" option in the title bar context menu
-    /// </code>
-    /// </summary>
+    [BitField<bool>(nameof(EnableFilter), 2)]
+    [BitField<bool>(nameof(DisableUserScaling), 11)]
     [FieldOffset(0x1C8)] public uint Flags1C8;
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
@@ -152,7 +102,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1E4)] public ushort Id;
     [FieldOffset(0x1E6)] public ushort ParentId;
     [FieldOffset(0x1E8)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
-    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
     /// <remarks> Used by context menus or other windows that cause interaction with the addon set here to be blocked. </remarks>
     [FieldOffset(0x1EA)] public ushort BlockedParentId;
     [FieldOffset(0x1EC)] public byte CursorNavigationOwnIndex;
@@ -163,6 +112,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
+    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
+    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
     [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration")] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration")] public uint CloseTransitionDuration;
     [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale")] public float OpenTransitionScale;
@@ -173,22 +124,37 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY")] public short CloseTransitionOffsetY;
     [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId")] public short OpenSoundEffectId;
 
+    /// <summary> Gets a value indicating whether OnSetup was called </summary>
+    public partial bool IsReady { get; }
+
+    /// <summary> Disables the "Close" option in the title bar context menu and prevents the window from being closed via input (ESC or similar). </summary>
+    public partial bool DisableUserClose { get; set; }
+
+    /// <summary> Disables loading from/saving to AddonConfig </summary>
+    public partial bool DisableAddonConfig { get; set; }
+
+    /// <summary> Enables TextNodes to be populated (before OnSetup) </summary>
+    public partial bool EnableTextNodePopulation { get; set; }
+
+    /// <summary> Enable Filter (Modal window with backdrop) </summary>
+    public partial bool EnableFilter { get; set; }
+
+    /// <summary> Disables the "Scale Window" option in the title bar context menu </summary>
+    public partial bool DisableUserScaling { get; set; }
+
     public uint DepthLayer {
-        get => (Flags198 >> 16) & 0xF;
+        get => BitOps.GetBits(Flags198, 16, 0b1111u);
         set => SetDepthLayer(value);
     }
 
     public bool IsVisible {
-        get => (Flags198 & 0x200000) != 0;
-        set => Flags198 = value ? Flags198 |= 0x200000 : Flags198 &= 0xFFDFFFFF;
+        get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.IsVisible);
+        set => VisibilityState = value
+            ? VisibilityState | AtkUnitBaseVisibilityState.IsVisible
+            : VisibilityState & ~AtkUnitBaseVisibilityState.IsVisible;
     }
 
-    /// <summary>
-    /// Check if OnSetup was called.
-    /// </summary>
-    public bool IsReady => (Flags1A1 & 0x01) != 0;
-
-    public Span<AtkValue> AtkValuesSpan => new Span<AtkValue>(AtkValues, AtkValuesCount);
+    public Span<AtkValue> AtkValuesSpan => new(AtkValues, AtkValuesCount);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 45 2B E6")]
     public static partial float GetGlobalUIScale();
@@ -454,9 +420,40 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial bool HandleBackButtonInput(int inputId, bool a3);
 }
 
+[Flags]
+public enum AtkUnitBaseVisibilityState : byte {
+    None = 0,
+    Unk1 = 1 << 0,
+    IsVisible = 1 << 1,
+    /// <remarks> Seen on Retainer Menu </remarks>
+    IsHiddenDueToModal = 1 << 2,
+    Unk4 = 1 << 3,
+}
+
+public enum AtkUnitBaseLoadState : byte {
+    /// <remarks>
+    /// <see cref="AtkUnitBase.LoadUldResourceHandle"/> will be called, which loads the uld file, and optionally scds.
+    /// </remarks>
+    LoadingUldResource = 0,
+
+    /// <remarks>
+    /// AtkUldManager.LoadResourceAndTextures will be called, which creates nodes and loads textures.<br/>
+    /// Refer to <see cref="AtkUldManager.LoadedState"/>.
+    /// </remarks>
+    LoadingResources = 1,
+
+    /// <remarks>
+    /// <see cref="AtkUnitBase.IsFullyLoaded"/> returned <see langword="true"/>.
+    /// </remarks>
+    FullyLoaded = 2,
+}
+
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-public struct OperationGuide {
+public partial struct OperationGuide {
     [FieldOffset(0x00)] public byte Index; // 0xFF = Disabled
+    [BitField<OperationGuidePoint>(nameof(RelativePoint), 0, 4)]
+    [BitField<OperationGuidePoint>(nameof(Point), 4, 4)]
     [FieldOffset(0x01)] public byte PositionFlags;
     [FieldOffset(0x02)] public short OffsetX;
     [FieldOffset(0x04)] public short OffsetY;
@@ -464,21 +461,12 @@ public struct OperationGuide {
     [FieldOffset(0x08)] public uint AddonTransientId;
 
     /// <summary> The point of the node to anchor to. </summary>
-    /// <remarks> <see cref="PositionFlags"/> mask: 0b0000_1111 </remarks>
-    public OperationGuidePoint RelativePoint {
-        get => (OperationGuidePoint)(PositionFlags & 0x0F);
-        set => PositionFlags = (byte)((PositionFlags & 0xF0) | ((byte)value & 0x0F));
-    }
+    public partial OperationGuidePoint RelativePoint { get; set; }
 
     /// <summary> The point of this OperationGuide. </summary>
-    /// <remarks> <see cref="PositionFlags"/> mask: 0b1111_0000 </remarks>
-    public OperationGuidePoint Point {
-        get => (OperationGuidePoint)((PositionFlags & 0xF0) >> 4);
-        set => PositionFlags = (byte)((PositionFlags & 0x0F) | (((byte)value & 0x0F) << 4));
-    }
+    public partial OperationGuidePoint Point { get; set; }
 }
 
-// TODO: use AlignmentType
 public enum OperationGuidePoint : byte {
     TopLeft,
     Top,

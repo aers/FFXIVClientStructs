@@ -175,7 +175,7 @@ public unsafe partial struct QuestManager {
 
     public bool IsDailyQuestCompleted(ushort questId) {
         var quest = GetDailyQuestById(questId);
-        return quest != null && (quest->Flags & 1) != 0;
+        return quest != null && quest->IsCompleted;
     }
 
     public QuestWork* GetQuestById(ushort questId) {

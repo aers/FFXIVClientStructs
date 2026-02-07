@@ -60,21 +60,43 @@ public unsafe partial struct AtkResNode : ICreatable {
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0xAC)] public ushort Priority;
     [FieldOffset(0xAE)] public NodeFlags NodeFlags;
-    /// <summary>
-    /// <term>Bit 1 [0x1]</term> Is dirty (has updates to be drawn)<br/>
-    /// <term>Bit 2 [0x2]</term> Is undergoing timeline animation (?)<br/>
-    /// <term>Bit 3 [0x4]</term> Calculate transformation<br/>
-    /// <term>Bit 4 [0x10]</term> Stops rapid cursor navigation Up<br/>
-    /// <term>Bit 5 [0x20]</term> Stops rapid cursor navigation Down<br/>
-    /// <term>Bit 6 [0x40]</term> Stops rapid cursor navigation Left<br/>
-    /// <term>Bit 7 [0x80]</term> Stops rapid cursor navigation Right<br/>
-    /// <term>Bit 9 [0x100]</term> Don't make visible on new timeline label<br/>
-    /// <term>Bits 10-17</term> ClipCount<br/>
-    /// <term>Bit 21 [0x100000]</term> Change CursorType to Clickable on hover<br/>
-    /// <term>Bit 23 [0x400000]</term> Change CursorType to TextInput on hover<br/>
-    /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
-    /// </summary>
+    [BitField<bool>(nameof(IsDirty), 0)]
+    // Bit 1: Is undergoing timeline animation (?)
+    // Bit 2: Calculate transformation
+    [BitField<bool>(nameof(IsStoppingRapidCursorNavigationUp), 4)]
+    [BitField<bool>(nameof(IsStoppingRapidCursorNavigationDown), 5)]
+    [BitField<bool>(nameof(IsStoppingRapidCursorNavigationLeft), 6)]
+    [BitField<bool>(nameof(IsStoppingRapidCursorNavigationRight), 7)]
+    // Bit 8: Don't make visible on new timeline label
+    [BitField<byte>(nameof(ClipCount), 9, 8)]
+    [BitField<bool>(nameof(IsClickableCursorOnHover), 20)]
+    [BitField<bool>(nameof(IsTextInputCursorOnHover), 22)]
+    [BitField<bool>(nameof(IsEllipticalCollision), 23)]
     [FieldOffset(0xB0)] public uint DrawFlags;
+
+    /// <summary> Is dirty (has updates to be drawn) </summary>
+    public partial bool IsDirty { get; set; }
+
+    /// <summary> Stops rapid cursor navigation Up </summary>
+    public partial bool IsStoppingRapidCursorNavigationUp { get; set; }
+
+    /// <summary> Stops rapid cursor navigation Down </summary>
+    public partial bool IsStoppingRapidCursorNavigationDown { get; set; }
+
+    /// <summary> Stops rapid cursor navigation Left </summary>
+    public partial bool IsStoppingRapidCursorNavigationLeft { get; set; }
+
+    /// <summary> Stops rapid cursor navigation Right </summary>
+    public partial bool IsStoppingRapidCursorNavigationRight { get; set; }
+
+    /// <summary> Change CursorType to Clickable on hover </summary>
+    public partial bool IsClickableCursorOnHover { get; set; }
+
+    /// <summary> Change CursorType to TextInput on hover </summary>
+    public partial bool IsTextInputCursorOnHover { get; set; }
+
+    /// <summary> Use elliptical collision instead of rectangular </summary>
+    public partial bool IsEllipticalCollision { get; set; }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 ?? 5B C3 33 DB")]
     public partial void Ctor();
