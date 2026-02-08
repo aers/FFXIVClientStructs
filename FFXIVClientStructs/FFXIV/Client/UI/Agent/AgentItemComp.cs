@@ -3,11 +3,12 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentItemComp
-//   Client::UI::Agent::AgentInterface
-//     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Client::UI::Agent::AgentItemDetailBase
+//     Client::UI::Agent::AgentInterface
+//       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ItemComp)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>] // TODO: change to AgentItemDetailBase
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct AgentItemComp {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 53 ?? 0F B7 4B")]

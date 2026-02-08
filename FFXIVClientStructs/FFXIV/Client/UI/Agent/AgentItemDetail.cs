@@ -3,11 +3,12 @@ using FFXIVClientStructs.FFXIV.Client.Enums;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentItemDetail
-//   Client::UI::Agent::AgentInterface
-//     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Client::UI::Agent::AgentItemDetailBase
+//     Client::UI::Agent::AgentInterface
+//       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ItemDetail)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>] // TODO: change to AgentItemDetailBase
 [VirtualTable("48 89 18 48 8D 05 ?? ?? ?? ?? 48 89 07", 6)]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AgentItemDetail {
