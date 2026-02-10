@@ -1,5 +1,4 @@
-using System.Runtime.InteropServices;
-using FFXIVClientStructs.FFXIV.Client.Enums;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -17,7 +16,7 @@ public unsafe partial struct AgentItemInspection {
     [StructLayout(LayoutKind.Explicit, Size = 0x668)]
     public struct Data {
         [FieldOffset(0x0)] public InventoryItem Item;
-        [FieldOffset(0x50), FixedSizeArray] private FixedSizeArray11<Utf8String> Unk50;
+        [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray11<Utf8String> _unk50;
     }
 
 

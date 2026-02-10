@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -48,7 +48,7 @@ public unsafe partial struct AgentRetainerTask {
         [FieldOffset(0x0)] public ushort RewardRetainerTaskId;
         [FieldOffset(0x4)] public uint RewardXP;
         [FieldOffset(0x8)] private uint Unk8;
-        [FieldOffset(0xC)] private byte RewardItemCount;
+        [FieldOffset(0xC)] private byte RewardItemCount2;
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray2<uint> _rewardItemIds;
         [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray2<uint> _rewardItemCount;
     }
