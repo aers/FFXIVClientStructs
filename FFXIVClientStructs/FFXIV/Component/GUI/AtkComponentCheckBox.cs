@@ -12,9 +12,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
 [VirtualTable("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08", [1, 407])]
-public unsafe partial struct AtkComponentCheckBox : ICreatable {
-    public void Ctor() {
-        AtkComponentButton.Ctor();
+public unsafe partial struct AtkComponentCheckBox : ICreatable<AtkComponentCheckBox> {
+    public AtkComponentCheckBox* Ctor() {
+        var ret = AtkComponentButton.Ctor();
         VirtualTable = StaticVirtualTablePointer;
+        return (AtkComponentCheckBox*)ret;
     }
 }

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x238)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 33 ED 48 8B 89 ?? ?? ?? ?? 8B F2", 3, 74)]
-public unsafe partial struct AtkUnitBase : ICreatable {
+public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xB8)] public AtkWidgetAlignment WidgetAlignment; // copied from (AtkUldWidgetInfo*)UldManager.Objects
@@ -194,7 +194,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public static partial float GetGlobalUIScale();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
-    public partial void Ctor();
+    public partial AtkUnitBase* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 40 F6 C5 01")]
     public partial void Destructor();

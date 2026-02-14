@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-public unsafe partial struct AtkComponentDragDrop : ICreatable {
+public unsafe partial struct AtkComponentDragDrop : ICreatable<AtkComponentDragDrop> {
     [FieldOffset(0xC0)] public AtkDragDropInterface AtkDragDropInterface;
     [FieldOffset(0xF0)] public DragDropType AcceptedType;
     [FieldOffset(0xF8)] public AtkComponentIcon* AtkComponentIcon;
@@ -21,7 +21,7 @@ public unsafe partial struct AtkComponentDragDrop : ICreatable {
     [FieldOffset(0x10A)] public DragDropFlag Flags;
 
     [MemberFunction("33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8D 05 ?? ?? ?? ??")]
-    public partial void Ctor();
+    public partial AtkComponentDragDrop* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 FF 74 40")]
     public partial int GetIconId();

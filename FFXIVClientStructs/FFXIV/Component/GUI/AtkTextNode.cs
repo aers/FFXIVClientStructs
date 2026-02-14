@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x180)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 144])]
-public unsafe partial struct AtkTextNode : ICreatable {
+public unsafe partial struct AtkTextNode : ICreatable<AtkTextNode> {
     [FieldOffset(0xC0)] public uint TextId;
     [FieldOffset(0xC4)] public ByteColor TextColor;
     [FieldOffset(0xC8)] public ByteColor EdgeColor;
@@ -37,10 +37,11 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0x170)] public TextFlags TextFlags;
 
     // 7.0 inlines this ctor
-    public void Ctor() {
-        AtkResNode.Ctor();
+    public AtkTextNode* Ctor() {
+        var ret = AtkResNode.Ctor();
         VirtualTable = StaticVirtualTablePointer;
         NodeText.Ctor();
+        return (AtkTextNode*)ret;
     }
 
     /// <summary>
