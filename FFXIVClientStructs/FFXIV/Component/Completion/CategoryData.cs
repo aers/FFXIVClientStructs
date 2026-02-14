@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Completion;
 // Component::Completion::CategoryData
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public partial struct CategoryData {
+public unsafe partial struct CategoryData {
     [FieldOffset(0x08)] public StdVector<CStringPointer> CompletionTexts;
     [FieldOffset(0x20)] public StdVector<CompletionDataStruct> CompletionData;
     // [FieldOffset(0x38)] private StdVector<{ 4 bytes }> Unk38;
