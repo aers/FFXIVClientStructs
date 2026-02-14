@@ -65,7 +65,7 @@ public unsafe partial struct RaceChocoboManager {
     public byte GetPedigreeLevel() => (byte)(Math.Min(Father >> 12, Mother >> 12) + 1);
     public bool IsAttributeInheritedFromFather(ChocoboAttribute attribute) => (Parameters & (1 << (4 - (int)attribute))) == 0;
 
-    public byte GetStars(ChocoboAttribute attribute)
+    public byte GetAttributeStars(ChocoboAttribute attribute)
     {
         short inheritedStats = IsAttributeInheritedFromFather(attribute) ? Father : Mother;
         return (byte)(((inheritedStats >> (2 * (int)attribute)) & 0x3) + 1);
@@ -84,7 +84,7 @@ public unsafe partial struct RaceChocoboManager {
         };
     }
 
-    public short GetMaximumAttributeValue(ChocoboAttribute attribute) => (short)(40 * (GetStars(attribute) + GetPedigreeLevel()) - 20);
+    public short GetMaximumAttributeValue(ChocoboAttribute attribute) => (short)(40 * (GetAttributeStars(attribute) + GetPedigreeLevel()) - 20);
     public short GetCurrentAttributeValue(ChocoboAttribute attribute) => (short)(GetCurrentAttributePercentage(attribute) * GetMaximumAttributeValue(attribute) / 100f);
 
     public byte GetRating()
