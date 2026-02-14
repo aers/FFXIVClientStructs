@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1B0)]
-public unsafe partial struct AtkComponentList : ICreatable {
+public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* ScrollBarComponent;
     [FieldOffset(0xD0)] public AtkCollisionNode* CollisionNode;
@@ -99,7 +99,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0x193), Obsolete("Renamed to IsScrollBarEnabled")] public bool ScrollbarEnabled;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0")]
-    public partial void Ctor();
+    public partial AtkComponentList* Ctor();
 
     [VirtualFunction(23)]
     public partial void ScrollToItem(short index);

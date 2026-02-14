@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 270])]
-public unsafe partial struct AtkCounterNode : ICreatable {
+public unsafe partial struct AtkCounterNode : ICreatable<AtkCounterNode> {
     [FieldOffset(0xC0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xC8)] public uint PartId;
     [FieldOffset(0xCC)] public byte NumberWidth;
@@ -22,10 +22,11 @@ public unsafe partial struct AtkCounterNode : ICreatable {
     [FieldOffset(0xD8)] public Utf8String NodeText;
 
     // 7.0 inlines this ctor
-    public void Ctor() {
-        AtkResNode.Ctor();
+    public AtkCounterNode* Ctor() {
+        var ret = AtkResNode.Ctor();
         VirtualTable = StaticVirtualTablePointer;
         NodeText.Ctor();
+        return (AtkCounterNode*)ret;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 8D 04 9B")]
