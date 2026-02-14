@@ -10,10 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x420)]
-public unsafe partial struct AtkComponentMap : ICreatable {
+public unsafe partial struct AtkComponentMap : ICreatable<AtkComponentMap> {
     [FieldOffset(0xC0)] public AtkImageNode* MapFrameImage; // The color grading texture with map frame, does not include grid
     [FieldOffset(0xC8)] public AtkImageNode* BaseMapImage; // The un-blended raw map image, does not include grid or color grading or fog masking
     [FieldOffset(0xD0)] public AtkImageNode* DiscoveryPartsImage;
+    
     [FieldOffset(0xE0)] public AtkImageNode* PlayerCone;
     [FieldOffset(0xE8)] public AtkComponentNode* MarkerTemplate5; // NodeId 5
     [FieldOffset(0xF0)] public AtkComponentNode* MarkerTemplate6; // NodeId 6
@@ -47,7 +48,7 @@ public unsafe partial struct AtkComponentMap : ICreatable {
     [FieldOffset(0x3E8)] public AtkGrid Grid;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 33 FF C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05")]
-    public partial void Ctor();
+    public partial AtkComponentMap* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 0F 57 D2")]
     public partial void SetMapScale(float scale);

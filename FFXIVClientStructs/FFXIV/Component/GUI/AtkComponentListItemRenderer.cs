@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentButton>, Inherits<AtkDragDropInterface>(0xF0)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public unsafe partial struct AtkComponentListItemRenderer : ICreatable {
+public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkComponentListItemRenderer> {
     [FieldOffset(0x120), CExporterUnion("RowTemplate")] public AtkResNode* RowTemplateNode; // if RowTemplateNodeCount == 1
     [FieldOffset(0x120), CExporterUnion("RowTemplate")] public AtkResNode** RowTemplateNodeList; // if RowTemplateNodeCount != 1
     [FieldOffset(0x128)] public AtkComponentListItemPopulator Populator;
@@ -28,7 +28,7 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable {
     [FieldOffset(0x1A4)] public int RowTemplateNodeCount; // TODO: also contains flags!
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??")]
-    public partial void Ctor();
+    public partial AtkComponentListItemRenderer* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FE 04 75 12")]
     public partial AtkComponentDragDrop* StartDragDrop(int int1, uint iconId, int int2 = 0);
