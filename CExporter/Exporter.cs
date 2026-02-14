@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,7 +8,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
-using FFXIVClientStructs.FFXIV.Common.Lua;
 using InteropGenerator.Runtime.Attributes;
 using Pastel;
 using YamlDotNet.Core;
@@ -115,9 +113,8 @@ public class Exporter {
         if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
         var typeAndMembers = types.Select(t => (t, t.GetMethods(ExporterStatics.StaticBindingFlags))).ToArray();
         foreach (var (type, methods) in typeAndMembers) {
-            if (type == typeof(lua_State)) Debugger.Break();
             if (!quiet) Console.WriteLine($"Processing {type} with {methods.Length} methods");
-            var sanitizedName = type.FullSanitizeName();
+            var sanitizedName = type.FixTypeName();
             var currentStructIndex = _structs.FindIndex(s => s.StructTypeName == sanitizedName);
             if (currentStructIndex == -1) {
                 if (!quiet) Console.WriteLine($"Error in struct {type} please fix");
@@ -197,13 +194,13 @@ public class Exporter {
             foreach (var size in sizes) {
                 var checks = sizes.Where(t => t != size && t.StartOffset <= size.StartOffset).ToArray();
                 if (checks.Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset))
-                    ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                    ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
                 if (checks.Any(t => t.StartOffset == size.StartOffset))
-                    ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                    ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
                 if (size.StartOffset >= processedStruct.StructSize)
-                    ExporterStatics.ErrorList.Add($"Field offset exceeds struct size in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                    ExporterStatics.ErrorList.Add($"Field offset exceeds struct size in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
                 if (size.EndOffset > processedStruct.StructSize)
-                    ExporterStatics.ErrorList.Add($"Field size exceeds struct size in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
+                    ExporterStatics.ErrorList.Add($"Field size exceeds struct size in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
             }
         }
     }
@@ -211,9 +208,9 @@ public class Exporter {
     public static void VerifyNoNameOverlap(Dictionary<string, List<string>> check) {
         foreach (var processedStruct in _structs) {
             foreach (var processedStructField in processedStruct.Fields) {
-                if (!check.TryGetValue(processedStruct.StructType.FullSanitizeName(), out var checkStrings)) continue;
+                if (!check.TryGetValue(processedStruct.StructType.FixTypeName(), out var checkStrings)) continue;
                 if (checkStrings.Contains(processedStructField.FieldName)) {
-                    var structName = processedStruct.StructType.FullSanitizeName();
+                    var structName = processedStruct.StructType.FixTypeName();
                     var fieldName = processedStructField.FieldName;
                     ExporterStatics.ErrorList.Add($"Field name overlap detected in {structName.Pastel(Color.MediumSlateBlue)} with field {fieldName.Pastel(Color.Red)} in data.yml {(structName + "_" + fieldName).Pastel(Color.BlueViolet)}");
                 }
@@ -298,14 +295,15 @@ public class Exporter {
 
     private static ProcessedField ProcessField(FieldInfo field, int offset) {
         if (field.FieldType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{field.FieldType.GetGenericArguments()[0].FullSanitizeName()}>*";
+            var fieldTypeOverride = $"RedBlackTree::Node<{field.FieldType.GetGenericArguments()[0].FixTypeName()}>*";
             _processType.Add(new ProcessingType(field.FieldType, fieldTypeOverride[..^1]));
             return new ProcessedField {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
                 IsBase = field.IsDirectBase(),
-                FieldTypeOverride = fieldTypeOverride
+                FieldTypeOverride = fieldTypeOverride,
+                Bits = []
             };
         }
         if (field.FieldType.IsFunctionPointer || field.FieldType.IsUnmanagedFunctionPointer) {
@@ -320,9 +318,11 @@ public class Exporter {
                     return new ProcessedField {
                         FieldType = p,
                         FieldOffset = -1,
-                        FieldName = 'a' + (i + 1).ToString()
+                        FieldName = 'a' + (i + 1).ToString(),
+                        Bits = []
                     };
-                }).ToArray()
+                }).ToArray(),
+                Bits = []
             };
         }
         if (field.FieldType.IsFixedBuffer()) {
@@ -337,7 +337,8 @@ public class Exporter {
                     FieldType = elementType,
                     FieldOffset = field.GetFieldOffset() - offset,
                     FieldName = field.Name,
-                    FixedSize = size
+                    FixedSize = size,
+                    Bits = []
                 };
             }
             var fixedType = field.FieldType.GetFields()[0].FieldType;
@@ -352,7 +353,8 @@ public class Exporter {
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
                 FixedSize = size,
-                FieldTypeOverride = fieldOverrideType
+                FieldTypeOverride = fieldOverrideType,
+                Bits = []
             };
         }
         if (field.FieldType.GetCustomAttribute<InlineArrayAttribute>() != null) {
@@ -369,7 +371,8 @@ public class Exporter {
                 FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
                 FixedSize = arrLength,
                 FixedString = isString,
-                FieldTypeOverride = fieldOverrideType
+                FieldTypeOverride = fieldOverrideType,
+                Bits = []
             };
         }
         if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
@@ -378,7 +381,8 @@ public class Exporter {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = $"{sheetName}Sheet",
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}"
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}",
+                Bits = []
             };
         }
         if (field.GetCustomAttribute<CExporterExcelAttribute>() != null) {
@@ -387,7 +391,8 @@ public class Exporter {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*",
+                Bits = []
             };
         }
         if (field.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
@@ -395,7 +400,30 @@ public class Exporter {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
-                FieldTypeOverride = field.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
+                FieldTypeOverride = field.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName,
+                Bits = []
+            };
+        }
+        if (field.IsBitArray()) {
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                IsBase = field.IsDirectBase(),
+                Bits = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("BitFieldAttribute`1")).Select(t => {
+                    var attrType = t.GetType();
+                    var name = (string)attrType.GetProperty("Name")!.GetValue(t)!;
+                    var offset = (int)attrType.GetProperty("Index")!.GetValue(t)!;
+                    var size = (int)attrType.GetProperty("Length")!.GetValue(t)!;
+                    var type = attrType.GenericTypeArguments[0];
+                    _processType.Add(type);
+                    return new ProcessedBitField {
+                        Name = name,
+                        Offset = offset,
+                        Size = size,
+                        Type = type
+                    };
+                }).ToArray()
             };
         }
         _processType.Add(field.FieldType);
@@ -403,19 +431,21 @@ public class Exporter {
             FieldType = field.FieldType,
             FieldOffset = field.GetFieldOffset() - offset,
             FieldName = field.Name,
-            IsBase = field.IsDirectBase()
+            IsBase = field.IsDirectBase(),
+            Bits = []
         };
     }
 
     private static ProcessedField ProcessParameter(ParameterInfo parameter) {
         if (parameter.ParameterType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.ParameterType.GetGenericArguments()[0].FullSanitizeName()}>*";
+            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.ParameterType.GetGenericArguments()[0].FixTypeName()}>*";
             _processType.Add(new ProcessingType(parameter.ParameterType, fieldTypeOverride[..^1]));
             return new ProcessedField {
                 FieldType = parameter.ParameterType,
                 FieldOffset = -1,
                 FieldName = parameter.Name!,
-                FieldTypeOverride = fieldTypeOverride
+                FieldTypeOverride = fieldTypeOverride,
+                Bits = []
             };
         }
         if (parameter.GetCustomAttribute<CExporterExcelAttribute>() != null) {
@@ -424,7 +454,8 @@ public class Exporter {
                 FieldType = parameter.ParameterType,
                 FieldOffset = -1,
                 FieldName = parameter.Name!,
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*",
+                Bits = []
             };
         }
         if (parameter.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
@@ -432,26 +463,29 @@ public class Exporter {
                 FieldType = parameter.ParameterType,
                 FieldOffset = -1,
                 FieldName = parameter.Name!,
-                FieldTypeOverride = parameter.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
+                FieldTypeOverride = parameter.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName,
+                Bits = []
             };
         }
         _processType.Add(parameter.ParameterType);
         return new ProcessedField {
             FieldType = parameter.ParameterType,
             FieldOffset = -1,
-            FieldName = parameter.Name!
+            FieldName = parameter.Name!,
+            Bits = []
         };
     }
 
     private static ProcessedField ProcessVirtualParameter(Type parameter, int i, ParameterInfo[]? parameters) {
         if (parameter is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.GetGenericArguments()[0].FullSanitizeName()}>*";
+            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.GetGenericArguments()[0].FixTypeName()}>*";
             _processType.Add(new ProcessingType(parameter, fieldTypeOverride[..^1]));
             return new ProcessedField {
                 FieldType = parameter,
                 FieldOffset = -1,
                 FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = fieldTypeOverride
+                FieldTypeOverride = fieldTypeOverride,
+                Bits = []
             };
         }
         if (parameter.GetCustomAttribute<CExporterExcelAttribute>() != null) {
@@ -460,7 +494,8 @@ public class Exporter {
                 FieldType = parameter,
                 FieldOffset = -1,
                 FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*",
+                Bits = []
             };
         }
         if (i != 0 && parameters?[i - 1] is not null && parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
@@ -468,14 +503,16 @@ public class Exporter {
                 FieldType = parameter,
                 FieldOffset = -1,
                 FieldName = parameters[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
+                FieldTypeOverride = parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName,
+                Bits = []
             };
         }
         _processType.Add(parameter);
         return new ProcessedField {
             FieldType = parameter,
             FieldOffset = -1,
-            FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}"
+            FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
+            Bits = []
         };
     }
 
@@ -557,10 +594,11 @@ public class Exporter {
                             MemberFunctionReturnType = memberFunctionReturnType,
                             MemberFunctionParameters = [
                                 new ProcessedField {
-                                    FieldTypeOverride = memberFunctionClass.FullSanitizeName() + "*",
+                                    FieldTypeOverride = memberFunctionClass.FixTypeName() + "*",
                                     FieldType = memberFunctionClass,
                                     FieldOffset = -1,
-                                    FieldName = "this"
+                                    FieldName = "this",
+                                    Bits = []
                                 },
                                 .. memberFunctionParameters.Select(ProcessParameter).ToArray()]
                         },
@@ -587,15 +625,15 @@ public class Exporter {
                             StructType = type,
                             IsUnion = !attr.IsStruct,
                             StructName = attr.IsStruct ? attr.Struct : attr.Union,
-                            StructNamespace = type.FullSanitizeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
-                            StructTypeName = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}",
+                            StructNamespace = type.FixTypeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
+                            StructTypeName = type.FixTypeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}",
                             StructSize = 0,
                             VirtualFunctionSize = 0,
                             Fields = [
                                 ProcessField(unionField, unionStartField.GetFieldOffset())
                             ],
                             MemberFunctions = [],
-                            StructTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
+                            StructTypeOverride = type.FixTypeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
                         });
                     } else
                         unions[index].Fields = [
@@ -619,7 +657,8 @@ public class Exporter {
                             FieldTypeOverride = subStruct.StructTypeOverride,
                             FieldType = type,
                             FieldOffset = 0,
-                            FieldName = subStruct.StructName
+                            FieldName = subStruct.StructName,
+                            Bits = []
                         }
                     ];
                     if (!quiet) Console.WriteLine($"Processed {unionStruct.StructTypeOverride} with {unionStruct.Fields.Length} fields and methods");
@@ -633,7 +672,7 @@ public class Exporter {
                 IsUnion = type.GetCustomAttribute<CExporterStructUnionAttribute>() != null,
                 StructName = type.Name,
                 StructNamespace = type.GetNamespace(),
-                StructTypeName = overrideType ?? type.FullSanitizeName(),
+                StructTypeName = overrideType ?? type.FixTypeName(),
                 StructSize = type.SizeOf(),
                 VirtualFunctionSize = vtableSize,
                 Fields = ProcessFields(fields),
@@ -649,7 +688,8 @@ public class Exporter {
                         FieldType = fieldInfo.FieldType,
                         FieldOffset = fieldInfo.GetFieldOffset(),
                         FieldName = unionAttr.Union,
-                        FieldTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{unionAttr.Union}"
+                        FieldTypeOverride = type.FixTypeName() + $"{ExporterStatics.Separator}{unionAttr.Union}",
+                        Bits = []
                     }
                 ];
                 processedStruct.Fields = [.. processedStruct.Fields.OrderBy(t => t.FieldOffset)];
@@ -697,13 +737,20 @@ public class YamlExport {
     public required ProcessedStruct[] Structs;
 }
 
+public class ProcessedBitField {
+    public required int Size;
+    public required int Offset;
+    public required Type Type;
+    public required string Name;
+}
+
 public class ProcessedField {
     public string? FieldTypeOverride;
     public required Type FieldType;
     public required string FieldName;
     public required int FieldOffset;
     public bool IsBase;
-
+    public required ProcessedBitField[] Bits;
     public virtual int FieldSize => FieldType.SizeOf();
 }
 
@@ -766,7 +813,7 @@ public class ProcessedStruct {
                                 !t.FieldTypeOverride.EndsWith('*')
                             )
                         ))
-                    .Select(t => t.FieldTypeOverride ?? t.FieldType.FullSanitizeName()).Distinct().ToArray();
+                    .Select(t => t.FieldTypeOverride ?? t.FieldType.FixTypeName()).Distinct().ToArray();
             }
             return _dependencyNames;
         }
@@ -806,7 +853,7 @@ public class ProcessedMemberFunctionReturn(Type type, string? overrideType) {
     public static implicit operator (Type Type, string? OverrideType)(ProcessedMemberFunctionReturn value) => (value.Type, value.OverrideType);
     public static implicit operator ProcessedMemberFunctionReturn(Type type) => new(type, null);
     public static implicit operator Type(ProcessedMemberFunctionReturn value) => value.Type;
-    public static implicit operator string(ProcessedMemberFunctionReturn value) => value.OverrideType ?? value.Type.FullSanitizeName();
+    public static implicit operator string(ProcessedMemberFunctionReturn value) => value.OverrideType ?? value.Type.FixTypeName();
 }
 
 public class ProcessedEnumConverter : IYamlTypeConverter {
@@ -816,11 +863,11 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         if (value is not ProcessedEnum e) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(e.EnumType.FullSanitizeName()));
+        emitter.Emit(new Scalar(e.EnumType.FixTypeName()));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(e.EnumName));
         emitter.Emit(new Scalar("underlying"));
-        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FullSanitizeName()));
+        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName()));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(e.EnumNamespace));
         emitter.Emit(new Scalar("flags"));
@@ -848,13 +895,30 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
             emitter.Emit(new Scalar("__fastcall"));
         } else {
-            emitter.Emit(new Scalar(f.FieldTypeOverride ?? f.FieldType.FullSanitizeName()));
+            emitter.Emit(new Scalar(f.FieldTypeOverride ?? f.FieldType.FixTypeName()));
         }
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(f.FieldName));
         if (f.FieldOffset >= 0) {
             emitter.Emit(new Scalar("offset"));
             emitter.Emit(new Scalar(f.FieldOffset.ToString()));
+        }
+        if (f.Bits.Length > 0) {
+            emitter.Emit(new Scalar("bits"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var bit in f.Bits) {
+                emitter.Emit(new MappingStart());
+                emitter.Emit(new Scalar("type"));
+                emitter.Emit(new Scalar(bit.Type.FixTypeName()));
+                emitter.Emit(new Scalar("offset"));
+                emitter.Emit(new Scalar(bit.Offset.ToString()));
+                emitter.Emit(new Scalar("size"));
+                emitter.Emit(new Scalar(bit.Size.ToString()));
+                emitter.Emit(new Scalar("name"));
+                emitter.Emit(new Scalar(bit.Name));
+                emitter.Emit(new MappingEnd());
+            }
+            emitter.Emit(new SequenceEnd());
         }
         if (f.IsBase) {
             emitter.Emit(new Scalar("base"));
@@ -863,13 +927,13 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         switch (f) {
             case ProcessedFunctionField func: {
                     emitter.Emit(new Scalar("return_type"));
-                    emitter.Emit(new Scalar(func.FunctionReturnType.FullSanitizeName()));
+                    emitter.Emit(new Scalar(func.FunctionReturnType.FixTypeName()));
                     emitter.Emit(new Scalar("parameters"));
                     emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
                     foreach (var p in func.FunctionParameters) {
                         emitter.Emit(new MappingStart());
                         emitter.Emit(new Scalar("type"));
-                        emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FullSanitizeName()));
+                        emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FixTypeName()));
                         emitter.Emit(new Scalar("name"));
                         emitter.Emit(new Scalar(p.FieldName));
                         emitter.Emit(new MappingEnd());
@@ -897,7 +961,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         if (value is not ProcessedStruct s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(!string.IsNullOrWhiteSpace(s.StructTypeOverride) ? s.StructTypeOverride : s.StructType.FullSanitizeName()));
+        emitter.Emit(new Scalar(!string.IsNullOrWhiteSpace(s.StructTypeOverride) ? s.StructTypeOverride : s.StructType.FixTypeName()));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(s.StructName));
         emitter.Emit(new Scalar("namespace"));
@@ -991,7 +1055,7 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(v.Offset.ToString()));
         if (v.VirtualFunctionReturnType != null) {
             emitter.Emit(new Scalar("return_type"));
-            emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FullSanitizeName()));
+            emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FixTypeName()));
         }
         if (v.VirtualFunctionParameters != null) {
             emitter.Emit(new Scalar("parameters"));
@@ -1024,7 +1088,7 @@ public class ProcessedStaticMembersConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("is_pointer"));
         emitter.Emit(new Scalar(s.IsPointer.ToString()));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(s.ReturnType.FullSanitizeName()));
+        emitter.Emit(new Scalar(s.ReturnType.FixTypeName()));
         emitter.Emit(new MappingEnd());
     }
 

@@ -73,11 +73,6 @@ public static partial class TypeExtensions {
         return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == name && f.FieldType == field.FieldType) || type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
     }
 
-    public static bool IsDirectBase(this FieldInfo field) {
-        var bases = field.DeclaringType?.GetInheritsTypes() ?? [];
-        return bases.Any(b => field.FieldType == b && field.Name == (b.Name == field.DeclaringType?.Name ? b.Name + "Base" : b.Name)) || field.GetCustomAttribute<CExporterBaseTypeAttribute>() != null;
-    }
-
     public static string FixTypeName(this Type type, bool shouldLower = true) {
         using var builderPooled = StringBuilderPool.Get(500);
         var builder = builderPooled.Builder;
@@ -211,8 +206,6 @@ public static partial class TypeExtensions {
         return builder.ToString();
     }
 
-    public static string FullSanitizeName(this Type type) => type.FixTypeName();
-
     public static int PackSize(this Type type) {
         if (type.GetCustomAttribute<FixedSizeArrayAttribute>() != null) return 1; // FixedSizeArrayAttribute is always packed to 1 as the generated struct gets generated with Pack = 1
         if (!type.IsStruct()) return type.SizeOf();
@@ -223,7 +216,7 @@ public static partial class TypeExtensions {
     }
 
     public static bool IsInStructList(this Type type, List<ProcessedStruct> structs) {
-        var name = type.FullSanitizeName();
+        var name = type.FixTypeName();
         foreach (var str in structs) {
             if (str.StructTypeName == name) return true;
         }
@@ -255,6 +248,15 @@ public static class FieldInfoExtensions {
             offset += field.FieldType.SizeOf();
         }
         throw new Exception("Field not found");
+    }
+
+    public static bool IsDirectBase(this FieldInfo field) {
+        var bases = field.DeclaringType?.GetInheritsTypes() ?? [];
+        return bases.Any(b => field.FieldType == b && field.Name == (b.Name == field.DeclaringType?.Name ? b.Name + "Base" : b.Name)) || field.GetCustomAttribute<CExporterBaseTypeAttribute>() != null;
+    }
+
+    public static bool IsBitArray(this FieldInfo type) {
+        return type.GetCustomAttributes().Any(t => t.GetType().Name.Contains("BitFieldAttribute`1"));
     }
 }
 public static class Extensions {
