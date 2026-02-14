@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe partial struct AtkComponentBase : ICreatable {
+public unsafe partial struct AtkComponentBase : ICreatable<AtkComponentBase> {
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0x98)] public uint ComponentFlags; // & 1 = UldLoaded, & 2 = Interactable/Enabled?
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
@@ -19,7 +19,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [FieldOffset(0xB4)] public AtkCursorNavigationInfo CursorNavigationInfo;
 
     [MemberFunction("48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08")]
-    public partial void Ctor();
+    public partial AtkComponentBase* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 0E 75 2B")]
     public partial ComponentType GetComponentType();

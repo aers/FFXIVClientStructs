@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
-public unsafe partial struct AtkComponentHoldButton : ICreatable {
+public unsafe partial struct AtkComponentHoldButton : ICreatable<AtkComponentHoldButton> {
     [FieldOffset(0xF0)] public AtkResNode* ProgressResNode;
     [FieldOffset(0xF8)] public AtkImageNode* ProgressImageNode;
     [FieldOffset(0x100)] public bool IsTargetReached;
@@ -24,7 +24,7 @@ public unsafe partial struct AtkComponentHoldButton : ICreatable {
     [FieldOffset(0x10C)] public ProgressState Progress;
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ??")]
-    public partial void Ctor();
+    public partial AtkComponentHoldButton* Ctor();
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
