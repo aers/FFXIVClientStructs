@@ -75,11 +75,11 @@ public unsafe partial struct RaceChocoboManager {
     {
         return attribute switch
         {
-            ChocoboAttribute.MaximumSpeed => RaceChocoboManager.Instance()->MaximumSpeed,
-            ChocoboAttribute.Acceleration => RaceChocoboManager.Instance()->Acceleration,
-            ChocoboAttribute.Endurance => RaceChocoboManager.Instance()->Endurance,
-            ChocoboAttribute.Stamina => RaceChocoboManager.Instance()->Stamina,
-            ChocoboAttribute.Cunning => RaceChocoboManager.Instance()->Cunning,
+            ChocoboAttribute.MaximumSpeed => MaximumSpeed,
+            ChocoboAttribute.Acceleration => Acceleration,
+            ChocoboAttribute.Endurance => Endurance,
+            ChocoboAttribute.Stamina => Stamina,
+            ChocoboAttribute.Cunning => Cunning,
             _ => throw new ArgumentOutOfRangeException(nameof(attribute), attribute, null)
         };
     }
