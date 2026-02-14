@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-public unsafe partial struct AtkComponentButton : ICreatable {
+public unsafe partial struct AtkComponentButton : ICreatable<AtkComponentButton> {
     // based on the text size
     [FieldOffset(0xC0)] public short Left;
     [FieldOffset(0xC2)] public short Top;
@@ -30,7 +30,7 @@ public unsafe partial struct AtkComponentButton : ICreatable {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F ?? ?? ?? ??")]
-    public partial void Ctor();
+    public partial AtkComponentButton* Ctor();
 
     /// <summary>
     /// Set the text of the component button node.
