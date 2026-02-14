@@ -98,7 +98,7 @@ public unsafe partial struct Human {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public partial struct DrawData : ICreatable
+    public partial struct DrawData : ICreatable<DrawData>
     {
         [FieldOffset(0x00)] public CustomizeData CustomizeData;
         [FieldOffset(0x1A)] public byte AnimationVariant;
@@ -107,6 +107,6 @@ public unsafe partial struct Human {
         [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<EquipmentModelId> _glasses;
 
         [MemberFunction("66 0F 6F 0D ?? ?? ?? ?? 0F 57 C0")]
-        public partial void Ctor();
+        public partial DrawData* Ctor();
     }
 }
