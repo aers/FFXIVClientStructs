@@ -10,27 +10,18 @@ public unsafe partial struct RaceChocoboManager {
     //[FieldOffset(0x00)] private int Unknownx00;
     //[FieldOffset(0x04)] private int Unknownx04;
 
-    // These aren't direct stats but represent then number
-    // of points in an attribute.  To get the stat value,
-    // there's a formula that takes Pedigree & Stars.
-    // I've not fully nailed it down, but it's something like:
-    // ((Pedigree + Stars) * 0.38) * Value = Stat
-    //
-    // But where are Stars and Pedigree stored?
+    // Percentage of the respective stat values.
     [FieldOffset(0x08)] public byte MaximumSpeed;
     [FieldOffset(0x09)] public byte Acceleration;
     [FieldOffset(0x0A)] public byte Endurance;
     [FieldOffset(0x0B)] public byte Stamina;
     [FieldOffset(0x0C)] public byte Cunning;
 
-    // On investigation this looks like:
-    // 2 bits: Sex: 00:M, 01:F
-    // 2 bits: Weather: 01:Fair, 10: Foul, ?? Neutral
-    // 4 bits: Pedigree
-    // So a value of 102/0x66/01 10 0110
-    //   Would be:            M Foul  6
-    // But it doesn't seem to be super stable.
-    // Maybe it suffers a bit like RetainerManager.
+    // 1 bit: unused
+    // 1 bit: Sex: 0:M, 1:F
+    // 1 bit: Weather: 0:Fair, 1: Foul
+    // 5 bits: Stat inheritance: 0:from father, 1:from mother:
+    //         Cunning, Stamina, Endurance, Acceleration, Speed
     [FieldOffset(0x0D)] public byte Parameters;
 
     // 4 bits: Pedigree
@@ -70,4 +61,48 @@ public unsafe partial struct RaceChocoboManager {
     [FieldOffset(0x24)] public byte SessionsAvailable;
 
     //[FieldOffset(0x25)] private byte Unknownx25;
+
+    public byte GetPedigreeLevel() => (byte)(Math.Min(Father >> 12, Mother >> 12) + 1);
+    public bool IsAttributeInheritedFromFather(ChocoboAttribute attribute) => (Parameters & (1 << (4 - (int)attribute))) == 0;
+
+    public byte GetStars(ChocoboAttribute attribute)
+    {
+        short inheritedStats = IsAttributeInheritedFromFather(attribute) ? Father : Mother;
+        return (byte)(((inheritedStats >> (2 * (int)attribute)) & 0x3) + 1);
+    }
+
+    public byte GetCurrentAttributePercentage(ChocoboAttribute attribute)
+    {
+        return attribute switch
+        {
+            ChocoboAttribute.MaximumSpeed => RaceChocoboManager.Instance()->MaximumSpeed,
+            ChocoboAttribute.Acceleration => RaceChocoboManager.Instance()->Acceleration,
+            ChocoboAttribute.Endurance => RaceChocoboManager.Instance()->Endurance,
+            ChocoboAttribute.Stamina => RaceChocoboManager.Instance()->Stamina,
+            ChocoboAttribute.Cunning => RaceChocoboManager.Instance()->Cunning,
+            _ => throw new ArgumentOutOfRangeException(nameof(attribute), attribute, null)
+        };
+    }
+
+    public short GetMaximumAttributeValue(ChocoboAttribute attribute) => (short)(40 * (GetStars(attribute) + GetPedigreeLevel()) - 20);
+    public short GetCurrentAttributeValue(ChocoboAttribute attribute) => (short)(GetCurrentAttributePercentage(attribute) * GetMaximumAttributeValue(attribute) / 100f);
+
+    public byte GetRating()
+    {
+        int sumOfAttributeMaximums = GetMaximumAttributeValue(ChocoboAttribute.MaximumSpeed) +
+                              GetMaximumAttributeValue(ChocoboAttribute.Acceleration) +
+                              GetMaximumAttributeValue(ChocoboAttribute.Endurance) +
+                              GetMaximumAttributeValue(ChocoboAttribute.Stamina) +
+                              GetMaximumAttributeValue(ChocoboAttribute.Cunning);
+        return (byte)(sumOfAttributeMaximums / 500f * (10 + Rank));
+    }
+
+    public enum ChocoboAttribute
+    {
+        MaximumSpeed = 4,
+        Acceleration = 3,
+        Endurance = 2,
+        Stamina = 1,
+        Cunning = 0,
+    }
 }
