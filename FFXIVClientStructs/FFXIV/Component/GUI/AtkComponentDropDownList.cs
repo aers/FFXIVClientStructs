@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 [VirtualTable("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08", [1, 1345])]
-public unsafe partial struct AtkComponentDropDownList : ICreatable {
+public unsafe partial struct AtkComponentDropDownList : ICreatable<AtkComponentDropDownList> {
     [FieldOffset(0xC0)] public AtkComponentCheckBox* Checkbox;
     [FieldOffset(0xC8)] public AtkComponentList* List;
 
@@ -26,9 +26,10 @@ public unsafe partial struct AtkComponentDropDownList : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 83 C0 41")]
     public partial int GetSelectedItemIndex();
 
-    public void Ctor() {
-        AtkComponentBase.Ctor();
+    public AtkComponentDropDownList* Ctor() {
+        var ret = AtkComponentBase.Ctor();
         VirtualTable = StaticVirtualTablePointer;
         ShowPreview = true;
+        return (AtkComponentDropDownList*)ret;
     }
 }
