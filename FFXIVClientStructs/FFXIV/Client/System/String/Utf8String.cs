@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 // Client::System::String::Utf8String
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
+public unsafe partial struct Utf8String : ICreatable<Utf8String>, IDisposable, IStaticNativeObjectOperation<Utf8String> {
     [FieldOffset(0x0)] public CStringPointer StringPtr;
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
     /// <remarks>String length including null terminator.</remarks>
@@ -102,7 +102,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public static partial int ToInteger(Utf8String* value, int fromBase = 0); // base 0 = detect format (0x hex, 0b bin, 0o oct)
 
     [MemberFunction("E8 ?? ?? ?? ?? F7 C3")]
-    public partial void Ctor();
+    public partial Utf8String* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF EB 15")]
     public partial Utf8String* Ctor_FromSequence(byte* str, nuint length);
