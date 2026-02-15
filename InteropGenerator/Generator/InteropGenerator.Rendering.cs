@@ -456,8 +456,7 @@ public sealed partial class InteropGenerator {
                 if (bitField.Type == "bool") {
                     if (bitField.HasGetter) writer.WriteLine($"get => BitOps.GetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index});");
                     if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, value);");
-                }
-                else {
+                } else {
                     string mask = $"BitOps.CreateLowBitMask<{bitField.BackingType}>({bitField.Length})";
                     if (bitField.HasGetter) writer.WriteLine($"get => ({bitField.Type})BitOps.GetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask});");
                     if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask}, ({bitField.BackingType})value);");

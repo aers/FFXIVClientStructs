@@ -1,10 +1,10 @@
 using InteropGenerator.Helpers;
 
-namespace InteropGenerator.Models; 
+namespace InteropGenerator.Models;
 
 internal record BitFieldInfo(
     string FieldName,
-    string Name, 
+    string Name,
     string Type,
     string BackingType,
     int Index,
