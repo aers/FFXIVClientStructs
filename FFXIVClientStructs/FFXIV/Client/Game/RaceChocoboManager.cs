@@ -29,8 +29,8 @@ public unsafe partial struct RaceChocoboManager {
     // 5x2 bits: Cunning, Stamina, Endurance, Acceleration, Speed
     //           I think this looks reversed because of Little Endian
     // The attributes are represented as Stars-1, so 3 stars would be 0b10
-    [FieldOffset(0x0E)] public short Father;
-    [FieldOffset(0x10)] public short Mother;
+    [FieldOffset(0x0E)] public ushort Father;
+    [FieldOffset(0x10)] public ushort Mother;
 
     // ExcelSheet<ChocoboRaceAbility>
     [FieldOffset(0x12)] public byte AbilityHereditary;
@@ -67,7 +67,7 @@ public unsafe partial struct RaceChocoboManager {
 
     public byte GetAttributeStars(ChocoboAttribute attribute)
     {
-        short inheritedStats = IsAttributeInheritedFromFather(attribute) ? Father : Mother;
+        ushort inheritedStats = IsAttributeInheritedFromFather(attribute) ? Father : Mother;
         return (byte)(((inheritedStats >> (2 * (int)attribute)) & 0x3) + 1);
     }
 
