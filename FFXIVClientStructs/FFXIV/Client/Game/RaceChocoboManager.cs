@@ -87,14 +87,14 @@ public unsafe partial struct RaceChocoboManager {
     public short GetMaximumAttributeValue(ChocoboAttribute attribute) => (short)(40 * (GetAttributeStars(attribute) + GetPedigreeLevel()) - 20);
     public short GetCurrentAttributeValue(ChocoboAttribute attribute) => (short)(GetCurrentAttributePercentage(attribute) * GetMaximumAttributeValue(attribute) / 100f);
 
-    public byte GetRating()
+    public short GetRating()
     {
         int sumOfAttributeMaximums = GetMaximumAttributeValue(ChocoboAttribute.MaximumSpeed) +
                               GetMaximumAttributeValue(ChocoboAttribute.Acceleration) +
                               GetMaximumAttributeValue(ChocoboAttribute.Endurance) +
                               GetMaximumAttributeValue(ChocoboAttribute.Stamina) +
                               GetMaximumAttributeValue(ChocoboAttribute.Cunning);
-        return (byte)(sumOfAttributeMaximums / 500f * (10 + Rank));
+        return (short)(sumOfAttributeMaximums / 500f * (10 + Rank));
     }
 
     public enum ChocoboAttribute
