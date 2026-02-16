@@ -2911,8 +2911,19 @@ classes:
     vtbls:
       - ea: 0x1420D2C80
     funcs:
-      0x140B4B630: ReadPacket
+      0x140B4B590: ctor
+      0x140B4B630: HandleCompletionFlagsPacket
+      0x140B4B650: HandleTabDataPacket
+      0x140B4B7A0: Clear
+      0x140B4B830: IsContentNoteComplete
       0x140B4B9F0: IsCategoryUnlocked
+      0x140B4BB20: SetContentNoteComplete
+      0x140B4BB50: SelectTabAndRequestData
+      0x140B4BB90: GetState
+      0x140B4BBA0: GetSelectedTab
+      0x140B4BBB0: GetDisplayCount
+      0x140B4BBC0: GetDisplayId
+      0x140B4BBE0: GetDisplayStatus
   Client::Game::UI::RelicNote:
     instances:
       - ea: 0x1429C63F0  # UIState.RelicNote
