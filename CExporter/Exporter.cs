@@ -405,12 +405,7 @@ public class Exporter {
             };
         }
         if (field.IsBitArray()) {
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                IsBase = field.IsDirectBase(),
-                Bits = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("BitFieldAttribute`1")).Select(t => {
+            var bitsDefinition = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("BitFieldAttribute`1")).Select(t => {
                     var attrType = t.GetType();
                     var name = (string)attrType.GetProperty("Name")!.GetValue(t)!;
                     var offset = (int)attrType.GetProperty("Index")!.GetValue(t)!;
@@ -421,9 +416,42 @@ public class Exporter {
                         Name = name,
                         Offset = offset,
                         Size = size,
-                        Type = type
+                        Type = ExporterStatics.GetBestMatchFromSize(size)
                     };
-                }).ToArray()
+                }).ToArray();
+            var bits = new List<ProcessedBitField>();
+            foreach (var bit in bitsDefinition) {
+                if (bits.Count == 0 && bit.Offset != 0)
+                    bits.Add(new ProcessedBitField {
+                        Name = "UnkBits0",
+                        Offset = 0,
+                        Size = bit.Offset,
+                        Type = ExporterStatics.GetBestMatchFromSize(bit.Offset)
+                    });
+                else if (bit.Offset == 0) {
+                    bits.Add(bit);
+                    continue;
+                }
+                var last = bits.Last();
+                if (last.Offset + last.Size != bit.Offset) {
+                    var newOffset = last.Offset + last.Size;
+                    var size = bit.Offset - newOffset;
+                    
+                    bits.Add(new ProcessedBitField {
+                        Name = $"UnkBits{newOffset}",
+                        Offset = newOffset,
+                        Size = size,
+                        Type = ExporterStatics.GetBestMatchFromSize(size)
+                    });
+                }
+                bits.Add(bit);
+            }
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                IsBase = field.IsDirectBase(),
+                Bits = bits.ToArray()
             };
         }
         _processType.Add(field.FieldType);
