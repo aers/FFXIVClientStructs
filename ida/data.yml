@@ -1442,16 +1442,30 @@ classes:
     funcs:
       0x140DEABC0: ctor
       0x140DEABF0: Dtor
+      0x140DEACF0: RequestParameters
       0x140DEB480: GetAbility #(this,index)
-#oldfail       0x140D40460: GetNamePart
+      0x140DEB4A0: GetNamePart
+      0x140DEB4C0: GetRank
+      0x140DEB4D0: GetExperienceCurrent
+      0x140DEB4E0: GetExperienceMax
       0x140DEB4F0: GetColor
       0x140DEB500: GetGear #(this,index)
       0x140DEB520: GetSessionsAvailable
       0x140DEB540: HasRank
+      0x140DEB550: GetPedigreeLevel
+      0x140DEB5B0: IsAttributeInheritedFromMother
+      0x140DEB5E0: GetIsFemale
+      0x140DEB600: GetIsFoulWeather
+      0x140DEB640: GetAttributesCurrent
+      0x140DEB920: GetAttributesMaximum
+      0x140DEBBC0: GetAttributesStars
       # Not 100 confident what these 2 do
       #0x140DEB920: GetAbilitySlotIfNotLearned
       #0x140CAABC0: GetAbilityIndexIfLearned
-      0x140DEBD60: GetRank
+      0x140DEBD00: CanLearnRacingChocoboAbility # name from Lua function
+      0x140DEBD30: CanForgetRacingChocoboAbility # name from Lua function
+      0x140DEBD60: CanRetireRacingChocobo # name from Lua function
+      0x140DEBDA0: GetRating
       0x140DEC100: GetAdoptionDateFromItem # For Item#9560 (Proof of Covering)
       0x140DEC120: GetNameIdFromItem
       0x140DEC150: GetGradeFromItem
