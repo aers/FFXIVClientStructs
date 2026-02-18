@@ -406,19 +406,19 @@ public class Exporter {
         }
         if (field.IsBitArray()) {
             var bitsDefinition = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("BitFieldAttribute`1")).Select(t => {
-                    var attrType = t.GetType();
-                    var name = (string)attrType.GetProperty("Name")!.GetValue(t)!;
-                    var offset = (int)attrType.GetProperty("Index")!.GetValue(t)!;
-                    var size = (int)attrType.GetProperty("Length")!.GetValue(t)!;
-                    var type = attrType.GenericTypeArguments[0];
-                    _processType.Add(type);
-                    return new ProcessedBitField {
-                        Name = name,
-                        Offset = offset,
-                        Size = size,
-                        Type = ExporterStatics.GetBestMatchFromSize(size)
-                    };
-                }).ToArray();
+                var attrType = t.GetType();
+                var name = (string)attrType.GetProperty("Name")!.GetValue(t)!;
+                var offset = (int)attrType.GetProperty("Index")!.GetValue(t)!;
+                var size = (int)attrType.GetProperty("Length")!.GetValue(t)!;
+                var type = attrType.GenericTypeArguments[0];
+                _processType.Add(type);
+                return new ProcessedBitField {
+                    Name = name,
+                    Offset = offset,
+                    Size = size,
+                    Type = ExporterStatics.GetBestMatchFromSize(size)
+                };
+            }).ToArray();
             var bits = new List<ProcessedBitField>();
             foreach (var bit in bitsDefinition) {
                 if (bits.Count == 0 && bit.Offset != 0)
@@ -436,7 +436,7 @@ public class Exporter {
                 if (last.Offset + last.Size != bit.Offset) {
                     var newOffset = last.Offset + last.Size;
                     var size = bit.Offset - newOffset;
-                    
+
                     bits.Add(new ProcessedBitField {
                         Name = $"UnkBits{newOffset}",
                         Offset = newOffset,
