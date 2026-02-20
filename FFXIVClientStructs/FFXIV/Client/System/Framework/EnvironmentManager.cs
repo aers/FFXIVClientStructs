@@ -55,7 +55,7 @@ public partial struct EnvironmentManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 41 B1 01 BA ?? ?? ?? ?? 41 B8")]
     public partial void SetMasterVolume(int volume, bool saveToConfig);
 
-    ///<inheritdoc cref="SetVolume(uint,int,bool)"/>
+    /// <inheritdoc cref="SetVolume(uint,int,bool)"/>
     public void SetVolume(SoundChannel channel, int volume, bool saveToConfig) => SetVolume((uint)channel, volume, saveToConfig);
 
     /// <summary>
@@ -78,7 +78,7 @@ public partial struct EnvironmentManager {
     /// <summary>
     /// Queues a mode update operation to switch to Borderless Windowed (or restores the default window state).
     /// </summary>
-    /// /// <param name="mode">0 = Windowed, 1 = Fullscreen, 2 = Borderless, 3 = Apply from SystemConfig.</param>
+    /// <param name="mode">0 = Windowed, 1 = Fullscreen, 2 = Borderless, 3 = Apply from SystemConfig.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9F ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 8B D0")]
     public partial void SetWindowMode(uint mode = 3);
 
