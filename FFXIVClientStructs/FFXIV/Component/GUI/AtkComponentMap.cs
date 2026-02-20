@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x420)]
-public partial struct AtkComponentMap : ICreatable {
+public unsafe partial struct AtkComponentMap : ICreatable<AtkComponentMap> {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 33 FF C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05")]
-    public partial void Ctor();
+    public partial AtkComponentMap* Ctor();
 }

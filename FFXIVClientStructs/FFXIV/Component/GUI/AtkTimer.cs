@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct AtkTimer : ICreatable {
+public unsafe partial struct AtkTimer : ICreatable<AtkTimer> {
     [FieldOffset(0x08)] public AtkEventManager EventManager;
     /// <summary> Indicates the time at which the timer ends. </summary>
     [FieldOffset(0x10)] public uint EndTime;
@@ -21,7 +21,7 @@ public unsafe partial struct AtkTimer : ICreatable {
     [FieldOffset(0x28)] public bool IsActive;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 46 78")]
-    public partial void Ctor();
+    public partial AtkTimer* Ctor();
 
     [MemberFunction("40 55 56 48 83 EC 28 8B EA 48 8B F1 F6 C2 02 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 7C 24 ?? 48 8B 79 F8 4C 89 74 24")]
     public partial AtkTimer* Dtor(byte freeFlags);
