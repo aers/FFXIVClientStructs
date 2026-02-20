@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x138)]
-public unsafe partial struct AtkComponentIcon : ICreatable {
+public unsafe partial struct AtkComponentIcon : ICreatable<AtkComponentIcon> {
     [FieldOffset(0xC0)] public uint IconId;
     [FieldOffset(0xC4)] public IconSubFolder IconSubFolder;
     [FieldOffset(0xC8)] public AtkUldAsset* Texture;
@@ -27,7 +27,7 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [FieldOffset(0x130)] public IconComponentFlags Flags;
 
     [MemberFunction("45 33 C0 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 4C 89 41 ?? ?? ?? ?? BA")]
-    public partial void Ctor();
+    public partial AtkComponentIcon* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4D 12")]
     public partial bool LoadIcon(uint iconId);

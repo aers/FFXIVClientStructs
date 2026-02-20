@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public unsafe partial struct AtkComponentGaugeBar : ICreatable {
+public unsafe partial struct AtkComponentGaugeBar : ICreatable<AtkComponentGaugeBar> {
     /// <summary>
     /// Data describing a value transition. Informs the fields in <see cref="GaugeValue"/>. These fields aren't overwritten until the next transition of the same type occurs.
     /// </summary>
@@ -80,7 +80,7 @@ public unsafe partial struct AtkComponentGaugeBar : ICreatable {
     [FieldOffset(0x1A2)] public short MaxFillPositionX;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 98 ?? ?? ?? ??")]
-    public partial void Ctor();
+    public partial AtkComponentGaugeBar* Ctor();
 
     /// <summary>
     /// Sets the value of the gauge, prompting its visual elements to update.<br/>

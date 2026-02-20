@@ -68,7 +68,7 @@ public unsafe partial struct AtkTooltipManager {
     // to the specific agent
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public partial struct AtkTooltipArgs : ICreatable {
+    public partial struct AtkTooltipArgs : ICreatable<AtkTooltipArgs> {
         /// <remarks> Args for <see cref="AtkTooltipType.Text"/> / AddonTooltip. </remarks>
         [FieldOffset(0), CExporterUnion("Args")] public AtkTooltipTextArgs TextArgs;
         /// <remarks> Args for <see cref="AtkTooltipType.Item"/> / AddonItemDetail. </remarks>
@@ -81,7 +81,7 @@ public unsafe partial struct AtkTooltipManager {
         [FieldOffset(0), CExporterUnion("Args")] public AtkTooltipMiragePrismPrismItemArgs MiragePrismPrismItemArgs;
 
         [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
-        public partial void Ctor();
+        public partial AtkTooltipArgs* Ctor();
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
         public struct AtkTooltipTextArgs {
