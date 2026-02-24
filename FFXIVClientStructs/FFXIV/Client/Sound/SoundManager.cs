@@ -84,8 +84,9 @@ public unsafe partial struct SoundManager {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 89 ?? ?? ?? ?? 8B D6")]
     public partial void SetPerfomEnabled(bool enabled);
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 256 * 0xD0)]
-    public struct SoundDataMemory {
+    public partial struct SoundDataMemory {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray256<SoundData> _entries;
     }
 
