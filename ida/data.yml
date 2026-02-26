@@ -3778,6 +3778,7 @@ classes:
       0x1400D3740: TaskHousingEvent
       0x1400D3750: TaskResourceManager
       0x1400D3760: TaskUpdateGame
+      0x1400D37E0: GetClientRuntimeKind
       0x1400D4170: SetupSteamApi
       0x1400D42A0: TeardownSteamApi
       0x1400D4300: IsSteamApiInitialized
