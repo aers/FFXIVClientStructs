@@ -148,7 +148,7 @@ public unsafe partial struct Framework {
     public partial bool Tick();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4B 8B 8C F4")]
-    public partial ClientRuntimeKind GetClientRuntimeKind();
+    public partial ClientPlatform GetClientPlatform();
 
     [MemberFunction("89 51 ?? C6 41 ?? ?? 48 8B 0D")]
     public partial void Exit(int exitCode);
@@ -190,7 +190,7 @@ public unsafe partial struct Framework {
     }
 }
 
-public enum ClientRuntimeKind {
+public enum ClientPlatform {
     Win32   = 0, // Windows 32-bit
     PS3     = 1, // PlayStation 3
     PS4     = 2, // PlayStation 4

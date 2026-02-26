@@ -84,7 +84,7 @@ public unsafe partial struct MacroDecoder {
 // |    73 | Integer              | Quest#66047: Has met Alphinaud and Alisaie         |
 // |    74 | Integer              | PlayStation Generation                             |
 // |    75 | Integer              | Is Legacy Player                                   |
-// |    77 | Integer              | Client Runtime Kind                                |
+// |    77 | Integer              | Client Platform                                    |
 // |    78 | Integer              | Player BirthMonth                                  |
 // |    79 | Integer              | PadMode                                            |
 // |    82 | Integer              | Datacenter Region (1 = JP, 2 = NA, 3 = EU, 4 = OC) |
