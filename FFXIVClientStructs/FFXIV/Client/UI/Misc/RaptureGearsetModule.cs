@@ -96,14 +96,14 @@ public unsafe partial struct RaptureGearsetModule {
     /// After calling this method, it is advisable to validate the returned gearset ID and, if the ID is valid, to
     /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.
     /// </remarks>
-    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
     /// <param name="newGearsetId">The ID to which the gearset should be reassigned.</param>
+    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
     /// <returns>
     /// Returns <c>-1</c> if either the original gearset ID or the new gearset ID is invalid, <c>-2</c> if the player
-    /// is currently editing a portrait, otherwise it returns the ID of the original gearset that was moved to a new position.
+    /// is currently editing a portrait, otherwise it returns the moved gearset's new ID.
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16")]
-    public partial int ReassignGearsetId(int gearsetId, int newGearsetId);
+    public partial int ReassignGearsetId(int newGearsetId, int gearsetId);
 
     /// <summary>
     /// Link a glamour plate to a specific gearset.
