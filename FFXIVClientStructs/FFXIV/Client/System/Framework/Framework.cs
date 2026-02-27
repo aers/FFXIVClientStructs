@@ -103,6 +103,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2B70)] public UIClipboard* UIClipboard;
     [FieldOffset(0x2B80)] public EnvironmentManager* EnvironmentManager;
     [FieldOffset(0x2B88)] public SoundManager* SoundManager;
+    [FieldOffset(0x2B90)] public ClipSoundManager* ClipSoundManager;
     [FieldOffset(0x2BD0)] public LuaState LuaState;
 
     [FieldOffset(0x2BF8), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _gameVersion;
