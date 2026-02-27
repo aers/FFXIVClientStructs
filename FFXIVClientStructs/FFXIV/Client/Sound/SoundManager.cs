@@ -179,7 +179,7 @@ public unsafe partial struct SoundManager {
     public partial SoundData* PlayMovieSound(CStringPointer path, float volume, uint soundNumber, uint fadeInDuration, bool autoRelease); // Movies
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 48 8B F8 FF 15 ?? ?? ?? ?? EB"), GenerateStringOverloads]
-    public partial SoundData* PlaySound9(CStringPointer path); // Cutscene Vo
+    public partial SoundData* PlayCutsceneVoSound(CStringPointer path); // Cutscene Vo
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 256 * 0xD0)]

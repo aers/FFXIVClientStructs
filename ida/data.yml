@@ -3655,7 +3655,7 @@ classes:
       0x140405420: PlayMovieSound
       0x1404055D0: PlaySoundEffect
       0x140405650: PlaySoundEffect2
-      0x1404059E0: PlaySound9 # Cutscene
+      0x1404059E0: PlayCutsceneVoSound
       0x1404079A0: ToggleForceFeedback
       0x1404079D0: LoadSoundDataScd
   Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>:
