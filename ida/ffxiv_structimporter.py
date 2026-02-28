@@ -510,7 +510,7 @@ if api is None:
                     if offset == 0 and field.name == "_vtable":
                         continue
 
-                    if offset == last_field_offset:
+                    if offset == last_field_offset and not struct.union:
                         # TODO(caitlyn): Ghidra creates unions for this, but it's currently silently skipped for IDA
                         print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset.")
                         continue
@@ -617,7 +617,10 @@ if api is None:
                 decl.append("};")
 
                 # set struct type
-                decl[0] = f"struct __attribute__((packed)) {fullname} "
+                if struct.union:
+                    decl[0] = f"union {fullname} "
+                else:
+                    decl[0] = f"struct __attribute__((packed)) {fullname} "
                 if len(inherits_from) > 0:
                     decl[0] += f": {", ".join(inherits_from)}"
                 
