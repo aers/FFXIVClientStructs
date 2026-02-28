@@ -81,6 +81,11 @@ public unsafe partial struct Character {
     [FieldOffset(0x2365)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x2366)] public byte GMRank;
 
+    /// <remarks> See <see cref="Sound.SoundVolumeCategory"/>. </remarks>
+    [FieldOffset(0x2369)] public byte SoundVolumeCategory;
+    [FieldOffset(0x236A)] public byte SoundVolumeCategoryOverride;
+    [FieldOffset(0x236B)] private byte SoundFlags; // 0x40 = SoundVolumeCategory determined
+
     public bool IsWeaponDrawn => Timeline.IsWeaponDrawn;
     public bool IsCasting => GetCastInfo() != null && GetCastInfo()->IsCasting;
 

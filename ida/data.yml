@@ -166,6 +166,7 @@ functions:
   0x140974130: GetRandomShort
   0x1403816F0: UpdateAnimFactor
   0x1403821E0: LoadCharacterVfx
+  0x140404020: GetCharacterSoundVolumeCategory
   0x14040C320: GetActionTimelineKey
   0x14040C350: GetWeaponTimelineKey
   0x1405C86E0: StartSpursJobEntityWorkerThread
@@ -3634,6 +3635,8 @@ classes:
       0x1403FF220: ReleaseSoundData
       0x1403FF500: GetEffectiveVolume
       0x1403FF8E0: ctor
+      0x1404003F0: Initialize
+      0x140400BE0: Update
       0x140401660: SetAlwaysOn
       0x140401680: SetWindowInactive
       0x140401730: SetMasterVolume
@@ -3655,6 +3658,19 @@ classes:
       0x140401EC0: SetPerformAlways
       0x140401F10: SetMicPosition
       0x140402C20: SetVolume #(this, type, float: volume
+      0x140404160: PlaySound
+      0x140404420: PlayClipSound
+      0x140404670: PlayLayoutSound
+      0x140404E50: PlayBGMSound
+      0x140404F80: PlayGayaTitleSound
+      0x1404050A0: PlayOrchestrionSound
+      0x1404052D0: PlaySystemSound
+      0x140405420: PlayMovieSound
+      0x1404055D0: PlaySoundEffect
+      0x140405650: PlaySoundEffect2
+      0x1404059E0: PlayCutsceneVoSound
+      0x1404079A0: ToggleForceFeedback
+      0x1404079D0: LoadSoundDataScd
   Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>:
     vtbls:
       - ea: 0x14208EEB0
@@ -3663,6 +3679,35 @@ classes:
     vtbls:
       - ea: 0x14208EEB8
         base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
+    vfuncs:
+      0: Dtor
+      3: GetSoundController
+      5: SetIsLoadingSoundResource
+      6: GetIsLoadingSoundResource
+      7: GetFadeInDuration
+      8: SetFadeInDuration
+      9: GetVolume
+      10: SetVolume
+      11: GetIsPositional
+      12: SetPosition
+      13: GetPositionX
+      14: GetPositionY
+      15: GetPositionZ
+      16: GetSpeed
+      17: SetSpeed
+      36: Stop
+      37: IsPlaying
+      40: GetIsFadingOut
+      41: GetFadeInEnabled
+      42: GetIsAutoReleaseEnabled
+      43: SetFadeInEnabled
+      49: GetFileName
+      50: GetSoundNumber
+      54: GetSoundResourceHandle
+      55: SetSoundResourceHandle
+      56: LoadSoundResourceHandle
+      57: GetElapsedTime
+      61: GetMidiNote
   Client::Sound::SoundData:
     vtbls:
       - ea: 0x14208F210
@@ -10643,6 +10688,8 @@ classes:
       0x1408DCD10: IsWanderer # World Visit
       0x1408DCD60: IsTraveler # Data Center Travel
       0x1408DCDB0: IsVoyager  # Cross-region Data Center Travel
+      0x1408DD3B0: GetSoundVolumeCategory
+      0x1408DD400: DetermineSoundVolumeCategory
       0x1408E16A0: SetTargetId
       0x1408E1710: GetTargetId
       0x1408DD7D0: GetParentCharacter
@@ -24410,6 +24457,11 @@ classes:
     vtbls:
       - ea: 0x1424378B8
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    funcs:
+      0x141DAA030: SetPosition
+      0x141DAA230: SetPlaybackSpeed
+      0x141DAA1E0: SetPlaybackSpeed2 # something with speed of sound?
+      0x141DAA8E0: SetMidiNote
   SQEX::CDev::Engine::Sd::Driver::EffectController:
     vtbls:
       - ea: 0x142437C88
@@ -24620,21 +24672,96 @@ classes:
   SQEX::CDev::Engine::Sd::Layout::SoundPage: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Layout::IListenerManager: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Layout::ListenerManager: # SQEX::CDev::Engine::Sd::Layout::IListenerManager, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::SoundObject: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::AmbientSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::DirectionSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::PointSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::PointDirSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::LineSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::PolyLineSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::SurfaceSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::BoardObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::BoxObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::PolygonObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::PolyLineObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::PolygonSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::BoxExtController: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Layout::LineExtController: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::SoundObject:
+    vtbls:
+      - ea: 0x1424440F0
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    funcs:
+      0x141E0B1F0: ctor
+  SQEX::CDev::Engine::Sd::Layout::AmbientSound:
+    vtbls:
+      - ea: 0x1424441F8
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E0E470: ctor
+  SQEX::CDev::Engine::Sd::Layout::DirectionSound:
+    vtbls:
+      - ea: 0x1424442F8
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E0F3A0: ctor
+  SQEX::CDev::Engine::Sd::Layout::PointSound:
+    vtbls:
+      - ea: 0x1424443F8
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E10330: ctor
+  SQEX::CDev::Engine::Sd::Layout::PointDirSound:
+    vtbls:
+      - ea: 0x1424445B0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E12BB0: ctor
+  SQEX::CDev::Engine::Sd::Layout::LineSound:
+    vtbls:
+      - ea: 0x1424446B0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E14670: ctor
+  SQEX::CDev::Engine::Sd::Layout::PolyLineSound:
+    vtbls:
+      - ea: 0x1424447B0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E15F50: ctor
+  SQEX::CDev::Engine::Sd::Layout::SurfaceSound:
+    vtbls:
+      - ea: 0x1424448B0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E17EA0: ctor
+  SQEX::CDev::Engine::Sd::Layout::BoardObstruction:
+    vtbls:
+      - ea: 0x1424449B0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E19D30: ctor
+  SQEX::CDev::Engine::Sd::Layout::BoxObstruction:
+    vtbls:
+      - ea: 0x142444AB0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E1B360: ctor
+  SQEX::CDev::Engine::Sd::Layout::PolyLineObstruction:
+    vtbls:
+      - ea: 0x142444CE0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E20A30: ctor
+  SQEX::CDev::Engine::Sd::Layout::PolygonSound:
+    vtbls:
+      - ea: 0x142444E20
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E22120: ctor
+  SQEX::CDev::Engine::Sd::Layout::BoxExtController:
+    vtbls:
+      - ea: 0x142444F20
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E24280: ctor
+  SQEX::CDev::Engine::Sd::Layout::LineExtController:
+    vtbls:
+      - ea: 0x142445020
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E25B20: ctor
+  SQEX::CDev::Engine::Sd::Layout::PolygonObstruction:
+    vtbls:
+      - ea: 0x142444BB0
+        base: SQEX::CDev::Engine::Sd::Layout::SoundObject
+    funcs:
+      0x141E1D100: ctor
   SQEX::CDev::Engine::Sd::Layout::IListener: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Layout::Listener: # SQEX::CDev::Engine::Sd::Layout::IListener, SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Layout::PointListener: # SQEX::CDev::Engine::Sd::Layout::Listener, SQEX::CDev::Engine::Sd::Layout::IListener, SQEX::CDev::Engine::Sd::SdMemoryAllocator

@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Sound;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -34,6 +35,8 @@ public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x239C)] public uint DutyPenaltyMinutes;
     [FieldOffset(0x23A0)] private uint UnkPenaltyMinutes;
+    [FieldOffset(0x23A8)] private SoundData* TimeCountSoundDataPad;
+    [FieldOffset(0x23B0)] private SoundData* TimeCountSoundData;
 
     [FieldOffset(0x23D4)] public int CurrentTimestamp;
 
