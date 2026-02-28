@@ -23,7 +23,7 @@ public unsafe partial struct PreviewController {
     [FieldOffset(0x50)] public Utf8String CharacterDisplayModeTooltipText;
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 A6 ?? ?? ?? ?? ?? B8")]
-    public partial void Ctor(AtkStage* atkStage);
+    public partial PreviewController* Ctor(AtkStage* atkStage);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CD E8 ?? ?? ?? ?? 48 8B F0")]
     public partial void Detach();

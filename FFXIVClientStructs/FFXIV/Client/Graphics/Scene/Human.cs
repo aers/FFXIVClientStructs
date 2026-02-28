@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Shader;
 
@@ -82,13 +84,29 @@ public unsafe partial struct Human {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]
     public partial byte SetupVisor(ushort modelId, bool visorState);
 
-    // Updates the customize array and, if not skipEquipment the equip array.
-    // data needs to be 26 bytes if not skipEquipment and 66 bytes otherwise.
-    // Returns false and does nothing if the given race, sex or body type is not equal to the current one, 
-    // or if the race is Hyur and one tribe is Highlander and the other Midlander.
+    [Obsolete("Use (DrawData*, bool) instead")]
+    public bool UpdateDrawData(byte* data, bool skipEquipment) => UpdateDrawData((DrawData*)data, skipEquipment);
+
     [MemberFunction("E8 ?? ?? ?? ?? 83 BF ?? ?? ?? ?? ?? 75 34")]
-    public partial bool UpdateDrawData(byte* data, bool skipEquipment);
+    public partial bool UpdateDrawData(DrawData* data, bool skipEquipmentArrays);
+
+    [Obsolete("Use (DrawData*) instead")]
+    public bool SetupFromCharacterData(byte* data) => SetupFromCharacterData((DrawData*)data);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8B EA 48 81 C1")]
-    public partial bool SetupFromCharacterData(byte* data);
+    public partial bool SetupFromCharacterData(DrawData* data);
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
+    public partial struct DrawData : ICreatable<DrawData>
+    {
+        [FieldOffset(0x00)] public CustomizeData CustomizeData;
+        [FieldOffset(0x1A)] public byte AnimationVariant;
+        [FieldOffset(0x1E)] private ushort Unk1E;
+        [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipments;
+        [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<EquipmentModelId> _glasses;
+
+        [MemberFunction("66 0F 6F 0D ?? ?? ?? ?? 0F 57 C0")]
+        public partial DrawData* Ctor();
+    }
 }
