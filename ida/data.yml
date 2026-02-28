@@ -1014,7 +1014,6 @@ classes:
       0x140792CF0: ctor
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
-  Client::UI::Atk2DMap:
   Component::Excel::ExcelLanguageEvent:
     vtbls:
       - ea: 0x1420B6460
@@ -8571,8 +8570,10 @@ classes:
       - ea: 0x1420A89D0
         base: Component::GUI::AtkComponentBase
     funcs:
+      0x1406AAAD0: SetMapScale
+      0x1406AAB10: SetMapSize
+      0x1406AAB50: SetMapPosition
       0x1406AB0E0: ctor
-      # 0x1406883F0: Finalizer # can't find it
   Component::GUI::AtkComponentPreview:
     vtbls:
       - ea: 0x1420A8A70
@@ -17209,12 +17210,23 @@ classes:
       0: ManagedInvoke
       1: ManagedHide
       2: GetManagedUnitBase
+  Client::UI::Atk2DMap:
+    vtbls:
+      - ea: 0x142132FD0
   Client::UI::Atk2DAreaMap:
     vtbls:
       - ea: 0x142132FD8
         base: Client::UI::Atk2DMap
     funcs:
       0x1411A9640: ctor
+      0x1411A9730: CreateMarkerArray
+      0x1411A9820: GetMarker
+      0x1411A9850: GetMarkerNodeContainer
+      0x1411A9880: SetComponentMap
+      0x1411A9F30: ClampPosition
+      0x1411A9FC0: SetMarkerRadiusScale
+      0x1411AA0F0: HandleDragPosition
+      0x1413BD170: CenterOnPlayer
   # Addon Interfaces/Base Classes
   Client::UI::AddonCharaMakeFeatureOption:
     vtbls:

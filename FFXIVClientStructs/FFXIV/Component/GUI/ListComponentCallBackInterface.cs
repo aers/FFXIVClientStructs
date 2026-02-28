@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::ListComponentCallBackInterface
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct ListComponentCallBackInterface {
     [VirtualFunction(0)]
