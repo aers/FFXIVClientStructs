@@ -1,14 +1,14 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Memory;
 
-public interface ICreatable {
-    public void Ctor();
+public unsafe interface ICreatable<T> where T : unmanaged {
+    public T* Ctor();
 }
 
 // Client::System::Memory::IMemorySpace
 [GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct IMemorySpace {
-    public T* Create<T>() where T : unmanaged, ICreatable {
+    public T* Create<T>() where T : unmanaged, ICreatable<T> {
         var memory = (T*)Malloc<T>();
         if (memory is null) return null;
         Memset(memory, 0, (ulong)sizeof(T));

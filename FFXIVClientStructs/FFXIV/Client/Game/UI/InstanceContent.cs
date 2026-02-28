@@ -29,7 +29,7 @@ public unsafe partial struct InstanceContent {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public partial struct ContentUI : ICreatable {
+    public partial struct ContentUI : ICreatable<ContentUI> {
         [FieldOffset(0x08)] public ContentLookupInfo LookupInfo;
         [FieldOffset(0x10)] public InstanceContentExcelWrapper InstanceContent;
         [FieldOffset(0x28)] public ContentRoulette ContentRoulette;
@@ -38,7 +38,7 @@ public unsafe partial struct InstanceContent {
         [FieldOffset(0x68)] public GoldSaucerContent GoldSaucerContent;
 
         [MemberFunction("45 33 C0 C6 41 08 00")]
-        public partial void Ctor();
+        public partial ContentUI* Ctor();
 
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 4E ?? 48 8B 5C 24")]
         public partial bool LoadByContentLookupInfo(ContentLookupInfo* lookupInfo);

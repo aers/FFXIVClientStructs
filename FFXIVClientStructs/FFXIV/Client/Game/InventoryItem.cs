@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop(isInherited: true)]
 [VirtualTable("66 89 51 0C 48 8D 05", 7)]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public unsafe partial struct InventoryItem : ICreatable {
+public unsafe partial struct InventoryItem : ICreatable<InventoryItem> {
     [FieldOffset(0x08)] public InventoryType Container;
     [FieldOffset(0x0C)] public short Slot;
     /// <summary>
@@ -42,7 +42,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 8D 4B 58")]
-    public partial void Ctor();
+    public partial InventoryItem* Ctor();
 
     [VirtualFunction(0)]
     public partial void Dtor(byte freeFlags);

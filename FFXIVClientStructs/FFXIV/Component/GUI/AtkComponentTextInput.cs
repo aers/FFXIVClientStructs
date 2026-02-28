@@ -17,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<SoftKeyboardDeviceInterface.SoftKeyboardInputInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F", 3, 20)]
-public unsafe partial struct AtkComponentTextInput : ICreatable {
+public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentTextInput> {
     [FieldOffset(0x1F0)] public AtkUldComponentDataTextInput ComponentTextData;
     [FieldOffset(0x26C)] public AllowedEntities InputSanitizationFlags;
 
@@ -63,7 +63,7 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
 
     // 7.3: inlined, this is an orphaned (no x-ref) copy
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83")]
-    public partial void Ctor();
+    public partial AtkComponentTextInput* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 33 D2"), GenerateStringOverloads]
     public partial void SetText(CStringPointer text);
