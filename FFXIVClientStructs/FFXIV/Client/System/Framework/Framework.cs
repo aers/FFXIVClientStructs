@@ -191,13 +191,13 @@ public unsafe partial struct Framework {
 }
 
 public enum ClientPlatform {
-    Win32   = 0, // Windows 32-bit
-    PS3     = 1, // PlayStation 3
-    PS4     = 2, // PlayStation 4
-    Win64   = 3, // Windows 64-bit
-    Mac32   = 4, // macOS 32-bit (Windows build under Wine)
-    Mac64   = 5, // macOS 64-bit (Windows build under Wine)
-    PS5     = 6, // PlayStation 5
-    XSX     = 7, // Xbox Series X
+    Win32 = 0, // Windows 32-bit
+    PS3 = 1, // PlayStation 3
+    PS4 = 2, // PlayStation 4
+    Win64 = 3, // Windows 64-bit
+    Mac32 = 4, // macOS 32-bit (Windows build under Wine)
+    Mac64 = 5, // macOS 64-bit (Windows build under Wine)
+    PS5 = 6, // PlayStation 5
+    XSX = 7, // Xbox Series X
     Invalid = 9,
 }
