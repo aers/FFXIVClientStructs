@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
@@ -115,6 +116,9 @@ public unsafe partial struct ILayoutInstance {
 
     [VirtualFunction(55)]
     public partial bool WantToBeActive();
+
+    [VirtualFunction(58)]
+    public partial ByteColor ApplyStain(ByteColor* stainColorSrgb);
 
     [VirtualFunction(63)]
     public partial void SetActive(bool active);
