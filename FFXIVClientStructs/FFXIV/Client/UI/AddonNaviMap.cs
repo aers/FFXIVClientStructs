@@ -9,6 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A90)]
-public partial struct AddonNaviMape {
+public partial struct AddonNaviMap {
     [FieldOffset(0x238)] public Atk2DMap Atk2DMap;
 }
