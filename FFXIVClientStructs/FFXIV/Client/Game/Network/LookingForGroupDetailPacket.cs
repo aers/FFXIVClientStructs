@@ -24,7 +24,7 @@ public partial struct LookingForGroupDetailPacket {
     [FieldOffset(0x50)] public ushort AvgItemLv;
     [FieldOffset(0x52)] public ushort HostHomeWorld;
     [FieldOffset(0x54)] public ushort HostCurrentWorld;
-    [FieldOffset(0x56)] public Language LeaderClientLanguage; // Mostly 2 (definitely language then), sometimes 1, 3, 10 or 15. This is a bit of a guess from AgentLookingForGroup
+    [FieldOffset(0x56)] public Language LeaderClientLanguage;
     [FieldOffset(0x57)] public Language Language;
     [FieldOffset(0x58)] public byte TotalSlots;
     [FieldOffset(0x59)] public byte SlotsFilled;
