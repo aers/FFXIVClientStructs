@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct Atk2DMap {
-    [FieldOffset(0x00)] public nint VTable;
+    [FieldOffset(0x00)] private nint VTable;
     [FieldOffset(0x08)] public AtkComponentNode* PlayerPin;
     [FieldOffset(0x10)] public AtkImageNode* PlayerCone;
     [FieldOffset(0x18)] private float Unk18;
