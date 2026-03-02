@@ -10,8 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x560)]
 public unsafe partial struct AddonGSInfoCardList {
-    [FieldOffset(0xE0)] public AtkCollisionNode* SelectedCard;
-
     [FieldOffset(0x2A0)] public byte CardRarity; // 1..5
     [FieldOffset(0x2A1)] public CardType CardType;
     [FieldOffset(0x2A3)] public byte NumSideU;
