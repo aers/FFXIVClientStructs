@@ -172,6 +172,13 @@ public unsafe partial struct UIState {
     public partial bool IsTripleTriadCardUnlocked(ushort cardId);
 
     /// <summary>
+    /// Check if a Triple Triad Npc has been beaten once.
+    /// </summary>
+    /// <param name="tripleTriadResidentId">TripleTriadResident row id</param>
+    [MemberFunction("40 53 48 83 EC 20 8D 82 FE FF DC FF")]
+    public partial bool IsTripleTriadNpcBeaten(int tripleTriadResidentId);
+
+    /// <summary>
     /// Check if an emote (by ID) is unlocked.
     /// </summary>
     /// <remarks>
