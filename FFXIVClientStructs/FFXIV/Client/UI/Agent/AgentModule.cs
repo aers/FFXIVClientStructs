@@ -209,7 +209,7 @@ public enum AgentId : uint {
     ChocoboRace = 171,
     ChocoboBreed = 172,
     GoldSaucerMiniGame = 173,
-    TrippleTriad = 174,
+    TripleTriad = 174,
     TripleTriadRuleAnnounce = 175,
     TripleTriadRuleSetting = 176,
     Unk177 = 177,
