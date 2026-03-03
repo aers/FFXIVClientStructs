@@ -67,7 +67,6 @@ public unsafe partial struct UIState {
     [FieldOffset(0x17448)] public QTE QTE;
     [FieldOffset(0x17470)] public Emj Emj;
     [FieldOffset(0x174A8)] public NpcYell NpcYell;
-    // 7.3: huge space between these two
     [FieldOffset(0x19CF8)] public CharaCard CharaCard;
     // 0x19DB0: ItemAction Unlocks
     [FieldOffset(0x19F38)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;

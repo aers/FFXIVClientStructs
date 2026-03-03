@@ -102,7 +102,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// Returns <c>-1</c> if either the original gearset ID or the new gearset ID is invalid, <c>-2</c> if the player
     /// is currently editing a portrait, otherwise it returns the moved gearset's new ID.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF")]
     public partial int ReassignGearsetId(int newGearsetId, int gearsetId);
 
     /// <summary>
