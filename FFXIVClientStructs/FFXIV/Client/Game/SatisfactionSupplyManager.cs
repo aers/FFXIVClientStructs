@@ -24,8 +24,8 @@ public unsafe partial struct SatisfactionSupplyManager {
     // 0x5C: ExcelSheetWaiter* for SatisfactionSupplyReward
     // 0x64: ExcelSheetWaiter* for SatisfactionSupplyRewardExp
     // 0x6C: ExcelSheetWaiter* for SatisfactionBonusGuarantee
-    [FieldOffset(0x74)] public uint FixedRandom; // seems to be a debug thing, set by gm command, not actually used?
-    [FieldOffset(0x78)] public int TimeAdjustmentForBonusGuarantee; // seems to be a debug thing, set by gm command, this is added to server time (in seconds) and used to calculate bonus guarantee row
+    [FieldOffset(0x70)] public uint FixedRandom; // seems to be a debug thing, set by gm command, not actually used?
+    [FieldOffset(0x74)] public int TimeAdjustmentForBonusGuarantee; // seems to be a debug thing, set by gm command, this is added to server time (in seconds) and used to calculate bonus guarantee row
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct NpcInfo {
