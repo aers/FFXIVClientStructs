@@ -112,7 +112,7 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x08)] public uint LeaderAccountId;
         [FieldOffset(0x10)] public ulong LeaderContentId;
 
-        [FieldOffset(0x24)] public DutyCategory Category;
+        [FieldOffset(0x24)] public ushort Category; // TODO: change type to DutyCategory
         [FieldOffset(0x28)] public ushort DutyId;
         [FieldOffset(0x32)] private uint Unk32; // Seems to be a uint, not unique to listing
         [FieldOffset(0x36)] public ushort World;
