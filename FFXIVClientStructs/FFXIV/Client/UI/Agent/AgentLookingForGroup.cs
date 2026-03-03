@@ -57,7 +57,6 @@ public unsafe partial struct AgentLookingForGroup {
     [MemberFunction("E8 ?? ?? ?? ?? 88 9E ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 39 5E 18")]
     public partial void PopulateListingData(Detailed* listingData);
 
-
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public unsafe partial struct TreasureMapDetail {
         [FieldOffset(0x00)] public Utf8String String;
@@ -73,13 +72,12 @@ public unsafe partial struct AgentLookingForGroup {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x126)]
-    public unsafe partial struct GroupsSub {
-    }
+    public struct GroupsSub;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x448)]
     public unsafe partial struct RecruitmentSub {
-        [FieldOffset(0x0C)] public ushort SelectedCategory;
+        [FieldOffset(0x0C)] public ushort SelectedCategory; // TODO: change type to DutyCategory
         [FieldOffset(0x10)] public ushort SelectedDutyId;
 
         [FieldOffset(0x18)] public Objective Objective;
@@ -167,7 +165,6 @@ public unsafe partial struct AgentLookingForGroup {
         FieldOperations = 1 << 14,
         VCDungeonFinder = 1 << 15
     }
-
 
     public enum Objective : byte {
         None = 0,
