@@ -187,7 +187,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     /// <param name="gearsetId">The ID of the new gearset to be assigned.</param>
     /// <param name="oldGearsetId">The ID of the gearset to be replaced.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 48 8B 5C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B 01 FF 50 40 80 88")]
     public partial void ReassignGearsetId(int gearsetId, int oldGearsetId);
 
     /// <summary>
