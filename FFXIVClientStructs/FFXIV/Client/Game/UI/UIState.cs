@@ -175,7 +175,7 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <param name="tripleTriadResidentId">TripleTriadResident row id</param>
     [MemberFunction("40 53 48 83 EC 20 8D 82 FE FF DC FF")]
-    public partial bool IsTripleTriadNpcBeaten(int tripleTriadResidentId);
+    public partial bool IsTripleTriadNpcBeaten(uint tripleTriadResidentId);
 
     /// <summary>
     /// Check if an emote (by ID) is unlocked.
