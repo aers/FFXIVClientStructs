@@ -53,6 +53,10 @@ public unsafe partial struct AgentLookingForGroup {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 8B ?? ?? ?? ?? 85 C9 75 12")]
     public partial bool RequestListingsUpdate();
+        
+    [MemberFunction("E8 ?? ?? ?? ?? 88 9E ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 39 5E 18")]
+    public partial void PopulateListingData(Detailed* listingData);
+
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public unsafe partial struct TreasureMapDetail {
@@ -108,9 +112,9 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x08)] public uint LeaderAccountId;
         [FieldOffset(0x10)] public ulong LeaderContentId;
 
-        [FieldOffset(0x24)] public ushort Category;
+        [FieldOffset(0x24)] public ushort Category; // TODO: change type to DutyCategory
         [FieldOffset(0x28)] public ushort DutyId;
-
+        [FieldOffset(0x32)] private uint Unk32; // Seems to be a uint, not unique to listing
         [FieldOffset(0x36)] public ushort World;
 
         [FieldOffset(0x38)] public Objective Objective;
@@ -144,6 +148,26 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x390), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _leader;
         [FieldOffset(0x3B0), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> _comment;
     }
+
+    public enum DutyCategory : ushort {
+        None = 0,
+        Roulette = 1 << 1,
+        Dungeons = 1 << 2,
+        GuildQuests = 1 << 3,
+        Trials = 1 << 4,
+        Raids = 1 << 5,
+        HighEndDuty = 1 << 6,
+        PvP = 1 << 7,
+        GoldSaucer = 1 << 8,
+        FATEs = 1 << 9,
+        TreasureHunts = 1 << 10,
+        TheHunt = 1 << 11,
+        GatheringForays = 1 << 12,
+        DeepDungeons = 1 << 13,
+        FieldOperations = 1 << 14,
+        VCDungeonFinder = 1 << 15
+    }
+
 
     public enum Objective : byte {
         None = 0,
