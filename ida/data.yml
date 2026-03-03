@@ -11092,7 +11092,7 @@ classes:
       - ea: 0x1420C4600
   Client::UI::Shell::RaptureShellCommandInterface:
      vtbls:
-      - ea: 0x1420C4618
+      - ea: 0x1420C4610
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
