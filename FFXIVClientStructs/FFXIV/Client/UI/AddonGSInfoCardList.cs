@@ -44,7 +44,7 @@ public unsafe partial struct AddonGSInfoCardList {
     [FieldOffset(0x528)] public int TotalPages;
     /// <remarks> 0-indexed </remarks>
     [FieldOffset(0x52C)] public int SelectedPage;
-    [FieldOffset(0x534)] public byte SelectedCardIndex; // writable
+    [FieldOffset(0x534)] public int SelectedCardIndex; // writable
 }
 
 public enum GSInfoCardListFilterMode {
