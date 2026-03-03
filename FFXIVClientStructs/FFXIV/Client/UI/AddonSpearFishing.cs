@@ -25,16 +25,15 @@ public unsafe partial struct AddonSpearFishing {
     }
 }
 
-public enum SpearfishSize : byte {
-    Unknown = 0,
+public enum SpearfishSize : sbyte {
+    None = -1,
     Small = 1,
     Average = 2,
     Large = 3,
-    None = 255,
 }
 
-public enum SpearfishSpeed : ushort {
-    Unknown = 0,
+public enum SpearfishSpeed : short {
+    None = -1,
     SuperSlow = 100,
     ExtremelySlow = 150,
     VerySlow = 200,
@@ -46,6 +45,4 @@ public enum SpearfishSpeed : ushort {
     SuperFast = 500,
     HyperFast = 550,
     LynFast = 600,
-
-    None = ushort.MaxValue,
 }
