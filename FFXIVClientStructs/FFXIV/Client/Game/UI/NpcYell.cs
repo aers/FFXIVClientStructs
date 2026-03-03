@@ -34,7 +34,7 @@ public unsafe partial struct NpcYell {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct NpcYellSlot {
+    public partial struct NpcYellSlot {
         [FieldOffset(0x0)] public GameObjectId ObjectId;
         /// <remarks>
         /// Only valid before this slot is handled.
@@ -54,7 +54,7 @@ public unsafe partial struct NpcYell {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x118)]
-    public struct NpcYellInfo {
+    public partial struct NpcYellInfo {
         [FieldOffset(0x0)] public uint NpcYellRowId;
         [FieldOffset(0x8)] public GameObjectId ObjectId;
         /// <remarks>
