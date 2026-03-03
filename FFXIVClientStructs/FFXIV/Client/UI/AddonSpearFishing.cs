@@ -21,7 +21,7 @@ public unsafe partial struct AddonSpearFishing {
         [FieldOffset(0x08)] public bool InverseDirection;
         [FieldOffset(0x09)] public bool GuaranteedLarge;
         [FieldOffset(0x0A)] public SpearfishSize Size;
-        [FieldOffset(0x0C)] public SpearfishSpeed Speed;
+        [FieldOffset(0x0C)] public short Speed; // slowest fish is 100, increments by 50
     }
 }
 
@@ -30,19 +30,4 @@ public enum SpearfishSize : sbyte {
     Small = 1,
     Average = 2,
     Large = 3,
-}
-
-public enum SpearfishSpeed : short {
-    None = -1,
-    SuperSlow = 100,
-    ExtremelySlow = 150,
-    VerySlow = 200,
-    Slow = 250,
-    Average = 300,
-    Fast = 350,
-    VeryFast = 400,
-    ExtremelyFast = 450,
-    SuperFast = 500,
-    HyperFast = 550,
-    LynFast = 600,
 }
