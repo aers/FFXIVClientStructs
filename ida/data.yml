@@ -12377,6 +12377,7 @@ classes:
       0x14053DDC0: OpenListing
       0x14053DCE0: OpenListingByContentId
       0x14053EAB0: RequestListingsUpdate
+      0x140541050: PopulateListingData
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x1420FC4C8
