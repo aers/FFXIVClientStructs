@@ -88,7 +88,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x236B)] private byte SoundFlags; // 0x40 = SoundVolumeCategory determined
 
     public bool IsWeaponDrawn => Timeline.IsWeaponDrawn;
-    public bool IsCasting => GetCastInfo() != null && GetCastInfo()->IsCasting;
+    public bool IsCasting => VirtualTable != null && GetCastInfo() is var info && info != null && info->IsCasting;
 
     /// <summary>
     /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
