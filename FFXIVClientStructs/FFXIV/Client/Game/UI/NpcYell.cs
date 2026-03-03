@@ -32,6 +32,7 @@ public unsafe partial struct NpcYell {
     [FieldOffset(0x2849)] public byte UnhandledBattleTalkCount;
     [FieldOffset(0x284A)] private bool Unk284A; // Probably indicates waiting on the Excel sheet when an ENpc is involved, but can't tell for sure.
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct NpcYellSlot {
         [FieldOffset(0x0)] public GameObjectId ObjectId;
@@ -51,6 +52,7 @@ public unsafe partial struct NpcYell {
         [FieldOffset(0x24)] private bool Unk24; // Something to do with whether this entry shows a BattleTalk, but only sometimes.
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x118)]
     public struct NpcYellInfo {
         [FieldOffset(0x0)] public uint NpcYellRowId;
