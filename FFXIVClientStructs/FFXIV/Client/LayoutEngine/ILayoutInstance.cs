@@ -118,7 +118,7 @@ public unsafe partial struct ILayoutInstance {
     public partial bool WantToBeActive();
 
     [VirtualFunction(58)]
-    public partial ByteColor ApplyStain(ByteColor* stainColorSrgb);
+    public partial void ApplyStain(ByteColor* stainColorSrgb);
 
     [VirtualFunction(63)]
     public partial void SetActive(bool active);

@@ -68,7 +68,7 @@ public unsafe partial struct SharedGroupLayoutInstance {
     /// <param name="stainIndex">The object stain index to look up the color of.</param>
     /// <returns>The sRGB color for the given object stain.</returns>
     [MemberFunction("33 C0 81 F9 ?? ?? ?? ?? 0F 42 C1")]
-    public static partial ByteColor GetObjectStainColorByIndex(byte stainIndex);
+    public static partial ByteColor* GetObjectStainColorByIndex(byte stainIndex);
 
     /// <summary>
     /// Attempts to set the stain on the models in this group.
