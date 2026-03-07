@@ -14,6 +14,9 @@ public unsafe partial struct EventFramework {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 7C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
+    [StaticAddress("48 8D 35 ?? ?? ?? ?? 4C 8B CE", 3, isPointer: false)]
+    public static partial byte* GetHandlerState();
+
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
@@ -125,4 +128,34 @@ public enum ContentType : byte {
     Party, // SkyIsland - used in early phases of the Diadem
     Public,
     GoldSaucer
+}
+
+// if two states are valid at the same time, highest wins
+public enum EventHandlerState : byte {
+    StartedCraft = 3,
+    /// <remarks> The PreparingToCraft condition </remarks>
+    PreparingToCraft = 4,
+    ExitingCraft = 6,
+    /// <remarks> While in a craft, executing an action or not </remarks>
+    Crafting = 9,
+    /// <remarks> Touch or synthesis </remarks>
+    IncreasedEfficiency = 10,
+
+    FishingPoleReady = 15,
+    /// <remarks> While and after putting rod away </remarks>
+    FishingQuit = 17,
+    /// <remarks> While casting and line in water </remarks>
+    FishingLineInWater = 19,
+    FishingReelingInNoFish = 27,
+    FishingReelingInFish = 28,
+    FishingHookedWeak = 36,
+    FishingHookedStrong = 37,
+    FishingHookedLegendary = 38,
+    /// <remarks> While and after chumming </remarks>
+    FishingChummed = 53,
+    FishingFishEyes = 54,
+    FishingReleasingCatch = 117,
+
+    UnkCutscene148 = 148,
+    UnkCutscene162 = 162,
 }
