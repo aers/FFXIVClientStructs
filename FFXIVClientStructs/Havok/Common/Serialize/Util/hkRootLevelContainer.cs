@@ -17,7 +17,7 @@ public unsafe partial struct hkRootLevelContainer {
 
     [FieldOffset(0x00)] public hkArray<NamedVariant> NamedVariants;
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
+    [MemberFunction("40 53 57 41 57 48 83 EC 20 33"), GenerateStringOverloads]
     public partial void* findObjectByType(CStringPointer typeName, void* prevObject);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
