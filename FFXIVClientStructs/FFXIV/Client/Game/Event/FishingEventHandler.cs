@@ -9,6 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
 public unsafe partial struct FishingEventHandler {
+    // this dword field is reused across a lot of different structs
+    [StaticAddress("48 8D 35 ?? ?? ?? ?? 4C 8B CE", 3, isPointer: false)]
+    public static partial FishingLineState* GetBiteType();
+
     [FieldOffset(0x1C0)] private byte Unk220;
     [FieldOffset(0x1C8)] public FishingState State;
 
@@ -91,6 +95,24 @@ public unsafe partial struct FishingEventHandler {
         baitValue[1].SetBool(false);
         return ReceiveEvent(&returnValue, baitValue, 2, 2);
     }
+}
+
+public enum FishingLineState : byte {
+    None = 0,
+    PoleReady = 15,
+    /// <remarks> While and after putting rod away </remarks>
+    Quit = 17,
+    /// <remarks> While casting and line in water </remarks>
+    LineInWater = 19,
+    ReelingInNoFish = 27,
+    ReelingInFish = 28,
+    HookedWeak = 36,
+    HookedStrong = 37,
+    HookedLegendary = 38,
+    /// <remarks> While and after chumming </remarks>
+    Chummed = 53,
+    FishEyes = 54,
+    ReleasingCatch = 117,
 }
 
 [Flags]
