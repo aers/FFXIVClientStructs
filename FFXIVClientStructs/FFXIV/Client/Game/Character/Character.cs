@@ -43,6 +43,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x1CE8)] public byte ActorControlFlags;
 
     [FieldOffset(0x21E0)] public Balloon Balloon;
+    [FieldOffset(0x2260)] public NpcYellBalloon YellBalloon;
 
     [FieldOffset(0x22E8)] public float Alpha;
 
@@ -81,8 +82,13 @@ public unsafe partial struct Character {
     [FieldOffset(0x2365)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x2366)] public byte GMRank;
 
+    /// <remarks> See <see cref="Sound.SoundVolumeCategory"/>. </remarks>
+    [FieldOffset(0x2369)] public byte SoundVolumeCategory;
+    [FieldOffset(0x236A)] public byte SoundVolumeCategoryOverride;
+    [FieldOffset(0x236B)] private byte SoundFlags; // 0x40 = SoundVolumeCategory determined
+
     public bool IsWeaponDrawn => Timeline.IsWeaponDrawn;
-    public bool IsCasting => GetCastInfo() != null && GetCastInfo()->IsCasting;
+    public bool IsCasting => VirtualTable != null && GetCastInfo() is var info && info != null && info->IsCasting;
 
     /// <summary>
     /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the

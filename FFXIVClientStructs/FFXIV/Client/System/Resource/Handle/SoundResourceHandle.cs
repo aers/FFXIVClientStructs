@@ -6,4 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [GenerateInterop]
 [Inherits<ResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-public unsafe partial struct SoundResourceHandle;
+public partial struct SoundResourceHandle {
+    [FieldOffset(0xCC)] public uint SoundDataRefCount; // incremented in SoundData.LoadSoundResourceHandle, decremented in SoundData.vf2
+}

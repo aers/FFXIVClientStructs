@@ -2,7 +2,6 @@ using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Node;
 using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
-using static FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group.SharedGroupLayoutInstance;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
