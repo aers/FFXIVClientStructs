@@ -141,20 +141,20 @@ public enum EventHandlerState : byte {
     /// <remarks> Touch or synthesis </remarks>
     IncreasedEfficiency = 10,
 
-    FishingPoleReady = 15,
+    PoleReady = 15,
     /// <remarks> While and after putting rod away </remarks>
-    FishingQuit = 17,
+    Quit = 17,
     /// <remarks> While casting and line in water </remarks>
-    FishingLineInWater = 19,
-    FishingReelingInNoFish = 27,
-    FishingReelingInFish = 28,
-    FishingHookedWeak = 36,
-    FishingHookedStrong = 37,
-    FishingHookedLegendary = 38,
+    LineInWater = 19,
+    ReelingInNoFish = 27,
+    ReelingInFish = 28,
+    HookedWeak = 36,
+    HookedStrong = 37,
+    HookedLegendary = 38,
     /// <remarks> While and after chumming </remarks>
-    FishingChummed = 53,
-    FishingFishEyes = 54,
-    FishingReleasingCatch = 117,
+    Chummed = 53,
+    FishEyes = 54,
+    ReleasingCatch = 117,
 
     UnkCutscene148 = 148,
     UnkCutscene162 = 162,
