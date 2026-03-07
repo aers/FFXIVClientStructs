@@ -20,5 +20,5 @@ public unsafe partial struct AgentCatch {
 
     /// <remarks>Function is only for regular fishing, not spearfishing. Triggers when AddonCatch is shown.</remarks>
     [MemberFunction("48 89 6C 24 ?? 56 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 01")]
-    public partial void UpdateCatch(uint fishId, bool isLarge, ushort size, byte amount, byte level, byte stars, byte oceanStars, bool isMoochable, bool isFirstTimeCatch, byte a11, byte a12);
+    public partial void UpdateCatch(uint itemId, bool isLarge, ushort size, byte amount, byte level, byte stars, byte oceanStars, bool isMoochable, bool isFirstTimeCatch, byte a11, byte a12);
 }
