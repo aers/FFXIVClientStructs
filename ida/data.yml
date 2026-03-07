@@ -5059,6 +5059,7 @@ classes:
       0x1409506D0: ctor
       0x1409508A0: GetPtr  # Static
       0x1409508B0: ReceiveListing
+      0x1409517E0: SendListingsRequest
       0x140953640: IsCrossRealmParty # Static
       0x1409536C0: IsCrossRealmPartyLeader # Static
       0x1409536E0: IsAllianceRaid # Static
@@ -11115,6 +11116,7 @@ classes:
       0x1408E75F0: SetFlags
       0x1408E6AA0: SetTellTargetInForay
       0x1408E7A70: PrintLogMessage
+      0x1409913C0: ProcessShellCommandMessage
       0x140E65210: ReplyInSelectedChatMode
   Client::UI::Shell::ShellCommandBlueAction:
     vtbls:
@@ -18737,6 +18739,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411FAC50: ctor
+      0x1411FC330: SetExchangeMode
   Client::UI::AddonGrandCompanySupplyReward: # 192
     vtbls:
       - ea: 0x14213D3E8
