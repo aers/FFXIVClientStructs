@@ -24,7 +24,7 @@ public unsafe partial struct Object {
     [FieldOffset(0x70)] public Vector3 Scale;
 
     [VirtualFunction(0)]
-    public partial void Dtor(DestroyMode mode);
+    public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void CleanupRender();
@@ -68,30 +68,6 @@ public unsafe partial struct Object {
         public SiblingEnumerator GetEnumerator()
             => this;
     }
-}
-
-public enum DestroyMode : byte {
-    /// <summary>
-    /// Destroying the object doesn't automatically free its memory.
-    /// </summary>
-    /// <remarks>
-    /// Use this if you created the object via a static Create helper and passed in an existing allocation.
-    /// </remarks>
-    None = 0,
-
-    /// <summary>
-    /// Frees the memory of this object from the graphics allocator while destroying it.
-    /// </summary>
-    /// <remarks>
-    /// Use this if you created the object via a static Create helper and didn't pass in any existing allocation.
-    /// </remarks>
-    FreeMemory = (1 << 0),
-
-    /// <summary>
-    /// Rather than freeing via the graphics allocator, directly calls FreeMemory2 which
-    /// appears to be empty.
-    /// </summary>
-    FreeRawMemory = FreeMemory | (1 << 2),
 }
 
 public enum ObjectType {
