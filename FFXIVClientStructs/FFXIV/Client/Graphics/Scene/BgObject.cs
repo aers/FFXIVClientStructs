@@ -13,8 +13,9 @@ public unsafe partial struct BgObject {
     [FieldOffset(0xA8)] public BgObjectStainBuffer* StainBuffer;
     [FieldOffset(0xB0)] internal Transform* CachedTransform;
 
+    [GenerateStringOverloads]
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 30 48 8B D7")]
-    public static partial BgObject* Create(byte* modelGamePath, byte* pool, BgObject* existingAllocation);
+    public static partial BgObject* Create(CStringPointer modelGamePath, CStringPointer poolName, BgObject* existingAllocation = null);
 
     public bool TrySetStainColor(ByteColor srgbStainColor) {
         if (StainBuffer != null) {
