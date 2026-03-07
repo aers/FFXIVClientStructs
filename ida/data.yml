@@ -7320,7 +7320,7 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x140443640: ctor
-  Client::Graphics::Scene::BgObject:
+  Client::Graphics::Scene::BGObject:
     vtbls:
       - ea: 0x142098A18
         base: Client::Graphics::Scene::DrawObject
