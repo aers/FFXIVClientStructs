@@ -5059,6 +5059,7 @@ classes:
       0x1409506D0: ctor
       0x1409508A0: GetPtr  # Static
       0x1409508B0: ReceiveListing
+      0x1409517E0: SendListingsRequest
       0x140953640: IsCrossRealmParty # Static
       0x1409536C0: IsCrossRealmPartyLeader # Static
       0x1409536E0: IsAllianceRaid # Static
@@ -6501,6 +6502,7 @@ classes:
         base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x14052C2D0: ctor
+      0x14052E330: MoveItemInChest
 #oldfail       0x14031A8B0: Finalizer # inlined @ 0x1403CD9F0
   Client::UI::Agent::AgentExplorationInterface:
     vtbls:
@@ -11114,6 +11116,7 @@ classes:
       0x1408E75F0: SetFlags
       0x1408E6AA0: SetTellTargetInForay
       0x1408E7A70: PrintLogMessage
+      0x1409913C0: ProcessShellCommandMessage
       0x140E65210: ReplyInSelectedChatMode
   Client::UI::Shell::ShellCommandBlueAction:
     vtbls:
@@ -12036,6 +12039,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EB4DA0: ctor
+      0x140EB4E50: UpdateCatch
   Client::UI::Agent::AgentFreeCompany:
     vtbls:
       - ea: 0x14209D9F0
@@ -17839,6 +17843,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414557E0: ctor
+      0x141456300: NotifyQuickGatherState
   Client::UI::AddonNeedGreed: # 46
     vtbls:
       - ea: 0x14214BC58
@@ -18734,6 +18739,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411FAC50: ctor
+      0x1411FC330: SetExchangeMode
   Client::UI::AddonGrandCompanySupplyReward: # 192
     vtbls:
       - ea: 0x14213D3E8
@@ -19470,6 +19476,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412721D0: ctor
+      0x141272C60: PopulateSalvageItemListItem
   Client::UI::AddonMinionNoteBook: # 324
     vtbls:
       - ea: 0x142135328
