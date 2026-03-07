@@ -23,8 +23,7 @@ public unsafe partial struct Light {
     [FieldOffset(0x18)] public LightFlags LightFlags;
     [FieldOffset(0x1C)] public LightShape LightShape;
     [FieldOffset(0x20)] public Transform* Transform;
-    [FieldOffset(0x28)] public Vector3 Color;
-    [FieldOffset(0x34)] public float Intensity;
+    [FieldOffset(0x28)] internal Vector4 ColorIntensity;
     [FieldOffset(0x40)] public AxisAlignedBounds MaxRange;
     [FieldOffset(0x60)] public float ShadowPlaneNear;
     [FieldOffset(0x64)] public float ShadowPlaneFar;
@@ -35,6 +34,9 @@ public unsafe partial struct Light {
     [FieldOffset(0x88)] public float AngularFalloffDegrees;
     [FieldOffset(0x8C)] public float Range;
     [FieldOffset(0x90)] public float CharacterShadowRange;
+
+    public Vector3 Color { get => new Vector3(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z); set => ColorIntensity = new Vector4(value, ColorIntensity.W); }
+    public float Intensity { get => ColorIntensity.W; set => ColorIntensity.W = value; }
 
     // Set by UpdateCulling based on ComputeAxisAlignedBounds
     [FieldOffset(0xA0)] public AxisAlignedBounds CullingBounds;

@@ -11,15 +11,17 @@ namespace FFXIVClientStructs.FFXIV.Common.Math;
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct SphereBounds {
 
+    [FieldOffset(0x00)] internal Vector4 CenterPointRadius;
+
     /// <summary>
     /// The center point of the bounding sphere.
     /// </summary>
-    [FieldOffset(0x00)] public Vector3 CenterPoint;
-
+    public Vector3 CenterPoint { get => new Vector3(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z); set => CenterPointRadius = new Vector4(value, CenterPointRadius.W); }
+    
     /// <summary>
     /// The radius of the bounding sphere.
     /// </summary>
-    [FieldOffset(0x0C)] public float Radius;
+    public float Radius { get => CenterPointRadius.W; set => CenterPointRadius.W = value; }
 
     /// <summary>
     /// Determines whether the given point in 3D space lies within this
