@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
@@ -13,6 +14,7 @@ public unsafe partial struct DrawObject {
     [BitField<bool>(nameof(IsCoveredFromRain), 4)]
     [FieldOffset(0x88)] public byte Flags;
 
+    [BitField<byte>(nameof(LoadState), 0, 4)]
     [BitField<ObjectHighlightColor>(nameof(OutlineColor), 4, 4)]
     [FieldOffset(0x89)] public byte OutlineFlags;
 
@@ -44,6 +46,12 @@ public unsafe partial struct DrawObject {
     /// <summary>
     /// Computes a sphere that fully encloses this draw object.
     /// </summary>
+    /// <remarks>
+    /// WARNING: Calling this on a <see cref="BgObject"/> that is not yet loaded will result in an access violation.
+    /// <br />
+    /// Make sure to check its <see cref="BgObject.ModelResourceHandle"/>'s <see cref="ModelResourceHandle.LoadState"/>
+    /// to make sure it is loaded (state 7).
+    /// </remarks>
     /// <param name="outSphereBounds">The location in which to store the resulting sphere bounds.</param>
     /// <returns>The given location where the sphere bounds were stored.</returns>
     [VirtualFunction(12)]
@@ -104,4 +112,14 @@ public unsafe partial struct DrawObject {
     /// <returns>How transparent this draw object is, from 0.0 being fully opaque to 1.0 being fully transparent.</returns>
     [VirtualFunction(27)]
     public partial float GetTransparency();
+
+    /// <summary>
+    /// This is the inlined routine that is called after modifying the transform of a DrawObject.
+    /// </summary>
+    public void NotifyTransformChanged() {
+        IsTransformChanged = true;
+        if (LoadState == 3) {
+            UpdateTransforms(false);
+        }
+    }
 }

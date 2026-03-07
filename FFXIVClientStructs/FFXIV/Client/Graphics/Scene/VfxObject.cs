@@ -23,7 +23,7 @@ public unsafe partial struct VfxObject {
 
     [FieldOffset(0x1C0)] public int StaticTarget;
 
-    [FieldOffset(0x248)] internal byte SomeFlags;
+    [FieldOffset(0x248)] public byte SomeFlags;
 
     [FieldOffset(0x260)] public Vector4 Color;
 
