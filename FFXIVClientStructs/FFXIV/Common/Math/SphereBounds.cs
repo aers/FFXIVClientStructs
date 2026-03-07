@@ -16,12 +16,12 @@ public struct SphereBounds {
     /// <summary>
     /// The center point of the bounding sphere.
     /// </summary>
-    public Vector3 CenterPoint { get => new Vector3(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z); set => CenterPointRadius = new Vector4(value, CenterPointRadius.W); }
+    public Vector3 CenterPoint { readonly get => new Vector3(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z); set => CenterPointRadius = new Vector4(value, CenterPointRadius.W); }
     
     /// <summary>
     /// The radius of the bounding sphere.
     /// </summary>
-    public float Radius { get => CenterPointRadius.W; set => CenterPointRadius.W = value; }
+    public float Radius { readonly get => CenterPointRadius.W; set => CenterPointRadius.W = value; }
 
     /// <summary>
     /// Determines whether the given point in 3D space lies within this

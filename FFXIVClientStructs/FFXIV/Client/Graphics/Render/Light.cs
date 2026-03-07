@@ -35,8 +35,8 @@ public unsafe partial struct Light {
     [FieldOffset(0x8C)] public float Range;
     [FieldOffset(0x90)] public float CharacterShadowRange;
 
-    public Vector3 Color { get => new Vector3(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z); set => ColorIntensity = new Vector4(value, ColorIntensity.W); }
-    public float Intensity { get => ColorIntensity.W; set => ColorIntensity.W = value; }
+    public Vector3 Color { readonly get => new Vector3(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z); set => ColorIntensity = new Vector4(value, ColorIntensity.W); }
+    public float Intensity { readonly get => ColorIntensity.W; set => ColorIntensity.W = value; }
 
     // Set by UpdateCulling based on ComputeAxisAlignedBounds
     [FieldOffset(0xA0)] public AxisAlignedBounds CullingBounds;
