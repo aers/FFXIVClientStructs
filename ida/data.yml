@@ -2768,6 +2768,7 @@ classes:
       0x140B69890: IsEmoteUnlocked
       0x140B69A00: IsItemActionUnlocked
       0x140B677C0: IsTripleTriadCardUnlocked
+      0x140B678F0: IsTripleTriadNpcBeaten
       0x140B67A90: AnnounceHowTo
       0x140B688A0: Dismount
       0x140B68F70: RequestResetTimestamps # MapAllowance, ChallengeLogReset
@@ -12713,6 +12714,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141033030: ctor
+      0x140951EA0: RefreshDeckEdit
   Client::UI::Agent::AgentTripleTriadCoinExchange:
     vtbls:
       - ea: 0x142102360
@@ -14103,7 +14105,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141021DF0: ctor
-  Client::UI::Agent::AgentTrippleTriad:
+  Client::UI::Agent::AgentTripleTriad:
     vtbls:
       - ea: 0x142101E98
         base: Client::UI::Agent::AgentInterface
@@ -19740,6 +19742,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14160A690: ctor
+      0x14160C480: SetSelectedCard
   Client::UI::AddonGSInfoCardFilter: # 371
     vtbls:
       - ea: 0x1421BE190
