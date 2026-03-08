@@ -15,7 +15,7 @@ public unsafe partial struct EventFramework {
     public static partial EventFramework* Instance();
 
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 4C 8B CE", 3, isPointer: false)]
-    public static partial byte* GetHandlerState();
+    public static partial EventHandlerState* GetHandlerState();
 
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
