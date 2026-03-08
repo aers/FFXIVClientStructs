@@ -24,12 +24,15 @@ public unsafe partial struct InputData {
     [FieldOffset(0x994)] public GamepadModifierFlag CurrentGamepadModifier;
     [FieldOffset(0x995)] public KeyModifierFlag CurrentKeyModifier;
 
+    /// <remarks> The field contains values of <see cref="MouseButtonFlags" /> (as byte instead of int), saving which buttons are currently used for dragging. </remarks>
+    [FieldOffset(0x9AC)] public byte CurrentMouseDragButtons;
+
     [FieldOffset(0x9AE)] public bool GamepadInputs2ButtonsChanged;
     [FieldOffset(0x9AF)] public bool CursorPositionsChanged;
     [FieldOffset(0x9B0)] public bool KeyboardInputsChanged;
     [FieldOffset(0x9B1)] public bool UIFilteredCursorInputsButtonsChanged;
     [FieldOffset(0x9B2)] public bool GamepadInputsButtonsChanged;
-
+    [FieldOffset(0x9B3)] public GamepadInputsFilter CurrentGamepadInputsFilter;
     [FieldOffset(0x9B4)] public int NumKeybinds; // amount of InputIds
     [FieldOffset(0x9B8)] public Keybind* Keybinds; // index is InputId
 
@@ -236,6 +239,11 @@ public enum KeyModifierFlag : byte {
     Shift = 1 << 0,
     Ctrl = 1 << 1,
     Alt = 1 << 2,
+}
+
+public enum GamepadInputsFilter : byte {
+    LeftStick = 0,
+    RightStick = 1,
 }
 
 /// From pointer found in <see cref="UIInputData.GetKeybindByName"/>
