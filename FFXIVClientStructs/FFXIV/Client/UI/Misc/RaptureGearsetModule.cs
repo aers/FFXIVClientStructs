@@ -111,11 +111,10 @@ public unsafe partial struct RaptureGearsetModule {
     /// <param name="gearsetId">The gearset ID to rename</param>
     /// <param name="newGearsetName">The name to change the specified gearset to</param>
     /// <returns>
-    /// <c>0</c> if the gearset is invalid or the given name begins with a null terminator, <c>1</c> if 
-    /// renaming the gearset is successful.
+    /// <see langword="true" /> when renaming the gearset was successful, <see langword="false" /> when the gearset is invalid or the given name is empty.
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8")]
-    public partial int RenameGearset(int gearsetId, Utf8String* newGearsetName);
+    public partial bool RenameGearset(int gearsetId, Utf8String* newGearsetName);
 
     /// <summary>
     /// Link a glamour plate to a specific gearset.
