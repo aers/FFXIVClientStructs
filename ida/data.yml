@@ -7699,6 +7699,7 @@ classes:
       0x1405C8560: ctor
       0x1405C8590: PositionsDiffer
       0x1405C85C0: ButtonsDiffer
+      0x1405C85F0: Clear
   Client::System::Input::KeyboardInputData:
     funcs:
       0x1405C86A0: ctor
@@ -9280,6 +9281,9 @@ classes:
     funcs:
       0x14074E790: ctor # unused, inlined @ 0x14075CD19
       0x14074F640: GetKeybindByName
+      0x1406163F0: FilterUICursorInputs
+      0x140616410: FilterDragInputs
+      0x1406163A0: FilterGamepadInputs
   Client::UI::Misc::UiDataModule:
     vtbls:
       - ea: 0x1420B7A10
