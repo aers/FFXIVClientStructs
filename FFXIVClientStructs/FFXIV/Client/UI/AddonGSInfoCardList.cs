@@ -20,11 +20,7 @@ public unsafe partial struct AddonGSInfoCardList {
 
     [FieldOffset(0x2B0)] public TabController TabController;
 
-    [FieldOffset(0x360)] public TabController.NodeInfoContainer* TabControllerNodes;
-    [FieldOffset(0x360), Obsolete("Use TabControllerNodes.ContainerNode")] public AtkResNode* PageSelection;
-    [FieldOffset(0x368), FixedSizeArray, Obsolete("Use TabControllerNodes.TabButtons")] internal FixedSizeArray9<Pointer<AtkComponentButton>> _pageButtons;
-    [FieldOffset(0x3B0), Obsolete("Use TabControllerNodes.BackButton")] public AtkComponentButton* GotoFirstPageButton;
-    [FieldOffset(0x3B8), Obsolete("Use TabControllerNodes.ForwardButton")] public AtkComponentButton* GotoLastPageButton;
+    [FieldOffset(0x360)] public TabController.NodeInfoContainer TabControllerNodes;
 
     [FieldOffset(0x3D0), FixedSizeArray] internal FixedSizeArray30<Pointer<AtkComponentButton>> _cardButtons;
 
@@ -44,6 +40,10 @@ public unsafe partial struct AddonGSInfoCardList {
     [FieldOffset(0x530)] public int SelectedPage;
     [FieldOffset(0x538)] public int SelectedCardIndex; // writable
 
+    [FieldOffset(0x360), Obsolete("Use TabControllerNodes.ContainerNode")] public AtkResNode* PageSelection;
+    [FieldOffset(0x368), FixedSizeArray, Obsolete("Use TabControllerNodes.TabButtons")] internal FixedSizeArray9<Pointer<AtkComponentButton>> _pageButtons;
+    [FieldOffset(0x3B0), Obsolete("Use TabControllerNodes.BackButton")] public AtkComponentButton* GotoFirstPageButton;
+    [FieldOffset(0x3B8), Obsolete("Use TabControllerNodes.ForwardButton")] public AtkComponentButton* GotoLastPageButton;
     [FieldOffset(0x528), Obsolete("Invalid field. Use AgentGoldSaucer.CardListFilterMode")] public GSInfoCardListFilterMode FilterMode;
 }
 
