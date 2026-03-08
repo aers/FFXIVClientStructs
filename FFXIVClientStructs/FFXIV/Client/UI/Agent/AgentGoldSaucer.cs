@@ -13,7 +13,8 @@ public unsafe partial struct AgentGoldSaucer {
     [FieldOffset(0x100)] public int EditDeckSelectedPage;
     [FieldOffset(0x108)] public int EditDeckSelectedCardIndex;
     [FieldOffset(0x10C)] public CardListFilterMode CardListFilterMode;
-    [FieldOffset(0x120)] public ushort FilterDeckTypeRarity;
+    [FieldOffset(0x120)] public byte FilterDeckCardRarity;
+    [FieldOffset(0x121)] public byte FilterDeckCardType;
     [FieldOffset(0x122)] public ushort FilterDeckSides;
     [FieldOffset(0x124)] public byte FilterDeckSorting;
 
