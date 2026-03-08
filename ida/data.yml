@@ -97,6 +97,8 @@ globals:
   0x1429E6638: g_Client::Game::QuestManager::QuestRepeatFlagsReceived
   0x1429E6639: g_Client::Game::QuestManager::LeveQuestsReceived
   0x1429E663A: g_Client::Game::QuestManager::CompletedLeveQuestsReceived
+  0x1429E6660: g_InitializeSceneDataValues
+  0x1429E6A5C: g_InitializeSceneDataCount
   0x1427AC068: g_Component::SteamApi::InterfaceContext::ISteamFriends
   0x1427AC050: g_Component::SteamApi::InterfaceContext::ISteamUser
   0x1427AC098: g_Component::SteamApi::InterfaceContext::ISteamApps
