@@ -177,6 +177,15 @@ public unsafe partial struct RaptureGearsetModule {
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 83 F8 64")]
     public partial int ResolveIdFromEnabledIndex(byte enabledGearsetIndex);
 
+    /// <summary>
+    /// Prints a Gearset-related LogMessage to chat.
+    /// </summary>
+    /// <param name="logMessageId">The LogMessage RowId.</param>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <param name="gearsetName">The name of the gearset.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? B3"), GenerateStringOverloads]
+    public partial void PrintLogMessage(uint logMessageId, int gearsetId, CStringPointer gearsetName);
+
     [Flags]
     public enum GearsetFlag : byte {
         None = 0,
