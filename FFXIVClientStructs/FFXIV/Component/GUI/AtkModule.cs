@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
+using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using static FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitManager;
@@ -76,6 +77,15 @@ public unsafe partial struct AtkModule {
     // CallbackHandlerFunctions[2]
     [MemberFunction("40 56 48 83 EC ?? 48 8B F2 48 8B D1")]
     public partial AtkValue* HandleAddonAgentCallback(AtkValue* returnValue, AtkValue* values, uint valueCount);
+
+    /// <summary>
+    /// Handles the given input data.
+    /// </summary>
+    /// <param name="inputData">The input data to process.</param>
+    /// <param name="isPadMouseModeEnabled">Whether the player has the gamepad mouse emulator active.</param>
+    /// <returns>Flags with two bits. Seen returning one when the input was consumed by a collision node, and zero without.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B6 01 40 B5 02")]
+    public partial byte HandleInput(UIInputData* inputData, bool isPadMouseModeEnabled);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct AddonCallbackEntry {

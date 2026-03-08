@@ -113,8 +113,9 @@ public struct GamepadInputData {
     [FieldOffset(0x190)] public float DPadDown;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public struct CursorInputData {
+public partial struct CursorInputData {
     [FieldOffset(0x0)] public int PositionX;
     [FieldOffset(0x4)] public int PositionY;
     [FieldOffset(0x8)] public int MouseWheel; // -1 for scroll down, 1 for scroll up
@@ -128,6 +129,9 @@ public struct CursorInputData {
 
     // At least this is what it seems to be
     [FieldOffset(0x2C)] public bool IsGameWindowFocused;
+
+    [MemberFunction("84 D2 74 0F 33 C0")]
+    public partial void Clear(bool clearPositionAndWheel, MouseButtonFlags buttonsToClear);
 }
 
 [GenerateInterop]
