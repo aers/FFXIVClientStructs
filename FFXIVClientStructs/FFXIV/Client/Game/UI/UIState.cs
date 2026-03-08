@@ -102,7 +102,7 @@ public unsafe partial struct UIState {
 
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1409)] internal FixedSizeArray177<byte> _seenCutscenes;
+    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1420)] internal FixedSizeArray178<byte> _seenCutscenes;
 
     // unk bitmasks
 
