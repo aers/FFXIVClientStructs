@@ -10445,7 +10445,7 @@ classes:
       0x1407CC7D0: TryGetIdFromIndex
       0x1407CC990: RenameGearset
       0x1407CCB00: FindGearsetIdByName
-      0x1407CFC70: PrintLogMessage
+      0x1407CFC70: ShowLogMessage
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x1420BD7C8
@@ -11120,7 +11120,7 @@ classes:
       0x1408E7280: SetChatChannel
       0x1408E75F0: SetFlags
       0x1408E6AA0: SetTellTargetInForay
-      0x1408E7A70: PrintLogMessage
+      0x1408E7A70: ShowLogMessage
       0x1409913C0: ProcessShellCommandMessage
       0x140E65210: ReplyInSelectedChatMode
   Client::UI::Shell::ShellCommandBlueAction:
