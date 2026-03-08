@@ -15704,6 +15704,8 @@ classes:
         base: Client::Game::Event::EventHandler
       - ea: 0x1420F86D0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    vfuncs:
+        275: PlayAnimation
     funcs:
       0x140E275D0: ctor
       0x140E2D600: Create
