@@ -242,8 +242,8 @@ public enum KeyModifierFlag : byte {
 }
 
 public enum GamepadInputsFilter : byte {
-    LeftStick = 0,
-    RightStick = 1,
+    RightStick = 0,
+    LeftStick = 1,
 }
 
 /// From pointer found in <see cref="UIInputData.GetKeybindByName"/>
