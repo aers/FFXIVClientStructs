@@ -100,13 +100,13 @@ public unsafe partial struct UIState {
     /// <remarks> Use <see cref="IsChocoboTaxiStandUnlocked"/>. </remarks>
     [FieldOffset(0x1A044), FixedSizeArray(isBitArray: true, bitCount: 93)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStands;
 
-    // BitCount: TripleTriadResident.RowCount
-    /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
-    [FieldOffset(0x1A044), FixedSizeArray(isBitArray: true, bitCount: 129)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
-
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
     [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1420)] internal FixedSizeArray178<byte> _seenCutscenes;
+
+    // BitCount: TripleTriadResident.RowCount
+    /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
+    [FieldOffset(0x1A148), FixedSizeArray(isBitArray: true, bitCount: 129)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
 
     // unk bitmasks
 
