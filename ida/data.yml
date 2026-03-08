@@ -10438,6 +10438,7 @@ classes:
       0x1407CC700: HasLinkedBannerByEnabledIndex
       0x1407CC730: ResolveIdFromEnabledIndex
       0x1407CC7D0: TryGetIdFromIndex
+      0x1407CC990: RenameGearset
       0x1407CCB00: FindGearsetIdByName
   Client::UI::Misc::ItemFinderModule:
     vtbls:
