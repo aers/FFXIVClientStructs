@@ -91,6 +91,22 @@ public unsafe partial struct FishingEventHandler {
         baitValue[1].SetBool(false);
         return ReceiveEvent(&returnValue, baitValue, 2, 2);
     }
+
+    public FishingSceneData SceneData => (FishingSceneData)EventFramework.GetInitializingSceneData()->Values[0];
+}
+
+public enum FishingSceneData : int {
+    PoleReady = 0x10F,
+    Quitting = 0x111,
+    Casting = 0x113,
+    ReelingInNoFish = 0x11B,
+    ReelingInFish = 0x11C,
+    HookedWeak = 0x124,
+    HookedStrong = 0x125,
+    HookedLegendary = 0x126,
+    Chumming = 0x1235,
+    FishEyes = 0x1236,
+    ReleasingCatch = 0xC75,
 }
 
 [Flags]

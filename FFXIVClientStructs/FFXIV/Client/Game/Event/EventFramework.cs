@@ -14,10 +14,6 @@ public unsafe partial struct EventFramework {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 7C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
-    /// <remarks> Last state persists until a new one occurs </remarks>
-    [StaticAddress("48 8D 35 ?? ?? ?? ?? 4C 8B CE", 3, isPointer: false)]
-    public static partial EventHandlerState* GetHandlerState();
-
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
@@ -129,34 +125,4 @@ public enum ContentType : byte {
     Party, // SkyIsland - used in early phases of the Diadem
     Public,
     GoldSaucer
-}
-
-// if two states are valid at the same time, highest wins
-public enum EventHandlerState : byte {
-    // 1 happens right before 2 but it also happens during interactions with npcs, so I don't think it's a crafting only condition
-    StartingCraft = 2,
-    /// <remarks> In craft, before any action has been taken </remarks>
-    StartedCraft = 3,
-    /// <remarks> The PreparingToCraft condition </remarks>
-    PreparingToCraft = 4,
-    ExitingCraft = 6,
-    /// <remarks> Only after any action has been executed </remarks>
-    Crafting = 9,
-    /// <remarks> Touch or synthesis </remarks>
-    IncreasedEfficiency = 10,
-
-    PoleReady = 15,
-    ExitingFishing = 17,
-    Casting = 19,
-    ReelingInNoFish = 27,
-    ReelingInFish = 28,
-    HookedWeak = 36,
-    HookedStrong = 37,
-    HookedLegendary = 38,
-    Chumming = 53,
-    FishEyes = 54,
-    ReleasingCatch = 117,
-
-    UnkCutscene148 = 148,
-    UnkCutscene162 = 162,
 }
