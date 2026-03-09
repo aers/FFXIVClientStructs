@@ -13,7 +13,7 @@ public unsafe partial struct Object {
     [FieldOffset(0x28)] public Object* NextSiblingObject;
     [FieldOffset(0x30)] public Object* ChildObject; // for humans this is a weapon
     [BitField<bool>(nameof(IsTransformChanged), 1)] // Enable this flag after setting the transform
-    [FieldOffset(0x38)] public byte ObjectFlags;
+    [FieldOffset(0x38)] public ulong ObjectFlags;
 
 
     public SiblingEnumerator ChildObjects
