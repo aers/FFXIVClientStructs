@@ -17427,6 +17427,12 @@ classes:
       0x1411A9480: SetMarkerRadiusScale
       0x1411A95B0: HandleDragPosition
       0x1413BC630: CenterOnPlayer
+  Client::UI::Atk2DNaviMap:
+    vtbls:
+      - ea: 0x142133B10
+        base: Client::UI::Atk2DMap
+    funcs:
+      0x1411A96C0: ctor
   # Addon Interfaces/Base Classes
   Client::UI::AddonCharaMakeFeatureOption:
     vtbls:
