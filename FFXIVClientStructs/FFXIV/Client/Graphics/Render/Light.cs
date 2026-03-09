@@ -15,7 +15,7 @@ public unsafe partial struct Light {
     /// <remarks>
     /// This seems to be used for the player-configurable lights in Group Pose.
     /// </remarks>
-    public static readonly AxisAlignedBounds UnlimitedMaxRange = new AxisAlignedBounds(new Vector3(-10000.0f, -10000.0f, -10000.0f), new Vector3(10000.0f, 10000.0f, 10000.0f));
+    public static readonly AxisAlignedBounds UnlimitedMaxRange = new(new Vector3(-10000.0f, -10000.0f, -10000.0f), new Vector3(10000.0f, 10000.0f, 10000.0f));
 
     [FieldOffset(0x18)] public LightFlags LightFlags;
     [FieldOffset(0x1C)] public LightShape LightShape;
@@ -32,7 +32,7 @@ public unsafe partial struct Light {
     [FieldOffset(0x8C)] public float Range;
     [FieldOffset(0x90)] public float CharacterShadowRange;
 
-    public Vector3 Color { readonly get => new Vector3(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z); set => ColorIntensity = new Vector4(value, ColorIntensity.W); }
+    public Vector3 Color { readonly get => new(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z); set => ColorIntensity = new Vector4(value, ColorIntensity.W); }
     public float Intensity { readonly get => ColorIntensity.W; set => ColorIntensity.W = value; }
 
     // Set by UpdateCulling based on ComputeAxisAlignedBounds

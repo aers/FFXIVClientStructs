@@ -16,7 +16,7 @@ public struct SphereBounds {
     /// <summary>
     /// The center point of the bounding sphere.
     /// </summary>
-    public Vector3 CenterPoint { readonly get => new Vector3(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z); set => CenterPointRadius = new Vector4(value, CenterPointRadius.W); }
+    public Vector3 CenterPoint { readonly get => new(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z); set => CenterPointRadius = new Vector4(value, CenterPointRadius.W); }
     
     /// <summary>
     /// The radius of the bounding sphere.
