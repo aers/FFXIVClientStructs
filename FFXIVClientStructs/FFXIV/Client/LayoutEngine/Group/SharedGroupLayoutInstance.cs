@@ -83,14 +83,13 @@ public unsafe partial struct SharedGroupLayoutInstance {
     /// the given index was out of range (see <see cref="ObjectStainCount"/>).
     /// </returns>
     public bool TryApplyStain(byte stainIndex) {
-        if (StainInfo != null && stainIndex < ObjectStainCount) {
-            StainInfo->ChosenStainIndex = stainIndex;
-            StainInfo->Flags |= SharedGroupStainFlags.StainModified;
-            ReapplyStain();
-            return true;
-        } else {
+        if (StainInfo == null || stainIndex >= ObjectStainCount)
             return false;
-        }
+
+        StainInfo->ChosenStainIndex = stainIndex;
+        StainInfo->Flags |= SharedGroupStainFlags.StainModified;
+        ReapplyStain();
+        return true;
     }
 }
 

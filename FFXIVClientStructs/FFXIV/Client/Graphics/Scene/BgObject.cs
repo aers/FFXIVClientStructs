@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
+// Client::Graphics::Scene::BgObject
+//   Client::Graphics::Scene::DrawObject
+//     Client::Graphics::Scene::Object
 [GenerateInterop]
 [Inherits<DrawObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
@@ -18,21 +21,21 @@ public unsafe partial struct BgObject {
     public static partial BgObject* Create(CStringPointer modelGamePath, CStringPointer poolName, BgObject* existingAllocation = null);
 
     public bool TrySetStainColor(ByteColor srgbStainColor) {
-        if (StainBuffer != null) {
-            StainBuffer->SrgbByteColor = srgbStainColor;
-
-            // This is the same 2.0 power approximation used when the BgPartsLayoutInstance creates stained BgObjects
-            var srgbFloatColor = new Vector4(srgbStainColor.R, srgbStainColor.G, srgbStainColor.B, srgbStainColor.A) / byte.MaxValue;
-            StainBuffer->LinearFloatColor = new Vector4(
-                srgbFloatColor.X * srgbFloatColor.X,
-                srgbFloatColor.Y * srgbFloatColor.Y,
-                srgbFloatColor.Z * srgbFloatColor.Z,
-                srgbFloatColor.W);
-
-            return true;
-        } else {
+        if (StainBuffer == null)
             return false;
-        }
+
+        StainBuffer->SrgbByteColor = srgbStainColor;
+
+        // This is the same 2.0 power approximation used when the BgPartsLayoutInstance creates stained BgObjects
+        var srgbFloatColor = new Vector4(srgbStainColor.R, srgbStainColor.G, srgbStainColor.B, srgbStainColor.A) / byte.MaxValue;
+
+        StainBuffer->LinearFloatColor = new Vector4(
+            srgbFloatColor.X * srgbFloatColor.X,
+            srgbFloatColor.Y * srgbFloatColor.Y,
+            srgbFloatColor.Z * srgbFloatColor.Z,
+            srgbFloatColor.W);
+
+        return true;
     }
 }
 

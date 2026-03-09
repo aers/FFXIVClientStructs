@@ -31,15 +31,15 @@ public unsafe partial struct DrawObject {
 
     [VirtualFunction(6)]
     public partial void UpdateCulling();
-    
+
     [VirtualFunction(7)]
     public partial void UpdateTransforms(bool a2_unk);
-    
+
     // vf8: void UpdateCullingForced(this) // For BgObjects same as UpdateCulling, but sets CullingManager+8 to zero before updating culling, and then restores it
-    
+
     // vf9: // Goes through the modelResource of each model and applies a distance plus five to the given index. Could be some sort of streaming or LOD priority?
     // vf10: // Also iterates through the modelResources like vf9
-    
+
     [VirtualFunction(11)]
     public partial void UpdateMaterials();
 
@@ -56,10 +56,10 @@ public unsafe partial struct DrawObject {
     /// <returns>The given location where the sphere bounds were stored.</returns>
     [VirtualFunction(12)]
     public partial SphereBounds* ComputeSphereBounds(SphereBounds* outSphereBounds);
-    
+
     [VirtualFunction(13)]
     public partial AxisAlignedBounds* ComputeAxisAlignedBounds(AxisAlignedBounds* outAlignedBounds);
-    
+
     [VirtualFunction(14)]
     public partial OrientedBounds* ComputeOrientedBounds(OrientedBounds* outOrientedBounds);
 
@@ -89,7 +89,7 @@ public unsafe partial struct DrawObject {
 
     [VirtualFunction(19)]
     public partial Vector3* GetAttachBoneLocalLocation(Vector3* outLocation, int attachBoneIndex);
-    
+
     /// <summary>
     /// Determines whether the bone with the given bone index is a valid attach bone.
     /// </summary>

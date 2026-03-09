@@ -28,10 +28,10 @@ public unsafe partial struct Object {
 
     [VirtualFunction(1)]
     public partial void CleanupRender();
-    
+
     [VirtualFunction(2)]
     public partial ObjectType GetObjectType();
-    
+
     [VirtualFunction(4)]
     public partial void UpdateRender();
 

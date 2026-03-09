@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Common.Math;
@@ -10,18 +7,23 @@ namespace FFXIVClientStructs.FFXIV.Common.Math;
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct SphereBounds {
-
     [FieldOffset(0x00)] internal Vector4 CenterPointRadius;
 
     /// <summary>
     /// The center point of the bounding sphere.
     /// </summary>
-    public Vector3 CenterPoint { readonly get => new(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z); set => CenterPointRadius = new Vector4(value, CenterPointRadius.W); }
-    
+    public Vector3 CenterPoint {
+        readonly get => new(CenterPointRadius.X, CenterPointRadius.Y, CenterPointRadius.Z);
+        set => CenterPointRadius = new Vector4(value, CenterPointRadius.W);
+    }
+
     /// <summary>
     /// The radius of the bounding sphere.
     /// </summary>
-    public float Radius { readonly get => CenterPointRadius.W; set => CenterPointRadius.W = value; }
+    public float Radius {
+        readonly get => CenterPointRadius.W;
+        set => CenterPointRadius.W = value;
+    }
 
     /// <summary>
     /// Determines whether the given point in 3D space lies within this
@@ -57,18 +59,20 @@ public struct SphereBounds {
         // Geometric solution from https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection.html
         Vector3 L = CenterPoint - ray.Origin;
         float tca = Vector3.Dot(L, ray.Direction);
-
         float d2 = Vector3.Dot(L, L) - tca * tca;
+
         if (d2 > Radius * Radius) {
             hitPoint = Vector3.Zero;
             return false;
         }
+
         float thc = MathF.Sqrt(Radius * Radius - d2);
         float t0 = tca - thc;
         float t1 = tca + thc;
-
         float t = MathF.Min(t0, t1);
+
         hitPoint = ray.Origin + ray.Direction * t;
+
         return true;
     }
 

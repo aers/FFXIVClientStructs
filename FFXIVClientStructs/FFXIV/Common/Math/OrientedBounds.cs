@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace FFXIVClientStructs.FFXIV.Common.Math;
 
 /// <summary>
@@ -10,7 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Common.Math;
 /// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public struct OrientedBounds {
-
     /// <summary>
     /// The transformation of the bounding box in 3D space.
     /// </summary>
@@ -41,19 +36,18 @@ public struct OrientedBounds {
     /// <param name="point">The point to test.</param>
     /// <returns>True if the point lies within or on the bounding box, or false otherwise.</returns>
     public readonly bool ContainsPoint(Vector3 point) {
+        // Check for invalid transform. This means the transform matrix is somehow damaged/degenerate
+        // and does not represent an affine transformation.
+        if (!Matrix4x4.Invert(Transform, out var inverseTransform))
+            return false;
+
         // Transform the point by the inverse transform to get it in local space.
         // If you're going to do this en masse, consider doing the matrix inversion once.
-        if (Matrix4x4.Invert(Transform, out var inverseTransform)) {
-            var localPoint = Vector3.Transform(point, inverseTransform);
+        var localPoint = Vector3.Transform(point, inverseTransform);
 
-            return MathF.Abs(localPoint.X) <= HalfExtents.X
-                && MathF.Abs(localPoint.Y) <= HalfExtents.Y
-                && MathF.Abs(localPoint.Z) <= HalfExtents.Z;
-        } else {
-            // Invalid transform. This means the transform matrix is somehow damaged/degenerate
-            // and does not represent an affine transformation.
-            return false;
-        }
+        return MathF.Abs(localPoint.X) <= HalfExtents.X
+            && MathF.Abs(localPoint.Y) <= HalfExtents.Y
+            && MathF.Abs(localPoint.Z) <= HalfExtents.Z;
     }
 
     public override string ToString() => $"{HalfExtents * 2.0f} at {Transform}";

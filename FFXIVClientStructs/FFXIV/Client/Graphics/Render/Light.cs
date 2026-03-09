@@ -32,14 +32,21 @@ public unsafe partial struct Light {
     [FieldOffset(0x8C)] public float Range;
     [FieldOffset(0x90)] public float CharacterShadowRange;
 
-    public Vector3 Color { readonly get => new(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z); set => ColorIntensity = new Vector4(value, ColorIntensity.W); }
-    public float Intensity { readonly get => ColorIntensity.W; set => ColorIntensity.W = value; }
-
-    // Set by UpdateCulling based on ComputeAxisAlignedBounds
+    /// <remarks> Set by UpdateCulling based on ComputeAxisAlignedBounds </remarks>
     [FieldOffset(0xA0)] public AxisAlignedBounds CullingBounds;
 
-    // Set by UpdateCulling based on applying this light's transform to MaxRange
+    /// <remarks> Set by UpdateCulling based on applying this light's transform to MaxRange </remarks>
     [FieldOffset(0xC0)] public AxisAlignedBounds RangeBounds;
+
+    public Vector3 Color {
+        readonly get => new(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z);
+        set => ColorIntensity = new Vector4(value, ColorIntensity.W);
+    }
+
+    public float Intensity {
+        readonly get => ColorIntensity.W;
+        set => ColorIntensity.W = value;
+    }
 }
 
 [Flags]
@@ -84,4 +91,3 @@ public enum LightFalloffType : uint {
     Quadratic = 1,
     Cubic = 2,
 }
-

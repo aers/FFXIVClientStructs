@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;

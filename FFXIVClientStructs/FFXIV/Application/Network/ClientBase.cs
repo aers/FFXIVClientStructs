@@ -1,10 +1,9 @@
-using System.Runtime.InteropServices;
-
 namespace FFXIVClientStructs.FFXIV.Application.Network;
 
+// Application::Network::ClientBase
 [GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public unsafe partial struct ClientBase {
+public partial struct ClientBase {
     [FieldOffset(0x0)] public Utf8String Host;
     [FieldOffset(0x68)] public ushort Port;
     [FieldOffset(0x6C)] public TransportLayers TransportLayer;
