@@ -3400,6 +3400,7 @@ classes:
       0x140B63D60: RequestCharaCardForGameObject
       0x140B63DF0: RequestCharaCardForContentId
       0x140AF3BF0: RequestCharaCardForLocalPlayer
+      0x140B63F80: RequestUpdateCharaCard
       0x140B64000: SendCharaCardData
       0x140B64430: HandleCurrentBannerDataPacket
       0x140B64460: HandleCurrentCharaCardDataPacket
