@@ -36,8 +36,14 @@ public unsafe partial struct Weapon {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 4C 8B E0")]
-    public static partial Weapon* Create(WeaponModelId* weaponModelId);
+    public static partial Weapon* Create(WeaponCreateInfo* weaponData);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 16 48 8B 0D ?? ?? ?? ??")]
-    public partial bool Initialize(WeaponModelId* weaponModelId);
+    public partial bool Initialize(WeaponCreateInfo* weaponData);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x09)]
+public struct WeaponCreateInfo {
+    [FieldOffset(0x00)] public WeaponModelId weaponModelId;
+    [FieldOffset(0x08)] public byte AnimationVariant;
 }
