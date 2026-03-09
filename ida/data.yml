@@ -6749,6 +6749,10 @@ classes:
       0x1402620D0: ModelDrawInit
 #oldfail       0x140383720: GetAttributeIndex
 #oldfail       0x1403823A0: GetShapeIndex
+  Client::Graphics::Render::Light:
+    vtbls:
+      - ea: 0x1420781F8
+        base: Client::Graphics::Render::RenderObject      
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x1420780D0
@@ -7086,6 +7090,8 @@ classes:
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
     funcs:
       0x140446A10: ctor
+      0x1407744C0: Create
+      0x140448CA0: Update
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x142097518
@@ -7102,13 +7108,29 @@ classes:
       1: CleanupRender
       2: GetObjectType
       4: UpdateRender
+    funcs:
+      0x14040AEF0: AddChild
+      0x14040AFE0: OnAddedToWorld
   Client::Graphics::Scene::DrawObject:
     vtbls:
       - ea: 0x142097088
         base: Client::Graphics::Scene::Object
     vfuncs: # 50
+      6: UpdateCulling
+      7: UpdateTransforms
       11: UpdateMaterials
+      12: ComputeSphereBounds
+      13: ComputeAxisAlignedBounds
+      14: ComputeOrientedBounds
+      15: HitTestBounds
+      16: HitTestBoundsNoOutput
+      17: GetAttachBoneWorldTransform
+      18: GetAttachBoneWorldLocation
+      19: GetAttachBoneLocalLocation
+      21: HasAttachBone
       24: UpdateTint
+      26: SetTransparency
+      27: GetTransparency
     funcs:
       0x14040B040: ctor
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
@@ -7264,6 +7286,8 @@ classes:
         base: Client::Graphics::Scene::CharacterBase
     funcs:
       0x1404380D0: ctor
+      0x140774620: Create
+      0x140438140: Initialize
   Client::Graphics::Scene::Monster:
     vtbls:
       - ea: 0x142098380
@@ -7289,6 +7313,7 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x14040EB10: ctor
+      0x140774390: Create
   Client::Graphics::Scene::EnvLocation:
     vtbls:
       - ea: 0x142098BD8
@@ -7307,6 +7332,7 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x14043DCD0: ctor
+      0x140774580: Create
   Client::Graphics::Scene::EnvScene:
     vtbls:
       - ea: 0x142098EF8
@@ -7700,6 +7726,7 @@ classes:
       0x1405C8560: ctor
       0x1405C8590: PositionsDiffer
       0x1405C85C0: ButtonsDiffer
+      0x1405C85F0: Clear
   Client::System::Input::KeyboardInputData:
     funcs:
       0x1405C86A0: ctor
@@ -8898,6 +8925,7 @@ classes:
       37: SetColliderActive
       38: UpdateCollider
       55: WantToBeActive
+      58: ApplyStain
       63: SetActive
       64: GetTranslationImpl
       65: SetTranslationImpl
@@ -9113,6 +9141,8 @@ classes:
     funcs:
       0x1406E4280: InitAnimationHandlers
       0x1406E3C60: InitTimelines
+      0x1406DB920: ReapplyStain
+      0x1407738B0: GetObjectStainColorByIndex # static
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
     vtbls:
       - ea: 0x1420AC960
@@ -9281,6 +9311,9 @@ classes:
     funcs:
       0x14074E790: ctor # unused, inlined @ 0x14075CD19
       0x14074F640: GetKeybindByName
+      0x1406163F0: FilterUICursorInputs
+      0x140616410: FilterDragInputs
+      0x1406163A0: FilterGamepadInputs
   Client::UI::Misc::UiDataModule:
     vtbls:
       - ea: 0x1420B7A10
@@ -10446,7 +10479,7 @@ classes:
       0x1407CC7D0: TryGetIdFromIndex
       0x1407CC990: RenameGearset
       0x1407CCB00: FindGearsetIdByName
-      0x1407CFC70: QueueLogMessage
+      0x1407CFC70: ShowLogMessage
   Client::UI::Misc::ItemFinderModule:
     vtbls:
       - ea: 0x1420BD7C8
@@ -11121,7 +11154,7 @@ classes:
       0x1408E7280: SetChatChannel
       0x1408E75F0: SetFlags
       0x1408E6AA0: SetTellTargetInForay
-      0x1408E7A70: PrintLogMessage
+      0x1408E7A70: ShowLogMessage
       0x1409913C0: ProcessShellCommandMessage
       0x140E65210: ReplyInSelectedChatMode
   Client::UI::Shell::ShellCommandBlueAction:
@@ -17424,6 +17457,12 @@ classes:
       0x1411A9480: SetMarkerRadiusScale
       0x1411A95B0: HandleDragPosition
       0x1413BC630: CenterOnPlayer
+  Client::UI::Atk2DNaviMap:
+    vtbls:
+      - ea: 0x142133B10
+        base: Client::UI::Atk2DMap
+    funcs:
+      0x1411A96C0: ctor
   # Addon Interfaces/Base Classes
   Client::UI::AddonCharaMakeFeatureOption:
     vtbls:

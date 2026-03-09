@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentCabinetWithdraw
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CabinetWithdraw)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Character;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::EventObjectManager

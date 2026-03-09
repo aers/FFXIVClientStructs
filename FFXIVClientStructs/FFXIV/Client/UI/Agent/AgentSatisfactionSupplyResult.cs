@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentSatisfactionSupplyResult
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.SatisfactionSupplyResult)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

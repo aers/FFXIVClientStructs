@@ -150,8 +150,8 @@ public struct MonkGauge {
     public BeastChakraType[] BeastChakra => [BeastChakra1, BeastChakra2, BeastChakra3];
 
     public int OpoOpoStacks => BeastChakraStacks & 3;
-    public int RaptorStacks => ((BeastChakraStacks >> 2) & 3);
-    public int CoeurlStacks => ((BeastChakraStacks >> 4) & 3);
+    public int RaptorStacks => (BeastChakraStacks >> 2) & 3;
+    public int CoeurlStacks => (BeastChakraStacks >> 4) & 3;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentFreeCompanyChest
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.FreeCompanyChest)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

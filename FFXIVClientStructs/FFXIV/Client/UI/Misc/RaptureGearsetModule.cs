@@ -117,15 +117,6 @@ public unsafe partial struct RaptureGearsetModule {
     public partial bool RenameGearset(int gearsetId, Utf8String* newGearsetName);
 
     /// <summary>
-    /// Queues a log message to the game.
-    /// </summary>
-    /// <param name="logMessageId">The log message ID of the gearset.</param>
-    /// <param name="gearsetId">The ID of the gearset.</param>
-    /// <param name="gearsetName">The name of the gearset.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? B3"), GenerateStringOverloads]
-    public partial void QueueLogMessage(uint logMessageId, int gearsetId, CStringPointer gearsetName);
-
-    /// <summary>
     /// Link a glamour plate to a specific gearset.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to link a glamour plate to </param>
@@ -185,6 +176,15 @@ public unsafe partial struct RaptureGearsetModule {
     /// <returns>The ID of the <see cref="GearsetEntry"/>.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 83 F8 64")]
     public partial int ResolveIdFromEnabledIndex(byte enabledGearsetIndex);
+
+    /// <summary>
+    /// Shows a Gearset-related LogMessage.
+    /// </summary>
+    /// <param name="logMessageId">The LogMessage RowId.</param>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <param name="gearsetName">The name of the gearset.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? B3"), GenerateStringOverloads]
+    public partial void ShowLogMessage(uint logMessageId, int gearsetId, CStringPointer gearsetName);
 
     [Flags]
     public enum GearsetFlag : byte {

@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 // Client::System::Resource::Handle::ModelResourceHandle

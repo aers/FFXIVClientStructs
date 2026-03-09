@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Common.Component;
-
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkManagedInterface
