@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
@@ -25,7 +26,7 @@ public unsafe partial struct Weapon {
     [FieldOffset(0xA48)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
     [FieldOffset(0xA50)] public ChangedWeaponData* ChangedData;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x06)] // Size unknown
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct ChangedWeaponData {
         // No primary ID since this requires a new model to be setup.
         [FieldOffset(0x00)] public ushort SecondaryId;
@@ -33,4 +34,16 @@ public unsafe partial struct Weapon {
         [FieldOffset(0x03)] public byte Stain0;
         [FieldOffset(0x04)] public byte Stain1;
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 4C 8B E0")]
+    public static partial Weapon* Create(WeaponCreateInfo* weaponData);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 16 48 8B 0D ?? ?? ?? ??")]
+    public partial bool Initialize(WeaponCreateInfo* weaponData);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x09)]
+public struct WeaponCreateInfo {
+    [FieldOffset(0x00)] public WeaponModelId weaponModelId;
+    [FieldOffset(0x08)] public byte AnimationVariant;
 }

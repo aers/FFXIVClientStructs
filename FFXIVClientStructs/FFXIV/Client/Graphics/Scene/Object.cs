@@ -12,6 +12,9 @@ public unsafe partial struct Object {
     [FieldOffset(0x20)] public Object* PreviousSiblingObject;
     [FieldOffset(0x28)] public Object* NextSiblingObject;
     [FieldOffset(0x30)] public Object* ChildObject; // for humans this is a weapon
+    [BitField<bool>(nameof(IsTransformChanged), 1)] // Enable this flag after setting the transform
+    [FieldOffset(0x38)] public ulong ObjectFlags;
+
 
     public SiblingEnumerator ChildObjects
         => new(ChildObject);
@@ -20,8 +23,23 @@ public unsafe partial struct Object {
     [FieldOffset(0x60)] public Quaternion Rotation;
     [FieldOffset(0x70)] public Vector3 Scale;
 
+    [VirtualFunction(0)]
+    public partial Object* Dtor(byte freeFlags);
+
+    [VirtualFunction(1)]
+    public partial void CleanupRender();
+    
     [VirtualFunction(2)]
     public partial ObjectType GetObjectType();
+    
+    [VirtualFunction(4)]
+    public partial void UpdateRender();
+
+    [MemberFunction("E8 ?? ?? ?? ?? F6 43 38 01")]
+    public partial void AddChild(Object* child);
+
+    [MemberFunction("F6 41 38 01 74 2F")]
+    public partial void OnAddedToWorld();
 
     public struct SiblingEnumerator {
         private Object* _first;
