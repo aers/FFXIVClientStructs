@@ -44,6 +44,6 @@ public unsafe partial struct Weapon {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x09)]
 public struct WeaponCreateInfo {
-    [FieldOffset(0x00)] public WeaponModelId weaponModelId;
+    [FieldOffset(0x00)] public WeaponModelId WeaponModelId;
     [FieldOffset(0x08)] public byte AnimationVariant;
 }
