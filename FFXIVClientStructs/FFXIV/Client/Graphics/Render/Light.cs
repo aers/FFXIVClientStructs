@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
@@ -10,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //     Client::Graphics::ReferencedClassBase
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x160)]
+[StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct Light {
     /// <summary>
     /// A special <see cref="MaxRange"/> value that disables range checks.
