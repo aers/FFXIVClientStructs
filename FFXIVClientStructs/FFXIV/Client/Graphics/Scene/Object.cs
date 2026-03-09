@@ -24,7 +24,7 @@ public unsafe partial struct Object {
     [FieldOffset(0x70)] public Vector3 Scale;
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial Object* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void CleanupRender();
