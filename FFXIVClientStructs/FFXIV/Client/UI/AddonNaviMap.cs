@@ -10,7 +10,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A90)]
 public unsafe partial struct AddonNaviMap {
-    [FieldOffset(0x238)] public Atk2DNaviMap Atk2DMap;
+    [FieldOffset(0x238), Obsolete("Use NaviMap")] public Atk2DMap Atk2DMap;
+    [FieldOffset(0x238)] public Atk2DNaviMap NaviMap;
 
     [FieldOffset(0x1588)] public AtkResNode* PlayerCone;
     [FieldOffset(0x1590)] public AtkCollisionNode* MainCollision;
