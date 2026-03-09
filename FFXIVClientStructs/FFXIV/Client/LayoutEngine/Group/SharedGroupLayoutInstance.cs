@@ -122,5 +122,5 @@ public enum SharedGroupStainFlags {
     /// <summary>
     /// If this bit is set, the next call to <see cref="SharedGroupLayoutInstance.ReapplyStain"/> will apply the stain color.
     /// </summary>
-    StainModified = (1 << 0),
+    StainModified = 1 << 0,
 }

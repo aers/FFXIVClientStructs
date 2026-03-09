@@ -44,10 +44,10 @@ public unsafe partial struct Light {
 
 [Flags]
 public enum LightFlags {
-    SpecularHighlights = (1 << 0),
-    DynamicShadows = (1 << 1),
-    CharacterShadows = (1 << 2),
-    ObjectShadows = (1 << 3),
+    SpecularHighlights = 1 << 0,
+    DynamicShadows = 1 << 1,
+    CharacterShadows = 1 << 2,
+    ObjectShadows = 1 << 3,
 }
 
 // Client::Graphics::Render::LightingManager::LightShape
