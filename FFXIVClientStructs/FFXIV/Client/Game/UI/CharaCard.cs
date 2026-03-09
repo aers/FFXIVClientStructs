@@ -17,10 +17,10 @@ public unsafe partial struct CharaCard {
     [FieldOffset(0x124)] public CharaCardData CurrentCharaCardData;
     [FieldOffset(0x1E0)] public CharaCardFlags Flags;
 
-    [MemberFunction("40 53 48 81 EC 80 0F 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 45 33 C9 C7 44 24 20 5E 03 00 00 45 33 C0 48 C7 44 24 28 20 00 00 00 48 8D 54 24 20 48 89 5C 24 40 48 8B C8 C7 44 24 48 01 00 00 00")]
+    [MemberFunction("40 53 48 81 EC 80 0F 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 45 33 C9 C7 44 24 20 ?? ?? ?? ?? 45 33 C0 48 C7 44 24 28 20 00 00 00 48 8D 54 24 20 48 89 5C 24 40 48 8B C8 C7 44 24 48 01 00 00 00")]
     public partial void RequestCharaCardForContentId(ulong contentId);
 
-    [MemberFunction("40 53 48 81 EC 80 0F 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 8B 4B 78 48 8D 54 24 20 48 89 4C 24 40 45 33 C9 48 8B C8 C7 44 24 20 5E 03 00 00 45 33 C0 48 C7 44 24 28 20 00 00 00 C7 44 24 48 01 00 00 00")]
+    [MemberFunction("40 53 48 81 EC 80 0F 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 8B 4B 78 48 8D 54 24 20 48 89 4C 24 40 45 33 C9 48 8B C8 C7 44 24 20 ?? ?? ?? ?? 45 33 C0 48 C7 44 24 28 20 00 00 00 C7 44 24 48 01 00 00 00")]
     public partial void RequestCharaCardForGameObject(GameObject* gameObject);
 
     [MemberFunction("48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 0D")]
