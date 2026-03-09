@@ -2,11 +2,11 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-// Client::UI::Atk2DMap
-//   Client::UI::Atk2DNaviMap
+// Client::UI::Atk2DNaviMap
+//   Client::UI::Atk2DMap
 [GenerateInterop]
 [Inherits<Atk2DMap>]
-[StructLayout(LayoutKind.Explicit, Size = 0x134D)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1350)]
 public unsafe partial struct Atk2DNaviMap {
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray101<NaviMapMarker> _naviMapMarkers;
     [FieldOffset(0x1340)] public AtkResNode* CompassFrame;
@@ -26,4 +26,4 @@ public unsafe struct NaviMapMarker {
     [FieldOffset(0x26)] public short Y;
     [FieldOffset(0x28)] public float Unknown28;
     [FieldOffset(0x2C)] public byte Unknown2C;
-};
+}
