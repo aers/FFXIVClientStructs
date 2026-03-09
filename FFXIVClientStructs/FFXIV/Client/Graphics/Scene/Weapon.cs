@@ -39,5 +39,5 @@ public unsafe partial struct Weapon {
     public static partial Weapon* Create(WeaponModelId* weaponModelId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 16 48 8B 0D ?? ?? ?? ??")]
-    public partial byte Initialize(WeaponModelId* weaponModelId);
+    public partial bool Initialize(WeaponModelId* weaponModelId);
 }
