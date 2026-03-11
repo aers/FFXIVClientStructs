@@ -9,7 +9,7 @@ public unsafe partial struct BonePhysicsUpdater {
     [FieldOffset(0x1A0)] public JobSystem TransformUpdaterJob;
 
     /// <remarks> This is executed by BoneSimulatorUpdateJob. </remarks>
-    [MemberFunction("48 8D 05 ?? ?? ?? ?? 48 89 6B ?? 48 89 43")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? ?? ?? ?? 33 ED 4C 8B F2")] // don't use the lea instruction sig
     public partial void BoneSimulatorTask(UpdateBoneSimulatorJobData* data);
 
     [GenerateInterop]
