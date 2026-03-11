@@ -2081,6 +2081,8 @@ classes:
       0x140DD5AD0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400E1780: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
       0x140DB6690: RequestGuestAccessSettings
+      0x140DB63B0: HandleHousingSignboardPacket
+      0x140DB6480: HandleHousingPortalPacket
       0x140DB6700: HandleGuestAccessSettings
       0x140DB29B0: SaveGuestAccessSettings
       0x140DB2BC0: MoveToEntry
@@ -6200,6 +6202,8 @@ classes:
       0x140B9FD00: HandleNPCYellPacket
       0x140B9FEC0: HandleAchievementsPacket
       0x140B9FF30: HandleFateProgressTabPacket
+      0x140BA0430: HandleHousingSignboardPacket
+      0x140BA0470: HandleHousingPortalPacket
       0x140BA2B20: HandleMapEffectPacket
       0x140BA3100: HandleQuestManagerUnkArray2SecondHalfPacket
       0x140BA3150: HandleQuestManagerUnkArray2SecondHalfEntryPacket
