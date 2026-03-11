@@ -30,19 +30,6 @@ public unsafe partial struct PublicContentDirector {
     [FieldOffset(0xD30 + 0x31), CExporterExcelEnd] private byte Unknown4;
 
     [FieldOffset(0xD64)] public ContentDirector.MapEffectList ManagedSharedGroups;
-
-    [MemberFunction("40 53 57 48 83 EC 78 48 8B D9 48 8D 0D")]
-    public static partial nint HandleEnterContentInfoPacket(EnterContentInfoPacket* packet);
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public partial struct EnterContentInfoPacket {
-        [FieldOffset(0x00)] public byte NotifyType;
-
-        /// <summary>
-        /// The ID of the ContentFinderCondition EXD that has popped.
-        /// </summary>
-        [FieldOffset(0x1C)] public ushort ContentFinderConditionId;
-    }
 }
 
 public enum PublicContentDirectorType : byte {
