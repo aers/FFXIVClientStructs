@@ -302,7 +302,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void SetScale(float scale, bool a3);
 
     [VirtualFunction(15)]
-    public partial void GetSize(short* outWidth, short* outHeight, bool scaled);
+    public partial void GetSize(ushort* outWidth, ushort* outHeight, bool scaled);
 
     [VirtualFunction(16)]
     public partial void Hide2();
