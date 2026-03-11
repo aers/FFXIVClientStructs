@@ -41,7 +41,7 @@ public unsafe partial struct NameCache {
         [FieldOffset(0x00), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
         [FieldOffset(0x40)] public byte Sex;
         [FieldOffset(0x44)] public uint EntityId;
-        [FieldOffset(0x48)] public short HomeWorldId;
+        [FieldOffset(0x48)] public ushort HomeWorldId;
     }
 
     [GenerateInterop]
@@ -54,7 +54,7 @@ public unsafe partial struct NameCache {
     [StructLayout(LayoutKind.Explicit, Size = 0x0B)]
     public struct CharacterInfo {
         [FieldOffset(0x00)] public CStringPointer Name;
-        [FieldOffset(0x08)] public short HomeWorldId;
+        [FieldOffset(0x08)] public ushort HomeWorldId;
         [FieldOffset(0x0A)] public byte Sex;
     }
 }
