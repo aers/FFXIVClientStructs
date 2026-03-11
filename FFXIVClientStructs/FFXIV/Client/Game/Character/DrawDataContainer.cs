@@ -76,7 +76,7 @@ public unsafe partial struct DrawDataContainer {
     public partial void HideVieraEars(bool hide);
 
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B6 B9")]
-    public partial void LoadGearsetData(PacketPlayerGearsetData* gearsetData);
+    public partial void HandleGearsetDrawDataPacket(GearsetDrawDataPacket* packet);
 
     public enum EquipmentSlot : uint {
         Head = 0,

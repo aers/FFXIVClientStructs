@@ -10953,7 +10953,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       # 0x1413566D0: ctor # inlined at 0x1408CF5D2
-      0x140886050: LoadGearsetData
+      0x140886050: HandleGearsetDrawDataPacket
       0x140886F70: LoadWeapon
       0x1408881F0: HideWeapons
       0x140888FE0: LoadEquipment
