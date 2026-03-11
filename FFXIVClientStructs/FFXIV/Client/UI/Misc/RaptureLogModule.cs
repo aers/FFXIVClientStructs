@@ -63,7 +63,7 @@ public unsafe partial struct RaptureLogModule {
     public partial uint FormatLogMessage(uint logKindId, Utf8String* sender, Utf8String* message, int* timestamp, void* a6, Utf8String* a7, int chatTabIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E")]
-    public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
+    public partial uint PrintMessage(LogInfo logInfo, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 47 FF 83 F8 06")]
     public partial void FormatPlayerLink(CStringPointer name, Utf8String* result, CStringPointer displayNamePrefix, uint unk5, bool isNotLocalPlayer, ushort homeWorld, bool unk8, CStringPointer displayNameOverride, bool unk10);
@@ -119,7 +119,7 @@ public unsafe partial struct RaptureLogModule {
     public partial bool GetLogMessage(int index, Utf8String* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95")]
-    public partial bool GetLogMessageDetail(int index, short* outLogInfo, Utf8String* outSender, Utf8String* outMessage, int* outTimestamp);
+    public partial bool GetLogMessageDetail(int index, LogInfo* outLogInfo, Utf8String* outSender, Utf8String* outMessage, int* outTimestamp);
 
     [MemberFunction("4C 8B D9 48 8B 89")]
     public partial void AddMsgSourceEntry(ulong contentId, ulong accountId, int messageIndex, ushort worldId, ushort chatType);
@@ -137,39 +137,17 @@ public unsafe partial struct RaptureLogModule {
         return result;
     }
 
-    /// <remarks>
-    /// For <paramref name="casterKind"/> and <paramref name="targetKind"/> the values are:<br/>
-    /// 0 = You<br/>
-    /// 1 = Party Member<br/>
-    /// 2 = Alliance Member<br/>
-    /// 3 = Other PC<br/>
-    /// 4 = Engaged Enemy<br/>
-    /// 5 = Unengaged Enemy<br/>
-    /// 6 = Friendly NPCs<br/>
-    /// 7 = Pets/Companions<br/>
-    /// 8 = Pets/Companions (Party)<br/>
-    /// 9 = Pets/Companions (Alliance)<br/>
-    /// 10 = Pets/Companions (Other PC)
-    /// </remarks>
-    [OverloadResolutionPriority(1)]
-    [Obsolete("Use the overload with the EntityRelationKind parameters instead. Note that the numeric value of these parameters is different by one compared to this overload.")]
-    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out sbyte casterKind, out sbyte targetKind, out int timestamp) {
-        var result = GetLogMessageDetail(index, out sender, out message, out logKind, out EntityRelationKind casterKindRelation, out EntityRelationKind targetKindRelation, out timestamp);
-        casterKind = (sbyte)(casterKindRelation - 1);
-        targetKind = (sbyte)(targetKindRelation - 1);
-        return result;
-    }
-    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out EntityRelationKind casterKind, out EntityRelationKind targetKind, out int timestamp) {
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out ushort logKind, out EntityRelationKind sourceKind, out EntityRelationKind targetKind, out int timestamp) {
         using var pSender = new Utf8String();
         using var pMessage = new Utf8String();
-        short pLogInfo;
+        LogInfo pLogInfo;
         int pTimestamp;
 
         var result = GetLogMessageDetail(index, &pLogInfo, &pSender, &pMessage, &pTimestamp);
 
-        logKind = (short)(pLogInfo & 0x7F);
-        casterKind = (EntityRelationKind)((pLogInfo >> 11) & 0xF);
-        targetKind = (EntityRelationKind)((pLogInfo >> 7) & 0xF);
+        logKind = pLogInfo.LogKind;
+        sourceKind = pLogInfo.SourceKind;
+        targetKind = pLogInfo.TargetKind;
         timestamp = pTimestamp;
         sender = pSender.AsSpan().ToArray();
         message = pMessage.AsSpan().ToArray();
@@ -190,6 +168,15 @@ public unsafe partial struct RaptureLogModule {
         [FieldOffset(0x28)] public sbyte PartyOrAllianceMemberIdent;
         [FieldOffset(0x29)] public byte Flags;
     }
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x02)]
+public partial struct LogInfo {
+    [BitField<ushort>(nameof(LogKind), 0, 7)]
+    [BitField<EntityRelationKind>(nameof(TargetKind), 7, 4)]
+    [BitField<EntityRelationKind>(nameof(SourceKind), 11, 4)]
+    [FieldOffset(0x00)] public ushort Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
