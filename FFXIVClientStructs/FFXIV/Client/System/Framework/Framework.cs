@@ -163,7 +163,7 @@ public unsafe partial struct Framework {
     [MemberFunction("80 B9 ?? ?? ?? ?? 00 74 ?? 48 8B 81 ?? ?? ?? ?? C3")]
     public partial NetworkModuleProxy* GetNetworkModuleProxy();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 03 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 6B C3")]
     public static partial long GetServerTime();
 
     /// <summary>

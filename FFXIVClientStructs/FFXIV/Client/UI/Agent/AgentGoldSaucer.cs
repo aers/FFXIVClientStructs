@@ -18,7 +18,7 @@ public unsafe partial struct AgentGoldSaucer {
     [FieldOffset(0x122)] public ushort FilterDeckSides;
     [FieldOffset(0x124)] public byte FilterDeckSorting;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 94 C0 88 43 58")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 33 C0 C6 83")]
     public partial void RefreshDeckEdit();
 }
 
