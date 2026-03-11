@@ -12,7 +12,7 @@ public unsafe partial struct AgentMutelist {
     [FieldOffset(0x68)] public Utf8String SelectedPlayerFullName; // includes cross world icon
 
     [MemberFunction("40 53 55 56 57 41 56 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 0F B7 AC 24"), GenerateStringOverloads]
-    public partial bool Add(ulong accountId, ulong contentId, CStringPointer name, short worldId);
+    public partial bool Add(ulong accountId, ulong contentId, CStringPointer name, short worldId = -1); // worldId == -1 for current characters home world id
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 24 50 48 8B CF E8")]
     public partial bool Remove(ulong accountId, bool showInLog = true);
