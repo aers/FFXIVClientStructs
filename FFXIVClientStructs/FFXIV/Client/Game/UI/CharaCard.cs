@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -27,7 +27,7 @@ public unsafe partial struct CharaCard {
     public partial void RequestCharaCardUpdate();
 
     [MemberFunction("40 53 48 83 EC ?? 8B 05 ?? ?? ?? ?? 48 8B DA")]
-    public partial void HandleCurrentCharaCardDataPacket(AgentCharaCard.CharaCardPacket* packet);
+    public partial void HandleCurrentCharaCardDataPacket(CharaCardPacket* packet);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x34)]
