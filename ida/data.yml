@@ -6233,6 +6233,7 @@ classes:
       0x14191B210: HandleMarketBoardOfferingsPacket
       0x14191B2D0: HandleMarketBoardPurchasePacket
       0x14191BD80: HandleMarketBoardHistoryPacket
+      0x14196F310: HandleContentsFinderNotificationPacket
 #fail   0x140A151E0: HandleApplyIdScramblePacket
   Client::Network::NetworkModulePacketReceiverCallback:
     vtbls:
@@ -17246,7 +17247,6 @@ classes:
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x1416BCDF0: ctor
-      0x14196F310: HandleEnterContentInfoPacket  # static
   Client::Game::InstanceContent::PartyContentDirector:
     vtbls:
       - ea: 0x142346EA0
