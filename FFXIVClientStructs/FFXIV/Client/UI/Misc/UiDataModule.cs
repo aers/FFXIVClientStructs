@@ -40,7 +40,7 @@ public unsafe partial struct UiDataModule {
 
         /// <remarks>To save changes, call <see cref="UiDataModule.SaveFile(bool)"/>.</remarks>
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B 11 48 85 C0"), GenerateStringOverloads]
-        public partial MuteListEntry* Add(ulong accountId, CStringPointer name, short worldId);
+        public partial MuteListEntry* Add(ulong accountId, CStringPointer name, ushort worldId);
 
         /// <remarks>To save changes, call <see cref="UiDataModule.SaveFile(bool)"/>.</remarks>
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 40 0F B6 FF 41 0F 45 FD FF C3")]
@@ -53,7 +53,7 @@ public unsafe partial struct UiDataModule {
         [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
         public struct MuteListEntry {
             [FieldOffset(0x00)] public ulong AccountId;
-            [FieldOffset(0x08)] public short WorldId;
+            [FieldOffset(0x08)] public ushort WorldId;
 
             [FieldOffset(0x10)] public Utf8String CharacterName;
             [FieldOffset(0x78)] public Utf8String Comment;
