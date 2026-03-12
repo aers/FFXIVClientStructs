@@ -34,7 +34,6 @@ public enum DetailKind : byte {
     LetterView = 28,
 
     // ActionDetail
-    /// Keep in sync with <see cref="UI.Agent.ActionKind"/>
     Action = 29,
     CraftingAction = 30,
     GeneralAction = 31,

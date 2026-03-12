@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-public enum ValueType {
+public enum AtkValueType {
     Undefined = 0,
     Null = 0x1,
     Bool = 0x2,
@@ -77,7 +77,7 @@ public unsafe partial struct AtkValue : IDisposable {
     public partial void Copy(AtkValue* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 F6")]
-    public partial void ChangeType(ValueType type);
+    public partial void ChangeType(AtkValueType type);
 
     /// <summary>
     /// Set this AtkValue to reference the specified pointer to a cstring.
@@ -122,31 +122,31 @@ public unsafe partial struct AtkValue : IDisposable {
     // The game probably uses a macro for this, because it always
     // checks if the type is managed before calling it.
     public void ReleaseManagedMemory() {
-        if (Type.HasFlag(ValueType.Managed))
+        if (Type.HasFlag(AtkValueType.Managed))
             ReleaseManagedMemoryInternal();
     }
 
     public void SetBool(bool value) {
         ReleaseManagedMemory();
-        Type = ValueType.Bool;
+        Type = AtkValueType.Bool;
         Bool = value;
     }
 
     public void SetInt(int value) {
         ReleaseManagedMemory();
-        Type = ValueType.Int;
+        Type = AtkValueType.Int;
         Int = value;
     }
 
     public void SetUInt(uint value) {
         ReleaseManagedMemory();
-        Type = ValueType.UInt;
+        Type = AtkValueType.UInt;
         UInt = value;
     }
 
     public void SetFloat(float value) {
         ReleaseManagedMemory();
-        Type = ValueType.Float;
+        Type = AtkValueType.Float;
         Float = value;
     }
 
@@ -156,17 +156,17 @@ public unsafe partial struct AtkValue : IDisposable {
 
     public string GetValueAsString() {
         return Type switch {
-            ValueType.Undefined or ValueType.Null => string.Empty,
-            ValueType.Bool => Bool.ToString(),
-            ValueType.Int => Int.ToString(),
-            ValueType.UInt => UInt.ToString(),
-            ValueType.Float => Float.ToString(),
-            ValueType.String or ValueType.ManagedString => String.ToString(),
-            ValueType.WideString => Marshal.PtrToStringUni((nint)WideString) ?? string.Empty,
-            ValueType.String8 => String.ToString(),
-            ValueType.Vector or ValueType.ManagedVector => Vector != null ? Vector->ToString() : "null",
-            ValueType.Pointer => $"0x{(nint)Pointer:X}",
-            ValueType.AtkValues => $"0x{(nint)AtkValues:X}",
+            AtkValueType.Undefined or AtkValueType.Null => string.Empty,
+            AtkValueType.Bool => Bool.ToString(),
+            AtkValueType.Int => Int.ToString(),
+            AtkValueType.UInt => UInt.ToString(),
+            AtkValueType.Float => Float.ToString(),
+            AtkValueType.String or AtkValueType.ManagedString => String.ToString(),
+            AtkValueType.WideString => Marshal.PtrToStringUni((nint)WideString) ?? string.Empty,
+            AtkValueType.String8 => String.ToString(),
+            AtkValueType.Vector or AtkValueType.ManagedVector => Vector != null ? Vector->ToString() : "null",
+            AtkValueType.Pointer => $"0x{(nint)Pointer:X}",
+            AtkValueType.AtkValues => $"0x{(nint)AtkValues:X}",
             _ => BitConverter.ToString(BitConverter.GetBytes((ulong)String.Value)).Replace("-", " ")
         };
     }

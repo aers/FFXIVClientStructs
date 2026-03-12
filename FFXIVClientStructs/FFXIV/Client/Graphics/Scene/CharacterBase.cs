@@ -402,11 +402,11 @@ public unsafe partial struct CharacterBase {
 
     [Flags]
     public enum StateFlag : ulong {
-        VisorToggled = 0x00_00_00_00_40,
-        VisorChanging = 0x00_00_00_00_80,
-        HasUmbrella = 0x00_00_01_00_00,
-        VieraEarsHidden = 0x00_80_00_00_00,
-        VieraEarsChanging = 0x01_00_00_00_00
+        VisorToggled = 1UL << 6,
+        VisorChanging = 1UL << 7,
+        HasUmbrella = 1UL << 16,
+        VieraEarsHidden = 1UL << 31,
+        VieraEarsChanging = 1UL << 32
     }
 
     public enum ModelType : byte {

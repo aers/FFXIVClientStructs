@@ -209,7 +209,7 @@ public unsafe partial struct CurrencyManager {
     /// <remarks>
     /// For limited items only.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 39 06")]
+    [MemberFunction("44 8B C2 4C 8B D1 48 8B 11")]
     public partial uint GetItemCountRemaining(uint itemId); // returns maxCount - count
 
     /// <summary>

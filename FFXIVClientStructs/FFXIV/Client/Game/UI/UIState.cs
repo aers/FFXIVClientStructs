@@ -67,7 +67,6 @@ public unsafe partial struct UIState {
     [FieldOffset(0x17448)] public QTE QTE;
     [FieldOffset(0x17470)] public Emj Emj;
     [FieldOffset(0x174A8)] public NpcYell NpcYell;
-    // 7.3: huge space between these two
     [FieldOffset(0x19CF8)] public CharaCard CharaCard;
     // 0x19DB0: ItemAction Unlocks
     [FieldOffset(0x19F38)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
@@ -103,7 +102,11 @@ public unsafe partial struct UIState {
 
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1409)] internal FixedSizeArray177<byte> _seenCutscenes;
+    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1420)] internal FixedSizeArray178<byte> _seenCutscenes;
+
+    // BitCount: TripleTriadResident.RowCount
+    /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
+    [FieldOffset(0x1A148), FixedSizeArray(isBitArray: true, bitCount: 129)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
 
     // unk bitmasks
 
@@ -170,6 +173,13 @@ public unsafe partial struct UIState {
     /// <returns>Returns true if the card is unlocked.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 66 0F 44 FD")]
     public partial bool IsTripleTriadCardUnlocked(ushort cardId);
+
+    /// <summary>
+    /// Check if a Triple Triad Npc has been beaten once.
+    /// </summary>
+    /// <param name="tripleTriadResidentId">TripleTriadResident row id</param>
+    [MemberFunction("40 53 48 83 EC 20 8D 82 FE FF DC FF")]
+    public partial bool IsTripleTriadNpcBeaten(uint tripleTriadResidentId);
 
     /// <summary>
     /// Check if an emote (by ID) is unlocked.

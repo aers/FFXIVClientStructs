@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyItemSearch

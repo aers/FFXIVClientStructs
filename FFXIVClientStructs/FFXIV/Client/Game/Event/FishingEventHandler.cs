@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 89 8B", 3)]
 public unsafe partial struct FishingEventHandler {
     [FieldOffset(0x1C0)] private byte Unk220;
     [FieldOffset(0x1C8)] public FishingState State;
@@ -80,6 +81,10 @@ public unsafe partial struct FishingEventHandler {
     //[FieldOffset( 0x280 )] private uint Unk280;
     //[FieldOffset( 0x284 )] private ulong Unk284; // Unaligned, but it disassembles as a qword in the constructor, so idk.
 
+    // see FishingHookStrength if you want to observe hooks. Other values have a lot of overlap with FishingState, and there's standing vs sitting differences
+    [VirtualFunction(275)]
+    public partial void PlayAnimation(Character.Character* chara, ushort actionTimelineId, nint a4);
+
     /// <summary>
     /// Changes the currently equipped bait.
     /// </summary>
@@ -91,6 +96,12 @@ public unsafe partial struct FishingEventHandler {
         baitValue[1].SetBool(false);
         return ReceiveEvent(&returnValue, baitValue, 2, 2);
     }
+}
+
+public enum FishingHookStrength {
+    Weak = 292,
+    Strong = 293,
+    Legendary = 294,
 }
 
 [Flags]

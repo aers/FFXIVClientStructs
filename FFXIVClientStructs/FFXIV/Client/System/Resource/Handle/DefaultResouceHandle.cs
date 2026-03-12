@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 // Client::System::Resource::Handle::DefaultResourceHandle

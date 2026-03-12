@@ -49,14 +49,14 @@ public unsafe partial struct InstanceContentDeepDungeon {
         [FieldOffset(0x04)] public sbyte RoomIndex;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x03)]
-    public struct DeepDungeonItemInfo {
+    public partial struct DeepDungeonItemInfo {
         [FieldOffset(0x00)] public byte ItemId;
         [FieldOffset(0x01)] public byte Count;
+        [BitField<bool>(nameof(IsUsable), 0)]
+        [BitField<bool>(nameof(IsActive), 1)]
         [FieldOffset(0x02)] public byte Flags;
-
-        public bool IsUsable => (Flags & (1 << 0)) != 0;
-        public bool IsActive => (Flags & (1 << 1)) != 0;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x02)]

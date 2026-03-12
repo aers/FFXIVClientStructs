@@ -12,7 +12,7 @@ public unsafe partial struct Inspect {
     [FieldOffset(0xC)] public uint EntityId;
     /// <remarks>0 = Not set/Retainer, 3 = Companion (Buddy), 4 = Player Character</remarks>
     [FieldOffset(0x10)] public byte Type;
-    [FieldOffset(0x12)] public short WorldId;
+    [FieldOffset(0x12)] public ushort WorldId;
     [FieldOffset(0x14), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
 
     /// <remarks> PSN-Online-ID or Xbox-Gamertag </remarks>

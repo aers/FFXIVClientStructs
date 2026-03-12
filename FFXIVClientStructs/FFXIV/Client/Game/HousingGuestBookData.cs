@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Housing;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::HousingGuestBookData

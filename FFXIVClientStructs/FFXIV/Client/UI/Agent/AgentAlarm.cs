@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentAlarm
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Alarm)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
@@ -18,7 +21,7 @@ public unsafe partial struct AgentAlarm {
     public partial void DeleteAllAlarms();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 EF ?? 49 83 EC")]
-    public partial void DeleteAlarm(byte index, bool printLogMessage = true);
+    public partial void DeleteAlarm(byte index, bool showLogMessage = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 33 D2 4C 89 6D")]
     public partial void PlayAlarmSoundEffect(AlarmSoundEffect soundEffect);

@@ -48,15 +48,39 @@ public partial struct EnvironmentManager {
     /// </summary>
     /// <param name="channel">Indicates which volume to set</param>
     /// <param name="volume">Volume in range 0-100, -1 indicates to read the configuration value</param>
-    /// <param name="saveToConfig">Wether the new volume should be written to system configuration</param>
+    /// <param name="saveToConfig">Whether the new volume should be written to system configuration</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 41 B0")]
     public partial void SetVolume(uint channel, int volume, bool saveToConfig);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 41 B1 01 BA ?? ?? ?? ?? 41 B8")]
     public partial void SetMasterVolume(int volume, bool saveToConfig);
 
-    ///<inheritdoc cref="SetVolume(uint,int,bool)"/>
+    /// <inheritdoc cref="SetVolume(uint,int,bool)"/>
     public void SetVolume(SoundChannel channel, int volume, bool saveToConfig) => SetVolume((uint)channel, volume, saveToConfig);
+
+    /// <summary>
+    /// Queues a mode update operation to switch to Exclusive Fullscreen.
+    /// </summary>
+    /// <param name="width">The target width.</param>
+    /// <param name="height">The target height.</param>
+    /// <param name="refreshRate">The target refresh rate.</param>
+    [MemberFunction("E9 ?? ?? ?? ?? 85 D2 75 ?? 48 8B CB")]
+    public partial void SetWindowModeFullscreen(short width, short height, short refreshRate);
+
+    /// <summary>
+    /// Queues a mode update operation to switch to Windowed mode at a specific resolution.
+    /// </summary>
+    /// <param name="width">The target width.</param>
+    /// <param name="height">The target height.</param>
+    [MemberFunction("44 8B 91 ?? ?? ?? ?? 4C 8D 89")]
+    public partial void SetWindowModeWindowed(short width, short height);
+
+    /// <summary>
+    /// Queues a mode update operation to switch to Borderless Windowed (or restores the default window state).
+    /// </summary>
+    /// <param name="mode">0 = Windowed, 1 = Fullscreen, 2 = Borderless, 3 = Apply from SystemConfig.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9F ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 8B D0")]
+    public partial void SetWindowMode(uint mode = 3);
 
     /// <summary>
     /// Each value represents one volume slider in the system configuration, expect master volume.<br/>

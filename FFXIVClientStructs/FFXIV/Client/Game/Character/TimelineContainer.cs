@@ -39,8 +39,7 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x330 + 0x17)] public byte BannerTimelineAcceptClassJobCategory;
     [FieldOffset(0x330 + 0x18), CExporterExcelEnd] public byte BannerTimelineCategory;
 
-
-    // 0x40 = WeaponDrawn
+    [BitField<bool>(nameof(IsWeaponDrawn), 6)]
     [FieldOffset(0x34E)] public byte Flags3;
 
     /// <summary> Computes height difference between the player the action timeline belongs to and target to height adjust emotes. </summary>

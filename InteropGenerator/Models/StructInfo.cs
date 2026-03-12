@@ -13,6 +13,7 @@ internal sealed record StructInfo(
     SignatureInfo? StaticVirtualTableSignature,
     uint? VirtualTableFunctionCount,
     EquatableArray<FixedSizeArrayInfo> FixedSizeArrays,
+    EquatableArray<BitFieldInfo> BitFields,
     EquatableArray<InheritanceInfo> InheritedStructs,
     int? Size,
     ExtraInheritedStructInfo? ExtraInheritedStructInfo) {
@@ -20,5 +21,5 @@ internal sealed record StructInfo(
     public bool HasSignatures() => !MemberFunctions.IsEmpty || !StaticAddresses.IsEmpty || StaticVirtualTableSignature is not null;
     public bool HasVirtualTable() => !VirtualFunctions.IsEmpty || StaticVirtualTableSignature is not null;
 
-    public bool NeedsRender() => MemberFunctions.Any() || VirtualFunctions.Any() || StaticAddresses.Any() || StringOverloads.Any() || StaticVirtualTableSignature is not null || FixedSizeArrays.Any();
+    public bool NeedsRender() => MemberFunctions.Any() || VirtualFunctions.Any() || StaticAddresses.Any() || StringOverloads.Any() || StaticVirtualTableSignature is not null || FixedSizeArrays.Any() || BitFields.Any();
 }

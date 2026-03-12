@@ -1,4 +1,4 @@
-﻿; Shipped analyzer releases
+; Shipped analyzer releases
 ; https://github.com/dotnet/roslyn-analyzers/blob/main/src/Microsoft.CodeAnalysis.Analyzers/ReleaseTrackingAnalyzers.Help.md
 
 | Rule ID  | Category                   | Severity | Notes                                                                                                               |
@@ -26,3 +26,12 @@
 | CSIG0302 | InteropGenerator.Field     | Error    | Field marked for fixed size array generation must have a proper type name (FixedSizeArray#\<T>)                     |
 | CSIG0303 | InteropGenerator.Field     | Error    | Field marked for fixed size array generation must have a proper filed name                                          |
 | CSIG0304 | InteropGenerotor.Field     | Error    | Field marked for fixed size array generation with isString set to true must use byte or char as the underlying type |
+| CSIG0305 | InteropGenerator.Field     | Error    | Fixed size bit array backing field must be byte type                                                                |
+| CSIG0306 | InteropGenerator.Field     | Error    | Fixed size bit array backing field must have a size that fits the bit count                                         |
+| CSIG0307 | InteropGenerator.Field     | Error    | Fixed size array cannot be both string and bit array                                                                |
+| CSIG0401 | InteropGenerator.Field     | Error    | Bit Field index must be non-negative                                                                                |
+| CSIG0402 | InteropGenerator.Field     | Error    | Bit Field length must be greater than zero                                                                          |
+| CSIG0403 | InteropGenerator.Field     | Error    | Bit Field exceeds underlying type size                                                                              |
+| CSIG0404 | InteropGenerator.Property  | Error    | Bit Field property definition is missing a getter                                                                   |
+| CSIG0405 | InteropGenerator.Field     | Error    | Bit Field backing field type not supported                                                                          |
+| CSIG0406 | InteropGenerator.Field     | Error    | Bit Field length is invalid for bool                                                                                |

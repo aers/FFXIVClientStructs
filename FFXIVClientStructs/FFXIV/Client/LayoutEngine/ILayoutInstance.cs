@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
@@ -23,11 +24,10 @@ public unsafe partial struct ILayoutInstance {
     [FieldOffset(0x20)] public uint SubId; // for instances that are created as part of prefab; high byte is key for nesting level 1 and so on - max 4 nesting levels supported
     [FieldOffset(0x24)] public int IndexInPool;
     [FieldOffset(0x28)] public byte IndexInPrefab;
+    [BitField<int>(nameof(NestingLevel), 4, 3)]
     [FieldOffset(0x29)] public byte Flags1; // bits0-3: ???, bits4-6: nesting level, bit7: ???
     [FieldOffset(0x2A)] public byte Flags2;
     [FieldOffset(0x2B)] public byte Flags3;
-
-    public int NestingLevel => (Flags1 >> 4) & 7;
 
     [VirtualFunction(0)]
     public partial ILayoutInstance* Dtor(byte freeFlags);
@@ -116,6 +116,9 @@ public unsafe partial struct ILayoutInstance {
 
     [VirtualFunction(55)]
     public partial bool WantToBeActive();
+
+    [VirtualFunction(58)]
+    public partial void ApplyStain(ByteColor* stainColorSrgb);
 
     [VirtualFunction(63)]
     public partial void SetActive(bool active);

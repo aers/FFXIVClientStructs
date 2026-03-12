@@ -14,6 +14,12 @@ public unsafe partial struct EventFramework {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 7C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
+    /// <summary>
+    /// Global copy of the SceneData passed to <see cref="ProcessInitializeScene"/>.
+    /// </summary>
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 80 A3", 3)]
+    public static partial SceneData* GetInitializingSceneData();
+
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
@@ -30,7 +36,7 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x3D10)] public GameObjectId SceneGameObjectId;
     [FieldOffset(0x3D18)] public short Scene;
     [FieldOffset(0x3D20)] public ushort SceneFlags;
-    [FieldOffset(0x3D28), FixedSizeArray] internal FixedSizeArray255<uint> _sceneData;
+    [FieldOffset(0x3D28), FixedSizeArray] internal FixedSizeArray255<uint> _sceneData; // TODO: use SceneData struct instead
     [FieldOffset(0x4124)] public byte SceneDataCount;
 
     [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
@@ -117,6 +123,13 @@ public unsafe partial struct EventFramework {
 
     public CraftEventHandler* GetCraftEventHandler()
         => (CraftEventHandler*)GetEventHandlerById(0xA0001);
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x400)]
+public partial struct SceneData {
+    [FieldOffset(0x000), FixedSizeArray] internal FixedSizeArray255<int> _values;
+    [FieldOffset(0x3FC)] public byte Count;
 }
 
 public enum ContentType : byte {

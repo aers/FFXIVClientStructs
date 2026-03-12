@@ -63,9 +63,10 @@ public unsafe partial struct InfoProxyCommonList {
         /// 0x10000->0x70000 = DisplayGroup.Star -> DisplayGroup.Club
         /// 0x1000000 = OtherServer (FCTag not available)
         /// </summary>
+        [BitField<bool>(nameof(WaitingForFriendListApproval), 6)]
+        [BitField<DisplayGroup>(nameof(Group), 16, 8)]
+        [BitField<bool>(nameof(IsOtherServer), 24)]
         [FieldOffset(0x20)] public uint ExtraFlags;
-        public DisplayGroup Group => (DisplayGroup)(ExtraFlags >> 16);
-        public bool IsOtherServer => (ExtraFlags & 0x1000000) != 0;
         // 4 bytes empty
         // 4 bytes unknown
         [FieldOffset(0x24)] public byte Sort;

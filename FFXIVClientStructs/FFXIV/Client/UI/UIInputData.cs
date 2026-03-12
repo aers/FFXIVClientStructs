@@ -32,4 +32,32 @@ public unsafe partial struct UIInputData {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8")]
     public partial InputId GetKeybindByName(Utf8String* name, System.Input.Keybind* outKeybind);
+
+    /// <summary>
+    /// Strips cursor position and scroll input and the given mouse buttons from this input data.
+    /// </summary>
+    /// <remarks>
+    /// This is called by the UI module when the cursor is over a UI collision node to stop the character/viewport from handling it.
+    /// </remarks>
+    /// <param name="buttonsToFilter">The mouse buttons to remove from this input data.</param>
+    [MemberFunction("44 8B C2 48 81 C1 ?? ?? ?? ?? B2 01")]
+    public partial void FilterUICursorInputs(MouseButtonFlags buttonsToFilter);
+
+    /// <summary>
+    /// Strips mouse drag input from this input data.
+    /// </summary>
+    /// <remarks>
+    /// This is called by the UI module when the cursor is over a UI collision node to stop the character/viewport from handling it.
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 84 FF 74 08 49 8B CE")]
+    public partial void FilterDragInputs();
+
+    /// <summary>
+    /// Strips gamepad inputs from this input data.
+    /// </summary>
+    /// <remarks>
+    /// This is called by the UI module when the cursor is over a UI collision node to stop the character/viewport from handling it.
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 0C")]
+    public partial void FilterGamepadInputs();
 }

@@ -48,6 +48,13 @@ public static class ExporterStatics {
 
         return definedTypes.Where(t => t.FullName!.StartsWith(HavokNamespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
     }
+
+    public static Type GetBestMatchFromSize(int size) => size switch {
+        < 9 => typeof(byte),
+        < 17 => typeof(ushort),
+        < 33 => typeof(uint),
+        _ => typeof(ulong)
+    };
 }
 
 internal class CExporterUnionCompare : IEqualityComparer<CExporterUnionAttribute> {

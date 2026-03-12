@@ -96,14 +96,25 @@ public unsafe partial struct RaptureGearsetModule {
     /// After calling this method, it is advisable to validate the returned gearset ID and, if the ID is valid, to
     /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.
     /// </remarks>
-    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
     /// <param name="newGearsetId">The ID to which the gearset should be reassigned.</param>
+    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
     /// <returns>
     /// Returns <c>-1</c> if either the original gearset ID or the new gearset ID is invalid, <c>-2</c> if the player
-    /// is currently editing a portrait, otherwise it returns the ID of the original gearset that was moved to a new position.
+    /// is currently editing a portrait, otherwise it returns the moved gearset's new ID.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16")]
-    public partial int ReassignGearsetId(int gearsetId, int newGearsetId);
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF")]
+    public partial int ReassignGearsetId(int newGearsetId, int gearsetId);
+
+    /// <summary>
+    /// Changes the gearset's name at the specified ID.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to rename</param>
+    /// <param name="newGearsetName">The name to change the specified gearset to</param>
+    /// <returns>
+    /// <see langword="true" /> when renaming the gearset was successful, <see langword="false" /> when the gearset is invalid or the given name is empty.
+    /// </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8")]
+    public partial bool RenameGearset(int gearsetId, Utf8String* newGearsetName);
 
     /// <summary>
     /// Link a glamour plate to a specific gearset.
@@ -165,6 +176,15 @@ public unsafe partial struct RaptureGearsetModule {
     /// <returns>The ID of the <see cref="GearsetEntry"/>.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 83 F8 64")]
     public partial int ResolveIdFromEnabledIndex(byte enabledGearsetIndex);
+
+    /// <summary>
+    /// Shows a Gearset-related LogMessage.
+    /// </summary>
+    /// <param name="logMessageId">The LogMessage RowId.</param>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <param name="gearsetName">The name of the gearset.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? B3"), GenerateStringOverloads]
+    public partial void ShowLogMessage(uint logMessageId, int gearsetId, CStringPointer gearsetName);
 
     [Flags]
     public enum GearsetFlag : byte {

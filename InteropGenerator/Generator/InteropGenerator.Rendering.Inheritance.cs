@@ -119,6 +119,14 @@ public sealed partial class InteropGenerator {
 
         token.ThrowIfCancellationRequested();
 
+        // inherited bit field properties
+        foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
+            if (!inheritedStruct.BitFields.IsEmpty)
+                RenderInheritedBitFieldProperties(inheritedStruct, path, writer);
+        }
+
+        token.ThrowIfCancellationRequested();
+
         // inherited string overloads
         // we can just use the regular renderer here since the overloaded function should also be inherited
         foreach ((StructInfo inheritedStruct, _, _) in resolvedInheritanceOrder) {
@@ -279,6 +287,28 @@ public sealed partial class InteropGenerator {
                 }
                 if (propertyInfo.Set) {
                     writer.WriteLine($"set => {path}.{propertyInfo.Name} = value;");
+                }
+            }
+        }
+    }
+
+    private static void RenderInheritedBitFieldProperties(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
+        foreach (BitFieldInfo bitFieldInfo in inheritedStruct.BitFields) {
+            if (bitFieldInfo.IsPartial) // already handled by RenderInheritedPublicProperties
+                continue;
+
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{bitFieldInfo.Name}" />""");
+            writer.WriteLine($"""/// <remarks>Property inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+            foreach (string inheritedAttribute in bitFieldInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
+            }
+            writer.WriteLine($"public {bitFieldInfo.Type} {bitFieldInfo.Name}");
+            using (writer.WriteBlock()) {
+                if (bitFieldInfo.HasGetter) {
+                    writer.WriteLine($"get => {path}.{bitFieldInfo.Name};");
+                }
+                if (bitFieldInfo.HasSetter) {
+                    writer.WriteLine($"set => {path}.{bitFieldInfo.Name} = value;");
                 }
             }
         }

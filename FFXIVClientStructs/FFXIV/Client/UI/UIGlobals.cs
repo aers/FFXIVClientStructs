@@ -51,7 +51,7 @@ public unsafe partial struct UIGlobals {
     public static partial uint GenerateEquippedItemsChecksum();
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B7 C5")]
-    public static partial void PlaySoundEffect(uint effectId, nint a2 = 0, nint a3 = 0, byte a4 = 0);
+    public static partial void PlaySoundEffect(uint effectId, nint a2 = 0, nint a3 = 0, byte a4 = 0); // TODO: change a2 and a3 to SoundData** outSoundDataPad = null, SoundData** outSoundData = null
 
     public static void PlayChatSoundEffect(uint effectId) {
         if (effectId is < 1 or > 16)

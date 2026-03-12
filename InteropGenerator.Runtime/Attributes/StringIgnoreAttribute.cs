@@ -5,5 +5,4 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     attribute on the method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Parameter)]
-public sealed class StringIgnoreAttribute : Attribute {
-}
+public sealed class StringIgnoreAttribute : Attribute;

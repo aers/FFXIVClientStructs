@@ -44,12 +44,12 @@ public partial struct ClientSelectData {
 [Flags]
 public enum ClientSelectDataConfigFlags : ushort {
     None = 0,
-    HideHead = 0x01,
-    HideWeapon = 0x02,
-    HideLegacyMark = 0x04,
-    // ? = 0x08,
-    StoreNewItemsInArmouryChest = 0x10,
-    StoreCraftedItemsInInventory = 0x20,
-    CloseVisor = 0x40,
-    HideVieraEars = 0x80
+    HideHead = 1 << 0,
+    HideWeapon = 1 << 1,
+    HideLegacyMark = 1 << 2,
+    // ? = 1 << 3,
+    StoreNewItemsInArmouryChest = 1 << 4,
+    StoreCraftedItemsInInventory = 1 << 5,
+    CloseVisor = 1 << 6,
+    HideVieraEars = 1 << 7,
 }
