@@ -81,7 +81,7 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
     public struct TextInputHandlerValues {
-        /// <remarks> Depending on the handler this was seen to be <see cref="ValueType.Undefined"/>, <see cref="ValueType.Bool"/> or <see cref="ValueType.String"/> for <see cref="EvaluatedString"/> </remarks>
+        /// <remarks> Depending on the handler this was seen to be <see cref="AtkValueType.Undefined"/>, <see cref="AtkValueType.Bool"/> or <see cref="AtkValueType.String"/> for <see cref="EvaluatedString"/> </remarks>
         [FieldOffset(0x00)] public AtkValue VariableValue;
         [FieldOffset(0x10)] public AtkValue FontType;
         [FieldOffset(0x20)] public AtkValue FontSize;
