@@ -42,7 +42,7 @@ public unsafe partial struct AtkComponentMap : ICreatable {
     [FieldOffset(0x3E8)] public AtkGrid Grid;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 33 FF C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05")]
-    public partial void Ctor();
+    public partial AtkComponentMap* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 0F 57 D2")]
     public partial void SetMapScale(float scale);

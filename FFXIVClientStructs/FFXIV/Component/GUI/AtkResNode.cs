@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 41 ?? 66 C7 81", 3, 3)]
-public unsafe partial struct AtkResNode : ICreatable {
+public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     [FieldOffset(0x8)] public uint NodeId;
     [FieldOffset(0x10)] public AtkTimeline* Timeline;
 
@@ -99,7 +99,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     public partial bool IsEllipticalCollision { get; set; }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 ?? 5B C3 33 DB")]
-    public partial void Ctor();
+    public partial AtkResNode* Ctor();
 
     [MemberFunction("48 85 C9 74 14 0F B7 41 40")]
     public partial NodeType GetNodeType();

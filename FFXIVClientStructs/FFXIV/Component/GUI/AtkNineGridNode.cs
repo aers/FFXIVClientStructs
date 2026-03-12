@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 213])]
-public unsafe partial struct AtkNineGridNode : ICreatable {
+public unsafe partial struct AtkNineGridNode : ICreatable<AtkNineGridNode> {
     [FieldOffset(0xC0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xC8)] public uint PartId;
     [FieldOffset(0xCC)] public short TopOffset;
@@ -24,8 +24,9 @@ public unsafe partial struct AtkNineGridNode : ICreatable {
     [FieldOffset(0xD8)] public byte PartsTypeRenderType;
 
     // 7.0 inlines this ctor
-    public void Ctor() {
-        AtkResNode.Ctor();
+    public AtkNineGridNode* Ctor() {
+        var ret = AtkResNode.Ctor();
         VirtualTable = StaticVirtualTablePointer;
+        return (AtkNineGridNode*)ret;
     }
 }

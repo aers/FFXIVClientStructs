@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Completion;
 // Component::Completion::CategoryData
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public partial struct CategoryData {
+public unsafe partial struct CategoryData {
     [FieldOffset(0x08)] public StdVector<CStringPointer> CompletionTexts;
     [FieldOffset(0x20)] public StdVector<CompletionDataStruct> CompletionData;
     // [FieldOffset(0x38)] private StdVector<{ 4 bytes }> Unk38;
@@ -15,7 +15,7 @@ public partial struct CategoryData {
     [FieldOffset(0xBA)] private short UnkBA;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F1 48 89 01 41 0F B6 F8")]
-    public partial void Ctor(byte group, byte sheetNameIndex);
+    public partial CategoryData* Ctor(byte group, byte sheetNameIndex);
 
     [MemberFunction("40 57 48 8B 79 28")]
     public partial void SortEntries();
