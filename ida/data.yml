@@ -2081,6 +2081,8 @@ classes:
       0x140DD5AD0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400E1780: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
       0x140DB6690: RequestGuestAccessSettings
+      0x140DB63B0: HandleHousingSignboardPacket
+      0x140DB6480: HandleHousingPortalPacket
       0x140DB6700: HandleGuestAccessSettings
       0x140DB29B0: SaveGuestAccessSettings
       0x140DB2BC0: MoveToEntry
@@ -6200,6 +6202,8 @@ classes:
       0x140B9FD00: HandleNPCYellPacket
       0x140B9FEC0: HandleAchievementsPacket
       0x140B9FF30: HandleFateProgressTabPacket
+      0x140BA0430: HandleHousingSignboardPacket
+      0x140BA0470: HandleHousingPortalPacket
       0x140BA2B20: HandleMapEffectPacket
       0x140BA3100: HandleQuestManagerUnkArray2SecondHalfPacket
       0x140BA3150: HandleQuestManagerUnkArray2SecondHalfEntryPacket
@@ -6229,6 +6233,7 @@ classes:
       0x14191B210: HandleMarketBoardOfferingsPacket
       0x14191B2D0: HandleMarketBoardPurchasePacket
       0x14191BD80: HandleMarketBoardHistoryPacket
+      0x14196F310: HandleContentsFinderNotificationPacket
 #fail   0x140A151E0: HandleApplyIdScramblePacket
   Client::Network::NetworkModulePacketReceiverCallback:
     vtbls:
@@ -10953,7 +10958,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       # 0x1413566D0: ctor # inlined at 0x1408CF5D2
-      0x140886050: LoadGearsetData
+      0x140886050: HandleGearsetDrawDataPacket
       0x140886F70: LoadWeapon
       0x1408881F0: HideWeapons
       0x140888FE0: LoadEquipment
@@ -17242,7 +17247,6 @@ classes:
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x1416BCDF0: ctor
-      0x14196F310: HandleEnterContentInfoPacket  # static
   Client::Game::InstanceContent::PartyContentDirector:
     vtbls:
       - ea: 0x142346EA0
