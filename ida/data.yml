@@ -12202,6 +12202,9 @@ classes:
     funcs:
       0x140F76590: ctor
       0x140F76850: Finalizer
+      0x140F7A140: ReassignGearsetId
+      0x140F7A2D0: MoveGearsetUpOrDown
+      0x140F7A4C0: RenameGearset
       0x140EBDA50: OpenContextMenuForGearset
       0x140EB1880: OpenRegistGearSetList # (this, InventoryItem*, ushort)
       0x140F7B810: OpenBannerEditorForGearset
