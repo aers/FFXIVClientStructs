@@ -65,10 +65,10 @@ public unsafe partial struct AgentGearSet {
     public void EquipGearset(int gearsetId)
         => SendEvent(4, gearsetId);
 
-    public void OpenReassignGearDialog(int gearsetId)
+    public void ReassignGear(int gearsetId)
         => SendEvent(6, gearsetId);
 
-    public void OpenReassignSetNumberDialog(int gearsetId)
+    public void ReassignSetNumber(int gearsetId)
         => SendEvent(7, gearsetId);
 
     public void MoveSetUp(int gearsetId)
