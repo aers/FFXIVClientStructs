@@ -15,6 +15,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
+    [FieldOffset(0x114)] private byte IsChildAddonOpen; // 126 when any child addon is open
+    [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon;
+    [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon;
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
 
     [FieldOffset(0x880)] public GearsetCharaView CharaView;
@@ -23,6 +26,35 @@ public unsafe partial struct AgentGearSet {
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);
+
+    /// <summary>
+    /// Reassigns a gearset's ID to a specified ID number.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset to be changed.</param>
+    /// <param name="newGearsetId">The new ID of the gearset to be changed to.</param>
+    /// <returns>Always <see langword="false" /></returns>
+    /// <remarks>Wrapper to <see cref="RaptureGearsetModule.ReassignGearsetId"/> and <see cref="RaptureHotbarModule.ReassignGearsetId"/>. <br/> 
+    /// Also pushes an update to the GearSetList addon.</remarks>
+    [MemberFunction("E9 ?? ?? ?? ?? 48 FF C9 48 3B D1")]
+    public partial bool ReassignGearsetId(int gearsetId, int newGearsetId);
+
+    /// <summary>
+    /// Moves the gearset up or down in the Gearset List.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset to be changed</param>
+    /// <param name="direction"><see langword="true" /> if moving gearset up, <see langword="false" /> if moving gearset down</param>
+    /// <returns>Always <see langword="false" /></returns>
+    [MemberFunction("4C 8B D1 44 8B CA")]
+    public partial bool MoveGearsetUpOrDown(int gearsetId, bool direction);
+
+    /// <summary>
+    /// Changes the gearset's name at the specified ID.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to rename</param>
+    /// <param name="newGearsetName">The name to change the specified gearset to</param>
+    /// <returns>Heap address of a vtable containing various agent functions.</returns>
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 49 8B F8"), GenerateStringOverloads]
+    public partial ulong RenameGearset(int gearsetId, CStringPointer newGearsetName);
 
     public void CreateGearset()
         => SendEvent(1);
@@ -33,10 +65,10 @@ public unsafe partial struct AgentGearSet {
     public void EquipGearset(int gearsetId)
         => SendEvent(4, gearsetId);
 
-    public void ReassignGear(int gearsetId)
+    public void OpenReassignGearDialog(int gearsetId)
         => SendEvent(6, gearsetId);
 
-    public void ReassignSetNumber(int gearsetId)
+    public void OpenReassignSetNumberDialog(int gearsetId)
         => SendEvent(7, gearsetId);
 
     public void MoveSetUp(int gearsetId)
