@@ -12,7 +12,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkComponentNumericInput : ICreatable {
     [FieldOffset(0x1E8)] public AtkComponentButton* PlusButtonComponent;
     [FieldOffset(0x1F0)] public AtkComponentButton* MinusButtonComponent;
-
     [FieldOffset(0x1F8)] public int Value; // Found through SetValue function
     [FieldOffset(0x2F8)] public AtkUldComponentDataNumericInput Data;
 
