@@ -15,6 +15,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
+    [FieldOffset(0x114)] private byte IsChildAddonOpen; // 126 when any child addon is open
+    [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon;
+    [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon;
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
 
     [FieldOffset(0x880)] public GearsetCharaView CharaView;
@@ -24,17 +27,79 @@ public unsafe partial struct AgentGearSet {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);
 
+    /// <summary>
+    /// Reassigns a gearset's ID to a specified ID number.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset to be changed.</param>
+    /// <param name="newGearsetId">The new ID of the gearset to be changed to.</param>
+    /// <returns>Always <see langword="false" /></returns>
+    /// <remarks>Wrapper to <see cref="RaptureGearsetModule.ReassignGearsetId"/> and <see cref="RaptureHotbarModule.ReassignGearsetId"/>. <br/> 
+    /// Also pushes an update to the GearSetList addon.</remarks>
+    [MemberFunction("E9 ?? ?? ?? ?? 48 FF C9 48 3B D1")]
+    public partial bool ReassignGearsetId(int gearsetId, int newGearsetId);
+
+    /// <summary>
+    /// Moves the gearset up or down in the Gearset List.
+    /// </summary>
+    /// <param name="gearsetId">The ID of the gearset to be changed</param>
+    /// <param name="direction"><see langword="true" /> if moving gearset up, <see langword="false" /> if moving gearset down</param>
+    /// <returns>Always <see langword="false" /></returns>
+    [MemberFunction("4C 8B D1 44 8B CA")]
+    public partial bool MoveGearsetUpOrDown(int gearsetId, bool direction);
+
+    /// <summary>
+    /// Changes the gearset's name at the specified ID.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to rename</param>
+    /// <param name="newGearsetName">The name to change the specified gearset to</param>
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 49 8B F8"), GenerateStringOverloads]
+    public partial bool RenameGearset(int gearsetId, CStringPointer newGearsetName);
+
+    /// <summary>
+    /// Update the gearset at the specified ID with the currently equipped items.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to update</param>
+    [MemberFunction("E9 ?? ?? ?? ?? 8B D7 48 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24")]
+    public partial bool UpdateGearsetInternal(int gearsetId); // TODO: replace existing UpdateGearset
+
+    /// <summary>
+    /// Opens the dialog for deleting a gearset for the specified ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to open the delete dialog to</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 48 8B 13")]
+    public partial void OpenDeleteDialog(int gearsetId);
+
+    /// <summary>
+    /// Opens the dialog for updating a gearset for the specified ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to open the reassign dialog to</param>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0")]
+    public partial void ReassignGear(int gearsetId);
+
+    /// <summary>
+    /// Updates the gearset at the specified ID if the ID is not empty, if it is empty, creates a new gearset
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to update gearset or create new</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 84 C0")]
+    public partial void UpdateGearsetIfExistsOrCreateNew(int gearsetId);
+
+    /// <summary>
+    /// Creates a gearset
+    /// </summary>
+    [MemberFunction("48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8")]
+    public partial bool CreateGearsetInternal();
+
     public void CreateGearset()
         => SendEvent(1);
 
-    public void OpenDeleteDialog(int gearsetId)
-        => SendEvent(2, gearsetId);
+    // public void OpenDeleteDialog(int gearsetId)
+    //     => SendEvent(2, gearsetId);
 
     public void EquipGearset(int gearsetId)
         => SendEvent(4, gearsetId);
 
-    public void ReassignGear(int gearsetId)
-        => SendEvent(6, gearsetId);
+    // public void ReassignGear(int gearsetId)
+    //     => SendEvent(6, gearsetId);
 
     public void ReassignSetNumber(int gearsetId)
         => SendEvent(7, gearsetId);

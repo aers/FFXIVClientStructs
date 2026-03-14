@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -94,7 +95,9 @@ public unsafe partial struct RaptureGearsetModule {
     /// <remarks>
     /// This method is used to change the order of gearsets, and is referred to as "Reassign Set Number" in the game.<br/>
     /// After calling this method, it is advisable to validate the returned gearset ID and, if the ID is valid, to
-    /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.
+    /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.<br/>
+    /// Use <see cref="AgentGearSet.ReassignGearsetId"/> to reassign the gearset ID internally,
+    /// on the hotbar and to send an update to the addon.
     /// </remarks>
     /// <param name="newGearsetId">The ID to which the gearset should be reassigned.</param>
     /// <param name="gearsetId">The ID of the gearset to be switched.</param>
@@ -113,6 +116,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// <returns>
     /// <see langword="true" /> when renaming the gearset was successful, <see langword="false" /> when the gearset is invalid or the given name is empty.
     /// </returns>
+    /// <remarks> Use <see cref="AgentGearSet.RenameGearset(int, CStringPointer)"/> to rename and send an update to the GearSetList addon </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8")]
     public partial bool RenameGearset(int gearsetId, Utf8String* newGearsetName);
 
