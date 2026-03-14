@@ -52,9 +52,42 @@ public unsafe partial struct AgentGearSet {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to rename</param>
     /// <param name="newGearsetName">The name to change the specified gearset to</param>
-    /// <returns>Heap address of a vtable containing various agent functions.</returns>
     [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 49 8B F8"), GenerateStringOverloads]
-    public partial ulong RenameGearset(int gearsetId, CStringPointer newGearsetName);
+    public partial void RenameGearset(int gearsetId, CStringPointer newGearsetName);
+
+    /// <summary>
+    /// Update the gearset at the specified ID with the currently equipped items.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to update</param>
+    [MemberFunction("E9 ?? ?? ?? ?? 8B D7 48 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24")]
+    public partial void UpdateGearsetInternal(int gearsetId); // TODO: replace existing UpdateGearset
+
+    /// <summary>
+    /// Opens the dialog for deleting a gearset for the specified ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to open the delete dialog to</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 48 8B 13")]
+    public partial void OpenDeleteGearsetDialog(int gearsetId); // TODO: replace existing OpenDeleteDialog
+
+    /// <summary>
+    /// Opens the dialog for updating a gearset for the specified ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to open the reassign dialog to</param>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0")]
+    public partial void OpenReassignGearsetDialog(int gearsetId); // TODO: replace existing ReassignGear
+
+    /// <summary>
+    /// Updates the gearset at the specified ID if the ID is not empty, if it is empty, creates a new gearset
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to update gearset or create new</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 84 C0")]
+    public partial void UpdateGearsetIfExistsOrCreateNew(int gearsetId);
+
+    /// <summary>
+    /// Creates a gearset
+    /// </summary>
+    [MemberFunction("48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8")]
+    public partial void CreateGearsetInternal();
 
     public void CreateGearset()
         => SendEvent(1);
