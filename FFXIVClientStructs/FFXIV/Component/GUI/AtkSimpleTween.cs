@@ -28,7 +28,7 @@ public unsafe partial struct AtkSimpleTween : ICreatable<AtkSimpleTween> {
     public partial AtkSimpleTween* Ctor();
 
     [VirtualFunction(1)]
-    public partial void Dtor();
+    public partial AtkSimpleTween* Dtor();
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 BB ?? ?? ?? ?? ?? 74 8E")]
     public partial void Clear();
