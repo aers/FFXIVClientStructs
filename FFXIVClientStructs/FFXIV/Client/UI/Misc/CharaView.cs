@@ -50,7 +50,7 @@ public unsafe partial struct CharaView : ICreatable<CharaView> {
     public partial CharaView* Ctor();
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial CharaView* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void Initialize(AgentInterface* agent, uint clientObjectId, nint agentCallbackReady);

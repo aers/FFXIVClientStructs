@@ -5,7 +5,7 @@ public partial struct RaptureHotbarModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public unsafe partial struct ClearCallback {
         [VirtualFunction(0)]
-        public partial void Dtor(byte freeFlags);
+        public partial ClearCallback* Dtor(byte freeFlags);
 
         /// <summary>
         /// Resets <b>ALL</b> hotbars for the current player to their default states.
