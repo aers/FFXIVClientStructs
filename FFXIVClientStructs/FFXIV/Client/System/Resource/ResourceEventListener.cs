@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct ResourceEventListener {
     [VirtualFunction(0)]
-    public partial void Dtor();
+    public partial ResourceEventListener* Dtor();
 
     // vfuncs 1-4 are virtuals that are specific to the classes that inherits this
 
