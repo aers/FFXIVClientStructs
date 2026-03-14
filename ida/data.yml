@@ -12202,11 +12202,17 @@ classes:
     funcs:
       0x140F76590: ctor
       0x140F76850: Finalizer
+      0x140EBDA50: OpenContextMenuForGearset
+      0x140EB1880: OpenRegistGearSetList # (this, InventoryItem*, ushort)
+      0x140F77ED0: OpenDeleteGearSetDialog
+      0x140F78060: EquipGearset
+      0x140F78100: UpdateGearsetOrCreateNew
+      0x140F78840: OpenReassignGearDialog
+      0x140F79700: CreateGearsetInFirstEmptyId
+      0x140F79DC0: UpdateGearset
       0x140F7A140: ReassignGearsetId
       0x140F7A2D0: MoveGearsetUpOrDown
       0x140F7A4C0: RenameGearset
-      0x140EBDA50: OpenContextMenuForGearset
-      0x140EB1880: OpenRegistGearSetList # (this, InventoryItem*, ushort)
       0x140F7B810: OpenBannerEditorForGearset
   Client::UI::Agent::AgentSupportMain:
     vtbls:
