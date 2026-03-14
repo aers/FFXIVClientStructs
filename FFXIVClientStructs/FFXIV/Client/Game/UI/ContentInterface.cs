@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public partial struct ContentInterface {
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlag);
+    public partial ContentInterface* Dtor(byte freeFlag);
 
     [VirtualFunction(1)]
     public partial CStringPointer GetName();

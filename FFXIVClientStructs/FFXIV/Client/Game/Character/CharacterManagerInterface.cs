@@ -8,5 +8,5 @@ public unsafe partial struct CharacterManagerInterface {
     // [FieldOffset(0x10)] public void* CriticalSection; // seems to be needed for some std::vector handling related to BlackListManager
 
     [VirtualFunction(5)]
-    public partial void Dtor(byte freeFlags);
+    public partial CharacterManagerInterface* Dtor(byte freeFlags);
 }
