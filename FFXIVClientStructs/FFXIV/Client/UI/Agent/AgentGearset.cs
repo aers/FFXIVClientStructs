@@ -67,14 +67,14 @@ public unsafe partial struct AgentGearSet {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to open the delete dialog to</param>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 48 8B 13")]
-    public partial void OpenDeleteGearsetDialog(int gearsetId); // TODO: replace existing OpenDeleteDialog
+    public partial void OpenDeleteDialog(int gearsetId);
 
     /// <summary>
     /// Opens the dialog for updating a gearset for the specified ID
     /// </summary>
     /// <param name="gearsetId">The gearset ID to open the reassign dialog to</param>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0")]
-    public partial void OpenReassignGearsetDialog(int gearsetId); // TODO: replace existing ReassignGear
+    public partial void ReassignGear(int gearsetId);
 
     /// <summary>
     /// Updates the gearset at the specified ID if the ID is not empty, if it is empty, creates a new gearset
@@ -92,14 +92,14 @@ public unsafe partial struct AgentGearSet {
     public void CreateGearset()
         => SendEvent(1);
 
-    public void OpenDeleteDialog(int gearsetId)
-        => SendEvent(2, gearsetId);
+    // public void OpenDeleteDialog(int gearsetId)
+    //     => SendEvent(2, gearsetId);
 
     public void EquipGearset(int gearsetId)
         => SendEvent(4, gearsetId);
 
-    public void ReassignGear(int gearsetId)
-        => SendEvent(6, gearsetId);
+    // public void ReassignGear(int gearsetId)
+    //     => SendEvent(6, gearsetId);
 
     public void ReassignSetNumber(int gearsetId)
         => SendEvent(7, gearsetId);
