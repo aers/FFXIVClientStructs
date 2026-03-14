@@ -53,14 +53,14 @@ public unsafe partial struct AgentGearSet {
     /// <param name="gearsetId">The gearset ID to rename</param>
     /// <param name="newGearsetName">The name to change the specified gearset to</param>
     [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 49 8B F8"), GenerateStringOverloads]
-    public partial void RenameGearset(int gearsetId, CStringPointer newGearsetName);
+    public partial bool RenameGearset(int gearsetId, CStringPointer newGearsetName);
 
     /// <summary>
     /// Update the gearset at the specified ID with the currently equipped items.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to update</param>
     [MemberFunction("E9 ?? ?? ?? ?? 8B D7 48 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24")]
-    public partial void UpdateGearsetInternal(int gearsetId); // TODO: replace existing UpdateGearset
+    public partial bool UpdateGearsetInternal(int gearsetId); // TODO: replace existing UpdateGearset
 
     /// <summary>
     /// Opens the dialog for deleting a gearset for the specified ID
@@ -87,7 +87,7 @@ public unsafe partial struct AgentGearSet {
     /// Creates a gearset
     /// </summary>
     [MemberFunction("48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8")]
-    public partial void CreateGearsetInternal();
+    public partial bool CreateGearsetInternal();
 
     public void CreateGearset()
         => SendEvent(1);
