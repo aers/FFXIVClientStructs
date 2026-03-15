@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
