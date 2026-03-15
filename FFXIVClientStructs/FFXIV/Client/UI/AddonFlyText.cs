@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonFlyText
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("FlyText")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
@@ -13,8 +16,8 @@ public unsafe partial struct AddonFlyText {
         uint offsetNum, uint offsetNumMax, StringArrayData* stringArrayData, uint offsetStr,
         uint offsetStrMax, int unknown);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B 18")]
-    public partial nint CreateFlyText(int kind, int val1, int val2, byte* text2,
-        uint color, uint icon, uint damageTypeIcon, byte* text1,
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B 18"), GenerateStringOverloads]
+    public partial nint CreateFlyText(int kind, int val1, int val2, CStringPointer text2,
+        uint color, uint icon, uint damageTypeIcon, CStringPointer text1,
         float yOffset);
 }

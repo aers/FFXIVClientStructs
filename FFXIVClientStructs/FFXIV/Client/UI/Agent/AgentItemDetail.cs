@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ItemDetail)]
 [GenerateInterop]
-[Inherits<AgentInterface>] // TODO: change to AgentItemDetailBase
+[Inherits<AgentItemDetailBase>]
 [VirtualTable("48 89 18 48 8D 05 ?? ?? ?? ?? 48 89 07", 6)]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AgentItemDetail {
