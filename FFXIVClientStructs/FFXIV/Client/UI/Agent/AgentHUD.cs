@@ -21,9 +21,9 @@ public unsafe partial struct AgentHUD {
 
     [FieldOffset(0xB18)] public uint CastBarAddonId;
 
-    [FieldOffset(0xB38)] public uint CurrentTargetId;
+    [FieldOffset(0xB38)] public GameObjectId CurrentTargetId;
     [FieldOffset(0xB40)] public int TargetCounter;
-    [FieldOffset(0xB48)] public uint TargetPartyMemberId;
+    [FieldOffset(0xB48)] public GameObjectId TargetPartyMemberId;
     [FieldOffset(0xB50)] public int TargetSwitchToSelfCounter;
     [FieldOffset(0xB54)] public uint CurrentBattleCharaTargetLevel;
 

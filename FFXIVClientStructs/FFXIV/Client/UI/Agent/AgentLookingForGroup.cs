@@ -39,7 +39,7 @@ public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0x31D0)] public ulong ListingContentId; // Only populated while a Detailed listing is opened
     [FieldOffset(0x31D8)] public uint ListingAccountId; // Only populated while a Detailed listing is opened
 
-    [FieldOffset(0x3262)] public ushort NumberOfListingsDisplayed;
+    [FieldOffset(0x3262)] public byte NumberOfListingsDisplayed;
 
     [FieldOffset(0x3269)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
     [FieldOffset(0x326B)] public byte CategoryTab; // 0 All - 16 Other
@@ -77,7 +77,7 @@ public unsafe partial struct AgentLookingForGroup {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x448)]
     public unsafe partial struct RecruitmentSub {
-        [FieldOffset(0x0C)] public ushort SelectedCategory; // TODO: change type to DutyCategory
+        [FieldOffset(0x0C)] public DutyCategory SelectedCategory;
         [FieldOffset(0x10)] public ushort SelectedDutyId;
 
         [FieldOffset(0x18)] public Objective Objective;
@@ -105,16 +105,14 @@ public unsafe partial struct AgentLookingForGroup {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x478)]
     public unsafe partial struct Detailed {
-        [FieldOffset(0x00)] public uint ListingId;
-
-        [FieldOffset(0x08)] public uint LeaderAccountId;
+        [FieldOffset(0x00)] public ulong ListingId;
+        [FieldOffset(0x08)] public ulong LeaderAccountId;
         [FieldOffset(0x10)] public ulong LeaderContentId;
 
-        [FieldOffset(0x24)] public ushort Category; // TODO: change type to DutyCategory
+        [FieldOffset(0x24)] public DutyCategory Category;
         [FieldOffset(0x28)] public ushort DutyId;
         [FieldOffset(0x32)] private uint Unk32; // Seems to be a uint, not unique to listing
         [FieldOffset(0x36)] public ushort World;
-
         [FieldOffset(0x38)] public Objective Objective;
         [FieldOffset(0x39)] public byte BeginnerFriendly;
         [FieldOffset(0x3A)] public CompletionStatus CompletionStatus;
@@ -125,13 +123,10 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x48)] public uint TimeLeft;
 
         [FieldOffset(0x50)] public ushort AvgItemLv;
-
         [FieldOffset(0x52)] public ushort HomeWorld;
         [FieldOffset(0x54)] public ushort CurrentWorld;
-
         [FieldOffset(0x56)] public Language LeaderClientLanguage;
         [FieldOffset(0x57)] public Language LanguageFlags;
-
         [FieldOffset(0x58)] public byte TotalSlots;
         [FieldOffset(0x59)] public byte SlotsFilled;
 
