@@ -28,11 +28,11 @@ public enum AtkValueType {
 
 /// <summary>
 /// Values used for other Atk systems sent on the stack. <br/>
-/// Only <see cref="AtkValue.Type" /> == <see cref="ValueType.Managed"/> has the value pointer located in the heap.
+/// Only <see cref="AtkValue.Type" /> == <see cref="AtkValueType.Managed"/> has the value pointer located in the heap.
 /// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct AtkValue : ICreatable, IDisposable {
+public unsafe partial struct AtkValue : IDisposable {
     [FieldOffset(0x0)] public AtkValueType Type;
 
     // union field
@@ -49,13 +49,11 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [FieldOffset(0x8), CExporterUnion("Value")] public void* Pointer;
     [FieldOffset(0x8), CExporterUnion("Value")] public AtkValue* AtkValues;
 
-    public AtkValue() => Ctor();
-    public AtkValue(AtkValue* other) => Ctor(other);
-
-    public void Ctor() {
+    public AtkValue() {
         Type = AtkValueType.Undefined;
         String.Value = null;
     }
+
     public AtkValue(AtkValue* other) => CtorCopy(other);
 
     public void Dtor(bool free) => Dispose(free);
