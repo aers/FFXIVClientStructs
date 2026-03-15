@@ -37,8 +37,7 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x3D10)] public GameObjectId SceneGameObjectId;
     [FieldOffset(0x3D18)] public short Scene;
     [FieldOffset(0x3D20)] public ushort SceneFlags;
-    [FieldOffset(0x3D28), FixedSizeArray] internal FixedSizeArray255<uint> _sceneData; // TODO: use SceneData struct instead
-    [FieldOffset(0x4124)] public byte SceneDataCount;
+    [FieldOffset(0x3D28)] public SceneData SceneData;
 
     [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
 
