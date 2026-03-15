@@ -108,7 +108,7 @@ public unsafe partial struct GameObject {
     public partial CharacterBase* GetCharacterBase();
 
     [VirtualFunction(26)]
-    public partial void Highlight(ObjectHighlightColor color); // TODO: add missing "bool includeMount = true" arg
+    public partial void Highlight(ObjectHighlightColor color, bool includeMount = true);
 
     /// <param name="outHandlers">Should point to array that can fit up to 32 pointers.</param>
     /// <returns>Num elements filled.</returns>
