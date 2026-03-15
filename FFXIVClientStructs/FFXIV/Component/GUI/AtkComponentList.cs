@@ -147,14 +147,14 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
 
     /// <remarks> rendererNodeId is the node id of the ListItemRenderer to use. if 0, it uses FirstAtkComponentListItemRenderer </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D3 85 ED")]
-    public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, int columnCount, uint rendererNodeId = 0); // TODO: columnCount is of size byte and not int
+    public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, byte columnCount, uint rendererNodeId = 0);
 
     [Obsolete("Use GetComponentItemRendererById")]
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
     public partial AtkComponentListItemRenderer* GetItemRendererByNodeId(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 FF 04")]
-    public partial void SetItemCount(int value); // TODO: value is of size short and not int. passed the value of SetItemLabels
+    public partial void SetItemCount(short value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 FF 79 ?? 44 39 75"), GenerateStringOverloads]
     public partial void SetItemLabel(int index, CStringPointer text);
