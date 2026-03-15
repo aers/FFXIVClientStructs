@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x420)]
-public unsafe partial struct AtkComponentMap : ICreatable {
+public unsafe partial struct AtkComponentMap : ICreatable<AtkComponentMap> {
     [FieldOffset(0xE0)] public AtkImageNode* PlayerCone;
     [FieldOffset(0xE8)] public AtkComponentNode* MarkerTemplate5; // NodeId 5
     [FieldOffset(0xF0)] public AtkComponentNode* MarkerTemplate6; // NodeId 6
