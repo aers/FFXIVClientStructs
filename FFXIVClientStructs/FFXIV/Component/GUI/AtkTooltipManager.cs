@@ -185,14 +185,14 @@ public unsafe partial struct AtkTooltipManager {
         [FieldOffset(0x18)] public ushort ParentId; // same as IDs in addons
         [FieldOffset(0x1A)] public AtkTooltipType Type;
     }
+}
 
-    [Flags]
-    public enum AtkTooltipType : byte {
-        None = 0,
-        Text = 1 << 0,
-        Item = 1 << 1,
-        Action = 1 << 2,
-        LovmAction = 1 << 3,
-        MiragePrismPrismItem = 1 << 4,
-    }
+[Flags]
+public enum AtkTooltipType : byte {
+    None = 0,
+    Text = 1 << 0,
+    Item = 1 << 1,
+    Action = 1 << 2,
+    LovmAction = 1 << 3,
+    MiragePrismPrismItem = 1 << 4,
 }
