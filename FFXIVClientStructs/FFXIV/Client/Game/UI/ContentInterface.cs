@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::ContentInterface
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-public partial struct ContentInterface {
+public unsafe partial struct ContentInterface {
     [VirtualFunction(0)]
     public partial ContentInterface* Dtor(byte freeFlag);
 
