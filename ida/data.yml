@@ -8710,6 +8710,7 @@ classes:
       0x14069BC20: ctor
       0x14069DAE0: SetValue
       0x14069B830: InnerSetValue
+      0x14069D9F0: UpdateTextNode
   Component::GUI::AtkComponentDropDownList:
     vtbls:
       - ea: 0x1420A7E78
