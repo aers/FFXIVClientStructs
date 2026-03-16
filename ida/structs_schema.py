@@ -71,11 +71,11 @@ class DefinedStructStaticMember:
 
 
 class DefinedStructFixedField(DefinedStructField, object):
-    def __init__(self, name, type, offset, base, size):
-        # type: (str, str, int, bool, str | None) -> None
+    def __init__(self, name, type, offset, base, size, is_string):
+        # type: (str, str, int, bool, str | None, bool) -> None
         super(DefinedStructFixedField, self).__init__(name, type, offset, base)
         self.size = size
-
+        self.is_string = is_string
 
 class DefinedStruct(DefinedStructBase, object):
     def __init__(

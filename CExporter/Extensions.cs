@@ -77,9 +77,10 @@ public static partial class TypeExtensions {
         using var builderPooled = StringBuilderPool.Get(500);
         var builder = builderPooled.Builder;
         var name = type switch {
-            _ when type == typeof(void) || type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
+            _ when type == typeof(void) => shouldLower ? type.Name.ToLower() : type.Name,
+            _ when type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower().Replace("byte", "char") : type.Name.Replace("byte", "char"),
             _ when type == typeof(char) => "wchar_t",
-            _ when type == typeof(bool) => "byte",
+            _ when type == typeof(bool) => "char",
             _ when type == typeof(float) => "float",
             _ when type == typeof(double) => "double",
             _ when type == typeof(short) => "__int16",
