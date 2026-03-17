@@ -46,6 +46,7 @@ public struct SageGauge {
     [FieldOffset(0x0A)] public byte Addersgall;
     [FieldOffset(0x0B)] public byte Addersting;
     [FieldOffset(0x0C)] public byte Eukrasia;
+    // 0x0D-0x0F: padding
 
     public bool EukrasiaActive => Eukrasia > 0;
 }
