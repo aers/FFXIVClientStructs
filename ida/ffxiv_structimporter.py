@@ -305,13 +305,14 @@ if api is None:
 
                 if "vfuncs" in class_data and index in class_data["vfuncs"]:
                     return class_data["vfuncs"][index]
-                
-                if "vtbls" in class_data and isinstance(class_data["vtbls"], list):
-                    for vtbl in class_data["vtbls"]:
-                        if "base" in vtbl:
-                            res = self.get_fallback_vfunc_name(vtbl["base"], index, visited)
-                            if res: return res
-                
+
+                if "vtbls" in class_data and isinstance(class_data["vtbls"], list) and len(class_data["vtbls"]) > 0:
+                    vtbl = class_data["vtbls"][0]
+                    if "base" in vtbl:
+                        res = self.get_fallback_vfunc_name(vtbl["base"], index, visited)
+                        if res:
+                            return res
+
                 return None
 
             def delete_struct_members(self, fullname):
