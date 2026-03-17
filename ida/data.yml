@@ -15752,7 +15752,7 @@ classes:
     vtbls:
       - ea: 0x1420F6038
         base: Client::Game::Event::EventHandler
-      - ea: 0x1420F68D8
+      - ea: 0x1420F6008
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
         275: PlayAnimation
