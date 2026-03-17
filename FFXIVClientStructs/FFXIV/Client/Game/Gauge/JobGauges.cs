@@ -83,6 +83,16 @@ public struct RedMageGauge {
     [FieldOffset(0x08)] public byte WhiteMana;
     [FieldOffset(0x09)] public byte BlackMana;
     [FieldOffset(0x0A)] public byte ManaStacks;
+    // 0x0B-0x0F: padding
+    // 0x10-0x48: Action sheet row pointers cached by Init() for PrimaryCostValue lookups
+    [FieldOffset(0x10)] private nint _enchantedRiposteRow;       // Action 7527
+    [FieldOffset(0x18)] private nint _enchantedZwerchbauRow;     // Action 7528
+    [FieldOffset(0x20)] private nint _enchantedRedoublementRow;  // Action 7529
+    [FieldOffset(0x28)] private nint _enchantedMoulinetRow;      // Action 7530
+    [FieldOffset(0x30)] private nint _enchantedRepriseRow;       // Action 16528
+    [FieldOffset(0x38)] private nint _verholyRow;                // Action 29685
+    [FieldOffset(0x40)] private nint _verflareRow;               // Action 29688
+    [FieldOffset(0x48)] private nint _enchantedRipostePvPRow;    // Action 41488
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
