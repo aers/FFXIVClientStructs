@@ -104,9 +104,11 @@ public struct RedMageGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct PictomancerGauge {
     [FieldOffset(0x08)] public byte PalleteGauge;
+    // 0x09: padding
     [FieldOffset(0x0A)] public byte Paint;
     [FieldOffset(0x0B)] public CanvasFlags CanvasFlags;
     [FieldOffset(0x0C)] public CreatureFlags CreatureFlags;
+    // 0x0D-0x0F: padding
 
     public bool CreatureMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Pom) || CanvasFlags.HasFlag(CanvasFlags.Wing) || CanvasFlags.HasFlag(CanvasFlags.Claw) || CanvasFlags.HasFlag(CanvasFlags.Maw);
     public bool WeaponMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Weapon);
