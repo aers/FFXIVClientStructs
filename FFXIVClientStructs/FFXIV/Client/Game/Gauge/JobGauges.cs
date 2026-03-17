@@ -233,8 +233,10 @@ public struct DarkKnightGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct PaladinGauge {
     [FieldOffset(0x08)] public byte OathGauge;
+    // 0x09: padding
     [FieldOffset(0x0A)] public ushort ConfiteorComboTimer; //that only updates when you generate/spend oath
     [FieldOffset(0x0C)] public byte ConfiteorComboStep;
+    // 0x0D-0x0F: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
