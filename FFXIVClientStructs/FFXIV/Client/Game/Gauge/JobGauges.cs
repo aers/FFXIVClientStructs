@@ -195,6 +195,9 @@ public struct ReaperGauge {
     [FieldOffset(0x0A)] public ushort EnshroudedTimeRemaining;
     [FieldOffset(0x0C)] public byte LemureShroud;
     [FieldOffset(0x0D)] public byte VoidShroud;
+    // Squared range of Regress (Action 24403), precomputed in Init() from Action.Range²
+    // Used by external code for distance checks without needing sqrt
+    [FieldOffset(0x20)] private float _regressRangeSquared;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
