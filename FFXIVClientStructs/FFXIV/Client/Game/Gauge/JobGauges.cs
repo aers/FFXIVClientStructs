@@ -60,6 +60,8 @@ public struct BlackMageGauge {
     [FieldOffset(0x0B)] public byte UmbralHearts;
     [FieldOffset(0x0C)] public byte PolyglotStacks;
     [FieldOffset(0x0D)] public EnochianFlags EnochianFlags;
+    // Action sheet row pointer cached by Init() for Between the Lines (Action 7419)
+    [FieldOffset(0x20)] private nint _betweenTheLinesRow;
 
     public int UmbralStacks => ElementStance >= 0 ? 0 : ElementStance * -1;
     public int AstralStacks => ElementStance <= 0 ? 0 : ElementStance;
