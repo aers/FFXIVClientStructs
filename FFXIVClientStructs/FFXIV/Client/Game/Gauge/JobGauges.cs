@@ -20,6 +20,7 @@ public struct ScholarGauge {
     [FieldOffset(0x09)] public byte FairyGauge;
     [FieldOffset(0x0A)] public short SeraphTimer;
     [FieldOffset(0x0C)] public byte DismissedFairy;
+    // 0x0D-0x0F: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
