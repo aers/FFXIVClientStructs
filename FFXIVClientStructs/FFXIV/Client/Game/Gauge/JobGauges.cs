@@ -189,10 +189,12 @@ public struct NinjaGauge {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct SamuraiGauge {
+    // 0x08-0x09: padding
     [FieldOffset(0x0A)] public KaeshiAction Kaeshi;
     [FieldOffset(0x0B)] public byte Kenki;
     [FieldOffset(0x0C)] public byte MeditationStacks;
     [FieldOffset(0x0D)] public SenFlags SenFlags;
+    // 0x0E-0x0F: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
