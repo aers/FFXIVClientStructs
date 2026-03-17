@@ -51,7 +51,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     public static partial bool IsLocalPlayerPartyLeader();
 
     [MemberFunction("40 53 41 57 48 83 EC 28 48 8B D9 4C 8B FA 48 8B 0D")]
-    public partial void ReceiveListing(nint packet);
+    public partial void ReceiveListing(nint packet); // TODO: use CrossRealmListingSegmentPacket*
 }
 
 [GenerateInterop]
