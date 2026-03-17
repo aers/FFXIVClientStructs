@@ -120,6 +120,7 @@ public struct PictomancerGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct BardGauge {
     [FieldOffset(0x08)] public ushort SongTimer;
+    // 0x0A-0x0B: padding
     [FieldOffset(0x0C)] public byte Repertoire;
     [FieldOffset(0x0D)] public byte SoulVoice;
     [FieldOffset(0x0E)] public byte RadiantFinaleCoda;
