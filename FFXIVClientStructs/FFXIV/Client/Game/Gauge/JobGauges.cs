@@ -225,7 +225,9 @@ public struct DarkKnightGauge {
     [FieldOffset(0x09)] public byte DarkArtsState;
     [FieldOffset(0x0A)] public ushort DarksideTimer;
     [FieldOffset(0x0C)] public ushort ShadowTimer;
+    // 0x0E-0x0F: padding
     [FieldOffset(0x10)] public ushort DeliriumStep;
+    // 0x12-0x17: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
