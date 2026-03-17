@@ -246,8 +246,10 @@ public struct WarriorGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct GunbreakerGauge {
     [FieldOffset(0x08)] public byte Ammo;
+    // 0x09: padding
     [FieldOffset(0x0A)] public short MaxTimerDuration;
     [FieldOffset(0x0C)] public byte AmmoComboStep;
+    // 0x0D-0x0F: padding
 }
 
 #endregion
