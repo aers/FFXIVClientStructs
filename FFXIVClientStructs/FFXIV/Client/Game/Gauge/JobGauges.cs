@@ -186,9 +186,12 @@ public struct DragoonGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct NinjaGauge {
     [FieldOffset(0x08)] public byte Ninki;
+    // 0x09: padding
     [FieldOffset(0x0A)] public byte Kazematoi;
+    // 0x0B: padding
     // Set to 1 locally (not from server) when a mudra sequence is in progress.
     [FieldOffset(0x0C)] public byte NinjutsuActivated;
+    // 0x0D-0x0F: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
