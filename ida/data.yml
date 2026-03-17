@@ -15588,14 +15588,20 @@ classes:
     vtbls:
       - ea: 0x1420F68E8
         base: Client::Game::Event::GatheringEventHandler
+    funcs:
+      0x140E2D610: ctor # not used due to being inlined
   Client::Game::Event::SpearFishingEventHandler:
     vtbls:
       - ea: 0x1420F7260
         base: Client::Game::Event::GatheringEventHandler
+    funcs:
+      0x140E351B0: ctor # not used due to being inlined
   Client::Game::Event::GoldSaucerEventHandler:
     vtbls:
       - ea: 0x1420EAD90
         base: Client::Game::Event::EventHandler
+    funcs:
+      0x140E06290: ctor # not used due to being inlined
   Client::Game::Event::QuestEventHandler: # 0x01
     vtbls:
       - ea: 0x1420E4CE8
