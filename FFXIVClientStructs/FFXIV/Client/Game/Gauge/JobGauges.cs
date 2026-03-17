@@ -174,6 +174,7 @@ public struct DragoonGauge {
     [FieldOffset(0x0A)] public byte LotdState; // This seems to only ever be 0 or 2 now
     [FieldOffset(0x0B)] public byte EyeCount;
     [FieldOffset(0x0C)] public byte FirstmindsFocusCount;
+    // 0x0D-0x0F: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
