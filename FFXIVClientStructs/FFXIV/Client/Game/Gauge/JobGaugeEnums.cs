@@ -17,6 +17,12 @@ public enum AstrologianDraw : byte {
     Umbral = 1
 }
 
+public enum AstrologianSpell : byte {
+    FallMalefic = 1,
+    AspectedBenefic = 2,
+    GravityII = 3
+}
+
 public enum DanceStep : byte {
     Finish = 0,
     Emboite = 1,

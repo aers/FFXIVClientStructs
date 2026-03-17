@@ -27,6 +27,13 @@ public struct ScholarGauge {
 public struct AstrologianGauge {
     [FieldOffset(0x08)] public short Cards;
     [FieldOffset(0x0A)] public AstrologianDraw CurrentDraw;
+    // 0x0B-0x0D: padding
+    [FieldOffset(0x0E)] public AstrologianSpell ActiveSpell;
+    // 0x0F: padding
+    // 0x10-0x1F: padding
+    // Squared range of Retrograde (Action 41507), precomputed in Init() from Action.Range²
+    [FieldOffset(0x20)] private float _retrogradeRangeSquared;
+    // 0x24-0x2F: padding
 
     public AstrologianCard[] CurrentCards => new[]
     {
@@ -36,8 +43,6 @@ public struct AstrologianGauge {
     };
 
     public AstrologianCard CurrentArcana => (AstrologianCard)(0xF & (this.Cards >> 12));
-    // Squared range of Retrograde (Action 41507), precomputed in Init() from Action.Range²
-    [FieldOffset(0x20)] private float _retrogradeRangeSquared;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
