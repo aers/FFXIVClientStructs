@@ -35,6 +35,8 @@ public struct AstrologianGauge {
     };
 
     public AstrologianCard CurrentArcana => (AstrologianCard)(0xF & (this.Cards >> 12));
+    // Squared range of Retrograde (Action 41507), precomputed in Init() from Action.Range²
+    [FieldOffset(0x20)] private float _retrogradeRangeSquared;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
