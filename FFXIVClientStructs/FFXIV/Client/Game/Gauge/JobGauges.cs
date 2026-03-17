@@ -143,6 +143,7 @@ public unsafe partial struct DancerGauge {
     [FieldOffset(0x09)] public byte Esprit;
     [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray4<byte> _danceSteps;
     [FieldOffset(0x0E)] public byte StepIndex;
+    // 0x0F: padding
 
     public DanceStep CurrentStep => (DanceStep)(StepIndex >= 4 ? 0 : DanceSteps[StepIndex]);
 }
