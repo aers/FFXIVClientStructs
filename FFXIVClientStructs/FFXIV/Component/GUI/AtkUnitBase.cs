@@ -39,7 +39,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [BitField<bool>(nameof(DisableFocusability), 7)]
     [FieldOffset(0x1A0)] public byte Flags1A0;
     [BitField<bool>(nameof(IsReady), 0)]
-    [BitField<bool>(nameof(DisableUserClose), 2)]
+    [BitField<bool>(nameof(ShouldFireCallbackAndHideOrClose), 2)]
     [BitField<bool>(nameof(DisableFocusOnShow), 6)]
     [FieldOffset(0x1A1)] public byte Flags1A1;
     [BitField<bool>(nameof(WasLoadUldByNameCalled), 2)]
@@ -128,7 +128,11 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial bool IsReady { get; }
 
     /// <summary> Disables the "Close" option in the title bar context menu and prevents the window from being closed via input (ESC or similar). </summary>
-    public partial bool DisableUserClose { get; set; }
+    [Obsolete("Use ShouldFireCallbackAndHideOrClose.")]
+    public bool DisableUserClose { get => ShouldFireCallbackAndHideOrClose; set => ShouldFireCallbackAndHideOrClose = value; }
+
+    /// <summary> If addon should have <seealso cref="FireCallback"/> triggered and if <seealso cref="Hide"/> or <seealso cref="Close"/> should be called </summary>
+    public partial bool ShouldFireCallbackAndHideOrClose { get; set; }
 
     /// <summary> Disables loading from/saving to AddonConfig </summary>
     public partial bool DisableAddonConfig { get; set; }
