@@ -240,6 +240,7 @@ public struct PaladinGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct WarriorGauge {
     [FieldOffset(0x08)] public byte BeastGauge;
+    // 0x09-0x0F: padding
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
