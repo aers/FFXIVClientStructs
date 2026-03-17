@@ -178,8 +178,7 @@ public struct DragoonGauge {
 public struct NinjaGauge {
     [FieldOffset(0x08)] public byte Ninki;
     [FieldOffset(0x0A)] public byte Kazematoi;
-    // Set to 1 locally (not from server) when a mudra combo is active without Ten/Chi status.
-    // Ten and Chi mudras each grant statuses (496/497); this covers Jin-first combos.
+    // Set to 1 locally (not from server) when a mudra sequence is in progress.
     [FieldOffset(0x0C)] public byte NinjutsuActivated;
 }
 
