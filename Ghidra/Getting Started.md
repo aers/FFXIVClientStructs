@@ -1,6 +1,8 @@
 # Pre-requisites
-Download and install [Ghidra](https://ghidra-sre.org/)
+Download and install [Ghidra](https://ghidra-sre.org/).  
 They have an installation guide and some additional depdendencies themselves (Java runtime).
+
+Afterwards, ensure that you can **launch PyGhidra.**
 
 # Getting started with a new project
 `File -> New Project` or press `Ctrl+N`<br>
@@ -38,15 +40,16 @@ Note that after each patch, you'll have to re-import, re-analyze, and re-run any
 <p align="center"><img src=".\images\Project Window Multi.png"></p>
 
 # Script dependency installation:
-We use [..\ida\ffxiv_idarename.py](../ida/ffxiv_idarename.py) to apply data.yml.  The same script works for both IDA and Ghidra, howver it's slightly more complicated in Ghidra as it uses an embedded version of jython.
+We use [..\ida\ffxiv_idarename.py](../ida/ffxiv_idarename.py) to apply data.yml.  The same script works for both IDA and Ghidra, howver it's slightly more complicated in Ghidra as we need to add dependencies to the PyGhidra environment manually.
 
-- Install a copy of [Python 2](https://www.python.org/downloads/).<br>
-Note: it has to be major version 2, so something like [Python 2.7.18](https://www.python.org/downloads/release/python-2718/) works.<br>
+- Install a copy of [Python 3](https://www.python.org/downloads/).<br>
+Note: it has to be major version 3, so something like [Python 3.14.3](https://www.python.org/downloads/release/python-3143/) works.<br>
 
-- Execute the following:<br>
-`python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Jython\lib\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`<br>
-Note: this must be run from Python 2.  If you have multiple versions installed, you may need to qualify the path like:<br>
-`c:\Python27\python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Jython\lib\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`
+- Check your PyGhidra log for "virtual environment" and copy the path. It should be something similar to this:<br>
+`/home/user/.config/ghidra/ghidra_VERSION/venv`
+
+- Execute the following, using the venv path from the log:<br>
+`.../venv/bin/python -m pip install pyyaml==6.0.3 anytree==2.13.0`
 
 - Open the Script Manager <p align="center"><img src=".\images\Open Script Manager.png"></p>
 
