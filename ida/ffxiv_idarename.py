@@ -1,7 +1,7 @@
 # current exe version: 2020.12.29.0000.0000
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_idarename
-# @runtime Jython
+# @runtime PyGhidra
 
 from __future__ import print_function
 import os
@@ -327,6 +327,17 @@ if api is None:
     except ImportError:
         print("Warning: Unable to load Ghidra")
     else:
+
+        # Selftest and hackfix for int / long overload conflicts in current year.
+        try:
+            toAddr(0x140000000)
+        except OverflowError:
+            import jpype.types
+
+            toAddrOrig = toAddr
+            def toAddr(ea):
+                return toAddrOrig(jpype.types.JLong(ea))
+
         # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
             @property
