@@ -493,7 +493,7 @@ public unsafe partial struct PlayerState {
     public bool HasWeeklyBingoJournal => GetWeeklyBingoFlagsValue(5) != 0;
 
     /// <summary>Returns the number of placed stickers.</summary>
-    public int WeeklyBingoNumPlacedStickers => BitOperations.PopCount(_weeklyBingoStickers);
+    public int WeeklyBingoNumPlacedStickers => BitOperations.PopCount(WeeklyBingoStickers);
 
     #endregion
 
