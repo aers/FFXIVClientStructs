@@ -1,6 +1,6 @@
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_structimport
-# @runtime Jython
+# @runtime PyGhidra
 
 from yaml import load
 
@@ -707,6 +707,7 @@ if api is None:
         from ghidra.program.model.listing import *
         from ghidra.program.model.symbol import SourceType
         from ghidra.app.util import SymbolPathParser
+        from java.util import ArrayList
 
     except ImportError:
         print("Warning: Unable to load Ghidra")
@@ -816,13 +817,13 @@ if api is None:
                 return funcs.first if not funcs.size() == 0 else None
 
             def create_memberfunc_args(self, member_func):
-                # type: (DefinedStructMemFunc) -> list[ParameterImpl]
-                arg_vars = []
+                # type: (DefinedStructMemFunc) -> ArrayList
+                arg_vars = ArrayList()
                 for param in member_func.parameters:
                     dt = self.get_datatype(param.type)
                     if not dt:
-                        return []
-                    arg_vars.append(ParameterImpl(param.name, dt, currentProgram))
+                        return ArrayList()
+                    arg_vars.add(ParameterImpl(param.name, dt, currentProgram))
                 return arg_vars
 
             @property
