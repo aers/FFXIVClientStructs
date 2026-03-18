@@ -16,5 +16,10 @@ public static class InteropTypeNames {
 
     public const string CStringPointer = "InteropGenerator.Runtime.CStringPointer";
 
-    public static HashSet<string> UninheritableAttributes = [MemberFunctionAttribute, VirtualFunctionAttribute, StaticAddressAttribute, GenerateStringOverloadsAttribute, StringIgnoreAttribute, FixedSizeArrayAttribute, BitFieldAttribute, "System.Runtime.InteropServices.FieldOffsetAttribute"];
+    private const string CExporterAttributeNamespace = "FFXIVClientStructs.Attributes";
+
+    public const string CExporterExcelBeginAttribute = CExporterAttributeNamespace + ".CExporterExcelBeginAttribute";
+    public const string CExporterExcelEndAttribute = CExporterAttributeNamespace + ".CExporterExcelEndAttribute";
+
+    public static HashSet<string> UninheritableAttributes = [MemberFunctionAttribute, VirtualFunctionAttribute, StaticAddressAttribute, GenerateStringOverloadsAttribute, StringIgnoreAttribute, FixedSizeArrayAttribute, BitFieldAttribute, "System.Runtime.InteropServices.FieldOffsetAttribute", CExporterExcelBeginAttribute, CExporterExcelEndAttribute];
 }
