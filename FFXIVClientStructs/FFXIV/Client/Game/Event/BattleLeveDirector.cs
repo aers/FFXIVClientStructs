@@ -9,8 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [Inherits<LeveDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x690)]
 public partial struct BattleLeveDirector {
-    [FieldOffset(0x4C0 + 0x00), CExporterExcelBegin("BattleLeve")] private byte RowStart;
-    [FieldOffset(0x4C0 + 0x00), FixedSizeArray] internal FixedSizeArray8<ushort> _time;
+    [FieldOffset(0x4C0 + 0x00), FixedSizeArray, CExporterExcelBegin("BattleLeve")] internal FixedSizeArray8<ushort> _time;
     [FieldOffset(0x4C0 + 0x10), FixedSizeArray] internal FixedSizeArray8<LeveDataStruct> _leveData;
     [FieldOffset(0x4C0 + 0x190), FixedSizeArray] internal FixedSizeArray8<byte> _toDoSequence;
     [FieldOffset(0x4C0 + 0x198)] public int Rule;
