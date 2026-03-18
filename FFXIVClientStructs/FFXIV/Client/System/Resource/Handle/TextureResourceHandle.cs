@@ -28,7 +28,7 @@ public unsafe partial struct TextureResourceHandle {
         [FieldOffset(0xC)] public ushort Depth;
         [FieldOffset(0xE)] public byte MipCountAndFlag;
         [FieldOffset(0xF)] public byte ArraySize;
-        [FieldOffset(0x10)] private FixedSizeArray3<uint> _lodOffsets;
-        [FieldOffset(0x1C)] private FixedSizeArray13<uint> _offsetsToSurfaces;
+        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<uint> _lodOffsets;
+        [FieldOffset(0x1C), FixedSizeArray] internal FixedSizeArray13<uint> _offsetsToSurfaces;
     }
 }
