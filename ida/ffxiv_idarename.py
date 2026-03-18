@@ -201,6 +201,7 @@ if api is None:
         import idc  # noqa
         import idautils  # noqa
         import ida_funcs  # noqa
+        import ida_bytes  # noqa
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
@@ -237,6 +238,8 @@ if api is None:
 
             def set_addr_name(self, ea, name):
                 # print("{0} {1}".format(ea, name))
+                if ida_bytes.get_item_head(ea) != ea:
+                    return True
                 result = idc.set_name(ea, name)
                 return bool(result)
 
