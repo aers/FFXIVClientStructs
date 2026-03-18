@@ -1315,6 +1315,54 @@ classes:
     vtbls:
       - ea: 0x1423B2510
         base: Component::Network::IpcChannel::PrimaryEntityFactoryClass<Application::Network::ZoneProtoChannel::ZoneProtoUp,Application::Network::ZoneProtoChannel::ZoneProtoDown>
+  Application::Network::ChatClient::RaptureChannelManager:
+    vtbls:
+      - ea: 0x1423ADAD8
+        base: Component::Network::IpcChannel::ChannelManagerOnSingleConnectionTmpl<Application::Network::ZoneProtoChannel::ChatProtoUp,Application::Network::ZoneProtoChannel::ChatProtoDown>
+  Component::Network::IpcChannel::ChannelManagerOnSingleConnectionTmpl<Application::Network::ZoneProtoChannel::ChatProtoUp,Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423ADA08
+        base: Component::Network::IpcChannel::ChannelManagerTmpl_LF<Application::Network::ChatProtoChannel::ChatProtoUp,Application::Network::ChatProtoChannel::ChatProtoDown>
+  Component::Network::IpcChannel::ChannelManagerTmpl_LF<Application::Network::ChatProtoChannel::ChatProtoUp,Application::Network::ChatProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423AD938
+        base: Component::Network::IpcChannel::ChannelManagerCoreTmpl<Application::Network::ChatProtoChannel::ChatProtoUp,Application::Network::ChatProtoChannel::ChatProtoDown>
+  Component::Network::IpcChannel::ChannelManagerCoreTmpl<Application::Network::ChatProtoChannel::ChatProtoUp,Application::Network::ChatProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423AD738
+        base: Component::Network::IpcChannel::ChannelManagerBase
+  Component::Network::IpcChannel::NetBufferFactoryInterface<Application::Network::ZoneProtoChannel::ChatProtoUp>:
+    vtbls:
+      - ea: 0x1423AD808
+  Component::Network::IpcChannel::NetBufferFactoryTmpl<Application::Network::ZoneProtoChannel::ChatProtoUp>:
+    vtbls:
+      - ea: 0x1423AD830
+        base: Component::Network::IpcChannel::NetBufferFactoryInterface<Application::Network::ZoneProtoChannel::ChatProtoUp>
+  Component::Network::IpcChannel::NetBufferFactoryTmpl_LF<Application::Network::ZoneProtoChannel::ChatProtoUp>:
+    vtbls:
+      - ea: 0x1423AD868
+        base: Component::Network::IpcChannel::NetBufferFactoryTmpl<Application::Network::ZoneProtoChannel::ChatProtoUp>
+  Component::Network::IpcChannel::NetBufferFactoryInterface<Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423AD8A0
+  Component::Network::IpcChannel::NetBufferFactoryTmpl<Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423AD8C8
+        base: Component::Network::IpcChannel::NetBufferFactoryInterface<Application::Network::ZoneProtoChannel::ChatProtoDown>
+  Component::Network::IpcChannel::NetBufferFactoryTmpl_LF<Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423AD900
+        base: Component::Network::IpcChannel::NetBufferFactoryTmpl<Application::Network::ZoneProtoChannel::ChatProtoDown>
+  Component::Network::IpcChannel::PrimaryEntityFactoryClass<Application::Network::ZoneProtoChannel::ChatProtoUp,Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423ADCB0
+  Component::Network::IpcChannel::TargetEntityFactoryClass<Application::Network::ZoneProtoChannel::ChatProtoUp,Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423ADCC8
+  Component::Network::IpcChannel::PrimaryEntityFactoryClass_LF<Application::Network::ZoneProtoChannel::ChatProtoUp,Application::Network::ZoneProtoChannel::ChatProtoDown>:
+    vtbls:
+      - ea: 0x1423ADD60
+        base: Component::Network::IpcChannel::PrimaryEntityFactoryClass<Application::Network::ZoneProtoChannel::ChatProtoUp,Application::Network::ZoneProtoChannel::ChatProtoDown>
   Component::Network::IpcChannel::ChannelManagerBase:
     vtbls:
       - ea: 0x1423B2570
