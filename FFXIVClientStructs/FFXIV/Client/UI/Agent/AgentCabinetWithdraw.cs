@@ -29,7 +29,7 @@ public unsafe partial struct AgentCabinetWithdraw {
 
         [FieldOffset(0xD8)] public uint CurrentTabIndex;
 
-        [FieldOffset(0xE8)] private ExcelSheetWaiter _sheetWaiter;
+        [FieldOffset(0xE8)] private ExcelSheetWaiter SheetWaiter;
 
         [FieldOffset(0x1A8)] public StdVector<CurrentCategoryItemDetail> CurrentCategoryItems;
 

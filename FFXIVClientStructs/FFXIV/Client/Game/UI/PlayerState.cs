@@ -208,10 +208,10 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x73C), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
     /// <summary>Bitflags of placed stickers.</summary>
     /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
-    [FieldOffset(0x740)] private ushort _weeklyBingoStickers;
+    [FieldOffset(0x740)] private ushort WeeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x744)] private uint _weeklyBingoFlags;
+    [FieldOffset(0x744)] private uint WeeklyBingoFlags;
     [FieldOffset(0x748), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
     [FieldOffset(0x74C)] public byte WeeklyBingoRequestOpenBingoNo;
 

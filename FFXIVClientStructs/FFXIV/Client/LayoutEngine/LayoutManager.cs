@@ -85,7 +85,6 @@ public unsafe partial struct LayoutManager {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public unsafe struct AnalyticShapeDataKey {
-        //[FieldOffset(0)] private uint _alignment; // Hack to get StdMap to be alligned correctly with padding
         [FieldOffset(4)] public uint Key;
 
         public int CompareTo(AnalyticShapeDataKey other) => Key.CompareTo(other.Key);

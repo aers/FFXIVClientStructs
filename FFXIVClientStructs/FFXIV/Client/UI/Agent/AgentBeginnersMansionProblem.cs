@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public partial struct AgentBeginnersMansionProblem {
 
-    [FieldOffset(0x28)] private ExcelSheetWaiter _sheetWaiter;
+    [FieldOffset(0x28)] private ExcelSheetWaiter SheetWaiter;
 
     [FieldOffset(0xC8)] public StdVector<nint> TutorialRows;
 

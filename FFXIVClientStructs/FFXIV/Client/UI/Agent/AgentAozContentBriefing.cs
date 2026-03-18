@@ -21,7 +21,7 @@ public unsafe partial struct AgentAozContentBriefing {
     [FieldOffset(0x178)] public byte* NoviceRequirementsPtr;
     [FieldOffset(0x180)] public byte* ModerateRequirementsPtr;
     [FieldOffset(0x188)] public byte* AdvancedRequirementsPtr;
-    [FieldOffset(0x190)] private byte _UnkFlags;
+    [FieldOffset(0x190)] private byte UnkFlags;
 
     [MemberFunction("4C 8B C1 80 FA 03")]
     public partial bool IsWeeklyChallengeComplete(byte challenge);
@@ -32,12 +32,12 @@ public unsafe partial struct AgentAozContentBriefing {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AozContentData {
-    [FieldOffset(0x04)] private int _UnkLoadState;
+    [FieldOffset(0x04)] private int UnkLoadState;
     [FieldOffset(0x0C)] public int SelectedContentIndex;
     [FieldOffset(0x10)] public int MaxContentEntries;
 
     [FieldOffset(0x40)] public int CurrentContentIndex;
-    [FieldOffset(0x44)] private uint _UnkState;
+    [FieldOffset(0x44)] private uint UnkState;
     [FieldOffset(0x48)] public byte CurrentActIndex;
     [FieldOffset(0x49)] public byte CurrentEnemyIndex;
 
@@ -49,7 +49,7 @@ public unsafe partial struct AozContentData {
 
     [FieldOffset(0x360), FixedSizeArray] internal FixedSizeArray3<AozWeeklyReward> _weeklyRewards;
 
-    [FieldOffset(0x37C)] private float _UnkFloat;
+    [FieldOffset(0x37C)] private float UnkFloat;
 }
 
 [GenerateInterop]
