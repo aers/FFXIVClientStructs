@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
-    [FieldOffset(0x114)] private byte OpenChildAddonId;
+    [FieldOffset(0x114)] public byte OpenChildAddonId;
     [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon;
     [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon;
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
@@ -106,7 +106,7 @@ public unsafe partial struct AgentGearSet {
     /// <param name="createAtFirstEmpty">Whether it is created at the first empty ID or at the gearset ID specified.</param>
     /// <returns>The gearset ID of the created gearset</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7")]
-    public partial int CreateGearset(int gearsetId=0xff, bool createAtFirstEmpty=true);
+    public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
 
     /// <summary>
     /// Opens the gearset viewer for the specified gearset ID
@@ -115,8 +115,8 @@ public unsafe partial struct AgentGearSet {
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB ?? 83 F8")]
     public partial void OpenGearsetViewer(int gearsetId);
 
-    //public void CreateGearset()
-    //    => SendEvent(1);
+    public void CreateGearset()
+        => SendEvent(1);
 
     // public void OpenDeleteDialog(int gearsetId)
     //     => SendEvent(2, gearsetId);
