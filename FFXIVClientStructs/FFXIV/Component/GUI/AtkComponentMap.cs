@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -21,6 +22,7 @@ public unsafe partial struct AtkComponentMap : ICreatable {
     [FieldOffset(0x138)] public AtkResourceRendererManager ResourceRendererManager;
     [FieldOffset(0x250)] public DiscoveryRenderer m_DiscoveryRenderer;
     // [FieldOffset(0x268)] public AtkRenderTexture RenderTexture;
+    [FieldOffset(0x270)] public Texture* Texture;
 
     [FieldOffset(0x374)] public float MapScale;
 
