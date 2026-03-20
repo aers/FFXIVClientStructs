@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -11,6 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x490)]
 public unsafe partial struct AddonNamePlate {
     [FieldOffset(0x240)] public BakePlateRenderer BakePlate;
+    [FieldOffset(0x428)] public Texture* Texture;
     [FieldOffset(0x480)] public NamePlateObject* NamePlateObjectArray; // 0 - 50
     [FieldOffset(0x488)] public byte DoFullUpdate;
     [FieldOffset(0x48A)] public ushort AlternatePartId;
@@ -21,6 +23,7 @@ public unsafe partial struct AddonNamePlate {
     // might be 238 not 240 but not super relevant here
     [StructLayout(LayoutKind.Explicit, Size = 0x240)]
     public struct BakePlateRenderer {
+        [FieldOffset(0xB0)] public Texture* Texture;
         [FieldOffset(0x230)] public byte DisableFixedFontResolution; // added in 5.5
     }
 
