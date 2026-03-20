@@ -68,6 +68,7 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0xD8)] public AtkResNode* TargetGlowContainer;
         [FieldOffset(0xE0)] public AtkNineGridNode* ClickFlash;
         [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
+        [FieldOffset(0xF0)] public AtkCollisionNode* Collision;
         [FieldOffset(0xF8)] public byte EmnityByte; //01 or 02 or FF
     }
 }
