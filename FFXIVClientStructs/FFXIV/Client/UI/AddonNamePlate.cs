@@ -24,6 +24,7 @@ public unsafe partial struct AddonNamePlate {
     public struct BakePlateRenderer {
         [FieldOffset(0xB0)] public Texture* Texture;
         [FieldOffset(0x230)] public byte DisableFixedFontResolution; // added in 5.5
+        [FieldOffset(0x1E8)] public Texture* Texture2; // Seems to be the same texture?
     }
 
     // this is the pre-rendered texture data for a nameplate
