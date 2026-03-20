@@ -10516,6 +10516,7 @@ classes:
       0x1407CA730: GetCurrentGearsetIndex
       0x1407CA830: EquipGearset
       0x1407CA8D0: EquipGearsetInternal
+      0x1407CB1B0: CreateGearsetInternal
       0x1407CB3B0: CreateGearset
       0x1407CB400: DeleteGearset
       0x1407CB5E0: UpdateGearset # (this, gearsetIndex)
@@ -10536,6 +10537,7 @@ classes:
       0x1407CC670: TryGetIdFromIndex
       0x1407CC830: RenameGearset
       0x1407CC9A0: FindGearsetIdByName
+      0x1407CD7F0: FirstEmptyGearsetSlot
       0x1407CFB10: ShowLogMessage
   Client::UI::Misc::ItemFinderModule:
     vtbls:
@@ -12264,12 +12266,18 @@ classes:
       0x140F77ED0: OpenDeleteDialog
       0x140F78060: EquipGearsetInternal
       0x140F78100: UpdateGearsetIfExistsOrCreateNew
+      0x140F78160: CreateGearset
+      0x140F782B0: OpenGearsetViewer
       0x140F78840: ReassignGear
+      0x140F78E90: PreviewWindowSetup
       0x140F79700: CreateGearsetInternal
       0x140F79DC0: UpdateGearsetInternal
+      0x140F79F20: ReassignSetNumber
       0x140F7A140: ReassignGearsetId
       0x140F7A2D0: MoveGearsetUpOrDown
       0x140F7A4C0: RenameGearset
+      0x140F7A660: OpenGearsetViewer2
+      0x140F7B440: PreviewWindowAtkSetup
       0x140F7B810: OpenBannerEditorForGearset
   Client::UI::Agent::AgentSupportMain:
     vtbls:
