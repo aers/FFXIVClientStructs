@@ -38,7 +38,7 @@ public unsafe partial struct AddonAreaMap {
     [FieldOffset(0x380)] public AtkComponentButton* ResizeButton;
     [FieldOffset(0x388)] public AtkResNode* TitleContainerNode;
     [FieldOffset(0x390)] public AtkTextNode* TitleTextNode;
-    [FieldOffset(0x398)] public AtkImageNode* TitleBackgroundImageNode;
+    [FieldOffset(0x398)] public AtkImageNode* CrosshairImageNode;
     [FieldOffset(0x3A0)] public AtkNineGridNode* LocationBackgroundNode;
     [FieldOffset(0x3A8)] public Atk2DAreaMap AreaMap;
 
