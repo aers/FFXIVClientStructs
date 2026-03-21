@@ -12264,7 +12264,6 @@ classes:
       0x140EBDA50: OpenContextMenuForGearset
       0x140EB1880: OpenRegistGearSetList # (this, InventoryItem*, ushort)
       0x140F77ED0: OpenDeleteDialog
-      0x140F798C0: DeleteGearset
       0x140F78060: EquipGearsetInternal
       0x140F78100: UpdateGearsetIfExistsOrCreateNew
       0x140F78160: CreateGearset
@@ -12272,6 +12271,7 @@ classes:
       0x140F78840: ReassignGear
       0x140F78E90: PreviewWindowSetup
       0x140F79700: CreateGearsetInternal
+      0x140F798C0: DeleteGearset
       0x140F79DC0: UpdateGearsetInternal
       0x140F79F20: ReassignSetNumber
       0x140F7A140: ReassignGearsetId
