@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1590)]
 public unsafe partial struct AddonPartyList {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
-    [FieldOffset(0xA38), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;
+    [FieldOffset(0xA38), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _trustMembers;
     [FieldOffset(0x1238)] public PartyListMemberStruct Chocobo;
     [FieldOffset(0x1338)] public PartyListMemberStruct Pet;
 
@@ -68,6 +68,7 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0xD8)] public AtkResNode* TargetGlowContainer;
         [FieldOffset(0xE0)] public AtkNineGridNode* ClickFlash;
         [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
+        [FieldOffset(0xF0)] public AtkCollisionNode* Collision;
         [FieldOffset(0xF8)] public byte EmnityByte; //01 or 02 or FF
     }
 }
