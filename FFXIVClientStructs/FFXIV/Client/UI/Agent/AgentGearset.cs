@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Client.UI.Misc.RaptureGearsetModule;
@@ -15,15 +16,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
-    [FieldOffset(0x114)] private byte IsChildAddonOpen; // 126 when any child addon is open
+    [FieldOffset(0x114)] public byte OpenChildAddonId;
     [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon;
     [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon;
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
 
     [FieldOffset(0x880)] public GearsetCharaView CharaView;
 
+    [FieldOffset(0xBB0)] public Texture* GearsetPreviewTexture; // populated when preview open
     [FieldOffset(0xBB8)] public StdVector<int> GearSetIds;
-
+    
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);
 
@@ -77,6 +79,13 @@ public unsafe partial struct AgentGearSet {
     public partial void ReassignGear(int gearsetId);
 
     /// <summary>
+    /// Opens the dialog for updating the ID of the specified gearset
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to open the reassign set number dialog to</param>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0 ?? 8B D6 48 8B CB")]
+    public partial void ReassignSetNumber(int gearsetId);
+
+    /// <summary>
     /// Updates the gearset at the specified ID if the ID is not empty, if it is empty, creates a new gearset
     /// </summary>
     /// <param name="gearsetId">The gearset ID to update gearset or create new</param>
@@ -84,10 +93,37 @@ public unsafe partial struct AgentGearSet {
     public partial void UpdateGearsetIfExistsOrCreateNew(int gearsetId);
 
     /// <summary>
-    /// Creates a gearset
+    /// Creates a gearset at first empty ID
     /// </summary>
+    /// <remarks> Calls <see cref="CreateGearset(int, bool)"/> with gearset ID of <c>0xFF</c> and createAtFirstEmpty of <c>true</c></remarks>
     [MemberFunction("48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8")]
     public partial bool CreateGearsetInternal();
+
+    /// <summary>
+    /// Creates a gearset at specified gearset ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to create the gearset at</param>
+    /// <param name="createAtFirstEmpty">Whether it is created at the first empty ID or at the gearset ID specified.</param>
+    /// <returns>The gearset ID of the created gearset</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7")]
+    public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
+
+    /// <summary>
+    /// Deletes the gearset as the specified ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to be deleted</param>
+    /// <remarks>
+    /// Calls <see cref="RaptureGearsetModule.DeleteGearset(int)"/>, <see cref="RaptureHotbarModule.DeleteGearsetSlots(int)"/> and updates the addon.
+    /// </remarks>
+    [MemberFunction("40 56 41 54 41 56 48 83 EC ?? 48 8B 05")]
+    public partial bool DeleteGearset(int gearsetId);
+
+    /// <summary>
+    /// Opens the gearset viewer for the specified gearset ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to open the gearset viewer for</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB ?? 83 F8")]
+    public partial void OpenGearsetViewer(int gearsetId);
 
     public void CreateGearset()
         => SendEvent(1);
@@ -101,14 +137,16 @@ public unsafe partial struct AgentGearSet {
     // public void ReassignGear(int gearsetId)
     //     => SendEvent(6, gearsetId);
 
-    public void ReassignSetNumber(int gearsetId)
-        => SendEvent(7, gearsetId);
+    //public void ReassignSetNumber(int gearsetId)
+    //    => SendEvent(7, gearsetId);
 
     public void MoveSetUp(int gearsetId)
-        => SendEvent(8, gearsetId);
+        => MoveGearsetUpOrDown(gearsetId, true);
+    //    => SendEvent(8, gearsetId);
 
     public void MoveSetDown(int gearsetId)
-        => SendEvent(9, gearsetId);
+        => MoveGearsetUpOrDown(gearsetId, false);
+    //    => SendEvent(9, gearsetId);
 
     public void OpenRenameDialog(int gearsetId)
         => SendEvent(10, gearsetId);
@@ -164,9 +202,9 @@ public unsafe partial struct AgentGearSet {
         [FieldOffset(0x31A)] public bool HideVisor;
         [FieldOffset(0x31B)] public bool HideWeapon;
         [FieldOffset(0x31C)] public bool CloseVisor;
-        [FieldOffset(0x31D)] public bool DrawWeapon;
-        [FieldOffset(0x31E)] public bool CharacterDisplayMode;
+        [FieldOffset(0x31F)] public bool DrawWeapon;
+        [FieldOffset(0x320)] public bool CharacterDisplayMode;
 
-        [FieldOffset(0x320)] public GearsetEntry* Gearset;
+        [FieldOffset(0x328)] public GearsetEntry* Gearset;
     }
 }
