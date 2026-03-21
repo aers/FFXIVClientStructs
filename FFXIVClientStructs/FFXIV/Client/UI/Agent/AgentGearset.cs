@@ -109,6 +109,16 @@ public unsafe partial struct AgentGearSet {
     public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
 
     /// <summary>
+    /// Deletes the gearset as the specified ID
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to be deleted</param>
+    /// <remarks>
+    /// Calls <see cref="RaptureGearsetModule.DeleteGearset(int)"/>, <see cref="RaptureHotbarModule.DeleteGearsetSlots(int)"/> and updates the addon.
+    /// </remarks>
+    [MemberFunction("40 56 41 54 41 56 48 83 EC ?? 48 8B 05")]
+    public partial bool DeleteGearset(int gearsetId);
+
+    /// <summary>
     /// Opens the gearset viewer for the specified gearset ID
     /// </summary>
     /// <param name="gearsetId">The gearset ID to open the gearset viewer for</param>
