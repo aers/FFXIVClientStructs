@@ -28,7 +28,7 @@ public unsafe partial struct AddonAreaMap {
     [FieldOffset(0x2B8)] public AtkComponentDropDownList* TerritoryDropDownList;
     [FieldOffset(0x2C0)] public AtkTextNode* AreaTextNode;
     [FieldOffset(0x2C8)] public AtkTextNode* SubAreaTextNode;
-    [FieldOffset(0x2D0)] private AtkResNode* unknownContainerNode;
+    [FieldOffset(0x2D0)] public AtkResNode* LayerSelectionContainerNode;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray16<Pointer<AtkComponentRadioButton>> _worldRadioButtons;
     [FieldOffset(0x358)] public AtkResNode* CurrentPositionContainerNode;
     [FieldOffset(0x360)] public AtkTextNode* CurrentPositionTextNode;
