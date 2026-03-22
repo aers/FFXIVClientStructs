@@ -28,8 +28,9 @@ public unsafe partial struct AddonNaviMap {
     [FieldOffset(0x15E8)] public AtkUldAsset* MapImageAsset;
     [FieldOffset(0x15F0)] public AtkImageNode* Mask;
 
-
     [FieldOffset(0x3A78)] public float MarkerPositionScaling; // Same as Atk2DMap.MarkerPositionScaling
     [FieldOffset(0x3A7C)] public short MapTextureWidth;
     [FieldOffset(0x3A7E)] public short MapTextureHeight;
+
+    [FieldOffset(0x38B0)] public AtkRenderTexture RenderTexture;
 }

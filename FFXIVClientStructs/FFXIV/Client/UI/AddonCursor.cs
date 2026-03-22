@@ -9,4 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
-public unsafe partial struct AddonCursor;
+public unsafe partial struct AddonCursor {
+    [FieldOffset(0x288)] public AtkResNode* CursorContainerNode; // Same as AtkUnitBase.RootNode
+}

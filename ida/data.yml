@@ -7961,6 +7961,16 @@ classes:
   Component::GUI::AtkRenderTexture:
     vtbls:
       - ea: 0x1420A62C0
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x14061FFC0: ctor
+      0x14061FFE0: Finalizer
+      0x140620000: UnsetTexturePointer
+      0x140620010: UnloadTexture
+      0x140620040: CreateTexture
+      0x140620140: GetDisplayWidth
+      0x140620170: GetDisplayHeight
   Component::GUI::AtkCrestManager:
     vtbls:
       - ea: 0x1420A6348
