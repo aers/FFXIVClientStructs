@@ -6252,6 +6252,11 @@ classes:
       0x140B9FF30: HandleFateProgressTabPacket
       0x140BA0430: HandleHousingSignboardPacket
       0x140BA0470: HandleHousingPortalPacket
+      0x140BA13C0: HandleDeepDungeonMapInfoPacket
+      0x140BA1430: HandleDeepDungeonUpdatePacket
+      0x140BA1470: HandleDeepDungeonPartyInfoPacket
+      0x140BA14B0: HandleDeepDungeonChestInfoPacket
+      0x140BA14F0: HandleDeepDungeonBlacklistPacket
       0x140BA2B20: HandleMapEffectPacket
       0x140BA3100: HandleQuestManagerUnkArray2SecondHalfPacket
       0x140BA3150: HandleQuestManagerUnkArray2SecondHalfEntryPacket
@@ -16226,7 +16231,7 @@ classes:
       - ea: 0x14223A558
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
-      397: HandleGMCommand
+      402: HandleGMCommand
     funcs:
       0x1418EB880: ctor
       0x1418EBB20: Finalizer
@@ -17232,6 +17237,11 @@ classes:
       0x14190BBE0: ctor
       0x14190A0B0: UsePomander
       0x14190A120: UseStone
+      0x14190A1A0: HandleMapInfoPacket
+      0x14190A3B0: HandleUpdatePacket
+      0x14190A5A0: HandlePartyInfoPacket
+      0x14190A600: HandleChestInfoPacket
+      0x14190A750: HandleBlacklistPacket
   Client::Game::InstanceContent::InstanceContentDeepDungeon2:
     vtbls:
       - ea: 0x1423234A0
