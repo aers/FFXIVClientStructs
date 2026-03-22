@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -33,5 +32,5 @@ public unsafe partial struct AddonNaviMap {
     [FieldOffset(0x3A7C)] public short MapTextureWidth;
     [FieldOffset(0x3A7E)] public short MapTextureHeight;
 
-    [FieldOffset(0x38B8)] public Texture* MapTexture;
+    [FieldOffset(0x38B0)] public AtkRenderTexture RenderTexture;
 }
