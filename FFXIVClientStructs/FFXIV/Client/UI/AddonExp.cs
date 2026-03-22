@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public unsafe partial struct AddonExp {
     [FieldOffset(0x268)] public AtkComponentGaugeBar* ExperienceBarComponent;
-    [FieldOffset(0x270)] private AtkTextNode* UnkTextNode; // Reads string from StringArrays[2][70] (Hud string array at index 70)
+    [FieldOffset(0x270)] public AtkTextNode* ChainTextNode;
     [FieldOffset(0x278)] public AtkImageNode* MoonIconNode;
     [FieldOffset(0x280)] public AtkImageNode* SwordsIconNode;
     [FieldOffset(0x288)] public byte ClassJob;
