@@ -106,7 +106,7 @@ public unsafe partial struct AgentGearSet {
     /// <param name="createAtFirstEmpty">Whether it is created at the first empty ID or at the gearset ID specified.</param>
     /// <returns>The gearset ID of the created gearset</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7")]
-    public partial void CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
+    public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
 
     /// <summary>
     /// Deletes the gearset as the specified ID
