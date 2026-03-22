@@ -16,9 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
-    [FieldOffset(0x114)] public byte OpenChildAddonId;
-    [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon;
-    [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon;
+    [FieldOffset(0x114)] public uint ChildAddonId;
+    [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon; // TODO: change to int
+    [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon; // TODO: change to int
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
 
     [FieldOffset(0x880)] public GearsetCharaView CharaView;
