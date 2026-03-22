@@ -24,8 +24,7 @@ public unsafe partial struct AtkComponentMap : ICreatable {
 
     [FieldOffset(0x138)] public AtkResourceRendererManager ResourceRendererManager;
     [FieldOffset(0x250)] public DiscoveryRenderer m_DiscoveryRenderer;
-    [FieldOffset(0x268)] public AtkRenderTexture RenderTexture;
-    [FieldOffset(0x270)] public Texture* DiscoveryMaskingTexture;
+    [FieldOffset(0x268)] public AtkRenderTexture DiscoveryRenderTexture;
     [FieldOffset(0x310)] public Texture* DiscoveryPartsTexture;
 
     [FieldOffset(0x374)] public float MapScale;
