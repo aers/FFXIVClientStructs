@@ -69,11 +69,29 @@ public unsafe partial struct RaptureGearsetModule {
     public partial int EquipGearsetInternal(int gearsetId, byte glamourPlateId = 0);
 
     /// <summary>
+    /// Finds the first gearset ID that is empty.
+    /// </summary>
+    /// <returns>The gearset ID if an empty slot is found, or <c>255</c> if no empty slots were found.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 84 24 ?? ?? ?? ?? 3D")]
+    public partial int FirstEmptyGearsetSlot();
+
+    /// <summary>
     /// Save the player's current inventory to a new gearset at the next possible ID.
     /// </summary>
     /// <returns>Returns the ID of the created gearset, or -1 if the creation attempt fails.</returns>
+    /// <remarks>
+    /// First checks <see cref="FirstEmptyGearsetSlot"/> to find an empty ID, then calls <see cref="CreateGearsetInternal(int)"/> to create the gearset.
+    /// </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 8B D5 E8 ?? ?? ?? ?? 8B E8")]
-    public partial sbyte CreateGearset();
+    public partial sbyte CreateGearset(); // TODO: return int, fix comment (-1 -> 255)
+
+    /// <summary>
+    /// Save the player's current equipped gear to the gearset ID.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to create a new gearset.</param>
+    /// <returns>Returns the ID of the created gearset, or 255 if the creation attempt fails.</returns>
+    [MemberFunction("48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 63 F2 48 8D 0D")]
+    public partial int CreateGearsetInternal(int gearsetId);
 
     /// <summary>
     /// Delete the gearset at the specified ID.
