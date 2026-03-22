@@ -83,7 +83,7 @@ public unsafe partial struct AgentGearSet {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to open the reassign set number dialog to</param>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0 ?? 8B D6 48 8B CB")]
-    public partial void ReassignSetNumber(int gearsetId);
+    public partial bool ReassignGearSetNumber(int gearsetId); // TODO: replace existing ReassignSetNumber
 
     /// <summary>
     /// Updates the gearset at the specified ID if the ID is not empty, if it is empty, creates a new gearset
@@ -95,7 +95,7 @@ public unsafe partial struct AgentGearSet {
     /// <summary>
     /// Creates a gearset at first empty ID
     /// </summary>
-    /// <remarks> Calls <see cref="CreateGearset(int, bool)"/> with gearset ID of <c>0xFF</c> and createAtFirstEmpty of <c>true</c></remarks>
+    /// <remarks> Calls <see cref="CreateGearset(int, bool)"/> with gearsetId of <c>255</c> and createAtFirstEmpty of <c>true</c></remarks>
     [MemberFunction("48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8")]
     public partial bool CreateGearsetInternal();
 
@@ -106,7 +106,7 @@ public unsafe partial struct AgentGearSet {
     /// <param name="createAtFirstEmpty">Whether it is created at the first empty ID or at the gearset ID specified.</param>
     /// <returns>The gearset ID of the created gearset</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7")]
-    public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
+    public partial void CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
 
     /// <summary>
     /// Deletes the gearset as the specified ID
@@ -137,7 +137,8 @@ public unsafe partial struct AgentGearSet {
     // public void ReassignGear(int gearsetId)
     //     => SendEvent(6, gearsetId);
 
-    //public void ReassignSetNumber(int gearsetId)
+    public void ReassignSetNumber(int gearsetId)
+        => ReassignGearSetNumber(gearsetId);
     //    => SendEvent(7, gearsetId);
 
     public void MoveSetUp(int gearsetId)
