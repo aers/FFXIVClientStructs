@@ -29,6 +29,7 @@ jobs:
       - name: Check error txt file for content
         id: check_error
         run: |
+          echo ${{ github.event.pull_request.base.ref }}
           if [ -s ./ida/errors.txt ]; then
             echo "error=true" >> $GITHUB_OUTPUT
           else
