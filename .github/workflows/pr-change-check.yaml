@@ -29,7 +29,6 @@ jobs:
       - name: Check error txt file for content
         id: check_error
         run: |
-          echo ${{ github.event.pull_request.base.ref }}
           if [ -s ./ida/errors.txt ]; then
             echo "error=true" >> $GITHUB_OUTPUT
           else
@@ -114,6 +113,7 @@ jobs:
 
   build-pr:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -141,6 +141,7 @@ jobs:
   
   build-main:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -159,6 +160,7 @@ jobs:
   check-breaking-changes:
     runs-on: ubuntu-latest
     needs: [build-pr, build-main, test]
+    if: github.event.pull_request.base.ref == 'main'
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/composites/update-dotnet
