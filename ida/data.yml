@@ -4856,6 +4856,8 @@ classes:
       19: IsScdResourceLoaded
       20: LoadScdResource
       21: UnloadScdResource # it really just DecRefs it
+      24: ToggleUi
+      25: IsUiFlagsSet
     funcs:
       0x1401D2B80: Finalizer
       0x14065C6C0: ctor
@@ -4905,6 +4907,7 @@ classes:
       0x1400EBB10: OpenAddonByAgent
       0x1400EBEB0: OpenYesNo
       0x1400EC530: OpenYesNo2
+      0x1400EDC30: ToggleUi
       0x1400EC250: OpenSelectOk
       0x1400EC0F0: OpenSelectOk2
       0x1400EF990: ShowScreenImage
