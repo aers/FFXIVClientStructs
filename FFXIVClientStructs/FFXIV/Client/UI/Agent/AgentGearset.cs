@@ -25,7 +25,7 @@ public unsafe partial struct AgentGearSet {
 
     [FieldOffset(0xBB0)] public Texture* GearsetPreviewTexture; // populated when preview open
     [FieldOffset(0xBB8)] public StdVector<int> GearSetIds;
-    
+
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);
 
