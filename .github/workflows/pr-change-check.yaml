@@ -22,7 +22,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: ./.github/composites/update-dotnet
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Run CExporter
         working-directory: ./
         run: dotnet run --project CExporter/CExporter.csproj -c Release
@@ -130,7 +130,7 @@ jobs:
           git status
       - uses: ./.github/composites/update-dotnet
       - name: Install dependencies for PR branch
-        run: dotnet restore
+        run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Build PR branch
         run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
       - uses: actions/upload-artifact@v4
@@ -148,7 +148,7 @@ jobs:
           ref: ${{ github.event.pull_request.base.ref }}
       - uses: ./.github/composites/update-dotnet
       - name: Install dependencies for Main branch
-        run: dotnet restore
+        run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Build Main branch
         run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
       - uses: actions/upload-artifact@v4

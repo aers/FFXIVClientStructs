@@ -15,9 +15,9 @@ jobs:
           fetch-depth: 2
       - uses: ./.github/composites/update-dotnet
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Run Format
-        run: dotnet format
+        run: dotnet format ./FFXIVClientStructs.slnx
       - name: Check for changes
         id: git-check
         run: |

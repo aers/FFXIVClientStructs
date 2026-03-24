@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 2
       - uses: ./.github/composites/update-dotnet
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Run CExporter
         working-directory: ./
         run: dotnet run --project CExporter/CExporter.csproj -c Release
