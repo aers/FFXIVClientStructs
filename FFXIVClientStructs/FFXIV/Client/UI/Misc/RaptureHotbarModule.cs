@@ -347,7 +347,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="savedHotbarIndex">The saved hotbar index to check.</param>
     /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 23 B7")]
+    [MemberFunction("40 57 48 83 EC ?? 8B FA 83 FA ?? 7D")]
     public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
 
     /// <summary>
