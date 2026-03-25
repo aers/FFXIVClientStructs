@@ -17,6 +17,12 @@ public unsafe partial struct EmoteController {
     [FieldOffset(0x20)] public PoseType CurrentPoseType;
     [FieldOffset(0x21)] public byte CPoseState;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 39 5D")]
+    public partial bool IsEmoting(); // EmoteId != 0
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 33 D2 48 8D 8E")]
+    public partial bool IsInEmoteLoop(); // OwnerObject->Mode == CharacterModes.EmoteLoop
+
     /// <summary> Plays an emote for a character that's not the local player. </summary>
     /// <remarks> For the local player, use <see cref="AgentEmote.ExecuteEmote"/> or <see cref="EmoteManager.ExecuteEmote(ushort, PlayEmoteOption*)"/> instead. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 44 0F B7 44 24")]
