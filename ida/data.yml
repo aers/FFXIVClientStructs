@@ -1366,6 +1366,8 @@ classes:
   Component::Network::IpcChannel::ChannelManagerBase:
     vtbls:
       - ea: 0x1423B3418
+    vfuncs:
+      0: Dtor
   Client::Game::Network::PacketElement:
     vtbls:
       - ea: 0x1420D5210
