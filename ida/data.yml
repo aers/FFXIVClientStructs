@@ -10955,6 +10955,7 @@ classes:
       0x14087FB60: HasStatus
       0x1408AF6E0: IsJumping
       0x140ADBB00: IsInPvP
+      0x1405F62D0: ResolveTargetedEmoteId # static?
   Client::Game::Character::Character::CastInfo:
     funcs:
       0x1408B3190: Reset

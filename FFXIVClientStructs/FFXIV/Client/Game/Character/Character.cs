@@ -147,6 +147,16 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 05 8B 4D F4")]
     public partial bool IsInPvP();
 
+    /// <summary>
+    /// Resolves the correct emote id, based on the targets height or distance.
+    /// </summary>
+    /// <param name="emoteId">The base emote id.</param>
+    /// <param name="options">The PlayEmote options.</param>
+    /// <returns> The adjusted emote id for the target. </returns>
+    /// <remarks> For example, this is used for Throw/Snowball, Dote, Splash, All Saints' Charm, Bouquet or Photograph. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5D ?? 0F B7 F8")]
+    public partial ushort ResolveTargetedEmoteId(ushort emoteId, EmoteController.PlayEmoteOption* options); // TODO: judging from the address, this might be a static function
+
     [VirtualFunction(77)]
     public partial StatusManager* GetStatusManager();
 
