@@ -11012,6 +11012,7 @@ classes:
       0x1405F4B00: GetAvailablePoses
       0x1405F4B50: Initialize
       0x1405F5390: SetPose
+      0x1405F5470: PlayEmote
       0x1405F5870: IsEmoting
       0x1405F58B0: IsInEmoteLoop
       0x1405F77C0: GetPoseState
