@@ -64,7 +64,7 @@ public enum DragDropType : uint {
     Nothing = 1,
     Everything = 2,
     ActionBar = 3, // ActionBar_Macro to ActionBar_Glasses, and Unknown81
-    Unknown4 = 4,
+    Unknown4 = 4, // seen in Addon(Retainer)Character.OnRequestedUpdate
     Item = 5,
     Macro = 6,
     Action = 7,
@@ -97,9 +97,9 @@ public enum DragDropType : uint {
     BgcArmyAction = 34,
     Unknown35 = 35,
     Perform = 36,
-    Unknown37 = 37, // EurekaLogosShardSynthesis
+    Unknown37 = 37, // EurekaLogosShardSynthesis, also seen in AddonEurekaMagiciteItemShardList
     Unknown38 = 38, // AOZNotebook
-    Unknown39 = 39,
+    McGuffin = 39,
     Ornament = 40,
     MYCTemporaryItem = 41,
     Glasses = 42,

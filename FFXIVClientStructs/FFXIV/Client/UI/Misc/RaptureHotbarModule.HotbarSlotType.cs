@@ -2,41 +2,55 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 public partial struct RaptureHotbarModule {
     public enum HotbarSlotType : byte {
-        Empty = 0x00,
-        Action = 0x01,
-        Item = 0x02,
-
-        EventItem = 0x04,
-
-        Emote = 0x06,
-        Macro = 0x07,
-        Marker = 0x08,
-        CraftAction = 0x09,
-        GeneralAction = 0x0A,
-        BuddyAction = 0x0B,
-        MainCommand = 0x0C,
-        Companion = 0x0D,
-
-        GearSet = 0x0F,
-        PetAction = 0x10,
-        Mount = 0x11,
-        FieldMarker = 0x12,
-
-        Recipe = 0x14,
-        ChocoboRaceAbility = 0x15,
-        ChocoboRaceItem = 0x16,
-        //Unk0x17 = 0x17, // seems to be a legacy type, possibly PvP related based on associated icon 000785
-        ExtraCommand = 0x18,
-        PvPQuickChat = 0x19,
-        PvPCombo = 0x1A,
-        BgcArmyAction = 0x1B,
-        //Unk0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
-        PerformanceInstrument = 0x1D,
-        McGuffin = 0x1E,
-        Ornament = 0x1F,
-        LostFindsItem = 0x20,
-        Glasses = 0x21,
-        PhantomAction = 0x22,
-        QuickPanel = 0x23,
+        Empty = 0,
+        Action = 1,
+        Item = 2,
+        /// <remarks>
+        /// Special type for DragDrop situations. The id contains the InventoryType and slot index.<br/>
+        /// When setting this to a HotbarSlot, the correct id is resolved and the type is changed to <see cref="Item" />.
+        /// </remarks>
+        InventoryItem = 3,
+        EventItem = 4,
+        /// <remarks>
+        /// Special type for DragDrop situations. The id is the slot index in the KeyItems inventory container.<br/>
+        /// When setting this to a HotbarSlot, the correct id is resolved and the type is changed to <see cref="EventItem" />.
+        /// </remarks>
+        KeyItem = 5,
+        Emote = 6,
+        Macro = 7,
+        Marker = 8,
+        CraftAction = 9,
+        GeneralAction = 10,
+        BuddyAction = 11,
+        MainCommand = 12,
+        Companion = 13,
+        /// <remarks>
+        /// Special type for DragDrop situations. The id is the slot index in the Crystals inventory container.<br/>
+        /// When setting this to a HotbarSlot, the correct id is resolved and the type is changed to <see cref="Item" />.
+        /// </remarks>
+        Crystal = 14,
+        GearSet = 15,
+        PetAction = 16,
+        Mount = 17,
+        FieldMarker = 18,
+        Unknown19 = 19,
+        Recipe = 20,
+        ChocoboRaceAbility = 21,
+        ChocoboRaceItem = 22,
+        /// <remarks> Seems to be a legacy type, possibly PvP related based on associated icon 000785 </remarks>
+        Unknown23 = 23,
+        ExtraCommand = 24,
+        PvPQuickChat = 25,
+        PvPCombo = 26,
+        BgcArmyAction = 27,
+        /// <remarks> Seems to be a legacy type, possibly performance instrument related based on associated icon 000782 </remarks>
+        Unknown28 = 28,
+        PerformanceInstrument = 29,
+        McGuffin = 30,
+        Ornament = 31,
+        LostFindsItem = 32, // aka MYCTemporaryItem
+        Glasses = 33,
+        PhantomAction = 34,
+        QuickPanel = 35,
     }
 }
