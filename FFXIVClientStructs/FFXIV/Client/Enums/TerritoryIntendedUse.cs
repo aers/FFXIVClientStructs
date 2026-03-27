@@ -41,7 +41,7 @@ public enum TerritoryIntendedUse : byte {
     CrystallineConflictCustomMatch = 37,
     HuntingGrounds = 38, // Diadem
     RivalWings = 39,
-    Unknown40 = 40, // Mordion Gaol (with Exit), Frondale's Home for Friendless Foundlings, Starlight Stalls
+    Seasonal2 = 40, // Mordion Gaol (The Rising 2017), Frondale's Home for Friendless Foundlings, Starlight Stalls
     Eureka = 41,
     Unknown42 = 42, // unused, was Crystal Tower Training Grounds
     TheCalamityRetold = 43,
@@ -64,6 +64,6 @@ public enum TerritoryIntendedUse : byte {
     CosmicExploration = 60,
     OccultCrescent = 61,
     Unknown62 = 62,
-    Unknown63 = 63,
+    Seasonal3 = 63, // Lilyswim (Hatching-tide 2026)
     Unknown64 = 64,
 }
