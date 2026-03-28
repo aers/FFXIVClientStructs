@@ -2702,7 +2702,7 @@ classes:
       0x14064AD10: InitializeResourceRendererManager # inlined in SetupFromULDResourceHandle, no xrefs
       0x1406473B0: SetupFromULDResourceHandle
       0x14064DAA0: UpdateTextLayouts
-      0x140648790: PopulateTextLabels
+      0x140648790: SetupTextRecursive
       0x140646290: SetupComponentFromULDResourceHandle
       0x140648C80: ReadComponentData
       0x1406498F0: ReadTPHD # PartList
