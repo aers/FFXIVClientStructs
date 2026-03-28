@@ -395,12 +395,13 @@ public class Exporter {
                 Bits = []
             };
         }
-        if (field.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
+        if (field.GetCustomAttribute<CExporterTypeForceAttribute>() is { } typeForceAttribute) {
             return new ProcessedField {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
-                FieldTypeOverride = field.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName,
+                FieldTypeOverride = typeForceAttribute.TypeName,
+                FieldTypeOverrideCheck = typeForceAttribute.DontCheck,
                 Bits = []
             };
         }
@@ -774,6 +775,7 @@ public class ProcessedBitField {
 
 public class ProcessedField {
     public string? FieldTypeOverride;
+    public bool? FieldTypeOverrideCheck;
     public required Type FieldType;
     public required string FieldName;
     public required int FieldOffset;
@@ -837,6 +839,7 @@ public class ProcessedStruct {
                             ) ||
                             (
                                 t.FieldTypeOverride != null &&
+                                t.FieldTypeOverrideCheck is false &&
                                 !t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") &&
                                 !t.FieldTypeOverride.EndsWith('*')
                             )

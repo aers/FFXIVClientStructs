@@ -45,15 +45,15 @@ public unsafe partial struct Device {
     [FieldOffset(0xA10)] private CallbackManager* UnkA10;
     [FieldOffset(0xA18)] private CallbackManager* UnkA18;
 
-    [FieldOffset(0xE0A90), CExporterTypeForce("D3D_FEATURE_LEVEL")] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
-    [FieldOffset(0xE0A98), CExporterTypeForce("IDXGIFactory1*")] public void* DXGIFactory; // IDXGIFactory1
-    [FieldOffset(0xE0AA0), CExporterTypeForce("IDXGIOutput6*")] public void* DXGIOutput; // IDXGIOutput6
+    [FieldOffset(0xE0A90), CExporterTypeForce("D3D_FEATURE_LEVEL", true)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
+    [FieldOffset(0xE0A98), CExporterTypeForce("IDXGIFactory1*", true)] public void* DXGIFactory; // IDXGIFactory1
+    [FieldOffset(0xE0AA0), CExporterTypeForce("IDXGIOutput6*", true)] public void* DXGIOutput; // IDXGIOutput6
     [FieldOffset(0xE0AA8)] public void* D3D11Forwarder; // CID3D11Forwarder (ID3D11Device vtbl present here)
     /// <remarks>
     /// Type: ID3D11DeviceContext5* <br/>
     /// IDA doesn't have a reference for DeviceContext5 so we use the last one possible in the list defined in d3d11_3.h being ID3D11DeviceContext4*
     /// </remarks>
-    [FieldOffset(0xE0AB0), CExporterTypeForce("ID3D11DeviceContext4*")] public void* D3D11DeviceContext;
+    [FieldOffset(0xE0AB0), CExporterTypeForce("ID3D11DeviceContext4*", true)] public void* D3D11DeviceContext;
 
     [FieldOffset(0xE0AC0)] public ImmediateContext* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
