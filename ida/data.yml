@@ -10955,6 +10955,7 @@ classes:
       0x14087FB60: HasStatus
       0x1408AF6E0: IsJumping
       0x140ADBB00: IsInPvP
+      0x1405F62D0: ResolveTargetedEmoteId # static?
   Client::Game::Character::Character::CastInfo:
     funcs:
       0x1408B3190: Reset
@@ -11012,6 +11013,7 @@ classes:
       0x1405F4B00: GetAvailablePoses
       0x1405F4B50: Initialize
       0x1405F5390: SetPose
+      0x1405F5470: PlayEmote
       0x1405F5870: IsEmoting
       0x1405F58B0: IsInEmoteLoop
       0x1405F77C0: GetPoseState
