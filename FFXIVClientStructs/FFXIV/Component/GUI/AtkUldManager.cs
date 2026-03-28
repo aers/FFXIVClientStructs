@@ -82,6 +82,12 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7F 28 66 03 E8")]
     public partial int GetNodeCount(AtkResNode* node);
 
+    /// <summary>
+    /// Sets any child <see cref="AtkTextNode"/>'s Text via TextId and SheetType, then recurses into child components.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 84 F6 74 59")]
+    public partial void SetupTextRecursive();
+    
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 04")]
     public static partial void ReadAtkTextNodeData(AtkTextNode* node, byte* nodeData, bool unk);
 
