@@ -90,7 +90,7 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7F 28 66 03 E8")]
     public partial int GetNodeCount(AtkResNode* node);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 04")]
     public static partial void ReadAtkTextNodeData(AtkTextNode* node, byte* nodeData, bool unk);
 
