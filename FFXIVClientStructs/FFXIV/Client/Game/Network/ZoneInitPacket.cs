@@ -8,7 +8,7 @@ public partial struct ZoneInitPacket {
     [FieldOffset(0x04)] public ushort Instance; // only when IsInstancedArea is true
     [FieldOffset(0x06)] public ushort ContentFinderConditionId;
     [FieldOffset(0x08)] public uint TransitionTerritoryFilterKey;
-    [FieldOffset(0x0C)] public uint PopRangeInstanceId;
+    [FieldOffset(0x0C)] public uint PopRangeId; // InstanceId in the PlanMap lgb
     [FieldOffset(0x10)] public byte WeatherId;
 
     [FieldOffset(0x12)] public ZoneInitFlags Flags;
