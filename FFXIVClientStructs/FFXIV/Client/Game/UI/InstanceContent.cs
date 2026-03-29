@@ -9,6 +9,7 @@ public unsafe partial struct InstanceContent {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 0F 94 C3", 3)]
     public static partial InstanceContent* Instance();
 
+    [FieldOffset(0x6C)] public byte RankedCrystallineConflictHostingDataCenterId; // saved as uint, used as byte? checks against 0xFF too
     [FieldOffset(0x70)] public bool IsLimitedTimeBonusActive;
 
     /// <summary>
