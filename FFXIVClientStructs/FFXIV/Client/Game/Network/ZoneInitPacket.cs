@@ -18,11 +18,12 @@ public partial struct ZoneInitPacket {
     [FieldOffset(0x20)] public uint RankedCrystallineConflictHostingDataCenterId; // WorldDCGroupType RowId
     [FieldOffset(0x24)] public bool IsLimitedTimeBonusActive;
 
-    // no idea why there are two different festival sets
-    [FieldOffset(0x26), FixedSizeArray] internal FixedSizeArray8<ushort> _gameMainFestivalIds;
-    [FieldOffset(0x36), FixedSizeArray] internal FixedSizeArray8<ushort> _gameMainFestivalPhases;
-    [FieldOffset(0x46), FixedSizeArray] internal FixedSizeArray8<ushort> _playerStateFestivalIds;
-    [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray8<ushort> _playerStateFestivalPhases;
+    // Saved to GameMain, used by various systems like LayoutManager, WeatherManager, EventHandlers etc. for how things should look
+    [FieldOffset(0x26), FixedSizeArray] internal FixedSizeArray8<ushort> _gameFestivalIds;
+    [FieldOffset(0x36), FixedSizeArray] internal FixedSizeArray8<ushort> _gameFestivalPhases;
+    // Saved to PlayerState, used by UI systems like ContentsFinder, AgentHalloweenNpcSelect, AgentFriendlist (for "Invite Friend to Return") and lua scripts for what options should be displayed
+    [FieldOffset(0x46), FixedSizeArray] internal FixedSizeArray8<ushort> _uiFestivalIds;
+    [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray8<ushort> _uiFestivalPhases;
 
     // Used for camera and streaming layout
     [FieldOffset(0x68)] public float PositionX;
