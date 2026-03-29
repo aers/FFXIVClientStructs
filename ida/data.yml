@@ -222,6 +222,7 @@ functions:
   0x140614B00: GetHighResolutionTimeMs
   0x1407B1170: GetHotbarSlotTypeFromDragDropType
   0x14097E6F0: ToObjStrId
+  0x14097E7B0: ToActStrId
   0x140B34880: GenerateEquippedItemsChecksum # for Banners; unused
   0x140E24E90: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140F3DEB0: ConvertRawToMapPosX
@@ -2948,6 +2949,7 @@ classes:
       0x140B00D40: SetOrnamentUnlocked
       0x140B00DE0: IsGlassesStylesUnlocked
       0x140BA3D00: SetDesynthesisLevels
+      0x140B00B90: SetDesynthesisLevelForClassJob
       0x140B00E20: IsGlassesUnlocked
       0x140B01090: ToggleUnlockBit
       0x140B010D0: IsUnlockBitSet
@@ -2957,7 +2959,6 @@ classes:
       0x140B02600: IsCurrentJobLimited
       0x140B02780: GetParentClassJobId
       0x140AFDD90: IsPlayerStateFlagSet
-#fail       0x140A12B70: ctor # inlined to Client::Game::UI::UIState.ctor (7.3)
       0x140B009C0: IsCrystariumDeliveryQuestComplete
       0x140B01A10: GetClassJobLevel
       0x140B01B90: SetCurrentLevel
@@ -10283,7 +10284,9 @@ classes:
       0x14097E360: AppendUnseenIcon
       0x14097E400: AppendCrossWorldIcon
       0x14097E530: AppendIcon
+      0x14097E820: FormatObjStr
       0x14097E900: FormatAddonTextApply
+      0x14097EA70: FormatAddonTransientTextApply
       0x14097EBE0: ResolveSheetRedirect
       0x140981D50: GetSubrowSheetIntValue
       0x14097F0A0: AddSheetRedirectItemDecoration

@@ -22,14 +22,13 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x520)] public UIModule* UIModule;
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
-
+    [FieldOffset(0x628)] public ExcelSheet* AddonTransientSheet;
     // [0] = TempLinkString
     // [1] = <edgecolortype(0)><colortype(0)>
     // [2] = LinkTerminator (<link(0xCE,0,0,0,)>)
     [FieldOffset(0x630), FixedSizeArray] internal FixedSizeArray7<Utf8String> _unkStrings0;
-
     [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
-    // [FieldOffset(0x930)] public StdDeque<TextParameter> ItemRarityParameters; // to format Addon#6
+    [FieldOffset(0x930)] public StdDeque<TextParameter> ItemRarityParameters; // to format Addon#6
 
     // [3] = TempItemRarity
     // [4] = TempItemNameOutput
