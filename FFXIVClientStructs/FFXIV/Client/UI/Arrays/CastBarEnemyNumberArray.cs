@@ -10,7 +10,7 @@ public unsafe partial struct CastBarEnemyNumberArray {
         return numberArray == null ? null : (CastBarEnemyNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray48<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray42<int> _data;
 
     [FieldOffset(0 * 4)] public bool Active;
 
