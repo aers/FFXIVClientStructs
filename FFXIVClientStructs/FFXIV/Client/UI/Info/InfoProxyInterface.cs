@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyInterface
@@ -29,6 +31,9 @@ public unsafe partial struct InfoProxyInterface {
 
     [VirtualFunction(5)]
     public partial void ClearListData();
+
+    [VirtualFunction(7)]
+    public partial void HandleZoneInitPacket(ZoneInitPacket* packet);
 
     /// <summary>
     /// Gets called after all data is received from the server.

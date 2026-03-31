@@ -185,7 +185,7 @@ public enum UIModulePacketType {
     ClassJobChange = 2,
     LevelChange = 3,
     ShowLogMessage = 4,
-    InitZone = 5,
+    ZoneInit = 5,
     Login = 6,
     Logout = 7,
     CloseLogoutDialog = 8,
@@ -221,4 +221,7 @@ public enum UIModulePacketType {
     Unknown38 = 38, // Tofu
     Unknown39 = 39, // Tofu
     Unknown40 = 40, // Tofu
+
+    [Obsolete("Renamed to ZoneInit")]
+    InitZone = 5,
 }

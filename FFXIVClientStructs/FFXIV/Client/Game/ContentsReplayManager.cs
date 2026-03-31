@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [GenerateInterop]
@@ -20,7 +22,7 @@ public unsafe partial struct ContentsReplayManager {
     [FieldOffset(0x4C8)] public Utf8String ReplayTitle;
     [FieldOffset(0x530)] private Utf8String Unk530;
 
-    // 5D0 InitZonePacket
+    [FieldOffset(0x5D0)] public ZoneInitPacket ZoneInitPacket;
 
     [FieldOffset(0x724)] public float PositionMs;
 
