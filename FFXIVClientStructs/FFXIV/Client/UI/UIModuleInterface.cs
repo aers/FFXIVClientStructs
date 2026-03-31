@@ -180,14 +180,45 @@ public unsafe partial struct UIModuleInterface {
 }
 
 public enum UIModulePacketType {
+    Unknown0 = 0,
+    Unknown1 = 1, // chat message?
     ClassJobChange = 2,
     LevelChange = 3,
     ShowLogMessage = 4,
-    Login = 6,
     InitZone = 5,
+    Login = 6,
     Logout = 7,
     CloseLogoutDialog = 8,
     StartLogoutCountdown = 9,
     UnlockedMapMarkersUpdated = 10,
     PrintPlayTime = 11,
+    Unknown12 = 12, // case doesn't exist
+    Unknown13 = 13, // contents finder update?
+    Unknown14 = 14, // party size changed?
+    Unknown15 = 15, // party state changed?
+    SetLoginSummonCompanionId = 16, // FlagStatusModule UIFlag 1
+    Unknown17 = 17, // ScenarioTree
+    Unknown18 = 18, // chat message?
+    Unknown19 = 19, // InfoProxy 0x19 (PvP team?)
+    Unknown20 = 20, // InfoProxy 0x1D (PvPTeamOrganization?)
+    Unknown21 = 21, // CrossWorldLinkShell
+    Unknown22 = 22, // ReadyCheck
+    Unknown23 = 23, // case doesn't exist
+    Unknown24 = 24, // WorldTravel
+    Unknown25 = 25, // WorldTravel
+    Unknown26 = 26, // CircleList
+    Unknown27 = 27, // Circle
+    Unknown28 = 28, // CircleFinder
+    Unknown29 = 29, // MentorCondition
+    Unknown30 = 30, // PerformanceReadyCheck
+    Unknown31 = 31, // QuestRedoHud
+    Unknown32 = 32, // OrnamentNoteBook
+    Unknown33 = 33, // something Retainer
+    Unknown34 = 34, // sets uintParam to InputTimerModule+0x4F4
+    Unknown35 = 35, // FateProgress
+    Unknown36 = 36, // Glasses
+    Unknown37 = 37, // Tofu
+    Unknown38 = 38, // Tofu
+    Unknown39 = 39, // Tofu
+    Unknown40 = 40, // Tofu
 }
