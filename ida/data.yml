@@ -3039,6 +3039,9 @@ classes:
     funcs:
       0x140B37CD0: InvokeSelectUseTicket
       0x140B37C40: TeleportWithTickets
+  Client::Game::UI::TeleportInfo:
+    funcs:
+      0x140C29AD0: GetFlags
   Client::Game::UI::Cabinet:
     instances:
       - ea: 0x1429CB5F8  # UIState.Cabinet
@@ -10678,6 +10681,8 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D9740: ctor
+      0x1407D9AE0: IsInHistory
+      0x1407D9B30: GetHistoryEntry
       0x1407D9B80: AddHistoryEntry
   Client::UI::Misc::RecommendEquipModule:
     funcs:
@@ -14217,6 +14222,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C26AF0: ctor
+      0x140C29520: GetRegionLabel
+      0x140C29810: GetRegion
+      0x140C29B80: GetTimelineId
   Client::UI::Agent::AgentLoadingTips:
     vtbls:
       - ea: 0x1421010F0
