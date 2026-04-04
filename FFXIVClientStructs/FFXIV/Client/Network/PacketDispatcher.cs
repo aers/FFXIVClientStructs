@@ -33,6 +33,9 @@ public unsafe partial struct PacketDispatcher {
         GameObjectId targetId,
         bool isRecorded);
 
+    [MemberFunction("4C 8B DC 55 56 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 41 0F B6 F0")]
+    public static partial void HandleZoneInitPacket(uint entityId, ZoneInitPacket* packet, byte a3); // a3 has something to do with ContentsReplay
+
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B F2")]
     public static partial void HandleSocialPacket(uint targetId, nint packet);
 

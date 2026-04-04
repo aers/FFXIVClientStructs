@@ -5027,6 +5027,7 @@ classes:
       3: RequestData
       4: GetEntryCount
       5: ClearListData
+      7: HandleZoneInitPacket
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
@@ -6236,7 +6237,7 @@ classes:
       0x140B9E8C0: HandleUpdatePartyPacket
       0x140B9F0A0: HandleUpdateAllianceNormalPacket
       0x140B9F0E0: HandleUpdateAllianceSmallPacket
-      0x140B9F120: HandleInitZonePacket
+      0x140B9F120: HandleZoneInitPacket
       0x140B9F2A0: HandleUpdateHatePacket
       0x140B9F300: HandleUpdateHaterPacket
       0x140B9F3B0: HandleSpawnObjectPacket
@@ -9637,6 +9638,7 @@ classes:
       0x140769250: PropagateLevelChange
       0x1407692A0: PropagateClassJobChange
       0x140761920: ScreenShotCallback
+      0x140769410: HandleZoneInitPacket
   Client::UI::Misc::PvpSetModule:
     vtbls:
       - ea: 0x1420BE568
