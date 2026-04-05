@@ -7742,8 +7742,8 @@ classes:
       0x142035B40: Finalizer
       0x14060CC70: Initialize
       0x14060CD00: Terminate
-      0x140B52D20: Update
-      0x14177A7F0: GetFlightAllowedStatus
+      0x14060CF40: Update
+      0x14177A7F0: GetFlightAllowedStatus # static
   Client::Game::Control::CameraManager:
     funcs:
       0x1417F5500: ctor
