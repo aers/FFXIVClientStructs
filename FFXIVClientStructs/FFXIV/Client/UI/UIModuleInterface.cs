@@ -217,10 +217,10 @@ public enum UIModulePacketType {
     Unknown34 = 34, // sets uintParam to InputTimerModule+0x4F4
     Unknown35 = 35, // FateProgress
     Unknown36 = 36, // Glasses
-    Unknown37 = 37, // Tofu
-    Unknown38 = 38, // Tofu
-    Unknown39 = 39, // Tofu
-    Unknown40 = 40, // Tofu
+    Unknown37 = 37, // TofuReceiveBoard
+    Unknown38 = 38, // TofuRealTimeUpdate
+    Unknown39 = 39, // TofuStopShare
+    Unknown40 = 40, // TofuConfirmation
 
     [Obsolete("Renamed to ZoneInit")]
     InitZone = 5,
