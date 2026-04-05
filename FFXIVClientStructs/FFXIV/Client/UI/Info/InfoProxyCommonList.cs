@@ -66,6 +66,7 @@ public unsafe partial struct InfoProxyCommonList {
         [BitField<bool>(nameof(WaitingForFriendListApproval), 6)]
         [BitField<DisplayGroup>(nameof(Group), 16, 8)]
         [BitField<bool>(nameof(IsOtherServer), 24)]
+        [FieldOffset(0x18)] public ulong AccountId;
         [FieldOffset(0x20)] public uint ExtraFlags;
         // 4 bytes empty
         // 4 bytes unknown

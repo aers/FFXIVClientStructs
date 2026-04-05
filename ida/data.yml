@@ -10063,6 +10063,19 @@ classes:
       0x140B34280: Initialize
       0x140B34300: ImportData
       0x140B34530: ExportData
+  Client::UI::Misc::TofuHelper:
+    vtbls:
+      - ea: 0x1420D27F0
+        base: Client::UI::Misc::HelperInterface
+    funcs:
+      0x140AE6380: OnStartSharing
+      0x140AE6970: OnStopSharing
+  Client::UI::Misc::TofuHelper::TofuHelperData:
+    funcs:
+      0x140AF1B50: HandleSharePacket
+      0x140AF2580: SaveBoardAndPlaySound
+      0x140AF3E90: SendVerificationPacket
+      0x140AF49B0: ShowSharedNotification
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x142061E48
