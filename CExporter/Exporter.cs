@@ -839,7 +839,7 @@ public class ProcessedStruct {
                             ) ||
                             (
                                 t.FieldTypeOverride != null &&
-                                t.FieldTypeOverrideCheck is false &&
+                                (!t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value) &&
                                 !t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") &&
                                 !t.FieldTypeOverride.EndsWith('*')
                             )
