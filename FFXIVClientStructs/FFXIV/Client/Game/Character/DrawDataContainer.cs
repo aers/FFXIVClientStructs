@@ -33,7 +33,7 @@ public unsafe partial struct DrawDataContainer {
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 7F")]
-    public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
+    public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte a5, byte skipGameObject, byte a7, bool a8);
 
     /// <summary>
     /// Called when Hide/Display Weapons when sheathed is toggled or /displayarms is used.
