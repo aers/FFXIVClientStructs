@@ -185,6 +185,7 @@ functions:
   0x14080CD80: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x14080CE70: GetEventItemName
   0x14080D000: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
+  0x140819680: GetUIConstOrDefault
   0x14082E550: LoadAreaVfx
   0x140859410: IsCompanySealItemId
   0x140859520: GetTomestonesItem
