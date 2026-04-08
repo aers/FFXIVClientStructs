@@ -213,6 +213,7 @@ public static partial class TypeExtensions {
         var pack = type.StructLayoutAttribute?.Pack ?? 8;
         if (pack == 0) pack = 8;
         var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        if (fields.Length == 0) return 1;
         return fields.Max(t => Math.Min(pack, t.FieldType.PackSize()));
     }
 
