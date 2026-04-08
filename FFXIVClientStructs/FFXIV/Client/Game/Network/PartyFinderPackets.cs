@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 /// Entries passed to <see cref="AgentLookingForGroup"/>.
 /// </remarks>
 [GenerateInterop]
-[Inherits<ServerIpcSegmentHeader>]
+[Inherits<ServerIpcSegmentHeader>] // TODO: We'll be switching to use ServerIpcSegment<CrossRealmListingSegmentPacket>, so remove this Inherits attribute and subtract 0x10 from every offset and the size
 [StructLayout(LayoutKind.Explicit, Size = 0x660)]
 public partial struct CrossRealmListingSegmentPacket {
     [FieldOffset(0x10)] private uint Unk10;
