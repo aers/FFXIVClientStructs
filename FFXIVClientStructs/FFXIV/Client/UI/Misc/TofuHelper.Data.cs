@@ -21,6 +21,7 @@ public partial struct TofuTransferObject {
     [FieldOffset(0x2E0)] public Utf8String Arg5Name;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x450)]
 public partial struct TofuPackedBoard {
     // Packed Board to be sent as packet to server. Structure changes dramatically with small object changes
@@ -29,15 +30,6 @@ public partial struct TofuPackedBoard {
     [FieldOffset(0x2)] public SharingType SharingType;
     [FieldOffset(0x6)] private byte Background; // lower nibble
     [FieldOffset(0x410), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _boardName;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x4AA)]
-public partial struct TofuPacket {
-    [FieldOffset(0x10)] public ulong SenderContentId;
-    [FieldOffset(0x18)] public uint CheckSum; // uses 0x410 of BoardContent to create checksum
-    [FieldOffset(0x20)] private TofuPackedBoard BoardContent;
-    [FieldOffset(0x4A8)] public byte BoardIndexInSharedFolder; // 1-based
-    [FieldOffset(0x4A9)] public byte TotalBoardsInSharedFolder;
 }
 
 public enum SharingType : byte {

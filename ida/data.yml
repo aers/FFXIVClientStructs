@@ -10068,11 +10068,20 @@ classes:
       - ea: 0x1420D27F0
         base: Client::UI::Misc::HelperInterface
     funcs:
-      0x140AE6380: OnStartSharing
-      0x140AE6970: OnStopSharing
+      0x140AE6380: HandleStartSharingPacket
+      0x140AE6400: HandleRealTimeUpdatePacket
+      0x140AE6970: HandleStopSharingPacket
+      0x140AE6BF0: HandleTofuConfirmationPacket
+  Client::UI::Misc::TofuHelper::TofuBoardOverview:
+    funcs:
+      0x140AE4330: ctor
+      0x140AE5430: BuildPackedBoard
   Client::UI::Misc::TofuHelper::TofuHelperData:
     funcs:
+      0x140AED0D0: ctor
+      0x140AED730: dtor
       0x140AF1B50: HandleSharePacket
+      0x140AF1F60: HandleRealTimeUpdate
       0x140AF2580: SaveBoardAndPlaySound
       0x140AF3E90: SendVerificationPacket
       0x140AF49B0: ShowSharedNotification

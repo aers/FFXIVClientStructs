@@ -55,6 +55,7 @@ public unsafe partial struct InfoProxyCommonList {
     public partial struct CharacterData {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public OnlineStatus State;
+        [FieldOffset(0x18)] public ulong AccountId;
         //12 bytes
         /// <summary>
         /// Extra flags for status:
@@ -66,7 +67,6 @@ public unsafe partial struct InfoProxyCommonList {
         [BitField<bool>(nameof(WaitingForFriendListApproval), 6)]
         [BitField<DisplayGroup>(nameof(Group), 16, 8)]
         [BitField<bool>(nameof(IsOtherServer), 24)]
-        [FieldOffset(0x18)] public ulong AccountId;
         [FieldOffset(0x20)] public uint ExtraFlags;
         // 4 bytes empty
         // 4 bytes unknown
