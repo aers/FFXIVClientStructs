@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Network;
-using static FFXIVClientStructs.FFXIV.Client.Game.Network.TofuStartSharingPacket;
 using static FFXIVClientStructs.FFXIV.Client.UI.Misc.TofuHelper;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -48,7 +47,7 @@ public unsafe partial struct TofuHelper {
         /// <param name="boardIndexInSharedFolder">The index of the board within the folder thats shared.  If no folder was shared, this is <c>0</c>.</param>
         /// <param name="totalBoardsInSharedFolder">The total number of boards within the shared fodler. If no folder was shared, this is <c>1</c>.</param>
         [MemberFunction("E8 ?? ?? ?? ?? 40 80 F5")]
-        public partial void SaveBoardAndPlaySound(TofuSharePacketData* packetData, TofuPackedBoard* boardInfo, uint boardIndexInSharedFolder, uint totalBoardsInSharedFolder);
+        public partial void SaveBoardAndPlaySound(TofuStartSharingPacket* packetData, TofuPackedBoard* boardInfo, uint boardIndexInSharedFolder, uint totalBoardsInSharedFolder);
 
         /// <summary>
         /// Shows a notification for the shared board.
