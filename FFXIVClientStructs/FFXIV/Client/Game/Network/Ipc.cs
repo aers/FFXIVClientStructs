@@ -11,3 +11,9 @@ public partial struct ServerIpcSegmentHeader {
 
     [FieldOffset(0x0C)] public int Timestamp;
 }
+
+[StructLayout(LayoutKind.Sequential)]
+public struct ServerIpcSegment<T> where T : unmanaged {
+    public ServerIpcSegmentHeader Header;
+    public T Payload;
+}
