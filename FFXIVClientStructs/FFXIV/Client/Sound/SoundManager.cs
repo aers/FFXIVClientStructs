@@ -21,38 +21,40 @@ public unsafe partial struct SoundManager {
     [StaticAddress("48 89 35 ?? ?? ?? ?? 48 83 C4 20", 3, isPointer: true)]
     public static partial SoundManager* Instance();
 
-    [FieldOffset(0x0031)] public bool Disabled;
-    [FieldOffset(0x0034)] public float MasterVolume;
-    [FieldOffset(0x0038)] public float ActiveVolume;
-    [FieldOffset(0x003C), FixedSizeArray] internal FixedSizeArray19<float> _volume;
-    [FieldOffset(0x0088), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume2; // All are 1.0f
-    [FieldOffset(0x00D4), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume3; // All are 1.0f
-    [FieldOffset(0x0120), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume4; // All are 1.0f
-    [FieldOffset(0x016C), FixedSizeArray] internal FixedSizeArray19<bool> _channelMuted;
-    [FieldOffset(0x017F), FixedSizeArray] internal FixedSizeArray19<bool> _channelAlwaysOn;
+    [FieldOffset(0x31)] public bool Disabled;
+    [FieldOffset(0x34)] public float MasterVolume;
+    [FieldOffset(0x38)] public float ActiveVolume;
+    [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray19<float> _volume;
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume2; // All are 1.0f
+    [FieldOffset(0xD4), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume3; // All are 1.0f
+    [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume4; // All are 1.0f
+    [FieldOffset(0x16C), FixedSizeArray] internal FixedSizeArray19<bool> _channelMuted;
+    [FieldOffset(0x17F), FixedSizeArray] internal FixedSizeArray19<bool> _channelAlwaysOn;
 
-    [FieldOffset(0x01C9)] public bool MasterEnabled;
-    [FieldOffset(0x01CA)] public bool IsSoundAlways;
-    [FieldOffset(0x01CB)] public bool SoundEnabled;
-    [FieldOffset(0x01CC)] public bool WindowInactive;
+    [FieldOffset(0x1C9)] public bool MasterEnabled;
+    [FieldOffset(0x1CA)] public bool IsSoundAlways;
+    [FieldOffset(0x1CB)] public bool SoundEnabled;
+    [FieldOffset(0x1CC)] public bool WindowInactive;
 
-    [FieldOffset(0x0218)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
-    [FieldOffset(0x0220)] public SoundData* InactiveSoundDataListHead;
-    [FieldOffset(0x0228)] public SoundData* ActiveSoundDataListHead;
+    [FieldOffset(0x218)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
+    [FieldOffset(0x220)] public SoundData* InactiveSoundDataListHead;
+    [FieldOffset(0x228)] public SoundData* ActiveSoundDataListHead;
 
-    [FieldOffset(0x0260)] private int Unk260; // 1 = In Cutscene
+    [FieldOffset(0x260)] private int Unk260; // 1 = In Cutscene
 
-    [FieldOffset(0x02A0)] public nint CriticalSection;
+    [FieldOffset(0x2A0)] public nint CriticalSection;
 
-    [FieldOffset(0x02C8)] public nint EventHandle2;
+    [FieldOffset(0x2C8)] public nint EventHandle2;
+
+    [FieldOffset(0x318)] public SoundData* WeatherSoundData;
 
     // Red: System sounds
     // Green: Sound effects, ambient noises, voices, instruments
     // Blue: Music
-    [FieldOffset(0x0358), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed1;
-    [FieldOffset(0x0758), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed2;
-    [FieldOffset(0x0B58), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen1;
-    [FieldOffset(0x0F58), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen2;
+    [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed1;
+    [FieldOffset(0x758), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed2;
+    [FieldOffset(0xB58), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen1;
+    [FieldOffset(0xF58), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen2;
     [FieldOffset(0x1358), FixedSizeArray] internal FixedSizeArray256<float> _FFTBlue1;
     [FieldOffset(0x1758), FixedSizeArray] internal FixedSizeArray256<float> _FFTBlue2;
 
@@ -180,6 +182,10 @@ public unsafe partial struct SoundManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 48 8B F8 FF 15 ?? ?? ?? ?? EB"), GenerateStringOverloads]
     public partial SoundData* PlayCutsceneVoSound(CStringPointer path); // Cutscene Vo
+
+    /// <remarks> Uses <see cref="WeatherSoundData"/> field. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 5F ?? BE ?? ?? ?? ?? ?? ?? ?? 48 85 C9 74 ?? 4C 39 77"), GenerateStringOverloads]
+    public partial void PlayWeatherSound(CStringPointer path, uint fadeDuration);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 256 * 0xD0)]

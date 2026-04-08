@@ -3853,6 +3853,7 @@ classes:
       0x140403E60: PlaySoundEffect
       0x140403EE0: PlaySoundEffect2
       0x140404270: PlayCutsceneVoSound
+      0x1404058B0: PlayWeatherSound
       0x140406250: ToggleForceFeedback
       0x140406280: LoadSoundDataScd
   Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>:
