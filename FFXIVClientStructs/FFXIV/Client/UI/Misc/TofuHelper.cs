@@ -1,5 +1,6 @@
-using static FFXIVClientStructs.FFXIV.Client.UI.Misc.TofuHelper;
 using FFXIVClientStructs.FFXIV.Client.Game.Network;
+using static FFXIVClientStructs.FFXIV.Client.Game.Network.TofuStartSharingPacket;
+using static FFXIVClientStructs.FFXIV.Client.UI.Misc.TofuHelper;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -10,16 +11,16 @@ public unsafe partial struct TofuHelper {
     [FieldOffset(0x10)] public TofuHelperData* Data;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 90 ?? ?? ?? ?? 48 8B D3 48 8B 48 ?? 48 83 C4 ?? 5B E9 ?? ?? ?? ?? 48 8B 01 FF 90 ?? ?? ?? ?? 48 8B D3 48 8B 48 ?? 48 83 C4 ?? 5B E9 ?? ?? ?? ?? 48 83 C4")]
-    public partial void HandleStartSharingPacket(TofuStartSharingPacket* packet);
+    public partial void HandleStartSharingPacket(ServerIpcSegment<TofuStartSharingPacket>* packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 0F 6F 05 ?? ?? ?? ?? 48 8D 8B")]
-    public partial void HandleStopSharingPacket(TofuStopSharingPacket* packet); 
+    public partial void HandleStopSharingPacket(ServerIpcSegment<TofuStopSharingPacket>* packet); 
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB")]
-    public partial void HandleRealTimeUpdatePacket(TofuRealTimeUpdatePacket* packet);
+    public partial void HandleRealTimeUpdatePacket(ServerIpcSegment<TofuRealTimeUpdatePacket>* packet);
 
     [MemberFunction("48 83 EC ?? 4C 8B 51 ?? 4D 85 D2 0F 84")]
-    public partial void HandleTofuConfirmationPacket(TofuConfirmationPacket* packet);
+    public partial void HandleTofuConfirmationPacket(ServerIpcSegment<TofuConfirmationPacket>* packet);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3AA0)]
@@ -42,12 +43,12 @@ public unsafe partial struct TofuHelper {
         /// <summary>
         /// Saves the board to the shared list and plays a sound.
         /// </summary>
-        /// <param name="senderContentId">Pointer within the packet for the content ID of the sender.</param>
-        /// <param name="boardInfo">Contains information on the sent board, comes from packet+0x20 which structure isn't defined.</param>
+        /// <param name="packetData">Pointer to the data of the packet.</param>
+        /// <param name="boardInfo">Pointer to the packed board from the sender.</param>
         /// <param name="boardIndexInSharedFolder">The index of the board within the folder thats shared.  If no folder was shared, this is <c>0</c>.</param>
         /// <param name="totalBoardsInSharedFolder">The total number of boards within the shared fodler. If no folder was shared, this is <c>1</c>.</param>
         [MemberFunction("E8 ?? ?? ?? ?? 40 80 F5")]
-        public partial void SaveBoardAndPlaySound(nint senderContentId, TofuPackedBoard* boardInfo, uint boardIndexInSharedFolder, uint totalBoardsInSharedFolder);
+        public partial void SaveBoardAndPlaySound(TofuSharePacketData* packetData, TofuPackedBoard* boardInfo, uint boardIndexInSharedFolder, uint totalBoardsInSharedFolder);
 
         /// <summary>
         /// Shows a notification for the shared board.
@@ -62,12 +63,9 @@ public unsafe partial struct TofuHelper {
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct TofuBoardOverview {
     [FieldOffset(0x0), CExporterUnion("TofuObjects")] private nint Unk0; // Objects only exist on received boards, not in boards to be sent
-    [FieldOffset(0x0), CExporterUnion("TofuObjects")] private TofuTransferObject* Objects;
-    [FieldOffset(0x8)] private nint Unk8; // Object pointer end, used with object pointer to find total object array size and then divided by 0x378 to find number of objects
-    [FieldOffset(0x10)] private nint Unk10;
+    [FieldOffset(0x0), CExporterUnion("TofuObjects")] private StdVector<TofuTransferObject> Objects;
     [FieldOffset(0x18)] public Utf8String BoardName;
     [FieldOffset(0x84)] public byte BoardBackground;
-    public Span<TofuTransferObject> ObjectArray => new(Objects, 50);
 }
 
 [GenerateInterop]
@@ -99,5 +97,6 @@ public unsafe partial struct TofuShareSession {
     [FieldOffset(0x31B8)] public bool IsNotSending;
     [FieldOffset(0x31C0)] public TofuHelperData* Data;
     [FieldOffset(0x31D0)] public TofuHelper* TofuHelper;
-    [FieldOffset(0x31D8)] public UIModule* UiModule;
+    [FieldOffset(0x31D8)] public UIModule* UIModule;
+    [FieldOffset(0x31E8)] public ulong CurrentShareContentId;
 }
