@@ -188,59 +188,59 @@ public unsafe partial struct CharacterBase {
     #region Resolve*Path(Span<byte>) overloads
     public ReadOnlySpan<byte> ResolveRootPath(Span<byte> pathBuffer) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveRootPath(pBuffer, (nuint)pathBuffer.Length);
+            return ResolveRootPath(pBuffer, (nuint)pathBuffer.Length).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveSklbPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveSklbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+            return ResolveSklbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveMdlPath(Span<byte> pathBuffer, uint slotIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveMdlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+            return ResolveMdlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveSkpPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveSkpPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+            return ResolveSkpPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolvePhybPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+            return ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveKdbPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveKdbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+            return ResolveKdbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveBnmBPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveBnmBPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+            return ResolveBnmBPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolvePapPath(Span<byte> pathBuffer, uint unkAnimationIndex, ReadOnlySpan<byte> animationName) {
         fixed (byte* pAnimationName = animationName)
         fixed (byte* pBuffer = pathBuffer)
-            return ResolvePapPath(pBuffer, (nuint)pathBuffer.Length, unkAnimationIndex, pAnimationName);
+            return ResolvePapPath(pBuffer, (nuint)pathBuffer.Length, unkAnimationIndex, pAnimationName).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveTmbPath(Span<byte> pathBuffer, ReadOnlySpan<byte> timelineName) {
         fixed (byte* pTimelineName = timelineName)
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveTmbPath(pBuffer, (nuint)pathBuffer.Length, pTimelineName);
+            return ResolveTmbPath(pBuffer, (nuint)pathBuffer.Length, pTimelineName).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveMaterialPapPath(Span<byte> pathBuffer, uint slotIndex, uint unkSId) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveMaterialPapPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, unkSId);
+            return ResolveMaterialPapPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, unkSId).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveImcPath(Span<byte> pathBuffer, uint slotIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveImcPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+            return ResolveImcPath(pBuffer, (nuint)pathBuffer.Length, slotIndex).AsSpan();
     }
 
     /// <remarks>
@@ -249,28 +249,28 @@ public unsafe partial struct CharacterBase {
     public ReadOnlySpan<byte> ResolveMtrlPath(Span<byte> pathBuffer, uint slotIndex, ReadOnlySpan<byte> mtrlFileName) {
         fixed (byte* pMtrlFileName = mtrlFileName)
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pMtrlFileName);
+            return ResolveMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pMtrlFileName).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveSkinMtrlPath(Span<byte> pathBuffer, uint slotIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveSkinMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+            return ResolveSkinMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveDecalPath(Span<byte> pathBuffer, uint slotIndex) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveDecalPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
+            return ResolveDecalPath(pBuffer, (nuint)pathBuffer.Length, slotIndex).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveVfxPath(Span<byte> pathBuffer, uint slotIndex, out uint unkOutParam) {
         fixed (uint* pUnkOutParam = &unkOutParam)
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveVfxPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pUnkOutParam);
+            return ResolveVfxPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pUnkOutParam).AsSpan();
     }
 
     public ReadOnlySpan<byte> ResolveEidPath(Span<byte> pathBuffer) {
         fixed (byte* pBuffer = pathBuffer)
-            return ResolveEidPath(pBuffer, (nuint)pathBuffer.Length);
+            return ResolveEidPath(pBuffer, (nuint)pathBuffer.Length).AsSpan();
     }
     #endregion
 

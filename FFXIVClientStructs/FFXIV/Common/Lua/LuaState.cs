@@ -23,7 +23,7 @@ public unsafe partial struct LuaState {
             var results = new string?[cnt];
             for (var i = 0; i < cnt; i++) {
                 State->luaB_tostring();
-                results[i] = State->lua_tostring(-1);
+                results[i] = State->lua_tostring(-1).ToString();
                 State->lua_remove(1);
             }
 
