@@ -112,23 +112,23 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
-    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
-    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
-    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration")] public uint OpenTransitionDuration;
-    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration")] public uint CloseTransitionDuration;
-    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale")] public float OpenTransitionScale;
-    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale")] public float CloseTransitionScale;
-    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX")] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY")] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX")] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY")] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId")] public short OpenSoundEffectId;
+    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons", true)] public byte NumOpenPopups;
+    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId", true)] public ushort ContextMenuParentId;
+    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration", true)] public uint OpenTransitionDuration;
+    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration", true)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale", true)] public float OpenTransitionScale;
+    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale", true)] public float CloseTransitionScale;
+    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX", true)] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY", true)] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX", true)] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY", true)] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId", true)] public short OpenSoundEffectId;
 
     /// <summary> Gets a value indicating whether OnSetup was called </summary>
     public partial bool IsReady { get; }
 
     /// <summary> Disables the "Close" option in the title bar context menu and prevents the window from being closed via input (ESC or similar). </summary>
-    [Obsolete("Use ShouldFireCallbackAndHideOrClose.")]
+    [Obsolete("Use ShouldFireCallbackAndHideOrClose.", true)]
     public bool DisableUserClose { get => ShouldFireCallbackAndHideOrClose; set => ShouldFireCallbackAndHideOrClose = value; }
 
     /// <summary> If addon should have <seealso cref="FireCallback"/> triggered and if <seealso cref="Hide"/> or <seealso cref="Close"/> should be called </summary>

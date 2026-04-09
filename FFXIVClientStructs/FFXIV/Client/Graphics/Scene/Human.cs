@@ -84,13 +84,13 @@ public unsafe partial struct Human {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]
     public partial byte SetupVisor(ushort modelId, bool visorState);
 
-    [Obsolete("Use (DrawData*, bool) instead")]
+    [Obsolete("Use (DrawData*, bool) instead", true)]
     public bool UpdateDrawData(byte* data, bool skipEquipment) => UpdateDrawData((DrawData*)data, skipEquipment);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 BF ?? ?? ?? ?? ?? 75 34")]
     public partial bool UpdateDrawData(DrawData* data, bool skipEquipmentArrays);
 
-    [Obsolete("Use (DrawData*) instead")]
+    [Obsolete("Use (DrawData*) instead", true)]
     public bool SetupFromCharacterData(byte* data) => SetupFromCharacterData((DrawData*)data);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8B EA 48 81 C1")]

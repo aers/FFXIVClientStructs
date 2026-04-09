@@ -38,7 +38,7 @@ public unsafe partial struct AtkComponentTreeList : ICreatable<AtkComponentTreeL
         int itemCount,
         ListComponentCallBackInterface* callBackInterface = null);
 
-    [Obsolete("Use LoadAtkValues with callBackInterface parameter")]
+    [Obsolete("Use LoadAtkValues with callBackInterface parameter", true)]
     public void LoadAtkValues(
         int atkValuesCount,
         AtkValue* atkValues,

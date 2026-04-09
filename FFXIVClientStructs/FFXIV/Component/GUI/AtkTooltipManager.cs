@@ -28,7 +28,7 @@ public unsafe partial struct AtkTooltipManager {
     /// <remarks> See <see cref="AtkTooltipType"/>. </remarks>
     [FieldOffset(0x14C)] public byte TooltipType;
 
-    [FieldOffset(0x14C), Obsolete("Renamed to TooltipType")] public byte Flag1;
+    [FieldOffset(0x14C), Obsolete("Renamed to TooltipType", true)] public byte Flag1;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);

@@ -41,17 +41,17 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0xDD6)] private bool UnkDD6;
     [FieldOffset(0xDD8)] public int RepairAutoAddonId;
 
-    [FieldOffset(0x48), Obsolete("Use SelectedItem.Container")] public int SelectedItemInventoryType;
-    [FieldOffset(0x4C), Obsolete("Use SelectedItem.Slot")] public ushort SelectedItemInventorySlot;
-    [FieldOffset(0x50), Obsolete("Use SelectedItem.ItemId")] public int SelectedItemId;
-    [FieldOffset(0x58), Obsolete("Renamed to DialogAddonId")] public int AddonId_SelectYesno;
-    [FieldOffset(0x5C), Obsolete("Renamed to Filter")] public int InventoryContainerIndex;
-    [FieldOffset(0x64), Obsolete("Renamed to ShownRepairEntryAmount")] public int RepairableItemAmount;
-    [FieldOffset(0x88), FixedSizeArray, Obsolete("Use to FilterItemRefs")] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
-    [FieldOffset(0x94C), Obsolete("Renamed to InventoryItemEntryAmount")] public int RepairEntriesAmount;
-    [FieldOffset(0x954), FixedSizeArray, Obsolete("Use InventoryItemEntries")] internal FixedSizeArray140<RepairEntry> _repairEntries;
+    [FieldOffset(0x48), Obsolete("Use SelectedItem.Container", true)] public int SelectedItemInventoryType;
+    [FieldOffset(0x4C), Obsolete("Use SelectedItem.Slot", true)] public ushort SelectedItemInventorySlot;
+    [FieldOffset(0x50), Obsolete("Use SelectedItem.ItemId", true)] public int SelectedItemId;
+    [FieldOffset(0x58), Obsolete("Renamed to DialogAddonId", true)] public int AddonId_SelectYesno;
+    [FieldOffset(0x5C), Obsolete("Renamed to Filter", true)] public int InventoryContainerIndex;
+    [FieldOffset(0x64), Obsolete("Renamed to ShownRepairEntryAmount", true)] public int RepairableItemAmount;
+    [FieldOffset(0x88), FixedSizeArray, Obsolete("Use to FilterItemRefs", true)] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
+    [FieldOffset(0x94C), Obsolete("Renamed to InventoryItemEntryAmount", true)] public int RepairEntriesAmount;
+    [FieldOffset(0x954), FixedSizeArray, Obsolete("Use InventoryItemEntries", true)] internal FixedSizeArray140<RepairEntry> _repairEntries;
 
-    [Obsolete("Use ChangeRepairInventory.")]
+    [Obsolete("Use ChangeRepairInventory.", true)]
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 08 74 2D")]
     public partial RepairEntry* ChangeInventoryContainer(bool arg0); // false for self- and NPC-Repair but will be set in 0xDCC. unsure for what that's used.
 
