@@ -81,10 +81,4 @@ public enum ObjectType {
     EnvSpace = 7,
     EnvLocation = 8,
     UnkType9 = 9,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_Type6 = 6,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_Type9 = 9,
 }
