@@ -17336,30 +17336,48 @@ classes:
     vtbls:
       - ea: 0x1422EBB80
         base: Client::Game::InstanceContent::InstanceContentDirector
+  Client::Game::InstanceContent::InstanceContentVariantDungeon:
+    vtbls:
+      - ea: 0x142321B20
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x1419A9740: ctor
   Client::Game::InstanceContent::InstanceContentVariantDungeon1: # The Sil'dihn Subterrane
     vtbls:
       - ea: 0x14230F110
-        base: Client::Game::InstanceContent::InstanceContentDirector
+        base: Client::Game::InstanceContent::InstanceContentVariantDungeon
     funcs:
       0x14197EA60: ctor
   Client::Game::InstanceContent::InstanceContentVariantDungeon2: # Mount Rokkon
     vtbls:
       - ea: 0x14230E450
-        base: Client::Game::InstanceContent::InstanceContentVariantDungeon1
+        base: Client::Game::InstanceContent::InstanceContentVariantDungeon
     funcs:
       0x14197E6B0: ctor
   Client::Game::InstanceContent::InstanceContentVariantDungeon3: # Aloalo Island
     vtbls:
       - ea: 0x14230FDE0
-        base: Client::Game::InstanceContent::InstanceContentVariantDungeon1
+        base: Client::Game::InstanceContent::InstanceContentVariantDungeon
     funcs:
       0x14197EBB0: ctor
+  Client::Game::InstanceContent::InstanceContentVariantDungeon4: # The Merchant's Tale
+    vtbls:
+      - ea: 0x1423227E0
+        base: Client::Game::InstanceContent::InstanceContentVariantDungeon2
+    funcs:
+      0x1419A9AB0: ctor
   Client::Game::InstanceContent::InstanceContentCriterionDungeon:
     vtbls:
       - ea: 0x142310AA0
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x14197EE70: ctor
+  Client::Game::InstanceContent::InstanceContentAozStage: # Masked Carnivale
+    vtbls:
+      - ea: 0x1422DB6A0
+        base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x14195D450: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
       - ea: 0x1421D0768
