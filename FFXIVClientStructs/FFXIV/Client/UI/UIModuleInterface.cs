@@ -222,6 +222,6 @@ public enum UIModulePacketType {
     Unknown39 = 39, // Tofu
     Unknown40 = 40, // Tofu
 
-    [Obsolete("Renamed to ZoneInit")]
+    [Obsolete("Renamed to ZoneInit", true)]
     InitZone = 5,
 }

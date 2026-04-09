@@ -122,7 +122,7 @@ public unsafe partial struct CharacterBase {
     [VirtualFunction(69)]
     public partial bool SetEquipmentSlotModel(uint slot, EquipmentModelId* slotData);
 
-    [VirtualFunction(69), Obsolete("Use SetEquipmentSlotModel")]
+    [VirtualFunction(69), Obsolete("Use SetEquipmentSlotModel", true)]
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotData);
 
     [VirtualFunction(70)]

@@ -71,7 +71,7 @@ public unsafe partial struct AtkModuleInterface {
         [VirtualFunction(0)]
         public partial AtkValue* ReceiveEvent(AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind);
 
-        [VirtualFunction(1), Obsolete("Renamed to ReceiveEventWithResult")]
+        [VirtualFunction(1), Obsolete("Renamed to ReceiveEventWithResult", true)]
         public partial AtkValue* ReceiveEvent2(AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind);
 
         /// <remarks> Using FireCallbackWithResult, the return value is actually forwarded to the caller and might have a different ValueType besides bool. </remarks>

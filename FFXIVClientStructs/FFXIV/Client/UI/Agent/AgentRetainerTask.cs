@@ -23,13 +23,13 @@ public unsafe partial struct AgentRetainerTask {
     [FieldOffset(0x40)] public Data RetainerData;
 
     // Set when venture is complete
-    [FieldOffset(0x44), Obsolete("Use RetainerData.RewardXP")] public uint RewardXP;
+    [FieldOffset(0x44), Obsolete("Use RetainerData.RewardXP", true)] public uint RewardXP;
 
     // Set when venture is complete
-    [FieldOffset(0x50), FixedSizeArray, Obsolete("Use RetainerData.RewardItemIds")] internal FixedSizeArray2<uint> _rewardItemIds;
+    [FieldOffset(0x50), FixedSizeArray, Obsolete("Use RetainerData.RewardItemIds", true)] internal FixedSizeArray2<uint> _rewardItemIds;
 
     // Set when venture is complete
-    [FieldOffset(0x58), FixedSizeArray, Obsolete("Use RetainerData.RewardItemCount")] internal FixedSizeArray2<uint> _rewardItemCount;
+    [FieldOffset(0x58), FixedSizeArray, Obsolete("Use RetainerData.RewardItemCount", true)] internal FixedSizeArray2<uint> _rewardItemCount;
 
     [FieldOffset(0x6C)] public uint RetainerTaskLvRange;
 
