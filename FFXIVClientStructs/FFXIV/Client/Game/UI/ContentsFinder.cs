@@ -33,7 +33,7 @@ public unsafe partial struct ContentsFinder {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct ContentsFinderQueueInfo {
-    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<QueueEntry> _queuedEntries;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<ContentsId> _queuedEntries;
 
     [FieldOffset(0x28)] public uint QueuedClassJobId;
 
@@ -50,7 +50,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [FieldOffset(0x62)] public QueueInfoState InfoState;
 
-    [FieldOffset(0x7C)] public QueueEntry PoppedQueueEntry;
+    [FieldOffset(0x7C)] public ContentsId PoppedQueueEntry;
 
     [FieldOffset(0x88)] public bool PoppedContentIsUnrestrictedParty;
     [FieldOffset(0x89)] public bool PoppedContentIsMinimalIL;
@@ -84,13 +84,6 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 0F B6 49 ?? 8D 41")]
     public partial void CancelQueue();
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct QueueEntry {
-        [FieldOffset(0x0)] public ContentsId.ContentsType ContentType;
-        [FieldOffset(0x4), CExporterUnion("Id")] public uint ConditionId;
-        [FieldOffset(0x4), CExporterUnion("Id")] public byte RouletteId;
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
