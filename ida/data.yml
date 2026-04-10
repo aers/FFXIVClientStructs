@@ -14753,6 +14753,12 @@ classes:
     funcs:
       0x140A223E0: ctor
       0x140A22410: Finalizer
+  Client::UI::Agent::AgentVVDVoteRoute:
+    vtbls:
+      - ea: 0x1420CC050
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409B4D60: ctor
   Client::UI::Agent::AgentTofuList:
     vtbls:
       - ea: 0x1420CD2A8

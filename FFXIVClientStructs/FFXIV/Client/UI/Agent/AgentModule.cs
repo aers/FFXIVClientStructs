@@ -473,7 +473,7 @@ public enum AgentId : uint {
     Class2JobHotbar = 433,
     VVDNotebook = 434,
     VVDFinder = 435,
-    Unk436 = 436, // 7.4
+    VVDVoteRoute = 436, // 7.4
     TofuList = 437,
     TofuPreview = 438,
     TofuEdit = 439,
