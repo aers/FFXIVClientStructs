@@ -79,7 +79,7 @@ public enum NumberArrayType {
     ContentsFinderConfirm = 58,
     FreeCompanyChest = 59,
     Buddy = 60,
-    FreeCompanyExchange = 61,
+    // FreeCompanyExchange2 = 61, ?
     FreeCompanyAction = 62,
     RecommendList = 63,
 
