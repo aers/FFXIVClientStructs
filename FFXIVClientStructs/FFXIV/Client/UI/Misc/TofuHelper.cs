@@ -29,7 +29,7 @@ public unsafe partial struct TofuHelper {
         [FieldOffset(0x868)] public TofuShareData TofuShareData;
 
         [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 49 8D 78")]
-        public partial bool HandleSharePacket(Utf8String* a2, TofuStartSharingPacket* packet);
+        public partial bool HandleSharePacket(Utf8String* a2, ServerIpcSegment<TofuStartSharingPacket>* packet);
 
         /// <summary>
         /// Function called to verify to the server the shared board was received. Prevents the server from resending the board.
@@ -59,24 +59,28 @@ public unsafe partial struct TofuHelper {
     }
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct TofuBoardOverview {
-    [FieldOffset(0x0), CExporterUnion("TofuObjects")] private nint Unk0; // Objects only exist on received boards, not in boards to be sent
-    [FieldOffset(0x0), CExporterUnion("TofuObjects")] private StdVector<TofuTransferObject> Objects;
+    /// <remarks> Objects only exist on received boards, not in boards to be sent </remarks>
+    [FieldOffset(0x0)] public StdVector<TofuTransferObject> Objects;
     [FieldOffset(0x18)] public Utf8String BoardName;
     [FieldOffset(0x84)] public byte BoardBackground;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 FF 85 C0 75 ?? 44 8B F7")]
+    public partial uint ConstructPackedBoard(nint buffer, uint size, RaptureAtkColorDataManager* colorDataManager);
 }
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3238)]
 public partial struct TofuShareData {
-    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray10<uint> _uiIndex;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray10<uint> _boardIndex;
     [FieldOffset(0x28)] public ulong SenderContentId;
-    [FieldOffset(0x30)] private uint FolderIndex;
+    [FieldOffset(0x30)] public uint FolderIndex; // this is the folder index for shared boards internally, not the ui display
     [FieldOffset(0x34)] public byte TotalBoardsInSharedFolder;
-    [FieldOffset(0x38)] private bool IsLastBoardInSharedFolder;
-    [FieldOffset(0x39)] private bool Unk8A1;
-    [FieldOffset(0x40)] private TofuShareSession ShareSession;
+    [FieldOffset(0x38)] public bool IsLastBoardInSharedFolder;
+
+    [FieldOffset(0x40)] public TofuShareSession ShareSession;
 }
 
 [GenerateInterop]
@@ -86,12 +90,9 @@ public unsafe partial struct TofuShareSession {
     [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray10<TofuPackedBoard> _boards;
     [FieldOffset(0x3070), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _folderName;
     [FieldOffset(0x30AC)] public float SendCooldownSeconds; // client side rate limit for sending consecutive boards, set to 1 second
-    [FieldOffset(0x30B0)] private uint SendState;
-    [FieldOffset(0x30B4)] private uint CurrentBoardIndex;
+    [FieldOffset(0x30B0)] public SendState SendState;
+    [FieldOffset(0x30B4)] public uint CurrentBoardIndex; // 1-based
     [FieldOffset(0x30B8)] public uint TotalBoardsInSharedFolder;
-
-    [FieldOffset(0x30DA)] private bool Unk311A;
-    [FieldOffset(0x31A4)] private uint Unk31E4;
 
     [FieldOffset(0x31B8)] public bool IsNotSending;
     [FieldOffset(0x31C0)] public TofuHelperData* Data;
