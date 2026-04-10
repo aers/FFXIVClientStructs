@@ -82,16 +82,24 @@ public struct Contents {
     [FieldOffset(0xD0)] public ContentsId Id;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public struct ContentsId {
-    public enum ContentsType : byte {
-        None,
-        Roulette, // Id refers to ContentRoulette sheet
-        Regular, // Id refers to ContentFinderCondition sheet
-    }
-
     [FieldOffset(0x0)] public ContentsType ContentType;
     [FieldOffset(0x4)] public uint Id;
+}
+
+public enum ContentsType : byte {
+    None,
+
+    /// <summary>
+    /// Id refers to ContentRoulette sheet
+    /// </summary>
+    Roulette,
+
+    /// <summary>
+    /// Id refers to ContentFinderCondition sheet
+    /// </summary>
+    Regular,
 }
 
 [GenerateInterop]
