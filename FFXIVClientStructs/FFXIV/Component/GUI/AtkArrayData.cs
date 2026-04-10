@@ -44,7 +44,7 @@ public enum NumberArrayType {
     CastBar = 23,
     TargetCursor = 24,
     AreaMap = 25,
-
+    GatheringNote = 26,
     Journal = 27,
     ToDoList = 28,
     RecipeNote = 29,
@@ -68,18 +68,18 @@ public enum NumberArrayType {
     FreeCompanyRights = 47, // also MemberRankAssign, FreeCompanyRank
     CabinetStore = 48,
     CabinetWithdraw = 49,
-
+    FreeCompanyTopics = 50,
     FreeCompanyActivity = 51,
     FreeCompanyExchange = 52,
     FreeCompanyStatus = 53,
     ConfigSystem = 54,
-
+    ActionCrossEditor = 55,
     NaviMap = 56,
     AreaMap2 = 57,
     ContentsFinderConfirm = 58,
     FreeCompanyChest = 59,
     Buddy = 60,
-    //1 60,
+    FreeCompanyExchange = 61,
     FreeCompanyAction = 62,
     RecommendList = 63,
 
@@ -112,11 +112,12 @@ public enum NumberArrayType {
     PvPTeamActivity = 91,
 
     ContentMemberList = 93,
-
+    InventoryBuddy = 94,
     CrossWorldLinkShell = 95,
-
+    MinionNoteBook = 96,
+    MountNoteBook = 97,
     Lovm = 98,
-
+    LovmPalette = 99,
     LovmQueueList = 100,
     LovmNamePlate = 101,
     LovmMiniMap = 102,
@@ -139,7 +140,7 @@ public enum NumberArrayType {
     PvPFrontline = 120,
     LFGRecruiterNameSearch = 121,
     Snipe = 122,
-    // 1 122, // unsure
+    TreasureHighLow = 123,
     PVPSimulationHeader = 124,
     PVPSimulationAlliance = 125,
     PVPSimulationHeader2 = 126,
@@ -174,6 +175,9 @@ public enum NumberArrayType {
     MKDInfo = 155,
     MKDInfo2 = 156,
     QuickPanel = 157,
+    VVDVoteRoute = 158,
+
+    MKDRelicGrowth2 = 160,
 }
 
 public enum StringArrayType {
@@ -200,7 +204,7 @@ public enum StringArrayType {
     EnemyList = 20,
     CastBar = 21,
     AreaMap = 22,
-
+    GatheringNote = 23,
     Journal = 24,
     ToDoList = 25,
     RecipeNote = 26,
@@ -228,7 +232,7 @@ public enum StringArrayType {
     FreeCompanyExchange = 48,
     FreeCompanyStatus = 49,
     ConfigSystem = 50,
-
+    ActionCrossEditor = 51,
     NaviMap = 52,
     AreaMap2 = 53,
     ContentsFinderConfirm = 54,
@@ -247,7 +251,7 @@ public enum StringArrayType {
     LookingForGroup = 67,
     HousingTravellersNote = 68,
     DTR = 69,
-    //PadMouseMode = 70,
+    PadMouseMode = 70,
     RetainerCharacter = 71,
     AdventureNoteBook = 72,
     HousingChocoboList = 73,
@@ -270,11 +274,11 @@ public enum StringArrayType {
     LovmActionDetail = 90,
     LovmResult = 91,
     Lovm = 92,
-
+    LovmPalette = 93,
     PvPProfile = 94,
     Orchestrion = 95,
     OrchestrionPlayListSelect = 96,
-
+    CutSceneReplay = 97,
     RetainerTask = 98,
     YKWNote = 99,
     DeepDungeonNaviMap = 100,
