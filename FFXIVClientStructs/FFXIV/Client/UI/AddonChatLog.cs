@@ -28,6 +28,7 @@ public unsafe partial struct AddonChatLog {
     [FieldOffset(0x538)] public AtkImageNode* TabBarEndImageNode;
     [FieldOffset(0x540)] public AtkImageNode* TabBarStartImageNode;
     [FieldOffset(0x548)] public AtkCollisionNode* ControlsCollisionNode;
+    [FieldOffset(0x568)] public AtkAddonControl* AddonControl;
     [FieldOffset(0x598)] public AtkStage* AtkStage;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? 49 8B B6")]
