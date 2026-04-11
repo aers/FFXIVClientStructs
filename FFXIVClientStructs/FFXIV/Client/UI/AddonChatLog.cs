@@ -21,7 +21,8 @@ public unsafe partial struct AddonChatLog {
 
     [FieldOffset(0x508)] public AtkTextNode* CurrentChannelTextNode;
     [FieldOffset(0x510)] public AtkComponentNode* SettingsComponentNode;
-    [FieldOffset(0x518)] public AtkComponentNode* CloseComponentNode;
+    [FieldOffset(0x518)] public AtkComponentNode* NoviceNetworkComponentNode;
+    [FieldOffset(0x518), Obsolete("Named incorrectly, use NoviceNetworkComponentNode.")] public AtkComponentNode* CloseComponentNode;
     [FieldOffset(0x520)] public AtkNineGridNode* BackgroundNode;
     [FieldOffset(0x528)] public AtkComponentButton* ResizeButton;
     [FieldOffset(0x530)] public AtkComponentNode* AddTabComponentNode;
