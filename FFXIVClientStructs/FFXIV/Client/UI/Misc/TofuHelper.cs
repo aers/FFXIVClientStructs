@@ -79,7 +79,7 @@ public partial struct TofuShareData {
     [FieldOffset(0x30)] public uint FolderIndex; // this is the folder index for shared boards internally, not the ui display
     [FieldOffset(0x34)] public byte TotalBoardsInSharedFolder;
     [FieldOffset(0x38)] public bool IsLastBoardInSharedFolder;
-    [FieldOffset(0x39)] private bool Unk8A1;
+
     [FieldOffset(0x40)] public TofuShareSession ShareSession;
 }
 
@@ -93,9 +93,6 @@ public unsafe partial struct TofuShareSession {
     [FieldOffset(0x30B0)] public SendState SendState;
     [FieldOffset(0x30B4)] public uint CurrentBoardIndex; // 1-based
     [FieldOffset(0x30B8)] public uint TotalBoardsInSharedFolder;
-
-    [FieldOffset(0x30DA)] private bool Unk311A;
-    [FieldOffset(0x31A4)] private uint Unk31E4;
 
     [FieldOffset(0x31B8)] public bool IsNotSending;
     [FieldOffset(0x31C0)] public TofuHelperData* Data;
