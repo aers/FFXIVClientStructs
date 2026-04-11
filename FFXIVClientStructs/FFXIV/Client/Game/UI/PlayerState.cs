@@ -434,12 +434,18 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Check if a specific set of Glasses are unlocked. Internally, this will look up the associated GlassesStyle
     /// for the specified pair and check that it's valid and marked as unlocked in
-    /// <see cref="UnlockedGlassesStylesBitArray"/>.
+    /// <see cref="UnlockedGlassesStyles"/>.
     /// </summary>
     /// <param name="glassesId">The RowID of a set of glasses to check.</param>
     /// <returns>Returns true if the specified glasses are unlocked, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3")]
     public partial bool IsGlassesUnlocked(ushort glassesId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A FE 75 ?? 84 C0")]
+    public partial bool IsGlassesStyleUnlocked(ushort glassesStyleId);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF DA 41 0F B6 F8")]
+    public partial void SetGlassesStyleUnlocked(ushort glassesStyleId, bool isUnlocked);
 
     #endregion
 

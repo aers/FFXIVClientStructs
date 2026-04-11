@@ -2949,7 +2949,8 @@ classes:
       0x140B00CC0: GetPenaltyTimestamp
       0x140B00CD0: SetPenaltyTimestamp
       0x140B00D40: SetOrnamentUnlocked
-      0x140B00DE0: IsGlassesStylesUnlocked
+      0x140B00DE0: IsGlassesStyleUnlocked
+      0x140B00E80: SetGlassesStyleUnlocked
       0x140BA3D00: SetDesynthesisLevels
       0x140B00B90: SetDesynthesisLevelForClassJob
       0x140B00E20: IsGlassesUnlocked
@@ -9978,6 +9979,14 @@ classes:
       0x1407F14D0: AddSeenSupportJob
       0x1407F1660: IsSupportJobSeen
       0x1407F1690: RemoveSeenSupportJob
+  Client::UI::Misc::GlassesModule:
+    vtbls:
+      - ea: 0x1420BF4E0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407F2A50: ctor
+      0x1407F2C40: AddUnseenGlassesStyle
+      0x1407F2D40: RemoveUnseenGlassesStyle
   Client::UI::Misc::QuickPanelModule:
     vtbls:
       - ea: 0x1420BF468
