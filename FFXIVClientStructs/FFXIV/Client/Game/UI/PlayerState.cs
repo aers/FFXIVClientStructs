@@ -354,6 +354,9 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE")]
     public partial bool IsOrnamentUnlocked(uint ornamentId);
 
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B DA 41 0F B6 F8 C1 EA")]
+    public partial void SetOrnamentUnlocked(uint ornamentId, bool isUnlocked);
+
     /// <summary>
     /// Check if a specific orchestrion roll has been unlocked by the player.
     /// </summary>
