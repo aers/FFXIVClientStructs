@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 public partial struct SpawnNpcPacket {
     [FieldOffset(0x00)] public uint GimmickId;
     /// <remarks> Instance ID of an Event NPC. Seen for Event NPCs that turn into Battle NPCs (during quests, for example.) </remarks>
-    [FieldOffset(0x04)] public uint EventNpcId;
+    [FieldOffset(0x04)] public uint EventNpcInstanceId; // CharacterData.EventNpcInstanceId
     [FieldOffset(0x08)] public byte CharacterDataFlags; // CharacterData.Flags
     [FieldOffset(0x09)] public byte CharacterDataIcon; // CharacterData.Icon
     [FieldOffset(0x0A)] private byte UnkA; // flag to toggle 2 on Character+0x48
