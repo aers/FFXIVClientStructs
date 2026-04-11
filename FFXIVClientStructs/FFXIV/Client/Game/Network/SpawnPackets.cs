@@ -9,13 +9,17 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public partial struct SpawnNpcPacket {
     [FieldOffset(0x00)] public uint GimmickId;
-    [FieldOffset(0x04)] private uint Unk4; // Character+0x1BC0
+    /// <remarks> Instance ID of an Event NPC. Seen for Event NPCs that turn into Battle NPCs (during quests, for example.) </remarks>
+    [FieldOffset(0x04)] public uint EventNpcId;
     [FieldOffset(0x08)] public byte CharacterDataFlags; // CharacterData.Flags
     [FieldOffset(0x09)] public byte CharacterDataIcon; // CharacterData.Icon
     [FieldOffset(0x0A)] private byte UnkA; // flag to toggle 2 on Character+0x48
-    [FieldOffset(0x0B)] private byte UnkB; // Character+0x41 Pose?
-    [FieldOffset(0x0C)] private byte UnkC; // Character+0x42
-    [FieldOffset(0x0D)] private byte UnkD; // Character+0x44
+    /// <remarks> How many other BNpcs can be linked in this family. </remarks>
+    [FieldOffset(0x0B)] public byte MaxLinks;
+    /// <remarks> If not zero, specifies which family this BNpc is linked to. </remarks>
+    [FieldOffset(0x0C)] public byte LinkFamily;
+    /// <remarks> How far the link family can be apart. </remarks>
+    [FieldOffset(0x0D)] public byte LinkRange;
     [FieldOffset(0x0E)] private byte UnkE; // Character+0x43
     [FieldOffset(0x0F)] private byte UnkF; // flag to toggle 1 on Character+0x48
     [FieldOffset(0x10)] public CommonSpawnData Common;
