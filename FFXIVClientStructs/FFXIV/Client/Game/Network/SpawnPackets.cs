@@ -110,8 +110,8 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x252)] public CustomizeData CustomizeData;
     [FieldOffset(0x26C), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
 
-    [FieldOffset(0x30), Obsolete("Renamed to BaseId")] public uint BNpcBaseId;
-    [FieldOffset(0x34), Obsolete("Renamed to NameId")] public uint BNpcNameId;
+    [FieldOffset(0x30), Obsolete("Renamed to BaseId", true)] public uint BNpcBaseId;
+    [FieldOffset(0x34), Obsolete("Renamed to NameId", true)] public uint BNpcNameId;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct StatusEffect {

@@ -74,9 +74,6 @@ public unsafe partial struct Treasure {
         Unk3 = 3, // Went directly to this (skipped 1 and 2) when opening personal spoils in certain instances.  Is also a transition state that lasts a few frames as fadeout beings for some coffers.
         FadingOut = 4,
         FadedOut = 5,
-
-        [Obsolete("Why are you using this without documenting it in CS?", true)]
-        Unk_3 = 3,
     }
 
     [Flags]
@@ -88,9 +85,6 @@ public unsafe partial struct Treasure {
         /// </remarks>
         FadedOut = 2,
         Unk4 = 4, // Probably either "contains loot rollable by player's party", or "claim timer running for player's party" / "items from this treasure are in rolling UI window".
-
-        [Obsolete("Why are you using this without documenting it in CS?", true)]
-        Unk_4 = 4,
     }
 
     public enum TreasureKind : byte {
@@ -100,8 +94,5 @@ public unsafe partial struct Treasure {
         Unk3 = 3,
         TreasureHunt = 4,
         PersonalLoot = 5, // Variant, Occult Crescent, etc.
-
-        [Obsolete("Why are you using this without documenting it in CS?", true)]
-        Unk_3 = 3,
     }
 }

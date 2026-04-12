@@ -237,17 +237,17 @@ public unsafe partial struct SoundManager {
         /// <remarks>  2 Tracks, 3D </remarks>
         RandomWind = 20,
 
-        [Obsolete("Renamed to Music")] Bgm1 = 1,
-        [Obsolete("Renamed to SE")] Se1 = 2,
-        [Obsolete("Renamed to BG")] Env1 = 5,
-        [Obsolete("Renamed to Foot")] Se2 = 6,
-        [Obsolete("Renamed to PlacedNPC")] Se3 = 7,
-        [Obsolete("Renamed to TimeStretchBGM")] Bgm2 = 8,
-        [Obsolete("Renamed to Zingle")] Bgm3 = 9,
-        [Obsolete("Renamed to BGEnv")] Env2 = 11,
-        [Obsolete("Renamed to Walla")] Env3 = 12,
-        [Obsolete("Renamed to Orchestrion")] Bgm4 = 16,
-        [Obsolete("Renamed to Instruments")] Perform = 17,
+        [Obsolete("Renamed to Music", true)] Bgm1 = 1,
+        [Obsolete("Renamed to SE", true)] Se1 = 2,
+        [Obsolete("Renamed to BG", true)] Env1 = 5,
+        [Obsolete("Renamed to Foot", true)] Se2 = 6,
+        [Obsolete("Renamed to PlacedNPC", true)] Se3 = 7,
+        [Obsolete("Renamed to TimeStretchBGM", true)] Bgm2 = 8,
+        [Obsolete("Renamed to Zingle", true)] Bgm3 = 9,
+        [Obsolete("Renamed to BGEnv", true)] Env2 = 11,
+        [Obsolete("Renamed to Walla", true)] Env3 = 12,
+        [Obsolete("Renamed to Orchestrion", true)] Bgm4 = 16,
+        [Obsolete("Renamed to Instruments", true)] Perform = 17,
     }
 }
 

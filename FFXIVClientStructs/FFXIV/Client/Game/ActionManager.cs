@@ -414,13 +414,4 @@ public enum ActionType : uint {
     Unk18, // Not in UseAction (?)
     BgcArmyAction,
     Ornament,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_10 = 10,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_12 = 12,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_18 = 18,
 }

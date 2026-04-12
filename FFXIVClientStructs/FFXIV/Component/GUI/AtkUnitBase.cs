@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x238)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 33 ED 48 8B 89 ?? ?? ?? ?? 8B F2", 3, 74)]
-public unsafe partial struct AtkUnitBase : ICreatable {
+public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xB8)] public AtkWidgetAlignment WidgetAlignment; // copied from (AtkUldWidgetInfo*)UldManager.Objects
@@ -39,7 +39,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [BitField<bool>(nameof(DisableFocusability), 7)]
     [FieldOffset(0x1A0)] public byte Flags1A0;
     [BitField<bool>(nameof(IsReady), 0)]
-    [BitField<bool>(nameof(DisableUserClose), 2)]
+    [BitField<bool>(nameof(ShouldFireCallbackAndHideOrClose), 2)]
     [BitField<bool>(nameof(DisableFocusOnShow), 6)]
     [FieldOffset(0x1A1)] public byte Flags1A1;
     [BitField<bool>(nameof(WasLoadUldByNameCalled), 2)]
@@ -112,23 +112,27 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
-    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
-    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
-    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration")] public uint OpenTransitionDuration;
-    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration")] public uint CloseTransitionDuration;
-    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale")] public float OpenTransitionScale;
-    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale")] public float CloseTransitionScale;
-    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX")] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY")] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX")] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY")] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId")] public short OpenSoundEffectId;
+    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons", true)] public byte NumOpenPopups;
+    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId", true)] public ushort ContextMenuParentId;
+    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration", true)] public uint OpenTransitionDuration;
+    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration", true)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale", true)] public float OpenTransitionScale;
+    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale", true)] public float CloseTransitionScale;
+    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX", true)] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY", true)] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX", true)] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY", true)] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId", true)] public short OpenSoundEffectId;
 
     /// <summary> Gets a value indicating whether OnSetup was called </summary>
     public partial bool IsReady { get; }
 
     /// <summary> Disables the "Close" option in the title bar context menu and prevents the window from being closed via input (ESC or similar). </summary>
-    public partial bool DisableUserClose { get; set; }
+    [Obsolete("Use ShouldFireCallbackAndHideOrClose.", true)]
+    public bool DisableUserClose { get => ShouldFireCallbackAndHideOrClose; set => ShouldFireCallbackAndHideOrClose = value; }
+
+    /// <summary> If addon should have <seealso cref="FireCallback"/> triggered and if <seealso cref="Hide"/> or <seealso cref="Close"/> should be called </summary>
+    public partial bool ShouldFireCallbackAndHideOrClose { get; set; }
 
     /// <summary> Disables loading from/saving to AddonConfig </summary>
     public partial bool DisableAddonConfig { get; set; }
@@ -160,7 +164,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public static partial float GetGlobalUIScale();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
-    public partial void Ctor();
+    public partial AtkUnitBase* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 40 F6 C5 01")]
     public partial void Destructor();
@@ -302,7 +306,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void SetScale(float scale, bool a3);
 
     [VirtualFunction(15)]
-    public partial void GetSize(short* outWidth, short* outHeight, bool scaled);
+    public partial void GetSize(ushort* outWidth, ushort* outHeight, bool scaled);
 
     [VirtualFunction(16)]
     public partial void Hide2();

@@ -35,8 +35,8 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0xFD0)] public ulong YesNoTargetContentId;
     [FieldOffset(0xFD8)] public GameObjectId TargetObjectId;
     [FieldOffset(0xFE0)] public GameObjectId YesNoTargetObjectId;
-    [FieldOffset(0xFE8)] public short TargetHomeWorldId;
-    [FieldOffset(0xFEA)] public short YesNoTargetHomeWorldId;
+    [FieldOffset(0xFE8)] public short TargetHomeWorldId; // can be -1 if unknown
+    [FieldOffset(0xFEA)] public short YesNoTargetHomeWorldId; // can be -1 if unknown
     [FieldOffset(0xFEC)] public byte YesNoEventId;
 
     [FieldOffset(0xFF0)] public int TargetSex;
@@ -101,7 +101,7 @@ public unsafe partial struct AgentContext {
 [StructLayout(LayoutKind.Explicit, Size = 0x6A8)]
 public unsafe partial struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
-    [FieldOffset(0x02)] public short CurrentEventId;
+    [FieldOffset(0x02)] public byte CurrentEventId;
 
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray34<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title + 1 * unk
 

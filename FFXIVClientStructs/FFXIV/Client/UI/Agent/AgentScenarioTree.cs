@@ -55,7 +55,7 @@ public unsafe partial struct AgentScenarioTree {
         [FieldOffset(0x2C)] public byte MSQPathIndex;
         [FieldOffset(0x2D)] private bool Unk2D;
 
-        [FieldOffset(0x00), Obsolete("Use MainScenarioQuestIds[0]")] public ushort CurrentScenarioQuest; // CurrentScenarioQuest | 0x10000U = Quest row
-        [FieldOffset(0x06), Obsolete("Use MainScenarioQuestIds[3]")] public ushort CompleteScenarioQuest; // Only populated if no MSQ is accepted
+        [FieldOffset(0x00), Obsolete("Use MainScenarioQuestIds[0]", true)] public ushort CurrentScenarioQuest; // CurrentScenarioQuest | 0x10000U = Quest row
+        [FieldOffset(0x06), Obsolete("Use MainScenarioQuestIds[3]", true)] public ushort CompleteScenarioQuest; // Only populated if no MSQ is accepted
     }
 }
