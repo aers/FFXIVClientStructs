@@ -32,7 +32,6 @@ public unsafe partial struct AddonInclusionShop {
             [FieldOffset(AtkValue.StructSize * 6), FixedSizeArray] internal FixedSizeArray3<AtkValue> _giveItemId;
             [FieldOffset(AtkValue.StructSize * 9), FixedSizeArray] internal FixedSizeArray3<AtkValue> _giveIconId;
             [FieldOffset(AtkValue.StructSize * 12), FixedSizeArray] internal FixedSizeArray3<AtkValue> _giveAmount;
-            [FieldOffset(AtkValue.StructSize * 14)] public AtkValue AtkValue14;
             [FieldOffset(AtkValue.StructSize * 15)] public AtkValue MaxAmount;
             [FieldOffset(AtkValue.StructSize * 16)] public AtkValue Flags; // 0b10 = CanSelectAmount
             [FieldOffset(AtkValue.StructSize * 17)] public AtkValue Index;
