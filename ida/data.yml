@@ -12192,6 +12192,7 @@ classes:
         base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1405279D0: ctor
+      0x140521900: OpenContextMenuForMember
   Client::UI::Agent::AgentFreeCompanyOrganizeSheet:
     vtbls:
       - ea: 0x14209DBC0
