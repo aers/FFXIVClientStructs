@@ -63,12 +63,20 @@ public unsafe partial struct TofuHelper {
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct TofuBoardOverview {
     /// <remarks> Objects only exist on received boards, not in boards to be sent </remarks>
-    [FieldOffset(0x0)] public StdVector<TofuTransferObject> Objects;
+    [FieldOffset(0x0)] public StdVector<TofuFullObject> Objects;
     [FieldOffset(0x18)] public Utf8String BoardName;
     [FieldOffset(0x84)] public byte BoardBackground;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 85 C0 75 ?? 44 8B F7")]
     public partial uint ConstructPackedBoard(nint buffer, uint size, RaptureAtkColorDataManager* colorDataManager);
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x450)]
+public partial struct TofuPackedBoardShare {
+    [FieldOffset(0x0)] public TofuPackedBoard PackedBoard;
+    [FieldOffset(0x410), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _boardName;
+    [FieldOffset(0x44C)] private uint Unk44C; // Populated with data even if board is empty. Not timestamp and doesn't change with different boards
 }
 
 [GenerateInterop]
@@ -87,16 +95,17 @@ public partial struct TofuShareData {
 [StructLayout(LayoutKind.Explicit, Size = 0x31F8)]
 public unsafe partial struct TofuShareSession {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray10<TofuBoardOverview> _boardOverviews;
-    [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray10<TofuPackedBoard> _boards;
+    [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray10<TofuPackedBoardShare> _boards;
     [FieldOffset(0x3070), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _folderName;
     [FieldOffset(0x30AC)] public float SendCooldownSeconds; // client side rate limit for sending consecutive boards, set to 1 second
     [FieldOffset(0x30B0)] public SendState SendState;
     [FieldOffset(0x30B4)] public uint CurrentBoardIndex; // 1-based
     [FieldOffset(0x30B8)] public uint TotalBoardsInSharedFolder;
 
+    [FieldOffset(0x30C8)] public ulong CurrentShareContentId;
+
     [FieldOffset(0x31B8)] public bool IsNotSending;
     [FieldOffset(0x31C0)] public TofuHelperData* Data;
     [FieldOffset(0x31D0)] public TofuHelper* TofuHelper;
     [FieldOffset(0x31D8)] public UIModule* UIModule;
-    [FieldOffset(0x31E8)] public ulong CurrentShareContentId;
 }
