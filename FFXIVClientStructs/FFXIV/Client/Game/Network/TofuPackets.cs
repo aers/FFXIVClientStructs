@@ -5,8 +5,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 [StructLayout(LayoutKind.Explicit, Size = 0x49A)]
 public partial struct TofuStartSharingPacket {
     [FieldOffset(0x0)] public ulong SenderContentId;
-    [FieldOffset(0x8)] public uint Checksum; // uses 0x410 of BoardContent to create checksum
-    [FieldOffset(0x10)] private TofuPackedBoard BoardContent;
+    [FieldOffset(0x8)] public uint Checksum; // uses BoardContent to create checksum
+    [FieldOffset(0x10)] public TofuPackedBoard BoardContent;
+    [FieldOffset(0x420), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _folderName;
+    [FieldOffset(0x45C), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _boardName;
     [FieldOffset(0x498)] public byte BoardIndexInSharedFolder; // 1-based
     [FieldOffset(0x499)] public byte TotalBoardsInSharedFolder;
 }
