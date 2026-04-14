@@ -17,6 +17,7 @@ public static class ExporterStatics {
     public static readonly BindingFlags StaticBindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
     public static readonly string[] IgnoredTypeNames = ["MemberFunctionPointers", "StaticAddressPointers", "Addresses", "VirtualTable"];
+    public static readonly string[] BaseTypeNames = ["byte", "wchar_t", "char", "float", "double", "__int16", "int", "__int64", "unsigned __int16", "unsigned int", "unsigned __int64", "__int8", "unsigned __int8"];
     public static readonly List<string> WarningList = [];
     public static readonly List<string> ErrorList = [];
 

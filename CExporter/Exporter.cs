@@ -364,6 +364,8 @@ public class Exporter {
             var fieldOverrideType = elementType == typeof(nint) ? field.GetCustomAttribute<CExporterExcelAttribute>()?.SheetName ?? null : null;
             if (fieldOverrideType != null)
                 fieldOverrideType = $"Component::Exd::Sheets::{fieldOverrideType}*";
+            if (isString && elementType == typeof(byte))
+                fieldOverrideType = "char";
             _processType.Add(elementType);
             return new ProcessedFixedField {
                 FieldType = elementType,
@@ -825,25 +827,14 @@ public class ProcessedStruct {
         get {
             if (_dependencyNames.Length == 0) {
                 _dependencyNames = Fields
-                    .Where(t => (
-                            t.GetType() == typeof(ProcessedField) ||
-                            t.GetType() == typeof(ProcessedFixedField)
-                        ) &&
-                        (
-                            !(
-                                t.FieldType.IsPointer() ||
-                                t.FieldType.IsPrimitive ||
-                                t.FieldType.IsFixedBuffer() ||
-                                t.FieldType.IsEnum ||
-                                t.FieldType.IsBaseType()
-                            ) ||
-                            (
-                                t.FieldTypeOverride != null &&
-                                (!t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value) &&
-                                !t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") &&
-                                !t.FieldTypeOverride.EndsWith('*')
-                            )
-                        ))
+                    .Where(t => {
+                        if (t.FieldTypeOverride != null) {
+                            if (t.FieldTypeOverride.EndsWith('*') || t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") || ExporterStatics.BaseTypeNames.Contains(t.FieldTypeOverride))
+                                return false;
+                            return !t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value;
+                        }
+                        return (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!( t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()));
+                    })
                     .Select(t => t.FieldTypeOverride ?? t.FieldType.FixTypeName()).Distinct().ToArray();
             }
             return _dependencyNames;
