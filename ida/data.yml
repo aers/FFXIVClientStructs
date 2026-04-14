@@ -7716,6 +7716,11 @@ classes:
       0x140607470: GetHardTargetId
       0x140607490: GetHardTarget
       0x1405FE630: SetHardTarget
+      0x1405FF210: CheckHorizontalDistance # (TargetSystem* this, GameObject* object, float maxDistance) -> bool
+      0x1405FF460: CheckVerticalDistance # (TargetSystem* this, GameObject* object, float maxDistance) -> bool
+      0x140604050: IsObjectTargetableByLocalPlayer # (TargetSystem *this, GameObject *obj, float horizontalRange) -> bool
+      0x140606810: HandleTargetingKeybinds
+      0x140607240: SetHardTargetChecked # (TargetSystem* this, GameObject* hardTargetObject, bool requireOnScreen, bool requireOnScreenOrLos) -> bool
       0x1406074B0: GetSoftTargetObjectId
       0x1406074D0: GetSoftTargetId
       0x1406074F0: GetSoftTarget
@@ -9453,12 +9458,14 @@ classes:
     vtbls:
       - ea: 0x1420B82A0
     funcs:
+      0x1400E3750: IsInputIdPressed # static
       # 0x140621DA0: ctor # inlined @ 0x14075CDAD
       0x140759850: HandleInputUpdate
       0x14075A130: DisablePadMouseMode
       0x14075A860: CanEnterIdleCam
       0x14075A8C0: CanEnterGPose
       0x14075B180: CheckCastCancel
+      0x14075E000: HandleTargetingKeybinds
       0x14075EFE0: CheckScreenshotState
   Client::UI::UIModuleInterface:
     vtbls:

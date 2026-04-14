@@ -22,6 +22,9 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0xF8)] public GameObject* FocusTarget;
     [FieldOffset(0x110)] public GameObject* PreviousTarget;
     [FieldOffset(0x140)] public GameObjectId TargetObjectId;
+    [FieldOffset(0x148)] public GameObjectArray TargetableObjectsOnScreen;
+
+    [Obsolete("Renamed to TargetableObjectsOnScreen")]
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
     [FieldOffset(0x2178)] public GameObjectArray ObjectFilterArray1;
@@ -52,6 +55,9 @@ public unsafe partial struct TargetSystem {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 8B 83")]
     public partial bool SetHardTarget(GameObject* hardTargetObject, bool ignoreTargetModes = false, bool a4 = false, int a5 = 0);
+
+    [MemberFunction("40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 8B 05")]
+    public partial void HandleTargetingKeybinds();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C3 74 ?? B0 01")]
     public partial GameObject* GetSoftTarget();

@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.Shell;
 
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct ShellCommandInterface {
     [VirtualFunction(1)]
