@@ -14,17 +14,18 @@ public unsafe partial struct AtkUIColorHolder {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct UIColor {
-        [FieldOffset(0x0)] public uint RowId;
-        // the names of these fields are based on the column names in EXDSchema
-        [FieldOffset(0x4)] private uint Unknown0; // this field is used by GetColor() when useThemeColor is false or ActiveColorThemeType == 0
-        [FieldOffset(0x8)] private uint Unknown1; // this field is used by GetColor() when useThemeColor is true and ActiveColorThemeType != 0
+        [FieldOffset(0x00)] public uint RowId;
+        /// <remarks> Used by <see cref="GetColor"/> when the <c>useThemeColor</c> parameter is <see langword="false"/> or <see cref="ActiveColorThemeType"/> is <c>0</c>. </remarks>
+        [FieldOffset(0x04)] public uint Color;
+        /// <remarks> Used by <see cref="GetColor"/> when the <c>useThemeColor</c> parameter is <see langword="true"/> and <see cref="ActiveColorThemeType"/> is not <c>0</c>. </remarks>
+        [FieldOffset(0x08)] public uint ThemedColor;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct UIColorGroup {
-        [FieldOffset(0x0)] public uint StartId;
-        [FieldOffset(0x4)] public uint EndId;
-        [FieldOffset(0x8)] public uint AccumulatedOffset; // used in the index calculation for the UIColors vector
+        [FieldOffset(0x00)] public uint StartId;
+        [FieldOffset(0x04)] public uint EndId;
+        [FieldOffset(0x08)] public uint AccumulatedOffset; // used in the index calculation for the UIColors vector
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B C8 88 43 2C")]
