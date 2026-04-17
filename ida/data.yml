@@ -9724,9 +9724,9 @@ classes:
       0x1407DE020: SetOwnPlayerNameSetting
       0x1407DE040: SetOthersPlayerNameSetting
       0x1407DE060: ToggleCharacterVoices
-      0x1407DE080: SetUnk54
+      0x1407DE080: SetEmjVoiceNpc
       0x1407DE0A0: IsVoiceUnlocked
-      0x1407DE0C0: SetUnk55
+      0x1407DE0C0: SetEmjCostumeId
       0x1407DE0E0: IsConstumeUnlocked
       0x1407DE120: ToggleVoiceSeen
       0x1407DE180: IsVoiceSeen
@@ -12545,7 +12545,7 @@ classes:
       - ea: 0x1420FD268
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1409C5D20: ctor
+      0x1420FD268: ctor
   Client::UI::Agent::AgentVoteKick:
     vtbls:
       - ea: 0x1420D83F0
@@ -13600,12 +13600,14 @@ classes:
     vtbls:
       - ea: 0x1420CB7F0
         base: Client::UI::Misc::CharaView
+    funcs:
+      0x1409A2880: ctor
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x142103A58
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140ED1C00: ctor
+      0x1410546C0: ctor
   Client::UI::Agent::AgentAozContentBriefing:
     vtbls:
       - ea: 0x1420E4AC0
