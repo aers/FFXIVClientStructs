@@ -28,6 +28,9 @@ public unsafe partial struct AgentFreeCompany {
 
     [FieldOffset(0xA90)] public FreeCompanyActionTimer ActionTimeRemaining;
 
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 10 E8 ?? ?? ?? ?? 44 8B 43 20")]
+    public partial void OpenContextMenuForMember(byte memberIndex);
+
     // This supports 3 company actions despite 2 being the current limit.
     // The UI also has a blank 3rd slot
     [GenerateInterop]
