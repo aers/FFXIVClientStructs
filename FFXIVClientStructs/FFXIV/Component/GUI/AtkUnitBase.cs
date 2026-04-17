@@ -269,6 +269,9 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF C6 44 24 ?? ?? 4C 8B C7"), GenerateStringOverloads]
     public partial void SaveAddonConfig(CStringPointer name, bool a2, bool a3);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 0C 48 8B CF")]
+    public partial void RegisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener, AtkResNode* node);
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
