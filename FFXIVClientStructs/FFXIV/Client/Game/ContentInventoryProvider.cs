@@ -8,7 +8,7 @@ public unsafe partial struct ContentInventoryProvider {
     [FieldOffset(0x20)] public short SlotCount;
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial ContentInventoryProvider* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial bool HasInventoryContainer(InventoryType inventoryType);

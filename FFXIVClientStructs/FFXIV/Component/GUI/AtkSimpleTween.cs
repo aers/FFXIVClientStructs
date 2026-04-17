@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-public unsafe partial struct AtkSimpleTween : ICreatable {
+public unsafe partial struct AtkSimpleTween : ICreatable<AtkSimpleTween> {
     [FieldOffset(0x8)] public SimpleTweenState State;
     [FieldOffset(0x10)] public AtkResNode* Node;
     [FieldOffset(0x18)] public float CurrentTimestamp;
@@ -25,10 +25,10 @@ public unsafe partial struct AtkSimpleTween : ICreatable {
     [FieldOffset(0x48)] public float EasingFactor;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C3 89 7B 58")]
-    public partial void Ctor();
+    public partial AtkSimpleTween* Ctor();
 
     [VirtualFunction(1)]
-    public partial void Dtor();
+    public partial AtkSimpleTween* Dtor();
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 BB ?? ?? ?? ?? ?? 74 8E")]
     public partial void Clear();

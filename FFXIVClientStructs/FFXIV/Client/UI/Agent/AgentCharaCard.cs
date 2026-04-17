@@ -1,5 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -19,14 +19,14 @@ public unsafe partial struct AgentCharaCard {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 30 00 48 8B FA 48 8B D9 75 4B")]
     private partial void OpenCharaCardForContentId(ulong contentId);
 
-    public void OpenCharaCard(ulong contentId) => OpenCharaCardForContentId(contentId);
-
     [MemberFunction("48 85 D2 74 6D 48 89 5C 24")]
     private partial void OpenCharaCardForObject(GameObject* gameObject);
-    public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 
     [MemberFunction("40 55 53 57 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC B8 04 00 00")]
     private partial void OpenCharaCardForPacket(CharaCardPacket* packet, bool a3);
+
+    public void OpenCharaCard(ulong contentId) => OpenCharaCardForContentId(contentId);
+    public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 
     // Client::UI::Agent::AgentCharaCard::Storage
     [GenerateInterop]
@@ -139,25 +139,5 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x04)] public byte NumDecorations;
         /// <remarks> CharaCardDecoration RowIds </remarks>
         [FieldOffset(0x06), FixedSizeArray] internal FixedSizeArray5<ushort> _decorations;
-    }
-
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x1E6)]
-    public partial struct CharaCardPacket {
-        [FieldOffset(0x000)] public CrestData FreeCompanyCrestData; // guessed
-        [FieldOffset(0x008)] public ulong AccountId;
-        [FieldOffset(0x010)] public ulong ContentId;
-        [FieldOffset(0x018)] public uint EntityId;
-        [FieldOffset(0x01C)] public uint SomeState;
-        [FieldOffset(0x020)] public ushort WorldId;
-        [FieldOffset(0x022)] public ushort Level;
-        [FieldOffset(0x024)] public byte ClassJobId;
-        [FieldOffset(0x025)] public byte Sex;
-        [FieldOffset(0x026)] public byte GrandCompany;
-        [FieldOffset(0x027)] public byte GcRank;
-        [FieldOffset(0x028)] public CharaCardData CharaCardData;
-        [FieldOffset(0x0E4), FixedSizeArray] internal FixedSizeArray193<byte> _searchComment;
-        [FieldOffset(0x1A5), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
-        [FieldOffset(0x1C5), FixedSizeArray(isString: true)] internal FixedSizeArray22<byte> _freeCompany; // length unknown; copied from InfoProxyFreeCompany
     }
 }

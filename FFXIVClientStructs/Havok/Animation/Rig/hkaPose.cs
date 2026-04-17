@@ -31,10 +31,10 @@ public unsafe partial struct hkaPose {
     [FieldOffset(0x40)] public hkArray<float> FloatSlotValues;
 
     [MemberFunction("40 53 48 83 EC 20 4C 89 01 33 C0")]
-    public partial void Ctor1(PoseSpace space, hkaSkeleton* skeleton, hkArray<hkQsTransformf>* pose);
+    public partial hkaPose* Ctor1(PoseSpace space, hkaSkeleton* skeleton, hkArray<hkQsTransformf>* pose);
 
     [MemberFunction("40 53 48 83 EC 30 4C 89 01")]
-    public partial void Ctor2(PoseSpace space, hkaSkeleton* skeleton, hkQsTransformf* pose, int numBones);
+    public partial hkaPose* Ctor2(PoseSpace space, hkaSkeleton* skeleton, hkQsTransformf* pose, int numBones);
 
     // [MemberFunction("")]
     // public partial hkaSkeleton* GetSkeleton();

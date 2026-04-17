@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -30,8 +31,8 @@ public unsafe partial struct InstanceContent {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public partial struct ContentUI : ICreatable {
-        [FieldOffset(0x08)] public ContentLookupInfo LookupInfo;
+    public partial struct ContentUI : ICreatable<ContentUI> {
+        [FieldOffset(0x08)] public ContentsId LookupInfo;
         [FieldOffset(0x10)] public InstanceContentExcelWrapper InstanceContent;
         [FieldOffset(0x28)] public ContentRoulette ContentRoulette;
         [FieldOffset(0x38)] public PartyContent PartyContent;
@@ -39,10 +40,10 @@ public unsafe partial struct InstanceContent {
         [FieldOffset(0x68)] public GoldSaucerContent GoldSaucerContent;
 
         [MemberFunction("45 33 C0 C6 41 08 00")]
-        public partial void Ctor();
+        public partial ContentUI* Ctor();
 
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 4E ?? 48 8B 5C 24")]
-        public partial bool LoadByContentLookupInfo(ContentLookupInfo* lookupInfo);
+        public partial bool LoadByContentLookupInfo(ContentsId* lookupInfo);
 
         [MemberFunction("E9 ?? ?? ?? ?? 44 0F B6 43 ?? 48 8D 51")]
         public partial bool LoadByContentFinderConditionId(uint rowId);
@@ -52,16 +53,5 @@ public unsafe partial struct InstanceContent {
 
         [VirtualFunction(0)]
         public partial ContentUI* Dtor(byte freeFlags);
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-    public partial struct ContentLookupInfo {
-        [FieldOffset(0x00)] public ContentLookupType Type;
-        [FieldOffset(0x04)] public uint RowId;
-    }
-
-    public enum ContentLookupType : byte {
-        ContentRoulette = 1,
-        ContentFinderCondition = 2,
     }
 }

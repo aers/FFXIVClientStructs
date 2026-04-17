@@ -70,8 +70,8 @@ public unsafe partial struct RaceChocoboManager {
     [FieldOffset(0x24)] public byte SessionsAvailable;
     [FieldOffset(0x25)] private byte Unk25;
 
-    [FieldOffset(0x0E), Obsolete("Use FatherParameters or the generated bit field properties")] public short Father;
-    [FieldOffset(0x10), Obsolete("Use MotherParameters or the generated bit field properties")] public short Mother;
+    [FieldOffset(0x0E), Obsolete("Use FatherParameters or the generated bit field properties", true)] public short Father;
+    [FieldOffset(0x10), Obsolete("Use MotherParameters or the generated bit field properties", true)] public short Mother;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 55 ?? 48 8B CF E8 ?? ?? ?? ?? 48 8D 77")]
     public partial void GetAttributesCurrent(RaceChocoboAttributeValues* outValues);

@@ -15,7 +15,7 @@ public unsafe partial struct EventHandler {
 
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
-    [FieldOffset(0x88)] public ulong SceneFlags; // TODO: use SceneFlag enum
+    [FieldOffset(0x88)] public SceneFlag SceneFlags;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 

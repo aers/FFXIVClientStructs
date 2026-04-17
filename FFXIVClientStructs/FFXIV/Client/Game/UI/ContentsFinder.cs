@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Enums;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -32,7 +33,7 @@ public unsafe partial struct ContentsFinder {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct ContentsFinderQueueInfo {
-    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<QueueEntry> _queuedEntries;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<ContentsId> _queuedEntries;
 
     [FieldOffset(0x28)] public uint QueuedClassJobId;
 
@@ -41,7 +42,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [FieldOffset(0x4C)] public int NextQueueUpdateTimestamp;
 
-    [FieldOffset(0x55)] public QueueStates QueueState;
+    [FieldOffset(0x55)] public ContentsFinderQueueState QueueState;
 
     [FieldOffset(0x5A)] public byte QueuedContentRouletteId;
     [FieldOffset(0x5B)] public sbyte ClampedPositionInQueue;
@@ -49,7 +50,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [FieldOffset(0x62)] public QueueInfoState InfoState;
 
-    [FieldOffset(0x7C)] public QueueEntry PoppedQueueEntry;
+    [FieldOffset(0x7C)] public ContentsId PoppedQueueEntry;
 
     [FieldOffset(0x88)] public bool PoppedContentIsUnrestrictedParty;
     [FieldOffset(0x89)] public bool PoppedContentIsMinimalIL;
@@ -61,7 +62,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     public DateTime GetQueueReadyDateTime() => DateTime.UnixEpoch.AddSeconds(QueueReadyTimestamp);
 
     [MemberFunction("40 53 57 41 57 48 83 EC 30 0F B6 41 55")]
-    public partial void ProcessInfoState(QueueStates newState, QueueInfoState* newInfoState);
+    public partial void ProcessInfoState(ContentsFinderQueueState newState, QueueInfoState* newInfoState);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 13 44 0F B6 C7")]
     public partial void SetQueuedLanguages(byte languageFlags);
@@ -73,7 +74,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     public partial void SetQueuedJobAndRoulette(uint classJobId, byte a3, byte a4, byte contentRouletteId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0")]
-    public partial void UpdateQueueState(QueueStates newState, bool beganQueue);
+    public partial void UpdateQueueState(ContentsFinderQueueState newState, bool beganQueue);
 
     [MemberFunction("4C 8B DC 55 41 54 41 56 49 8D 6B ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 80 79 ?? 00")]
     public partial void QueueRoulette(byte contentRouletteId, byte a3 = 0);
@@ -83,24 +84,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 0F B6 49 ?? 8D 41")]
     public partial void CancelQueue();
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct QueueEntry {
-        [FieldOffset(0x0)] public ContentsId.ContentsType ContentType;
-        [FieldOffset(0x4), CExporterUnion("Id")] public uint ConditionId;
-        [FieldOffset(0x4), CExporterUnion("Id")] public byte RouletteId;
-    }
-
-    public enum QueueStates : byte {
-        None = 0,
-        Pending = 1,
-        Queued = 2,
-        Ready = 3,
-        Accepted = 4,
-        InContent = 5
-    }
 }
-
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct QueueInfoState {

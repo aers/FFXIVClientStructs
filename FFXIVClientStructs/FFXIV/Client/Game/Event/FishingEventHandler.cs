@@ -145,7 +145,4 @@ public enum FishingState : int {
     /// Or air, sand, etc.; just when you are actually fishing.
     /// </remarks>
     LineInWater = 12,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_11 = 11,
 }

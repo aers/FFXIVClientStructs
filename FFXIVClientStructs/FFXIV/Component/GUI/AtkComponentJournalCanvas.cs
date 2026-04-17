@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x648)]
-public partial struct AtkComponentJournalCanvas : ICreatable {
+public unsafe partial struct AtkComponentJournalCanvas : ICreatable<AtkComponentJournalCanvas> {
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 48 8D 05 ?? ?? ?? ?? 33 C9 33 D2 41 B8 ?? ?? ?? ?? 48 89 4B 08")]
-    public partial void Ctor();
+    public partial AtkComponentJournalCanvas* Ctor();
 }
