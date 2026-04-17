@@ -16182,6 +16182,8 @@ classes:
       0x140C8BB70: GetQuestBattleDirector
       0x140C8BBC0: GetGoldSaucerDirector
       0x140C8E7C0: CheckInteractRange
+      0x140C8E9D0: IsFestivalActive
+      0x140C8EA30: IsFestivalPhaseActive
       0x140C8F460: InteractWithHandlerFromSelector
       0x140C8FE90: AddDailyHandler
       0x140C8FEB0: RemoveDailyHandler

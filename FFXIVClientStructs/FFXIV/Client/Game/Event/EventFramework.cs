@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Common.Lua;
+using static FFXIVClientStructs.FFXIV.Client.Game.GameMain;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
@@ -41,6 +42,8 @@ public unsafe partial struct EventFramework {
 
     [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
 
+    [FieldOffset(0x446A), FixedSizeArray] internal FixedSizeArray8<Festival> _festivals; // copied from PlayerState, used by GPose (maybe more) to check if Fan Festival frames/stamps should be displayed
+
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B D8 48 85 C0 0F 84")]
     public partial ContentDirector* GetContentDirector();
 
@@ -76,9 +79,8 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 83 7E 20 00 48 8B 7C 24")]
     public partial void MaterializeItem(EventId eventID, InventoryType inventoryType, short inventorySlot, int extraParam = 0);
 
-    public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId) {
-        MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
-    }
+    public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId)
+        => MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 46 ?? 49 BF")]
     public partial void GetEventMapMarkers(ushort territoryId, StdVector<MapMarkerData>* markerVector);
