@@ -18,6 +18,9 @@ public unsafe partial struct AtkAddonControl {
     [FieldOffset(0x5C)] public bool IsParentAddonLinked; // set in AtkAddonControl_Initialize, ParentAddon != 0
     [FieldOffset(0x5D)] public bool IsChildSetupComplete; // set in a loop in AtkAddonControl_Update, false if processing child, true if loop completed
 
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 4C 89 64 24 ?? 4C 8B CE 48 8D 8E")]
+    public partial AtkEvent* RegisterEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public unsafe struct ChildAddonInfo {
         [FieldOffset(0x00)] private CStringPointer Unk0; // for example chat tab title

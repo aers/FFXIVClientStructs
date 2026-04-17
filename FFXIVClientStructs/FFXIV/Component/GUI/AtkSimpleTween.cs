@@ -43,7 +43,7 @@ public unsafe partial struct AtkSimpleTween : ICreatable<AtkSimpleTween> {
     /// Only <see cref="AtkEventType.TweenProgress"/> and <see cref="AtkEventType.TweenComplete"/> will be dispatched.
     /// </remarks>
     [MemberFunction("48 83 EC 48 0F B6 44 24 ?? 4C 8B D1")]
-    public partial AtkValue* RegisterEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam, bool isGlobalEvent);
+    public partial AtkEvent* RegisterEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam, bool isGlobalEvent);
 
     [MemberFunction("0F B6 44 24 ?? 48 83 C1 40")]
     public partial bool UnregisterEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isGlobalEvent);

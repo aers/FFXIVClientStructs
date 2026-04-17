@@ -28,4 +28,7 @@ public unsafe partial struct AtkTimer : ICreatable<AtkTimer> {
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 FA 01 75 30")]
     public partial void Start(bool fireTimerStartEvent = false);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 4D 8B FD")]
+    public partial AtkEvent* RegisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener, AtkResNode* node);
 }
