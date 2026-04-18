@@ -6,7 +6,7 @@ public unsafe partial struct AtkComponentListItemPopulator {
     public delegate void PopulateWithRendererDelegate(AtkEventListener* eventListener, int listItemIndex, AtkResNode** nodeList, AtkComponentListItemRenderer* listItemRenderer);
     public delegate void PopulateDelegate(AtkEventListener* eventListener, ListItemInfo* listItemInfo, AtkResNode** nodeList);
 
-    [FieldOffset(0x00)] public AtkEventListener* UnitBase;
+    [FieldOffset(0x00)] public AtkEventListener* EventListener;
     [FieldOffset(0x08)] public delegate* unmanaged<AtkEventListener*, int, AtkResNode**, AtkComponentListItemRenderer*, void> PopulateWithRenderer;
     [FieldOffset(0x10)] public delegate* unmanaged<AtkEventListener*, ListItemInfo*, AtkResNode**, void> Populate;
 
