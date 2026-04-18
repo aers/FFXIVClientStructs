@@ -56,6 +56,12 @@ public unsafe partial struct AtkUnitManager {
     [VirtualFunction(11)]
     public partial void AddonRequestUpdateById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 
+    [VirtualFunction(24)]
+    public partial void ToggleUi(UiFlags flags, bool show, bool disableTransition, bool a5 = false);
+
+    [VirtualFunction(25)]
+    public partial bool IsUiFlagsSet(UiFlags flags);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
     public partial AtkUnitBase* GetAddonByName(CStringPointer name, int index = 1);
 

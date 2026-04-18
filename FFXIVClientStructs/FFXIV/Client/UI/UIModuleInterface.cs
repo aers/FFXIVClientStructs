@@ -127,7 +127,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(138)] public partial ??? ToggleCursor(???);
     // [VirtualFunction(152)] public partial ??? ShowEventFadeIn(???);
     // [VirtualFunction(153)] public partial ??? ShowEventFadeOut(???);
-    [VirtualFunction(157)] public partial void ToggleUi(UiFlags flags, bool enable, bool unknown = true);
+    [VirtualFunction(157)] public partial void ToggleUi(UiFlags flags, bool enable, bool disableTransition = true);
     // [VirtualFunction(158)] public partial ??? ToggleUi_2(???);
     // [VirtualFunction(160)] public partial ??? LoadScreenHideUi(???);
     // [VirtualFunction(161)] public partial ??? LoadScreenShowUi(???);

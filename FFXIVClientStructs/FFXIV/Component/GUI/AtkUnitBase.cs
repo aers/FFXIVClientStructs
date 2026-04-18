@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -60,11 +61,12 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
     [FieldOffset(0x1AC)] public uint ShowTransitionDuration;
     [FieldOffset(0x1B0)] public uint HideTransitionDuration;
-    [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
+    [BitField<UiFlags>(nameof(UiFlags), 0, 7)]
+    [FieldOffset(0x1B4)] public uint Flags1B4; // set by SetFlag, bits 24-30 setting flags?!
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     /// <remarks> Used for dialogs, context menus and other windows that cause inputs to be blocked. Checked in <see cref="ShouldIgnoreInputs"/>. </remarks>
     [FieldOffset(0x1B9)] public byte NumBlockingAddons;
-    [FieldOffset(0x1BA)] private byte Unk1BA;
+    [FieldOffset(0x1BA)] public byte UiFlagsHideCount; // incremented for each Hide call caused due to set UiFlags
     [FieldOffset(0x1BB)] private byte Unk1BB;
     [FieldOffset(0x1BC)] public float ShowTransitionScale;
     [FieldOffset(0x1C0)] public float HideTransitionScale;
