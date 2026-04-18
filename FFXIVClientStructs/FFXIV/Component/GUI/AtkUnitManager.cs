@@ -78,13 +78,6 @@ public unsafe partial struct AtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE 48 8D 8B ?? ?? ?? ??")]
     public partial void UpdateCursor();
 
-    public enum AddonStatus {
-        NotLoaded = 0,
-
-        Shown = 1 << 2,
-        Hidden = 1 << 3,
-    }
-
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct HudAnchoringInfo {
@@ -94,6 +87,13 @@ public unsafe partial struct AtkUnitManager {
         /// <remarks> X/Y coordinates between 0 and 1, depending on <see cref="AlignmentType"/>. </remarks>
         [FieldOffset(0x10)] public float NormalizedCoordinate;
     }
+}
+
+public enum AddonStatus {
+    NotLoaded = 0,
+
+    Shown = 1 << 2,
+    Hidden = 1 << 3,
 }
 
 [Flags]

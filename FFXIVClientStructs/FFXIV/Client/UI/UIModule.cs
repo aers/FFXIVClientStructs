@@ -123,21 +123,22 @@ public unsafe partial struct UIModule {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
-    [Flags]
-    public enum UiFlags {
-        Shortcuts = 1, //disable ui shortcuts
-        Hud = 2,
-        Nameplates = 4,
-        Chat = 8,
-        ActionBars = 16,
-        Unk32 = 32, //same as 1 ?
-        TargetInfo = 64 //+disable system menu / ESC key
-    }
-
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct UIModuleHandler {
         // called via AtkModuleEvent.CallHandler()
         [FieldOffset(0x0)] public delegate* unmanaged<void*, AtkValue*, AtkValue*, uint, AtkValue*> FunctionPtr; // (mostLikelyUIModule, result, values, valueCount) -> result
         [FieldOffset(0x8)] public uint UIModuleOffset;
     }
+}
+
+[Flags]
+public enum UiFlags {
+    None = 0,
+    Shortcuts = 1 << 0, // disable ui shortcuts
+    Hud = 1 << 1,
+    Nameplates = 1 << 2,
+    Chat = 1 << 3,
+    ActionBars = 1 << 4,
+    Unk32 = 1 << 5, // same as 1 ?
+    TargetInfo = 1 << 6 // + disable system menu / ESC key
 }

@@ -18,7 +18,7 @@ public unsafe partial struct RaptureAtkUnitManager {
 
     [FieldOffset(0x9CA0)] public AtkEventInterface WindowContextMenuHandler;
 
-    [FieldOffset(0x9D10)] public UIModule.UiFlags UiFlags;
+    [FieldOffset(0x9D10)] public UiFlags UiFlags;
 
     [FieldOffset(0x9D21)] public bool IsEditingHudLayout;
 
