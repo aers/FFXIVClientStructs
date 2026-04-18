@@ -1,0 +1,28 @@
+name: Push Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/composites/update-dotnet
+      - name: Install dependencies
+        run: dotnet restore ./FFXIVClientStructs.slnx
+      - name: Run CExporter
+        working-directory: ./
+        run: dotnet run --project CExporter/CExporter.csproj -c Release
+      - name: Check error txt file for content
+        id: check_error
+        run: |
+          if [ -s ./ida/errors.txt ]; then
+            echo "error=true" >> $GITHUB_OUTPUT
+          else
+            echo "error=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Create commit comment
+        if: steps.check_error.outputs.error == 'true'
+        uses: peter-evans/commit-comment@v4
+        with:
+          body-path: './ida/errors.txt'
