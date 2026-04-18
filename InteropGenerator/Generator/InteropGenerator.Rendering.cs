@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace InteropGenerator.Generator;
 
@@ -451,7 +452,7 @@ public sealed partial class InteropGenerator {
             foreach (string inheritedAttribute in bitField.InheritableAttributes)
                 writer.WriteLine(inheritedAttribute);
 
-            writer.WriteLine($"public {(bitField.IsPartial ? "partial " : "")}{bitField.Type} {bitField.Name}");
+            writer.WriteLine($"{SyntaxFacts.GetText(bitField.Accessibility)} {(bitField.IsPartial ? "partial " : "")}{bitField.Type} {bitField.Name}");
             using (writer.WriteBlock()) {
                 if (bitField.Type == "bool") {
                     if (bitField.HasGetter) writer.WriteLine($"get => BitOps.GetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index});");

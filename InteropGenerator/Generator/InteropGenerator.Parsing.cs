@@ -330,6 +330,7 @@ public sealed partial class InteropGenerator {
                     continue;
 
                 // defaults
+                Accessibility accessibility = Accessibility.Public;
                 bool isPartial = false;
                 bool hasGetter = true;
                 bool hasSetter = true;
@@ -339,6 +340,7 @@ public sealed partial class InteropGenerator {
                     if (propertySymbol.Name != name)
                         continue;
 
+                    accessibility = propertySymbol.DeclaredAccessibility;
                     isPartial = propertySymbol.IsPartialDefinition;
                     hasGetter = propertySymbol.GetMethod != null;
                     hasSetter = !propertySymbol.IsReadOnly && propertySymbol.SetMethod != null;
@@ -357,6 +359,7 @@ public sealed partial class InteropGenerator {
                     fieldSymbol.Type.GetFullyQualifiedName(),
                     index,
                     length,
+                    accessibility,
                     isPartial,
                     hasGetter,
                     hasSetter,
