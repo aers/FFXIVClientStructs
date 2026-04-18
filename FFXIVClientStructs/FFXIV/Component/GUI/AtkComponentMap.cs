@@ -14,7 +14,7 @@ public unsafe partial struct AtkComponentMap : ICreatable<AtkComponentMap> {
     [FieldOffset(0xC0)] public AtkImageNode* MapFrameImage; // The color grading texture with map frame, does not include grid
     [FieldOffset(0xC8)] public AtkImageNode* BaseMapImage; // The un-blended raw map image, does not include grid or color grading or fog masking
     [FieldOffset(0xD0)] public AtkImageNode* DiscoveryPartsImage;
-    
+
     [FieldOffset(0xE0)] public AtkImageNode* PlayerCone;
     [FieldOffset(0xE8)] public AtkComponentNode* MarkerTemplate5; // NodeId 5
     [FieldOffset(0xF0)] public AtkComponentNode* MarkerTemplate6; // NodeId 6

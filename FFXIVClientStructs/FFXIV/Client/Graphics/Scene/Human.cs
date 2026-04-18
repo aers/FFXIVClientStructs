@@ -1,8 +1,8 @@
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
-using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Shader;
 
@@ -98,8 +98,7 @@ public unsafe partial struct Human {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public partial struct DrawData : ICreatable<DrawData>
-    {
+    public partial struct DrawData : ICreatable<DrawData> {
         [FieldOffset(0x00)] public CustomizeData CustomizeData;
         [FieldOffset(0x1A)] public byte AnimationVariant;
         [FieldOffset(0x1E)] private ushort Unk1E;
