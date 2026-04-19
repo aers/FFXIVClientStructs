@@ -4,9 +4,6 @@ using Thread = FFXIVClientStructs.FFXIV.Client.System.Threading.Thread;
 
 namespace FFXIVClientStructs.FFXIV.Client.Sound;
 
-// TODO: rename everything channel to bus
-// TODO: remove enum overloads, use it directly
-
 // Client::Sound::SoundManager
 //   Client::System::Resource::ResourceEventListener
 //   Client::System::Threading::Thread
@@ -28,8 +25,8 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume2; // All are 1.0f
     [FieldOffset(0xD4), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume3; // All are 1.0f
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume4; // All are 1.0f
-    [FieldOffset(0x16C), FixedSizeArray] internal FixedSizeArray19<bool> _channelMuted;
-    [FieldOffset(0x17F), FixedSizeArray] internal FixedSizeArray19<bool> _channelAlwaysOn;
+    [FieldOffset(0x16C), FixedSizeArray] internal FixedSizeArray19<bool> _busMuted;
+    [FieldOffset(0x17F), FixedSizeArray] internal FixedSizeArray19<bool> _busAlwaysOn;
 
     [FieldOffset(0x1C9)] public bool MasterEnabled;
     [FieldOffset(0x1CA)] public bool IsSoundAlways;
@@ -66,25 +63,19 @@ public unsafe partial struct SoundManager {
     /// <summary>
     /// Calculates effective volume
     /// </summary>
-    /// <param name="channel">The specific sound channel. This is different from the channels visible to the user</param>
+    /// <param name="bus">The specific sound bus. This is different from the buses visible to the user</param>
     /// <returns>Volume in the ange 0-1</returns>
     [MemberFunction("F3 0F 10 0D ?? ?? ?? ?? 48 63 C2")]
-    public partial float GetEffectiveVolume(int channel);
-
-    /// <inheritdoc cref="GetEffectiveVolume(int)"/>
-    public float GetEffectiveVolume(SoundChannel channel) => GetEffectiveVolume((int)channel);
+    public partial float GetEffectiveVolume(SoundBus bus);
 
     /// <summary>
-    /// Sets channel volume
+    /// Sets bus volume
     /// </summary>
-    /// <param name="channel">The specific sound channel. This is different from the channels visible to the user</param>
+    /// <param name="bus">The specific sound bus. This is different from the buses visible to the user</param>
     /// <param name="volume">Volume in the ange 0-1</param>
     /// <param name="p3">unknown</param>
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 ?? ?? 75 ?? EB")]
-    public partial void SetVolume(int channel, float volume, int p3 = 100);
-
-    /// <inheritdoc cref="SetVolume(int,float,int)"/>
-    public void SetVolume(SoundChannel channel, float volume, int p3 = 100) => SetVolume((int)channel, volume, p3);
+    public partial void SetVolume(SoundBus bus, float volume, int p3 = 100);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 31 00 0F B6 FA 48 8B D9 75 2B")]
     public partial void SetMasterEnabled(bool enabled);
@@ -192,69 +183,68 @@ public unsafe partial struct SoundManager {
     public partial struct SoundDataMemory {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray256<SoundData> _entries;
     }
-
-    // TODO: rename to SoundBus, move out of struct?
-    /// <remarks> All busses use 44100 Hz sampling rate. </remarks>
-    public enum SoundChannel {
-        /// <remarks>  2 Tracks, 2D </remarks>
-        Music = 1,
-        /// <remarks> 20 Tracks, 3D </remarks>
-        SE = 2,
-        /// <remarks>  5 Tracks, 3D </remarks>
-        Voice = 3,
-        /// <remarks>  5 Tracks, 2D </remarks>
-        System = 4,
-        /// <remarks> 12 Tracks, 3D </remarks>
-        BG = 5,
-        /// <remarks> 15 Tracks, 3D </remarks>
-        Foot = 6,
-        /// <remarks>  5 Tracks, 3D </remarks>
-        PlacedNPC = 7,
-        /// <remarks>  2 Tracks, 2D </remarks>
-        TimeStretchBGM = 8,
-        /// <remarks>  2 Tracks, 2D </remarks>
-        Zingle = 9,
-        /// <remarks>  8 Tracks, 3D </remarks>
-        CommonVFX = 10,
-        /// <remarks>  4 Tracks, 3D </remarks>
-        BGEnv = 11,
-        /// <remarks>  2 Tracks, 3D </remarks>
-        Walla = 12,
-        /// <remarks>  2 Tracks, 2D </remarks>
-        Movie = 13,
-        /// <remarks> 28 Tracks, 3D </remarks>
-        Unknown0 = 14,
-        /// <remarks>  4 Tracks, 3D </remarks>
-        Unknown1 = 15,
-        /// <remarks>  2 Tracks, 3D </remarks>
-        Orchestrion = 16,
-        /// <remarks> 16 Tracks, 3D </remarks>
-        Instruments = 17,
-        /// <remarks>  4 Tracks, 2D </remarks>
-        Vibration = 18,
-        /// <remarks> 12 Tracks, 3D </remarks>
-        Housing = 19,
-        /// <remarks>  2 Tracks, 3D </remarks>
-        RandomWind = 20,
-
-        [Obsolete("Renamed to Music", true)] Bgm1 = 1,
-        [Obsolete("Renamed to SE", true)] Se1 = 2,
-        [Obsolete("Renamed to BG", true)] Env1 = 5,
-        [Obsolete("Renamed to Foot", true)] Se2 = 6,
-        [Obsolete("Renamed to PlacedNPC", true)] Se3 = 7,
-        [Obsolete("Renamed to TimeStretchBGM", true)] Bgm2 = 8,
-        [Obsolete("Renamed to Zingle", true)] Bgm3 = 9,
-        [Obsolete("Renamed to BGEnv", true)] Env2 = 11,
-        [Obsolete("Renamed to Walla", true)] Env3 = 12,
-        [Obsolete("Renamed to Orchestrion", true)] Bgm4 = 16,
-        [Obsolete("Renamed to Instruments", true)] Perform = 17,
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct ClipSoundManager {
     [FieldOffset(0x00)] public SoundManager* SoundManager;
     [FieldOffset(0x08)] private fixed byte CriticalSection[40];
+}
+
+/// <remarks> All busses use 44100 Hz sampling rate. </remarks>
+public enum SoundBus {
+    /// <remarks>  2 Tracks, 2D </remarks>
+    Music = 1,
+    /// <remarks> 20 Tracks, 3D </remarks>
+    SE = 2,
+    /// <remarks>  5 Tracks, 3D </remarks>
+    Voice = 3,
+    /// <remarks>  5 Tracks, 2D </remarks>
+    System = 4,
+    /// <remarks> 12 Tracks, 3D </remarks>
+    BG = 5,
+    /// <remarks> 15 Tracks, 3D </remarks>
+    Foot = 6,
+    /// <remarks>  5 Tracks, 3D </remarks>
+    PlacedNPC = 7,
+    /// <remarks>  2 Tracks, 2D </remarks>
+    TimeStretchBGM = 8,
+    /// <remarks>  2 Tracks, 2D </remarks>
+    Zingle = 9,
+    /// <remarks>  8 Tracks, 3D </remarks>
+    CommonVFX = 10,
+    /// <remarks>  4 Tracks, 3D </remarks>
+    BGEnv = 11,
+    /// <remarks>  2 Tracks, 3D </remarks>
+    Walla = 12,
+    /// <remarks>  2 Tracks, 2D </remarks>
+    Movie = 13,
+    /// <remarks> 28 Tracks, 3D </remarks>
+    Unknown0 = 14,
+    /// <remarks>  4 Tracks, 3D </remarks>
+    Unknown1 = 15,
+    /// <remarks>  2 Tracks, 3D </remarks>
+    Orchestrion = 16,
+    /// <remarks> 16 Tracks, 3D </remarks>
+    Instruments = 17,
+    /// <remarks>  4 Tracks, 2D </remarks>
+    Vibration = 18,
+    /// <remarks> 12 Tracks, 3D </remarks>
+    Housing = 19,
+    /// <remarks>  2 Tracks, 3D </remarks>
+    RandomWind = 20,
+
+    [Obsolete("Renamed to Music", true)] Bgm1 = 1,
+    [Obsolete("Renamed to SE", true)] Se1 = 2,
+    [Obsolete("Renamed to BG", true)] Env1 = 5,
+    [Obsolete("Renamed to Foot", true)] Se2 = 6,
+    [Obsolete("Renamed to PlacedNPC", true)] Se3 = 7,
+    [Obsolete("Renamed to TimeStretchBGM", true)] Bgm2 = 8,
+    [Obsolete("Renamed to Zingle", true)] Bgm3 = 9,
+    [Obsolete("Renamed to BGEnv", true)] Env2 = 11,
+    [Obsolete("Renamed to Walla", true)] Env3 = 12,
+    [Obsolete("Renamed to Orchestrion", true)] Bgm4 = 16,
+    [Obsolete("Renamed to Instruments", true)] Perform = 17,
 }
 
 public enum SoundVolumeCategory {
