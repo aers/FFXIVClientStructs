@@ -78,12 +78,12 @@ public unsafe partial struct RaptureGearsetModule {
     /// <summary>
     /// Save the player's current inventory to a new gearset at the next possible ID.
     /// </summary>
-    /// <returns>Returns the ID of the created gearset, or -1 if the creation attempt fails.</returns>
+    /// <returns>Returns the ID of the created gearset, or 255 if the creation attempt fails.</returns>
     /// <remarks>
     /// First checks <see cref="FirstEmptyGearsetSlot"/> to find an empty ID, then calls <see cref="CreateGearsetInternal(int)"/> to create the gearset.
     /// </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 8B D5 E8 ?? ?? ?? ?? 8B E8")]
-    public partial sbyte CreateGearset(); // TODO: return int, fix comment (-1 -> 255)
+    public partial int CreateGearset();
 
     /// <summary>
     /// Save the player's current equipped gear to the gearset ID.
