@@ -87,8 +87,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     /// </summary>
     [FieldOffset(0x1CC)] public byte ScdResourceIndex;
     [FieldOffset(0x1CD)] public byte HUDScaleTableIndex;
-    [FieldOffset(0x1CE)] public byte VisibilityFlags;
-    // 1 byte padding
+    [FieldOffset(0x1CE)] public ushort VisibilityFlags;
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
     /// <remarks> Index in <see cref="AtkUnitManager.HudAnchoringTable"/>. </remarks>
     [FieldOffset(0x1D2)] public sbyte HudAnchoringInfoIndex; // -1 = undefined
