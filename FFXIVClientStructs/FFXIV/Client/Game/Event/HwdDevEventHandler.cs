@@ -12,7 +12,7 @@ public unsafe partial struct HwdDevEventHandler {
     [FieldOffset(0x1C4)] public bool IsInProgress;
     [FieldOffset(0x1C5)] public bool IsComplete;
 
-    [FieldOffset(0x1C8)] public StdVector<EventHandlerObjective> Objectives;
+    [FieldOffset(0x1C8)] public StdVector<DirectorTodo> Objectives;
 
     [FieldOffset(0x1E8)] public Utf8String ToDoDescription2; // this is appended to ToDoDescription
     [FieldOffset(0x250)] public Utf8String ToDoDescription;

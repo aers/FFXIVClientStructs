@@ -64,20 +64,6 @@ public struct EventHandlerInfo {
     [FieldOffset(0x04)] public byte Flags;
 }
 
-// TODO: remove (was renamed/replaced with DirectorTodo)
-[StructLayout(LayoutKind.Explicit, Size = 0x160)]
-public struct EventHandlerObjective {
-    [FieldOffset(0x00)] public bool Enabled;
-
-    [FieldOffset(0x04)] public int DisplayType;
-    [FieldOffset(0x08)] public Utf8String Label;
-
-    [FieldOffset(0x78)] public int CountCurrent;
-    [FieldOffset(0x7C)] public int CountNeeded;
-    [FieldOffset(0x80)] public ulong TimeLeft;
-    [FieldOffset(0x88)] public uint MapRowId;
-}
-
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public struct DirectorTodo {
     [FieldOffset(0x00)] public bool Enabled;
@@ -100,7 +86,7 @@ public struct DirectorTodo {
     [FieldOffset(0x80)] public long EndTimestamp;
     /// <remarks> In seconds. </remarks>
     [FieldOffset(0x88)] public long Duration;
-    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way. copied from old EventHandlerObjective struct
+    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]
