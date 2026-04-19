@@ -25,18 +25,6 @@ public unsafe partial struct AtkEventData {
         [FieldOffset(0x0C)] private short UnkC;
         [FieldOffset(0x0E)] private short Unk0E;
         [FieldOffset(0x10)] private short Unk10;
-
-        // different than the UIInputData one
-        // TODO: move out and combine with AtkInputData.ModifierFlag
-        [Flags]
-        public enum ModifierFlag : byte {
-            None = 0,
-            Ctrl = 1 << 0,
-            Alt = 1 << 1,
-            Shift = 1 << 2,
-            // Unk8 = 1 << 3,
-            Dragging = 1 << 4,
-        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
@@ -44,57 +32,38 @@ public unsafe partial struct AtkEventData {
         [FieldOffset(0x00)] public int InputId; // TODO: use InputId enum?
         [FieldOffset(0x04)] public InputState State;
         [FieldOffset(0x05)] public ModifierFlag Modifier;
-
-        public enum InputState : byte {
-            Down = 0,
-            Up = 1,
-            Held = 2,
-            /// <remarks> For <see cref="AtkEventType.InputNavigation"/>. </remarks>
-            Repeat = 3,
-        }
-
-        // TODO: move out and combine with AtkMouseData.ModifierFlag
-        [Flags]
-        public enum ModifierFlag : byte {
-            None = 0,
-            Ctrl = 1 << 0,
-            Alt = 1 << 1,
-            Shift = 1 << 2,
-            // Unk8 = 1 << 3,
-            Dragging = 1 << 4,
-        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public unsafe struct AtkFocusData {
+    public struct AtkFocusData {
         [FieldOffset(0x00)] public AtkResNode* ResNode;
         [FieldOffset(0x08)] public AtkCollisionNode* CollisionNode;
         [FieldOffset(0x10)] public int FocusParam;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public unsafe struct AtkValueData {
+    public struct AtkValueData {
         [FieldOffset(0x00)] public int NewValue;
         [FieldOffset(0x04)] public int LastValue;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public unsafe struct AtkListItemData {
+    public struct AtkListItemData {
         [FieldOffset(0x00)] public AtkComponentListItemRenderer* ListItemRenderer;
         [FieldOffset(0x08)] public AtkComponentTreeListItem* ListItem;
         [FieldOffset(0x10)] public int SelectedIndex; // HoveredItemIndex2
         [FieldOffset(0x14)] private short UnkListField15C;
         [FieldOffset(0x16)] public short HoveredItemIndex3;
         [FieldOffset(0x18)] public byte MouseButtonId;
-        [FieldOffset(0x19)] public AtkMouseData.ModifierFlag MouseModifier;
+        [FieldOffset(0x19)] public ModifierFlag MouseModifier;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public unsafe struct AtkDragDropData {
+    public struct AtkDragDropData {
         [FieldOffset(0x00)] public AtkDragDropInterface* DragDropInterface;
         [FieldOffset(0x08)] public AtkComponentNode* ComponentNode;
         [FieldOffset(0x10)] public byte MouseButtonId;
-        [FieldOffset(0x11)] public AtkMouseData.ModifierFlag MouseModifier;
+        [FieldOffset(0x11)] public ModifierFlag MouseModifier;
         [FieldOffset(0x12)] private int Unk12;
         [FieldOffset(0x16)] private short Unk16;
         [FieldOffset(0x18)] private nint Unk18;
@@ -102,7 +71,7 @@ public unsafe partial struct AtkEventData {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public unsafe struct AtkAddonControlData {
+    public struct AtkAddonControlData {
         [FieldOffset(0x00)] public AtkUnitBase* UnitBase;
     }
 
@@ -111,5 +80,23 @@ public unsafe partial struct AtkEventData {
         [FieldOffset(0x00)] public ushort LabelId;
         [FieldOffset(0x02)] public AtkTimelineJumpBehavior JumpBehavior;
     }
+}
 
+public enum InputState : byte {
+    Down = 0,
+    Up = 1,
+    Held = 2,
+    /// <remarks> For <see cref="AtkEventType.InputNavigation"/>. </remarks>
+    Repeat = 3,
+}
+
+// different than the UIInputData one
+[Flags]
+public enum ModifierFlag : byte {
+    None = 0,
+    Ctrl = 1 << 0,
+    Alt = 1 << 1,
+    Shift = 1 << 2,
+    // Unk8 = 1 << 3,
+    Dragging = 1 << 4,
 }
