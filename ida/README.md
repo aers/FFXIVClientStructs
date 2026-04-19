@@ -10,10 +10,7 @@ This could be either Python2 or Python3.
 Additionally, you will need to place "idauser.cfg" from this repository in "%AppData%\Hex-Rays\IDA Pro\". IDA doesn't allow you to use certain characters in names and this config changes that.
 
 #### Ghidra dependency installation:
-This is slightly more complicated as Ghidra uses an embedded version of Jython. 
-- Install a copy of Python2 from https://www.python.org/downloads/
-- Execute the following `python.exe -m pip install -t \<YourGhidraFolder\>\Ghidra\Features\Jython\lib\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`
-- Add `FFXIVClientStructs\ida` as a script directory.
+See [Getting Started](../Ghidra/Getting%20Started.md) for information on how to set up PyGhidra.
 
 ## ffxiv_sigmaker.py
 > [!WARNING]
