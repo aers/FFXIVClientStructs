@@ -11,7 +11,7 @@ public partial struct TofuBoardEntry {
     [FieldOffset(0x106A)] public byte PositionInList;
     [FieldOffset(0x106B)] public byte Folder;
     [FieldOffset(0x106C), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
-    [FieldOffset(0x10AC)] public int ServerTime;
+    [FieldOffset(0x10AC)] public uint ServerTime;
     [FieldOffset(0x10B0)] public ushort Background;
     [FieldOffset(0x10B2)] public byte NumberOfObjects;
     [FieldOffset(0x10B3)] private byte Unk10B3; // Either 0xA2 or 0
