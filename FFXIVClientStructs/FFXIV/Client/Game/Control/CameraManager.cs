@@ -26,8 +26,8 @@ public unsafe partial struct CameraManager {
     [FieldOffset(0x60)] private CameraBase UnkCamera; //not a pointer
 
     [FieldOffset(0x10), Obsolete("Renamed to LobbyCamera", true)] public LobbyCamera* LobbCamera;
-    [FieldOffset(0x18), Obsolete("Renamed to SpectatorCamera", true)] public Camera3* Camera3;
-    [FieldOffset(0x18), Obsolete("Renamed to AimingCamera", true)] public Camera4* Camera4;
+    [FieldOffset(0x18), Obsolete("Renamed to SpectatorCamera", true)] public SpectatorCamera* Camera3;
+    [FieldOffset(0x18), Obsolete("Renamed to AimingCamera", true)] public AimingCamera* Camera4;
 
     [MemberFunction("E8 ?? ?? ?? ?? 39 B0")]
     public partial Camera* GetActiveCamera();

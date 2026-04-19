@@ -115,15 +115,6 @@ public unsafe partial struct LobbyCamera {
 [StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public partial struct SpectatorCamera;
 
-// TODO: remove (was replaced with SpectatorCamera)
-// Client::Game::Camera3
-//   Client::Game::Camera
-//     Client::Game::CameraBase
-[GenerateInterop]
-[Inherits<Camera>]
-[StructLayout(LayoutKind.Explicit, Size = 0x310)]
-public partial struct Camera3;
-
 // Client::Game::LowCutCamera
 //   Client::Game::CameraBase
 [GenerateInterop]
@@ -137,17 +128,6 @@ public partial struct LowCutCamera;
 [Inherits<CameraBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public partial struct AimingCamera {
-    [FieldOffset(0x120)] public Graphics.Scene.Camera SceneCamera0;
-    [FieldOffset(0x220)] public Graphics.Scene.Camera SceneCamera1;
-}
-
-// TODO: remove (was replaced with AimingCamera)
-// Client::Game::Camera4
-//   Client::Game::CameraBase
-[GenerateInterop]
-[Inherits<CameraBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x380)]
-public partial struct Camera4 {
     [FieldOffset(0x120)] public Graphics.Scene.Camera SceneCamera0;
     [FieldOffset(0x220)] public Graphics.Scene.Camera SceneCamera1;
 }
