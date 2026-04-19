@@ -53,9 +53,15 @@ public unsafe partial struct CompanionInfo {
     [FieldOffset(0x38)] public byte Rank;
     [FieldOffset(0x39)] public byte Stars;
     [FieldOffset(0x3A)] public byte SkillPoints;
-    [FieldOffset(0x3B)] public byte DefenderLevel; // todo: make array
-    [FieldOffset(0x3C)] public byte AttackerLevel;
-    [FieldOffset(0x3D)] public byte HealerLevel;
+    /// <remarks>
+    /// 0 = Defender Level <br/>
+    /// 1 = Attacker Level <br/>
+    /// 2 = Healer Level
+    /// </remarks>
+    [FieldOffset(0x3B), FixedSizeArray] internal FixedSizeArray3<byte> _levels;
+    [FieldOffset(0x3B), Obsolete("Use Levels[0]", true)] public byte DefenderLevel;
+    [FieldOffset(0x3C), Obsolete("Use Levels[1]", true)] public byte AttackerLevel;
+    [FieldOffset(0x3D), Obsolete("Use Levels[2]", true)] public byte HealerLevel;
     [FieldOffset(0x3E)] public byte ActiveCommand;
     [FieldOffset(0x3F)] public byte FavoriteFeed;
     [FieldOffset(0x40)] public byte CurrentColorStainId;
