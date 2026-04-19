@@ -9856,8 +9856,60 @@ classes:
     vtbls:
       - ea: 0x1420BEE50
         base: Client::UI::Misc::UserFileManager::UserFileEvent
+    vfuncs:
+      10: DeleteEverything
     funcs:
       0x1407E95A0: ctor
+      0x1407E9740: CreateFolder
+      0x1407E97d0: CreateBoard
+      0x1407E9860: CopyBoardToFolder
+      0x1407E9AE0: DeleteItemAndContents
+      0x1407E9CC0: TotalItemCount
+      0x1407E9CF0: MaxItemAllowed
+      0x1407E9D50: IsFull
+      0x1407E9D90: GetFolderAtUIIndex
+      0x1407E9DE0: GetFolderIndexByBoardIndex
+      0x1407E9E40: GetBoardAtUIIndex
+      0x1407E9EA0: DeleteFolder
+      0x1407E9FF0: IsItemValid
+      0x1407EA0B0: MoveItem
+      0x1407EA140: RenameFolder
+      0x1407EA1B0: RenameBoard
+      0x1407EA310: SetServerTime
+      0x1407EA4B0: GetNumberOfBoardsInFolder
+      0x1407EA510: GetBoardFolderIndexByBoardIndex
+  Client::UI::Misc::TofuModule::TofuDataBase:
+    vtbls:
+      - ea: 0x1420BF558
+    vfuncs:
+      0: dtor
+      1: ResetData
+  Client::UI:Misc::TofuModule::TofuBoardData:
+    vtbls:
+      - ea: 0x1420BF588
+        base: Client::UI::Misc::TofuModule::TofuDataBase
+    vfuncs:
+      0: dtor
+      1: DeleteAllItems
+      2: SwapItems
+      3: GetItemUIIndex
+      4: IsItemValid
+      5: GetItemOrderIndex
+    funcs:
+      0x1407FC5D0: DeleteFolder # Accessing boards via agent from deleted folder crashes game
+      0x1407FC680: DeleteFolderAtIndexOrAbove
+      0x1407FC8F0: DeleteAllEmptyFolders
+  Client::UI:Misc::TofuModule::TofuFolderData:
+    vtbls:
+      - ea: 0x1420BF5B8
+        base: Client::UI::Misc::TofuModule::TofuDataBase
+    vfuncs:
+      0: dtor
+      1: DeleteAllItems
+      2: SwapItems
+      3: GetItemUIIndex
+      4: IsItemValid
+      5: GetItemOrderIndex
   Client::UI::Misc::FishingModule:
     vtbls:
       - ea: 0x1420BEEC8
@@ -10080,6 +10132,28 @@ classes:
       0x140B34280: Initialize
       0x140B34300: ImportData
       0x140B34530: ExportData
+  Client::UI::Misc::TofuHelper:
+    vtbls:
+      - ea: 0x1420D27F0
+        base: Client::UI::Misc::HelperInterface
+    funcs:
+      0x140AE6380: HandleStartSharingPacket
+      0x140AE6400: HandleRealTimeUpdatePacket
+      0x140AE6970: HandleStopSharingPacket
+      0x140AE6BF0: HandleTofuConfirmationPacket
+  Client::UI::Misc::TofuHelper::TofuBoardOverview:
+    funcs:
+      0x140AE4330: ctor
+      0x140AE5430: ConstructPackedBoard
+  Client::UI::Misc::TofuHelper::TofuHelperData:
+    funcs:
+      0x140AED0D0: ctor
+      0x140AED730: dtor
+      0x140AF1B50: HandleSharePacket
+      0x140AF1F60: HandleRealTimeUpdate
+      0x140AF2580: SaveBoardAndPlaySound
+      0x140AF3E90: SendVerificationPacket
+      0x140AF49B0: ShowSharedNotification
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x142061E48
@@ -14784,6 +14858,14 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A1DCB0: ctor
+      0x140A1FA60: RenameBoard 
+      0x140A1FC40: ContextMenuOptions
+  Client::UI::Agent::AgentTofuList::TofuListData:
+    funcs:
+      0x140A96910: ReviewSelectedBoard
+      0x140A9AB30: RenameItem
+      0x140AA28A0: MoveSavedFolder
+      0x140AA2930: MoveSavedBoard
   Client::UI::Agent::AgentTofuPreview:
     vtbls:
       - ea: 0x1420CD328
