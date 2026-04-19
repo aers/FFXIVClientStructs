@@ -17,8 +17,8 @@ public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
     [FieldOffset(0x114)] public uint ChildAddonId;
-    [FieldOffset(0x118)] public byte GearsetIdOfDisplayAddon; // TODO: change to int
-    [FieldOffset(0x11C)] public byte GearsetIdOfPreviewAddon; // TODO: change to int
+    [FieldOffset(0x118)] public int GearsetIdOfDisplayAddon;
+    [FieldOffset(0x11C)] public int GearsetIdOfPreviewAddon;
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
 
     [FieldOffset(0x880)] public GearsetCharaView CharaView;
@@ -62,7 +62,7 @@ public unsafe partial struct AgentGearSet {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to update</param>
     [MemberFunction("E9 ?? ?? ?? ?? 8B D7 48 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24")]
-    public partial bool UpdateGearsetInternal(int gearsetId); // TODO: replace existing UpdateGearset
+    public partial bool UpdateGearset(int gearsetId);
 
     /// <summary>
     /// Opens the dialog for deleting a gearset for the specified ID
@@ -83,7 +83,7 @@ public unsafe partial struct AgentGearSet {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to open the reassign set number dialog to</param>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0 ?? 8B D6 48 8B CB")]
-    public partial bool ReassignGearSetNumber(int gearsetId); // TODO: replace existing ReassignSetNumber
+    public partial bool ReassignSetNumber(int gearsetId);
 
     /// <summary>
     /// Updates the gearset at the specified ID if the ID is not empty, if it is empty, creates a new gearset
@@ -106,7 +106,7 @@ public unsafe partial struct AgentGearSet {
     /// <param name="createAtFirstEmpty">Whether it is created at the first empty ID or at the gearset ID specified.</param>
     /// <returns>The gearset ID of the created gearset</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7")]
-    public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty); // TODO: replace existing CreateGearset
+    public partial int CreateGearset(int gearsetId, bool createAtFirstEmpty);
 
     /// <summary>
     /// Deletes the gearset as the specified ID
@@ -137,15 +137,14 @@ public unsafe partial struct AgentGearSet {
     // public void ReassignGear(int gearsetId)
     //     => SendEvent(6, gearsetId);
 
-    public void ReassignSetNumber(int gearsetId)
-        => ReassignGearSetNumber(gearsetId);
+    // public void ReassignSetNumber(int gearsetId)
     //    => SendEvent(7, gearsetId);
 
-    public void MoveSetUp(int gearsetId)
+    public bool MoveSetUp(int gearsetId)
         => MoveGearsetUpOrDown(gearsetId, true);
     //    => SendEvent(8, gearsetId);
 
-    public void MoveSetDown(int gearsetId)
+    public bool MoveSetDown(int gearsetId)
         => MoveGearsetUpOrDown(gearsetId, false);
     //    => SendEvent(9, gearsetId);
 
@@ -162,8 +161,8 @@ public unsafe partial struct AgentGearSet {
     public void SetToHotbar(int gearsetId)
         => SendEvent(13, gearsetId);
 
-    public void UpdateGearset(int gearsetId)
-        => SendEvent(16, gearsetId);
+    // public void UpdateGearset(int gearsetId)
+    //     => SendEvent(16, gearsetId);
 
     public void LinkToGlamourPlate(int gearsetId)
         => SendEvent(20, gearsetId);
