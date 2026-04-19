@@ -69,9 +69,15 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x1A4)] public int BasePiety;
     [FieldOffset(0x1A8), FixedSizeArray] internal FixedSizeArray74<int> _attributes;
     [FieldOffset(0x2D0)] public byte GrandCompany;
-    [FieldOffset(0x2D1)] public byte GCRankMaelstrom; // TODO: convert to array of 3 with name `_gCRanks`
-    [FieldOffset(0x2D2)] public byte GCRankTwinAdders;
-    [FieldOffset(0x2D3)] public byte GCRankImmortalFlames;
+    /// <remarks>
+    /// 0 = Maelstrom <br/>
+    /// 1 = Order of the Twin Adder <br/>
+    /// 2 = Immortal Flames
+    /// </remarks>
+    [FieldOffset(0x2D1), FixedSizeArray] internal FixedSizeArray3<byte> _GCRanks; 
+    [FieldOffset(0x2D1), Obsolete("Use GCRanks[0]", true)] public byte GCRankMaelstrom;
+    [FieldOffset(0x2D2), Obsolete("Use GCRanks[1]", true)] public byte GCRankTwinAdders;
+    [FieldOffset(0x2D3), Obsolete("Use GCRanks[2]", true)] public byte GCRankImmortalFlames;
     [FieldOffset(0x2D4)] public ushort HomeAetheryteId;
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;
