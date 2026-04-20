@@ -179,8 +179,12 @@ public unsafe partial struct AgentGearSet {
     private void SendEvent(int evt, int gearsetId = 0) {
         var result = stackalloc AtkValue[1];
         var values = stackalloc AtkValue[2];
-        values[0].SetInt(evt); // case
-        values[1].SetInt(gearsetId); // optional gearsetId
+        // case
+        values[0].Type = AtkValueType.Int;
+        values[0].Int = evt;
+        // optional gearsetId
+        values[1].Type = AtkValueType.Int;
+        values[1].Int = gearsetId;
         ReceiveEvent(result, values, 2, 0);
     }
 

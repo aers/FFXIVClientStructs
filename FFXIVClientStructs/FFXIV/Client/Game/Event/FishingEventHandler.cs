@@ -92,8 +92,10 @@ public unsafe partial struct FishingEventHandler {
     public AtkValue* ChangeBait(int baitId) {
         var returnValue = new AtkValue();
         var baitValue = stackalloc AtkValue[2];
-        baitValue[0].SetInt(baitId);
-        baitValue[1].SetBool(false);
+        baitValue[0].Type = AtkValueType.Int;
+        baitValue[0].Int = baitId;
+        baitValue[1].Type = AtkValueType.Bool;
+        baitValue[1].Bool = false;
         return ReceiveEvent(&returnValue, baitValue, 2, 2);
     }
 }
