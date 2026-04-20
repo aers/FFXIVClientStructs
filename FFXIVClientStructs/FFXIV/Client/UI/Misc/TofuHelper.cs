@@ -68,7 +68,7 @@ public unsafe partial struct TofuBoardOverview {
     [FieldOffset(0x84)] public byte BoardBackground;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 85 C0 75 ?? 44 8B F7")]
-    public partial uint ConstructPackedBoard(nint buffer, uint size, RaptureAtkColorDataManager* colorDataManager);
+    public partial uint ConstructUnpackedBoard(nint buffer, uint size, RaptureAtkColorDataManager* colorDataManager);
 }
 
 [GenerateInterop]

@@ -25,8 +25,8 @@ public unsafe partial struct AgentTofuList {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E98)]
 public unsafe partial struct TofuListData {
-    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray70<Board> _boards; // Starts with Saved then Shared
-    [FieldOffset(0x2530), FixedSizeArray] internal FixedSizeArray70<BoardShort> _boardShorts;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray70<TofuBoard> _boards; // Starts with Saved then Shared
+    [FieldOffset(0x2530), FixedSizeArray] internal FixedSizeArray70<TofuBoardShort> _boardShorts;
     [FieldOffset(0x2BC0)] public uint TotalSavedList;
     [FieldOffset(0x2BC4)] public uint TotalSavedBoards;
     [FieldOffset(0x2BC8)] public uint TotalSaved;
@@ -62,15 +62,15 @@ public unsafe partial struct TofuListData {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
-public partial struct Board {
+public partial struct TofuBoard {
     [FieldOffset(0x0)] public StdVector<TofuFullObject> Objects;
     [FieldOffset(0x18)] public Utf8String Name;
     [FieldOffset(0x84)] public byte Background;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe partial struct BoardShort {
-    [FieldOffset(0x0)] public Board* Board;
+public unsafe partial struct TofuBoardShort {
+    [FieldOffset(0x0)] public TofuBoard* Board;
     [FieldOffset(0x8)] public CStringPointer Name;
 }
 

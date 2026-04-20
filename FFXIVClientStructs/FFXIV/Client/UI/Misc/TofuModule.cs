@@ -119,15 +119,13 @@ public unsafe partial struct TofuData {
     [FieldOffset(0x20), CExporterUnion("Tofu")] private TofuBoardEntry* BoardArray;
     [FieldOffset(0x20), CExporterUnion("Tofu")] private TofuFolderEntry* FolderArray;
 
-    public byte MaxCount { // max possible items, follows reused inlined code
-        get
+    public byte MaxCount // max possible items, follows reused inlined code
         => Id switch {
             TofuDataType.SavedBoards => 50,
             TofuDataType.SavedFolders => 55,
             TofuDataType.SharedBoards or TofuDataType.SharedFolders => 20,
             _ => 1
         };
-    }
 
     public Span<byte> UIOrder => new(OrderArray, MaxCount);
     public Span<TofuBoardEntry> Boards => new(BoardArray, MaxCount);

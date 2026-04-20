@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x49A)]
 public partial struct TofuStartSharingPacket {
     [FieldOffset(0x0)] public ulong SenderContentId;
