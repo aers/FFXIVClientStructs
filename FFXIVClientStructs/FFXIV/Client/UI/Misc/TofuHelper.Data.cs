@@ -51,7 +51,7 @@ public unsafe partial struct TofuUnpackedBoard {
     [FieldOffset(0x2)] public byte NumberOfTextObjects; 
 
     public Span<TofuUnpackedObject> Objects => new((byte*)Unsafe.AsPointer(ref this) + ObjectOffset, NumberOfObjects);
-    private Span<byte> TextLength => new((byte*)Unsafe.AsPointer(ref this) + ObjectOffset + NumberOfObjects * ObjectSize, NumberOfTextObjects);
+    private Span<byte> TextLength => new((byte*)Unsafe.AsPointer(ref this) + ObjectOffset + (NumberOfObjects * ObjectSize), NumberOfTextObjects);
     public string[] TextContents {
         get {
             var textPtr = (byte*)Unsafe.AsPointer(ref this) + ObjectOffset + (NumberOfObjects * ObjectSize) + NumberOfTextObjects;
