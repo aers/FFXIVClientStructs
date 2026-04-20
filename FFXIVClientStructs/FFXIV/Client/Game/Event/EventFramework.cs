@@ -106,6 +106,9 @@ public unsafe partial struct EventFramework {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 81 ?? ?? ?? ?? 41 0F B7 F1")]
     public partial void ProcessEventPlay(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 41 0F B6 F9 41 0F B7 D8 E8 ?? ?? ?? ?? 48 8B C8 48 85 C0 74 ?? 66 39 58 ?? 75 ?? 0F B6 80 ?? ?? ?? ?? A8 ?? 74 ?? ?? ?? ?? 24 ?? 4C 8B 4C 24 ?? 44 0F B6 C7 88 81 ?? ?? ?? ?? 0F B7 D3 0F B6 44 24 ?? 88 44 24 ?? 41 FF 92")]
+    public partial void ProcessEventYield(EventId eventId, short scene, byte yieldId, int* intParams, byte intParamCount);
+
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 48 8D 9F ?? ?? ?? ??")]
     public partial void ProcessInitializeScene(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 

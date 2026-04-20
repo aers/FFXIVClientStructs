@@ -21,6 +21,9 @@ public unsafe partial struct EventHandler {
 
     [FieldOffset(0xC8)] private Utf8String UnkString0;
 
+    [VirtualFunction(40)]
+    public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
+
     [VirtualFunction(158)]
     public partial void CancelInteraction();
 

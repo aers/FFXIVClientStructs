@@ -6195,6 +6195,7 @@ classes:
       0x141819730: ctor
       0x140B87500: SendEventCompletePacket
       0x140B87F40: HandleEventPlayPacket
+      0x140B88030: HandleEventYieldPacket
       0x140B88450: HandleSystemLogMessagePacket
       0x140B8C190: HandleSpawnPlayerPacket
       0x140B8C290: HandleSpawnNPCPacket
@@ -7518,20 +7519,20 @@ classes:
         base: Common::Lua::LuaState
     funcs:
       0x1405CFE10: ctor_FromState
-      0x1405CFE60: ctor
       0x1405CFE40: Finalizer
+      0x1405CFE60: ctor
       0x1405CFE90: Resume
-      0x1405D0080: PushBoolAndResume
-      0x1405D0140: PushIntegerAndResume
-      0x1405D0200: PushIntegersAndResume
-      0x1405D02D0: PushStringAndResume
-      0x1405D03A0: PushStringStringAndResume
-      0x1405D0480: PushStringIntegersAndResume
+      0x1405D0080: ResumeWithBool
+      0x1405D0140: ResumeWithInteger
+      0x1405D0200: ResumeWithIntegers
+      0x1405D02D0: ResumeWithString
+      0x1405D03A0: ResumeWithStringString
+      0x1405D0480: ResumeWithStringIntegers
       0x1405D0570: GetStringAndResume
-      0x1405D0640: PushBoolIntegersAndResume
+      0x1405D0640: ResumeWithBoolIntegers
+      0x1405D0720: IsError
       0x1405D0730: Yield
       0x1405D0740: GetStatus
-      0x1405D0720: IsError
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x1420E16B8
@@ -15171,6 +15172,15 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x140C67900: ctor
+      0x140C6C560: FinalizeLuaCall
+      0x1419E1F90: ResumeWithInteger
+      0x140C6C770: ResumeWithIntegers
+      0x140C6C7D0: ResumeWithBoolIntegers
+      0x140C6C830: ResumeWithStringString
+      0x140C6C890: Resume
+      0x140C6C8F0: ResumeWithStringIntegers
+      0x140C6C950: HandleLuaResumeResult
+      0x140CACF20: ResumeWithString
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x1421E2118
@@ -15674,8 +15684,14 @@ classes:
       0x14170A0D0: ctor
       0x14170A720: Dtor
       0x14170C190: AddInitializeSceneTask
+      0x14170C220: AddFinalizeSceneTask
+      0x1417113C0: ShowLogMessage
+      0x141711400: ShowLogMessageTextParameters
+      0x141711450: ShowLogMessage<uint>
+      0x1417114A0: ShowLogMessage<string>
+      0x141711550: ShowLogMessageSourceObjectTargetObjectTextParameters
+      0x1417115B0: ShowLogMessageSourceObjectTargetObject
       0x141711DE0: ShowScreenImage
-      0x14171F280: AddFinalizeSceneTask
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
       - ea: 0x1421E4378
@@ -16170,6 +16186,7 @@ classes:
       0x140C7F7C0: Finalizer
       0x140C805C0: InteractWithObject
       0x140C856D0: ProcessEventPlay
+      0x140C857E0: ProcessEventYield
       0x140C92760: ProcessInitializeScene
       0x140C86800: ProcessSystemLogMessage
       0x140C88170: SetTerritoryTypeId
