@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [StructLayout(LayoutKind.Explicit, Size = 0x1B8)]
 public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
-    [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;
+    [FieldOffset(0x18)] public EventSceneModule* EventSceneModule;
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
