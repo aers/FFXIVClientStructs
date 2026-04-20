@@ -15125,6 +15125,7 @@ classes:
       0: Dtor
       6: Terminate
       7: IsUnlocked
+      40: ProcessYield
       158: CancelInteraction
       204: GetTitle # lua function "GetEventHandlerTitle"
       206: GetEventId
