@@ -20,7 +20,7 @@ public partial struct TofuStopSharingPacket;
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public partial struct TofuRealTimeUpdatePacket {
     [FieldOffset(0x0)] public uint Checksum; // based off: field = 0x8, size = 0x38
-    [FieldOffset(0x8)] public uint Unk8; // constantly changing, doesnt seem to be server time
+    [FieldOffset(0x8)] private uint Unk8; // constantly changing, doesnt seem to be server time
     [FieldOffset(0xC)] private uint UnkC; // Operation Flag, first byte is main op flag, second (and third?) byte is argument(?), fourth byte seems like a bool(?)
     [FieldOffset(0x10)] private byte Unk10; // Contains object index... sometimes (add object/move layer is different)
     [FieldOffset(0x11)] private byte Unk11; // Payload start, position, scale, text content, etc
