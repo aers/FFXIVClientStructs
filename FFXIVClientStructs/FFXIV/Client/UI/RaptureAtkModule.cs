@@ -207,8 +207,10 @@ public unsafe partial struct RaptureAtkModule {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct AddonFactoryInfo {
+        public delegate AtkUnitBase* CreateAddon(RaptureAtkModule* raptureAtkModule, CStringPointer addonName, uint atkValueCount, AtkValue* atkValues);
+
         // Create(RaptureAtkModule* thisPtr, byte* addonName, uint numValues, AtkValue* values)
-        [FieldOffset(0)] public delegate* unmanaged<RaptureAtkModule*, byte*, uint, AtkValue*, nint> Create;
+        [FieldOffset(0)] public delegate* unmanaged<RaptureAtkModule*, byte*, uint, AtkValue*, AtkUnitBase*> Create;
     }
 
     [Flags]
