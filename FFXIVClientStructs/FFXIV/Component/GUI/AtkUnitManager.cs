@@ -83,6 +83,19 @@ public unsafe partial struct AtkUnitManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE 48 8D 8B ?? ?? ?? ??")]
     public partial void UpdateCursor();
+    
+    /// <summary>
+    /// After allocating the AtkUnitBase, and invoking Addon[Name]_Ctor, this function initializes the addon.
+    /// Including utilizing the HUDAnchoring Table.
+    /// Seems to also be called to initialize child addons sometimes.
+    /// </summary>
+    /// <param name="addonVariable">A Pointer to the variable that holds a Pointer to an AtkUnitBase.</param>
+    /// <param name="addonName">Name of the Addon, </param>
+    /// <param name="atkValueCount">Number of AtkValues being passed.</param>
+    /// <param name="values">Array of AtkValue's</param>
+    /// <returns>True if initialized with non-zero AtkUnitBase id, False otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 9F 48 8D 7D 17")]
+    public partial bool InitializeAddon(AtkUnitBase** addonVariable, CStringPointer addonName, uint atkValueCount, AtkValue* values);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
