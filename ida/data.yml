@@ -4890,7 +4890,8 @@ classes:
       0x1400E4B20: ctor # INLINED IN 7.0
       0x1400E61C0: GetAddonByNameHash
       0x1401D3010: Finalizer
-      0x140661820: InitializeAddon # inlined @ 0x1406C0B93
+      0x14065E020: InitializeAddon
+      0x140661820: InitializeAddonInner # inlined
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x142060308
