@@ -1,4 +1,3 @@
-using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -9,34 +8,26 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 /// Useful Information: https://github.com/xivdev/file-formats/blob/main/imhex/stgy.hexpat
 /// </summary>
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = StructSize)]
+[StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public unsafe partial struct TofuPackedBoard {
-    private const int StructSize = 0x410;
-
-    [FieldOffset(0x0)] public ushort PackedSize;
+    [FieldOffset(0x0)] public ushort UnpackedSize;
     [FieldOffset(0x2)] public SharingType SharingType;
+    [FieldOffset(0x3), FixedSizeArray] internal FixedSizeArray1037<byte> _data;
 
     /// <summary>
-    /// Uncompresses the packed board content to a readable format.
+    /// Decompresses the packed board to an unpacked board.
     /// </summary>
-    /// <returns> A struct of the unpacked board. </returns>
-    public TofuUnpackedBoard Uncompress() {
-        var headerSize = 0x3;
-        var uncompressedSize = 0x820;
+    /// <returns> <see langword="true"/> if decompression was successful. </returns>
+    public bool TryDecompressTo(TofuUnpackedBoard* target) {
+        if (UnpackedSize > TofuUnpackedBoard.StructSize)
+            return false;
 
-        var compressedBoard = (byte*)Unsafe.AsPointer(ref this) + headerSize; // 0x78 0x9C zlib flag
-        using var memoryStream = new UnmanagedMemoryStream(compressedBoard, StructSize - headerSize);
-        using var zlib = new ZLibStream(memoryStream, CompressionMode.Decompress);
+        int size = UnpackedSize;
 
-        // zlib.ReadExactly *sometimes* causes crashes: "Unable to read beyond the end of the stream."
-        int offset = 0;
-        var buffer = new byte[uncompressedSize];
-        while (offset < buffer.Length) {
-            var bytesRead = zlib.Read(buffer, offset, buffer.Length - offset);
-            if (bytesRead <= 0) break;
-            offset += bytesRead;
-        }
-        return MemoryMarshal.Read<TofuUnpackedBoard>(buffer);
+        if (target->ReadPackedBoard(&size, Data.GetPointer(0), StructSize - 3) != 0)
+            return false;
+
+        return size == UnpackedSize;
     }
 }
 
