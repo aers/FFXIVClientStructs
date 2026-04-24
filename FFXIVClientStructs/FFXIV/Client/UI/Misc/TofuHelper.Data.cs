@@ -65,14 +65,16 @@ public unsafe partial struct TofuUnpackedBoard {
     public partial int ReadPackedBoard(int* outPacketSize, byte* packedData, int packedDataLength);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = StructSize)]
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x11)]
 public partial struct TofuUnpackedObject {
-    public const int StructSize = 0x11;
-
     private const ushort TextFlag = 0x4000;
     private const ushort NegativeAngleFlag = 0x8000;
-    
-    [FieldOffset(0x0)] public ushort PosXRaw; // Can contain embedded flags
+
+    [BitField<ushort>(nameof(PosX), 0, 13)] // unsure where it ends
+    [BitField<bool>(nameof(HasText), 14)]
+    [BitField<bool>(nameof(IsNegativeAngle), 15)]
+    [FieldOffset(0x0)] public ushort BitField0; // Can contain embedded flags
     [FieldOffset(0x2)] public ushort PosY;
     [FieldOffset(0x4)] public TofuObjectType ObjectType;
     [FieldOffset(0x6)] public ushort ArgExtra1;
@@ -84,9 +86,7 @@ public partial struct TofuUnpackedObject {
     [FieldOffset(0xF)] public byte AngleRaw;
     [FieldOffset(0x10)] public bool IsVisible;
 
-    public ushort PosX => (ushort)(PosXRaw & ~TextFlag & ~NegativeAngleFlag);
-    public short Angle => (short)((PosXRaw & NegativeAngleFlag) != 0 ? -AngleRaw : AngleRaw);
-    public bool HasText => (PosXRaw & TextFlag) != 0;
+    public short Angle => (short)((BitField0 & NegativeAngleFlag) != 0 ? -AngleRaw : AngleRaw);
 }
 
 [Flags]
