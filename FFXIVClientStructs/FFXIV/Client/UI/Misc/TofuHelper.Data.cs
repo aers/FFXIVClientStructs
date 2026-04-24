@@ -68,9 +68,6 @@ public unsafe partial struct TofuUnpackedBoard {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x11)]
 public partial struct TofuUnpackedObject {
-    private const ushort TextFlag = 0x4000;
-    private const ushort NegativeAngleFlag = 0x8000;
-
     [BitField<ushort>(nameof(PosX), 0, 13)] // unsure where it ends
     [BitField<bool>(nameof(HasText), 14)]
     [BitField<bool>(nameof(IsNegativeAngle), 15)]
@@ -86,7 +83,7 @@ public partial struct TofuUnpackedObject {
     [FieldOffset(0xF)] public byte AngleRaw;
     [FieldOffset(0x10)] public bool IsVisible;
 
-    public short Angle => (short)((BitField0 & NegativeAngleFlag) != 0 ? -AngleRaw : AngleRaw);
+    public short Angle => (short)(IsNegativeAngle ? -AngleRaw : AngleRaw);
 }
 
 [Flags]
