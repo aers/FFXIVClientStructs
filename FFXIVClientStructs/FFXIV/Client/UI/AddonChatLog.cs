@@ -22,7 +22,7 @@ public unsafe partial struct AddonChatLog {
     [FieldOffset(0x508)] public AtkTextNode* CurrentChannelTextNode;
     [FieldOffset(0x510)] public AtkComponentNode* SettingsComponentNode;
     [FieldOffset(0x518)] public AtkComponentNode* NoviceNetworkComponentNode;
-    [FieldOffset(0x518), Obsolete("Named incorrectly, use NoviceNetworkComponentNode.")] public AtkComponentNode* CloseComponentNode;
+    [FieldOffset(0x518), Obsolete("Named incorrectly, use NoviceNetworkComponentNode.", true)] public AtkComponentNode* CloseComponentNode;
     [FieldOffset(0x520)] public AtkNineGridNode* BackgroundNode;
     [FieldOffset(0x528)] public AtkComponentButton* ResizeButton;
     [FieldOffset(0x530)] public AtkComponentNode* AddTabComponentNode;
@@ -30,7 +30,7 @@ public unsafe partial struct AddonChatLog {
     [FieldOffset(0x540)] public AtkImageNode* TabBarStartImageNode;
     [FieldOffset(0x548)] public AtkCollisionNode* ControlsCollisionNode;
     [FieldOffset(0x568)] public AtkAddonControl AddonControl;
-    [FieldOffset(0x598), Obsolete("Is actually a part of AddonControl, use that instead")] public AtkStage* AtkStage;
+    [FieldOffset(0x598), Obsolete("Is actually a part of AddonControl, use that instead", true)] public AtkStage* AtkStage;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? 49 8B B6")]
     public partial bool IsZoomed();
