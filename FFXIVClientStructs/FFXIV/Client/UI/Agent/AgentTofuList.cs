@@ -55,10 +55,10 @@ public unsafe partial struct TofuListData {
     public partial void ReviewSelectedBoard();
 
     [MemberFunction("E8 ?? ?? ?? ?? FF CB FF CF")]
-    public partial void SwapBoards(uint boardIndex, uint targetIndex);
+    public partial void SwapBoards(int boardIndex, int targetIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B 36")]
-    public partial void SwapFolders(uint folderIndex, uint targetIndex);
+    public partial void SwapFolders(int folderIndex, int targetIndex);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
