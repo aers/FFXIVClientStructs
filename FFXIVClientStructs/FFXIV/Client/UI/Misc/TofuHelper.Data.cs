@@ -1,0 +1,101 @@
+using System.Runtime.CompilerServices;
+using System.Text;
+
+namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
+
+/// <summary>
+/// The unpacked board is initially allocated and written to with <see cref="TofuBoardOverview.WriteToUnpackedBoard"/> and then compressed via zlib. <br/>
+/// Useful Information: https://github.com/xivdev/file-formats/blob/main/imhex/stgy.hexpat
+/// </summary>
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x410)]
+public unsafe partial struct TofuPackedBoard {
+    [FieldOffset(0x0)] public ushort UnpackedSize;
+    [FieldOffset(0x2)] public SharingType SharingType;
+    [FieldOffset(0x3), FixedSizeArray] internal FixedSizeArray1037<byte> _data;
+
+    /// <summary>
+    /// Decompresses the packed board to an unpacked board.
+    /// </summary>
+    /// <returns> <see langword="true"/> if decompression was successful. </returns>
+    public bool TryDecompressTo(TofuUnpackedBoard* target) {
+        if (UnpackedSize > TofuUnpackedBoard.StructSize)
+            return false;
+
+        int size = UnpackedSize;
+
+        if (target->ReadPackedBoard(&size, Data.GetPointer(0), StructSize - 3) != 0)
+            return false;
+
+        return size == UnpackedSize;
+    }
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x820)]
+public unsafe partial struct TofuUnpackedBoard {
+    [FieldOffset(0x0)] public byte Background;
+    [FieldOffset(0x1)] public byte NumberOfObjects;
+    [FieldOffset(0x2)] public byte NumberOfTextObjects;
+
+    public byte* ObjectsPointer => (byte*)Unsafe.AsPointer(ref this) + 0x3;
+    public byte* TextLengthsPointer => ObjectsPointer + NumberOfObjects * TofuUnpackedObject.StructSize;
+    public byte* TextObjectsPointer => TextLengthsPointer + NumberOfTextObjects;
+
+    public Span<TofuUnpackedObject> Objects => new(ObjectsPointer, NumberOfObjects);
+    public Span<byte> TextLengths => new(TextLengthsPointer, NumberOfTextObjects);
+
+    public Span<byte> GetTextSpan(int index) {
+        if (index >= NumberOfTextObjects)
+            return [];
+
+        var lengths = TextLengths;
+        var currentPtr = TextObjectsPointer;
+
+        for (var i = 0; i < index; i++) {
+            currentPtr += lengths[i];
+        }
+
+        return new Span<byte>(currentPtr, lengths[index]);
+    }
+
+    public string GetText(int index) => Encoding.UTF8.GetString(GetTextSpan(index));
+
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 39 6C 24")]
+    public partial int ReadPackedBoard(int* outPacketSize, byte* packedData, int packedDataLength);
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x11)]
+public partial struct TofuUnpackedObject {
+    [BitField<ushort>(nameof(PosX), 0, 13)] // unsure where it ends
+    [BitField<bool>(nameof(HasText), 14)]
+    [BitField<bool>(nameof(IsNegativeAngle), 15)]
+    [FieldOffset(0x00)] public ushort BitField0;
+    [FieldOffset(0x02)] public ushort PosY;
+    [FieldOffset(0x04)] public TofuObjectType ObjectType;
+    [FieldOffset(0x06)] public ushort ArgExtra1;
+    [FieldOffset(0x08)] public ushort ArgExtra2;
+    [FieldOffset(0x0A)] public ushort ArgExtra3;
+    [FieldOffset(0x0C)] public byte ColourPaletteIndex;
+    [FieldOffset(0x0D)] public byte Transparency;
+    [FieldOffset(0x0E)] public byte Scale;
+    [FieldOffset(0x0F)] public byte AngleRaw;
+    [FieldOffset(0x10)] public bool IsVisible;
+
+    public short Angle => (short)(IsNegativeAngle ? -AngleRaw : AngleRaw);
+}
+
+[Flags]
+public enum SharingType : byte {
+    Normal = 0,
+    RealTime = 1,
+    Folder = 4,
+}
+
+[Flags]
+public enum SendState : uint {
+    None = 0,
+    Intermediate = 1,
+    Last = 2,
+}

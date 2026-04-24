@@ -55,6 +55,7 @@ public unsafe partial struct InfoProxyCommonList {
     public partial struct CharacterData {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public OnlineStatus State;
+        [FieldOffset(0x18)] public ulong AccountId;
         //12 bytes
         /// <summary>
         /// Extra flags for status:
