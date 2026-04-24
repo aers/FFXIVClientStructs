@@ -10127,7 +10127,7 @@ classes:
   Client::UI::Misc::TofuHelper::TofuBoardOverview:
     funcs:
       0x140AE4330: ctor
-      0x140AE5430: ConstructUnpackedBoard
+      0x140AE5430: WriteToUnpackedBoard
   Client::UI::Misc::TofuHelper::TofuHelperData:
     funcs:
       0x140AED0D0: ctor

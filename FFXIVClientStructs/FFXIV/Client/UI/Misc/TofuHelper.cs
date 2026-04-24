@@ -67,8 +67,15 @@ public unsafe partial struct TofuBoardOverview {
     [FieldOffset(0x18)] public Utf8String BoardName;
     [FieldOffset(0x84)] public byte BoardBackground;
 
+    /// <summary>
+    /// Writes data from this <see cref="TofuBoardOverview"/> to a <see cref="TofuUnpackedBoard"/>.
+    /// </summary>
+    /// <param name="target">The TofuUnpackedBoard to write to.</param>
+    /// <param name="size">Always <see cref="TofuUnpackedBoard.StructSize"/>.</param>
+    /// <param name="colorDataManager"></param>
+    /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 85 C0 75 ?? 44 8B F7")]
-    public partial uint ConstructUnpackedBoard(nint buffer, uint size, RaptureAtkColorDataManager* colorDataManager);
+    public partial uint WriteToUnpackedBoard(TofuUnpackedBoard* target, int size, RaptureAtkColorDataManager* colorDataManager);
 }
 
 [GenerateInterop]
