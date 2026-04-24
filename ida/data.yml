@@ -10124,10 +10124,6 @@ classes:
       0x140AE6400: HandleRealTimeUpdatePacket
       0x140AE6970: HandleStopSharingPacket
       0x140AE6BF0: HandleTofuConfirmationPacket
-  Client::UI::Misc::TofuHelper::TofuBoardOverview:
-    funcs:
-      0x140AE4330: ctor
-      0x140AE5430: WriteToUnpackedBoard
   Client::UI::Misc::TofuHelper::TofuHelperData:
     funcs:
       0x140AED0D0: ctor
@@ -10137,7 +10133,11 @@ classes:
       0x140AF2580: SaveBoardAndPlaySound
       0x140AF3E90: SendVerificationPacket
       0x140AF49B0: ShowSharedNotification
-  Client::UI::Misc::TofuHelper::TofuUnpackedBoard:
+  Client::UI::Misc::TofuBoardOverview:
+    funcs:
+      0x140AE4330: ctor
+      0x140AE5430: WriteToUnpackedBoard
+  Client::UI::Misc::TofuUnpackedBoard:
     funcs:
       0x141FC4630: ReadPackedBoard
   Client::System::Crypt::SimpleString:
