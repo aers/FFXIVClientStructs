@@ -4,7 +4,7 @@ using System.Text;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 /// <summary>
-/// The unpacked board is initially constructed in <see cref="TofuBoardOverview.ConstructUnpackedBoard"/> and then compressed via zlib. <br/>
+/// The unpacked board is initially allocated and written to with <see cref="TofuBoardOverview.WriteToUnpackedBoard"/> and then compressed via zlib. <br/>
 /// Useful Information: https://github.com/xivdev/file-formats/blob/main/imhex/stgy.hexpat
 /// </summary>
 [GenerateInterop]
@@ -71,16 +71,16 @@ public partial struct TofuUnpackedObject {
     [BitField<ushort>(nameof(PosX), 0, 13)] // unsure where it ends
     [BitField<bool>(nameof(HasText), 14)]
     [BitField<bool>(nameof(IsNegativeAngle), 15)]
-    [FieldOffset(0x0)] public ushort BitField0; // Can contain embedded flags
-    [FieldOffset(0x2)] public ushort PosY;
-    [FieldOffset(0x4)] public TofuObjectType ObjectType;
-    [FieldOffset(0x6)] public ushort ArgExtra1;
-    [FieldOffset(0x8)] public ushort ArgExtra2;
-    [FieldOffset(0xA)] public ushort ArgExtra3;
-    [FieldOffset(0xC)] public byte ColourPaletteIndex;
-    [FieldOffset(0xD)] public byte Transparency;
-    [FieldOffset(0xE)] public byte Scale;
-    [FieldOffset(0xF)] public byte AngleRaw;
+    [FieldOffset(0x00)] public ushort BitField0;
+    [FieldOffset(0x02)] public ushort PosY;
+    [FieldOffset(0x04)] public TofuObjectType ObjectType;
+    [FieldOffset(0x06)] public ushort ArgExtra1;
+    [FieldOffset(0x08)] public ushort ArgExtra2;
+    [FieldOffset(0x0A)] public ushort ArgExtra3;
+    [FieldOffset(0x0C)] public byte ColourPaletteIndex;
+    [FieldOffset(0x0D)] public byte Transparency;
+    [FieldOffset(0x0E)] public byte Scale;
+    [FieldOffset(0x0F)] public byte AngleRaw;
     [FieldOffset(0x10)] public bool IsVisible;
 
     public short Angle => (short)(IsNegativeAngle ? -AngleRaw : AngleRaw);
