@@ -69,6 +69,9 @@ public unsafe partial struct TofuUnpackedBoard {
     }
 
     public string GetText(int index) => Encoding.UTF8.GetString(GetTextSpan(index));
+
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 39 6C 24")]
+    public partial int ReadPackedBoard(int* outPacketSize, byte* packedData, int packedDataLength);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = StructSize)]

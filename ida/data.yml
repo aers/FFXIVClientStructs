@@ -10137,6 +10137,9 @@ classes:
       0x140AF2580: SaveBoardAndPlaySound
       0x140AF3E90: SendVerificationPacket
       0x140AF49B0: ShowSharedNotification
+  Client::UI::Misc::TofuHelper::TofuUnpackedBoard:
+    funcs:
+      0x141FC4630: ReadPackedBoard
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x142061E48
