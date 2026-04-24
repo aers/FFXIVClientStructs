@@ -7410,6 +7410,9 @@ classes:
     funcs:
       0x14043DB80: ctor
       0x1407743A0: Create
+      0x140440160: LoadAnimationData
+      0x14043DC20: ResetFlags
+      0x14043E040: SetModel
   Client::Graphics::Scene::EnvScene:
     vtbls:
       - ea: 0x142098ED8
