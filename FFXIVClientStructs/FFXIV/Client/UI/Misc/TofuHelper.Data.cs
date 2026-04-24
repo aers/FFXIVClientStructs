@@ -43,31 +43,38 @@ public unsafe partial struct TofuPackedBoard {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x820)]
 public unsafe partial struct TofuUnpackedBoard {
-    private const uint ObjectOffset = 0x3;
-    private const uint ObjectSize = 0x11;
-
     [FieldOffset(0x0)] public byte Background;
     [FieldOffset(0x1)] public byte NumberOfObjects;
-    [FieldOffset(0x2)] public byte NumberOfTextObjects; 
+    [FieldOffset(0x2)] public byte NumberOfTextObjects;
 
-    public Span<TofuUnpackedObject> Objects => new((byte*)Unsafe.AsPointer(ref this) + ObjectOffset, NumberOfObjects);
-    private Span<byte> TextLength => new((byte*)Unsafe.AsPointer(ref this) + ObjectOffset + (NumberOfObjects * ObjectSize), NumberOfTextObjects);
-    public string[] TextContents {
-        get {
-            var textPtr = (byte*)Unsafe.AsPointer(ref this) + ObjectOffset + (NumberOfObjects * ObjectSize) + NumberOfTextObjects;
-            var result = new string[NumberOfTextObjects];
-            for (int i = 0; i < NumberOfTextObjects; i++) {
-                var length = TextLength[i];
-                result[i] = Encoding.UTF8.GetString(textPtr, length);
-                textPtr += length;
-            }
-            return result;
+    public byte* ObjectsPointer => (byte*)Unsafe.AsPointer(ref this) + 0x3;
+    public byte* TextLengthsPointer => ObjectsPointer + NumberOfObjects * TofuUnpackedObject.StructSize;
+    public byte* TextObjectsPointer => TextLengthsPointer + NumberOfTextObjects;
+
+    public Span<TofuUnpackedObject> Objects => new(ObjectsPointer, NumberOfObjects);
+    public Span<byte> TextLengths => new(TextLengthsPointer, NumberOfTextObjects);
+
+    public Span<byte> GetTextSpan(int index) {
+        if (index >= NumberOfTextObjects)
+            return [];
+
+        var lengths = TextLengths;
+        var currentPtr = TextObjectsPointer;
+
+        for (var i = 0; i < index; i++) {
+            currentPtr += lengths[i];
         }
+
+        return new Span<byte>(currentPtr, lengths[index]);
     }
+
+    public string GetText(int index) => Encoding.UTF8.GetString(GetTextSpan(index));
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x11)]
+[StructLayout(LayoutKind.Explicit, Size = StructSize)]
 public partial struct TofuUnpackedObject {
+    public const int StructSize = 0x11;
+
     private const ushort TextFlag = 0x4000;
     private const ushort NegativeAngleFlag = 0x8000;
     
