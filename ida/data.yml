@@ -5774,6 +5774,7 @@ classes:
     funcs:
       0x14030C6C0: ctor
       0x14030D410: GetMaterialFileNameBySlot
+      0x14030F460: LoadMaterials
 #oldfail       0x1403E05A0: GetAttributeIndex
 #oldfail       0x1403ED470: GetShapeIndex
   Client::System::Resource::Handle::ModelResourceHandleFactory:
