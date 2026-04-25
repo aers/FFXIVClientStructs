@@ -88,7 +88,10 @@ public unsafe partial struct InfoProxyItemSearch {
 public unsafe partial struct MarketBoardListing {
     public const int Size = 0xB8;
 
-    // [FieldOffset(0x00)] private Utf8String Unk0x00;
+    /// <summary>
+    /// Appears to only be populated when item is being sold as a set.
+    /// </summary>
+    [FieldOffset(0x00)] private Utf8String SellingPlayerName;
 
     [FieldOffset(0x68)] public ulong ListingId;
     [FieldOffset(0x70)] public ulong SellingRetainerContentId; // ??
@@ -117,7 +120,7 @@ public unsafe partial struct MarketBoardListing {
     [FieldOffset(0xA9)] public byte MateriaCount;
     [FieldOffset(0xAA)] public bool IsMannequin;
 
-    // [FieldOffset(0xAC)] private ushort Unk0xAC;
+    [FieldOffset(0xAC)] private ushort IsSellingAsSet;
 
     /// <summary>
     /// The Town (from EXD) that this marketboard entry is from.
