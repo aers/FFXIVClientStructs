@@ -219,8 +219,8 @@ public enum UIModulePacketType {
     Unknown36 = 36, // Glasses
     TofuReceiveBoard = 37,
     TofuRealTimeUpdate = 38,
-    TofuStopShare = 39, 
-    TofuConfirmation = 40, 
+    TofuStopShare = 39,
+    TofuConfirmation = 40,
 
     [Obsolete("Renamed to ZoneInit", true)]
     InitZone = 5,

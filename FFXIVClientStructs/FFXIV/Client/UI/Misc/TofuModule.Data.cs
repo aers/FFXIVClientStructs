@@ -23,7 +23,7 @@ public partial struct TofuFolderEntry {
     [FieldOffset(0x0)] public bool IsValid;
     [FieldOffset(0x1)] public byte Index;
     [FieldOffset(0x2)] public byte PositionInList;
-    [FieldOffset(0x3), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name; 
+    [FieldOffset(0x3), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
     [FieldOffset(0x43)] public bool IsBoard; // boards contribute to the max folder counter and is marked as "valid", but the name is empty
 }
 

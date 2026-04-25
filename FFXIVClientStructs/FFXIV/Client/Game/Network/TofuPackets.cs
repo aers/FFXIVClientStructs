@@ -29,5 +29,5 @@ public partial struct TofuRealTimeUpdatePacket {
 [StructLayout(LayoutKind.Explicit, Size = 0x09)]
 public partial struct TofuConfirmationPacket {
     [FieldOffset(0x0)] public ulong ReceiverContentId;
-    [FieldOffset(0x8)] public byte BoardIndexInFolder; 
+    [FieldOffset(0x8)] public byte BoardIndexInFolder;
 }

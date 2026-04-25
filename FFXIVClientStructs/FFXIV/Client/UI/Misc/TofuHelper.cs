@@ -13,7 +13,7 @@ public unsafe partial struct TofuHelper {
     public partial void HandleStartSharingPacket(ServerIpcSegment<TofuStartSharingPacket>* packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 0F 6F 05 ?? ?? ?? ?? 48 8D 8B")]
-    public partial void HandleStopSharingPacket(ServerIpcSegment<TofuStopSharingPacket>* packet); 
+    public partial void HandleStopSharingPacket(ServerIpcSegment<TofuStopSharingPacket>* packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB")]
     public partial void HandleRealTimeUpdatePacket(ServerIpcSegment<TofuRealTimeUpdatePacket>* packet);

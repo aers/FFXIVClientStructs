@@ -35,7 +35,7 @@ public unsafe partial struct TofuListData {
     [FieldOffset(0x2BD4)] public uint TotalSharedBoards;
     [FieldOffset(0x2BD8)] public uint TotalShared;
     [FieldOffset(0x2BDC)] public int SharedSelectedIndex;
-    [FieldOffset(0x2BE0)] public TofuMoveToFolder MoveToFolderDialog; 
+    [FieldOffset(0x2BE0)] public TofuMoveToFolder MoveToFolderDialog;
     [FieldOffset(0x3D18)] public TofuSettings SettingsDialog;
     [FieldOffset(0x3DF8)] public Utf8String SelectYesNoText;
     [FieldOffset(0x3E60)] public AgentTofuList* Agent;
@@ -49,7 +49,7 @@ public unsafe partial struct TofuListData {
     [FieldOffset(0x3E8C)] public uint ChildAddonId;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B 47 ?? 89 A8")]
-    public partial void RenameItem(int index, Utf8String* newName); 
+    public partial void RenameItem(int index, Utf8String* newName);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 BB ?? ?? ?? ?? ?? 48 8D 8B")]
     public partial void ReviewSelectedBoard();
