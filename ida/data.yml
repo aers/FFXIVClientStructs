@@ -4868,6 +4868,8 @@ classes:
       21: UnloadScdResource # it really just DecRefs it
       24: ToggleUi
       25: IsUiFlagsSet
+      39: ShouldApplyUiBaseScale
+      40: ShouldApplyScreenTextBaseScale
     funcs:
       0x1401D2D40: Finalizer
       0x14065C650: ctor

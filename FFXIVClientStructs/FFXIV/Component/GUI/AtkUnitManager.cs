@@ -37,12 +37,33 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9178)] public AddonFilter* AddonFilterSystem;
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
-
+    [FieldOffset(0x9190)] private AtkResNode* ChatLogFocusNode; // set via a function called in AddonChatLog.OnRefresh, but not sure what for
+    [FieldOffset(0x9198)] public AtkResNode* CursorFocusNode;
+    /// <remarks>
+    /// On scene change, the Hud addons are opened and their ids are stored here.<br/>
+    /// Once all are set up (in <see cref="AtkModule.Update"/>), it calls handler 0 which sets <see cref="AtkModule.IsHudInitialized"/> to <see langword="true"/>.
+    /// </remarks>
+    [FieldOffset(0x91A0), FixedSizeArray] internal FixedSizeArray128<ushort> _hudInitAddonIds;
     [FieldOffset(0x92A0)] private AtkResNode Unk92A0;
     [FieldOffset(0x9360)] public Size LastScreenSize;
+    [FieldOffset(0x9368)] public float LastScreenSizeScale;
+    [FieldOffset(0x936C)] public float HUDScaleDefault; // always 1.0f?!
+    /// <remarks> Controlled by ConfigOption <c>UiBaseScale</c> (also settable via <c>/uiscale</c>). </remarks>
+    [FieldOffset(0x9370)] public float UiBaseScale;
+    /// <remarks>
+    /// Used by addons ScreenText, ChatLog (for the auto-translate popup), MiniTalkPlayer.<br/>
+    /// Multiplied by g_GlobalUIScale.<br/>
+    /// Might need a resolution or scene change to be applied in opened addons.
+    /// </remarks>
+    [FieldOffset(0x9374)] public float ScreenTextBaseScale;
+    /// <remarks> Key is DepthLayer of the UnitBase. </remarks>
+    [FieldOffset(0x9378), FixedSizeArray] internal FixedSizeArray13<ushort> _nextDrawOrderIndexes;
+    /// <remarks> Count of non-zero entries in <see cref="HudInitAddonIds"/>. </remarks>
+    [FieldOffset(0x9392)] public short NumHudInitAddonIds;
 
     [FieldOffset(0x9398), FixedSizeArray] internal FixedSizeArray48<HudAnchoringInfo> _hudAnchoringTable;
     [FieldOffset(0x9C98)] public AtkUnitManagerFlags Flags;
+    [FieldOffset(0x9C99)] private byte Flags2;
 
     [VirtualFunction(8)]
     public partial bool SetAddonVisibility(ushort addonId, bool visible);
@@ -61,6 +82,12 @@ public unsafe partial struct AtkUnitManager {
 
     [VirtualFunction(25)]
     public partial bool IsUiFlagsSet(UiFlags flags);
+
+    [VirtualFunction(39)]
+    public partial bool ShouldApplyUiBaseScale(AtkUnitBase* addon);
+
+    [VirtualFunction(40)]
+    public partial bool ShouldApplyScreenTextBaseScale(AtkUnitBase* addon);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
     public partial AtkUnitBase* GetAddonByName(CStringPointer name, int index = 1);
