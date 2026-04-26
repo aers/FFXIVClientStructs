@@ -52,7 +52,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     // Bit 5: Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
     // Bit 6: Disable WindowCollisionNode interactivity (no focus on click, not moving the addon when dragged)
     [FieldOffset(0x1A3)] public byte Flags1A3;
-    // Bit 4: Used to determine which AtkUnitManager.UIScale field to use. Checked (Rapture)AtkUnitManager.vf39/vf40
+    // Bit 4: Use UiBaseScale or ScreenTextBaseScale (depending on other flags, checked in AtkUnitManager vfuncs)
     // Bit 6: Unknown, enables whatever HudAnchoringInfoIndex does
     [FieldOffset(0x1A4)] public byte Flags1A4;
     [BitField<bool>(nameof(EnableTextNodePopulation), 5)]
