@@ -5527,6 +5527,7 @@ classes:
     funcs:
       0x1402EDA30: DecRef
       0x1402EDA60: IncRef
+      0x1402EEF20: FinishLoad
       0x1402EDC30: ctor
   Client::System::Resource::Handle::DefaultResourceHandle:
     vtbls:
