@@ -61,7 +61,7 @@ public unsafe partial struct ResourceHandle {
     /// and loads this resource (<see cref="Load(void*, byte)"/>).
     /// </summary>
     /// <param name="fileDescriptor">The file descriptor that has been read into this resource (<see cref="Read(FileDescriptor*, bool)"/>).</param>
-    /// <param name="openFileResult">The result of opening the file for the file descriptor (<see cref="FileInterface.Open(char*, OpenFileMode)"/>).</param>
+    /// <param name="openFileResult">The result of opening the file for the file descriptor (<see cref="FileInterface.OpenFile(char*, OpenFileMode)"/>).</param>
     /// <param name="a4">Unknown. Seen: 0, 1, and 2.</param>
     /// <returns>Whether this resource handle was loaded successfully.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 80 3F 0B 75 28")]
