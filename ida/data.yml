@@ -5466,6 +5466,9 @@ classes:
       - ea: 0x1420997D8
     vfuncs:
       0: Dtor
+    funcs:
+      0x14045C6E0: OpenFile
+      0x14045C670: Close
   Client::System::File::FileHandleManager:
     vtbls:
       - ea: 0x1420997E8
