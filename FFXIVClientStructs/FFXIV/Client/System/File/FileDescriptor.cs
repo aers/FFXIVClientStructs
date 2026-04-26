@@ -54,12 +54,12 @@ public unsafe partial struct FileDescriptor {
     [FieldOffset(0x60)] public FileDescriptor* Previous; // believe its a queue
     [FieldOffset(0x68)] public FileDescriptor* Next;
 
-    // This is unioned with other fields for sqpack-related file modes
-    [FieldOffset(0x70), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _filePath;
-
     /// <summary>
     /// The wide-character path of the file to read from or write to, if the <see cref="FileMode"/> is
     /// one of the modes that operates on plain files on disk.
     /// </summary>
-    public Span<char> FilePathSpan => _filePath;
+    /// <remarks>
+    /// This is unioned with other fields for sqpack-related file modes.
+    /// </remarks>
+    [FieldOffset(0x70), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _filePath;
 }
