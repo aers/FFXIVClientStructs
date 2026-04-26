@@ -74,6 +74,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1C4)] public float Scale;
     [BitField<bool>(nameof(EnableFilter), 2)]
     [BitField<bool>(nameof(DisableUserScaling), 11)] // sets Scale to 1.0
+    [BitField<bool>(nameof(DisableUnfocusedCloseOnEsc), 20)] // if true, won't close on esc when unfocused
     [BitField<bool>(nameof(IsScalingWithGlobalUIScale), 21)] // multiplies scale by g_GlobalUIScale
     [FieldOffset(0x1C8)] public uint Flags1C8;
     /// <summary>
