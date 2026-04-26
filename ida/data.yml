@@ -5469,7 +5469,17 @@ classes:
     funcs:
       0x14045C6E0: OpenFile
       0x14045C670: Close
+  Client::System::File::FileHandle:
+    funcs:
+      0x14045EE70: Reset
+  Client::System::File::FileHandleIndex:
+    funcs:
+      0x1400C02ED: Return
+      0x14045C1F0: Reset
   Client::System::File::FileHandleManager:
+    instances:
+      - ea: 0x1429944C0
+        pointer: true
     vtbls:
       - ea: 0x1420997E8
   Client::System::File::StreamFile:

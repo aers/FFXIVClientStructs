@@ -14,12 +14,9 @@ public unsafe partial struct FileDescriptor {
     [FieldOffset(0x0)] public FileMode FileMode;
     /// <summary>
     /// If <see cref="FileMode"/> is not a one of the <see cref="Resource.Handle.ResourceHandle"/>-reading modes,
-    /// this holds the buffer to read into or write from.
+    /// this holds the buffer to read into or write from, or <c>null</c> to allocate a new buffer in the FileHandle
+    /// specified by <see cref="FileHandleIndex"/>.
     /// </summary>
-    /// <remarks>
-    /// If left <c>null</c>, the <see cref="FileMode.LoadFileResource"/> mode will allocate a buffer using
-    /// <see cref="AllocationMemorySpace"/> and <see cref="AllocationAlignment"/>.
-    /// </remarks>
     [FieldOffset(0x8)] public byte* FileBuffer;
     [Obsolete("Replaced by Length.")]
     [FieldOffset(0x10)] public ulong FileLength; // Misleading name--not necessarily the length of the file
@@ -37,6 +34,7 @@ public unsafe partial struct FileDescriptor {
     /// The offset in the file to start reading from/writing to.
     /// </summary>
     [FieldOffset(0x18)] public ulong StartOffset;
+    [FieldOffset(0x28)] public FileHandleIndex FileHandleIndex;
     [FieldOffset(0x30)] public FileInterface* FileInterface;
     /// <summary>
     /// If <see cref="FileMode"/> is <see cref="FileMode.LoadFileResource"/> and <see cref="FileBuffer"/> is <c>null</c>,
