@@ -1,6 +1,12 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
+public enum OpenFileMode : int {
+    Read = 0,
+    Overwrite = 1,
+    Append = 2,
+}
+
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)] // Size is a guess
 public unsafe partial struct FileInterface {
