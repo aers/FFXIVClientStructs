@@ -19,14 +19,8 @@ public unsafe partial struct FileHandleManager {
     }
 }
 
-// Holy smokes, what an array!
-[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 1)]
-[global::System.Runtime.CompilerServices.InlineArrayAttribute(8704)] // 0x2200
-public struct FixedSizeArray8704<T> where T : unmanaged {
-    private T _element0;
-}
-
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x44000)]
-public struct FileHandlePage {
+public partial struct FileHandlePage {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8704<FileHandle> _handles;
 }
