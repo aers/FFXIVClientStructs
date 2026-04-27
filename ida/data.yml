@@ -5473,6 +5473,9 @@ classes:
   Client::System::File::FileHandle:
     funcs:
       0x14045EE70: Reset
+  Client::System::File::FileDescriptor:
+    funcs:
+      0x14045C870: Read
   Client::System::File::FileHandleIndex:
     funcs:
       0x1400C02ED: Return

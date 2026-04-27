@@ -62,4 +62,15 @@ public unsafe partial struct FileDescriptor {
     /// This is unioned with other fields for sqpack-related file modes.
     /// </remarks>
     [FieldOffset(0x70), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _filePath;
+
+    /// <summary>
+    /// Reads into the given buffer.
+    /// </summary>
+    /// <param name="outputBuffer">The buffer to read data into.</param>
+    /// <param name="length">The number of bytes to read, or zero to read the remaining data.</param>
+    /// <param name="start">The offset into the file to start reading from, or zero to start from the file's current offset.</param>
+    /// <param name="resetPosition">Whether to start reading at the given <c>start</c> value, even if it is zero.</param>
+    /// <returns>The status code from attempting to read the file, with 1 being success.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 45 C7 89 83 ?? ?? ?? ??")]
+    public partial byte Read(byte* outputBuffer, ulong length, ulong start, bool resetPosition);
 }
