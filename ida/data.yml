@@ -25283,8 +25283,9 @@ classes:
       9: GetMemoryModule
     funcs:
       0x14008E510: Free
-      0x14008E490: StaticMalloc # always using an alignment of 0x10
+      0x14008E490: StaticMalloc # uses _aligned_malloc, but always with an alignment of 0x10
       0x14008EA40: StaticAlignedMalloc
+      0x14008EB20: StaticAlignedFree
       0x14008EC60: CreateMemorySpaces
       0x14008F2A0: DestroyMemorySpaces
   Client::System::Memory::IMemoryModule:
