@@ -100,7 +100,7 @@ public enum AgentId : uint {
     PartyInvite = 62,
     Search = 63,
     Detail = 64,
-    LetterList = 65,
+    Letter = 65,
     LetterView = 66,
     LetterEdit = 67,
     ItemDetail = 68,
