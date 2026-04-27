@@ -2771,7 +2771,6 @@ classes:
       0x140304080: GetResourceSync
       0x1403085E0: FindResourceHandle
       0x1403091D0: Initialize
-      0x140461D20: ReadSqPack
   Client::Game::UI::DirectorTodo:
     funcs:
       0x140B2CF60: SetDirector
@@ -5497,6 +5496,7 @@ classes:
     funcs:
       0x140460680: ctor
       0x140460770: Finalizer
+      0x140461D20: ReadSqPack
   Client::System::File::FileManager:
     instances:
       - ea: 0x1429944C8

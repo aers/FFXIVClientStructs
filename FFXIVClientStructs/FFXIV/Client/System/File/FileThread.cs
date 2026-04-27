@@ -3,7 +3,11 @@ namespace FFXIVClientStructs.FFXIV.Client.System.File;
 // Client::System::File::FileThread
 //   Client::System::Threading::Thread
 //     Client::System::Common::NonCopyable
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x2518)]
-public unsafe struct FileThread {
+public unsafe partial struct FileThread {
     [FieldOffset(0x0008)] public void* SecurityAttributes; // https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-createeventa
+
+    [MemberFunction("40 56 41 56 48 83 EC ?? 0F BE 02")]
+    public partial byte ReadSqPack(FileDescriptor* fileDescriptor, int priority, bool isSync);
 }
