@@ -80,5 +80,6 @@ public enum ObjectType {
     UnkType6 = 6,
     EnvSpace = 7,
     EnvLocation = 8,
-    UnkType9 = 9,
+    Decal = 9,
+    UnkType10 = 10,
 }

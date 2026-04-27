@@ -7440,6 +7440,12 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x1404434F0: ctor
+  Client::Graphics::Scene::Decal:
+    vtbls:
+      - ea: 0x142098868
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x14043CD70: ctor
   Client::Graphics::Scene::BGObject:
     vtbls:
       - ea: 0x1420989F8
