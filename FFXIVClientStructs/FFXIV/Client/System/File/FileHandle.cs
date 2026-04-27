@@ -26,7 +26,7 @@ public partial struct FileHandleIndex {
     [FieldOffset(0x00)] public uint Value;
 
     // Returns the file handle to the global file handle manager's empty pool and clears out this handle index.
-    [MemberFunction("E8 ?? ?? ?? ?? 41 89 2F BB ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 89 2F BB")]
     public partial void Return();
 
     // Resets the file handle that this file handle index refers to, if necessary.

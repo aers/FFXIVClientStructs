@@ -5477,7 +5477,7 @@ classes:
       0x1402EF650: Read
   Client::System::File::FileHandleIndex:
     funcs:
-      0x1400C02ED: Return
+      0x14045C130: Return
       0x14045C1F0: Reset
   Client::System::File::FileHandleManager:
     instances:
