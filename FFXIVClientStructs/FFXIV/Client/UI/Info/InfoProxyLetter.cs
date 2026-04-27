@@ -44,7 +44,7 @@ public unsafe partial struct InfoProxyLetter {
     public partial bool TakeAllAttachments(uint LetterIndex, int SenderContentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 27 49 8B 07")]
-    public partial bool DeleteLetter(uint LetterIndex);
+    public partial bool DeleteLetter(uint letterIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 0F 45 33 FF")]
     public partial bool RequestRewardDelivery();
