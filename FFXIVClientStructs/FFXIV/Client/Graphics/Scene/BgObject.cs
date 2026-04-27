@@ -35,7 +35,7 @@ public unsafe partial struct BgObject {
     /// Resets the <see cref="BgObject.Flags"/>, <see cref="BgObject.OutlineFlags"/>, and <see cref="BgObject.ObjectFlags"/>
     /// for this BgObject during its creation.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B D3 E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 48 8D 4C 24 ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B D3 E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 48 8D 4C 24")]
     public partial void ResetFlags();
 
     /// <summary>
@@ -44,7 +44,7 @@ public unsafe partial struct BgObject {
     /// <param name="modelResourceCategory">The resource category that contains the model resource.</param>
     /// <param name="modelResourcePath">The path of the model resource.</param>
     /// <returns>Success or failure.</returns>
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 8B C2 C7 44 24 ?? ?? ?? ?? ??")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 8B C2 C7 44 24")]
     [GenerateStringOverloads]
     public partial bool SetModel(ResourceCategory* modelResourceCategory, CStringPointer modelResourcePath);
 
