@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.File;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource;
@@ -20,6 +21,9 @@ public unsafe partial struct ResourceManager {
 
     [MemberFunction("E8 ?? ?? ?? 00 48 8B D8 EB ?? F0 FF 83 ?? ?? 00 00"), GenerateStringOverloads]
     public partial ResourceHandle* GetResourceAsync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown, bool isUnknown, void* unkDebugPtr, uint unkDebugInt);
+
+    [MemberFunction("40 56 41 56 48 83 EC ?? 0F BE 02")]
+    public partial byte ReadSqPack(FileDescriptor* fileDescriptor, int priority, bool isSync);
 }
 
 public enum ResourceCategory {
