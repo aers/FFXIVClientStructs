@@ -25270,6 +25270,9 @@ classes:
       - ea: 0x1427F80B8
         name: SoundSpace
         pointer: true
+      - ea: 0x1427F80D8
+        name: ManagedResouceSpace
+        pointer: true
     vtbls:
       - ea: 0x14204A9F0
     vfuncs:
