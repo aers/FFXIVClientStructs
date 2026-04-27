@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 public enum OpenFileMode : int {
     Read = 0,
-    Overwrite = 1,
+    Write = 1,
     Append = 2,
 }
 
