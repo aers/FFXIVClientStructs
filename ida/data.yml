@@ -5,6 +5,9 @@ globals:
   0x142049DB8: g_FloatOne # 1f
   0x142052C60: g_FloatOneAndAHalf # 1.5f
   0x142049DF4: g_FloatSix # 6f
+  0x14204AFD0: g_MemoryPoolConfig # { int BlockSize; int BlockCount; }[10], last entry is special for the lookup table
+  0x1427F8130: g_MemoryPoolsStart
+  0x1427F8180: g_MemoryPoolsEnd
   0x142052C64: g_FloatTwenty # 20f
 #fail   0x141F0C404: g_ConfigFileName
   0x142055030: g_NumberArraySizes
@@ -134,7 +137,6 @@ functions:
   0x14005F170: vsprintf_s
   0x14005F1D0: vswprintf_s
   0x140093790: IsMacClient
-  0x1400942A0: SpecialFreeMemory
   0x1400D3810: CheckOsTypeAndVersion
 #fail   0x1400683A0: GetMyDocumentsFolder #as UTF8String
   0x1400D4E30: GetPerformanceFrequency
@@ -375,7 +377,6 @@ functions:
   0x141CE89B0: _invalid_parameter_noinfo
   0x141CE89D0: _invalid_parameter_noinfo_noreturn
   0x141CD86E0: MemCpy
-  0x14008E490: StaticMalloc #uses MemoryManager if avail, but fail saves malloc
   0x14008E7D0: MemAlloc
   0x14032AEB0: MatrixMultiply
   0x140328140: MatrixMultiply2
@@ -462,9 +463,10 @@ classes:
       0x1400D50F0: Now2
       0x1405C2410: Now
       0x1405C6520: ctor
-  MemoryManager:
+  Client::System::Memory::MemoryManager:
     funcs:
       0x14008E7E0: AllocDefaultSpace
+      0x14008E600: FreeDefaultSpace
       0x14008E870: Alloc
       0x14008FEE0: GetDefaultSpace
       0x14008FFA0: GetApricotSpace
@@ -474,6 +476,16 @@ classes:
       0x140090000: GetSoundSpace
       0x140090020: GetSoundSpace_2
       0x14008E8A0: SpaceAlloc
+  Client::System::Memory::MemoryPool:
+    instances:
+      - ea: 0x1427F80F0
+    funcs:
+      0x1400941A0: Alloc
+      0x1400942A0: Free
+      0x140094350: ctor
+      0x140094480: Dtor
+      0x140094A60: GetBlockSizeForSize
+      0x140094AB0: GetPoolIndexForSize
   Client::Game::GameMain:
     instances:
       - ea: 0x142996400
@@ -25257,6 +25269,9 @@ classes:
       - ea: 0x1427F80B8
         name: SoundSpace
         pointer: true
+      - ea: 0x1427F80D8
+        name: ManagedResouceSpace
+        pointer: true
     vtbls:
       - ea: 0x14204A9F0
     vfuncs:
@@ -25268,7 +25283,11 @@ classes:
       9: GetMemoryModule
     funcs:
       0x14008E510: Free
+      0x14008E490: StaticMalloc # uses _aligned_malloc, but always with an alignment of 0x10
+      0x14008EA40: StaticAlignedMalloc
+      0x14008EB20: StaticAlignedFree
       0x14008EC60: CreateMemorySpaces
+      0x14008F2A0: DestroyMemorySpaces
   Client::System::Memory::IMemoryModule:
     vtbls:
       - ea: 0x14204AAF8

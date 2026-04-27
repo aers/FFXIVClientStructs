@@ -42,7 +42,10 @@ public unsafe partial struct IMemorySpace {
     public static partial void Memset(void* ptr, int value, ulong size);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 1B 48 89 28")]
-    public static partial void* StaticMalloc(ulong size, ulong alignment);
+    public static partial void* StaticAlignedMalloc(ulong size, ulong alignment = 0x10);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 89 84 FB")]
+    public static partial void StaticAlignedFree(void* ptr);
 
     [VirtualFunction(0)]
     public partial IMemorySpace* Dtor(byte freeFlags);
