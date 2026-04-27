@@ -5253,6 +5253,9 @@ classes:
       0x14093EAF0: GetNumLettersFromGameMasters
       0x14093EB10: GetHasLettersFromGameMasters
       0x14093EB00: GetHasLettersFromSupportDesk
+      0x14093EF70: DeleteLetter
+      0x14093F020: TakeAttachments
+      0x14093F870: RequestRewardDelivery
       0x14096E040: Finalizer
   Client::UI::Info::InfoProxySearch:
     vtbls:
