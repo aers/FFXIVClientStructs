@@ -41,7 +41,11 @@ public unsafe partial struct InfoProxyLetter {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 8B 57 30 45 33 C0")]
-    public partial bool TakeAllAttachments(uint LetterIndex, int SenderContentId);
+    /// <summary></summary>
+    /// <param name="letterIndex">The letter that is being read.</param>
+    /// <param name="attatchmentSlot">The slot to be interacted with in the letter. (-1,0,1,2,3,4)</param>
+    /// <returns>If action is successful or not.</returns>
+    public partial bool TakeAttachments(uint letterIndex, int attatchmentSlot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 27 49 8B 07")]
     public partial bool DeleteLetter(uint letterIndex);
