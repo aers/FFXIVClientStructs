@@ -134,22 +134,22 @@ public unsafe partial struct Utf8String : ICreatable<Utf8String>, IDisposable, I
     public Utf8String* ToTitleCase() => ToUpper(true, true);
 
     [MemberFunction("40 53 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B DA 4C 3B C8")]
-    public partial Utf8String* SubStr(nint destinationAdress, ulong start, ulong length);
+    public partial Utf8String* SubStr(nint destinationAdress, ulong startIdx, long length = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 3B C3")]
-    public partial Utf8String* CopySubStrTo(Utf8String* destination, int start, int length);
+    public partial Utf8String* CopySubStrTo(Utf8String* destination, ulong startIdx, long length = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D ?? E8 ?? ?? ?? ?? 41 B4")]
     public partial Utf8String* Replace(Utf8String* toFind, Utf8String* replacement);
 
     [MemberFunction("E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 45 84 ED")]
-    public partial ulong IndexOf(Utf8String* toFind, ulong startIdx = 0);
+    public partial long IndexOf(Utf8String* toFind, ulong startIdx = 0);
 
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 17 45 33 ED 41 BA")]
-    public partial ulong FindFirstOf(Utf8String* charsToFind, ulong startIdx, bool exclude = false);
+    public partial long FindFirstOf(Utf8String* charsToFind, ulong startIdx, bool exclude = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 48 8B F9 45 0F B6 E9")]
-    public partial ulong FindLastOf(Utf8String* toFind, ulong startIdx, bool exclude = false);
+    public partial long FindLastOf(Utf8String* toFind, ulong startIdx, bool exclude = false);
 
     [MemberFunction("48 8B 01 0F B6 04")]
     public partial byte GetCharAt(ulong idx);
