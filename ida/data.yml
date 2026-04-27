@@ -5,6 +5,9 @@ globals:
   0x142049DB8: g_FloatOne # 1f
   0x142052C60: g_FloatOneAndAHalf # 1.5f
   0x142049DF4: g_FloatSix # 6f
+  0x14204AFD0: g_MemoryPoolConfig # { int BlockSize; int BlockCount; }[10], last entry is special for the lookup table
+  0x1427F8130: g_MemoryPoolsStart
+  0x1427F8180: g_MemoryPoolsEnd
   0x142052C64: g_FloatTwenty # 20f
 #fail   0x141F0C404: g_ConfigFileName
   0x142055030: g_NumberArraySizes
@@ -134,7 +137,6 @@ functions:
   0x14005F170: vsprintf_s
   0x14005F1D0: vswprintf_s
   0x140093790: IsMacClient
-  0x1400942A0: SpecialFreeMemory
   0x1400D3810: CheckOsTypeAndVersion
 #fail   0x1400683A0: GetMyDocumentsFolder #as UTF8String
   0x1400D4E30: GetPerformanceFrequency
@@ -465,6 +467,7 @@ classes:
   MemoryManager:
     funcs:
       0x14008E7E0: AllocDefaultSpace
+      0x14008E600: FreeDefaultSpace
       0x14008E870: Alloc
       0x14008FEE0: GetDefaultSpace
       0x14008FFA0: GetApricotSpace
@@ -474,6 +477,16 @@ classes:
       0x140090000: GetSoundSpace
       0x140090020: GetSoundSpace_2
       0x14008E8A0: SpaceAlloc
+  MemoryPool:
+    instances:
+      - ea: 0x1427F80F0
+    funcs:
+      0x1400941A0: Alloc
+      0x1400942A0: Free
+      0x140094350: ctor
+      0x140094480: Dtor
+      0x140094A60: GetBlockSizeForSize
+      0x140094AB0: GetPoolIndexForSize
   Client::Game::GameMain:
     instances:
       - ea: 0x142996400
