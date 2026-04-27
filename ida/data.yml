@@ -464,7 +464,7 @@ classes:
       0x1400D50F0: Now2
       0x1405C2410: Now
       0x1405C6520: ctor
-  MemoryManager:
+  Client::System::Memory::MemoryManager:
     funcs:
       0x14008E7E0: AllocDefaultSpace
       0x14008E600: FreeDefaultSpace
@@ -477,7 +477,7 @@ classes:
       0x140090000: GetSoundSpace
       0x140090020: GetSoundSpace_2
       0x14008E8A0: SpaceAlloc
-  MemoryPool:
+  Client::System::Memory::MemoryPool:
     instances:
       - ea: 0x1427F80F0
     funcs:
