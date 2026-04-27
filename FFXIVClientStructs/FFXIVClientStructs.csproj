@@ -28,6 +28,10 @@
     
     <!-- GitInfo generator -->
     <ThisAssemblyNamespace>FFXIVClientStructs</ThisAssemblyNamespace>
+
+    <!-- Overide assembly version -->
+    <GitVersion>false</GitVersion>
+    <AssemblyVersion>7.5.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsDocsBuild)' == 'true'">
