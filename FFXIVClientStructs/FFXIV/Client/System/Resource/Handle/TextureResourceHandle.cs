@@ -11,6 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct TextureResourceHandle {
     [FieldOffset(0xB0)] public TexFileHeader Header;
+    [BitField<bool>(nameof(ChangeLod), 0)]
+    [FieldOffset(0x104)] internal byte SomeLodFlag;
     [FieldOffset(0x128)] public Texture* Texture;
     /// <remarks> Only known valid during <see cref="ResourceHandle.Load"/>. </remarks>
     [FieldOffset(0x130)] public Texture* TextureWhileLoading;

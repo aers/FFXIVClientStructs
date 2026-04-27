@@ -5483,7 +5483,23 @@ classes:
       - ea: 0x1420997D8
     vfuncs:
       0: Dtor
+    funcs:
+      0x14045C6E0: OpenFile
+      0x14045C670: Close
+  Client::System::File::FileHandle:
+    funcs:
+      0x14045EE70: Reset
+  Client::System::File::FileDescriptor:
+    funcs:
+      0x1402EF650: Read
+  Client::System::File::FileHandleIndex:
+    funcs:
+      0x14045C130: Return
+      0x14045C1F0: Reset
   Client::System::File::FileHandleManager:
+    instances:
+      - ea: 0x1429944C0
+        pointer: true
     vtbls:
       - ea: 0x1420997E8
   Client::System::File::StreamFile:
@@ -5497,6 +5513,8 @@ classes:
     funcs:
       0x140460680: ctor
       0x140460770: Finalizer
+      0x140461D20: ReadSqPack
+      0x140460820: DoFileJob
   Client::System::File::FileManager:
     instances:
       - ea: 0x1429944C8
@@ -5531,6 +5549,7 @@ classes:
     funcs:
       0x1402EDA30: DecRef
       0x1402EDA60: IncRef
+      0x1402EEF20: FinishLoad
       0x1402EDC30: ctor
   Client::System::Resource::Handle::DefaultResourceHandle:
     vtbls:
@@ -5791,6 +5810,7 @@ classes:
     funcs:
       0x14030C6C0: ctor
       0x14030D410: GetMaterialFileNameBySlot
+      0x14030F460: LoadMaterials
 #oldfail       0x1403E05A0: GetAttributeIndex
 #oldfail       0x1403ED470: GetShapeIndex
   Client::System::Resource::Handle::ModelResourceHandleFactory:
@@ -7427,6 +7447,9 @@ classes:
     funcs:
       0x14043DB80: ctor
       0x1407743A0: Create
+      0x140440160: LoadAnimationData
+      0x14043DC20: ResetFlags
+      0x14043E040: SetModel
   Client::Graphics::Scene::EnvScene:
     vtbls:
       - ea: 0x142098ED8

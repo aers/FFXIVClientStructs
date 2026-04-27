@@ -1,10 +1,23 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
-public enum FileMode : uint {
-    // based on penumbra
+public enum FileMode : byte {
+    
+    /// <summary>
+    /// Reads a file on disk into a ResourceHandle.
+    /// </summary>
     LoadUnpackedResource = 0,
-    LoadFileResource = 1,
-    CreateFileResource = 2,
+    /// <summary>
+    /// Reads a file on disk into a byte buffer.
+    /// </summary>
+    LoadFileResource = 1, // Misleading name, does not involve a ResourceHandle at all
+    WriteFile = 2,
+    AppendFile = 3,
+    Seek = 4,
+    GetSize = 5,
+
     LoadIndexResource = 0xA,
-    LoadSqPackResource = 0xB
+    /// <summary>
+    /// Reads an entry in a .sqpack archive into a ResourceHandle.
+    /// </summary>
+    LoadSqPackResource = 0xB,
 }
