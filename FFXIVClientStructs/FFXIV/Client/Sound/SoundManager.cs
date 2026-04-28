@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 /// </summary>
 [GenerateInterop]
 [Inherits<ResourceEventListener>, Inherits<Thread>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1D08)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D10)]
 public unsafe partial struct SoundManager {
     [StaticAddress("48 89 35 ?? ?? ?? ?? 48 83 C4 20", 3, isPointer: true)]
     public static partial SoundManager* Instance();
@@ -28,37 +28,31 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x16C), FixedSizeArray] internal FixedSizeArray19<bool> _busMuted;
     [FieldOffset(0x17F), FixedSizeArray] internal FixedSizeArray19<bool> _busAlwaysOn;
 
-    [FieldOffset(0x1C9)] public bool MasterEnabled;
-    [FieldOffset(0x1CA)] public bool IsSoundAlways;
-    [FieldOffset(0x1CB)] public bool SoundEnabled;
-    [FieldOffset(0x1CC)] public bool WindowInactive;
+    [FieldOffset(0x220)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
+    [FieldOffset(0x228)] public SoundData* InactiveSoundDataListHead;
+    [FieldOffset(0x230)] public SoundData* ActiveSoundDataListHead;
 
-    [FieldOffset(0x218)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
-    [FieldOffset(0x220)] public SoundData* InactiveSoundDataListHead;
-    [FieldOffset(0x228)] public SoundData* ActiveSoundDataListHead;
+    [FieldOffset(0x24A)] public bool PlaySoundsWhenWindowInactive; // inverted config option IsSoundAlways
+    [FieldOffset(0x24B)] public bool IsSndMaster; // same as config option IsSndMaster
+    [FieldOffset(0x24C)] public bool WindowInactive;
 
-    [FieldOffset(0x260)] private int Unk260; // 1 = In Cutscene
-
-    [FieldOffset(0x2A0)] public nint CriticalSection;
-
-    [FieldOffset(0x2C8)] public nint EventHandle2;
-
-    [FieldOffset(0x318)] public SoundData* WeatherSoundData;
+    [FieldOffset(0x320)] public SoundData* WeatherSoundData;
+    [FieldOffset(0x320)] public nint CriticalSection;
 
     // Red: System sounds
     // Green: Sound effects, ambient noises, voices, instruments
     // Blue: Music
-    [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed1;
-    [FieldOffset(0x758), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed2;
-    [FieldOffset(0xB58), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen1;
-    [FieldOffset(0xF58), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen2;
-    [FieldOffset(0x1358), FixedSizeArray] internal FixedSizeArray256<float> _FFTBlue1;
-    [FieldOffset(0x1758), FixedSizeArray] internal FixedSizeArray256<float> _FFTBlue2;
+    [FieldOffset(0x360), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed1;
+    [FieldOffset(0x760), FixedSizeArray] internal FixedSizeArray256<float> _FFTRed2;
+    [FieldOffset(0xB60), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen1;
+    [FieldOffset(0xF60), FixedSizeArray] internal FixedSizeArray256<float> _FFTGreen2;
+    [FieldOffset(0x1360), FixedSizeArray] internal FixedSizeArray256<float> _FFTBlue1;
+    [FieldOffset(0x1760), FixedSizeArray] internal FixedSizeArray256<float> _FFTBlue2;
 
-    [FieldOffset(0x1BE0)] public float OrchestrionPosX;
-    [FieldOffset(0x1BE4)] public float OrchestrionPosY;
-    [FieldOffset(0x1BE8)] public float OrchestrionPosZ;
-    [FieldOffset(0x1BEC), FixedSizeArray(isString: true)] internal FixedSizeArray260<byte> _orchestrionPath;
+    [FieldOffset(0x1BE8)] public float OrchestrionPosX;
+    [FieldOffset(0x1BEC)] public float OrchestrionPosY;
+    [FieldOffset(0x1BF0)] public float OrchestrionPosZ;
+    [FieldOffset(0x1BF4), FixedSizeArray(isString: true)] internal FixedSizeArray260<byte> _orchestrionPath;
 
     /// <summary>
     /// Calculates effective volume
