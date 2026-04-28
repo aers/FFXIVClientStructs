@@ -141,67 +141,69 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x390), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _leader;
         [FieldOffset(0x3B0), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> _comment;
     }
+}
 
-    public enum DutyCategory : uint {
-        None = 0,
-        Roulette = 1 << 1,
-        Dungeons = 1 << 2,
-        GuildQuests = 1 << 3,
-        Trials = 1 << 4,
-        Raids = 1 << 5,
-        HighEndDuty = 1 << 6,
-        PvP = 1 << 7,
-        GoldSaucer = 1 << 8,
-        FATEs = 1 << 9,
-        TreasureHunts = 1 << 10,
-        TheHunt = 1 << 11,
-        GatheringForays = 1 << 12,
-        DeepDungeons = 1 << 13,
-        FieldOperations = 1 << 14,
-        VCDungeonFinder = 1 << 15
-    }
 
-    public enum Objective : byte {
-        None = 0,
-        DutyCompletion = 1,
-        Practice = 2,
-        Loot = 4,
-    }
+public enum DutyCategory : uint {
+    None = 0,
+    Roulette = 1 << 1,
+    Dungeons = 1 << 2,
+    GuildQuests = 1 << 3,
+    Trials = 1 << 4,
+    Raids = 1 << 5,
+    HighEndDuty = 1 << 6,
+    PvP = 1 << 7,
+    GoldSaucer = 1 << 8,
+    FATEs = 1 << 9,
+    TreasureHunts = 1 << 10,
+    TheHunt = 1 << 11,
+    GatheringForays = 1 << 12,
+    DeepDungeons = 1 << 13,
+    FieldOperations = 1 << 14,
+    VCDungeonFinder = 1 << 15
+}
 
-    public enum CompletionStatus : byte {
-        None = 0,
-        DutyComplete = 2,
-        DutyIncomplete = 4,
-        DutyCompleteWeeklyUnclaimed = 8,
-    }
+public enum Objective : byte {
+    None = 0,
+    DutyCompletion = 1,
+    Practice = 2,
+    Loot = 4,
+}
 
-    [Flags]
-    public enum DutyFinderSetting : byte {
-        None = 0,
-        UnrestrictedParty = 1,
-        MinimumIL = 2,
-        SilenceEcho = 4,
-    }
+[Flags]
+public enum CompletionStatus : byte {
+    None = 0,
+    DutyComplete = 1 << 1,
+    DutyIncomplete = 1 << 2,
+    DutyCompleteWeeklyUnclaimed = 1 << 3,
+}
 
-    public enum LootRule : byte {
-        Normal = 0,
-        GreedOnly = 1,
-        Lootmaster = 2,
-    }
+[Flags]
+public enum DutyFinderSetting : byte {
+    None = 0,
+    UnrestrictedParty = 1,
+    MinimumIL = 2,
+    SilenceEcho = 4,
+}
 
-    [Flags]
-    public enum Language : byte {
-        Japanese = 1,
-        English = 2,
-        German = 4,
-        French = 8,
-    }
+public enum LootRule : byte {
+    Normal = 0,
+    GreedOnly = 1,
+    Lootmaster = 2,
+}
 
-    [Flags]
-    public enum JoinCondition : byte {
-        Free = 1,
-        PrivateParty = 3,
-        LimitedRecruitingWorld = 8,
-        OnePlayerPerJob = 33,
-    }
+[Flags]
+public enum Language : byte {
+    Japanese = 1,
+    English = 2,
+    German = 4,
+    French = 8,
+}
+
+[Flags]
+public enum JoinCondition : byte {
+    Free = 1,
+    PrivateParty = 3,
+    LimitedRecruitingWorld = 8,
+    OnePlayerPerJob = 33,
 }
