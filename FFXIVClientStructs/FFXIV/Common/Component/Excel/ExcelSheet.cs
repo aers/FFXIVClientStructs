@@ -14,6 +14,8 @@ public unsafe partial struct ExcelSheet {
 
     //[FieldOffset(0x68)] public LinkList<ExcelPage> ExcelPages;
 
+    //[FieldOffset(0xB0)] public ?? ??; // Figure out what this pointer is and you solve 90% of 7.5 Excel shifting
+
     [FieldOffset(0xC8)] public ExcelVariant Variant;
     [FieldOffset(0xCC)] public ushort ColumnCount;
 
