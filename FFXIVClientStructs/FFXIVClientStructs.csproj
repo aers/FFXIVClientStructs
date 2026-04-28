@@ -31,8 +31,13 @@
 
     <!-- Overide assembly version -->
     <GitVersion>false</GitVersion>
-    <AssemblyVersion>7.5.0.0</AssemblyVersion>
   </PropertyGroup>
+
+  <Target Name="PopulateInfo" DependsOnTargets="GitVersion" BeforeTargets="GetAssemblyVersion">
+    <PropertyGroup>
+      <AssemblyVersion>7.50.0.$(GitCommits)</AssemblyVersion>
+    </PropertyGroup>
+  </Target>
 
   <PropertyGroup Condition="'$(IsDocsBuild)' == 'true'">
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
