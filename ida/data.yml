@@ -23488,7 +23488,7 @@ classes:
   Client::UI::AddonXBMBattleMonsterDetail: # 973
     vtbls:
       - ea: 0x142279010
-        base: 0x142235B90
+        base: Client::UI::AddonActionDetailBase
     funcs:
       0x1415263E0: ctor
   Client::UI::AddonXBMMonsterNotebook: # 974
@@ -23530,7 +23530,7 @@ classes:
   Client::UI::AddonXBMPetActionDetail: # 980
     vtbls:
       - ea: 0x14227A1D0
-        base: 0x142235B90
+        base: Client::UI::AddonActionDetailBase
     funcs:
       0x14152E190: ctor
   Client::UI::AddonXBMStageList: # 981
