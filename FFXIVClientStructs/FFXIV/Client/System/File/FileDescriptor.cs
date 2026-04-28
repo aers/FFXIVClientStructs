@@ -18,7 +18,7 @@ public unsafe partial struct FileDescriptor {
     /// specified by <see cref="FileHandleIndex"/>.
     /// </summary>
     [FieldOffset(0x8)] public byte* FileBuffer;
-    [Obsolete("Replaced by Length.")]
+    [Obsolete("Replaced by Length.", true)]
     [FieldOffset(0x10)] public ulong FileLength; // Misleading name--not necessarily the length of the file
     /// <summary>
     /// The amount of data to be read from or written to the <see cref="FileBuffer"/> or <see cref="ResourceHandle"/>
@@ -28,7 +28,7 @@ public unsafe partial struct FileDescriptor {
     /// Set to zero to read the rest of the file, starting at <see cref="StartOffset"/>.
     /// </remarks>
     [FieldOffset(0x10)] public ulong Length;
-    [Obsolete("Replaced by StartOffset")]
+    [Obsolete("Replaced by StartOffset", true)]
     [FieldOffset(0x18)] public ulong CurrentFileOffset; // Misleading name--not related to any 'current' state
     /// <summary>
     /// The offset in the file to start reading from/writing to.
