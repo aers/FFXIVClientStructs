@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //      Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkEventListener>]
-[StructLayout(LayoutKind.Explicit, Size = 0x150)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1F8)]
 public unsafe partial struct AtkTooltipManager {
     [FieldOffset(0x8)] public StdMap<Pointer<AtkResNode>, Pointer<AtkTooltipInfo>> TooltipMap;
     [FieldOffset(0x18)] public AtkStage* AtkStage;
@@ -20,15 +20,18 @@ public unsafe partial struct AtkTooltipManager {
     /// [2] ActionDetail<br/>
     /// [3] LovmActionDetail<br/>
     /// [4] MiragePrismPrismItemDetail<br/>
+    /// [5] XBMItemDetail<br/>
+    /// [6] XBMPetActionDetail<br/>
+    /// [7] XBMBattleMonsterDetail<br/>
     /// </remarks>
-    [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkManagedInterface>> _managedInterfaces;
-    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray5<AtkTimer> _timers;
-    [FieldOffset(0x140)] public ushort ParentAddonId; // the opener
+    [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray8<Pointer<AtkManagedInterface>> _managedInterfaces;
+    [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray8<AtkTimer> _timers;
+    [FieldOffset(0x1E8)] public ushort ParentAddonId; // the opener
 
     /// <remarks> See <see cref="AtkTooltipType"/>. </remarks>
-    [FieldOffset(0x14C)] public byte TooltipType;
+    [FieldOffset(0x1F4)] public byte TooltipType;
 
-    [FieldOffset(0x14C), Obsolete("Renamed to TooltipType", true)] public byte Flag1;
+    [FieldOffset(0x1F4), Obsolete("Renamed to TooltipType", true)] public byte Flag1;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
