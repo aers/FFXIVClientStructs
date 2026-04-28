@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 //   Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
 //     Client::LayoutEngine::ILayoutInstance
 [GenerateInterop]
-[Inherits<ILayoutInstance>]
+[Inherits<TriggerBoxLayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public partial struct MapRangeLayoutInstance {
     [FieldOffset(0x80)] public uint Map;
