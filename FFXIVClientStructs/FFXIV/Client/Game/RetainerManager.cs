@@ -18,7 +18,7 @@ public unsafe partial struct RetainerManager {
     [FieldOffset(0x2E0)] public ulong LastSelectedRetainerId;
     [FieldOffset(0x2E8)] public uint RetainerObjectId;
 
-    [MemberFunction("83 FA 0A 73 21")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 ?? 48 8B 4C F4")]
     public partial Retainer* GetRetainerBySortedIndex(uint sortedIndex);
 
     /// <summary>

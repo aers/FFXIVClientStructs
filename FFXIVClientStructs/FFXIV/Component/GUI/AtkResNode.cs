@@ -346,7 +346,7 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C0 3B C7 74")]
     public partial ushort GetTimelineLabel();
 
-    [MemberFunction("48 85 C9 74 12 48 8B 41 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9 74 ?? 8B D5")]
     public partial void EnableTimeline();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 39 BD")]

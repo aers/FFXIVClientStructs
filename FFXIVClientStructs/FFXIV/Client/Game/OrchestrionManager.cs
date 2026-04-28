@@ -53,7 +53,7 @@ public unsafe partial struct OrchestrionManager {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct OrchestrionSampleState {
-    [StaticAddress("F3 0F 11 05 ?? ?? ?? ?? F3 0F 10 4A", 4)]
+    [StaticAddress("48 8D 15 ?? ?? ?? ?? 0F 1F 80 ?? ?? ?? ?? ?? ?? ?? 74 ?? 48 83 C0 ?? 48 3B C2", 3)]
     public static partial OrchestrionSampleState* Instance();
 
     [FieldOffset(0x00)] public Vector3 Position;

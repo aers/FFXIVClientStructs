@@ -143,7 +143,7 @@ public unsafe partial struct UIState {
     /// <param name="a4">Exact purpose unknown, but appears to be a flag to respect Unlock Flag 245 (ignore quest
     /// progression?) for quest-based checks. Virtually always <c>true</c> in game code.</param>
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 A2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]
     public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte minQuestProgression = 0, bool a4 = true);
 
     /// <summary>

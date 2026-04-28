@@ -17,6 +17,6 @@ public unsafe partial struct Monster {
     [FieldOffset(0xA30)] public TextureResourceHandle* Decal;
 
     // Expects at least 8 bytes of data.
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ?? 0F 11 44 24")]
     public partial bool SetupFromData(byte* data);
 }

@@ -25,7 +25,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5C 24 ?? 84 C0")]
     public static partial bool IsAllianceRaid();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 3A F8 0F 85")]
     public static partial byte GetGroupIndex(byte group);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 77 ?? C7 43")]
