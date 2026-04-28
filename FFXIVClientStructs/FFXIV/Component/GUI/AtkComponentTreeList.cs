@@ -27,7 +27,7 @@ public unsafe partial struct AtkComponentTreeList : ICreatable<AtkComponentTreeL
     [MemberFunction("48 83 EC 28 3B 91 ?? ?? ?? ??")]
     public partial AtkComponentTreeListItem* GetItem(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B F7 75")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 3B FF 75")]
     public partial void LoadAtkValues(
         int atkValuesCount,
         AtkValue* atkValues,

@@ -311,7 +311,7 @@ public unsafe partial struct PlayerState {
     /// Returns whether the player is specialized in the given DoH ClassJob.
     /// </summary>
     /// <param name="classJobId">The ClassJob row id of the DoH job to check.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F AB F5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 8B CF 8B C5")]
     public partial bool IsMeisterFlag(uint classJobId);
 
     /// <summary>
@@ -523,7 +523,7 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a Battle Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 81 FD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 3D ?? ?? ?? ?? ?? 75 ?? 8D 56")]
     public partial bool IsBattleMentor();
 
     /// <summary>

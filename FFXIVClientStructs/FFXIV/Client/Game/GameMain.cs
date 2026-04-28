@@ -55,7 +55,7 @@ public unsafe partial struct GameMain {
     [MemberFunction("40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E 48 8D 0D")]
     public static partial bool IsInPvPInstance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 7F ?? ?? 4C 8D 3D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 83 7E ?? 00 4C 8D 3D")]
     public static partial bool IsInGPose();
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 DB 0F B6 C3")]
@@ -67,7 +67,7 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 80 A3 ?? ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8")]
     public partial void SetActiveFestivals(Festival festival1, Festival festival2, Festival festival3, Festival festival4, Festival festival5, Festival festival6, Festival festival7, Festival festival8); // Applies immediately regardless of client state
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0A")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 89 B7")]
     public static partial bool ExecuteCommand(int command, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 54 24 ?? B9")]

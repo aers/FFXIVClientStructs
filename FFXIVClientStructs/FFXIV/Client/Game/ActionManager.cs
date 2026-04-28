@@ -180,7 +180,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The type of action to check.</param>
     /// <param name="actionId">The ID of the action to check.</param>
     /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 0F 85 ?? ?? ?? ?? 88 45")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 75 ?? 88 45")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
@@ -222,7 +222,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CF E8 ?? ?? ?? ?? 0F B7 55")]
     public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, bool applyProcs = true, CastTimeProc* outOptProc = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 0F B7 47")]
+    [MemberFunction("E9 ?? ?? ?? ?? 41 B0 ?? 8B D3")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
 
     /// <summary>
@@ -289,7 +289,7 @@ public unsafe partial struct ActionManager {
     /// <summary>
     /// Determine the extraParam argument to be used for UseActionLocation for various summon actions (carbuncle, eos, etc.)
     /// </summary>
-    [MemberFunction("48 83 EC 28 81 E9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 BA ?? ?? ?? ?? E9")]
     public static partial byte GetExtraParamForSummonAction(uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 83 FC ?? 0F 84 ?? ?? ?? ?? 41 81 FC")]

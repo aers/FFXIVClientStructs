@@ -29,7 +29,7 @@ public unsafe partial struct PublicContentOccultCrescent {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB")]
     public static partial PublicContentOccultCrescent* GetInstance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 89 AD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 48 85 C0 0F 84 ?? ?? ?? ?? 48 89 AD")]
     public static partial OccultCrescentMKDData* GetMKDData();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 75 12")]

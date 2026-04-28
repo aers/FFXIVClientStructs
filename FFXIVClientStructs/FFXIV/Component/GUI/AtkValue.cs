@@ -111,7 +111,7 @@ public unsafe partial struct AtkValue : IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? EB 5C")]
     public partial bool SetVectorValue(uint index, AtkValue* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 C6 02 FF C7"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4E ?? FF C7"), GenerateStringOverloads]
     public partial bool SetVectorString(uint index, CStringPointer value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 8B 8E")]

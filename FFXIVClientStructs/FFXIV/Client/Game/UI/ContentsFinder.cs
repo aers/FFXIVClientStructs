@@ -61,7 +61,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
     public DateTime GetQueueReadyDateTime() => DateTime.UnixEpoch.AddSeconds(QueueReadyTimestamp);
 
-    [MemberFunction("40 53 57 41 57 48 83 EC 30 0F B6 41 55")]
+    [MemberFunction("40 53 56 57 41 57 48 83 EC ?? 0F B6 41")]
     public partial void ProcessInfoState(ContentsFinderQueueState newState, QueueInfoState* newInfoState);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 13 44 0F B6 C7")]

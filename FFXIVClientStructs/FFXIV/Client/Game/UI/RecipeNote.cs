@@ -113,7 +113,7 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x3F8)] public ushort DurabilityFactor;
     }
 
-    [MemberFunction("48 89 4C 24 ?? 53 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B E9 E8 ?? ?? ?? ?? 45 33 C0")]
+    [MemberFunction("48 89 4C 24 ?? 53 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 4C 8B E1 E8")]
     public partial void InitializeRecipeList();
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 ?? ?? ?? ?? 4D 85 C9")]

@@ -343,7 +343,7 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F 28 C9 8B 87")]
     public partial void SetOrigin(float originX, float originY);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 41 3B C4 75")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C0 3B C7 74")]
     public partial ushort GetTimelineLabel();
 
     [MemberFunction("48 85 C9 74 12 48 8B 41 10")]

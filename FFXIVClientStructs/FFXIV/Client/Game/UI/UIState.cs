@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A400)]
 public unsafe partial struct UIState {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 45 33 C0 BA ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? BA", 3)]
     public static partial UIState* Instance();
 
     [FieldOffset(0x00)] public Hotbar Hotbar;
@@ -163,7 +163,7 @@ public unsafe partial struct UIState {
     /// <item><term>4</term><description>The item does not have an unlock status.</description></item>
     /// </list>
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD 89 87")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CD 89 87")]
     public partial long IsItemActionUnlocked([CExporterExcel("Item")] void* itemExdPtr);
 
     /// <summary>
@@ -221,7 +221,7 @@ public unsafe partial struct UIState {
     public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId)
         => UnlockedChocoboTaxiStandsBitArray.Get((int)chocoboTaxiStandId - 0x120000);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 43 ?? B0")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 44")]

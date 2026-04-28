@@ -52,13 +52,13 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E9 ?? ?? ?? ?? 80 EB 20")]
     public partial CStringPointer GetAddonText(uint addonId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4E ?? 48 8B D0 E8 ?? ?? ?? ?? 8B 44 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4E ?? 48 8B D0 E8 ?? ?? ?? ?? 8B 45")]
     public partial CStringPointer FormatAddonTextApply(uint addonId, FormatAddonTextApplyMode mode, StdDeque<TextParameter>* localParameters, Utf8String* formatBuffer, Utf8String* normalizationBuffer);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 44 89 7C 24 ?? 44 89 4C 24")] // FormatAddonText1<int,int,uint>
     public partial CStringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 3A 56")] // FormatAddonText2<int>
+    [MemberFunction("E8 ?? ?? ?? ?? 49 6B F7")] // FormatAddonText2<int>
     public partial CStringPointer FormatAddonText2Int(uint addonId, int value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 44 39 7E")] // FormatAddonText2<int,int>
@@ -82,7 +82,7 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8D 55 ?? E8 ?? ?? ?? ?? E9")]
     public partial void AddSheetRedirectItemDecoration(Utf8String* sheetName, SheetRedirectFlags flags, int rowId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D 80 48 8D 55 60")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D ?? 48 8D 95 ?? ?? ?? ?? E8")]
     public partial void CreateSheetLink(ExcelSheet* sheet, Utf8String* text, int rowId, int colParam);
 
     /// <summary> Sets global parameters 1, 4, 6 and 65 </summary>
@@ -100,7 +100,7 @@ public unsafe partial struct RaptureTextModule {
 
     /// <summary> Sets global parameters 2, 5, 7 and 66 </summary>
     /// <remarks> The caller must ensure the name pointer remains valid until the subsequent formatting call has processed global parameter 1. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 75 A8")]
+    [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 3A 85")]
     public partial void SetGlobalTempEntity2(CStringPointer name, int sex, uint objStrId);
 
     [Flags]

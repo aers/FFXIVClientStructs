@@ -9,7 +9,7 @@ public struct TaskManagerOsData {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct TaskManager {
-    [StaticAddress("4D 89 66 68 4C 89 35 ?? ?? ?? ??", 7, isPointer: true)]
+    [StaticAddress("4C 89 35 ?? ?? ?? ?? ?? ?? ?? 39 0D", 3, isPointer: true)]
     public static partial TaskManager* Instance();
 
     [FieldOffset(0x08)] public TaskManagerOsData OsData;

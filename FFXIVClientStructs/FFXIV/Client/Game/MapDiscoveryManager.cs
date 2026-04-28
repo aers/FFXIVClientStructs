@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1024)]
 public unsafe partial struct MapDiscoveryManager {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 88 05", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 47", 3)]
     public static partial MapDiscoveryManager* Instance();
 
     /// <summary> Maps with up to 16 discoverable regions </summary>

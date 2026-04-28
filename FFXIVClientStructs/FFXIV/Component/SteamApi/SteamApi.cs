@@ -59,7 +59,7 @@ public unsafe partial struct SteamApi {
     /// See <a href="https://partner.steamgames.com/doc/api/ISteamUtils#IsSteamRunningOnSteamDeck">the Steam API docs</a> for more information.
     /// </summary>
     /// <returns>Returns <c>true</c> if on a Steam Deck, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 45 48 8D 15")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 15 ?? ?? ?? ?? EB")]
     public partial bool IsRunningOnSteamDeck();
 
     /// <summary>

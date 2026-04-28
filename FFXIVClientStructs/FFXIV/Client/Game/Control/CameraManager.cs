@@ -29,6 +29,6 @@ public unsafe partial struct CameraManager {
     [FieldOffset(0x18), Obsolete("Renamed to SpectatorCamera", true)] public SpectatorCamera* Camera3;
     [FieldOffset(0x18), Obsolete("Renamed to AimingCamera", true)] public AimingCamera* Camera4;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 39 B0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 32 FF 40 32 FF")]
     public partial Camera* GetActiveCamera();
 }

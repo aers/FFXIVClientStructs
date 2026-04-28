@@ -48,8 +48,9 @@ public unsafe partial struct SharedGroupLayoutInstance {
 
     // [FieldOffset(0x14C), FixedSizeArray] internal FixedSizeArray16<byte> _timelineIndices; // used by EventObjAnimation ActorControl packet, some kind of simple lookup table
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 FF C7 48 8D 76 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 FF C7 4D 8D 76 ?? 44 3B 7B")]
     public partial bool InitAnimationHandlers(void* fileData);
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 8F ?? ?? ?? ?? 83 E9 01")]
     public partial void InitTimelines(void* fileData);
 

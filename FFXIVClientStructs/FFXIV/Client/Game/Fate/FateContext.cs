@@ -67,7 +67,7 @@ public unsafe partial struct FateContext {
     [FieldOffset(0x864)] public float Radius;
     [FieldOffset(0xBB0), FixedSizeArray] internal FixedSizeArray37<FateMapMarker> _mapMarkers;
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B FA 49 8B F0 8B 91")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 3D ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 74 24")]
     public partial bool TryGetPositionAndRadius(Vector3* position, Vector3* radius);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]

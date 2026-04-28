@@ -140,7 +140,7 @@ public unsafe partial struct CharaSelectCharacterEntry {
     [MemberFunction("0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0")]
     public partial bool IsNotLocked();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? 49 8B CD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 84 C0 75 ?? 48 8B CE")]
     public partial bool IsInDifferentRegion();
 }
 
