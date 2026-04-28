@@ -89,14 +89,15 @@ public unsafe partial struct FishingEventHandler {
     /// Changes the currently equipped bait.
     /// </summary>
     /// <param name="baitId">ItemId of bait to change to.</param>
-    public AtkValue* ChangeBait(int baitId) {
+    public AtkValue ChangeBait(int baitId) {
         var returnValue = new AtkValue();
         var baitValue = stackalloc AtkValue[2];
         baitValue[0].Type = AtkValueType.Int;
         baitValue[0].Int = baitId;
         baitValue[1].Type = AtkValueType.Bool;
         baitValue[1].Bool = false;
-        return ReceiveEvent(&returnValue, baitValue, 2, 2);
+        ReceiveEvent(&returnValue, baitValue, 2, 2);
+        return returnValue;
     }
 }
 
