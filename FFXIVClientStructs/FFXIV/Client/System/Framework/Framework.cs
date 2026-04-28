@@ -181,7 +181,7 @@ public unsafe partial struct Framework {
     /// <see cref="IsSteamGame"/> to true, though this seemingly has no effect (??).
     /// </summary>
     /// <returns>Returns <c>true</c> if the API was initialized successfully, false otherwise.</returns>
-    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC 40 02 00 00 48 8B 05")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F9 C6 81")]
     public partial bool SetupSteamApi();
 
     [GenerateInterop]

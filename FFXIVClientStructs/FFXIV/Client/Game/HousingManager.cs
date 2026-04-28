@@ -139,7 +139,7 @@ public unsafe partial struct HousingManager {
     /// </summary>
     /// <param name="point">The point to check is unlocked or not</param>
     /// <returns>True or False</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 49 8B 56")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 49 8B 56 ?? 8B 82")]
     public static partial bool IsSubmarineExplorationUnlocked(byte point);
 
     /// <summary>

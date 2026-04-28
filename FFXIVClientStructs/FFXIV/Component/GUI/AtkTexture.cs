@@ -32,7 +32,7 @@ public unsafe partial struct AtkTexture : ICreatable<AtkTexture> {
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 10 02")]
     public partial int ReleaseTexture();
 
-    [MemberFunction("80 79 10 01 75 44")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 ?? 75 ?? 81 A3")]
     public partial int GetLoadState();
 
     [MemberFunction("0F B6 41 11 48 8B D1")]

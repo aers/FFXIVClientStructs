@@ -204,7 +204,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 FF 48 89 43")]
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 31")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 DD")]
     public partial AtkComponentBase* GetComponentByNodeId(uint nodeId);
 
     public AtkComponentNode* GetComponentNodeById(uint nodeId) {
@@ -235,7 +235,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
     /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 06 41 B9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 4C 8B C5 BA")]
     public partial void SubscribeAtkArrayData(byte arrayType, byte arrayIndex);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>

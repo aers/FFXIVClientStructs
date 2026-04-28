@@ -121,7 +121,7 @@ public unsafe partial struct QuestManager {
     public bool IsQuestAccepted(uint questId) => IsQuestAccepted((ushort)(questId & 0xFFFF));
 
     /// <param name="questRepeatFlag">QuestRepeatFlag RowId / field from Quest sheet.</param>
-    [MemberFunction("0F B6 C2 4C 8B C9")]
+    [MemberFunction("0F B6 C2 4C 8B C9 44 8B C0")]
     public partial bool IsQuestRepeatFlagSet(byte questRepeatFlag);
 
     /// <summary>

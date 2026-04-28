@@ -49,7 +49,7 @@ public unsafe partial struct AgentInventoryContext {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 0F B6 D8")]
     public partial void DiscardItem(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId, int position = -1); // position = YesNoPosition
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83 ?? ?? ?? ?? 48 8B CB")]
     public partial void LowerItemQuality(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId);
 
     public bool IsContextItemDisabled(int index)

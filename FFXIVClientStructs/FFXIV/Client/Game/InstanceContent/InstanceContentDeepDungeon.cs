@@ -91,7 +91,7 @@ public unsafe partial struct InstanceContentDeepDungeon {
     /// </summary>
     /// <remarks>Returns an error if the player's animation lock is greater than 0.</remarks>
     /// <param name="slot">Slot number in the range 0-2.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 85 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 85 C0 48 8B 43")]
     public partial void UseStone(uint slot);
 
 }
