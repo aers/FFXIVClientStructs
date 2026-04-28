@@ -27,18 +27,19 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x58)] internal Texture* LightDiffuse;
     [FieldOffset(0x60)] internal Texture* LightSpecular;
     [FieldOffset(0x68)] internal Texture* Unk68; // VFX?
-    [FieldOffset(0x70)] internal Texture* Unk70; // Depth/Stencil?
+    /// Unscaled scene reverse-Z depth stencil
+    [FieldOffset(0x70)] internal Texture* DepthStencil;
     [FieldOffset(0x78)] internal Texture* Unk78; // depends on byte at GraphicsConfig+0x43
-    [FieldOffset(0x80)] internal Texture* Unk80; // Looks the same as Unk70
-    [FieldOffset(0x88)] internal Texture* Unk88; // Looks the same as Unk70
-    [FieldOffset(0x90)] internal Texture* Unk90; // Looks the same as Unk70
+    [FieldOffset(0x80)] internal Texture* Unk80; // Looks the same as DepthStencil
+    [FieldOffset(0x88)] internal Texture* Unk88; // Looks the same as DepthStencil
+    [FieldOffset(0x90)] internal Texture* Unk90; // Looks the same as DepthStencil
     [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _semitransparentGBuffers;
     [FieldOffset(0xC0)] internal Texture* UnkC0; // Light?
     [FieldOffset(0xC8)] internal Texture* SemitransparentShadow;
     [FieldOffset(0xD0)] internal Texture* SemitransparentLightDiffuse;
     [FieldOffset(0xD8)] internal Texture* SemitransparentLightSpecular;
     [FieldOffset(0xE0)] internal Texture* UnkE0; // VFX?
-    [FieldOffset(0xE8)] internal Texture* UnkE8; // Looks the same as Unk70
+    [FieldOffset(0xE8)] internal Texture* UnkE8; // Looks the same as DepthStencil
     [FieldOffset(0xF0)] internal Texture* UnkF0; // null?
     [FieldOffset(0xF8)] internal Texture* UnkF8; // null?
     [FieldOffset(0x100)] internal Texture* Unk100; // Looks the same as Unk68
@@ -162,8 +163,8 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x670)] internal Texture* Unk670;
     [FieldOffset(0x678)] internal Texture* Unk678;
     [FieldOffset(0x680)] internal Texture* Unk680;
-    [FieldOffset(0x688)] internal Texture* Unk688; // Looks the same as Unk68
-    [FieldOffset(0x690)] internal Texture* Unk690; // Looks the same as Unk70
+    [FieldOffset(0x688)] internal Texture* Unk688;
+    [FieldOffset(0x690)] internal Texture* Unk690;
     [FieldOffset(0x698)] internal nint Unk698; // Unknown class, implements C::G::K::Notifier, holds a bunch of D3D11 objects
     [FieldOffset(0x6A0)] internal nint Unk6A0; // Same class as Unk698
     // bunch of floats
