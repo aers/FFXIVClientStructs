@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkEventTarget
 [GenerateInterop]
 [Inherits<AtkEventTarget>]
-[StructLayout(LayoutKind.Explicit, Size = 0x75E00)]
+[StructLayout(LayoutKind.Explicit, Size = 0x75EA8)]
 public unsafe partial struct AtkStage {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18", 3, isPointer: true)]
     public static partial AtkStage* Instance();
