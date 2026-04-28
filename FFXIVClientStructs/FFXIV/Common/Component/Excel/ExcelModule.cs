@@ -7,5 +7,5 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 [Inherits<ExcelModuleInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x818)]
 public unsafe partial struct ExcelModule {
-    [FieldOffset(0x7B0)] public ExcelSheet** SheetsByIndex;
+    [FieldOffset(0x7A8)] public ExcelSheet** SheetsByIndex;
 }
