@@ -24,7 +24,7 @@ public unsafe partial struct CharaCard {
     public partial void RequestCharaCardForGameObject(GameObject* gameObject);
 
     [MemberFunction("48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 0D")]
-    public partial void RequestCharaCardUpdate();
+    public partial void RequestCharaCardForLocalPlayer();
 
     [MemberFunction("40 53 48 83 EC ?? 8B 05 ?? ?? ?? ?? 48 8B DA")]
     public partial void HandleCurrentCharaCardDataPacket(CharaCardPacket* packet);
