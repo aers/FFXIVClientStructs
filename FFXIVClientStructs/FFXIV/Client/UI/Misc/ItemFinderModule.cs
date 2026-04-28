@@ -30,7 +30,7 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0x38C), FixedSizeArray] internal FixedSizeArray70<ushort> _premiumSaddleBagItemCount;
     [FieldOffset(0x418), FixedSizeArray] internal FixedSizeArray800<uint> _glamourDresserItemIds;
     [FieldOffset(0x1098), FixedSizeArray] internal FixedSizeArray800<ushort> _glamourDresserItemSetUnlockBits;
-    [FieldOffset(0x16D8), FixedSizeArray] internal FixedSizeArray126<uint> _cabinetItemUnlockBits;
+    [FieldOffset(0x16D8), FixedSizeArray] internal FixedSizeArray125<uint> _cabinetItemUnlockBits;
 
     [FieldOffset(0x18D8)] public ItemFinderModuleResult* Result;
 
