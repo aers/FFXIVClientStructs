@@ -11,7 +11,8 @@ internal sealed record MethodInfo(
     string GenericConstraints,
     bool IsStatic,
     EquatableArray<ParameterInfo> Parameters,
-    EquatableArray<string> InheritableAttributes) {
+    EquatableArray<string> InheritableAttributes,
+    EquatableArray<string> TypeArguments) {
 
     public string GetDeclarationString() => $"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesString()}){GenericConstraints}";
 
@@ -32,12 +33,43 @@ internal sealed record MethodInfo(
         return $"{Modifiers.Replace(" partial", string.Empty)} {ReturnType} {Name}({parameterTypesAndNamesString}){GenericConstraints}";
     }
 
+    public string NameXmlEscaped => Name.Replace('<', '{').Replace('>', '}');
+
+    public string NameNonGeneric => TypeArguments.Any() ? Name[..Name.LastIndexOf('<')] : Name;
+
+    public string ReturnTypeOrVoid => TypeArguments.Any(t => ReturnType == t + '*') ? "void*" : ReturnType;
+
+    public string ReturnTypeCast => ReturnType != ReturnTypeOrVoid ? $"({ReturnType})" : "";
+
+    public string GetParameterTypeStringWithTrailingTypeNoGenerics(){
+        if (!TypeArguments.Any()) return GetParameterTypeStringWithTrailingType();
+        var parameters = Parameters;
+        var typeString = "";
+        foreach (var p in parameters)
+        {
+            typeString += p.RefKind.GetStringPrefix();
+            var generic = false;
+            foreach (var t in TypeArguments)
+            {
+                if(p.Type == t + '*')
+                    generic = true;
+            }
+            if(generic)
+                typeString = "void*";
+            else
+                typeString += p.Type;
+            typeString += ", ";
+        }
+        return typeString;
+    }
+
     public string GetParameterTypeStringWithTrailingType() => Parameters.Any() ? string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Type}")) + ", " : "";
 
     public string GetParameterTypeStringForCref() => Parameters.Any() ? string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Type.Replace('<', '{').Replace('>', '}')}")) : "";
 
+    public string GetParameterNamesStringWithGeneric() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Name}"));
 
-    public string GetParameterNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Name}"));
+    public string GetParameterNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{(TypeArguments.Any(t => t + '*' == p.Type) ? "(void*)" : "") + p.Name}"));
 
     public string GetParameterNamesStringForStringOverload(ImmutableArray<string> paramsToOverload) =>
         string.Join(", ", Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetStringPrefix()}{p.Name}Ptr" : $"{p.RefKind.GetStringPrefix()}{p.Name}"));
@@ -47,5 +79,5 @@ internal sealed record MethodInfo(
     private string GetParameterTypesAndNamesStringWithDefaults() => string.Join(", ", Parameters.Select(p => $"{p.GetAttributeString()}{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
 
 
-    public string GetReturnString() => ReturnType == "void" ? "" : "return ";
+    public string GetReturnString() => ReturnType == "void" ? "" : $"return {ReturnTypeCast}";
 }

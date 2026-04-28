@@ -238,6 +238,7 @@ public sealed partial class InteropGenerator {
         }
 
         var constraints = string.Empty;
+        ImmutableArrayBuilder<string> typeArguments = new();
 
         if (methodSymbol.TypeParameters.Any()) {
             ImmutableArray<SymbolDisplayPart> symbolDisplayParts = methodSymbol.ToDisplayParts(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints));
@@ -258,7 +259,8 @@ public sealed partial class InteropGenerator {
                 constraints,
                 methodSymbol.IsStatic,
                 methodSymbol.Parameters.Select(p => ParseParameter(p, isInherited, token)).ToImmutableArray(),
-                inheritableAttributes
+                inheritableAttributes,
+                methodSymbol.TypeParameters.Select(t => t.Name).ToImmutableArray()
             );
 
         return true;
