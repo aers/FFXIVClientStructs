@@ -89,12 +89,12 @@ public unsafe partial struct UIState {
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
     // BitCount: HowToSheet.RowCount
     /// <remarks> Use <see cref="IsHowToUnlocked"/>. </remarks>
-    [FieldOffset(0x1A06E), FixedSizeArray(isBitArray: true, bitCount: 296)] internal FixedSizeArray37<byte> _unlockedHowTos;
+    [FieldOffset(0x1A06E), FixedSizeArray(isBitArray: true, bitCount: 304)] internal FixedSizeArray38<byte> _unlockedHowTos;
 
     // Ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     // BitCount: CompanionSheet.RowCount
     /// <remarks> Use <see cref="IsCompanionUnlocked"/>. </remarks>
-    [FieldOffset(0x1A094), FixedSizeArray(isBitArray: true, bitCount: 584)] internal FixedSizeArray73<byte> _unlockedCompanions;
+    [FieldOffset(0x1A094), FixedSizeArray(isBitArray: true, bitCount: 600)] internal FixedSizeArray75<byte> _unlockedCompanions;
 
     // BitCount: ChocoboTaxiStandSheet.RowCount
     /// <remarks> Use <see cref="IsChocoboTaxiStandUnlocked"/>. </remarks>
@@ -102,16 +102,16 @@ public unsafe partial struct UIState {
 
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x1A0EB), FixedSizeArray(isBitArray: true, bitCount: 1420)] internal FixedSizeArray178<byte> _seenCutscenes;
+    [FieldOffset(0x1A0EB), FixedSizeArray(isBitArray: true, bitCount: 1432)] internal FixedSizeArray179<byte> _seenCutscenes;
 
     // BitCount: TripleTriadCardSheet.RowCount
     /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
-    [FieldOffset(0x1A1A3), FixedSizeArray(isBitArray: true, bitCount: 465)] internal FixedSizeArray59<byte> _unlockedTripleTriadCards;
+    [FieldOffset(0x1A1A3), FixedSizeArray(isBitArray: true, bitCount: 476)] internal FixedSizeArray60<byte> _unlockedTripleTriadCards;
     [FieldOffset(0x1A1E0)] public ulong UnlockedTripleTriadCardsCount;
 
     // BitCount: TripleTriadResident.RowCount
     /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
-    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 129)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
+    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 131)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
 
     // unk byte
 
