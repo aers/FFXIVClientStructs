@@ -97,8 +97,8 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xAA958)] internal MKDSupportJobNoteModule MKDSupportJobNoteModule;
     [FieldOffset(0xAA9B8)] internal QuickPanelModule QuickPanelModule;
     [FieldOffset(0xAAC28)] internal GlassesModule GlassesModule;
-    // [FieldOffset(0xAACA0)] internal XBMNOTE;
-    // [FieldOffset(0xAAD00)] internal XBM;
+    [FieldOffset(0xAACA0)] internal XBMNoteModule XBMNoteModule;
+    [FieldOffset(0xAAD00)] internal XBMModule XBMModule;
     // [FieldOffset(0xAAD88)] internal nint Vf81Struct;
     [FieldOffset(0xAAE20)] internal ConfigModule ConfigModule;
     [FieldOffset(0xB9B30)] internal RaptureShellModule RaptureShellModule;

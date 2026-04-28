@@ -10090,6 +10090,18 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1408199C0: ctor
+  Client::UI::Misc::XBMNoteModule:
+    vtbls:
+      - ea: 0x14218A2C8
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14081B760: ctor
+  Client::UI::Misc::XBMModule:
+    vtbls:
+      - ea: 0x14218A340
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x14081BD60: ctor
   Client::UI::Misc::HelperInterface:
     vtbls:
       - ea: 0x1421B79D8

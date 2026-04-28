@@ -85,6 +85,8 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(76)] public partial MKDSupportJobNoteModule* GetMKDSupportJobNoteModule();
     [VirtualFunction(77)] public partial QuickPanelModule* GetQuickPanelModule();
     [VirtualFunction(78)] public partial GlassesModule* GetGlassesModule();
+    [VirtualFunction(79)] public partial XBMNoteModule* GetXBMNoteModule();
+    [VirtualFunction(80)] public partial XBMModule* GetXBMModule();
     [VirtualFunction(81)] public partial UIInputData* GetUIInputData();
     [VirtualFunction(82)] public partial UIInputModule* GetUIInputModule();
     // [VirtualFunction(83)] public partial Vf79Struct* GetVf70Struct();
