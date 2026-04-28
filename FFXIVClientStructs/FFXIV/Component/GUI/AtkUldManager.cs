@@ -211,4 +211,6 @@ public enum ComponentType : byte {
     Preview = 23,
     HoldButton = 24,
     Portrait = 25,
+    Unk26 = 26, // related to the XBMItem sheet
+    Unk27 = 27, // related to the XBMContentStageEventMap sheet
 }

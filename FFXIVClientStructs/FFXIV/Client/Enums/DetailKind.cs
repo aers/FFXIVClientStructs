@@ -28,10 +28,11 @@ public enum DetailKind : byte {
     MJIKeyItem = 22,
     MJICraftworksObject = 23,
     Cabinet = 24,
-    TradeRemote = 25,
-    HandIn = 26,
-    RepairRequest = 27,
-    LetterView = 28,
+    Unk25 = 25, // XBM Item?
+    TradeRemote = 26,
+    HandIn = 27,
+    RepairRequest = 28,
+    LetterView = 29,
 
     // ActionDetail
     Action = 30,
@@ -65,5 +66,8 @@ public enum DetailKind : byte {
     Glasses = 58,
     PhantomAction = 59,
     MKDTrait = 60,
-    Unk60 = 61,
+    Unk61 = 61,
+    Unk62 = 62,
+    Unk63 = 63,
+    Unk64 = 64, // XBM Action?
 }

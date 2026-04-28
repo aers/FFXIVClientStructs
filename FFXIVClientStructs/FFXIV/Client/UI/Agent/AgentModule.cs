@@ -535,8 +535,8 @@ public enum AgentId : uint {
     Unk495 = 495,
     Unk496 = 496,
     Unk497 = 497,
-    Unk498 = 498,
-    Unk499 = 499,
+    Unk498 = 498, // related to XBM tooltip
+    Unk499 = 499, // related to XBM tooltip
     XBMMonsterNotebook = 500,
     XBMPetParty = 501,
     XBMStageDetailList = 502,
