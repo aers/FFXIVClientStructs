@@ -4933,28 +4933,28 @@ classes:
       0x1400FD900: OpenDawn
       0x1400FD9C0: IsDawnSupported
       0x1400FE0B0: OpenLuaUI
-      0x1400FEFD0: HandleSaveAddonConfig # 17
-      0x1400FF280: HandlePlaySoundEffect # 21
-      0x1400FF380: HandleExecuteHotbarSlot # 22
-      0x1400FF470: HandleSetHotbarSlot # 23
-      0x1400FF570: HandleItemMove # 24
-      0x1400FF9C0: HandleLootRoll # 25
-      0x1400FFB30: HandleSellStack # 26
-      0x1400FFA70: HandleSetBattleMode # 27
-      0x1400FFBB0: HandleOpenInventory # 28
-      0x1400FFC10: HandleOpenItemContextMenu # 29
-      0x1400FFD20: HandleNameplateHover # 31
-      0x1400FFDE0: HandleShowDetailAddon # 32
-      0x140100030: HandleFormatText # 33
-      0x140100850: HandleExecuteMainCommand # 41
-      0x1401008B0: HandleIsMainCommandUnlocked # 42
-      0x140100B20: HandleNowLoading # 44
-      0x140100CF0: HandleItemDiscard # 45
-      0x140101090: HandleWorldToScreenPoint # 49
-      0x1401011C0: HandleScdResource # 50
-      0x140101440: HandleCloseTryOn # 52
-      0x1401014C0: HandleOpenContextMenuForAddon # 53
-      0x140101610: HandleGlassesDrop # 56
+      0x1400FEFD0: HandleSaveAddonConfig # 18
+      0x1400FF280: HandlePlaySoundEffect # 22
+      0x1400FF380: HandleExecuteHotbarSlot # 23
+      0x1400FF470: HandleSetHotbarSlot # 24
+      0x1400FF570: HandleItemMove # 25
+      0x1400FF9C0: HandleLootRoll # 26
+      0x1400FFB30: HandleSellStack # 27
+      0x1400FFA70: HandleSetBattleMode # 28
+      0x1400FFBB0: HandleOpenInventory # 29
+      0x1400FFC10: HandleOpenItemContextMenu # 30
+      0x1400FFD20: HandleNameplateHover # 32
+      0x1400FFDE0: HandleShowDetailAddon # 33
+      0x140100030: HandleFormatText # 34
+      0x140100850: HandleExecuteMainCommand # 42
+      0x1401008B0: HandleIsMainCommandUnlocked # 43
+      0x140100B20: HandleNowLoading # 45
+      0x140100CF0: HandleItemDiscard # 46
+      0x140101090: HandleWorldToScreenPoint # 50
+      0x1401011C0: HandleScdResource # 51
+      0x140101440: HandleCloseTryOn # 53
+      0x1401014C0: HandleOpenContextMenuForAddon # 54
+      0x140101610: HandleGlassesDrop # 57
       0x140103AB0: OnUpdate_Nameplates
       0x140104760: OnUpdate_NameplateCastbars
       0x1401058C0: IncRefNumberArrayData
