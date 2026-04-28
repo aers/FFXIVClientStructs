@@ -7,7 +7,7 @@ globals:
   0x142113E44: g_FloatSix # 6f
   0x142114ED0: g_MemoryPoolConfig # { int BlockSize; int BlockCount; }[10], last entry is special for the lookup table
   0x1428F6840: g_MemoryPoolsStart
-#fail   0x1427F8180: g_MemoryPoolsEnd
+  0x1428f6890: g_MemoryPoolsEnd
   0x14211CA9C: g_FloatTwenty # 20f
 #fail   0x141F0C404: g_ConfigFileName
   0x142128E30: g_NumberArraySizes
@@ -91,7 +91,7 @@ globals:
   0x142AE6214: g_Client::Game::UI::UnlockedCompanions  # not a pointer
   0x142AE625F: g_Client::Game::UI::ChocoboTaxiStands  # not a pointer
   0x142AE626B: g_Client::Game::UI::SeenCutscenes  # not a pointer
-#fail   0x1429E4093: g_Client::Game::UI::UnlockedTripleTriadCards  # not a pointer
+  0x142AE6323: g_Client::Game::UI::UnlockedTripleTriadCards  # not a pointer
   0x142AE6360: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
   0x142ACB72C: g_Client::Game::QuestManager::MapMarkersReceived
   0x142ACB72D: g_Client::Game::QuestManager::CompletedQuestsReceived
@@ -112,7 +112,7 @@ globals:
   0x1428D5280: g_OodleDelete
   0x1428D5290: g_OodlePrintf
   0x142A943A8: g_MacroTime
-#fail   0x1429C8520: g_LogoutCountdownAddonId
+  0x142AC8FB0: g_LogoutCountdownAddonId
   0x142AC8FB6: g_LogoutShouldCloseGame
   0x142F54860: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x142F54AD0: ?hkaAnimationContainerClass@@3VhkClass@@B
@@ -126,7 +126,7 @@ globals:
   0x142F7C6C8: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
-#fail   0x14005DB70: WinMain
+  0x14005DC90: WinMain
 #fail   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
 #fail   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
   0x1401E85B0: std::_Throw_tree_length_error
@@ -891,8 +891,8 @@ classes:
       0x140B1C040: SetTimeAdjustmentForBonus
       0x140B1C480: InitReadSatisfactionBonusGuaranteeRow
       0x140B1C570: InitReadSatisfactionSupplyRow
-#fail       0x140ACEDF0: InitReadSatisfactionSupplyRewardRow
-#fail       0x140ACEF80: InitReadSatisfactionSupplyRewardExpRow
+      0x140B1C880: InitReadSatisfactionSupplyRewardRow
+      0x140B1CA40: InitReadSatisfactionSupplyRewardExpRow
       0x141A7B210: GetAdjustedTimestamp # static
       0x141A7B230: GetBonusGuaranteeForTimestamp # static
       0x141A7B270: GetSatisfactionBonusesForNpc # static
@@ -901,7 +901,7 @@ classes:
       - ea: 0x14218AF10
   Client::Game::SheetWaiterBase:
     vtbls:
-#fail       - ea: 0x1420C00A8
+      - ea: 0x14218AF28
         base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::InstanceContent::ContentSheetWaiter:
     vtbls:
@@ -1245,7 +1245,7 @@ classes:
         base: Client::Network::Socket::PollerWinsock
   Client::Network::Socket::SocketWinsock:
     vtbls:
-#fail       - ea: 0x1421EC048
+      - ea: 0x1422D8E28
         base: Client::Network::Socket::SocketBase
   Client::Network::Socket::SocketImpl:
     vtbls:
@@ -1444,7 +1444,7 @@ classes:
       0x140AFCA10: UpdateObjectArraysWrapper2
       0x140AFCA30: ctor
       0x140AFCB00: LookupAreaObjectByOwnerId
-#fail       0x140AAF2A0: Update
+      0x140AFCCB0: Update
       0x140AFD140: UpdateMountAndCompanionMovement # maybe?
       0x140AFD3B0: UpdateLookAt
       0x140AFD810: DeleteAllModels
@@ -1510,9 +1510,9 @@ classes:
       5: Dtor
   Client::Game::Character::CharacterManager: # networked characters
     instances:
-#fail       - ea: 0x1427AC1A0
+      - ea: 0x1428AA2A0
     vtbls:
-#fail       - ea: 0x1420CEBB0
+      - ea: 0x14219A498
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140AF8E30: Initialize
@@ -1561,7 +1561,7 @@ classes:
       - ea: 0x1421C76B8
         base: Client::Game::Event::GoldSaucerDirector
     funcs:
-#fail       0x140DF10E0: ctor
+      0x140E56C00: ctor
   Client::Game::GoldSaucer::GFateClimbingDirector: # Cliffhanger
     vtbls:
       - ea: 0x1421CA460
@@ -1663,9 +1663,9 @@ classes:
       0x140B212A0: GetBattleChara
   Client::Game::Group::GroupManager:
     instances:
-#fail       - ea: 0x1427B20B0
+      - ea: 0x1428B0090
     vtbls:
-#fail       - ea: 0x1420FAF90 # it has some abstract base even!
+      - ea: 0x1421D6670 # it has some abstract base even!
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140EAE8C0: Create
@@ -2176,7 +2176,7 @@ classes:
       6: GetTerritoryType
   Client::Game::HousingFurnitureManager:
     funcs:
-#fail       0x140DBE5C0: ctor
+      0x140E239D0: ctor
       0x140E269E0: GetValueSetsByFurnitureIndex
       0x140E27760: GetHousingEventObjectByFurnitureIndex
   Client::Game::HousingObjectManager::HousingObjectArray:
@@ -2244,11 +2244,11 @@ classes:
       0: Dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x1420E9198
+      - ea: 0x1421C4268
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x1420E91E0
+      - ea: 0x1421C42B0
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -2544,7 +2544,7 @@ classes:
         base: Client::Game::WKS::WKSModuleBase
     funcs:
       0x141A698E0: ctor
-#fail       0x1419B0DA0: InitiateMission
+      0x141A6A3C0: InitiateMission
       0x141A6A520: ReportMission
       0x141A6A5D0: AbandonMission
   Client::Game::WKS::WKSResearchModule: # Cosmic Research Information
@@ -2726,7 +2726,7 @@ classes:
       0x14066C570: UpdateFromParentNode # (AtkResNode* node, AtkResNode *parent, bool force)
       0x14066C990: UpdateNodeTransform
       0x14066CB60: UpdateNodeColor
-#fail       0x14064BCC0: CreateAtkComponent
+      0x14066D0D0: CreateAtkComponent
       0x14066EA80: Update
       0x14066F050: LoadResourceAndTextures
       0x14066F7D0: SortNodeListByPriority
@@ -2835,7 +2835,7 @@ classes:
       0x140C49760: IsUnlockLinkUnlockedOrQuestCompleted
       0x140C49A00: IsCutsceneSeen
       0x140C4C0D0: IsEmoteUnlocked
-#fail       0x140B69C30: IsItemActionUnlocked
+      0x140C4C240: IsItemActionUnlocked
       0x140C49F90: IsTripleTriadCardUnlocked
       0x140C4A0C0: IsTripleTriadNpcBeaten
       0x140C4A260: AnnounceHowTo
@@ -2844,7 +2844,7 @@ classes:
       0x140C4B7B0: HasNextMapAllowanceTimestamp
       0x140C4B7D0: GetNextMapAllowanceTimestamp
       0x140C4B7E0: GetNextChallengeLogResetTimestamp
-#fail       0x140B68E80: GetIsAirDismountable
+      0x140C4B490: GetIsAirDismountable
       0x1419A3AE0: IsInstanceContentUnlocked   # static
       0x1419A4010: IsInstanceContentCompleted  # static
       0x140BB11C0: IsPublicContentUnlocked   # static
@@ -2915,7 +2915,7 @@ classes:
       0x140BDF710: GetDailyQuestSeed
       0x140BDF730: SetPlayerStateFlag
       0x140BDF750: GetPlayerStateFlag
-#fail       0x140AFEFD0: UpdateSquadronData
+      0x140BE09B0: UpdateSquadronData
       0x140BDF650: IsBeastTribeRankedUpToday
       0x140BDEC60: IsMountUnlocked
       0x140BE2700: IsOrnamentUnlocked
@@ -3061,7 +3061,7 @@ classes:
     instances:
       - ea: 0x142ACD808  # UIState.Cabinet
     funcs:
-#fail       0x140B386A0: IsItemInCabinet # row id of Cabinet sheet, not Item
+      0x140C1A6E0: IsItemInCabinet # row id of Cabinet sheet, not Item
   Client::Game::UI::Achievement:
     instances:
       - ea: 0x142ACD828  # UIState.Achievement
@@ -3219,7 +3219,7 @@ classes:
       - ea: 0x142AD11C0
     funcs:
      0x140BE6020: ctor
-#fail      0x140B04780: Dtor
+     0x140BE6190: Dtor
      0x140BE6200: Initialize # unused, inlined
   Client::Game::UI::RecipeNote:
     instances:
@@ -3236,7 +3236,7 @@ classes:
       0x140BEB5B0: Initialize
       0x140BED940: CancelCraftingPassthrough
       0x140BEDA60: InitializeRecipeList
-#fail       0x140B0CBF0: ClearFunctionPointers
+      0x140BEE900: ClearFunctionPointers
   Client::Game::UI::FishingNote:
     instances:
       - ea: 0x142AD2428
@@ -3280,7 +3280,7 @@ classes:
       0x140BFFF90: ctor
   Client::Game::Event::ListenItemCallback<Client::Game::UI::QuestTodoList>:
     vtbls:
-      - ea: 0x1421A4D38
+      - ea: 0x1421B8800
         base: Client::Game::Event::ListenItemCallbackInterface
   Client::Game::UI::QuestTodoList:
     instances:
@@ -3396,7 +3396,7 @@ classes:
       0x140C33B40: QueueDuties
       0x140C33F20: QueueRoulette
       0x140C34E00: CancelQueue
-#fail       0x140B52EF0: SetQueuedLanguages
+      0x140C35060: SetQueuedLanguages
       0x140C35760: UpdateQueueState
       0x140C35B00: ProcessInfoState
       0x140C35FE0: SetQueuedJobAndRoulette
@@ -3452,7 +3452,7 @@ classes:
     instances:
       - ea: 0x142AE36B8
     vtbls:
-      - ea: 0x1421A4D08
+      - ea: 0x1421B9B10
     funcs:
       0x140C43A40: ctor
       0x140DDE010: Dtor
@@ -3462,7 +3462,7 @@ classes:
       0x140B663E0: HandleYell
   Client::Game::UI::CharaCard:
     instances:
-#fail       - ea: 0x1429E3C88
+      - ea: 0x142AE5F08
     funcs:
       0x140C45DB0: ctor
       0x140C45F50: RequestCurrentBannerData
@@ -3470,7 +3470,7 @@ classes:
       0x140C46100: SetTempBannerData
       0x140C46140: RequestCharaCardForGameObject
       0x140C461D0: RequestCharaCardForContentId
-#fail       0x140AF3E20: RequestCharaCardForLocalPlayer
+      0x140BD5290: RequestCharaCardForLocalPlayer
       0x140BD5290: RequestUpdateCharaCard
       0x140C463E0: SendCharaCardData
       0x140C46810: HandleCurrentBannerDataPacket
@@ -3489,7 +3489,7 @@ classes:
     funcs:
 #fail       0x140048E10: StaticInitializer # seems to be removed now?
       0x1400E54E0: GetCurrentComboActionId
-#fail       0x140ADC060: GetExtraParamForSummonAction # this is probably a free function or a static member function of some unknown class, but it's used only by ActionManager
+      0x140B2A050: GetExtraParamForSummonAction # this is probably a free function or a static member function of some unknown class, but it's used only by ActionManager
       0x1408DC770: ClassifyTarget # (Character*) -> uint enum
 #oldfail       0x140B1D000: AdjustRecastTimeByStatusesAndStats # (Exd::Sheets::Action*, int recastMs, int actionCategoryId) -> int ms
       0x1408DCAE0: GetFlankType # (vec3* pos, GameObject* obj) -> uint enum
@@ -3531,7 +3531,7 @@ classes:
       0x1408E39C0: UseMinionRoulette
       0x1408E3B20: UseMountRoulette
       0x1408E3D80: CanUseMountRoulette
-#fail       0x1408B73A0: HasMonkForm
+      0x1408E4010: HasMonkForm
       0x1408E4110: CheckActionResources
       0x1408E7E00: AutoFaceTarget
       0x1408E7E60: AutoFaceTargetPosition
@@ -3876,7 +3876,7 @@ classes:
         base: Client::System::Common::NonCopyable
   Client::Sound::ISoundData:
     vtbls:
-#fail       - ea: 0x14208F408
+      - ea: 0x14215A758
         base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
     vfuncs:
       3: GetSoundController
@@ -3933,7 +3933,7 @@ classes:
     funcs:
       0x1400D5CD0: TaskRunner_arg1 # these are used to run static tasks, vfuncs are for Task subclasses
       0x1400D5CE0: TaskRunner_arg2
-#fail       0x1400D50D0: TaskRunner_arg3
+      0x1400D5CF0: TaskRunner_arg3
       0x14005F810: Finalizer
   Client::System::Framework::TaskManager::RootTask:
     vtbls:
@@ -3999,7 +3999,7 @@ classes:
       3: Free
       4: Tick
     funcs:
-#fail       0x1400CDF00: ctor
+      0x1400CEB10: ctor
       0x1400D1F30: Exit
       0x1400D2520: SetInactive
       0x1400D25E0: UpdateClipCursor
@@ -4059,17 +4059,17 @@ classes:
       1: GetSheetByIndex
       2: GetSheetByName
       3: GetLanguage
-  Common::Component::Excel::ExcelModuleInterface: # these are two different classes
-    vtbls:
-#fail       - ea: 0x1424943B0
+#  Common::Component::Excel::ExcelModuleInterface: # these are two different classes
+#    vtbls:
+#fail       - ea: 0x1424943B0 # gone?
 #fail       - ea: 0x142494440
-        base: Common::Component::Excel::ExcelResourceListener
-    vfuncs:
-      1: GetSheetByIndex
-      2: GetSheetByName
-      3: LoadSheet
-      5: ChangeLanguage
-      6: GetLanguage
+#        base: Common::Component::Excel::ExcelResourceListener
+#    vfuncs:
+#      1: GetSheetByIndex
+#      2: GetSheetByName
+#      3: LoadSheet
+#      5: ChangeLanguage
+#      6: GetLanguage
   Common::Component::Excel::ExcelResourceListener:
     vtbls:
       - ea: 0x142580240
@@ -4078,13 +4078,11 @@ classes:
       1: OnResourceLoad
   Common::Component::Excel::ExcelModule:
     vtbls:
-#fail       - ea: 0x142494460
-        base: Common::Component::Excel::ExcelModuleInterface
       - ea: 0x142581200
         base: Common::Component::Excel::ExcelResourceListener
     funcs:
       0x142080210: ctor
-#fail       0x141FB9B70: ExcelSheetContainerFromData
+      0x142081490: ExcelSheetContainerFromData
   Common::Component::Environment::AllocatorInterface:
     vtbls:
       - ea: 0x14216E6C0
@@ -4143,7 +4141,7 @@ classes:
     vtbls:
       - ea: 0x142580270
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x142493578
+      - ea: 0x142580278
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -4153,9 +4151,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x1424937F0
+      - ea: 0x1425804F0
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x142493848
+      - ea: 0x142580548
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -4202,7 +4200,7 @@ classes:
     vtbls:
       - ea: 0x1425800C8
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x142493458
+      - ea: 0x142580158
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -4655,52 +4653,48 @@ classes:
       - ea: 0x142581090
     vfuncs:
       0: Dtor
-  Common::Component::Excel::ExcelSheetInterface:
-    vtbls:
-#fail       - ea: 0x142494588
-    vfuncs:
-      1: IsAnyPageBeingLoaded  # (ExcelSheet* this) -> bool
-      2: GetColumnType  # (ExcelSheet* this, int nColumnIndex) -> short
-      3: GetColumnOffset  # (ExcelSheet* this, int nColumnIndex) -> short
-      4: PageRowResolver_Set  # (ExcelSheet* this, int nDesiredCapacityForRingBufferMode, byte bSyncForModeA, bool bForceRecreate)
-      5: RingBufferPageRowResolver_GetLoadedRowCount  # (ExcelSheet* this) -> int
-      6: RingBufferPageRowResolver_Clear  # (ExcelSheet* this)
-      7: HashTablePageRowResolver_GetRowIdByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, int *pnOutRowId) -> IExcelRowWrapper*
-      8: HashTablePageRowResolver_GetRowDescriptorByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
-      9: GetRowById  # (ExcelSheet* this, int nRowId, int *pnOutErrorCode) -> IExcelRowWrapper*
-      10: GetRowByDescriptor  # (ExcelSheet* this, ExcelRowDescriptor* pRowDescriptor, int *pnOutErrorCode) -> IExcelRowWrapper*
-      11: Unknown1_Get  # (ExcelSheet* this) -> short
-      12: Unknown1_Set  # (ExcelSheet* this, short newValue) -> short
-      13: ReturnSecondParameter  # (ExcelSheet* this, int) -> int
-      14: Unknown2_Find  # (ExcelSheet* this, char* pcszName) -> ?
-      15: GetVariant  # (ExcelSheet* this) -> int
-      16: GetColumnCount  # (ExcelSheet* this) -> short
-      17: GetRowCount  # (ExcelSheet* this) -> int
-      18: Unknown3_GetOrLoad_1
-      19: Unknown3_GetOrLoad_2
-      20: Unknown3_Free
-      21: Unknown3_GetLoadedCount
-      22: HashTablePageRowResolver_GetRowWrapperAndIdByIndex  # (ExcelSheet* this, int nRowIndex, int* pnOutRowId) -> IExcelRowWrapper*
-      23: HashTablePageRowResolver_GetRowWrapperAndDescriptorByIndex  # (ExcelSheet* this, int nRowIndex, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
-      24: EnumerateRows  # (ExcelSheet* this, void* pCallbackInterface, void* pUserData)
-      25: GetSheetVersion  # (ExcelSheet* this) -> short
-      26: GetName  # (ExcelSheet* this) -> char* (actually, 0x00 char* pszString, 0x08 short nHash, 0x0a bool bIsExternallyAllocated)
-      27: SetLanguage  # (ExcelSheet* this, int nLanguage)
+#  Common::Component::Excel::ExcelSheetInterface:
+#    vtbls:
+#fail       - ea: 0x142494588 # gone?
+#    vfuncs:
+#      1: IsAnyPageBeingLoaded  # (ExcelSheet* this) -> bool
+#      2: GetColumnType  # (ExcelSheet* this, int nColumnIndex) -> short
+#      3: GetColumnOffset  # (ExcelSheet* this, int nColumnIndex) -> short
+#      4: PageRowResolver_Set  # (ExcelSheet* this, int nDesiredCapacityForRingBufferMode, byte bSyncForModeA, bool bForceRecreate)
+#      5: RingBufferPageRowResolver_GetLoadedRowCount  # (ExcelSheet* this) -> int
+#      6: RingBufferPageRowResolver_Clear  # (ExcelSheet* this)
+#      7: HashTablePageRowResolver_GetRowIdByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, int *pnOutRowId) -> IExcelRowWrapper*
+#      8: HashTablePageRowResolver_GetRowDescriptorByStringKeyColumn  # (ExcelSheet* this, int nColumnIndex, char *pszStringValue, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
+#      9: GetRowById  # (ExcelSheet* this, int nRowId, int *pnOutErrorCode) -> IExcelRowWrapper*
+#      10: GetRowByDescriptor  # (ExcelSheet* this, ExcelRowDescriptor* pRowDescriptor, int *pnOutErrorCode) -> IExcelRowWrapper*
+#      11: Unknown1_Get  # (ExcelSheet* this) -> short
+#      12: Unknown1_Set  # (ExcelSheet* this, short newValue) -> short
+#      13: ReturnSecondParameter  # (ExcelSheet* this, int) -> int
+#      14: Unknown2_Find  # (ExcelSheet* this, char* pcszName) -> ?
+#      15: GetVariant  # (ExcelSheet* this) -> int
+#      16: GetColumnCount  # (ExcelSheet* this) -> short
+#      17: GetRowCount  # (ExcelSheet* this) -> int
+#      18: Unknown3_GetOrLoad_1
+#      19: Unknown3_GetOrLoad_2
+#      20: Unknown3_Free
+#      21: Unknown3_GetLoadedCount
+#      22: HashTablePageRowResolver_GetRowWrapperAndIdByIndex  # (ExcelSheet* this, int nRowIndex, int* pnOutRowId) -> IExcelRowWrapper*
+#      23: HashTablePageRowResolver_GetRowWrapperAndDescriptorByIndex  # (ExcelSheet* this, int nRowIndex, ExcelRowDescriptor* pOutRowDescriptor) -> IExcelRowWrapper*
+#      24: EnumerateRows  # (ExcelSheet* this, void* pCallbackInterface, void* pUserData)
+#      25: GetSheetVersion  # (ExcelSheet* this) -> short
+#      26: GetName  # (ExcelSheet* this) -> char* (actually, 0x00 char* pszString, 0x08 short nHash, 0x0a bool bIsExternallyAllocated)
+#      27: SetLanguage  # (ExcelSheet* this, int nLanguage)
   Common::Component::Excel::ExcelSheet:
     vtbls:
-#fail       - ea: 0x142494680
+      - ea: 0x1425810f8
         base: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
-#fail       - ea: 0x142494698
-        base: Common::Component::Excel::ExcelSheetInterface
-    vfuncs:
-      2: GetColumnType
     funcs:
       0x14207CCF0: ctor
   Component::Excel::ExcelPage:
     funcs:
-#fail       0x141FBEB70: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
-#fail       0x141FBF320: ContainsRowId  # (ExcelPage* this, int* pnRowId) -> bool
-#fail       0x141FBF120: GetOrCreatePageLoader  # (ExcelPage* this, _, ExcelRowDescriptor* pRowDescriptor) -> ExcelPageLoader*
+      0x142084240: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
+      0x1420850C0: ContainsRowId  # (ExcelPage* this, int* pnRowId) -> bool
+      0x142084EB0: GetOrCreatePageLoader  # (ExcelPage* this, _, ExcelRowDescriptor* pRowDescriptor) -> ExcelPageLoader*
       0x142086000: FreeSheetResourceAndPageLoader  # (ExcelPage* this, SheetResource* pRes, ExcelPageLoader* pLoader)
 #fail       0x141FBF5C0: Load_0xFFFE  # (ExcelPage* this, int nRowId) -> SheetResource*
       0x1420850F0: Load_0xFFFF  # (ExcelPage* this, bool bAsync) -> SheetResource*
@@ -4742,14 +4736,14 @@ classes:
     # 0x00: pDataOrState: void*
     # 0x08: pSheet: ExcelSheetContainer*
     funcs:
-#fail       0x141FB6B50: Clear  # (ExcelRow* this)
+      0x14207C520: Clear  # (ExcelRow* this)
       0x14207BE20: ctor  # (ExcelRow* this, void* pData, int nVariant, ExcelSheetContainer* pSheet, int pVariableDataLow32bits, int nFixedDataSize)
       0x14207C8C0: Parse_v3  # (ExcelRow* this, void* pData, int nVariant, ExcelSheetContainer* pSheet, int nVariableDataOffset, int nFixedDataSize)
-#fail       0x141FB6A10: GetColumnPtr  # (ExcelRow* this, size_t nColumnIndex) -> void*
-#fail       0x141FB6AF0: IsColumnRsv  # (ExcelRow* this, size_t nColumnIndex) -> bool
+      0x14207C420: GetColumnPtr  # (ExcelRow* this, size_t nColumnIndex) -> void*
+      0x14207C4E0: IsColumnRsv  # (ExcelRow* this, size_t nColumnIndex) -> bool
       0x14207BAA0: CalculateStringColumnHash  # static (char* pStringOffsetBytes)
       0x14207BDE0: ResolveStringColumnIndirection  # static (char* pStringOffsetBytes)
-#fail       0x141FB6A40: GetFirstColumnAsString
+      0x14207C450: GetFirstColumnAsString
   Component::Excel::ExcelRowDescriptor:
     # size 0x08+
     # 0x00: nRowId: int
@@ -4777,8 +4771,6 @@ classes:
     vtbls:
       - ea: 0x1425812A0
         base: Component::Excel::IExcelRowWrapper
-    funcs:
-#fail       0x141FBEB30: ctor  # (HashTableExcelPageRowResolver_RowWrapper* this)
   Component::Excel::RingBufferExcelPageRowResolver_RowWrapper:
     vtbls:
       - ea: 0x142581170
@@ -4978,7 +4970,7 @@ classes:
       0x1406A9900: DecRefStringArrayData
       0x1406AA520: SetupAtkMessageBoxManager
       0x1406AA660: SetAtkMessageBoxManagerTexts
-#fail       0x14068B890: UpdateUI
+      0x1406AD210: UpdateUI
       0x1406ADF40: GetAtkFontCodeModule
       0x1406AEA90: UpdateSubscribedAddons
       0x1406AF220: UpdateAtkUIColorHolder
@@ -5050,7 +5042,7 @@ classes:
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1420C87B0
+      - ea: 0x1421937E8
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       11: AddPage
@@ -5367,7 +5359,7 @@ classes:
       - ea: 0x142194E70
         base: Client::UI::Info::InfoProxyInterface
     funcs:
-#fail       0x14095C400: ctor
+      0x14098B270: ctor
       0x14098C970: GetCrossworldLinkshellName
 #      0x1401C6FC0: Finalizer # inlined in dtor
   Client::UI::Info::InfoProxyCrossWorldLinkshellMember:
@@ -6267,11 +6259,11 @@ classes:
       0x140B35720: HandleActorCastPacket
       0x140B35C60: HandleActorCustomizeDataPacket
       0x140B35E40: HandleActionEffect1Packet
-#fail       0x140B8E990: HandleActionEffect8Packet
-#fail       0x140B8EA10: HandleActionEffect16Packet
-#fail       0x140B8EA90: HandleActionEffect24Packet
-#fail       0x140B8EB10: HandleActionEffect32Packet
-#fail       0x140B8EB90: HandleActorControlPacket
+      0x140B35EA0: HandleActionEffect8Packet
+      0x140B35F20: HandleActionEffect16Packet
+      0x140B35FA0: HandleActionEffect24Packet
+      0x140B36020: HandleActionEffect32Packet
+      0x140B360A0: HandleActorControlPacket
       0x140B458D0: HandleInventoryItemUpdatePacket
       0x140B45AF0: HandleInventoryItemPacket
       0x140B45BE0: HandleInventoryItemCurrencyPacket
@@ -6542,7 +6534,7 @@ classes:
       0x1404D0700: HandleLogout
 #oldfail      0x140CEE2C0: Finalizer
       0x1404D4200: UpdateLobbyUIStage
-#fail       0x1404BC1B0: UpdateCharaSelectDisplay
+      0x1404D5360: UpdateCharaSelectDisplay
       0x1404D7690: SetDataCenter
       0x1404DB960: OpenTitle
 #oldfail       0x1402E8BB0: OpenTitleDCWorldMap
@@ -6551,7 +6543,7 @@ classes:
 #oldfail       0x1402EAE70: OpenTitleConnectDialog
       0x1404DE370: OpenCharaSelect
 #fail       0x1402A3910: OpenCharaMakeDataImport # inlined to ReceiveEvent (7.3)
-#fail       0x1404C6140: OpenCreateNewCharacterDialog
+      0x1404DF690: OpenCreateNewCharacterDialog
       0x1404E07F0: OpenLoginWaitDialog
 #oldfail       0x1402DD020: OpenLobbyScreenText
       0x1404E1650: CloseDialog
@@ -6791,7 +6783,7 @@ classes:
         0x1400CE940: SetShadowVisibilityType
   Client::Graphics::Render::Camera:
     vtbls:
-#fail       - ea: 0x142078090
+      - ea: 0x142142D80
         base: Client::Graphics::ReferencedClassBase
     vfuncs:
       5: UpdateConstantBuffer
@@ -6842,7 +6834,7 @@ classes:
       - ea: 0x142142FD0
     funcs:
       0x140269510: ctor
-#fail       0x1402573D0: Initialize
+      0x140269640: Initialize
       0x14026A8D0: AssignBackgroundTexture
       0x14026A930: AssignCamera
   Client::Graphics::Render::AmbientLight:
@@ -6941,7 +6933,7 @@ classes:
 #oldfail       0x1403DBD60: ctor
       0x1402B6EE0: Initialize
       0x1402B78C0: Terminate
-#fail       0x1402AE5C0: CreateCamera
+      0x1402B8BF0: CreateCamera
       0x1402B90F0: CreateModel
   Client::Graphics::Render::ShadowManager:
     instances:
@@ -7268,7 +7260,7 @@ classes:
       0x14041F4B0: ctor
       0x1404205F0: ViewportPointToRay
       0x140420810: ScreenPointToRay
-#fail       0x14040D260: CalculateViewMatrix
+      0x140420EE0: CalculateViewMatrix
       0x140E73AF0: WorldToScreenPoint # static
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:
@@ -7430,10 +7422,10 @@ classes:
       0x14079A640: Create
   Client::Graphics::Scene::EnvLocation:
     vtbls:
-#fail       - ea: 0x142098BB8
+      - ea: 0x142163F90
         base: Client::Graphics::Scene::DrawObject
     funcs:
-#fail       0x140442500: ctor
+      0x1404569F0: ctor
   Client::Graphics::Scene::EnvSpace:
     vtbls:
       - ea: 0x142164120
@@ -7627,19 +7619,19 @@ classes:
       0x1405F51A0: Finalizer
       0x1405F5230: Load
       0x1405F5280: ChangeLanguage
-#fail       0x1405D4A40: GetRowBySheetAndRowId  # (ExdModule* this, ExcelSheet* pSheet, int nRowId) -> ExcelRow*
-#fail       0x1405D4BE0: GetRowBySheetAndRowIndex  # (ExdModule* this, ExcelSheet* pSheet, int nRowIndex) -> ExcelRow*
-#fail       0x1405D4A90: GetRowBySheetIndexAndRowId  # (ExdModule* this, int nSheetIndex, int nRowId) -> ExcelRow*
-      0x1405F54A0: GetRowBySheetIndexAndRowIdAndSubRowId  # (ExdModule* this, int nSheetIndex, int nRowId, short nSubRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
-#fail       0x1405D4C60: GetRowBySheetIndexAndRowIndex  # (ExdModule* this, int nSheetIndex, int nRowIndex) -> ExcelRow*
-#fail       0x1405D4810: GetRowBySheetNameAndRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
+      0x1405F52F0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
+      0x1405F5300: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
+      0x1405F5350: GetRowBySheetNameAndRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1405F53D0: GetRowBySheetNameAndRowIdAndSubRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, short nSubRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
-#fail       0x1405D4AF0: GetRowBySheetNameAndRowIndex  # (ExdModule* this, char* pcszSheetName, int nRowIndex, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
-#fail       0x1405D4E70: GetRowCountBySheet  # (ExdModule* this, ExcelSheet* pShet) -> int
-#fail       0x1405D4E90: GetRowCountBySheetIndex  # (ExdModule* this, int nSheetIndex) -> int
-#fail       0x1405D4E10: GetRowCountBySheetName  # (ExdModule* this, char* pcszName) -> int
-#fail       0x1405D47D0: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
-#fail       0x1405D47B0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
+      0x1405F54A0: GetRowBySheetIndexAndRowIdAndSubRowId  # (ExdModule* this, int nSheetIndex, int nRowId, short nSubRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
+      0x1405F5570: GetRowBySheetAndRowId  # (ExdModule* this, ExcelSheet* pSheet, int nRowId) -> ExcelRow*
+      0x1405F55C0: GetRowBySheetIndexAndRowId  # (ExdModule* this, int nSheetIndex, int nRowId) -> ExcelRow*
+      0x1405F5610: GetRowBySheetNameAndRowIndex  # (ExdModule* this, char* pcszSheetName, int nRowIndex, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
+      0x1405F5710: GetRowBySheetAndRowIndex  # (ExdModule* this, ExcelSheet* pSheet, int nRowIndex) -> ExcelRow*
+      0x1405F57A0: GetRowBySheetIndexAndRowIndex  # (ExdModule* this, int nSheetIndex, int nRowIndex) -> ExcelRow*
+      0x1405F5930: GetRowCountBySheetName  # (ExdModule* this, char* pcszName) -> int
+      0x1405F5980: GetRowCountBySheet  # (ExdModule* this, ExcelSheet* pShet) -> int
+      0x1405F59A0: GetRowCountBySheetIndex  # (ExdModule* this, int nSheetIndex) -> int
       0x1409ABFB0: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x140836670: GetItemRowById
       0x140837D40: GetRoleForClassJobId
@@ -7753,9 +7745,9 @@ classes:
       - ea: 0x142170018
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
-#fail       0x1405FBA20: ctor
+      0x14061C840: ctor
       0x14061C9A0: OnObjectDestroyed
-#fail       0x140602D50: ProcessMouseState
+      0x140623B90: ProcessMouseState
       0x140626290: InteractWithObject
       0x14062AAF0: OpenObjectInteraction
       0x140626B20: Initialize
@@ -7767,7 +7759,7 @@ classes:
       0x140620010: CheckHorizontalDistance # (TargetSystem* this, GameObject* object, float maxDistance) -> bool
       0x140620260: CheckVerticalDistance # (TargetSystem* this, GameObject* object, float maxDistance) -> bool
       0x140624EB0: IsObjectTargetableByLocalPlayer # (TargetSystem *this, GameObject *obj, float horizontalRange) -> bool
-#fail       0x140606810: HandleTargetingKeybinds
+      0x1406276A0: HandleTargetingKeybinds
       0x1406280D0: SetHardTargetChecked # (TargetSystem* this, GameObject* hardTargetObject, bool requireOnScreen, bool requireOnScreenOrLos) -> bool
       0x140628340: GetSoftTargetObjectId
       0x140628360: GetSoftTargetId
@@ -7795,7 +7787,7 @@ classes:
     instances:
       - ea: 0x142A98FF0
     funcs:
-#fail       0x14060CFC0: ctor
+#fail       0x14060CFC0: ctor # inlined
       0x1420FF840: Finalizer
       0x14062DAD0: Initialize
       0x14062DB60: Terminate
@@ -7804,8 +7796,8 @@ classes:
   Client::Game::Control::CameraManager:
     funcs:
       0x1418AE0B0: ctor
-#fail       0x1417F57C0: GetActiveCamera
-#fail       0x1417F6280: SetActiveCamera
+      0x1418AE3B0: GetActiveCamera
+      0x1418AEF90: SetActiveCamera
       0x1418AF1E0: Update
       0x1418AF7A0: UpdateActiveCameraState
   Client::Game::Control::MoveControl::SplineController2D<float,SplineVector2,SplineVector2>:
@@ -7962,7 +7954,7 @@ classes:
       0x140643F50: AttachTooltip
       0x1406441E0: DetachTooltip
       0x140644600: ShowNodeTooltip  # takes node as argument
-#fail       0x140623830: ShowTooltip # similar args to attach tooltip
+      0x140644690: ShowTooltip # similar args to attach tooltip
       0x140645110: HideTooltip # (this, addonId, unkBool)
       0x1406454D0: DetachTooltipByAddonId
   Component::GUI::AtkAddonControl:
@@ -8046,7 +8038,7 @@ classes:
     funcs:
       # 0x140543C20: ctor # INLINED IN 7.0
       0x140649E70: Initialize
-#fail       0x140628E50: Update
+#fail       0x140628E50: Update # inlined
   Component::GUI::AtkCrestFactory:
     vtbls:
       - ea: 0x1421727F0
@@ -8287,7 +8279,7 @@ classes:
       0x140661D50: SetEnabled
       0x140661D80: IsRespondingToMouse
       0x140661DA0: SetRespondToMouse
-#fail       0x140640CB0: IsFocusable
+      0x140661DD0: IsFocusable
       0x140661DF0: SetFocusable
       0x140661E20: IsDroppable
       0x140661E40: SetDroppable
@@ -8299,10 +8291,10 @@ classes:
       0x140661F80: SetChangeCursorToTextInputOnHover
       0x140661FB0: IsEllipticalCollision
       0x140661FD0: SetEllipticalCollision
-#fail       0x140641050: GetIsUsingDepthBasedDrawPriority
-#fail       0x140641070: SetUseDepthBasedPriority
-#fail       0x1406410A0: GetDepth
-#fail       0x1406410C0: SetDepth
+      0x140662170: GetIsUsingDepthBasedDrawPriority
+      0x140662190: SetUseDepthBasedPriority
+      0x1406621C0: GetDepth
+      0x1406621E0: SetDepth
       0x140662200: GetOriginPos
       0x140662220: GetOriginX
       0x140662240: GetOriginY
@@ -8823,9 +8815,9 @@ classes:
       0x1406B7A60: ToggleSymbolInput
       0x1406B7AB0: ToggleIME
       0x1406B7B00: ToggleDictionary
-#fail       0x1406961C0: ToggleCapitalize
-#fail       0x140696210: ToggleEscapeClears
-#fail       0x140696370: ToggleWordWrap
+      0x1406B7B50: ToggleCapitalize
+      0x1406B7BA0: ToggleEscapeClears
+      0x1406B7D00: ToggleWordWrap
       0x1406B7D30: ToggleMask
       0x1406B7D60: SetMaxByte
       0x1406B7E40: SetMaxChar
@@ -9205,7 +9197,7 @@ classes:
         base: Client::LayoutEngine::Node::PointLayoutInstance
   Client::LayoutEngine::Layer::TriggerBoxLayoutInstance:
     vtbls:
-#fail       - ea: 0x1420AECA8
+      - ea: 0x142179AE8
         base: Client::LayoutEngine::ILayoutInstance
     vfuncs:
       78: GetLayerMask
@@ -9296,11 +9288,11 @@ classes:
         base: Client::LayoutEngine::Layer::RangeLayoutInstance
   Client::LayoutEngine::Layer::ExitRangeLayoutInstance:
     vtbls:
-#fail       - ea: 0x1420AEF20
+      - ea: 0x142179D60
         base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Layer::MapRangeLayoutInstance:
     vtbls:
-#fail       - ea: 0x1420AF410
+      - ea: 0x14217A250
         base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Layer::NaviMeshRangeLayoutInstance:
     vtbls:
@@ -9320,11 +9312,11 @@ classes:
         base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Layer::QuestMarkerLayoutInstance:
     vtbls:
-      - ea: 0x142179878
+      - ea: 0x14217D108
         base: Client::LayoutEngine::Layer::MarkerLayoutInstance
   Client::LayoutEngine::Layer::CollisionBoxLayoutInstance:
     vtbls:
-#fail       - ea: 0x1420AF6A8
+      - ea: 0x14217A4E8
         base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Layer::DoorRangeLayoutInstance:
     vtbls:
@@ -9360,7 +9352,7 @@ classes:
         base: Client::LayoutEngine::Layer::RangeLayoutInstance
   Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance:
     vtbls:
-      - ea: 0x142179D60
+      - ea: 0x142179FD8
         base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Layer::FateRangeLayoutInstance:
     vtbls:
@@ -10379,16 +10371,16 @@ classes:
       0x1409A43B0: ctor
       0x1409A4DF0: Finalizer
       0x1409A5650: GetAddonText
-#fail       0x140978500: FormatAddonText1<string>
-#fail       0x140978620: FormatAddonText1<string,int>
-#fail       0x1409787B0: FormatAddonText1<string,int,uint>
-#fail       0x1409789A0: FormatAddonText1<string,string>
-#fail       0x140978B70: FormatAddonText1<string,string,string>
-#fail       0x140978DE0: FormatAddonText1<int>
-#fail       0x140978EC0: FormatAddonText1<int,int>
-#fail       0x140979010: FormatAddonText1<int,int,uint>
-#fail       0x1409791B0: FormatAddonText1<int,int,uint,uint>
-#fail       0x140979390: FormatAddonText1<int,string>
+      0x1409A5690: FormatAddonText1<string>
+      0x1409A5860: FormatAddonText1<string,int>
+      0x1409A5A90: FormatAddonText1<string,int,uint>
+      0x1409A5D20: FormatAddonText1<string,string>
+      0x1409A5F80: FormatAddonText1<string,string,string>
+      0x1409A6290: FormatAddonText1<int>
+      0x1409A6420: FormatAddonText1<int,int>
+      0x1409A6610: FormatAddonText1<int,int,uint>
+      0x1409A6850: FormatAddonText1<int,int,uint,uint>
+      0x1409A6AD0: FormatAddonText1<int,string>
       0x1409A6D40: FormatAddonText2<string>
       0x1409A6E60: FormatAddonText2<string,int>
       0x1409A6FF0: FormatAddonText2<string,int,uint>
@@ -10411,7 +10403,7 @@ classes:
       0x1409A9540: FormatAddonText2<int,int,uint,uint,uint,uint,uint>
       0x1409A9820: FormatAddonText2<int,string>
       0x1409A99B0: FormatAddonText2<int,int,string>
-#fail       0x14097C3C0: FormatAddonText2<int,string,uint>
+      0x1409A9BA0: FormatAddonText2<int,string,uint>
       0x1409A9E60: FormatAddonTransient
       0x1409AA170: FormatSecondsRemaining
       0x1409AA520: FormatTimeSpan
@@ -10430,13 +10422,13 @@ classes:
       0x1409ABBD0: AppendCrossWorldIcon
       0x1409ABD10: AppendIcon
       0x1409AC000: FormatObjStr
-#fail       0x14097E900: FormatAddonTextApply
+      0x1409AC0E0: FormatAddonTextApply
       0x1409AC240: FormatAddonTransientTextApply
       0x1409AC3B0: ResolveSheetRedirect
-#fail       0x140981D50: GetSubrowSheetIntValue
       0x1409AC870: AddSheetRedirectItemDecoration
       0x1409AF100: CreateSheetLink
       0x1409AF570: GetLinkTerminator
+      0x1409AF660: GetSubrowSheetIntValue
       0x1409DCA40: TempStartWithCurrentColors
   Client::UI::Misc::RaptureLogModule:
     vtbls:
@@ -10637,7 +10629,7 @@ classes:
       0x1407DC870: DeleteConfigEntryForAddonName # addon name needs to end with _a
       0x1407DC8D0: DeleteConfigEntryForAddonNameHash
       0x1407DC9C0: ClearActiveDataSet
-#fail       0x1407B5D70: ClearActiveDataSetHudLayout
+      0x1407DC9D0: ClearActiveDataSetHudLayout
       0x1407DD080: SwitchToDataSet
       0x1407DD0A0: SwitchToDefaultSet
       0x1407DD110: ContainsDataSet
@@ -10649,8 +10641,8 @@ classes:
       0x1407DF120: ApplyHudLayout
   Client::UI::Misc::AddonConfigData:
     funcs:
-#fail       0x1407B51B0: Clear
-#fail       0x1407B52F0: ClearHudLayout
+      0x1407DB890: Clear
+      0x1407DBC00: ClearHudLayout
   Client::UI::Misc::AddonConfigEntry:
     funcs:
       0x1407DB4F0: SetAtkValue
@@ -10737,7 +10729,7 @@ classes:
     funcs:
       0x1409C4920: ctor
       0x1409C49F0: Finalizer
-#fail       0x140997630: GetWorldById
+      0x1409C4E00: GetWorldById
       0x1409C4E80: GetWorldNameById
       0x1409C4EE0: GetWorldIdByName
   Client::UI::Misc::ExtraCommandHelper:
@@ -11081,7 +11073,7 @@ classes:
       0x140909AB0: IsTraveler # Data Center Travel
       0x140909B00: IsVoyager  # Cross-region Data Center Travel
       0x14090EA60: GetSoundVolumeCategory
-#fail       0x1408DC280: DetermineSoundVolumeCategory
+      0x14090A180: DetermineSoundVolumeCategory
       0x14090E550: SetTargetId
       0x14090E5C0: GetTargetId
       0x14090A550: GetParentCharacter
@@ -11100,7 +11092,7 @@ classes:
       0x1409093F0: IsCastInProgress
       0x14090D1E0: CalculateOmenSize
       0x14090D640: StartOmen
-#fail       0x1408DFAB0: StartOmenDirectional
+      0x14090D9F0: StartOmenDirectional
       0x1408995B0: GetScale
       0x1408AA000: HasStatus
       0x1408DC110: IsJumping
@@ -11364,7 +11356,7 @@ classes:
       - ea: 0x14218FD88
   Client::UI::Shell::RaptureShellCommandInterface:
      vtbls:
-#fail       - ea: 0x1420C4E50
+      - ea: 0x14218FD98
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -11375,7 +11367,7 @@ classes:
     funcs:
       0x14090FF20: ctor
       0x140912BA0: Finalizer
-#fail       0x1408E5680: Update
+      0x140913670: Update
       0x140913C50: ExecuteMacro
       0x140913E20: CancelMacro
       0x140913E50: TryGetMacroIconCommand
@@ -11702,7 +11694,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1420C8040
+      - ea: 0x142193058
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -11861,7 +11853,7 @@ classes:
       0x140901C90: FinishCast # static
       0x140901E20: ShowLogMessage # static
       0x140902810: ApplyAll # static
-#fail       0x1408D4B80: Receive # static
+      0x140902940: Receive # static
       0x1409033F0: ConvertQuantizedPosToFloat # static
   Client::Game::Character::MJILivelyActor:
     vtbls:
@@ -11933,7 +11925,7 @@ classes:
       0x140EE0750: InsertTextCommandParam
       0x140EE1040: LinkItem
       0x140EE27F0: ChangeChannelName
-#fail       0x140E66A40: HideLogWindow
+      0x140EE22D0: HideLogWindow
   Client::UI::Agent::AgentInventory:
     vtbls:
       - ea: 0x1421F1458
@@ -13422,7 +13414,7 @@ classes:
       0x1410801C0: ctor
   Client::UI::Agent::AgentPvpWelcome:
     vtbls:
-      - ea: 0x1421BA430
+      - ea: 0x1421BD388
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CFB620: ctor
@@ -13769,7 +13761,7 @@ classes:
     funcs:
       0x140D797D0: ctor
       0x140D798B0: Finalizer
-#fail       0x140D19050: SetupWorldTravelInfo # (agent*, uint currentWorld, uint targetWorld)
+      0x140D7BF50: SetupWorldTravelInfo # (agent*, uint currentWorld, uint targetWorld)
   Client::UI::Agent::AgentRideShooting:
     vtbls:
       - ea: 0x1421F4D90
@@ -13804,7 +13796,7 @@ classes:
       0x140CBDF20: ctor
   Client::UI::Agent::AgentQIBCStatus:
     vtbls:
-#fail       - ea: 0x1420D5790
+      - ea: 0x1421BA430
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C69D40: ctor
@@ -15055,7 +15047,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A6E500: ctor
-      0x140A7FA30: FetchTerritoryData
+      0x140A6F4C0: FetchTerritoryData
       0x140A6F830: UpdateCreditsText
       0x141063EF0: RefreshInventory
   Client::UI::Agent::AgentWKSAnnounce:
@@ -15153,7 +15145,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A8F050: ctor
-#fail       0x140A601F0: UpdateQuestCompletion
+      0x140A8F6D0: UpdateQuestCompletion
       0x140A8FD00: SyncKnowledgeLevel
       0x140A8FD30: OpenMapForDynamicEvent
   Client::UI::Agent::AgentMKDContentsInfo:
@@ -15234,7 +15226,7 @@ classes:
       - ea: 0x14219AC48
   Client::Game::Event::FormatStringCallback<Client::Game::Event::EventHandler>:
     vtbls:
-#fail       - ea: 0x1420DEDF8
+      - ea: 0x1421A4D08
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::ActionTimelineCallback<Client::Game::Event::EventHandler>:
     vtbls:
@@ -15242,7 +15234,7 @@ classes:
         base: Client::Game::Event::ActionTimelineCallbackInterface
   Client::Game::Event::ListenItemCallback<Client::Game::Event::EventHandler>:
     vtbls:
-      - ea: 0x1421B8800
+      - ea: 0x1421A4D38
         base: Client::Game::Event::ListenItemCallbackInterface
   Client::Game::Event::EventHandler:
     vtbls:
@@ -15794,19 +15786,19 @@ classes:
       - ea: 0x1422CE738
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x1421E1330
+      - ea: 0x1422CE748
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x1421E1340
+      - ea: 0x1422CE758
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x1421E1358
+      - ea: 0x1422CE770
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::NpcRepairCallback:
     vtbls:
-#fail       - ea: 0x1421E1880
+      - ea: 0x1422CD3D8
         base: Client::Game::Event::TalkCallback # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -15934,19 +15926,19 @@ classes:
       0x14175B4B0: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
     vtbls:
-#fail       - ea: 0x1421CAFE0
+      - ea: 0x1422C65D0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
-#fail       - ea: 0x1427C27B0
+      - ea: 0x1428C07B0
     vtbls:
-#fail       - ea: 0x1421CB010
+      - ea: 0x1422C6600
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
-#fail       - ea: 0x1427C27E0
+      - ea: 0x1428C07E0
     vtbls:
-#fail       - ea: 0x1421CB040
+      - ea: 0x1422C6630
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
@@ -16317,7 +16309,7 @@ classes:
       0x140B7C3E0: ProcessEventPlay
       0x140B7C4F0: ProcessEventYield
       0x140B89570: ProcessInitializeScene
-#fail       0x140C86800: ProcessSystemLogMessage
+      0x140B7D440: ProcessSystemLogMessage
       0x140B7EE00: SetTerritoryTypeId
       0x140B7F060: ProcessDirectorUpdate
       0x140B801F0: ProcessMapEffect
@@ -16458,7 +16450,7 @@ classes:
       0x1419AFF10: ctor
   Client::Game::InstanceContent::InstanceContentPvpDirector:
     vtbls:
-#fail       - ea: 0x1422340E0
+      - ea: 0x1421E5D38
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1419A1590: ctor
@@ -17856,7 +17848,7 @@ classes:
       - ea: 0x142235DE0
         base: Component::GUI::AtkManagedInterface
     funcs:
-#fail       0x141249620: ctor
+      0x1412D9180: ctor
   Client::UI::AddonTargetInfoBase:
     vtbls:
       - ea: 0x14227D7D0
@@ -18496,7 +18488,7 @@ classes:
       0x14156DA10: ctor
   Client::UI::AddonScreenLog::AddonChild:
     vtbls:
-#fail       - ea: 0x142179890
+      - ea: 0x14226BCF0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenLog: # 93
     vtbls:
@@ -23675,7 +23667,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A1820: ctor
-#fail       0x1414F38A0: GetNumberArrayData
+#fail       0x1414F38A0: GetNumberArrayData # vfunc now?
     vfuncs:
       72: InitializePointers
       74: UpdateVisibility
@@ -24456,7 +24448,7 @@ classes:
       - ea: 0x1422D17E0
         base: Client::Graphics::ReferencedClassBase
     funcs:
-#fail       0x141732D60: CreateShaderPackage  # static function
+      0x1417E8F60: CreateShaderPackage  # static function
       0x1417EAF40: ctor
 #oldfail       0x1416E7C40: Finalizer
       # The following 3 funcs seems to be inlined in CreateShaderPackage
@@ -24470,7 +24462,7 @@ classes:
       - ea: 0x14218D360
         base: Client::Game::Character::CharacterData
     funcs:
-#fail       0x141686330: PlaceCompanion
+      0x14174AE40: PlaceCompanion
       # 0x141404580: ctor # inlined @ 1408a74e5
   Client::Game::Character::Ornament:
     vtbls:
