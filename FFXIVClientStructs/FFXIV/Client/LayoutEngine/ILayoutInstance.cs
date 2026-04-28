@@ -27,6 +27,7 @@ public unsafe partial struct ILayoutInstance {
     [BitField<int>(nameof(NestingLevel), 4, 3)]
     [FieldOffset(0x29)] public byte Flags1; // bits0-3: ???, bits4-6: nesting level, bit7: ???
     [FieldOffset(0x2A)] public byte Flags2;
+    [BitField<bool>(nameof(IsActive), 4)]
     [FieldOffset(0x2B)] public byte Flags3;
 
     [VirtualFunction(0)]
