@@ -82,8 +82,8 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;
     [FieldOffset(0x2E0)] public ushort FreeAetheryteId;
-    [FieldOffset(0x2E2)] public ushort FreeAetherytePlayStationPlus;
-    [FieldOffset(0x2E4)] private ushort UnkFreeAetheryte; // Switch Online?
+    [FieldOffset(0x2E2)] public ushort FreeAetherytePSPlus; // PlayStation Plus
+    [FieldOffset(0x2E4)] public ushort FreeAetheryteNSO; // Nintendo Switch Online
     [FieldOffset(0x2E8)] public uint BaseRestedExperience;
     // [FieldOffset(0x2F8), FixedSizeArray] internal FixedSizeArray4<byte> _unk2C8; // GCSupply stuff
     // [FieldOffset(0x2FC), FixedSizeArray] internal FixedSizeArray16<byte> _unk2CC; // GCSupply stuff
