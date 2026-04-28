@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentInputBase>]
 [Inherits<AtkTextInput.AtkTextInputEventInterface>]
 [Inherits<SoftKeyboardDeviceInterface.SoftKeyboardInputInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x600)]
+[StructLayout(LayoutKind.Explicit, Size = 0x608)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F", 3, 20)]
 public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentTextInput> {
     [FieldOffset(0x1F0)] public AtkUldComponentDataTextInput ComponentTextData;
@@ -29,30 +29,29 @@ public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentText
 
     /// <remarks> Works only when Completion is disabled. </remarks>
     [FieldOffset(0x27D)] public bool EnableTabCallback;
-
     [FieldOffset(0x27E)] public bool EnableFocusSounds;
 
-    [FieldOffset(0x280)] private Utf8String UnkText01;
-    [FieldOffset(0x2E8)] private Utf8String UnkText02;
+    [FieldOffset(0x288)] private Utf8String UnkText01;
+    [FieldOffset(0x2F0)] private Utf8String UnkText02;
 
-    [FieldOffset(0x350)] public Utf8String AvailableLines;
+    [FieldOffset(0x358)] public Utf8String AvailableLines;
 
-    [FieldOffset(0x3B8)] public AtkTextNode* AvailableLinesTextNode;
-    [FieldOffset(0x3C0)] public AtkTextNode* AvailableCharsTextNode;
-    [FieldOffset(0x3C8)] public AtkUnitBase* ContainingAddon2; // For whatever reason, the text input _also_ has this
-    [FieldOffset(0x3D0)] public AtkResNode* AutoTranslateMenuNode;
-    [FieldOffset(0x3D8)] public int CompletionOffset; // Offset into the total number of completion items- used for drawing the label
+    [FieldOffset(0x3C0)] public AtkTextNode* AvailableLinesTextNode;
+    [FieldOffset(0x3C8)] public AtkTextNode* AvailableCharsTextNode;
+    [FieldOffset(0x3D0)] public AtkUnitBase* ContainingAddon2; // For whatever reason, the text input _also_ has this
+    [FieldOffset(0x3D8)] public AtkResNode* AutoTranslateMenuNode;
+    [FieldOffset(0x3E0)] public int CompletionOffset; // Offset into the total number of completion items- used for drawing the label
 
-    [FieldOffset(0x3E0), FixedSizeArray] internal FixedSizeArray9<Pointer<AtkComponentButton>> _autoTranslateMenuButtons;
-    [FieldOffset(0x428)] public AtkTextNode* AutoTranslateMenuPageInfoTextNode;
-    [FieldOffset(0x430)] public AtkNineGridNode* AutoTranslateMenuBackground;
+    [FieldOffset(0x3E8), FixedSizeArray] internal FixedSizeArray9<Pointer<AtkComponentButton>> _autoTranslateMenuButtons;
+    [FieldOffset(0x430)] public AtkTextNode* AutoTranslateMenuPageInfoTextNode;
+    [FieldOffset(0x438)] public AtkNineGridNode* AutoTranslateMenuBackground;
 
     // Utf8Strings containing color macros that are wrapped around the highlighted AutoTranslate option
-    [FieldOffset(0x450)] public Utf8String HighlightedAutoTranslateOptionColorPrefix;
+    [FieldOffset(0x458)] public Utf8String HighlightedAutoTranslateOptionColorPrefix;
 
-    [FieldOffset(0x4B8)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
+    [FieldOffset(0x4C0)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
 
-    [FieldOffset(0x528)] public TextInputHandlerValues HandlerValues;
+    [FieldOffset(0x530)] public TextInputHandlerValues HandlerValues;
 
     public bool EnableCompletion {
         get => InputSanitizationFlags.HasFlag(AllowedEntities.Payloads);
