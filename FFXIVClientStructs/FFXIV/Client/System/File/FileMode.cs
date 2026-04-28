@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 public enum FileMode : byte {
-    
+
     /// <summary>
     /// Reads a file on disk into a ResourceHandle.
     /// </summary>
