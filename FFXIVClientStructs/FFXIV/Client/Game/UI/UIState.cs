@@ -30,7 +30,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x4380)] public ContentsNote ContentsNote;
     [FieldOffset(0x4438)] public RelicNote RelicNote;
     [FieldOffset(0x4450)] public MateriaTrade MateriaTrade;
-    [FieldOffset(0x44B8)] public PublicInstance PublicInstance;
+    [FieldOffset(0x4498)] public PublicInstance PublicInstance;
     [FieldOffset(0x44C0)] public RelicSphereUpgrade RelicSphereUpgrade;
     [FieldOffset(0x4538)] public DailyQuestSupply DailyQuestSupply;
     [FieldOffset(0x4920)] public RidePillon RidePillon;
@@ -45,7 +45,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0xC268)] public NpcTrade NpcTrade;
     [FieldOffset(0xC590)] public DirectorTodo DirectorTodo;
     [FieldOffset(0xC6D8)] public DirectorTodo FateDirectorTodo;
-    [FieldOffset(0xC828)] public MassivePcContentTodo MassivePcContentTodo;
+    [FieldOffset(0xC820)] public MassivePcContentTodo MassivePcContentTodo;
     [FieldOffset(0xC970)] public Map Map;
     [FieldOffset(0x10990)] public MarkingController MarkingController;
     [FieldOffset(0x10C70)] public LimitBreakController LimitBreakController;
