@@ -13,5 +13,6 @@ namespace FFXIVClientStructs.FFXIV.Component.Exd;
 [Inherits<IExcelListener>, Inherits<ResourceEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]
 public unsafe partial struct ExdEnvironment {
-
+    [FieldOffset(0x130)] public Common.Component.Excel.LinkedList<ExdModuleResourceHandle> First; // unsure
+    [FieldOffset(0x148)] public Common.Component.Excel.LinkedList<ExdModuleResourceHandle> Last; // unsure
 }
