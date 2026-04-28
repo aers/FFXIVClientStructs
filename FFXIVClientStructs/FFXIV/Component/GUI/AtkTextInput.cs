@@ -7,29 +7,29 @@ using FFXIVClientStructs.FFXIV.Component.Text;
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xCC8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCE8)]
 public unsafe partial struct AtkTextInput {
     [FieldOffset(0x8)] public AtkTextInputEventInterface* TargetTextInputEventInterface;
     [FieldOffset(0x10)] public CompletionModule* CompletionModule;
     [FieldOffset(0x18)] public TextService* TextService;
-    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray19<Pointer<RaptureAtkHistory>> _atkHistory;
-    [FieldOffset(0xB8)] public int ActiveAtkHistoryIndex;
-    [FieldOffset(0xC0)] public RaptureTextModule* RaptureTextModule;
-    [FieldOffset(0xC8)] public TextChecker* TextChecker;
-    [FieldOffset(0xD0)] public AtkFontCodeModule* AtkFontCodeModule;
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray23<Pointer<RaptureAtkHistory>> _atkHistory;
+    [FieldOffset(0xD8)] public int ActiveAtkHistoryIndex;
+    [FieldOffset(0xE0)] public RaptureTextModule* RaptureTextModule;
+    [FieldOffset(0xE8)] public TextChecker* TextChecker;
+    [FieldOffset(0xF0)] public AtkFontCodeModule* AtkFontCodeModule;
 
-    [FieldOffset(0xDA)] public short CursorPos;
-    [FieldOffset(0xDC)] public short TextLength;
-    [FieldOffset(0xDE)] public short SelectionStart;
-    [FieldOffset(0xE0)] public short SelectionEnd;
+    [FieldOffset(0xFA)] public short CursorPos;
+    [FieldOffset(0xFC)] public short TextLength;
+    [FieldOffset(0xFE)] public short SelectionStart;
+    [FieldOffset(0x100)] public short SelectionEnd;
 
-    [FieldOffset(0x1C0)] public ClipBoard ClipboardData;
-    [FieldOffset(0x2A0)] public Utf8String CopyBufferRaw;
-    [FieldOffset(0x308)] public Utf8String CopyBufferFiltered;
+    [FieldOffset(0x1E0)] public ClipBoard ClipboardData;
+    [FieldOffset(0x2C0)] public Utf8String CopyBufferRaw;
+    [FieldOffset(0x328)] public Utf8String CopyBufferFiltered;
 
-    [FieldOffset(0xBF8)] public ushort CompletionDepth;
+    [FieldOffset(0xC18)] public ushort CompletionDepth;
 
-    [FieldOffset(0xC18)] public AllowedEntities InputSanitizationFlags;
+    [FieldOffset(0xC38)] public AllowedEntities InputSanitizationFlags;
 
     /// <remarks> Call this only if <see cref="InputSanitizationFlags"/> has Payloads! </remarks>
     [MemberFunction("40 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 66 83 B9")]
