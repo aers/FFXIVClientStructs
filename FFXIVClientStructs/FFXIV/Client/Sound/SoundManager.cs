@@ -37,7 +37,7 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x24C)] public bool WindowInactive;
 
     [FieldOffset(0x320)] public SoundData* WeatherSoundData;
-    [FieldOffset(0x320)] public nint CriticalSection;
+    [FieldOffset(0x328)] public nint CriticalSection;
 
     // Red: System sounds
     // Green: Sound effects, ambient noises, voices, instruments
