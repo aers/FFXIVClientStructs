@@ -16,71 +16,71 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<AtkMessageBoxManager.AtkMessageBoxEvent>, Inherits<LogoutCallbackInterface>, Inherits<ZoneLoginCallbackInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2308)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2370)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? C6 41 ?? ?? 48 89 01 33 ED", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
 
-    [FieldOffset(0xA20)] public ExcelSheet* ErrorSheet;
-    [FieldOffset(0xA28)] public ExcelSheet* LobbySheet;
-    [FieldOffset(0xA30)] public NetworkModuleProxy* NetworkModuleProxy;
-    [FieldOffset(0xA38)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tempUtf8Strings;
-    [FieldOffset(0xC00)] public Utf8String ConnectingToDatacenterString;
-    [FieldOffset(0xC68)] public StdVector<Utf8String> VersionStrings;
-    [FieldOffset(0xC80)] public Utf8String DisplayedVersionString;
+    [FieldOffset(0xA80)] public ExcelSheet* ErrorSheet;
+    [FieldOffset(0xA88)] public ExcelSheet* LobbySheet;
+    [FieldOffset(0xA90)] public NetworkModuleProxy* NetworkModuleProxy;
+    [FieldOffset(0xA98)] public StdDeque<TextParameter> LobbyTextParameters;
+    [FieldOffset(0xAC0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0xC60)] public Utf8String ConnectingToDatacenterString;
+    [FieldOffset(0xCC8)] public StdVector<Utf8String> VersionStrings;
+    [FieldOffset(0xCE0)] public Utf8String DisplayedVersionString;
 
-    [FieldOffset(0xD00), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
+    [FieldOffset(0xD60), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
 
-    [FieldOffset(0x1178)] public sbyte ServiceAccountIndex;
-    [FieldOffset(0x1179)] public byte SelectedCharacterIndex;
+    [FieldOffset(0x11D8)] public sbyte ServiceAccountIndex;
+    [FieldOffset(0x11D9)] public byte SelectedCharacterIndex;
 
-    [FieldOffset(0x1180)] public ulong HoveredCharacterContentId;
-    [FieldOffset(0x1188)] public byte DataCenter;
+    [FieldOffset(0x11E0)] public ulong HoveredCharacterContentId;
+    [FieldOffset(0x11E8)] public byte DataCenter;
 
-    [FieldOffset(0x118A)] public short WorldIndex; // index in CurrentDataCenterWorlds
-    [FieldOffset(0x118C)] public ushort WorldId;
+    [FieldOffset(0x11EA)] public short WorldIndex; // index in CurrentDataCenterWorlds
+    [FieldOffset(0x11EC)] public ushort WorldId;
 
-    [FieldOffset(0x1190)] public uint DialogAddonId;
-    [FieldOffset(0x1194)] public uint DialogAddonId2;
-    [FieldOffset(0x1198)] public uint LobbyScreenTextAddonId;
-    [FieldOffset(0x119C)] public uint LogoAddonId;
-    [FieldOffset(0x11A0)] public uint TitleDCWorldMapAddonId;
-    [FieldOffset(0x11A4)] public uint TitleMovieSelectorAddonId;
-    [FieldOffset(0x11A8)] public uint TitleGameVersionAddonId;
-    [FieldOffset(0x11AC)] public uint TitleConnectAddonId;
-    [FieldOffset(0x11B0)] public uint CharaSelectAddonId;
-    [FieldOffset(0x11B4)] public uint CharaMakeDataImportAddonId;
-    [FieldOffset(0x11B8)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
-    [FieldOffset(0x11BC)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
-    [FieldOffset(0x11C0)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
-    [FieldOffset(0x11C4)] public uint LobbyWKTAddonId;
+    [FieldOffset(0x11F0)] public uint DialogAddonId;
+    [FieldOffset(0x11F4)] public uint DialogAddonId2;
+    [FieldOffset(0x11F8)] public uint LobbyScreenTextAddonId;
+    [FieldOffset(0x11FC)] public uint LogoAddonId;
+    [FieldOffset(0x1200)] public uint TitleDCWorldMapAddonId;
+    [FieldOffset(0x1204)] public uint TitleMovieSelectorAddonId;
+    [FieldOffset(0x1208)] public uint TitleGameVersionAddonId;
+    [FieldOffset(0x120C)] public uint TitleConnectAddonId;
+    [FieldOffset(0x1210)] public uint CharaSelectAddonId;
+    [FieldOffset(0x1214)] public uint CharaMakeDataImportAddonId;
+    [FieldOffset(0x1218)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x121C)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x1220)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
+    [FieldOffset(0x1224)] public uint LobbyWKTAddonId;
 
-    [FieldOffset(0x11D4)] public byte LobbyUpdateStage;
+    [FieldOffset(0x1234)] public byte LobbyUpdateStage;
 
-    [FieldOffset(0x11D7)] public byte LobbyUIStage;
+    [FieldOffset(0x1237)] public byte LobbyUIStage;
 
-    [FieldOffset(0x11E0)] public long IdleTime;
+    [FieldOffset(0x1240)] public long IdleTime;
 
-    [FieldOffset(0x11F0)] public long QueueTimeSinceLastUpdate;
-    [FieldOffset(0x1200)] public int QueuePosition;
+    [FieldOffset(0x1250)] public long QueueTimeSinceLastUpdate;
+    [FieldOffset(0x1260)] public int QueuePosition;
 
-    [FieldOffset(0x1205)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x1265)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
-    [FieldOffset(0x1208)] public ulong SelectedCharacterContentId;
+    [FieldOffset(0x1268)] public ulong SelectedCharacterContentId;
 
-    [FieldOffset(0x1210)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
-    [FieldOffset(0x1211)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
+    [FieldOffset(0x1270)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
+    [FieldOffset(0x1271)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
 
-    [FieldOffset(0x1213)] public bool LogoutShouldCloseGame;
+    [FieldOffset(0x1273)] public bool LogoutShouldCloseGame;
 
-    [FieldOffset(0x1310)] public bool TemporaryLocked; // "Please wait and try logging in later."
+    [FieldOffset(0x1370)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
-    [FieldOffset(0x1328)] public ulong RequestContentId;
+    [FieldOffset(0x1388)] public ulong RequestContentId;
 
-    [FieldOffset(0x1348)] public LogoutCallbackInterface.LogoutParams LogoutParams;
+    [FieldOffset(0x13A8)] public LogoutCallbackInterface.LogoutParams LogoutParams;
 
-    [FieldOffset(0x22B4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
+    [FieldOffset(0x2314)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5")]
     public partial void UpdateLobbyUIStage();
@@ -96,20 +96,20 @@ public unsafe partial struct AgentLobby {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x9E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA40)]
 public unsafe partial struct LobbyData {
     [FieldOffset(0)] public AgentLobby* AgentLobby;
     [FieldOffset(0x8)] public LobbyUIClient LobbyUIClient;
 
-    [FieldOffset(0x878)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
+    [FieldOffset(0x8D8)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
 
-    [FieldOffset(0x898)] public ulong ContentId;
-    [FieldOffset(0x8A0)] public Utf8String HomeWorldName;
-    [FieldOffset(0x908)] public Utf8String HomeWorldName2;
-    [FieldOffset(0x970)] public Utf8String CurrentWorldName;
+    [FieldOffset(0x8F8)] public ulong ContentId;
+    [FieldOffset(0x900)] public Utf8String HomeWorldName;
+    [FieldOffset(0x968)] public Utf8String HomeWorldName2;
+    [FieldOffset(0x9D0)] public Utf8String CurrentWorldName;
 
-    [FieldOffset(0x9DC)] public ushort CurrentWorldId;
-    [FieldOffset(0x9DE)] public ushort HomeWorldId;
+    [FieldOffset(0xA3C)] public ushort CurrentWorldId;
+    [FieldOffset(0xA3E)] public ushort HomeWorldId;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? C6 87 ?? ?? ?? ?? ?? B0 ?? 48 8B 5C 24")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, ulong contentId);
