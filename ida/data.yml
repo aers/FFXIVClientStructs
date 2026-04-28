@@ -9918,7 +9918,7 @@ classes:
       0x1407E9D90: GetFolderAtUIIndex
       0x1407E9DE0: GetFolderIndexByBoardIndex
       0x1407E9E40: GetBoardAtUIIndex
-      0x1407E9EA0: DeleteFolder
+#fail       0x1407E9EA0: DeleteFolder
       0x1407E9FF0: IsItemValid
       0x1407EA0B0: MoveItem
       0x1407EA140: RenameFolder
@@ -9937,8 +9937,6 @@ classes:
       - ea: 0x1420BF588
         base: Client::UI::Misc::TofuModule::TofuDataBase
     vfuncs:
-      0: dtor
-      1: DeleteAllItems
       2: SwapItems
       3: GetItemUIIndex
       4: IsItemValid
@@ -9952,8 +9950,6 @@ classes:
       - ea: 0x1420BF5B8
         base: Client::UI::Misc::TofuModule::TofuDataBase
     vfuncs:
-      0: dtor
-      1: DeleteAllItems
       2: SwapItems
       3: GetItemUIIndex
       4: IsItemValid
@@ -12678,7 +12674,7 @@ classes:
       - ea: 0x1420FD268
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1420FD268: ctor
+      0x140ED1C00: ctor
   Client::UI::Agent::AgentVoteKick:
     vtbls:
       - ea: 0x1420D83F0
