@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct Cabinet {
     [FieldOffset(0x00)] public CabinetState State;
-    // [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray132<byte> _unlockedItems; // TODO: 7.5 - this changed to a pointer, StdVector?
+    [FieldOffset(0x08)] public StdVector<byte> UnlockedItems;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 F6 40 B5 ?? 89 B3")]
     public partial bool WithdrawCabinetItem(uint cabinetId);
