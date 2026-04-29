@@ -160,11 +160,12 @@ public unsafe partial struct AgentLookingForGroup {
         VCDungeonFinder = 1 << 15
     }
 
+    [Flags]
     public enum Objective : byte {
         None = 0,
-        DutyCompletion = 1,
-        Practice = 2,
-        Loot = 4,
+        DutyCompletion = 1 << 0,
+        Practice = 1 << 1,
+        Loot = 1 << 2,
     }
 
     [Flags]
