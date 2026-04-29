@@ -8,19 +8,19 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.MiragePrismPrismBox)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x90)]
+[StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct AgentMiragePrismPrismBox {
     [FieldOffset(0x28)] public MiragePrismPrismBoxData* Data;
     [FieldOffset(0x39)] public byte TabIndex;
     [FieldOffset(0x3A)] public byte PageIndex;
-    [FieldOffset(0x48)] public InventoryItem TempDyeItem;
+    [FieldOffset(0x50)] public InventoryItem TempDyeItem;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A")]
     public partial void UpdateItems(bool resetTabIndex, bool a2);
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1239F8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x123A00)]
 public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8000<PrismBoxItem> _prismBoxItems;
     [FieldOffset(0x119408)] public PrismBoxItem TempContextItem;
@@ -30,27 +30,29 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x11AD98), FixedSizeArray] internal FixedSizeArray50<int> _pageItemIndexes;
     [FieldOffset(0x11AE60)] public int TempContextItemIndex;
     [FieldOffset(0x11AE64)] public int SelectedPageIndex;
-    [FieldOffset(0x11AE68)] public int UsedSlots;
+
+    [FieldOffset(0x11AE6C)] public int UsedSlots;
 
     // 7.1: a new 32-bit int was added between UsedSlots and CrystallizeCategory
 
-    [FieldOffset(0x11AE80)] public int CrystallizeCategory;
-    [FieldOffset(0x11AE84)] public ushort CrystallizeItemIndex;
-    [FieldOffset(0x11AE86)] public ushort CrystallizeItemCount;
-    [FieldOffset(0x11AE8C), FixedSizeArray] internal FixedSizeArray140<PrismBoxCrystallizeItem> _crystallizeItems;
-    [FieldOffset(0x11BDDC)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
+    [FieldOffset(0x11AE84)] public int CrystallizeCategory;
+    [FieldOffset(0x11AE88)] public ushort CrystallizeItemIndex;
+    [FieldOffset(0x11AE8A)] public ushort CrystallizeItemCount;
 
-    [FieldOffset(0x1238A4)] public byte CrystallizeFilterFlags;
-    [FieldOffset(0x1238A5)] public byte SortType; // 0 = Descending, 2 = Ascending
+    [FieldOffset(0x11AE90), FixedSizeArray] internal FixedSizeArray140<PrismBoxCrystallizeItem> _crystallizeItems;
+    [FieldOffset(0x11BDE0)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
 
-    [FieldOffset(0x1238A8)] internal AgentCabinet* AgentCabinet;
-    [FieldOffset(0x1238B0)] internal AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
-    [FieldOffset(0x1238B8)] public byte FilterLevel; // 0 = Unspecified = Max Level
+    [FieldOffset(0x1238AC)] public byte CrystallizeFilterFlags;
+    [FieldOffset(0x1238AD)] public byte SortType; // 0 = Descending, 2 = Ascending
 
-    [FieldOffset(0x1238BA)] public byte FilterSex; // 0 = Unspecified, 1 = Current, 2 = Male, 3 = Female
+    [FieldOffset(0x1238B0)] internal AgentCabinet* AgentCabinet;
+    [FieldOffset(0x1238B8)] internal AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
+    [FieldOffset(0x1238C0)] public byte FilterLevel; // 0 = Unspecified = Max Level
 
-    [FieldOffset(0x1238C0)] public Utf8String FilterString; // Inline buffer only
-    [FieldOffset(0x123928)] public Utf8String SearchString; // Inline buffer only
+    [FieldOffset(0x1238C2)] public byte FilterSex; // 0 = Unspecified, 1 = Current, 2 = Male, 3 = Female
+
+    [FieldOffset(0x1238C8)] public Utf8String FilterString; // Inline buffer only
+    [FieldOffset(0x123930)] public Utf8String SearchString; // Inline buffer only
 }
 
 [GenerateInterop]

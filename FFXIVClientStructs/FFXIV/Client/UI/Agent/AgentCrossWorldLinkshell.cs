@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.CrossWorldLinkShell)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x158)]
+[StructLayout(LayoutKind.Explicit, Size = 0x168)]
 public unsafe partial struct AgentCrossWorldLinkshell {
-    [FieldOffset(0x120)] public byte SelectedCWLSIndex;
+    [FieldOffset(0x130)] public byte SelectedCWLSIndex;
 }

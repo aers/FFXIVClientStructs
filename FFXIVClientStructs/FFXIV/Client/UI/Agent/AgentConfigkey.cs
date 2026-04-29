@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Configkey)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2240)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2248)]
 public unsafe partial struct AgentConfigkey {
     [FieldOffset(0x40)] public ConfigModule* ConfigModule;
     [FieldOffset(0x78)] public UIInputData* UIInputData;

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.WorldTravel)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x140)]
+[StructLayout(LayoutKind.Explicit, Size = 0x170)]
 public unsafe partial struct AgentWorldTravel {
     [FieldOffset(0x30)] private uint YesNo2Id;
     [FieldOffset(0x40)] public ushort* HomeWorldId;

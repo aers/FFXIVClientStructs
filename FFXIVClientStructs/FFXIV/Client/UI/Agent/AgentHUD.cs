@@ -15,47 +15,47 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Hud)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4DF0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4EC8)]
 public unsafe partial struct AgentHUD {
     [FieldOffset(0x60)] public HudStatus* Status;
 
-    [FieldOffset(0xB18)] public uint CastBarAddonId;
+    [FieldOffset(0xBF0)] public uint CastBarAddonId;
 
-    [FieldOffset(0xB38)] public GameObjectId CurrentTargetId;
-    [FieldOffset(0xB40)] public int TargetCounter;
-    [FieldOffset(0xB48)] public GameObjectId TargetPartyMemberId;
-    [FieldOffset(0xB50)] public int TargetSwitchToSelfCounter;
-    [FieldOffset(0xB54)] public uint CurrentBattleCharaTargetLevel;
+    [FieldOffset(0xC10)] public GameObjectId CurrentTargetId;
+    [FieldOffset(0xC18)] public int TargetCounter;
+    [FieldOffset(0xC20)] public GameObjectId TargetPartyMemberId;
+    [FieldOffset(0xC28)] public int TargetSwitchToSelfCounter;
+    [FieldOffset(0xC2C)] public uint CurrentBattleCharaTargetLevel;
 
-    [FieldOffset(0xD2C)] public int CompanionSummonTimer;
+    [FieldOffset(0xE04)] public int CompanionSummonTimer;
 
     /// <remarks> The local player is always first in the Span, their actual position in the UI can be retrieved using Index </remarks>
-    [FieldOffset(0xD38), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
+    [FieldOffset(0xE10), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
 
-    [FieldOffset(0x1384)] public short PartyMemberCount;
-    [FieldOffset(0x138C)] public uint PartyTitleAddonId;
-    [FieldOffset(0x1390), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
-    [FieldOffset(0x1430)] public int RaidGroupSize;
+    [FieldOffset(0x145C)] public short PartyMemberCount;
+    [FieldOffset(0x1464)] public uint PartyTitleAddonId;
+    [FieldOffset(0x1468), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
+    [FieldOffset(0x1508)] public int RaidGroupSize;
 
-    [FieldOffset(0x1444), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
-    [FieldOffset(0x14C0), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
+    [FieldOffset(0x151C), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
+    [FieldOffset(0x1598), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
-    [FieldOffset(0x33B8), FixedSizeArray] internal FixedSizeArray30<HudTargetInfoBuffTimeRemainingCacheEntry> _targetInfoBuffTimeRemainingCache;
+    [FieldOffset(0x3490), FixedSizeArray] internal FixedSizeArray30<HudTargetInfoBuffTimeRemainingCacheEntry> _targetInfoBuffTimeRemainingCache;
 
-    [FieldOffset(0x3548)] public uint ExpCurrentExperience;
-    [FieldOffset(0x354C)] public uint ExpNeededExperience;
-    [FieldOffset(0x3550)] public uint ExpRestedExperience;
-    [FieldOffset(0x3554)] public uint CharacterClassJobId;
+    [FieldOffset(0x3620)] public uint ExpCurrentExperience;
+    [FieldOffset(0x3624)] public uint ExpNeededExperience;
+    [FieldOffset(0x3628)] public uint ExpRestedExperience;
+    [FieldOffset(0x362C)] public uint CharacterClassJobId;
 
-    [FieldOffset(0x3564)] public uint ExpClassJobId;
-    [FieldOffset(0x3568)] public ushort ExpLevel;
-    [FieldOffset(0x356A)] public ushort ExpContentLevel; // level in eureka and bozja for example
-    [FieldOffset(0x356C)] public AgentHudExpFlag ExpFlags;
+    [FieldOffset(0x363C)] public uint ExpClassJobId;
+    [FieldOffset(0x3640)] public ushort ExpLevel;
+    [FieldOffset(0x3642)] public ushort ExpContentLevel; // level in eureka and bozja for example
+    [FieldOffset(0x3644)] public AgentHudExpFlag ExpFlags;
 
-    [FieldOffset(0x3578), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
+    [FieldOffset(0x3650), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
 
-    [FieldOffset(0x4A58)] public StdVector<MapMarkerData> MapMarkers;
-    [FieldOffset(0x4A70)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
+    [FieldOffset(0x4B30)] public StdVector<MapMarkerData> MapMarkers;
+    [FieldOffset(0x4B48)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
     public partial bool IsMainCommandEnabled(uint mainCommandId);

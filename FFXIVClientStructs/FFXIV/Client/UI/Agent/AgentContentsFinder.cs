@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ContentsFinder)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2450)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2458)]
 public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x28)] public AgentContentsFinderInterface InterfaceSub;
 
@@ -38,14 +38,14 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x23A8)] private SoundData* TimeCountSoundDataPad;
     [FieldOffset(0x23B0)] private SoundData* TimeCountSoundData;
 
-    [FieldOffset(0x23D4)] public int CurrentTimestamp;
+    [FieldOffset(0x23D8)] public int CurrentTimestamp;
 
-    [FieldOffset(0x23DC)] public int RecruitingParties;
-    [FieldOffset(0x23E0)] public byte SelectedTab;
+    [FieldOffset(0x23E0)] public int RecruitingParties;
+    [FieldOffset(0x23E4)] public byte SelectedTab;
 
-    [FieldOffset(0x23E8)] private bool TabChanged;
-    [FieldOffset(0x23E9)] public bool ListChanged;
-    [FieldOffset(0x23EA)] private bool DetailsChanged;
+    [FieldOffset(0x23ED)] private bool TabChanged;
+    [FieldOffset(0x23EE)] public bool ListChanged;
+    [FieldOffset(0x23EF)] private bool DetailsChanged;
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8")]
     public partial void OpenRegularDuty(uint contentsFinderCondition, bool hideIfShown = false);
