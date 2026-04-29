@@ -32,7 +32,7 @@ public enum AtkValueType {
 /// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct AtkValue {
+public unsafe partial struct AtkValue : IDisposable {
     [FieldOffset(0x0)] public AtkValueType Type;
 
     // union field
@@ -55,6 +55,15 @@ public unsafe partial struct AtkValue {
     }
 
     public AtkValue(AtkValue* other) => CtorCopy(other);
+
+    public void Dtor(bool free) => Dispose(free);
+
+    void IDisposable.Dispose() => Dispose(false);
+
+    private void Dispose(bool free) {
+        Dtor();
+        if (free) IMemorySpace.Free((AtkValue*)Unsafe.AsPointer(ref this));
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45")]
     public partial AtkValue* CtorCopy(AtkValue* other);
