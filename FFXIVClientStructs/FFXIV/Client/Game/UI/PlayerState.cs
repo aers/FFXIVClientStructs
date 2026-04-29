@@ -107,7 +107,7 @@ public unsafe partial struct PlayerState {
     // BitCount: FishParameterSheet.Last(row => row.IsInLog).RowId
     /// <remarks> Use <see cref="IsFishCaught"/>. </remarks>
     [FieldOffset(0x41F), FixedSizeArray(isBitArray: true, bitCount: 1511)] internal FixedSizeArray189<byte> _caughtFish;
-    [FieldOffset(0x4F0)] public uint NumFishCaught;
+    [FieldOffset(0x4E0)] public uint NumFishCaught;
     [FieldOffset(0x4E4)] public uint FishingBait;
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 48 8B F2"
     // BitCount: SpearfishingNotebookSheet.RowCount
