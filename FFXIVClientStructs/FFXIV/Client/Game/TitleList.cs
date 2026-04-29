@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::TitleList
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+[StructLayout(LayoutKind.Explicit, Size = 0x85)]
 public partial struct TitleList {
     [FieldOffset(0x8), FixedSizeArray(isBitArray: true, bitCount: 894)] internal FixedSizeArray112<byte> _unlockedTitles;
     [FieldOffset(0x7C)] public bool DataPending;
