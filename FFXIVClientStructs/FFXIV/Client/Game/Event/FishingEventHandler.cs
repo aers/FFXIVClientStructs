@@ -7,8 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x230)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 89 8B", 3, 277)]
+[StructLayout(LayoutKind.Explicit, Size = 0x230)]
 public unsafe partial struct FishingEventHandler {
     [FieldOffset(0x1C0)] private byte Unk220;
     [FieldOffset(0x1C8)] public FishingState State;

@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 48 8D 05", 3, 373)]
 [StructLayout(LayoutKind.Explicit, Size = 0xD30)]
 public unsafe partial struct ContentDirector {
     [FieldOffset(0x4E6)] public byte ContentTypeRowId;

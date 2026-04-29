@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AgentInventoryContext.InventoryContextEvent>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 86", 3, 275)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3298)]
 public unsafe partial struct ShopEventHandler {
     // 0x1B0: second base class, related to context menu integration for selling items
