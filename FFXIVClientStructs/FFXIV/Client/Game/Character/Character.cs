@@ -160,7 +160,7 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5D ?? 0F B7 F8")]
     public partial ushort ResolveTargetedEmoteId(ushort emoteId, EmoteController.PlayEmoteOption* options); // TODO: judging from the address, this might be a static function
 
-    [VirtualFunction(77)]
+    [VirtualFunction(78)]
     public partial StatusManager* GetStatusManager();
 
     /// <summary>
@@ -168,13 +168,13 @@ public unsafe partial struct Character {
     /// May be null for certain Character subclasses, e.g. <see cref="Companion"/>.
     /// </summary>
     /// <returns>Returns a pointer to a CastInfo struct, or <c>null</c>.</returns>
-    [VirtualFunction(79)]
+    [VirtualFunction(80)]
     public partial CastInfo* GetCastInfo();
 
-    [VirtualFunction(81)]
+    [VirtualFunction(82)]
     public partial ActionEffectHandler* GetActionEffectHandler();
 
-    [VirtualFunction(83)]
+    [VirtualFunction(84)]
     public partial ForayInfo* GetForayInfo();
 }
 

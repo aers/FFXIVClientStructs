@@ -11003,19 +11003,19 @@ classes:
       #30: TryGetEventHandler
       30: GetEventHandlersImpl
       34: SetReadyToDraw
-      35: Update
-      46: GetCenterPosition
-      47: GetNameId
-      53: GetTargetType
-      54: PositionModified
-      55: RotationModified
-      57: IsDead
-      58: IsNotMounted
-      59: Terminate
-      60: Dtor
-      61: IsCharacter
-      68: OnInitialize
-      69: IntersectsRay
+      36: Update
+      47: GetCenterPosition
+      48: GetNameId
+      54: GetTargetType
+      55: PositionModified
+      56: RotationModified
+      58: IsDead
+      59: IsNotMounted
+      60: Terminate
+      61: Dtor
+      62: IsCharacter
+      69: OnInitialize
+      70: IntersectsRay
     funcs:
       0x140898750: IsMountOrOrnament
       0x140898B00: SetName
@@ -11061,15 +11061,15 @@ classes:
       - ea: 0x14218CDA0
         base: Client::Game::Character::CharacterData
     vfuncs:
-      76: GetModelChara
-      77: GetStatusManager
-      78: GetStatusManager_2
-      79: GetCastInfo
-      80: GetCastInfo_2
-      81: GetActionEffectHandler
-      82: GetScreenLogManager
-      83: GetForayInfo
-      84: GetForayInfo_2
+      77: GetModelChara
+      78: GetStatusManager
+      79: GetStatusManager_2
+      80: GetCastInfo
+      81: GetCastInfo_2
+      82: GetActionEffectHandler
+      83: GetScreenLogManager
+      84: GetForayInfo
+      85: GetForayInfo_2
     funcs:
       0x1408DA690: ctor
       0x1408987E0: IsValidClientObject

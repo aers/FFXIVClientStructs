@@ -118,37 +118,37 @@ public unsafe partial struct GameObject {
     [VirtualFunction(34)]
     public partial void SetReadyToDraw();
 
-    [VirtualFunction(46)]
+    [VirtualFunction(47)]
     public partial void GetCenterPosition(Vector3* outCenter);
 
-    [VirtualFunction(47)]
+    [VirtualFunction(48)]
     public partial uint GetNameId();
 
-    [VirtualFunction(53)]
+    [VirtualFunction(54)]
     public partial TargetType GetTargetType();
 
-    [VirtualFunction(54)]
+    [VirtualFunction(55)]
     public partial void PositionModified();
 
-    [VirtualFunction(55)]
+    [VirtualFunction(56)]
     public partial void RotationModified();
 
-    [VirtualFunction(57)]
+    [VirtualFunction(58)]
     public partial bool IsDead();
 
-    [VirtualFunction(58)]
+    [VirtualFunction(59)]
     public partial bool IsNotMounted();
 
-    [VirtualFunction(59)]
+    [VirtualFunction(60)]
     public partial void Terminate();
 
-    [VirtualFunction(60)]
+    [VirtualFunction(61)]
     public partial GameObject* Dtor(byte freeFlags);
 
-    [VirtualFunction(61)]
+    [VirtualFunction(62)]
     public partial bool IsCharacter();
 
-    [VirtualFunction(68)]
+    [VirtualFunction(69)]
     public partial void OnInitialize();
 
     /// <summary>
@@ -158,7 +158,7 @@ public unsafe partial struct GameObject {
     /// <param name="outHitPosition">The output position where the intersection occurs, if any.</param>
     /// <param name="outModelChecked">A boolean output that indicates whether the intersection was checked against the model (<c>true</c>) or approximated via the object's center (<c>false</c>).</param>
     /// <returns><c>true</c> if the ray intersects with the game object; otherwise, <c>false</c>.</returns>
-    [VirtualFunction(69)]
+    [VirtualFunction(70)]
     public partial bool IntersectsRay(Ray* ray, Vector3* outHitPosition, bool* outModelChecked);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 B8")]
