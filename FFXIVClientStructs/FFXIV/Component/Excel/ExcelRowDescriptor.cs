@@ -4,6 +4,10 @@ namespace FFXIVClientStructs.FFXIV.Component.Excel;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct ExcelRowDescriptor {
+    [FieldOffset(0x0)] public uint RowId;
+    [FieldOffset(0x4)] public ushort LowerRowIdPart; // found to be assigned with = (ushort)RowId in a few calls
+    [FieldOffset(0x6)] public ushort SubRowCount;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray4<ushort> _subRowIds;
     // [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B DF 48 8D 4E")]
     // public partial void Assign0xFFFF();
 
