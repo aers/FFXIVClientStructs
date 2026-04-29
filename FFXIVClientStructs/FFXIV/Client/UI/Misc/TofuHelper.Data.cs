@@ -77,7 +77,7 @@ public partial struct TofuUnpackedObject {
     [FieldOffset(0x06)] public ushort ArgExtra1;
     [FieldOffset(0x08)] public ushort ArgExtra2;
     [FieldOffset(0x0A)] public ushort ArgExtra3;
-    [FieldOffset(0x0C)] public byte ColourPaletteIndex;
+    [FieldOffset(0x0C)] public byte ColorPaletteIndex;
     [FieldOffset(0x0D)] public byte Transparency;
     [FieldOffset(0x0E)] public byte Scale;
     [FieldOffset(0x0F)] public byte AngleRaw;

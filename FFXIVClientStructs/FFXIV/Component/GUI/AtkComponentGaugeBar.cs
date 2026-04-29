@@ -46,7 +46,7 @@ public unsafe partial struct AtkComponentGaugeBar : ICreatable<AtkComponentGauge
     }
 
     /// <summary>
-    /// A set of three NineGrid nodes for the bar's fill level; one main fill node, and two nodes layered beneath in alternate colours.
+    /// A set of three NineGrid nodes for the bar's fill level; one main fill node, and two nodes layered beneath in alternate colors.
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public struct GaugeFill {
