@@ -4769,7 +4769,7 @@ classes:
       3: SetRow  # (ExcelRowWrapper* this, ExcelRow* pNew)
   Common::Component::Excel::LinkList<Component::Excel::RingBufferExcelPageRowResolver::RowWrapper>:
     vtbls:
-      - ea: 142581158
+      - ea: 0x142581158
     vfuncs:
       0: Dtor
   Component::Excel::HashTableExcelPageRowResolver::RowWrapper:
