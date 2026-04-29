@@ -11311,7 +11311,7 @@ classes:
       0x1408C0870: GetHeightAdjustActionTimelineRowId
       0x1408C14D0: SetLipsOverrideTimeline
       0x1408C34D0: ClearBannerData
-      0x140F309E0: GetCurrentBannerTimelineTimestamp
+      0x1408C3950: GetCurrentBannerTimelineTimestamp
   Client::Game::Character::LookAtContainer:
     vtbls:
       - ea: 0x14218C8C0
