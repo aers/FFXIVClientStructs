@@ -6,6 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct NumberArrayData {
     [FieldOffset(0x28)] public int* IntArray;
 
+    public Span<int> Span => new(IntArray, Size);
+
     /// <summary>
     /// Set a value at the specified index of the IntArray.
     /// </summary>
