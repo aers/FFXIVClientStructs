@@ -8,6 +8,12 @@ public unsafe partial struct Cabinet {
     [FieldOffset(0x00)] public CabinetState State;
     // [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray132<byte> _unlockedItems; // TODO: 7.5 - this changed to a pointer, StdVector?
 
+    [MemberFunction("E8 ?? ?? ?? ?? 33 F6 40 B5 ?? 89 B3")]
+    public partial bool WithdrawCabinetItem(uint cabinetId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 E4 41 C6 46 ?? ?? 4D 89 66")]
+    public partial bool StoreCabinetItem(uint cabinetId);
+
     /// <summary>
     /// Check if an item is stored in the player's armoire.
     /// </summary>
@@ -15,9 +21,6 @@ public unsafe partial struct Cabinet {
     /// <returns>Returns true if the armoire contains the specified item.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0F 85 DB")]
     public partial bool IsItemInCabinet(uint cabinetId);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 E4 41 C6 46 ?? ?? 4D 89 66")]
-    public partial bool StoreCabinetItem(uint cabinetId);
 
     /// <summary>
     /// Check if the armoire is reporting as "loaded" from the server.

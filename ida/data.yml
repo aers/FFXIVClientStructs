@@ -3062,8 +3062,9 @@ classes:
     instances:
       - ea: 0x142ACD808
     funcs:
-      0x140C1A6E0: IsItemInCabinet
       0x140C1A3D0: StoreCabinetItem
+      0x140C1A4F0: WithdrawCabinetItem
+      0x140C1A6E0: IsItemInCabinet
   Client::Game::UI::Achievement:
     instances:
       - ea: 0x142ACD828  # UIState.Achievement
