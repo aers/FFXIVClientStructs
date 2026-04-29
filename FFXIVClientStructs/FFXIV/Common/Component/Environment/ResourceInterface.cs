@@ -24,10 +24,10 @@ public unsafe partial struct ResourceInterface {
         public partial CStringPointer GetPath();
 
         [VirtualFunction(2)]
-        public partial bool DidLoadSucceed();
+        public partial bool IsLoadSucceed();
 
         [VirtualFunction(3)]
-        public partial bool DidLoadFail();
+        public partial bool IsLoadFail();
 
         [VirtualFunction(4)]
         public partial byte* GetData();

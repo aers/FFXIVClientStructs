@@ -4611,8 +4611,8 @@ classes:
     vfuncs:
       0: Dtor
       1: GetPath
-      2: LoadSucceeded
-      3: LoadFailed
+      2: IsLoadSucceed
+      3: IsLoadFail
       4: GetData
       5: GetSize
   Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>:
@@ -4766,14 +4766,23 @@ classes:
       1: DecRef  # (ExcelRowWrapper* this)
       2: GetRow  # (ExcelRowWrapper* this) -> ExcelRow*
       3: SetRow  # (ExcelRowWrapper* this, ExcelRow* pNew)
-  Component::Excel::HashTableExcelPageRowResolver_RowWrapper:
+  Common::Component::Excel::LinkList<Component::Excel::RingBufferExcelPageRowResolver::RowWrapper>:
+    vtbls:
+      - ea: 142581158
+    vfuncs:
+      0: Dtor
+  Component::Excel::HashTableExcelPageRowResolver::RowWrapper:
     vtbls:
       - ea: 0x1425812A0
         base: Component::Excel::IExcelRowWrapper
-  Component::Excel::RingBufferExcelPageRowResolver_RowWrapper:
+  Component::Excel::RingBufferExcelPageRowResolver::RowWrapper:
     vtbls:
       - ea: 0x142581170
         base: Component::Excel::IExcelRowWrapper
+  Component::Excel::RingBufferExcelPageRowResolver::RowWrapperList:
+    vtbls:
+      - ea: 0x142581180
+        base: Common::Component::Excel::LinkList<Component::Excel::RingBufferExcelPageRowResolver::RowWrapper>
   Client::System::Input::TextService:
     vtbls:
       - ea: 0x14211E758
