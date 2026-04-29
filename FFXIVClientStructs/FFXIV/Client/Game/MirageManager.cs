@@ -43,7 +43,7 @@ public unsafe partial struct MirageManager {
     /// if the player already possess a unique item or if inventory space is insufficient.
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 85 D2 0F 85 ?? ?? ?? ?? 48 8B 46")]
-    public partial bool RestoreItemsFromOutfit(uint itemIndex, byte* restoreBits);
+    public partial bool RestorePrismBoxSetItem(uint itemIndex, byte* restoreBits);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 0B F3")]
     public partial bool IsSetSlotUnlocked(uint itemIndex, int slot);
