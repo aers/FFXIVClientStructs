@@ -3060,9 +3060,10 @@ classes:
       0x140CEA560: GetFlags
   Client::Game::UI::Cabinet:
     instances:
-      - ea: 0x142ACD808  # UIState.Cabinet
+      - ea: 0x142ACD808
     funcs:
-      0x140C1A6E0: IsItemInCabinet # row id of Cabinet sheet, not Item
+      0x140C1A6E0: IsItemInCabinet
+      0x140C1A3D0: StoreCabinetItem
   Client::Game::UI::Achievement:
     instances:
       - ea: 0x142ACD828  # UIState.Achievement
