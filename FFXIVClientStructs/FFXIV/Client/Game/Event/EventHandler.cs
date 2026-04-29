@@ -24,40 +24,40 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(40)]
     public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
 
-    [VirtualFunction(158)]
+    [VirtualFunction(159)]
     public partial void CancelInteraction();
 
-    [VirtualFunction(204)]
+    [VirtualFunction(205)]
     public partial void GetTitle(Utf8String* outTitle);
 
-    [VirtualFunction(206)]
+    [VirtualFunction(207)]
     public partial EventId GetEventId();
 
-    [VirtualFunction(208)]
+    [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
-    [VirtualFunction(257)]
+    [VirtualFunction(258)]
     public partial void GetDescription(Utf8String* outDescription);
 
-    [VirtualFunction(258)]
+    [VirtualFunction(259)]
     public partial void GetReliefText(Utf8String* outReliefText);
 
-    [VirtualFunction(259)]
+    [VirtualFunction(260)]
     public partial int GetTimeRemaining(int currentTimestamp);
 
-    [VirtualFunction(260)]
+    [VirtualFunction(261)]
     public partial bool HasTimer();
 
-    [VirtualFunction(262)]
+    [VirtualFunction(263)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(265)]
+    [VirtualFunction(266)]
     public partial StdVector<DirectorTodo>* GetDirectorTodos();
 
-    [VirtualFunction(266)]
+    [VirtualFunction(267)]
     public partial StdVector<MassivePcContentTodo>* GetMassivePcContentTodos(int setIndex);
 
-    [VirtualFunction(269)]
+    [VirtualFunction(270)]
     public partial int GetRecommendedLevel();
 }
 

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<LuaEventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x5C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5C8)]
 public unsafe partial struct QuestEventHandler {
     [FieldOffset(0x2E0)] public ushort QuestId;
     [FieldOffset(0x2E8)] public Utf8String Title;

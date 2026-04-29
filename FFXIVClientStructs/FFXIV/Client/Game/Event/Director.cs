@@ -25,6 +25,6 @@ public unsafe partial struct Director {
     [FieldOffset(0x440)] public StdVector<DirectorTodo> DirectorTodos; // name based on the Lua function "SetDirectorTodo", 10 objectives max
     [FieldOffset(0x458)] public uint EventItemId;
 
-    [VirtualFunction(277)]
+    [VirtualFunction(278)]
     public partial void PopulateMapMarkers(ushort territoryTypeId, StdVector<MapMarkerData>* markerVector);
 }

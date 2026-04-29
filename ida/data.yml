@@ -1553,9 +1553,6 @@ classes:
         base: Client::Game::Event::GoldSaucerDirector
     funcs:
       0x140E6D210: ctor
-    vfuncs:
-      3: IsRunningGate
-      299: IsAcceptingGate
   Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
     vtbls:
       - ea: 0x1421C76B8
@@ -15229,25 +15226,25 @@ classes:
       6: Terminate
       7: IsUnlocked
       40: ProcessYield
-      158: CancelInteraction
-      204: GetTitle # lua function "GetEventHandlerTitle"
-      206: GetEventId
-      208: GetNameplateIconForObject # (this, GameObject* gameObject)
-      226: GetIconId
-      230: IsOccupied33
-      231: GetOccupiedConditionId
-      232: GetOccupiedPermissionId
-      250: GetScriptVersion
-      257: GetDescription
-      258: GetReliefText
-      259: GetTimeRemaining # pass current unix timestamp as a2
-      260: HasTimer
-      262: GetEventItemId
-      265: GetDirectorTodos
-      266: GetMassivePcContentTodos
-      267: IsTodoTitleFocusable
-      269: GetRecommendedLevel
-      273: Initialize
+      159: CancelInteraction
+      205: GetTitle # lua function "GetEventHandlerTitle"
+      207: GetEventId
+      209: GetNameplateIconForObject # (this, GameObject* gameObject)
+      227: GetIconId
+      231: IsOccupied33
+      232: GetOccupiedConditionId
+      233: GetOccupiedPermissionId
+      251: GetScriptVersion
+      258: GetDescription
+      259: GetReliefText
+      260: GetTimeRemaining # pass current unix timestamp as a2
+      261: HasTimer
+      263: GetEventItemId
+      266: GetDirectorTodos
+      267: GetMassivePcContentTodos
+      268: IsTodoTitleFocusable
+      270: GetRecommendedLevel
+      274: Initialize
   Client::Game::Event::EventHandlerSelector:
     instances:
       - ea: 0x1428AF520
@@ -15834,11 +15831,11 @@ classes:
       - ea: 0x1421A5FD8
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
-      277: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
-      294: Update
-      295: Update2
-      296: SetSequence
-      297: Synchronize
+      278: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      295: Update
+      296: Update2
+      297: SetSequence
+      298: Synchronize
     funcs:
       0x140B68A60: ctor
       0x140B691A0: SetGlobalParametersContentName
@@ -16033,7 +16030,7 @@ classes:
       - ea: 0x1421D46D0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
-        275: PlayAnimation
+        276: PlayAnimation
     funcs:
       0x140E8D070: ctor
       0x140E932A0: Create
@@ -16417,11 +16414,11 @@ classes:
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::BattleLeveDirector:
     vtbls:
-      - ea: 0x1423A0978
+      - ea: 0x14239F660
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
-      - ea: 0x14239F660
+      - ea: 0x1423A0978
         base: Client::Game::Event::LeveDirector
   Client::Game::InstanceContent::ContentDirector:
     vtbls:
@@ -16430,11 +16427,11 @@ classes:
       - ea: 0x1421A7508
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
-      302: GetCurrentLevel
-      303: GetMaxLevel
-      328: GetContentTimeMax
-      329: GetContentTypeIconId
-      334: SetExperience
+      303: GetCurrentLevel
+      304: GetMaxLevel
+      329: GetContentTimeMax
+      330: GetContentTypeIconId
+      335: SetExperience
     funcs:
       0x140B6F2E0: ctor
       0x140B70EB0: ApplyMapEffect
@@ -16445,7 +16442,7 @@ classes:
       - ea: 0x1423316C0
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
-      402: HandleGMCommand
+      403: HandleGMCommand
     funcs:
       0x1419A7820: ctor
       0x1419A7AC0: Finalizer
@@ -17659,20 +17656,20 @@ classes:
       - ea: 0x1423D8158
         base: Client::Game::Event::Director
     vfuncs:
-      300: GetAdditionalTodoText
-      302: SetAdditionalTodo
-      303: SetAdditionalTodoNumber
-      304: SetAdditionalTodoFraction
-      305: SetAdditionalTodoFractionBar
-      306: SetAdditionalTodoLargeBar
-      307: SetAdditionalTodoColorableBar
-      308: SetAdditionalTodoTimeRemaining
-      309: SetAdditionalTodoQuestTitle
-      310: SetAdditionalTodoLargeTimeRemaining
-      311: SetAdditionalTodoLargeBlueText
-      312: SetAdditionalTodoLargeGrayText
-      313: SetAdditionalTodoJoinButton
-      333: ClearAdditionalTodo
+      301: GetAdditionalTodoText
+      303: SetAdditionalTodo
+      304: SetAdditionalTodoNumber
+      305: SetAdditionalTodoFraction
+      306: SetAdditionalTodoFractionBar
+      307: SetAdditionalTodoLargeBar
+      308: SetAdditionalTodoColorableBar
+      309: SetAdditionalTodoTimeRemaining
+      310: SetAdditionalTodoQuestTitle
+      311: SetAdditionalTodoLargeTimeRemaining
+      312: SetAdditionalTodoLargeBlueText
+      313: SetAdditionalTodoLargeGrayText
+      314: SetAdditionalTodoJoinButton
+      334: ClearAdditionalTodo
     funcs:
       0x141A1D220: ctor
   Client::Game::MassivePcContent::MassivePcContentCosmicExploration: # ContentId (MassivePcContent RowId?) 1 and 2: Sinus Ardorum and Phaenna

@@ -8,23 +8,19 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3360)]
+[StructLayout(LayoutKind.Explicit, Size = 0x33A0)]
 public unsafe partial struct PublicContentOccultCrescent {
     [FieldOffset(0x1380)] public OccultCrescentMKDData MKDData;
-    [FieldOffset(0x13A8)] public DynamicEventContainer DynamicEventContainer;
-    [FieldOffset(0x3128)] public OccultCrescentState State;
-    [FieldOffset(0x3192)] private byte Unk3192;
-    [FieldOffset(0x3193)] private byte Unk3193;
-    [FieldOffset(0x3194)] private uint Unk3194;
-    [FieldOffset(0x3198)] private byte Unk3198;
+    [FieldOffset(0x13B8)] public DynamicEventContainer DynamicEventContainer;
+    [FieldOffset(0x3138)] public OccultCrescentState State;
 
-    [FieldOffset(0x31A0)] private StdPair<uint, uint>* Unk31A0; // array of 6, <layout id, quest id>
-    [FieldOffset(0x31A8)] private float Unk31A8; // some countdown, re-check the colision and quest state
-    [FieldOffset(0x31AC)] private byte Unk31AC; // count for the array at 0x31A0
+    [FieldOffset(0x31E0)] private StdPair<uint, uint>* Unk31A0; // array of 6, <layout id, quest id>
+    [FieldOffset(0x31E8)] private float Unk31A8; // some countdown, re-check the colision and quest state
+    [FieldOffset(0x31EC)] private byte Unk31AC; // count for the array at 0x31E0
 
-    [FieldOffset(0x31B0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _strings;
+    [FieldOffset(0x31F0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _strings;
 
-    [FieldOffset(0x335D)] public bool StateLoaded;
+    [FieldOffset(0x339D)] public bool StateLoaded;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB")]
     public static partial PublicContentOccultCrescent* GetInstance();
