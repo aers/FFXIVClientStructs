@@ -1795,6 +1795,7 @@ classes:
       0x140894740: RequestPrismBox
       0x1408948E0: IsSetSlotUnlocked
       0x140895080: RestorePrismBoxItem
+      0x140895260: RestoreItemsFromOutfit
       0x140895B50: RequestGlamourPlates
       0x140895CA0: GetGlamourPlateData
       0x140895EC0: ApplyGlamourPlate

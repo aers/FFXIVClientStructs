@@ -27,11 +27,23 @@ public unsafe partial struct MirageManager {
     /// </summary>
     /// <param name="itemIndex">The index of <see cref="PrismBoxItemIds"/> to restore.</param>
     /// <returns>
-    /// Returns <c>true</c> if the command was sent to the server, or <c>false</c>
+    /// Returns <see langword="true"/> if the command was sent to the server, or <see langword="false"/>
     /// if the player already possess a unique item or if inventory space is insufficient.
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 B0 ?? 48 8B CE")]
     public partial bool RestorePrismBoxItem(uint itemIndex);
+
+    /// <summary>
+    /// Restores item from an Outfit set and puts them back into the players inventory.
+    /// </summary>
+    /// <param name="itemIndex">The index of <see cref="PrismBoxItemIds"/> to restore.</param>
+    /// <param name="restoreBits">11 bits for 11 slots :)<br/>See MirageStoreSetItem columns.</param>
+    /// <returns>
+    /// Returns <see langword="true"/> if the command was sent to the server, or <see langword="false"/>
+    /// if the player already possess a unique item or if inventory space is insufficient.
+    /// </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 85 D2 0F 85 ?? ?? ?? ?? 48 8B 46")]
+    public partial bool RestoreItemsFromOutfit(uint itemIndex, byte* restoreBits);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 0B F3")]
     public partial bool IsSetSlotUnlocked(uint itemIndex, int slot);
