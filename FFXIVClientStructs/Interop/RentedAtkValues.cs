@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.Interop;
 
-public unsafe ref struct RentedAtkValues: IDisposable {
+public unsafe ref struct RentedAtkValues : IDisposable {
     public AtkValue* Pointer;
     public Span<AtkValue> Span;
 

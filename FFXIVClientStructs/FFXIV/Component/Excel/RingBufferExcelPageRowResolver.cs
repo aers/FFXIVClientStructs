@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Common.Component.Excel;
-
 namespace FFXIVClientStructs.FFXIV.Component.Excel;
 
 // Component::Excel::RingBufferExcelPageRowResolver

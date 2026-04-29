@@ -11,7 +11,7 @@ public unsafe partial struct DebugInterface {
 
     // [VirtualFunction(2)]
     // public partial ??;
-    
+
     // [VirtualFunction(3)]
     // public partial ??;
 
