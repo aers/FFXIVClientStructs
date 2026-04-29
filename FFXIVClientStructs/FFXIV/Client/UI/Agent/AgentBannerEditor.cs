@@ -22,7 +22,7 @@ public unsafe partial struct AgentBannerEditor {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3F8)]
 public unsafe partial struct AgentBannerEditorState {
-    public enum EditorOpenType : int {
+    public enum EditorOpenType {
         Portrait = 0,
         Gearset = 1,
         AdventurerPlate = 2,

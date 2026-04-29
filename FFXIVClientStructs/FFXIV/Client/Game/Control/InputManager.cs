@@ -28,7 +28,7 @@ public unsafe partial struct InputManager {
     }
 }
 
-public enum InputCode : int {
+public enum InputCode {
     MOUSE_OK = 11,
     OK = 12,
     CANCEL = 13,

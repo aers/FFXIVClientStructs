@@ -108,7 +108,7 @@ public enum FishingHookStrength {
 }
 
 [Flags]
-public enum FishingBaitFlags : int {
+public enum FishingBaitFlags {
     Normal = 0,
     AmbitiousLure = 0x1,
     ModestLure = 0x2,
@@ -116,7 +116,7 @@ public enum FishingBaitFlags : int {
     Swimbait = 0x20,
 }
 
-public enum FishingState : int {
+public enum FishingState {
     None = 0,
     CastingOut = 1,
     /// <remarks>

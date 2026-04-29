@@ -35,7 +35,7 @@ public unsafe partial struct Cabinet {
         => this.State is CabinetState.Loaded;
 
     /// <summary> Represents the loaded state of Cabinet </summary>
-    public enum CabinetState : int {
+    public enum CabinetState {
         Invalid = 0, // Cabinet is initialized at this state
         Requested = 1, // This state is set between the client request and receiving the data from the server
         Loaded = 2, // Set upon data being received

@@ -95,7 +95,7 @@ public partial struct EnvironmentManager {
         All = 6
     }
 
-    public enum ModeUpdateOpType : int {
+    public enum ModeUpdateOpType {
         Delay = 1, // params: {num frames, -, -}
         MakeWindowedAndResize = 2, // params: {w, h, -}
         MakeWindowed = 3,

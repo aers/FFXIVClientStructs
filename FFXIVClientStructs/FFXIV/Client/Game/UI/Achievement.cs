@@ -53,7 +53,7 @@ public unsafe partial struct Achievement {
         => State is AchievementState.Loaded;
 
     /// <summary> Represents the loaded state of Achievement </summary>
-    public enum AchievementState : int {
+    public enum AchievementState {
         /// <summary> Achievement is initialized at this state. </summary>
         /// <remarks> Debug output calls it "invalide". </remarks>
         Invalid = 0,

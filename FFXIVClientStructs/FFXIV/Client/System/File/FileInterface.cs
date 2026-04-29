@@ -1,7 +1,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
-public enum OpenFileMode : int {
+public enum OpenFileMode {
     Read = 0,
     Write = 1,
     Append = 2,

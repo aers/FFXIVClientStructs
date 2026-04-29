@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
-public enum ColliderType : int {
+public enum ColliderType {
     Streamed = 1,
     Mesh = 2,
     Box = 3,

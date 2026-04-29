@@ -28,7 +28,7 @@ public unsafe partial struct SGDoorActionController {
     [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray4<Common.Math.Vector3> _translationsArray;
     [FieldOffset(0x1B0), FixedSizeArray] internal FixedSizeArray4<Quaternion> _rotationsArray;
 
-    public enum DoorState : int {
+    public enum DoorState {
         Opening = 0,
         Open = 1,
         Closing = 2,
