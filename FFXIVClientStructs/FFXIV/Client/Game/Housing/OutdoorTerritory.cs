@@ -9,38 +9,39 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 //   Client::Game::HousingTerritory
 [GenerateInterop]
 [Inherits<HousingTerritory>]
-[StructLayout(LayoutKind.Explicit, Size = 0xAE80)]
+[StructLayout(LayoutKind.Explicit, Size = 0x13DB0)]
 public unsafe partial struct OutdoorTerritory {
-    [FieldOffset(0x10)] public HousingFurnitureManager FurnitureStruct;
+    [FieldOffset(0x10)] public HousingFurnitureManager FurnitureManager;
+    [FieldOffset(0x10), Obsolete("Renamed to FurnitureManager")] public HousingFurnitureManager FurnitureStruct;
 
-    [FieldOffset(0x9690)] public ExcelSheetWaiter* ItemExcelSheetWaiter;
-    [FieldOffset(0x9698)] public ExcelSheet* ItemExcelSheet;
-    [FieldOffset(0x96A0)] public HouseId HouseId;
-    [FieldOffset(0x96A8)] public HouseUnit HouseUnit;
-    [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot; // LandSet index
-    [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot; // LandSet index
-    [FieldOffset(0x96B2)] public sbyte EditingEstateHallOfPlot; // LandSet index
+    [FieldOffset(0x125C0)] public ExcelSheetWaiter* ItemExcelSheetWaiter;
+    [FieldOffset(0x125C8)] public ExcelSheet* ItemExcelSheet;
+    [FieldOffset(0x125D0)] public HouseId HouseId;
+    [FieldOffset(0x125D8)] public HouseUnit HouseUnit;
+    [FieldOffset(0x125DA)] public sbyte EditingFixturesOfPlot; // LandSet index
+    [FieldOffset(0x125E0)] public sbyte EditingFurnishingsOfPlot; // LandSet index
+    [FieldOffset(0x125E2)] public sbyte EditingEstateHallOfPlot; // LandSet index
 
-    [FieldOffset(0x96B8), FixedSizeArray] internal FixedSizeArray60<PlotDetail> _plots;
+    [FieldOffset(0x125E8), FixedSizeArray] internal FixedSizeArray60<PlotDetail> _plots;
 
-    [FieldOffset(0x9A78), FixedSizeArray] internal FixedSizeArray2<ApartmentBuildingState> _apartmentBuildings;
+    [FieldOffset(0x129A8), FixedSizeArray] internal FixedSizeArray2<ApartmentBuildingState> _apartmentBuildings;
 
-    [FieldOffset(0x9A80)] public HousingTemporaryObject TemporaryObject;
-    [FieldOffset(0x9AC0)] public HousingObject* TargetedHousingObject;
-    [FieldOffset(0x9AC8)] public HousingObject* HoveredHousingObject;
-    [FieldOffset(0x9AD0)] public HousingObject* MovingHousingObject;
-    [FieldOffset(0x9AD8), FixedSizeArray] internal FixedSizeArray30<uint> _unkEntityIds;
-    [FieldOffset(0x9B50)] private uint Unk9B50; // something layout related. same as IndoorTerritory.Unk9708
+    [FieldOffset(0x129B0)] public HousingTemporaryObject TemporaryObject;
+    [FieldOffset(0x129F0)] public HousingObject* TargetedHousingObject;
+    [FieldOffset(0x129F8)] public HousingObject* HoveredHousingObject;
+    [FieldOffset(0x12A00)] public HousingObject* MovingHousingObject;
+    [FieldOffset(0x12A08), FixedSizeArray] internal FixedSizeArray30<uint> _unkEntityIds;
+    [FieldOffset(0x12A80)] private uint Unk9B50; // something layout related. same as IndoorTerritory.Unk9708
 
-    [FieldOffset(0x9B58)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener1;
-    [FieldOffset(0x9B80)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener2;
-    [FieldOffset(0x9BA8)] public OutdoorPlotExteriorData EditingPlotExteriorDataBackup;
+    [FieldOffset(0x12A88)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener1;
+    [FieldOffset(0x12AB0)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener2;
+    [FieldOffset(0x12AD8)] public OutdoorPlotExteriorData EditingPlotExteriorDataBackup;
 
-    [FieldOffset(0x9BF0)] public HouseBuddy HouseBuddy;
+    [FieldOffset(0x12B20)] public HouseBuddy HouseBuddy;
 
-    [FieldOffset(0xA1A4), FixedSizeArray] internal FixedSizeArray62<HousingMapMarkerInfo> _housingMapMarkerInfos;
+    [FieldOffset(0x130D4), FixedSizeArray] internal FixedSizeArray62<HousingMapMarkerInfo> _housingMapMarkerInfos;
 
-    [FieldOffset(0xA690)] public HousingGuestBookData GuestBook;
+    [FieldOffset(0x135C0)] public HousingGuestBookData GuestBook;
 
     /// <summary>
     /// Get the Icon ID used for map icons in housing areas.

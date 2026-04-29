@@ -1,5 +1,3 @@
-
-
 // ReSharper disable once CheckNamespace
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
