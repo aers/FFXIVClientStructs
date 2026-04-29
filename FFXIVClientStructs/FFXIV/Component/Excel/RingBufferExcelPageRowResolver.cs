@@ -6,8 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Component.Excel;
 [Inherits<IExcelPageRowResolver>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct RingBufferExcelPageRowResolver {
-    [FieldOffset(0x10)] public Common.Component.Excel.LinkedList<RowWrapperList> First;
-    [FieldOffset(0x28)] public Common.Component.Excel.LinkedList<RowWrapperList> Last;
+    [FieldOffset(0x10)] public Common.Component.Excel.LinkList<RowWrapperList> First;
+    [FieldOffset(0x28)] public Common.Component.Excel.LinkList<RowWrapperList> Last;
     [FieldOffset(0x40)] public uint RowsAllocated;
     [FieldOffset(0x48)] public uint RowsCapacity;
 
@@ -16,7 +16,7 @@ public unsafe partial struct RingBufferExcelPageRowResolver {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public unsafe partial struct RowWrapperList {
-        [FieldOffset(0x0)] public Common.Component.Excel.LinkedList<RowWrapperList> LinkedList;
+        [FieldOffset(0x0)] public Common.Component.Excel.LinkList<RowWrapperList> LinkedList;
         [FieldOffset(0x18)] public ExcelRowDescriptor RowDescriptor;
         [FieldOffset(0x28)] public RowWrapper RowWrapper;
     }

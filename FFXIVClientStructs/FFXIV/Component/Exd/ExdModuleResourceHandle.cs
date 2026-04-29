@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Exd;
 [Inherits<ResourceInterface.ResourceHandleInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct ExdModuleResourceHandle {
-    [FieldOffset(0x8)] public Common.Component.Excel.LinkedList<ExdModuleResourceHandle> LinkedList;
+    [FieldOffset(0x8)] public LinkList<ExdModuleResourceHandle> LinkedList;
     [FieldOffset(0x20)] public ResourceHandle* ResourceHandle;
     [FieldOffset(0x28), FixedSizeArray(true)] internal FixedSizeArray128<byte> _sheetPath;
     [FieldOffset(0xA8)] public ExcelModule* ExcelModule;
