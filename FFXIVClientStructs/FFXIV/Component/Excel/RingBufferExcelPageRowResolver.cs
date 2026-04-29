@@ -27,7 +27,6 @@ public unsafe partial struct RingBufferExcelPageRowResolver {
     [Inherits<IExcelRowWrapper>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public unsafe partial struct RowWrapper {
-        [FieldOffset(0x8)] public ExcelRow* Row;
         [FieldOffset(0x10)] public uint RefCount;
     }
 }
