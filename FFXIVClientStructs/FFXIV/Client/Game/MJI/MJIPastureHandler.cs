@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<Client.Game.Event.EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB68)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB78)]
 public unsafe partial struct MJIPastureHandler {
     // 0x1D8: AtkEventInterface-derived structure of size 0x30, used by agent to execute operations
 
@@ -29,13 +29,13 @@ public unsafe partial struct MJIPastureHandler {
     /// the Companion EXD sheet. See <see cref="MinionSlots"/> if information about minion locations is required.
     /// </summary>
     // Warning: This array will change size every time new minions are added!! Should be the row count of the Companion sheet.
-    [FieldOffset(0x6A0), FixedSizeArray] internal FixedSizeArray584<bool> _roamingMinions;
+    [FieldOffset(0x6A0), FixedSizeArray] internal FixedSizeArray600<bool> _roamingMinions;
 
     /// <summary>
     /// An array containing information on all the minion slots present on the Island Sanctuary.
     /// This array is indexed by an internal ID and does not appear to be grouped by location or similar.
     /// </summary>
-    [FieldOffset(0x8E8), FixedSizeArray] internal FixedSizeArray50<MJIMinionSlot> _minionSlots;
+    [FieldOffset(0x8F8), FixedSizeArray] internal FixedSizeArray50<MJIMinionSlot> _minionSlots;
 
     // 0xB50: substructure describing currently captured animal, if there are no slots available; size is at least 8
 
