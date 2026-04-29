@@ -9,21 +9,21 @@ public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 40 84 F6", 3)]
     public static partial Map* Instance();
 
-    [FieldOffset(0xB8), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
-    [FieldOffset(0x1198), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
+    [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
+    [FieldOffset(0x11A0), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
 
-    [FieldOffset(0x1AA0)] public MarkerInfo ActiveLevequestMarker; // Marker for active levequest mission, it has to be actually started.
+    [FieldOffset(0x1AA8)] public MarkerInfo ActiveLevequestMarker; // Marker for active levequest mission, it has to be actually started.
 
-    [FieldOffset(0x1B38)] public StdList<MarkerInfo> UnacceptedQuestMarkers;
+    [FieldOffset(0x1B40)] public StdList<MarkerInfo> UnacceptedQuestMarkers;
 
-    [FieldOffset(0x1B80)] public StdList<MarkerInfo> GuildLeveAssignmentMarkers;
+    [FieldOffset(0x1B88)] public StdList<MarkerInfo> GuildLeveAssignmentMarkers;
 
-    [FieldOffset(0x1BC8)] public StdList<MarkerInfo> GuildOrderGuideMarkers;
-    [FieldOffset(0x1BD8), FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingMarkers;// 60 Plots + 2 Apartments
-    [FieldOffset(0x3EB8)] public StdList<MarkerInfo> TripleTriadMarkers;
-    [FieldOffset(0x3EC8)] public StdList<MarkerInfo> CustomTalkMarkers;
+    [FieldOffset(0x1BD0)] public StdList<MarkerInfo> GuildOrderGuideMarkers;
+    [FieldOffset(0x1BE0), FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingMarkers;// 60 Plots + 2 Apartments
+    [FieldOffset(0x3EC0)] public StdList<MarkerInfo> TripleTriadMarkers;
+    [FieldOffset(0x3ED0)] public StdList<MarkerInfo> CustomTalkMarkers;
 
-    [FieldOffset(0x3F70)] public StdList<MarkerInfo> GemstoneTraderMarkers;
+    [FieldOffset(0x3F78)] public StdList<MarkerInfo> GemstoneTraderMarkers;
 
     [MemberFunction("83 FA 3E 0F 83")]
     public partial void AddHousingMarker(uint index, uint levelId, OutdoorTerritory.HousingMapMarkerInfo* housingMapMarkerInfo, ushort territoryTypeId, int iconId);
