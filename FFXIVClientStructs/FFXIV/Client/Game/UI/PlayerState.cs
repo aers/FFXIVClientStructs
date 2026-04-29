@@ -122,19 +122,19 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="InstanceContent.IsRouletteComplete" />. Not a bit array. </remarks>
     [FieldOffset(0x520), FixedSizeArray] internal FixedSizeArray10<byte> _contentRouletteCompletion;
     [FieldOffset(0x52C)] public short PlayerCommendations;
-    [FieldOffset(0x52E), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
-    [FieldOffset(0x535), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
+    [FieldOffset(0x52E), FixedSizeArray] internal FixedSizeArray8<byte> _selectedPoses;
+    [FieldOffset(0x536), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
     // BitCount: SecretRecipeBookSheet.RowCount
     /// <remarks> Use <see cref="IsSecretRecipeBookUnlocked"/>. </remarks>
-    [FieldOffset(0x538), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _unlockedSecretRecipeBooks;
+    [FieldOffset(0x539), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _unlockedSecretRecipeBooks;
 
-    [FieldOffset(0x562)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
-    [FieldOffset(0x563)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
+    [FieldOffset(0x563)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
+    [FieldOffset(0x564)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
     // BitCount: AdventureSheet.RowCount
     /// <remarks> Use <see cref="IsAdventureComplete"/>. </remarks>
-    [FieldOffset(0x564), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _completedAdventures;
+    [FieldOffset(0x565), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _completedAdventures;
     // BitCount: AdventureSheet.RowCount
-    [FieldOffset(0x590), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _unkAdventureBitmask; // ulong array?
+    [FieldOffset(0x591), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _unkAdventureBitmask; // ulong array?
 
     // BitCount: AetherCurrentSheet.RowCount
     /// <remarks> Use <see cref="IsAetherCurrentUnlocked"/>. </remarks>
