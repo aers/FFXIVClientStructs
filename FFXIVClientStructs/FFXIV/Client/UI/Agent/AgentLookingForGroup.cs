@@ -141,6 +141,7 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x3B0), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> _comment;
     }
 
+    [Flags]
     public enum DutyCategory : uint {
         None = 0,
         Roulette = 1 << 1,
