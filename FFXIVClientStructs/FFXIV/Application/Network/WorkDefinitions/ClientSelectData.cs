@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 //   Application::Network::WorkDefinitions::Base
 [GenerateInterop]
 [Inherits<Base>]
-[StructLayout(LayoutKind.Explicit, Size = 0x120)]
+[StructLayout(LayoutKind.Explicit, Size = 0x140)]
 public partial struct ClientSelectData {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _displayName;
     [FieldOffset(0x28)] public byte CurrentClass;
