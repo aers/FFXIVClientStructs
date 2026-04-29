@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Exd;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct ExdModule {
+    [FieldOffset(0x18)] public ExdEnvironment* ExdEnvironment;
     [FieldOffset(0x20)] public ExcelModule* ExcelModule;
 
     [MemberFunction("40 53 48 83 EC ?? 45 8B C8 48 8B C2")]

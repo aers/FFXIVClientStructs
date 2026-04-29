@@ -185,10 +185,10 @@ public sealed partial class InteropGenerator {
                 writer.WriteLine(inheritedAttribute);
             }
             if (methodInfo.IsStatic) {
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {methodInfo.ReturnTypeCast}{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesStringWithGeneric()});");
             } else {
                 // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesStringWithGeneric()});");
             }
         }
     }
@@ -205,10 +205,10 @@ public sealed partial class InteropGenerator {
                 if (offset != 0)
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
-                    var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
+                    var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingTypeNoGenerics()}{virtualFunctionInfo.MethodInfo.ReturnTypeOrVoid}>";
                     foreach (string inheritedAttribute in virtualFunctionInfo.MethodInfo.InheritableAttributes)
                         writer.WriteLine(inheritedAttribute);
-                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
+                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.NameNonGeneric};");
                 }
             }
         }
@@ -236,7 +236,7 @@ public sealed partial class InteropGenerator {
         foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
             MethodInfo methodInfo = virtualFunctionInfo.MethodInfo;
             if (offset != 0 && methodInfo.Name == "Dtor") continue;
-            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.NameXmlEscaped}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
@@ -247,7 +247,7 @@ public sealed partial class InteropGenerator {
                 var paramNames = string.Empty;
                 if (methodInfo.Parameters.Any())
                     paramNames = ", " + methodInfo.GetParameterNamesString();
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => VirtualTable->{methodInfo.Name}(({childTypeName}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {virtualFunctionInfo.MethodInfo.ReturnTypeCast}VirtualTable->{methodInfo.NameNonGeneric}(({childTypeName}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
             } else {
                 writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
             }
@@ -265,10 +265,10 @@ public sealed partial class InteropGenerator {
                 writer.WriteLine(inheritedAttribute);
             }
             if (methodInfo.IsStatic) {
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesStringWithGeneric()});");
             } else {
                 // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesStringWithGeneric()});");
             }
         }
     }
