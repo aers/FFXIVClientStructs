@@ -20,17 +20,17 @@ public unsafe partial struct CameraBase {
     [VirtualFunction(3)]
     public partial void Update();
 
-    [VirtualFunction(5)]
+    [VirtualFunction(6)]
     public partial void ResetAngles();
 
     /// <remarks> Also called YAngle in ConfigOptions. </remarks>
-    [VirtualFunction(6)]
+    [VirtualFunction(7)]
     public partial float CalculateSceneCameraPitch();
 
-    [VirtualFunction(7)]
+    [VirtualFunction(8)]
     public partial float CalculateSceneCameraYaw();
 
-    [VirtualFunction(8)]
+    [VirtualFunction(9)]
     public partial void ResetAngles2();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 18 48 8D 0D ?? ?? ?? ?? B3 01")]

@@ -24819,10 +24819,10 @@ classes:
     vfuncs:
       2: UpdateState
       3: Update
-      5: ResetAngles
-      6: CalculateSceneCameraPitch
-      7: CalculateSceneCameraYaw
-      8: ResetAngles2
+      6: ResetAngles
+      7: CalculateSceneCameraPitch
+      8: CalculateSceneCameraYaw
+      9: ResetAngles2
     funcs:
       0x141897B80: ctor
       0x141898410: ShouldDrawGameObject
@@ -24831,19 +24831,20 @@ classes:
       - ea: 0x1422DA148
         base: Client::Game::CameraBase
     vfuncs:
-      13: UpdateTiltOffset
-      16: DetermineControlMode
-      17: GetCameraTargetObject
-      18: GetTiltOffset
-      20: GetTargetObject
-      23: SaveConfigOptions
-      24: LoadConfigOptions
-      25: ResetConfigOptions
-      26: SetTiltOffset
-      27: GetZoomSpeed
-      28: GetZoomModeToggleSpeedMultiplier
-      29: GetInputDeltaHMultiplier
-      30: GetInputDeltaVMultiplier
+      14: UpdateTiltOffset
+      17: DetermineControlMode
+      18: GetCameraTargetObject
+      19: GetTiltOffset
+      21: GetTargetObject
+      22: Load
+      24: SaveConfigOptions
+      25: LoadConfigOptions
+      26: ResetConfigOptions
+      27: SetTiltOffset
+      28: GetZoomSpeed
+      29: GetZoomModeToggleSpeedMultiplier
+      30: GetInputDeltaHMultiplier
+      31: GetInputDeltaVMultiplier
     funcs:
 #oldfail       0x1417955B0: UpdateRotation
       0x1418A2950: ctor
