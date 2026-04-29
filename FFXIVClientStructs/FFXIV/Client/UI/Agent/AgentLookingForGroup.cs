@@ -201,7 +201,8 @@ public unsafe partial struct AgentLookingForGroup {
 
     [Flags]
     public enum JoinCondition : byte {
-        DataCentre = 1 << 0,
+        None = 0,
+        DataCenter = 1 << 0,
         Private = 1 << 1,
         AllianceRaid = 1 << 2,
         World = 1 << 3,
