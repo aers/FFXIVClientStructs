@@ -61,5 +61,6 @@ public unsafe partial struct WKSManager {
         Bronze,
         Silver,
         Gold
+        Failed = 5,
     }
 }
