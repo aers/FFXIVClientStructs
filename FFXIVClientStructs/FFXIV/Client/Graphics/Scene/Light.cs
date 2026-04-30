@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //     Client::Graphics::Scene::Object
 [GenerateInterop]
 [Inherits<DrawObject>]
-[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct Light {
     [FieldOffset(0x90)] public Render.Light* RenderLight;
     [FieldOffset(0x98)] public TextureResourceHandle* ProjectedCubemapTexture;
