@@ -19,6 +19,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentHUD {
     [FieldOffset(0x60)] public HudStatus* Status;
 
+    [FieldOffset(0x110), FixedSizeArray] internal FixedSizeArray20<int> _systemMenuCommandIds;
+
+    [FieldOffset(0x164)] public int SystemMenuEntryCount;
+    [FieldOffset(0x168)] public uint SystemMenuAddonId;
+
+    [FieldOffset(0x3D0), FixedSizeArray] internal FixedSizeArray20<Utf8String> _systemMenuStrings;
     [FieldOffset(0xBF0)] public uint CastBarAddonId;
 
     [FieldOffset(0xC10)] public GameObjectId CurrentTargetId;
