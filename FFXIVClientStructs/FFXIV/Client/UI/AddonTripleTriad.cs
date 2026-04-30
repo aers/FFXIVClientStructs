@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("TripleTriad")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1000)]
+[StructLayout(LayoutKind.Explicit, Size = 0xFD8)]
 public unsafe partial struct AddonTripleTriad {
     [FieldOffset(0x238)] public TurnState TurnState;
 
