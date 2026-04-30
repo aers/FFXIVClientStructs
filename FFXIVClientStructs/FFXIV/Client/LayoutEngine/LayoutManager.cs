@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 /// </summary>
 [GenerateInterop]
 [Inherits<IManagerBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xC30)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC60)]
 public unsafe partial struct LayoutManager {
     [FieldOffset(0x018)] public int InitState; // 7 is fully loaded and ready, <7 are various stages of init
     [FieldOffset(0x01C)] public int Type; // 2 for normal levels, 3 ???
