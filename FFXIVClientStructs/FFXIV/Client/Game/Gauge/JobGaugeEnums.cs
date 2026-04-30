@@ -67,10 +67,9 @@ public enum AetherFlags : byte {
     Aetherflow1 = 1 << 0,
     Aetherflow2 = 1 << 1,
     Aetherflow = Aetherflow1 | Aetherflow2,
-    IfritAttuned = 1 << 2,
-    TitanAttuned = 1 << 3,
-    GarudaAttuned = TitanAttuned | IfritAttuned,
-    PhoenixReady = 1 << 4,
+    PhoenixPrimed = 1 << 2,
+    SolarBahamutFirstPrimed = 1 << 3,
+    SolarBahamutSecondPrimed = PhoenixPrimed | SolarBahamutFirstPrimed,
     IfritReady = 1 << 5,
     TitanReady = 1 << 6,
     GarudaReady = 1 << 7
