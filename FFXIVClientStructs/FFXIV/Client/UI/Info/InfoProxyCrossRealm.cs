@@ -7,17 +7,17 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.CrossRealmParty)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A58)]
 public unsafe partial struct InfoProxyCrossRealm {
-    [FieldOffset(0x46D)] public byte LocalPlayerGroupIndex;
-    [FieldOffset(0x46E)] public byte GroupCount;
+    [FieldOffset(0x485)] public byte LocalPlayerGroupIndex;
+    [FieldOffset(0x486)] public byte GroupCount;
 
-    [FieldOffset(0x470)] public bool IsCrossRealm; //i guess?
-    [FieldOffset(0x471)] public bool IsInAllianceRaid;
-    [FieldOffset(0x472)] public bool IsPartyLeader;
-    [FieldOffset(0x473)] public bool IsInCrossRealmParty;
+    [FieldOffset(0x488)] public bool IsCrossRealm; //i guess?
+    [FieldOffset(0x489)] public bool IsInAllianceRaid;
+    [FieldOffset(0x48A)] public bool IsPartyLeader;
+    [FieldOffset(0x48B)] public bool IsInCrossRealmParty;
 
-    [FieldOffset(0x480), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
+    [FieldOffset(0x498), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
