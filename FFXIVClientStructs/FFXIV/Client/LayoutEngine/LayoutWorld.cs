@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 /// </summary>
 [GenerateInterop]
 [Inherits<IManagerBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x238)]
+[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 public unsafe partial struct LayoutWorld {
     [StaticAddress("48 8B D1 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 0A", 6, isPointer: true)]
     public static partial LayoutWorld* Instance();
@@ -25,10 +25,10 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x068)] public long MillisecondsSinceLastUpdate;
     [FieldOffset(0x080)] public StdMap<ulong, Pointer<LayoutManager>> LoadedLayouts; // key = (LvbCrc << 32) | TerritoryTypeRowId
     //[FieldOffset(0x090)] private StdMap<ulong, Pointer<LayoutManager>> UnkLayouts90; // key = (LvbCrc << 32) | TerritoryTypeRowId
-    [FieldOffset(0x0A0), FixedSizeArray] internal FixedSizeArray92<float> _streamingRadiusPerType;
+    [FieldOffset(0x0A0), FixedSizeArray] internal FixedSizeArray94<float> _streamingRadiusPerType;
     // 0x210 - some other map, value = Client::System::Resource::Handle::ResourceHandle*
-    [FieldOffset(0x220)] public StdMap<Utf8String, CStringPointer>* RsvMap;
-    [FieldOffset(0x228)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
+    [FieldOffset(0x228)] public StdMap<Utf8String, CStringPointer>* RsvMap;
+    [FieldOffset(0x230)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
 
     /// <inheritdoc cref="GetLayoutInstance" />
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? 0F 57 C0")]
