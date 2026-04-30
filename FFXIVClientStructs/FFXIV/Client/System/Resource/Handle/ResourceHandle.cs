@@ -52,7 +52,7 @@ public unsafe partial struct ResourceHandle {
     public partial bool DecRef();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 43 1B")]
-    public partial bool IncRef();
+    public partial ResourceHandle* IncRef();
 
     /// <summary>
     /// Loads any dependent resources (<see cref="LoadDependentResources(byte)"/>),
