@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
 [Inherits<BaseRenderer>]
-[StructLayout(LayoutKind.Explicit, Size = 0x20E60)]
+[StructLayout(LayoutKind.Explicit, Size = 0x18E00)]
 public partial struct BGInstancingRenderer {
-    [FieldOffset(0x20589)] public bool Wireframe;
+    [FieldOffset(0x18538)] public bool Wireframe;
 }

@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
 [Inherits<BaseRenderer>]
-[StructLayout(LayoutKind.Explicit, Size = 0x570)]
+[StructLayout(LayoutKind.Explicit, Size = 0x580)]
 public partial struct WaterRenderer {
     [FieldOffset(0x2D8)] public bool Wireframe;
 }

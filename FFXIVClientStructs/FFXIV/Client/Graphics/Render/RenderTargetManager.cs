@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Kernel::Notifier
 [GenerateInterop]
 [Inherits<Notifier>]
-[StructLayout(LayoutKind.Explicit, Size = 0x730)]
+[StructLayout(LayoutKind.Explicit, Size = 0x740)]
 public unsafe partial struct RenderTargetManager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 44 8B 86", 3, isPointer: true)]
     public static partial RenderTargetManager* Instance();
@@ -165,12 +165,13 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x680)] internal Texture* Unk680;
     [FieldOffset(0x688)] internal Texture* Unk688;
     [FieldOffset(0x690)] internal Texture* Unk690;
-    [FieldOffset(0x698)] internal nint Unk698; // Unknown class, implements C::G::K::Notifier, holds a bunch of D3D11 objects
-    [FieldOffset(0x6A0)] internal nint Unk6A0; // Same class as Unk698
+    [FieldOffset(0x698)] internal Texture* Unk698;
+    [FieldOffset(0x6A0)] internal nint Unk6A0; // Unknown class, implements C::G::K::Notifier, holds a bunch of D3D11 objects
+    [FieldOffset(0x6A8)] internal nint Unk6A8; // Same class as Unk6A0
     // bunch of floats
-    [FieldOffset(0x6E0)] public float FrametimeAverage; // Offset most likely wrong, idk the right one
+    [FieldOffset(0x710)] public float FrametimeAverage;
 
-    [FieldOffset(0x6EC)] public float GraphicsRezoScale; // Offset most likely wrong, idk the right one
+    [FieldOffset(0x720)] public float GraphicsRezoScale;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 8B D0 FF D3")]
     public partial Texture* GetCharaViewTexture(uint clientObjectIndex);

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //     Client::Graphics::ReferencedClassBase
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x158)]
+[StructLayout(LayoutKind.Explicit, Size = 0x180)]
 public unsafe partial struct Model {
     [FieldOffset(0x18)] public Model* Previous;
     [FieldOffset(0x20)] public Model* Next;

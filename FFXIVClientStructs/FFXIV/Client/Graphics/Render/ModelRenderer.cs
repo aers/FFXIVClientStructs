@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
 [Inherits<BaseRenderer>]
-[StructLayout(LayoutKind.Explicit, Size = 0x450)]
+[StructLayout(LayoutKind.Explicit, Size = 0x448)]
 public unsafe partial struct ModelRenderer {
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray23<uint> _constantSamplerIds; // Might be a FixedSizeArray22<uint> as of 7.2, unsure
 
@@ -23,19 +23,19 @@ public unsafe partial struct ModelRenderer {
     [FieldOffset(0x220)] public ShaderPackageResourceHandle* CharacterTransparencyShaderPackage;
     [FieldOffset(0x228)] public ShaderPackageResourceHandle* CharacterTattooShaderPackage;
     [FieldOffset(0x230)] public ShaderPackageResourceHandle* CharacterOcclusionShaderPackage;
-    [FieldOffset(0x238)] public ShaderPackageResourceHandle* HairMaskShaderPackage;
+    //[FieldOffset(0x238)] public ShaderPackageResourceHandle* HairMaskShaderPackage; 7.5 gone?
 
     // At 0x218: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
     // At 0x220, ..., 0x298: pointers to 16 unknown ConstantBuffers of size 4 vectors (0x40 bytes) each.
     // At 0x2A0, ..., 0x328: pointers to 18 unknown ConstantBuffers of size 1 vector (0x10 bytes) each.
 
-    [FieldOffset(0x358)] public ShaderCodeResourceHandle* SkiningConnectionVertexCS;
+    [FieldOffset(0x350)] public ShaderCodeResourceHandle* SkiningConnectionVertexCS;
 
     // At 0x338: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
     // At 0x340, 0x348, 0x350: pointer to objects of the same unknown class that seems to wrap D3D11 objects.
     // At 0x358: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
 
-    [FieldOffset(0x390)] public JobSystem JobSystem; // Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>
+    [FieldOffset(0x388)] public JobSystem JobSystem; // Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>
 
     // This function, among other things, constructs an OnRenderMaterialParams struct with its params and calls CharacterBase.OnRenderMaterial with it (through some indirections - see Model.RenderMaterialCallback).
     [MemberFunction("E8 ?? ?? ?? ?? 40 38 75 ?? 74 ?? 8B 45")]
