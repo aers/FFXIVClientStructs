@@ -839,7 +839,8 @@ if api is None:
                 dt = EnumDataType(enum.name, enum_size)
                 dt.setCategoryPath(self.get_category_path(enum.type))
                 for value in enum.values:
-                    dt.add(value, enum.values[value])
+                    if not dt.contains(enum.values[value]):
+                        dt.add(value, enum.values[value])
                 self.create_datatype(dt)
 
             def delete_enum(self, enum):
