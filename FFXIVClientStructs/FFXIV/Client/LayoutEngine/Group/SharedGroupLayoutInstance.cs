@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 /// </summary>
 [GenerateInterop]
 [Inherits<ILayoutInstance>, Inherits<ResourceEventListener>]
-[StructLayout(LayoutKind.Explicit, Size = 0x190)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 public unsafe partial struct SharedGroupLayoutInstance {
     /// <summary>
     /// The number of stains available for objects (housing items).
