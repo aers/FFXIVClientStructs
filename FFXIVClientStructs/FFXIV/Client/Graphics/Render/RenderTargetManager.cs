@@ -28,7 +28,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x60)] internal Texture* LightSpecular;
     [FieldOffset(0x68)] internal Texture* Unk68; // VFX?
     /// Unscaled scene reverse-Z depth stencil
-    [FieldOffset(0x70)] internal Texture* DepthStencil;
+    [FieldOffset(0x70)] public Texture* DepthStencil;
     [FieldOffset(0x78)] internal Texture* Unk78; // depends on byte at GraphicsConfig+0x43
     [FieldOffset(0x80)] internal Texture* Unk80; // Looks the same as DepthStencil
     [FieldOffset(0x88)] internal Texture* Unk88; // Looks the same as DepthStencil
