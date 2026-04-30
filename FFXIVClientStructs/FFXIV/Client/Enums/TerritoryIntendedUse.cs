@@ -65,5 +65,5 @@ public enum TerritoryIntendedUse : byte {
     OccultCrescent = 61,
     Unknown62 = 62,
     Seasonal3 = 63, // Lilyswim (Hatching-tide 2026)
-    Unknown64 = 64,
+    AirForceOne = 64,
 }
