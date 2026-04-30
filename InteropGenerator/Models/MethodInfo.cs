@@ -41,20 +41,18 @@ internal sealed record MethodInfo(
 
     public string ReturnTypeCast => ReturnType != ReturnTypeOrVoid ? $"({ReturnType})" : "";
 
-    public string GetParameterTypeStringWithTrailingTypeNoGenerics(){
+    public string GetParameterTypeStringWithTrailingTypeNoGenerics() {
         if (!TypeArguments.Any()) return GetParameterTypeStringWithTrailingType();
         var parameters = Parameters;
         var typeString = "";
-        foreach (var p in parameters)
-        {
+        foreach (var p in parameters) {
             typeString += p.RefKind.GetStringPrefix();
             var generic = false;
-            foreach (var t in TypeArguments)
-            {
-                if(p.Type == t + '*')
+            foreach (var t in TypeArguments) {
+                if (p.Type == t + '*')
                     generic = true;
             }
-            if(generic)
+            if (generic)
                 typeString = "void*";
             else
                 typeString += p.Type;
