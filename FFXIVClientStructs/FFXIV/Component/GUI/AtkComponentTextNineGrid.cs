@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // type 19
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xD8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe partial struct AtkComponentTextNineGrid : ICreatable<AtkComponentTextNineGrid> {
     [FieldOffset(0xC0)] public AtkTextNode* AtkTextNode;
     [FieldOffset(0xC8)] public AtkResNode* ParentNode;
