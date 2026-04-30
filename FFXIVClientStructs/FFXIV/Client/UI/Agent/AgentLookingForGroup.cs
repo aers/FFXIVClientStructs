@@ -171,7 +171,7 @@ public unsafe partial struct AgentLookingForGroup {
 
     [Flags]
     public enum CompletionStatus : byte {
-        None = 0,
+        None = 1 << 0,
         DutyComplete = 1 << 1,
         DutyIncomplete = 1 << 2,
         DutyCompleteWeeklyUnclaimed = 1 << 3,
