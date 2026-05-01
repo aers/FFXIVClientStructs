@@ -5487,8 +5487,6 @@ classes:
       0x14047B5E0: Finalizer
       0x14047C030: CreateFileThread
   Client::System::File::FileAccessPath:
-    vtbls:
-      - ea: 0x142164CE8
     funcs:
       0x1400955B0: ctor
       0x1400955D0: ctor_FromUtf8String
