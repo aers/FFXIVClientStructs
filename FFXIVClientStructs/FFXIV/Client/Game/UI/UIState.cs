@@ -26,7 +26,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x16A8)] public Achievement Achievement;
     [FieldOffset(0x1EF0)] public Buddy Buddy;
     [FieldOffset(0x42EC)] public PvPProfile PvPProfile;
-    [FieldOffset(0x4378)] internal void* Unk4378; // some UI timer for PvP Results?!
+    [FieldOffset(0x4378)] internal void* Unk4378; // queue for PvP ScreenImages and LogMessages, processed at the end of UIState.Update
     [FieldOffset(0x4380)] public ContentsNote ContentsNote;
     [FieldOffset(0x4438)] public RelicNote RelicNote;
     [FieldOffset(0x4450)] public MateriaTrade MateriaTrade;
