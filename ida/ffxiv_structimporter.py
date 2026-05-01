@@ -265,16 +265,16 @@ class BaseApi:
     def preprocess_yaml(self, yml: DefinedStructExport):
         """
         Preprocesses the YAML data before importing.
+
+        For the IDA srclang importer, this fixes issues with generic base classes.
+        """
+
     def load_data_yaml(self):
         # type: () -> dict
         path = os.path.join(os.path.dirname(self.get_file_path), "data.yml")
         if not os.path.exists(path):
             return None
         return load(open(path), Loader=Loader)
-
-        For the IDA srclang importer, this fixes issues with generic base classes.
-        """
-
 
 api = None
 
@@ -301,6 +301,8 @@ if api is None:
                 # type: (bool) -> None
                 self.full_padding = full_padding
                 self.srclang_importer = srclang_importer
+                if self.srclang_importer:
+                    self.srclang_types = {}
 
             def get_fallback_vfunc_name(self, class_name, index, visited=None):
                 # type: (str, int, set) -> str
@@ -360,15 +362,18 @@ if api is None:
                     ptr_count += 1
                     i -= 1
 
+                full_name = name
                 if ptr_count > 0:
                     name = name.strip("*")
 
-                idc_type = self.get_idc_type_from_ida_type(name)
-                if idc_type != self.get_struct_flag() or \
-                    "Component::Exd::Sheets" in name:
-                    return name + "*" * ptr_count
-
-                return self.generate_hashed_type_name(name) + "*" * ptr_count
+                cname = self.srclang_types.get(name)
+                if cname is None:
+                    cname = self.srclang_types.get(self.clean_struct_name(name))
+                    
+                if cname is not None:
+                    return cname + "*" * ptr_count
+                
+                return full_name
 
             def can_run(self):
                 return self.enum_exists("Component::Exd::SheetsEnum")
@@ -424,6 +429,7 @@ if api is None:
                 if self.srclang_importer:
                     # rename C++ -> C or create new C struct
                     cname = self.generate_hashed_type_name(fullname)
+                    self.srclang_types[fullname] = cname
                     
                     sid = self.get_struct_id(fullname)
                     if sid == idaapi.BADADDR:
@@ -716,7 +722,7 @@ if api is None:
 
                     if struct.virtual_functions:
                         # delete the _placeholder function from the VFT
-                        cname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
+                        cname = self.srclang_types[self.clean_struct_name(struct.type)]
                         sid = self.get_struct_id(f"{cname}_vtbl")
                         tinfo = self.get_struct(sid)
                         tinfo.del_udm(0)
@@ -728,7 +734,12 @@ if api is None:
 
                 fullname = self.clean_struct_name(struct.type)
 
-                s = self.get_struct(self.get_struct_id(fullname))
+                tid = self.get_struct_id(fullname)
+                if tid == idaapi.BADADDR:
+                    print("Error: Struct {0} not found when trying to create members".format(fullname))
+                    return
+
+                s = self.get_struct(tid)
 
                 if struct.virtual_functions != None and (
                     struct.fields == [] or struct.fields[0].offset > 0
@@ -1071,16 +1082,19 @@ if api is None:
                         # if a struct has a VFT but the field at offset 0 wasn't marked base,
                         # we assume it's the baseclass and fix the flag
                         if node.is_virtual() and field.offset == 0 and not field.base:
-                            #log.write(f"Warning: Fixing missing baseclass '{field.type}' for '{node.struct.type}'\n")
+                            print("Warning: Fixing missing baseclass '{0}' for '{1}'".format(field.type, node.struct.type))
                             field.base = True
 
                         if field.offset != 0 or not field.base:
                             continue
-
+                        
                         parent = nodes.get(field.type)
                         if parent is None:
-                            #log.write(f"Warning: Could not find baseclass '{field.type}' for '{node.struct.type}'\n")
-                            continue
+                            print("Warning: Could not find baseclass '{0}' for '{1}'".format(field.type, node.struct.type))
+                            field.base = False
+                            node.struct.virtual_functions = None
+                            node.struct.vtable_size = 0
+                            break
 
                         parent.children.append(node)
                         node.base = parent
