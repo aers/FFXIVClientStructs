@@ -13,7 +13,8 @@ public unsafe partial struct Control {
     [FieldOffset(0x00)] public CameraManager CameraManager;
     [FieldOffset(0x190)] public TargetSystem TargetSystem;
 
-    [FieldOffset(0x7633)] public bool IsWalking;
+    [FieldOffset(0x7518)] public bool IsWalkingDuringAutorun;
+    [FieldOffset(0x7637)] public bool IsWalking;
     [FieldOffset(0x7698)] public uint LocalPlayerEntityId;
     [FieldOffset(0x76A0)] public BattleChara* LocalPlayer;
     [FieldOffset(0x76B0)] public Matrix4x4 ViewProjectionMatrix;
