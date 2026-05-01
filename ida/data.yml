@@ -4000,6 +4000,7 @@ classes:
     funcs:
       0x1400CEB10: ctor
       0x1400D1F30: Exit
+      0x1400D2B10: ExitFromWindow
       0x1400D2520: SetInactive
       0x1400D25E0: UpdateClipCursor
       0x1400D26E0: PauseResumeFrameTicks
