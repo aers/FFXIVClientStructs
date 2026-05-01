@@ -16,7 +16,7 @@ public unsafe partial struct RingBufferExcelPageRowResolver {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public unsafe partial struct RowWrapperList {
-        [FieldOffset(0x0)] public Common.Component.Excel.LinkList<RowWrapperList> LinkedList;
+        [FieldOffset(0x0), CExporterBaseType] public Common.Component.Excel.LinkList<RowWrapperList> LinkedList;
         [FieldOffset(0x18)] public ExcelRowDescriptor RowDescriptor;
         [FieldOffset(0x28)] public RowWrapper RowWrapper;
     }
