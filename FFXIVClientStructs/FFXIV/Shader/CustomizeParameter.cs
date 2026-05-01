@@ -23,7 +23,7 @@ public struct CustomizeParameter {
     /// </summary>
     [FieldOffset(0x20)]
     public Vector3 MainColor;
-    
+
     /// <summary>
     /// XYZ : Hair highlight color, as squared RGB.
     /// </summary>

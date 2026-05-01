@@ -18,7 +18,7 @@ public unsafe partial struct AddonPartyList {
 
     [FieldOffset(0x1538), FixedSizeArray] internal FixedSizeArray8<uint> _partyClassJobIconId;
     [FieldOffset(0x1558), FixedSizeArray] internal FixedSizeArray7<uint> _trustClassJobIconId;
-    
+
     [FieldOffset(0x1580)] public uint PetIconId;
 
     [FieldOffset(0x15C4)] public uint ChocoboIconId;
