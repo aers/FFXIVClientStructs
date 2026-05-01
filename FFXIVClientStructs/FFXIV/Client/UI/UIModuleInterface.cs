@@ -123,6 +123,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(126)] public partial ??? ShowContentIntroduction(???);
     // [VirtualFunction(127)] public partial ??? IsContentIntroductionInvisible(???);
     // [VirtualFunction(128)] public partial ??? HideContentIntroduction(???);
+    [VirtualFunction(130)] public partial bool IsUIReady(bool ignoreHudInitialized = false);
     [VirtualFunction(131)] public partial void ChangeUIMode(GameUIMode uiMode);
     [VirtualFunction(132)] public partial bool InContentsReplay();
     [VirtualFunction(139)] public partial void SetCursorVisibility(bool visible);

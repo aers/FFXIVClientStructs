@@ -9584,6 +9584,7 @@ classes:
       126: ShowContentIntroduction
       127: IsContentIntroductionInvisible
       128: HideContentIntroduction
+      130: IsUIReady
       131: ChangeUIMode
       132: InContentsReplay
       139: SetCursorVisibility
