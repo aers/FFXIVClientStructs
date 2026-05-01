@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventFramework
 // ctor "E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 28 E9"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4500)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4800)]
 public unsafe partial struct EventFramework {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 7C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
@@ -25,23 +25,22 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0xC0)] public DirectorModule DirectorModule;
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
     [FieldOffset(0x1B0)] public EventSceneModule EventSceneModule;
-    // 7.1: something new
-    [FieldOffset(0x3BF8)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
+    
+    [FieldOffset(0x3F18)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
+    [FieldOffset(0x3F20)] public LuaState* LuaState;
+    [FieldOffset(0x3F28)] public LuaThread LuaThread;
 
-    [FieldOffset(0x3C20)] public LuaState* LuaState;
-    [FieldOffset(0x3C28)] public LuaThread LuaThread;
-
-    [FieldOffset(0x3C80)] public EventState EventState1;
-    [FieldOffset(0x3CE0)] public EventState EventState2;
+    [FieldOffset(0x3F80)] public EventState EventState1;
+    [FieldOffset(0x3FE0)] public EventState EventState2;
     // Written by ProcessEventPlay
-    [FieldOffset(0x3D10)] public GameObjectId SceneGameObjectId;
-    [FieldOffset(0x3D18)] public short Scene;
-    [FieldOffset(0x3D20)] public ushort SceneFlags;
-    [FieldOffset(0x3D28)] public SceneData SceneData;
+    [FieldOffset(0x4010)] public GameObjectId SceneGameObjectId;
+    [FieldOffset(0x4018)] public short Scene;
+    [FieldOffset(0x4020)] public ushort SceneFlags;
+    [FieldOffset(0x4028)] public SceneData SceneData;
 
-    [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
+    [FieldOffset(0x45D8)] public DailyQuestMap DailyQuests;
 
-    [FieldOffset(0x446A), FixedSizeArray] internal FixedSizeArray8<Festival> _festivals; // copied from PlayerState, used by GPose (maybe more) to check if Fan Festival frames/stamps should be displayed
+    [FieldOffset(0x476A), FixedSizeArray] internal FixedSizeArray8<Festival> _festivals; // copied from PlayerState, used by GPose (maybe more) to check if Fan Festival frames/stamps should be displayed
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B D8 48 85 C0 0F 84")]
     public partial ContentDirector* GetContentDirector();

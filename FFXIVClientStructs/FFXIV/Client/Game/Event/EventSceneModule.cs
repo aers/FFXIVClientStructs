@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventSceneModule
-[StructLayout(LayoutKind.Explicit, Size = 0x39D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3CE0)]
 public unsafe struct EventSceneModule {
     [FieldOffset(0x18)] public EventSceneModuleUsualImpl EventSceneModuleUsualImpl;
     [FieldOffset(0x28)] public EventSceneModuleImplBase EventSceneModuleImplBase;
