@@ -154,6 +154,9 @@ public unsafe partial struct Framework {
     [MemberFunction("89 51 ?? C6 41 ?? ?? 48 8B 0D")]
     public partial void Exit(int exitCode);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 05")]
+    public partial void ExitFromWindow();
+
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
     public partial UIModule* GetUIModule();
 
