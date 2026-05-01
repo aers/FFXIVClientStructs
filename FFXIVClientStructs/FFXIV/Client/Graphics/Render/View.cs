@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Common.Math;
-
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 // Client::Graphics::Render::View

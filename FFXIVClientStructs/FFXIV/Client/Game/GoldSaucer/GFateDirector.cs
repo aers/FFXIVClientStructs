@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 
@@ -30,12 +29,6 @@ public unsafe partial struct GFateDirector {
     [FieldOffset(0x79C)] public ushort ScreenImageId3;
 
     [FieldOffset(0x7A4)] public GFateDirectorFlag Flags;
-
-    [VirtualFunction(3)]
-    public partial bool IsRunningGate();
-
-    [VirtualFunction(294)]
-    public partial bool IsAcceptingGate();
 }
 
 public enum GateType : byte {

@@ -20,17 +20,17 @@ public unsafe partial struct ContentDirector {
     /// <remarks> This might also be a countdown until the content starts (e.g. Frontlines), then the actual time left of the content. </remarks>
     [FieldOffset(0xCF0)] public float ContentTimeLeft;
 
-    [VirtualFunction(302)]
+    [VirtualFunction(303)]
     public partial uint GetCurrentLevel();
 
-    [VirtualFunction(303)]
+    [VirtualFunction(304)]
     public partial uint GetMaxLevel();
 
     /// <summary>
     /// Gets the max time for the content in seconds
     /// </summary>
     /// <returns>Time in seconds</returns>
-    [VirtualFunction(328)]
+    [VirtualFunction(329)]
     public partial uint GetContentTimeMax();
 
     [GenerateInterop]

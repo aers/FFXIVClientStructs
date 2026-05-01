@@ -8,14 +8,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 89 8B", 3, 277)]
 public unsafe partial struct FishingEventHandler {
-    [FieldOffset(0x1C0)] private byte Unk_220;
+    [FieldOffset(0x1C0)] private byte Unk220;
     [FieldOffset(0x1C8)] public FishingState State;
 
     /// <remarks>
     /// 4 Hz inverse sawtooth between one and zero.  Latches upon cast.  No clue what it is for.
     /// </remarks>
-    [FieldOffset(0x1CC)] private float Unk_22C;
+    [FieldOffset(0x1CC)] private float Unk22C;
 
     /// <summary>
     /// Whether you are at a fishing hole.
@@ -44,7 +45,7 @@ public unsafe partial struct FishingEventHandler {
 
     [FieldOffset(0x1D5)] public bool CanIdenticalCastPreviousCatch;
     [FieldOffset(0x1D6)] public bool CanSurfaceSlapPreviousCatch;
-    [FieldOffset(0x1D7)] private bool Unk_237; // Never seen false.  vf57 actively sets it to true, whatever that does.
+    [FieldOffset(0x1D7)] private bool Unk237; // Never seen false.  vf57 actively sets it to true, whatever that does.
     [FieldOffset(0x1D8)] public FishingBaitFlags CurrentCastBaitFlags;
 
     /// <summary>
@@ -60,11 +61,7 @@ public unsafe partial struct FishingEventHandler {
     /// </summary>
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray3<uint> _swimBaitItemIds;
 
-    [FieldOffset(0x1E0), Obsolete("Use SwimBaitItemIds[0]", true)] public uint SwimBaitId1;
-    [FieldOffset(0x1E4), Obsolete("Use SwimBaitItemIds[1]", true)] public uint SwimBaitId2;
-    [FieldOffset(0x1E8), Obsolete("Use SwimBaitItemIds[2]", true)] public uint SwimBaitId3;
-
-    [FieldOffset(0x1EC)] private uint Unk_24C; // Sometimes matches 0x224, but that offset may just be uninitialized padding.
+    [FieldOffset(0x1EC)] private uint Unk24C; // Sometimes matches 0x224, but that offset may just be uninitialized padding.
 
     /// <summary>
     /// Unix time (in milliseconds) for when the current Mooch/Spareful Hand opportunity will cease being available (if ever).
@@ -78,27 +75,40 @@ public unsafe partial struct FishingEventHandler {
 
     // An instance of something that looks like it has a 6-function vtable right before this event handler's vtable.  Probably 0x30 bytes long.
     //[FieldOffset( 0x260 )] private void* vTablePtr;
-    //[FieldOffset( 0x268 )] private byte Unk_268;
+    //[FieldOffset( 0x268 )] private byte Unk268;
     //[FieldOffset( 0x270 )] public FishingEventHandler* FishingEventHandlerInstance;
-    //[FieldOffset( 0x278 )] private ulong Unk_278;
-    //[FieldOffset( 0x280 )] private uint Unk_280;
-    //[FieldOffset( 0x284 )] private ulong Unk_284; // Unaligned, but it disassembles as a qword in the constructor, so idk.
+    //[FieldOffset( 0x278 )] private ulong Unk278;
+    //[FieldOffset( 0x280 )] private uint Unk280;
+    //[FieldOffset( 0x284 )] private ulong Unk284; // Unaligned, but it disassembles as a qword in the constructor, so idk.
+
+    // see FishingHookStrength if you want to observe hooks. Other values have a lot of overlap with FishingState, and there's standing vs sitting differences
+    [VirtualFunction(276)]
+    public partial void PlayAnimation(Character.Character* chara, ushort actionTimelineId, nint a4);
 
     /// <summary>
     /// Changes the currently equipped bait.
     /// </summary>
     /// <param name="baitId">ItemId of bait to change to.</param>
-    public AtkValue* ChangeBait(int baitId) {
+    public AtkValue ChangeBait(int baitId) {
         var returnValue = new AtkValue();
         var baitValue = stackalloc AtkValue[2];
-        baitValue[0].SetInt(baitId);
-        baitValue[1].SetBool(false);
-        return ReceiveEvent(&returnValue, baitValue, 2, 2);
+        baitValue[0].Type = AtkValueType.Int;
+        baitValue[0].Int = baitId;
+        baitValue[1].Type = AtkValueType.Bool;
+        baitValue[1].Bool = false;
+        ReceiveEvent(&returnValue, baitValue, 2, 2);
+        return returnValue;
     }
 }
 
+public enum FishingHookStrength {
+    Weak = 292,
+    Strong = 293,
+    Legendary = 294,
+}
+
 [Flags]
-public enum FishingBaitFlags : int {
+public enum FishingBaitFlags {
     Normal = 0,
     AmbitiousLure = 0x1,
     ModestLure = 0x2,
@@ -106,7 +116,7 @@ public enum FishingBaitFlags : int {
     Swimbait = 0x20,
 }
 
-public enum FishingState : int {
+public enum FishingState {
     None = 0,
     CastingOut = 1,
     /// <remarks>
@@ -133,25 +143,9 @@ public enum FishingState : int {
     /// Only during the action's animation.
     /// </remarks>
     ModestLure = 10,
-    Unk_11 = 11,
+    Unk11 = 11,
     /// <remarks>
     /// Or air, sand, etc.; just when you are actually fishing.
     /// </remarks>
     LineInWater = 12,
-    [Obsolete("Use None", true)]
-    NotFishing = 0,
-    [Obsolete("Use CastingOut", true)]
-    PoleOut = 1,
-    [Obsolete("Use PullingPoleIn", true)]
-    PullPoleIn = 2,
-    [Obsolete("Use Quitting", true)]
-    Quit = 3,
-    [Obsolete("Use Hooking", true)]
-    Reeling = 6,
-    [Obsolete("Use ConfirmingCollectable", true)]
-    Waiting = 8,
-    [Obsolete("Use AmbitiousLure", true)]
-    NormalFishing = 9,
-    [Obsolete("Use LineInWaiter", true)]
-    LureFishing = 12,
 }

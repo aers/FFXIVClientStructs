@@ -38,7 +38,7 @@ public unsafe partial struct UI3DModule {
         [FieldOffset(0xC)] public uint IconId;
 
         // theres some other unknowns in here
-        [FieldOffset(0x12)] private byte Unk_12;
+        [FieldOffset(0x12)] private byte Unk12;
     }
 
     // Client::UI::UI3DModule::ObjectInfo
@@ -53,12 +53,12 @@ public unsafe partial struct UI3DModule {
         [FieldOffset(0x30)] public Vector3 ObjectPosProjectedScreenSpace; // maybe
         [FieldOffset(0x40)] public float DistanceFromCamera;
         [FieldOffset(0x44)] public float DistanceFromPlayer; // 0 for player
-        [FieldOffset(0x48)] private uint Unk_48;
+        [FieldOffset(0x48)] private uint Unk48;
         [FieldOffset(0x4C)] public byte NamePlateScale;
         [FieldOffset(0x4D)] public UIObjectKind NamePlateObjectKind;
         [FieldOffset(0x4E)] public UIObjectKind NamePlateObjectKindAdjusted; // identical to above except in one single case
         [FieldOffset(0x4F)] public byte NamePlateIndex;
-        [FieldOffset(0x50)] private byte Unk_50;
+        [FieldOffset(0x50)] private byte Unk50;
 
         [FieldOffset(0x51)] public byte SortPriority;
         // rest unknown
@@ -73,7 +73,7 @@ public unsafe partial struct UI3DModule {
     public partial struct MemberInfo {
         [FieldOffset(0x18)] public BattleChara* BattleChara;
 
-        [FieldOffset(0x20)] private byte Unk_20;
+        [FieldOffset(0x20)] private byte Unk20;
         // rest unknown
     }
 

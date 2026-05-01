@@ -49,14 +49,14 @@ public unsafe partial struct InstanceContentDeepDungeon {
         [FieldOffset(0x04)] public sbyte RoomIndex;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x03)]
-    public struct DeepDungeonItemInfo {
+    public partial struct DeepDungeonItemInfo {
         [FieldOffset(0x00)] public byte ItemId;
         [FieldOffset(0x01)] public byte Count;
+        [BitField<bool>(nameof(IsUsable), 0)]
+        [BitField<bool>(nameof(IsActive), 1)]
         [FieldOffset(0x02)] public byte Flags;
-
-        public bool IsUsable => (Flags & (1 << 0)) != 0;
-        public bool IsActive => (Flags & (1 << 1)) != 0;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x02)]
@@ -91,7 +91,7 @@ public unsafe partial struct InstanceContentDeepDungeon {
     /// </summary>
     /// <remarks>Returns an error if the player's animation lock is greater than 0.</remarks>
     /// <param name="slot">Slot number in the range 0-2.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 85 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 85 C0 48 8B 43")]
     public partial void UseStone(uint slot);
 
 }

@@ -11,23 +11,23 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentList>]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
-public unsafe partial struct AtkComponentTreeList : ICreatable {
+public unsafe partial struct AtkComponentTreeList : ICreatable<AtkComponentTreeList> {
     [FieldOffset(0x1B0)] public StdVector<Pointer<AtkComponentTreeListItem>> Items;
 
     [FieldOffset(0x1E8)] private float Unk1E8; // ScrollMultiplier?
     [FieldOffset(0x224)] public bool LayoutRefreshPending;
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 0F 57 C0")]
-    public partial void Ctor();
+    public partial AtkComponentTreeList* Ctor();
 
     /// <remarks> Does not add it to the <see cref="Items"/> list automatically! </remarks>
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 33 D2 45 33 C9")]
     public partial AtkComponentTreeListItem* CreateItem();
 
-    [MemberFunction("48 83 EC 28 3B 91 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 08 F6 01")]
     public partial AtkComponentTreeListItem* GetItem(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B F7 75")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 3B FF 75")]
     public partial void LoadAtkValues(
         int atkValuesCount,
         AtkValue* atkValues,
@@ -38,7 +38,7 @@ public unsafe partial struct AtkComponentTreeList : ICreatable {
         int itemCount,
         ListComponentCallBackInterface* callBackInterface = null);
 
-    [Obsolete("Use LoadAtkValues with callBackInterface parameter")]
+    [Obsolete("Use LoadAtkValues with callBackInterface parameter", true)]
     public void LoadAtkValues(
         int atkValuesCount,
         AtkValue* atkValues,

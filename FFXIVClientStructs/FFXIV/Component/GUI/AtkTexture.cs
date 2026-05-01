@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkTexture
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe partial struct AtkTexture : ICreatable {
+public unsafe partial struct AtkTexture : ICreatable<AtkTexture> {
     // union type
     [FieldOffset(0x8), CExporterUnion("Texture")] public AtkTextureResource* Resource;
     [FieldOffset(0x8), CExporterUnion("Texture")] public void* Crest;
@@ -14,8 +14,8 @@ public unsafe partial struct AtkTexture : ICreatable {
     [FieldOffset(0x10)] public TextureType TextureType;
     [FieldOffset(0x11)] private bool CachedIsTextureReady; // Use IsTextureReady() to get this
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 AF")]
-    public partial void Ctor();
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 45 33 ED")]
+    public partial AtkTexture* Ctor();
 
     [MemberFunction("E9 ?? ?? ?? ?? 0F BA F0 14")]
     public partial int LoadIconTexture(uint iconId, IconSubFolder iconSubFolder = IconSubFolder.None);
@@ -32,7 +32,7 @@ public unsafe partial struct AtkTexture : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 10 02")]
     public partial int ReleaseTexture();
 
-    [MemberFunction("80 79 10 01 75 44")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 ?? 75 ?? 81 A3")]
     public partial int GetLoadState();
 
     [MemberFunction("0F B6 41 11 48 8B D1")]

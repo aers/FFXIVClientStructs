@@ -18,7 +18,7 @@ public unsafe partial struct SGTransformActionController {
     [FieldOffset(0x1C0)] public Timer ScaleTimer;
     [FieldOffset(0x200)] public Transform CurrentTransform;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 95 ?? ?? ?? ?? 45 33 C0 C1 EA 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 97 ?? ?? ?? ?? 45 33 C0")]
     public partial void LoadFromFile(byte* data);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

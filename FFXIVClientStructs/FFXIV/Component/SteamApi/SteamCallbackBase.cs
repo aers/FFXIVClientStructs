@@ -27,7 +27,7 @@ public unsafe partial struct SteamCallbackBase {
     public partial nint GetSize();
 
     [VirtualFunction(3)]
-    public partial void Dtor(byte freeFlags);
+    public partial SteamCallbackBase* Dtor(byte freeFlags);
 
     public bool IsRegistered => Flags.HasFlag(SteamCallbackFlags.Registered);
 }

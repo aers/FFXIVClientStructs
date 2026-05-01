@@ -53,7 +53,7 @@ public unsafe partial struct BannerHelper {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4C 48 8D 54 24")]
     public partial bool HasCharaCardCreated();
 
-    [MemberFunction("C6 02 03 41 0F B7 41")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B8 ?? ?? ?? ?? 48 8D 54 24 ?? 49 8B CE")]
     public partial void CharaCardData_ApplyCharaViewCharacterDataAndBannerModuleEntry(CharaCardData* to, CharaViewCharacterData* from1, BannerModuleEntry* from2);
 
     [MemberFunction("48 89 5C 24 ?? 41 80 78")]

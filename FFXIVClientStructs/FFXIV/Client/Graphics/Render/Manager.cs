@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::Manager
 //   Client::Graphics::Singleton<Client::Graphics::Render::Manager>
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x40380)]
+[StructLayout(LayoutKind.Explicit, Size = 0x38390)]
 public unsafe partial struct Manager {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C9", 3, true)]
     public static partial Manager* Instance();
@@ -12,12 +12,12 @@ public unsafe partial struct Manager {
     [FieldOffset(0x87F8)] public JobSystem ManagerJobSystem; // Client::Graphics::JobSystem<Client::Graphics::Render::Manager>
     [FieldOffset(0x88B8)] public PostBoneDeformerBaseUpdater PostBoneDeformerBaseUpdater; // Client::Graphics::Render::Updater<Client::Graphics::Render::PostBoneDeformerBase>
     [FieldOffset(0x10908)] public ShaderManager ShaderManager;
-    [FieldOffset(0x10AE0)] public ModelRenderer ModelRenderer;
-    [FieldOffset(0x10F30)] public BGInstancingRenderer BGInstancingRenderer;
-    [FieldOffset(0x31D90)] public TerrainRenderer TerrainRenderer;
-    // [FieldOffset(0x47F20)] private UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
-    [FieldOffset(0x363F0)] public WaterRenderer WaterRenderer;
-    [FieldOffset(0x36960)] public VerticalFogRenderer VerticalFogRenderer;
+    [FieldOffset(0x10AF8)] public ModelRenderer ModelRenderer;
+    [FieldOffset(0x10F40)] public BGInstancingRenderer BGInstancingRenderer;
+    [FieldOffset(0x29D40)] public TerrainRenderer TerrainRenderer;
+    // [FieldOffset(0x2E160)] private UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
+    [FieldOffset(0x2E390)] public WaterRenderer WaterRenderer;
+    [FieldOffset(0x2E910)] public VerticalFogRenderer VerticalFogRenderer;
 
     // [FieldOffset(0x487F8)] private UnknownRenderer1 UnknownRenderer1; // 0xE0
     // [FieldOffset(0x488E0)] private UnknownRenderer2 UnknownRenderer2; // 0x7A10 Grass?

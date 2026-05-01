@@ -37,12 +37,33 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9178)] public AddonFilter* AddonFilterSystem;
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
-
+    [FieldOffset(0x9190)] private AtkResNode* ChatLogFocusNode; // set via a function called in AddonChatLog.OnRefresh, but not sure what for
+    [FieldOffset(0x9198)] public AtkResNode* CursorFocusNode;
+    /// <remarks>
+    /// On scene change, the Hud addons are opened and their ids are stored here.<br/>
+    /// Once all are set up (in <see cref="AtkModule.Update"/>), it calls handler 0 which sets <see cref="AtkModule.IsHudInitialized"/> to <see langword="true"/>.
+    /// </remarks>
+    [FieldOffset(0x91A0), FixedSizeArray] internal FixedSizeArray128<ushort> _hudInitAddonIds;
     [FieldOffset(0x92A0)] private AtkResNode Unk92A0;
     [FieldOffset(0x9360)] public Size LastScreenSize;
+    [FieldOffset(0x9368)] public float LastScreenSizeScale;
+    [FieldOffset(0x936C)] public float HUDScaleDefault; // always 1.0f?!
+    /// <remarks> Controlled by ConfigOption <c>UiBaseScale</c> (also settable via <c>/uiscale</c>). </remarks>
+    [FieldOffset(0x9370)] public float UiBaseScale;
+    /// <remarks>
+    /// Used by addons ScreenText, ChatLog (for the auto-translate popup), MiniTalkPlayer.<br/>
+    /// Multiplied by g_GlobalUIScale.<br/>
+    /// Might need a resolution or scene change to be applied in opened addons.
+    /// </remarks>
+    [FieldOffset(0x9374)] public float ScreenTextBaseScale;
+    /// <remarks> Key is DepthLayer of the UnitBase. </remarks>
+    [FieldOffset(0x9378), FixedSizeArray] internal FixedSizeArray13<ushort> _nextDrawOrderIndexes;
+    /// <remarks> Count of non-zero entries in <see cref="HudInitAddonIds"/>. </remarks>
+    [FieldOffset(0x9392)] public short NumHudInitAddonIds;
 
     [FieldOffset(0x9398), FixedSizeArray] internal FixedSizeArray48<HudAnchoringInfo> _hudAnchoringTable;
     [FieldOffset(0x9C98)] public AtkUnitManagerFlags Flags;
+    [FieldOffset(0x9C99)] private byte Flags2;
 
     [VirtualFunction(8)]
     public partial bool SetAddonVisibility(ushort addonId, bool visible);
@@ -55,6 +76,18 @@ public unsafe partial struct AtkUnitManager {
 
     [VirtualFunction(11)]
     public partial void AddonRequestUpdateById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
+
+    [VirtualFunction(24)]
+    public partial void ToggleUi(UiFlags flags, bool show, bool disableTransition, bool a5 = false);
+
+    [VirtualFunction(25)]
+    public partial bool IsUiFlagsSet(UiFlags flags);
+
+    [VirtualFunction(39)]
+    public partial bool ShouldApplyUiBaseScale(AtkUnitBase* addon);
+
+    [VirtualFunction(40)]
+    public partial bool ShouldApplyScreenTextBaseScale(AtkUnitBase* addon);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
     public partial AtkUnitBase* GetAddonByName(CStringPointer name, int index = 1);
@@ -75,15 +108,8 @@ public unsafe partial struct AtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? 48 83 C3")]
     public partial bool SetAddonDepthLayer(ushort id, uint depthLayerIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE 48 8D 8B ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE")]
     public partial void UpdateCursor();
-
-    public enum AddonStatus {
-        NotLoaded = 0,
-
-        Shown = 1 << 2,
-        Hidden = 1 << 3,
-    }
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
@@ -96,12 +122,18 @@ public unsafe partial struct AtkUnitManager {
     }
 }
 
+public enum AddonStatus {
+    NotLoaded = 0,
+
+    Shown = 1 << 2,
+    Hidden = 1 << 3,
+}
+
 [Flags]
 public enum AtkUnitManagerFlags : byte {
     None = 0,
     /// <summary> This flag is temporarily set when any AtkUnitList was modified. Cleared in UpdateDrawOrderIndexes. </summary>
     UnitListsChanged = 0x01,
-    [Obsolete($"Renamed to {nameof(UnitListsChanged)}", true)] Unk01 = 0x01,
     /// <summary> This flag is temporarily set to call AtkModule CallbackHandler 0, which sets <see cref="AtkModule.IsHudInitialized"/> to <see langword="true"/>. </summary>
     Unk02 = 0x02,
     UiHidden = 0x04,
@@ -109,7 +141,6 @@ public enum AtkUnitManagerFlags : byte {
     Unk10 = 0x10,
     /// <remarks> <see cref="RaptureAtkModule.UIScene"/> == <see cref="GameUIScene.GameMain"/> </remarks>
     InGame = 0x20,
-    [Obsolete($"Renamed to {nameof(InGame)}", true)] Unk20 = 0x20,
     Unk40 = 0x40,
     Unk80 = 0x80,
 }

@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [GenerateInterop]
@@ -8,6 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct StringArrayData {
     [FieldOffset(0x28)] public CStringPointer* StringArray;
     [FieldOffset(0x30)] public CStringPointer* ManagedStringArray;
+
+    public Span<CStringPointer> Span => new(StringArray, Size);
+    public Span<CStringPointer> ManagedSpan => new(ManagedStringArray, Size);
 
     /// <summary>
     /// Set a value at the specified index of the StringArray.

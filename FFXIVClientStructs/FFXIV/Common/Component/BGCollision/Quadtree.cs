@@ -85,5 +85,5 @@ public unsafe partial struct QuadtreeNode {
         public Enumerator GetEnumerator() => this;
     }
 
-    public Enumerator Colliders => new Enumerator((QuadtreeNode*)Unsafe.AsPointer(ref this));
+    public Enumerator Colliders => new((QuadtreeNode*)Unsafe.AsPointer(ref this));
 }

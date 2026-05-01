@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
@@ -10,55 +9,55 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [StructLayout(LayoutKind.Explicit, Size = 0x1B8)]
 public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
-    [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;
+    [FieldOffset(0x18)] public EventSceneModule* EventSceneModule;
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
-    [FieldOffset(0x88)] public ulong SceneFlags;
+    [FieldOffset(0x88)] public SceneFlag SceneFlags;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 
     [FieldOffset(0xC8)] private Utf8String UnkString0;
 
-    [VirtualFunction(158)]
+    [VirtualFunction(40)]
+    public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
+
+    [VirtualFunction(159)]
     public partial void CancelInteraction();
 
-    [VirtualFunction(204)]
+    [VirtualFunction(205)]
     public partial void GetTitle(Utf8String* outTitle);
 
-    [VirtualFunction(206)]
+    [VirtualFunction(207)]
     public partial EventId GetEventId();
 
-    [VirtualFunction(208)]
+    [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
-    [VirtualFunction(257)]
+    [VirtualFunction(258)]
     public partial void GetDescription(Utf8String* outDescription);
 
-    [VirtualFunction(258)]
+    [VirtualFunction(259)]
     public partial void GetReliefText(Utf8String* outReliefText);
 
-    [VirtualFunction(259)]
+    [VirtualFunction(260)]
     public partial int GetTimeRemaining(int currentTimestamp);
 
-    [VirtualFunction(260)]
+    [VirtualFunction(261)]
     public partial bool HasTimer();
 
-    [VirtualFunction(262)]
+    [VirtualFunction(263)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(265), Obsolete($"Renamed to {nameof(GetDirectorTodos)}", true)]
-    public partial StdVector<EventHandlerObjective>* GetObjectives();
-
-    [VirtualFunction(265)]
+    [VirtualFunction(266)]
     public partial StdVector<DirectorTodo>* GetDirectorTodos();
 
-    [VirtualFunction(266)]
+    [VirtualFunction(267)]
     public partial StdVector<MassivePcContentTodo>* GetMassivePcContentTodos(int setIndex);
 
-    [VirtualFunction(269)]
+    [VirtualFunction(270)]
     public partial int GetRecommendedLevel();
 }
 
@@ -66,20 +65,6 @@ public unsafe partial struct EventHandler {
 public struct EventHandlerInfo {
     [FieldOffset(0x00)] public EventId EventId;
     [FieldOffset(0x04)] public byte Flags;
-}
-
-// TODO: remove (was renamed/replaced with DirectorTodo)
-[StructLayout(LayoutKind.Explicit, Size = 0x160)]
-public struct EventHandlerObjective {
-    [FieldOffset(0x00)] public bool Enabled;
-
-    [FieldOffset(0x04)] public int DisplayType;
-    [FieldOffset(0x08)] public Utf8String Label;
-
-    [FieldOffset(0x78)] public int CountCurrent;
-    [FieldOffset(0x7C)] public int CountNeeded;
-    [FieldOffset(0x80)] public ulong TimeLeft;
-    [FieldOffset(0x88)] public uint MapRowId;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
@@ -104,7 +89,7 @@ public struct DirectorTodo {
     [FieldOffset(0x80)] public long EndTimestamp;
     /// <remarks> In seconds. </remarks>
     [FieldOffset(0x88)] public long Duration;
-    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way. copied from old EventHandlerObjective struct
+    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]
@@ -465,4 +450,85 @@ public enum MaterializeEntryId : ushort {
     Desynth = 0x0000,
     Retrieve = 0x0001, // Materia Retrieval
     Purify = 0x0002, // Aetherial Reduction
+}
+
+// Taken from EventHandler lua definitions
+[Flags]
+public enum SceneFlag : ulong {
+    None = 0,
+
+    NoDefaultCamera = 1UL << 0,
+    FadeOut = 1UL << 1,
+    InvisENpc = 1UL << 2,
+    InvisEObj = 1UL << 3,
+    InvisBnpc = 1UL << 4,
+    InvisOtherPc = 1UL << 5,
+    InvisPartyPc = 1UL << 6,
+    InvisGatheringPoint = 1UL << 7,
+    InvisAetheryte = 1UL << 8,
+    InvisTreasure = 1UL << 9,
+    ConditionCutscene = 1UL << 10,
+    HideUi = 1UL << 11,
+    AutoLocCamera = 1UL << 12,
+    HideHotbar = 1UL << 13,
+    Invincible = 1UL << 14,
+    SilentEnterTerriEnv = 1UL << 15,
+    SilentEnterTerriBgm = 1UL << 16,
+    SilentEnterTerriSe = 1UL << 17,
+
+    DisableSkip = 1UL << 19,
+
+    HideFestival = 1UL << 21,
+    DisableStealth = 1UL << 22,
+    RollbackHideUi = 1UL << 23,
+    LockHud = 1UL << 24,
+    LockHotbar = 1UL << 25,
+    DisableCancelEmote = 1UL << 26,
+    InvisAoe = 1UL << 27,
+    InvisPartyBuddy = 1UL << 28,
+    InvisAlliancePc = 1UL << 29,
+    InvisAllianceBuddy = 1UL << 30,
+    InvisCompanion = 1UL << 31,
+    InvisWeapon = 1UL << 32,
+    FixStandObject = 1UL << 33,
+    FadeOutAfterEmote = 1UL << 34,
+
+    InvisHObj = 1UL << 36,
+
+    SilentEnterTerriAll = SilentEnterTerriEnv | SilentEnterTerriBgm | SilentEnterTerriSe,
+
+    // Does not contain InvisWeapon!
+    InvisAll = InvisENpc
+        | InvisEObj
+        | InvisBnpc
+        | InvisOtherPc
+        | InvisPartyPc
+        | InvisGatheringPoint
+        | InvisAetheryte
+        | InvisTreasure
+        | InvisAoe
+        | InvisPartyBuddy
+        | InvisAlliancePc
+        | InvisAllianceBuddy
+        | InvisCompanion,
+
+    SetBase = NoDefaultCamera
+        | FadeOut
+        | InvisEObj
+        | InvisBnpc
+        | InvisOtherPc
+        | InvisPartyPc
+        | InvisGatheringPoint
+        | InvisTreasure
+        | ConditionCutscene
+        | HideUi
+        | DisableStealth
+        | InvisAoe
+        | InvisPartyBuddy
+        | InvisAlliancePc
+        | InvisAllianceBuddy
+        | InvisCompanion,
+
+    SetEObjBase = SetBase & ~InvisEObj,
+    SetInvisBase = SetBase | InvisAll,
 }

@@ -17,6 +17,6 @@ public unsafe struct CStringPointer(byte* value) {
     public static implicit operator byte*(CStringPointer cstr) => cstr.Value;
     public static implicit operator CStringPointer(byte* cstr) => new(cstr);
 
-    public static implicit operator ReadOnlySpan<byte>(CStringPointer cstr) => cstr.AsSpan();
-    public static implicit operator string(CStringPointer cstr) => cstr.ToString();
+    public static explicit operator ReadOnlySpan<byte>(CStringPointer cstr) => cstr.AsSpan();
+    public static explicit operator string(CStringPointer cstr) => cstr.ToString();
 }

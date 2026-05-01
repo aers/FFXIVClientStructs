@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PlayerState
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x908)]
+[StructLayout(LayoutKind.Explicit, Size = 0x920)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
@@ -55,6 +55,8 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x164)] public byte BirthDay;
     [FieldOffset(0x165)] public byte FirstClass;
     [FieldOffset(0x166)] public byte StartTown;
+    [BitField<bool>(nameof(IsLegacy), 0)]
+    [BitField<bool>(nameof(IsWarriorOfLight), 1)]
     [FieldOffset(0x167)] public byte QuestSpecialFlags;
     [FieldOffset(0x168), FixedSizeArray] internal FixedSizeArray8<ushort> _activeFestivalIds;
     [FieldOffset(0x178), FixedSizeArray] internal FixedSizeArray8<ushort> _activeFestivalPhases;
@@ -67,88 +69,82 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x1A4)] public int BasePiety;
     [FieldOffset(0x1A8), FixedSizeArray] internal FixedSizeArray74<int> _attributes;
     [FieldOffset(0x2D0)] public byte GrandCompany;
-    [FieldOffset(0x2D1)] public byte GCRankMaelstrom;
-    [FieldOffset(0x2D2)] public byte GCRankTwinAdders;
-    [FieldOffset(0x2D3)] public byte GCRankImmortalFlames;
+    /// <remarks>
+    /// 0 = Maelstrom <br/>
+    /// 1 = Order of the Twin Adder <br/>
+    /// 2 = Immortal Flames
+    /// </remarks>
+    [FieldOffset(0x2D1), FixedSizeArray] internal FixedSizeArray3<byte> _GCRanks;
+    [FieldOffset(0x2D1), Obsolete("Use GCRanks[0]", true)] public byte GCRankMaelstrom;
+    [FieldOffset(0x2D2), Obsolete("Use GCRanks[1]", true)] public byte GCRankTwinAdders;
+    [FieldOffset(0x2D3), Obsolete("Use GCRanks[2]", true)] public byte GCRankImmortalFlames;
     [FieldOffset(0x2D4)] public ushort HomeAetheryteId;
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;
     [FieldOffset(0x2E0)] public ushort FreeAetheryteId;
-    [FieldOffset(0x2E2)] public ushort FreeAetherytePlayStationPlus;
-    [FieldOffset(0x2E4)] public uint BaseRestedExperience;
+    [FieldOffset(0x2E2)] public ushort FreeAetherytePSPlus; // PlayStation Plus
+    [FieldOffset(0x2E4)] public ushort FreeAetheryteNSO; // Nintendo Switch Online
+    [FieldOffset(0x2E8)] public uint BaseRestedExperience;
     // [FieldOffset(0x2F8), FixedSizeArray] internal FixedSizeArray4<byte> _unk2C8; // GCSupply stuff
     // [FieldOffset(0x2FC), FixedSizeArray] internal FixedSizeArray16<byte> _unk2CC; // GCSupply stuff
-    [FieldOffset(0x2FC)] private sbyte Unk2DC; // GCSupply stuff
-    [FieldOffset(0x2FD), FixedSizeArray, Obsolete("Use UnlockedMountsBitArray", true)] internal FixedSizeArray41<byte> _unlockedMountsBitmask;
+    [FieldOffset(0x300)] private sbyte Unk2DC; // GCSupply stuff
     // BitCount: MountSheet.Where(row => row.ModelChara.RowId != 0).Max(row => row.Order))
     /// <remarks> Use <see cref="IsMountUnlocked"/>. </remarks>
-    [FieldOffset(0x2FD), FixedSizeArray(isBitArray: true, bitCount: 343)] internal FixedSizeArray43<byte> _unlockedMounts;
-    [FieldOffset(0x328), FixedSizeArray, Obsolete("Use UnlockedOrnamentsBitArray", true)] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
+    [FieldOffset(0x301), FixedSizeArray(isBitArray: true, bitCount: 358)] internal FixedSizeArray45<byte> _unlockedMounts;
     // BitCount: OrnamentSheet.RowCount
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/>. </remarks>
-    [FieldOffset(0x328), FixedSizeArray(isBitArray: true, bitCount: 55)] internal FixedSizeArray7<byte> _unlockedOrnaments;
-    [FieldOffset(0x330), FixedSizeArray, Obsolete("Use UnlockedGlassesStylesBitArray", true)] internal FixedSizeArray5<byte> _unlockedGlassesStylesBitmask;
+    [FieldOffset(0x32E), FixedSizeArray(isBitArray: true, bitCount: 59)] internal FixedSizeArray8<byte> _unlockedOrnaments;
     // BitCount: GlassesStylesSheet.RowCount
     /// <remarks> Use <see cref="IsGlassesUnlocked"/>. </remarks>
-    [FieldOffset(0x330), FixedSizeArray(isBitArray: true, bitCount: 52)] internal FixedSizeArray7<byte> _unlockedGlassesStyles;
-    [FieldOffset(0x338)] public ushort NumOwnedMounts;
-    [FieldOffset(0x33A)] private ushort NumOwnedMountsMinus1; // ???
-    // [FieldOffset(0x328), FixedSizeArray] internal FixedSizeArray44<ushort> _unk316; // something FishParameter?
-    // [FieldOffset(0x380), FixedSizeArray] internal FixedSizeArray44<ushort> _unk36E; // something FishingRecordType?
+    [FieldOffset(0x336), FixedSizeArray(isBitArray: true, bitCount: 62)] internal FixedSizeArray8<byte> _unlockedGlassesStyles;
+    [FieldOffset(0x340)] public ushort NumOwnedMounts;
+    [FieldOffset(0x342)] private ushort NumOwnedMountsMinus1; // ???
+    // [FieldOffset(0x330), FixedSizeArray] internal FixedSizeArray44<ushort> _unk316; // something FishParameter?
+    // [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray44<ushort> _unk36E; // something FishingRecordType?
     // Ref: "49 83 F8 ?? 73 ?? 41 0F B6 C0 BA ?? ?? ?? ?? C0 E0 ?? 2A C8 48 8D 05 ?? ?? ?? ?? ?? ?? ?? ?? ?? D3 E2 84 D0 0F 95 C0 EB ?? 32 C0"
-    [FieldOffset(0x3EC), FixedSizeArray, Obsolete("Use UnlockedFishingSpotsBitArray", true)] internal FixedSizeArray41<byte> _unlockedFishingSpotBitmask;
     // BitCount: FishingSpotSheet.Max(row => row.Order)
-    [FieldOffset(0x3EC), FixedSizeArray(isBitArray: true, bitCount: 325)] internal FixedSizeArray41<byte> _unlockedFishingSpots;
-    [FieldOffset(0x416), FixedSizeArray, Obsolete("Use CaughtFishBitArray", true)] internal FixedSizeArray182<byte> _caughtFishBitmask;
+    [FieldOffset(0x3F4), FixedSizeArray(isBitArray: true, bitCount: 329)] internal FixedSizeArray42<byte> _unlockedFishingSpots;
     // BitCount: FishParameterSheet.Last(row => row.IsInLog).RowId
     /// <remarks> Use <see cref="IsFishCaught"/>. </remarks>
-    [FieldOffset(0x416), FixedSizeArray(isBitArray: true, bitCount: 1463)] internal FixedSizeArray183<byte> _caughtFish;
-    [FieldOffset(0x4D0)] public uint NumFishCaught;
-    [FieldOffset(0x4D4)] public uint FishingBait;
-    [FieldOffset(0x4D8), FixedSizeArray, Obsolete("Use UnlockedSpearfishingNotebooksBitArray", true)] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
+    [FieldOffset(0x41F), FixedSizeArray(isBitArray: true, bitCount: 1511)] internal FixedSizeArray189<byte> _caughtFish;
+    [FieldOffset(0x4E0)] public uint NumFishCaught;
+    [FieldOffset(0x4E4)] public uint FishingBait;
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 48 8B F2"
     // BitCount: SpearfishingNotebookSheet.RowCount
-    [FieldOffset(0x4D8), FixedSizeArray(isBitArray: true, bitCount: 64)] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebooks;
-    [FieldOffset(0x4E1), FixedSizeArray, Obsolete("Use CaughtSpearfishBitArray", true)] internal FixedSizeArray38<byte> _caughtSpearfishBitmask;
+    [FieldOffset(0x4E8), FixedSizeArray(isBitArray: true, bitCount: 64)] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebooks;
     // Ref: "42 8D 04 C5 ?? ?? ?? ?? 2B C8 48 8D 05 ?? ?? ?? ?? ?? ?? ?? ?? ?? D3 E2 84 D0 0F B6 47"
     // BitCount: SpearfishingItemSheet.Where(row => row.RowId < 30000).Max(row => row.RowId) - 20000
     /// <remarks> Use <see cref="IsSpearfishCaught"/>. </remarks>
-    [FieldOffset(0x4E1), FixedSizeArray(isBitArray: true, bitCount: 304)] internal FixedSizeArray38<byte> _caughtSpearfish;
-    [FieldOffset(0x508)] public uint NumSpearfishCaught;
-    [FieldOffset(0x50C)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
+    [FieldOffset(0x4F1), FixedSizeArray(isBitArray: true, bitCount: 304)] internal FixedSizeArray38<byte> _caughtSpearfish;
+    [FieldOffset(0x518)] public uint NumSpearfishCaught;
+    [FieldOffset(0x51C)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
     // Size: ContentRoulette.Max(row => row.CompletionArrayIndex)
     /// <remarks> Use <see cref="InstanceContent.IsRouletteComplete" />. Not a bit array. </remarks>
-    [FieldOffset(0x510), FixedSizeArray] internal FixedSizeArray10<byte> _contentRouletteCompletion;
-    [FieldOffset(0x51C)] public short PlayerCommendations;
-    [FieldOffset(0x51E), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
-    [FieldOffset(0x525), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
-    [FieldOffset(0x528), FixedSizeArray, Obsolete("Use UnlockedSecretRecipeBooksBitArray", true)] internal FixedSizeArray14<byte> _unlockedSecretRecipeBooksBitmask;
+    [FieldOffset(0x520), FixedSizeArray] internal FixedSizeArray10<byte> _contentRouletteCompletion;
+    [FieldOffset(0x52C)] public short PlayerCommendations;
+    [FieldOffset(0x52E), FixedSizeArray] internal FixedSizeArray8<byte> _selectedPoses;
+    [FieldOffset(0x536), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
     // BitCount: SecretRecipeBookSheet.RowCount
     /// <remarks> Use <see cref="IsSecretRecipeBookUnlocked"/>. </remarks>
-    [FieldOffset(0x528), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _unlockedSecretRecipeBooks;
+    [FieldOffset(0x539), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _unlockedSecretRecipeBooks;
 
-    [FieldOffset(0x552)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
-    [FieldOffset(0x553)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
-    [FieldOffset(0x554), FixedSizeArray, Obsolete("Incorrectly identified", true)] internal FixedSizeArray43<byte> _unlockedAdventureBitmask;
-    [FieldOffset(0x554), FixedSizeArray, Obsolete("Use CompletedAdventuresBitArray", true)] internal FixedSizeArray43<byte> _completedAdventureBitmask;
+    [FieldOffset(0x563)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
+    [FieldOffset(0x564)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
     // BitCount: AdventureSheet.RowCount
     /// <remarks> Use <see cref="IsAdventureComplete"/>. </remarks>
-    [FieldOffset(0x554), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _completedAdventures;
+    [FieldOffset(0x565), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _completedAdventures;
     // BitCount: AdventureSheet.RowCount
-    [FieldOffset(0x580), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _unkAdventureBitmask; // ulong array?
+    [FieldOffset(0x591), FixedSizeArray(isBitArray: true, bitCount: 340)] internal FixedSizeArray43<byte> _unkAdventureBitmask; // ulong array?
 
-    [FieldOffset(0x5B1), FixedSizeArray, Obsolete("Use UnlockedAetherCurrentsBitArray", true)] internal FixedSizeArray56<byte> _unlockFlags;
-    [FieldOffset(0x5B1), FixedSizeArray, Obsolete("Use UnlockedAetherCurrentsBitArray", true)] internal FixedSizeArray56<byte> _unlockedAetherCurrentsBitmask;
     // BitCount: AetherCurrentSheet.RowCount
     /// <remarks> Use <see cref="IsAetherCurrentUnlocked"/>. </remarks>
-    [FieldOffset(0x5B1), FixedSizeArray(isBitArray: true, bitCount: 448)] internal FixedSizeArray56<byte> _unlockedAetherCurrents;
-    [FieldOffset(0x5E9), FixedSizeArray, Obsolete("Use UnlockedAetherCurrentCompFlgSetsBitArray", true)] internal FixedSizeArray4<byte> _unlockedAetherCurrentCompFlgSetBitmask;
+    [FieldOffset(0x5C1), FixedSizeArray(isBitArray: true, bitCount: 448)] internal FixedSizeArray56<byte> _unlockedAetherCurrents;
     // BitCount: AetherCurrentCompFlgSetSheet.RowCount
     /// <remarks> Use <see cref="IsAetherCurrentZoneComplete"/>. </remarks>
-    [FieldOffset(0x5E9), FixedSizeArray(isBitArray: true, bitCount: 31)] internal FixedSizeArray4<byte> _unlockedAetherCurrentCompFlgSets;
+    [FieldOffset(0x5F9), FixedSizeArray(isBitArray: true, bitCount: 31)] internal FixedSizeArray4<byte> _unlockedAetherCurrentCompFlgSets;
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
-    [FieldOffset(0x5ED)] public byte DeliveryLevel;
-    // [FieldOffset(0x5E6)] private byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
+    [FieldOffset(0x5FD)] public byte DeliveryLevel;
+    // [FieldOffset(0x5F6)] private byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
     /// <summary>
     /// Flag containing information about which DoH job the player is specialized in.
     /// </summary>
@@ -158,90 +154,102 @@ public unsafe partial struct PlayerState {
     /// <see cref="IsMeisterFlagMaxCount" /><br/>
     /// <see cref="IsMeisterFlagAndHasSoulStoneEquipped" />
     /// </remarks>
-    [FieldOffset(0x5EF)] public byte MeisterFlag;
-    [FieldOffset(0x5F0)] internal byte WeeklyLockoutInfo; // unsure how exactly it's processed
+    [FieldOffset(0x5FF)] public byte MeisterFlag;
+    [FieldOffset(0x600)] internal byte WeeklyLockoutInfo; // unsure how exactly it's processed
 
-    [FieldOffset(0x5F4)] public int SquadronMissionCompletionTimestamp;
-    [FieldOffset(0x5F8)] public int SquadronTrainingCompletionTimestamp;
-    [FieldOffset(0x5FC)] public ushort ActiveGcArmyExpedition;
-    [FieldOffset(0x5FE)] public ushort ActiveGcArmyTraining;
-    [FieldOffset(0x600)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
-    [FieldOffset(0x601)] public bool CanFly; // Set during zone loading, see "80 FA ?? 0F 94 C0 88 81"
+    [FieldOffset(0x604)] public int SquadronMissionCompletionTimestamp;
+    [FieldOffset(0x608)] public int SquadronTrainingCompletionTimestamp;
+    [FieldOffset(0x60C)] public ushort ActiveGcArmyExpedition;
+    [FieldOffset(0x60E)] public ushort ActiveGcArmyTraining;
+    [FieldOffset(0x610)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
+    [FieldOffset(0x611)] public bool CanFly; // Set during zone loading, see "80 FA ?? 0F 94 C0 88 81"
 
-    [FieldOffset(0x602), FixedSizeArray, Obsolete("Use UnlockedMinerFolkloreTomesBitArray", true)] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomeBitmask;
     // BitCount: GatheringSubCategorySheet.Where(row => row.ClassJob.RowId == 16 && row.Quest.RowId < 74).Max(row => row.Quest.RowId)
-    [FieldOffset(0x602), FixedSizeArray(isBitArray: true, bitCount: 11)] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomes;
-    [FieldOffset(0x604), FixedSizeArray, Obsolete("Use UnlockedBotanistFolkloreTomesBitArray", true)] internal FixedSizeArray2<byte> _unlockedBotanistFolkloreTomeBitmask;
+    [FieldOffset(0x612), FixedSizeArray(isBitArray: true, bitCount: 11)] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomes;
     // BitCount: GatheringSubCategorySheet.Where(row => row.ClassJob.RowId == 17 && row.Quest.RowId < 74).Max(row => row.Quest.RowId)
-    [FieldOffset(0x604), FixedSizeArray(isBitArray: true, bitCount: 11)] internal FixedSizeArray2<byte> _unlockedBotanistFolkloreTomes;
-    [FieldOffset(0x606), FixedSizeArray, Obsolete("Use UnlockedFishingFolkloreTomesBitArray", true)] internal FixedSizeArray2<byte> _unlockedFishingFolkloreTomeBitmask;
+    [FieldOffset(0x614), FixedSizeArray(isBitArray: true, bitCount: 11)] internal FixedSizeArray2<byte> _unlockedBotanistFolkloreTomes;
     // BitCount: GatheringSubCategorySheet.Where(row => row.ClassJob.RowId == 18 && row.Quest.RowId < 74).Max(row => row.Quest.RowId)
-    [FieldOffset(0x606), FixedSizeArray(isBitArray: true, bitCount: 11)] internal FixedSizeArray2<byte> _unlockedFishingFolkloreTomes;
-    [FieldOffset(0x608), FixedSizeArray, Obsolete("Use UnlockedOrchestrionRollsBitArray", true)] internal FixedSizeArray99<byte> _unlockedOrchestrionRollBitmask;
+    [FieldOffset(0x616), FixedSizeArray(isBitArray: true, bitCount: 11)] internal FixedSizeArray2<byte> _unlockedFishingFolkloreTomes;
     // BitCount: OrchestrionSheet.RowCount
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked"/>. </remarks>
-    [FieldOffset(0x608), FixedSizeArray(isBitArray: true, bitCount: 833)] internal FixedSizeArray105<byte> _unlockedOrchestrionRolls;
+    [FieldOffset(0x618), FixedSizeArray(isBitArray: true, bitCount: 892)] internal FixedSizeArray112<byte> _unlockedOrchestrionRolls;
 
-    [FieldOffset(0x682), FixedSizeArray(isBitArray: true, bitCount: 224)] internal FixedSizeArray28<byte> _unlockedRaids;
-    [FieldOffset(0x69E), FixedSizeArray(isBitArray: true, bitCount: 144)] internal FixedSizeArray18<byte> _unlockedDungeons;
-    [FieldOffset(0x6B0), FixedSizeArray(isBitArray: true, bitCount: 80)] internal FixedSizeArray10<byte> _unlockedGuildOrders;
-    [FieldOffset(0x6BA), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _unlockedTrials;
-    [FieldOffset(0x6C8), FixedSizeArray(isBitArray: true, bitCount: 24)] internal FixedSizeArray3<byte> _unlockedCrystallineConflicts;
-    [FieldOffset(0x6CB), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _unlockedFrontlines;
+    // BitCount: TutorialSheet.Max(row => Math.Max(Math.Max(row.Unknown1, row.Unknown2), row.Unknown3))
+    [FieldOffset(0x688), FixedSizeArray(isBitArray: true, bitCount: 26)] internal FixedSizeArray4<byte> _completedBeginnerTraining;
+    // BitCount: InstanceContentSheet.Where(row => row.InstanceContentType.RowId == 13).Max(row => row.RowId - 35000)
+    [FieldOffset(0x68C), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMaskedCarnivale;
+    // BitCount: VVDNotebookContentsSheet.RowCount - 1
+    [FieldOffset(0x690), FixedSizeArray(isBitArray: true, bitCount: 49)] internal FixedSizeArray7<byte> _completedVVDNotebookContents;
+    /// <remarks>Used for Mahjong and Rival Wings content.</remarks>
+    [FieldOffset(0x697), FixedSizeArray(isBitArray: true, bitCount: 8)] internal FixedSizeArray1<byte> _unlockedSpecialContent;
+    [FieldOffset(0x698), FixedSizeArray(isBitArray: true, bitCount: 224)] internal FixedSizeArray28<byte> _unlockedRaids;
+    [FieldOffset(0x6B4), FixedSizeArray(isBitArray: true, bitCount: 144)] internal FixedSizeArray18<byte> _unlockedDungeons;
+    [FieldOffset(0x6C6), FixedSizeArray(isBitArray: true, bitCount: 80)] internal FixedSizeArray10<byte> _unlockedGuildOrders;
+    [FieldOffset(0x6D0), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _unlockedTrials;
+    [FieldOffset(0x6DE), FixedSizeArray(isBitArray: true, bitCount: 24)] internal FixedSizeArray3<byte> _unlockedCrystallineConflicts;
+    [FieldOffset(0x6E1), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _unlockedFrontlines;
 
-    [FieldOffset(0x6CD), FixedSizeArray(isBitArray: true, bitCount: 224)] internal FixedSizeArray28<byte> _completedRaids;
-    [FieldOffset(0x6E9), FixedSizeArray(isBitArray: true, bitCount: 144)] internal FixedSizeArray18<byte> _completedDungeons;
-    [FieldOffset(0x6FB), FixedSizeArray(isBitArray: true, bitCount: 80)] internal FixedSizeArray10<byte> _completedGuildOrders;
-    [FieldOffset(0x705), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _completedTrials;
-    [FieldOffset(0x713), FixedSizeArray(isBitArray: true, bitCount: 24)] internal FixedSizeArray3<byte> _completedCrystallineConflicts;
-    [FieldOffset(0x716), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _completedFrontlines;
+    [FieldOffset(0x6E3), FixedSizeArray(isBitArray: true, bitCount: 224)] internal FixedSizeArray28<byte> _completedRaids;
+    [FieldOffset(0x6FF), FixedSizeArray(isBitArray: true, bitCount: 144)] internal FixedSizeArray18<byte> _completedDungeons;
+    [FieldOffset(0x711), FixedSizeArray(isBitArray: true, bitCount: 80)] internal FixedSizeArray10<byte> _completedGuildOrders;
+    [FieldOffset(0x71B), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _completedTrials;
+    [FieldOffset(0x729), FixedSizeArray(isBitArray: true, bitCount: 24)] internal FixedSizeArray3<byte> _completedCrystallineConflicts;
+    [FieldOffset(0x72C), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _completedFrontlines;
+    /// <remarks>Used for content like VC Dungeons, Faux Hallows trials and standalone deep dungeon bosses (The Final Verse).</remarks>
+    [FieldOffset(0x72E), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _unlockedMiscContent;
+    [FieldOffset(0x733), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMiscContent;
+    /// <remarks>
+    /// Flags:<br/>
+    /// 1 = Chocobo Race Unlocked<br/>
+    /// 2 = Has Race Chocobo<br/>
+    /// 4 = Advanced Mahjong Unlocked<br/>
+    /// </remarks>
+    [FieldOffset(0x738)] public byte GoldSaucerContentStatus;
+    [FieldOffset(0x739)] public byte CompletedLoVMStages;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
-    [FieldOffset(0x72C), FixedSizeArray] internal FixedSizeArray16<byte> _weeklyBingoOrderData;
+    [FieldOffset(0x744), FixedSizeArray] internal FixedSizeArray16<byte> _weeklyBingoOrderData;
     /// <summary>RowIds of WeeklyBingoRewardData sheet</summary>
-    [FieldOffset(0x73C), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
+    [FieldOffset(0x754), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
     /// <summary>Bitflags of placed stickers.</summary>
     /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
-    [FieldOffset(0x740)] private ushort _weeklyBingoStickers;
+    [FieldOffset(0x758)] private ushort WeeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x744)] private uint _weeklyBingoFlags;
-    [FieldOffset(0x748), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
-    [FieldOffset(0x74C)] public byte WeeklyBingoRequestOpenBingoNo;
+    [FieldOffset(0x75C)] private uint WeeklyBingoFlags;
+    [FieldOffset(0x760), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
+    [FieldOffset(0x764)] public byte WeeklyBingoRequestOpenBingoNo;
 
-    [FieldOffset(0x788)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x789)] private bool WeeklyBingoUnk63;
+    [FieldOffset(0x7A0)] public byte WeeklyBingoExpMultiplier;
+    [FieldOffset(0x7A1)] private bool WeeklyBingoUnk63;
 
     #endregion
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
-    [FieldOffset(0x790), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
+    [FieldOffset(0x7A8), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
 
     /// <remarks>
     /// 1 = Shadowbringers
     /// 2 = Endwalker
     /// 3 = Dawntrail
     /// </remarks>
-    [FieldOffset(0x820)] public byte MentorVersion;
+    [FieldOffset(0x838)] public byte MentorVersion;
 
     /// <remarks> Index is DohDolJobIndex from the ClassJob sheet. </remarks>
-    [FieldOffset(0x824), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
-    [FieldOffset(0x844)] public int FauxHollowsTimestamp;
-    [FieldOffset(0x848)] public int FauxHollowsState;
-    [FieldOffset(0x850)] public StdVector<ushort> CompletedCrystariumDeliveryQuests;
-    [FieldOffset(0x868)] public StdSet<byte> UnlockedMcGuffins;
-    [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray33<byte> _unlockedFramersKitsBitmask;
+    [FieldOffset(0x83C), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
+    [FieldOffset(0x85C)] public int FauxHollowsTimestamp;
+    [FieldOffset(0x860)] public int FauxHollowsState;
+    [FieldOffset(0x868)] public StdVector<ushort> CompletedCrystariumDeliveryQuests;
+    [FieldOffset(0x880)] public StdSet<byte> UnlockedMcGuffins;
+    [FieldOffset(0x890), FixedSizeArray] internal FixedSizeArray33<byte> _unlockedFramersKitsBitmask;
 
-    [FieldOffset(0x8C0)] public StdMap<uint, bool> TrackedStatuses;
-    [FieldOffset(0x8D0)] public StdMap<uint, bool> TrackedActionUnlocks;
-    [FieldOffset(0x8E0)] public StdMap<uint, bool> TrackedTraitUnlocks;
-    [FieldOffset(0x8F0)] public bool TrackedTraitUnlocksDirty;
-    [FieldOffset(0x8F1)] public bool TrackedActionUnlocksDirty;
-
-    public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
-    public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
+    [FieldOffset(0x8D8)] public StdMap<uint, bool> TrackedStatuses;
+    [FieldOffset(0x8E8)] public StdMap<uint, bool> TrackedActionUnlocks;
+    [FieldOffset(0x8F8)] public StdMap<uint, bool> TrackedTraitUnlocks;
+    [FieldOffset(0x908)] public bool TrackedTraitUnlocksDirty;
+    [FieldOffset(0x909)] public bool TrackedActionUnlocksDirty;
 
     public float GetDesynthesisLevel(uint classJobId)
         => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[(int)classJobId - 8] / 100f;
@@ -304,7 +312,7 @@ public unsafe partial struct PlayerState {
     /// Returns whether the player is specialized in the given DoH ClassJob.
     /// </summary>
     /// <param name="classJobId">The ClassJob row id of the DoH job to check.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F AB F5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 8B CF 8B C5")]
     public partial bool IsMeisterFlag(uint classJobId);
 
     /// <summary>
@@ -352,6 +360,9 @@ public unsafe partial struct PlayerState {
     /// <returns>Returns true if the ornament has been unlocked.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE")]
     public partial bool IsOrnamentUnlocked(uint ornamentId);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B DA 41 0F B6 F8 C1 EA")]
+    public partial void SetOrnamentUnlocked(uint ornamentId, bool isUnlocked);
 
     /// <summary>
     /// Check if a specific orchestrion roll has been unlocked by the player.
@@ -430,12 +441,18 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Check if a specific set of Glasses are unlocked. Internally, this will look up the associated GlassesStyle
     /// for the specified pair and check that it's valid and marked as unlocked in
-    /// <see cref="UnlockedGlassesStylesBitmask"/>.
+    /// <see cref="UnlockedGlassesStyles"/>.
     /// </summary>
     /// <param name="glassesId">The RowID of a set of glasses to check.</param>
     /// <returns>Returns true if the specified glasses are unlocked, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3")]
     public partial bool IsGlassesUnlocked(ushort glassesId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A FE 75 ?? 84 C0")]
+    public partial bool IsGlassesStyleUnlocked(ushort glassesStyleId);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF DA 41 0F B6 F8")]
+    public partial void SetGlassesStyleUnlocked(ushort glassesStyleId, bool isUnlocked);
 
     #endregion
 
@@ -492,7 +509,7 @@ public unsafe partial struct PlayerState {
     public bool HasWeeklyBingoJournal => GetWeeklyBingoFlagsValue(5) != 0;
 
     /// <summary>Returns the number of placed stickers.</summary>
-    public int WeeklyBingoNumPlacedStickers => BitOperations.PopCount(_weeklyBingoStickers);
+    public int WeeklyBingoNumPlacedStickers => BitOperations.PopCount(WeeklyBingoStickers);
 
     #endregion
 
@@ -507,7 +524,7 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a Battle Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 81 FD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 3D ?? ?? ?? ?? ?? 75 ?? 8D 56")]
     public partial bool IsBattleMentor();
 
     /// <summary>

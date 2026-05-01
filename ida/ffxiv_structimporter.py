@@ -155,6 +155,7 @@ class BaseApi:
                             field["offset"],
                             base,
                             field["size"],
+                            field["is_string"]
                         )
                     )
                 elif "return_type" in field:
@@ -264,9 +265,16 @@ class BaseApi:
     def preprocess_yaml(self, yml: DefinedStructExport):
         """
         Preprocesses the YAML data before importing.
+    def load_data_yaml(self):
+        # type: () -> dict
+        path = os.path.join(os.path.dirname(self.get_file_path), "data.yml")
+        if not os.path.exists(path):
+            return None
+        return load(open(path), Loader=Loader)
 
         For the IDA srclang importer, this fixes issues with generic base classes.
         """
+
 
 api = None
 
@@ -293,6 +301,37 @@ if api is None:
                 # type: (bool) -> None
                 self.full_padding = full_padding
                 self.srclang_importer = srclang_importer
+
+            def get_fallback_vfunc_name(self, class_name, index, visited=None):
+                # type: (str, int, set) -> str
+                if not hasattr(self, "data_yaml") or not self.data_yaml or "classes" not in self.data_yaml:
+                    return None
+                
+                if visited is None:
+                    visited = set()
+                
+                if class_name in visited:
+                    return None
+                visited.add(class_name)
+
+                if class_name not in self.data_yaml["classes"]:
+                    return None
+                
+                class_data = self.data_yaml["classes"][class_name]
+                if not class_data:
+                    return None
+
+                if "vfuncs" in class_data and index in class_data["vfuncs"]:
+                    return class_data["vfuncs"][index]
+
+                if "vtbls" in class_data and isinstance(class_data["vtbls"], list) and len(class_data["vtbls"]) > 0:
+                    vtbl = class_data["vtbls"][0]
+                    if "base" in vtbl:
+                        res = self.get_fallback_vfunc_name(vtbl["base"], index, visited)
+                        if res:
+                            return res
+
+                return None
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
@@ -700,7 +739,7 @@ if api is None:
                     type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
                     meminfo = self.get_struct_member_by_name(s, "__vftable")
                     self.set_struct_member_info(
-                        s, meminfo, 0, self.get_tinfo_from_type(type), 0
+                        s, meminfo, 0, self.get_tinfo_from_type(type), 0, False
                     )
 
                 contiguous_fields = True
@@ -787,6 +826,7 @@ if api is None:
                             0,
                             self.get_tinfo_from_type(field_type, array_size),
                             0,
+                            field.is_string if hasattr(field, "is_string") and (field_type == "char" or field_type == "wchar_t") else False
                         )
 
                 if struct.size is not None and struct.size != 0:
@@ -830,7 +870,7 @@ if api is None:
                     field_type = field_type[:-1] + ")"
 
                     self.set_struct_member_info(
-                        s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
+                        s, meminfo, 0, self.get_tinfo_from_type(field_type), 0, False
                     )
                 if struct.vtable_size:
                     size = int(struct.vtable_size / 8)
@@ -838,17 +878,23 @@ if api is None:
                     size = int(self.get_struct_size(s) / 8)
                 for i in range(size):
                     if self.get_struct_member_id(s, i * 8) == idc.BADADDR:
+                        name = "vf{0}".format(i)
+                        
+                        fallback_name = self.get_fallback_vfunc_name(struct.type, i)
+                        if fallback_name:
+                            name = fallback_name
+                        
                         self.create_struct_member(
                             s,
-                            "vf{0}".format(i),
+                            name,
                             i * 8,
                             self.get_idc_type_from_ida_type("__int64"),
                             None,
                             self.get_size_from_ida_type("__int64"),
                         )
-                        meminfo = self.get_struct_member_by_name(s, "vf{0}".format(i))
+                        meminfo = self.get_struct_member_by_name(s, name)
                         self.set_struct_member_info(
-                            s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0
+                            s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0, False
                         )
 
             def finalise_struct(self, struct: DefinedStruct):
@@ -1324,7 +1370,8 @@ if api is None:
                 dt = EnumDataType(enum.name, enum_size)
                 dt.setCategoryPath(self.get_category_path(enum.type))
                 for value in enum.values:
-                    dt.add(value, enum.values[value])
+                    if not dt.contains(enum.values[value]):
+                        dt.add(value, enum.values[value])
                 self.create_datatype(dt)
 
             def delete_enum(self, enum):
@@ -1833,9 +1880,15 @@ def get_time():
 def run():
     if not api.can_run():
         raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
+    
+    update_virt_func = api.should_update_virt_func()
+    update_member_func = api.should_update_member_func()
 
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
+    
+    print("{0} Loading data yaml".format(get_time()))
+    api.data_yaml = api.load_data_yaml()
 
     print("{0} Preprocessing yaml".format(get_time()))
     api.preprocess_yaml(yaml)
@@ -1872,7 +1925,7 @@ def run():
     for struct in yaml.structs:
         api.create_union(struct)
 
-    if api.should_update_virt_func():
+    if update_virt_func:
         for struct in yaml.structs:
             if struct.virtual_functions:
                 print(
@@ -1887,7 +1940,7 @@ def run():
                     if virt_func.return_type != None and virt_func.parameters != None:
                         api.update_virt_func(virt_func, struct)
 
-    if api.should_update_member_func():
+    if update_member_func:
         for struct in yaml.structs:
             if struct.member_functions != []:
                 print(

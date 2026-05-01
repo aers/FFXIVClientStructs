@@ -4,5 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
 [Inherits<BaseRenderer>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4430)]
-public partial struct TerrainRenderer;
+[StructLayout(LayoutKind.Explicit, Size = 0x4420)]
+public partial struct TerrainRenderer {
+    [FieldOffset(0x43B1)] public bool Wireframe;
+}

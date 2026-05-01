@@ -1,7 +1,8 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentWKSMission
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.WKSMission)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

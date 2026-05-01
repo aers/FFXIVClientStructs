@@ -30,7 +30,6 @@ public unsafe partial struct AtkInputManager {
         [FieldOffset(0x0)] public AtkEventListener* AtkEventListener;
         [FieldOffset(0x8)] public AtkEventTarget* AtkEventTarget;
         [FieldOffset(0x10)] public int FocusParam;
-        [FieldOffset(0x10), Obsolete("Renamed to FocusParam", true)] public int Unk10;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]

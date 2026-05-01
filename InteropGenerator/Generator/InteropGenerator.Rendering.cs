@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace InteropGenerator.Generator;
 
@@ -75,6 +76,12 @@ public sealed partial class InteropGenerator {
             token.ThrowIfCancellationRequested();
         }
 
+        // write bitfield accessors
+        if (!structInfo.BitFields.IsEmpty) {
+            RenderBitFields(structInfo, writer);
+            token.ThrowIfCancellationRequested();
+        }
+
         // write closing struct hierarchy
         for (var i = 0; i < structInfo.Hierarchy.Length; i++) {
             writer.DecreaseIndent();
@@ -88,10 +95,10 @@ public sealed partial class InteropGenerator {
         writer.WriteLine("public static class Addresses");
         using (writer.WriteBlock()) {
             foreach (MemberFunctionInfo mfi in structInfo.MemberFunctions) {
-                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo.Name, mfi.SignatureInfo));
+                writer.WriteLine(GetAddressString(structInfo, mfi.MethodInfo.NameNonGeneric, mfi.SignatureInfo));
             }
             foreach (StaticAddressInfo sai in structInfo.StaticAddresses) {
-                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo.Name, sai.SignatureInfo));
+                writer.WriteLine(GetAddressString(structInfo, sai.MethodInfo.NameNonGeneric, sai.SignatureInfo));
             }
             if (structInfo.StaticVirtualTableSignature is not null) {
                 writer.WriteLine(GetAddressString(structInfo, "StaticVirtualTable", structInfo.StaticVirtualTableSignature));
@@ -135,10 +142,10 @@ public sealed partial class InteropGenerator {
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
-                var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
+                var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingTypeNoGenerics()}{vfi.MethodInfo.ReturnTypeOrVoid}>";
                 foreach (string attr in vfi.MethodInfo.InheritableAttributes)
                     writer.WriteLine(attr);
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.NameNonGeneric};");
             }
         }
         writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
@@ -175,7 +182,7 @@ public sealed partial class InteropGenerator {
         string methodModifiers = methodInfo.Modifiers.Replace(" partial", string.Empty).Replace(" static", string.Empty);
         foreach (string attr in methodInfo.InheritableAttributes)
             writer.WriteLine(attr);
-        writer.WriteLine($"{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames});");
+        writer.WriteLine($"{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames}){methodInfo.GenericConstraints};");
     }
 
     private static void RenderMemberFunctions(StructInfo structInfo, IndentedTextWriter writer) {
@@ -185,19 +192,19 @@ public sealed partial class InteropGenerator {
             foreach (MemberFunctionInfo mfi in structInfo.MemberFunctions) {
                 // add struct type as first argument if method is not static
                 string thisPtrType = mfi.MethodInfo.IsStatic ? string.Empty : $"{structInfo.Name}*, ";
-                var functionPointerType = $"delegate* unmanaged <{thisPtrType}{mfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{mfi.MethodInfo.ReturnType}>";
-                writer.WriteLine($"public static {functionPointerType} {mfi.MethodInfo.Name} => ({functionPointerType}) {structInfo.Name}.Addresses.{mfi.MethodInfo.Name}.Value;");
+                var functionPointerType = $"delegate* unmanaged <{thisPtrType}{mfi.MethodInfo.GetParameterTypeStringWithTrailingTypeNoGenerics()}{mfi.MethodInfo.ReturnTypeOrVoid}>";
+                writer.WriteLine($"public static {functionPointerType} {mfi.MethodInfo.NameNonGeneric} => ({functionPointerType}) {structInfo.Name}.Addresses.{mfi.MethodInfo.NameNonGeneric}.Value;");
             }
         }
         foreach (MemberFunctionInfo mfi in structInfo.MemberFunctions) {
             writer.WriteLine(mfi.MethodInfo.GetDeclarationString());
             using (writer.WriteBlock()) {
-                writer.WriteLine($"if (MemberFunctionPointers.{mfi.MethodInfo.Name} is null)");
+                writer.WriteLine($"if (MemberFunctionPointers.{mfi.MethodInfo.NameNonGeneric} is null)");
                 using (writer.WriteBlock()) {
                     writer.WriteLine($"""InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("{structInfo.Name}.{mfi.MethodInfo.Name}", "{mfi.SignatureInfo.Signature}");""");
                 }
                 if (mfi.MethodInfo.IsStatic) {
-                    writer.WriteLine($"{mfi.MethodInfo.GetReturnString()}MemberFunctionPointers.{mfi.MethodInfo.Name}({mfi.MethodInfo.GetParameterNamesString()});");
+                    writer.WriteLine($"{mfi.MethodInfo.GetReturnString()}MemberFunctionPointers.{mfi.MethodInfo.NameNonGeneric}({mfi.MethodInfo.GetParameterNamesString()});");
                 } else {
                     var paramNames = string.Empty;
                     if (mfi.MethodInfo.Parameters.Any())
@@ -214,7 +221,7 @@ public sealed partial class InteropGenerator {
             var paramNames = string.Empty;
             if (virtualFunctionInfo.MethodInfo.Parameters.Any())
                 paramNames = ", " + virtualFunctionInfo.MethodInfo.GetParameterNamesString();
-            writer.WriteLine($"{virtualFunctionInfo.MethodInfo.GetDeclarationString()} => VirtualTable->{virtualFunctionInfo.MethodInfo.Name}(({structInfo.Name}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
+            writer.WriteLine($"{virtualFunctionInfo.MethodInfo.GetDeclarationString()} => {virtualFunctionInfo.MethodInfo.ReturnTypeCast}VirtualTable->{virtualFunctionInfo.MethodInfo.NameNonGeneric}(({structInfo.Name}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
         }
     }
 
@@ -369,11 +376,11 @@ public sealed partial class InteropGenerator {
                 foreach (StructInfo sInfo in structInfos) {
                     // member function addresses
                     foreach (MemberFunctionInfo mfi in sInfo.MemberFunctions) {
-                        writer.WriteLine(GetAddToResolverString(sInfo, mfi.MethodInfo.Name));
+                        writer.WriteLine(GetAddToResolverString(sInfo, mfi.MethodInfo.NameNonGeneric));
                     }
                     // static addresses
                     foreach (StaticAddressInfo sai in sInfo.StaticAddresses) {
-                        writer.WriteLine(GetAddToResolverString(sInfo, sai.MethodInfo.Name));
+                        writer.WriteLine(GetAddToResolverString(sInfo, sai.MethodInfo.NameNonGeneric));
                     }
                     // static virtual table
                     if (sInfo.StaticVirtualTableSignature is not null) {
@@ -386,11 +393,11 @@ public sealed partial class InteropGenerator {
                 foreach (StructInfo sInfo in structInfos) {
                     // member function addresses
                     foreach (MemberFunctionInfo mfi in sInfo.MemberFunctions) {
-                        writer.WriteLine(GetRemoveFromResolverString(sInfo, mfi.MethodInfo.Name));
+                        writer.WriteLine(GetRemoveFromResolverString(sInfo, mfi.MethodInfo.NameNonGeneric));
                     }
                     // static addresses
                     foreach (StaticAddressInfo sai in sInfo.StaticAddresses) {
-                        writer.WriteLine(GetRemoveFromResolverString(sInfo, sai.MethodInfo.Name));
+                        writer.WriteLine(GetRemoveFromResolverString(sInfo, sai.MethodInfo.NameNonGeneric));
                     }
                     // static virtual table
                     if (sInfo.StaticVirtualTableSignature is not null) {
@@ -438,5 +445,24 @@ public sealed partial class InteropGenerator {
         }
 
         return writer.ToString();
+    }
+
+    private static void RenderBitFields(StructInfo structInfo, IndentedTextWriter writer) {
+        foreach (BitFieldInfo bitField in structInfo.BitFields) {
+            foreach (string inheritedAttribute in bitField.InheritableAttributes)
+                writer.WriteLine(inheritedAttribute);
+
+            writer.WriteLine($"{SyntaxFacts.GetText(bitField.Accessibility)} {(bitField.IsPartial ? "partial " : "")}{bitField.Type} {bitField.Name}");
+            using (writer.WriteBlock()) {
+                if (bitField.Type == "bool") {
+                    if (bitField.HasGetter) writer.WriteLine($"get => BitOps.GetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index});");
+                    if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, value);");
+                } else {
+                    string mask = $"BitOps.CreateLowBitMask<{bitField.BackingType}>({bitField.Length})";
+                    if (bitField.HasGetter) writer.WriteLine($"get => ({bitField.Type})BitOps.GetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask});");
+                    if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask}, ({bitField.BackingType})value);");
+                }
+            }
+        }
     }
 }

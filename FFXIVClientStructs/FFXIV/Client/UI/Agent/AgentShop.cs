@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using AtkEventInterface = FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface.AtkEventInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;

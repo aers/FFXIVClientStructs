@@ -24,12 +24,15 @@ public unsafe partial struct InputData {
     [FieldOffset(0x994)] public GamepadModifierFlag CurrentGamepadModifier;
     [FieldOffset(0x995)] public KeyModifierFlag CurrentKeyModifier;
 
+    /// <remarks> The field contains values of <see cref="MouseButtonFlags" /> (as byte instead of int), saving which buttons are currently used for dragging. </remarks>
+    [FieldOffset(0x9AC)] public byte CurrentMouseDragButtons;
+
     [FieldOffset(0x9AE)] public bool GamepadInputs2ButtonsChanged;
     [FieldOffset(0x9AF)] public bool CursorPositionsChanged;
     [FieldOffset(0x9B0)] public bool KeyboardInputsChanged;
     [FieldOffset(0x9B1)] public bool UIFilteredCursorInputsButtonsChanged;
     [FieldOffset(0x9B2)] public bool GamepadInputsButtonsChanged;
-
+    [FieldOffset(0x9B3)] public GamepadInputsFilter CurrentGamepadInputsFilter;
     [FieldOffset(0x9B4)] public int NumKeybinds; // amount of InputIds
     [FieldOffset(0x9B8)] public Keybind* Keybinds; // index is InputId
 
@@ -113,8 +116,9 @@ public struct GamepadInputData {
     [FieldOffset(0x190)] public float DPadDown;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public struct CursorInputData {
+public partial struct CursorInputData {
     [FieldOffset(0x0)] public int PositionX;
     [FieldOffset(0x4)] public int PositionY;
     [FieldOffset(0x8)] public int MouseWheel; // -1 for scroll down, 1 for scroll up
@@ -128,6 +132,9 @@ public struct CursorInputData {
 
     // At least this is what it seems to be
     [FieldOffset(0x2C)] public bool IsGameWindowFocused;
+
+    [MemberFunction("84 D2 74 0F 33 C0")]
+    public partial void Clear(bool clearPositionAndWheel, MouseButtonFlags buttonsToClear);
 }
 
 [GenerateInterop]
@@ -232,6 +239,11 @@ public enum KeyModifierFlag : byte {
     Shift = 1 << 0,
     Ctrl = 1 << 1,
     Alt = 1 << 2,
+}
+
+public enum GamepadInputsFilter : byte {
+    RightStick = 0,
+    LeftStick = 1,
 }
 
 /// From pointer found in <see cref="UIInputData.GetKeybindByName"/>

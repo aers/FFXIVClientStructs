@@ -1,18 +1,19 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Memory;
 
-public interface ICreatable {
-    public void Ctor();
+public unsafe interface ICreatable<T> where T : unmanaged {
+    T* Ctor();
 }
 
 // Client::System::Memory::IMemorySpace
 [GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct IMemorySpace {
-    public T* Create<T>() where T : unmanaged, ICreatable {
-        var memory = (T*)Malloc<T>();
-        if (memory is null) return null;
-        Memset(memory, 0, (ulong)sizeof(T));
-        memory->Ctor();
+    public T* Create<T>() where T : unmanaged, ICreatable<T> {
+        var memory = Malloc<T>();
+        if (memory != null) {
+            Memset(memory, 0, (ulong)sizeof(T));
+            memory->Ctor();
+        }
         return memory;
     }
 
@@ -41,7 +42,10 @@ public unsafe partial struct IMemorySpace {
     public static partial void Memset(void* ptr, int value, ulong size);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 1B 48 89 28")]
-    public static partial void* StaticMalloc(ulong size, ulong alignment);
+    public static partial void* StaticAlignedMalloc(ulong size, ulong alignment = 0x10);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 89 84 FB")]
+    public static partial void StaticAlignedFree(void* ptr);
 
     [VirtualFunction(0)]
     public partial IMemorySpace* Dtor(byte freeFlags);

@@ -176,7 +176,7 @@ class SqPack:
         self.load_hash_table()
         self.data_files: list[str] = []
         for file in get_sqpack_files(
-            self.root, self.path.rsplit("\\", 1)[0].split("\\")[-1]
+            self.root, self.path.rsplit(os.sep, 1)[0].split(os.sep)[-1]
         ):
             for i in range(0, self.index_header.number_of_data_file):
                 name = self.path.rsplit(".", 1)[0] + ".dat" + str(i)

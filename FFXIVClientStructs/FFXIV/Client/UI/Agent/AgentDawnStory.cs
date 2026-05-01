@@ -1,8 +1,11 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentDawnStory
+//   Client::UI::Agent::AgentDawnInterface
+//     Client::UI::Agent::AgentInterface
+//       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.DawnStory)]
 [GenerateInterop]
 [Inherits<AgentDawnInterface>]

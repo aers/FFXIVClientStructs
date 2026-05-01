@@ -37,5 +37,5 @@ public unsafe partial struct AgentDetail {
     /// Can be 0, but will open slightly off-center.
     /// </param>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? BF")]
-    public partial void OpenForCharacterData(InfoProxyCommonList.CharacterData* characterData, InfoProxyDetail.UpdateDataPacket* updateDataPacket = null, int ownerAddonId = 0);
+    public partial void OpenForCharacterData(InfoProxyCommonList.CharacterData* characterData, InfoProxyDetail.DetailUpdateData* updateDataPacket = null, int ownerAddonId = 0);
 }

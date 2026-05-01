@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyCrossRealm
@@ -5,17 +7,17 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.CrossRealmParty)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A58)]
 public unsafe partial struct InfoProxyCrossRealm {
-    [FieldOffset(0x46D)] public byte LocalPlayerGroupIndex;
-    [FieldOffset(0x46E)] public byte GroupCount;
+    [FieldOffset(0x485)] public byte LocalPlayerGroupIndex;
+    [FieldOffset(0x486)] public byte GroupCount;
 
-    [FieldOffset(0x470)] public bool IsCrossRealm; //i guess?
-    [FieldOffset(0x471)] public bool IsInAllianceRaid;
-    [FieldOffset(0x472)] public bool IsPartyLeader;
-    [FieldOffset(0x473)] public bool IsInCrossRealmParty;
+    [FieldOffset(0x488)] public bool IsCrossRealm; //i guess?
+    [FieldOffset(0x489)] public bool IsInAllianceRaid;
+    [FieldOffset(0x48A)] public bool IsPartyLeader;
+    [FieldOffset(0x48B)] public bool IsInCrossRealmParty;
 
-    [FieldOffset(0x480), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
+    [FieldOffset(0x498), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
@@ -23,7 +25,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5C 24 ?? 84 C0")]
     public static partial bool IsAllianceRaid();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 3A F8 0F 85")]
     public static partial byte GetGroupIndex(byte group);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 77 ?? C7 43")]
@@ -44,8 +46,14 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? ?? ?? ?? 48 8B CB FF 50 ?? 41 0F B7 4E")]
     public static partial bool IsContentIdInParty(ulong contentId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 88 9F ?? ?? ?? ?? 0F B6 F0")]
+    public static partial bool IsLocalPlayerInParty();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 3F 33 D2")]
+    public static partial bool IsLocalPlayerPartyLeader();
+
     [MemberFunction("40 53 41 57 48 83 EC 28 48 8B D9 4C 8B FA 48 8B 0D")]
-    public partial void ReceiveListing(nint packet);
+    public partial void ReceiveListing(ServerIpcSegment<CrossRealmListingSegmentPacket>* packet);
 }
 
 [GenerateInterop]

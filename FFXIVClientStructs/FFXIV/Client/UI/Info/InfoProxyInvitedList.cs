@@ -5,4 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct InfoProxyInvitedList;
+public unsafe partial struct InfoProxyInvitedList {
+    [VirtualFunction(13), GenerateStringOverloads]
+    public partial bool RespondToInvitation(CStringPointer inviterName, bool accept);
+}

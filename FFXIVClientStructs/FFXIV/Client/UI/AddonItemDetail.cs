@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -134,7 +133,7 @@ public unsafe partial struct AddonItemDetail {
     [FieldOffset(0x7B4)] public short OffsetX;
     [FieldOffset(0x7B6)] public short OffsetY;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 45 ?? 83 F8 ?? 77 ?? ?? ?? ?? 48 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 45 ?? 83 F8 ?? 77 ?? 48 8B 07 48 8B CF FF 50 ?? B2 ?? 48 8B CF 44 0F BF F0")]
     public partial void UpdateGroupPositions(NumberArrayData* numberArray, StringArrayData* stringArray);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]

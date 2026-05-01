@@ -1,4 +1,4 @@
-using static FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitManager;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 using AtkEventInterface = FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface.AtkEventInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -15,7 +15,7 @@ public unsafe partial struct AgentInterface {
     [FieldOffset(0x20)] public uint AddonId;
 
     [VirtualFunction(2)]
-    public partial void Dtor(byte freeFlags);
+    public partial AgentInterface* Dtor(byte freeFlags);
 
     [VirtualFunction(3)]
     public partial void Show();
@@ -43,7 +43,7 @@ public unsafe partial struct AgentInterface {
     public partial uint GetAddonId();
 
     [VirtualFunction(10)]
-    public partial void OnGameEvent(GameEvent gameEvent);
+    public partial void OnGameEvent(AgentGameEvent gameEvent);
 
     [VirtualFunction(11)]
     public partial void OnLevelChange(byte classJobId, ushort level);
@@ -63,7 +63,7 @@ public unsafe partial struct AgentInterface {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 48 8B 82")]
     public partial void HideAddon();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 05 41 B4 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 45 33 C9 8D 4D")]
     public partial bool IsAddonShown();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1A 49 8B CF")]
@@ -74,16 +74,16 @@ public unsafe partial struct AgentInterface {
 
     [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 41 B0 ?? 33 D2")]
     public partial bool FocusAddon();
+}
 
-    public enum GameEvent {
-        LoggedIn,
-        LoadingEnded, // UI shown
-        LoadingStarted, // UI hidden
-        LoggedOut,
-        Unk4,
-        Unk5, // Entering Duty?
-        Unk6, // Entering Duty?
-        Unk7, // Leaving Duty?
-        Unk8
-    }
+public enum AgentGameEvent {
+    LoggedIn,
+    LoadingEnded, // UI shown
+    LoadingStarted, // UI hidden
+    LoggedOut,
+    Unk4,
+    Unk5, // Entering Duty?
+    Unk6, // Entering Duty?
+    Unk7, // Leaving Duty?
+    Unk8
 }

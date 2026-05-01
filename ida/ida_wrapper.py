@@ -167,7 +167,7 @@ class BaseIdaInterface(object):
             .replace("__int64", "long")
             .replace("__int32", "int")
             .replace("__int16", "short")
-            .replace("__int8", "byte")
+            .replace("__int8", "char")
         )
 
     def get_named_type(self, name: str):
@@ -538,6 +538,7 @@ class IdaInterface(BaseIdaInterface):
             offset: int,
             tif: ida_typeinf.tinfo_t,
             flag: int = 0,
+            is_string: bool = False
         ):
             """Set the info of a struct member
 
@@ -551,7 +552,10 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 smt_code_t: Unknown IDA documentation
             """
-            return ida_struct.set_member_tinfo(sid, member, offset, tif, flag)
+            set_mem_ret = ida_struct.set_member_tinfo(sid, member, offset, tif, flag)
+            if is_string:
+                member.flag = member.flag | ida_bytes.FF_STRLIT
+            return set_mem_ret
 
         def get_struct_member_id(self, sid: ida_struct.struc_t, offset: int) -> int:
             """Get the member id
@@ -1052,6 +1056,7 @@ class IdaInterface(BaseIdaInterface):
             offset: int,
             tif: ida_typeinf.tinfo_t,
             flag: int = 0,
+            is_string: bool = False
         ):
             """Set the info of a struct member
 

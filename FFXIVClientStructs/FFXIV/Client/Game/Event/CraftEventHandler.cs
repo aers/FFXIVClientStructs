@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -7,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x478)]
+[StructLayout(LayoutKind.Explicit, Size = 0x640)]
 public unsafe partial struct CraftEventHandler {
     [FieldOffset(0x1B8 + 0x00), CExporterExcelBegin("Recipe")] public uint RequiredQuality;
     [FieldOffset(0x1B8 + 0x04)] public uint Quest;

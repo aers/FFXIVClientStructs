@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Trade")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>, Inherits<AtkManagedInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x258)]
+[StructLayout(LayoutKind.Explicit, Size = 0x378)]
 public unsafe partial struct AddonTrade;

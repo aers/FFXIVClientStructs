@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 // Client::System::Input::ClipBoard

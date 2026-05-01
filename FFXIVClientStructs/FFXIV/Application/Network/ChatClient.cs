@@ -1,6 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Application.Network;
 
+// Application::Network::ChatClient
+//   Application::Network::ClientBase
 [GenerateInterop]
+[Inherits<ClientBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-public unsafe partial struct ChatClient {
-}
+public partial struct ChatClient;

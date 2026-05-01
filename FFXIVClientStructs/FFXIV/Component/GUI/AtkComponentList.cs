@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1B0)]
-public unsafe partial struct AtkComponentList : ICreatable {
+public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* ScrollBarComponent;
     [FieldOffset(0xD0)] public AtkCollisionNode* CollisionNode;
@@ -95,11 +95,11 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0x1AD)] private byte Unk1AD; // flags for dragdrop
     // 2 bytes nothing?
 
-    [FieldOffset(0xC8), Obsolete("Renamed to ScrollBarComponent")] public AtkComponentScrollBar* AtkComponentScrollBarC8;
-    [FieldOffset(0x193), Obsolete("Renamed to IsScrollBarEnabled")] public bool ScrollbarEnabled;
+    [FieldOffset(0xC8), Obsolete("Renamed to ScrollBarComponent", true)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
+    [FieldOffset(0x193), Obsolete("Renamed to IsScrollBarEnabled", true)] public bool ScrollbarEnabled;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0")]
-    public partial void Ctor();
+    public partial AtkComponentList* Ctor();
 
     [VirtualFunction(23)]
     public partial void ScrollToItem(short index);
@@ -147,13 +147,14 @@ public unsafe partial struct AtkComponentList : ICreatable {
 
     /// <remarks> rendererNodeId is the node id of the ListItemRenderer to use. if 0, it uses FirstAtkComponentListItemRenderer </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D3 85 ED")]
-    public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, int columnCount, uint rendererNodeId = 0);
+    public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, byte columnCount, uint rendererNodeId = 0);
 
+    [Obsolete("Use GetComponentItemRendererById", true)]
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
     public partial AtkComponentListItemRenderer* GetItemRendererByNodeId(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 FF 04")]
-    public partial void SetItemCount(int value);
+    public partial void SetItemCount(short value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 FF 79 ?? 44 39 75"), GenerateStringOverloads]
     public partial void SetItemLabel(int index, CStringPointer text);
@@ -200,7 +201,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 4C 8B C5 48 8B D7")]
     public partial bool HandleFocusStop(AtkEvent* atkEvent, AtkEventData.AtkFocusData* data);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 4C 8B C5 48 8B D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? ?? ?? ?? 8B D7 48 8B CB FF 90")]
     public partial bool HandleButtonPress(AtkEvent* atkEvent, AtkEventData.AtkInputData* data, int itemIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 44 24 ?? 83 FB")]

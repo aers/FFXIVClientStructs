@@ -1,12 +1,14 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentCabinetWithdraw
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CabinetWithdraw)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentCabinetWithdraw {
 
     [FieldOffset(0x28)] public CabinetWithdrawData* Data;
@@ -27,7 +29,7 @@ public unsafe partial struct AgentCabinetWithdraw {
 
         [FieldOffset(0xD8)] public uint CurrentTabIndex;
 
-        [FieldOffset(0xE8)] private ExcelSheetWaiter _sheetWaiter;
+        [FieldOffset(0xE8)] private ExcelSheetWaiter SheetWaiter;
 
         [FieldOffset(0x1A8)] public StdVector<CurrentCategoryItemDetail> CurrentCategoryItems;
 

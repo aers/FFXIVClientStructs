@@ -28,8 +28,8 @@ public unsafe partial struct CharacterData {
     [FieldOffset(0x30)] public byte OnlineStatus;
     [FieldOffset(0x31)] public byte Battalion; // used for determining friend/enemy state
 
-    // 0x01 = IsHostile
-    // 0x02 = InCombat
+    [BitField<bool>(nameof(IsHostile), 0)]
+    [BitField<bool>(nameof(InCombat), 1)]
     [FieldOffset(0x34)] public byte Flags;
 
     /// <summary>

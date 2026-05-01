@@ -1,12 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-[GenerateInterop(isInherited: true)]
-[Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public unsafe partial struct AgentExplorationInterface {
-}
-
-
+// Client::UI::Agent::AgentSubmersibleExploration
+//   Client::UI::Agent::AgentExplorationInterface
+//     Client::UI::Agent::AgentInterface
+//       Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.SubmersibleExploration)]
 [GenerateInterop]
 [Inherits<AgentExplorationInterface>]

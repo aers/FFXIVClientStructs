@@ -10,5 +10,4 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     [StringIgnore] attribute can be applied to a method parameter to ignore it.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class GenerateStringOverloadsAttribute : Attribute {
-}
+public sealed class GenerateStringOverloadsAttribute : Attribute;

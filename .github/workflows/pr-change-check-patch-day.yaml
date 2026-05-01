@@ -21,7 +21,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: ./.github/composites/update-dotnet
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Run CExporter
         working-directory: ./
         run: dotnet run --project CExporter/CExporter.csproj -c Release

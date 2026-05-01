@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public unsafe partial struct AtkComponentWindow : ICreatable {
+public unsafe partial struct AtkComponentWindow : ICreatable<AtkComponentWindow> {
     [FieldOffset(0xC0)] public AtkUnitBase* OwnerUnitBase;
     /// <remarks>
     /// [0] = Title<br/>
@@ -32,7 +32,7 @@ public unsafe partial struct AtkComponentWindow : ICreatable {
 
     // Inlined in 7.0, but still hanging around
     [MemberFunction("33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 0F 57 C0")]
-    public partial void Ctor();
+    public partial AtkComponentWindow* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4F ?? C6 85"), GenerateStringOverloads]
     public partial void SetTitle(CStringPointer title, CStringPointer subtitle);

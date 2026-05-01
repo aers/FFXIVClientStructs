@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FixedSheetInterface = FFXIVClientStructs.FFXIV.Component.Text.TextModuleInterface.FixedSheetInterface;
@@ -34,7 +33,7 @@ public unsafe partial struct CompletionModule {
     [FieldOffset(0x2A8)] public Utf8String OpenIconMacro;
     [FieldOffset(0x310)] public Utf8String CloseIconMacro;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 54 24 ?? 85 D2"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 56 ?? 85 D2 7E"), GenerateStringOverloads]
     public partial void AddCompletionEntry(long groupIndex, uint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23"), GenerateStringOverloads]

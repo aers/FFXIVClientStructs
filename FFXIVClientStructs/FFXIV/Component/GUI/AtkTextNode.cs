@@ -1,7 +1,6 @@
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -15,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x180)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 144])]
-public unsafe partial struct AtkTextNode : ICreatable {
+public unsafe partial struct AtkTextNode : ICreatable<AtkTextNode> {
     [FieldOffset(0xC0)] public uint TextId;
     [FieldOffset(0xC4)] public ByteColor TextColor;
     [FieldOffset(0xC8)] public ByteColor EdgeColor;
@@ -38,10 +37,11 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0x170)] public TextFlags TextFlags;
 
     // 7.0 inlines this ctor
-    public void Ctor() {
-        AtkResNode.Ctor();
+    public AtkTextNode* Ctor() {
+        var ret = AtkResNode.Ctor();
         VirtualTable = StaticVirtualTablePointer;
         NodeText.Ctor();
+        return (AtkTextNode*)ret;
     }
 
     /// <summary>
@@ -95,18 +95,19 @@ public unsafe partial struct AtkTextNode : ICreatable {
     public partial void ApplyTextFlow();
 
     public AlignmentType AlignmentType {
-        get => (AlignmentType)(AlignmentFontType & 0x0F);
+        get => (AlignmentType)BitOps.GetBits(AlignmentFontType, 0, 0b1111);
         set => SetAlignment(value);
     }
 
     public FontType FontType {
-        get => (FontType)((AlignmentFontType & 0xF0) >> 4);
+        get => (FontType)BitOps.GetBits(AlignmentFontType, 4, 0b1111);
         set => SetFont(value);
     }
 }
 
 [Flags]
 public enum TextFlags : ushort {
+    None = 0,
     AutoAdjustNodeSize = 1 << 0,
     Bold = 1 << 1,
     Italic = 1 << 2,
@@ -121,12 +122,12 @@ public enum TextFlags : ushort {
 }
 
 public enum FontType : byte {
-    Axis = 0x0,
-    MiedingerMed = 0x1,
-    Miedinger = 0x2,
-    TrumpGothic = 0x3,
-    Jupiter = 0x4,
-    JupiterLarge = 0x5,
+    Axis = 0,
+    MiedingerMed = 1,
+    Miedinger = 2,
+    TrumpGothic = 3,
+    Jupiter = 4,
+    JupiterLarge = 5,
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
@@ -154,5 +155,5 @@ public unsafe struct LinkData {
     [FieldOffset(0x2C), CExporterUnion("Value3")] public uint UIntValue3;
     [FieldOffset(0x30)] public uint LinkColor;
 
-    public uint BackgroundColor => (uint)(LinkColor & 0xFFFFFF | 0x40000000);
+    public uint BackgroundColor => LinkColor & 0xFFFFFF | 0x40000000;
 }

@@ -25,8 +25,11 @@ public unsafe partial struct EmjModule {
     [FieldOffset(0x51)] public byte OwnPlayerNameSetting;
     [FieldOffset(0x52)] public byte OthersPlayerNameSetting;
     [FieldOffset(0x53)] public bool DisableCharacterVoices;
-    [FieldOffset(0x54)] private byte Unk54;
-    [FieldOffset(0x55)] private byte Unk55;
+    [FieldOffset(0x54)] public byte EmjVoiceNpc;
+    /// <remarks>
+    /// This is the subrow id of EmjCostume
+    /// </remarks>
+    [FieldOffset(0x55)] public byte EmjCostumeId;
 
     [FieldOffset(0x58)] private int Unk58;
     [FieldOffset(0x5C)] private int Unk5C; // set to current time

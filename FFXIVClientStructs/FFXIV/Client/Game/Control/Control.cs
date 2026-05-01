@@ -29,7 +29,7 @@ public unsafe partial struct Control {
     /// <returns>See <see cref="FlightAllowedStatus"/></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 ?? 32 C0 48 83 C4 38")]
     public static partial FlightAllowedStatus GetFlightAllowedStatus();
-    public enum FlightAllowedStatus : int {
+    public enum FlightAllowedStatus {
         CanFly = 0,
         Unk1 = 1, // something with certain territories
         Unk2 = 2, // UIState.Instance() + 0x1A21D != 0

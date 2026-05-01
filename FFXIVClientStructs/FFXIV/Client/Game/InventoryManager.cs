@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
-using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 

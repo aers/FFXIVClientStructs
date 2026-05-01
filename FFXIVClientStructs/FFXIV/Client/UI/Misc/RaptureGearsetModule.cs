@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -69,11 +69,29 @@ public unsafe partial struct RaptureGearsetModule {
     public partial int EquipGearsetInternal(int gearsetId, byte glamourPlateId = 0);
 
     /// <summary>
+    /// Finds the first gearset ID that is empty.
+    /// </summary>
+    /// <returns>The gearset ID if an empty slot is found, or <c>255</c> if no empty slots were found.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 84 24 ?? ?? ?? ?? 3D")]
+    public partial int FirstEmptyGearsetSlot();
+
+    /// <summary>
     /// Save the player's current inventory to a new gearset at the next possible ID.
     /// </summary>
-    /// <returns>Returns the ID of the created gearset, or -1 if the creation attempt fails.</returns>
+    /// <returns>Returns the ID of the created gearset, or 255 if the creation attempt fails.</returns>
+    /// <remarks>
+    /// First checks <see cref="FirstEmptyGearsetSlot"/> to find an empty ID, then calls <see cref="CreateGearsetInternal(int)"/> to create the gearset.
+    /// </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 8B D5 E8 ?? ?? ?? ?? 8B E8")]
-    public partial sbyte CreateGearset();
+    public partial int CreateGearset();
+
+    /// <summary>
+    /// Save the player's current equipped gear to the gearset ID.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to create a new gearset.</param>
+    /// <returns>Returns the ID of the created gearset, or 255 if the creation attempt fails.</returns>
+    [MemberFunction("48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 63 F2 48 8D 0D")]
+    public partial int CreateGearsetInternal(int gearsetId);
 
     /// <summary>
     /// Delete the gearset at the specified ID.
@@ -95,16 +113,30 @@ public unsafe partial struct RaptureGearsetModule {
     /// <remarks>
     /// This method is used to change the order of gearsets, and is referred to as "Reassign Set Number" in the game.<br/>
     /// After calling this method, it is advisable to validate the returned gearset ID and, if the ID is valid, to
-    /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.
+    /// call <see cref="RaptureHotbarModule.ReassignGearsetId"/> to update the hotbar slots.<br/>
+    /// Use <see cref="AgentGearSet.ReassignGearsetId"/> to reassign the gearset ID internally,
+    /// on the hotbar and to send an update to the addon.
     /// </remarks>
-    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
     /// <param name="newGearsetId">The ID to which the gearset should be reassigned.</param>
+    /// <param name="gearsetId">The ID of the gearset to be switched.</param>
     /// <returns>
     /// Returns <c>-1</c> if either the original gearset ID or the new gearset ID is invalid, <c>-2</c> if the player
-    /// is currently editing a portrait, otherwise it returns the ID of the original gearset that was moved to a new position.
+    /// is currently editing a portrait, otherwise it returns the moved gearset's new ID.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16")]
-    public partial int ReassignGearsetId(int gearsetId, int newGearsetId);
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF")]
+    public partial int ReassignGearsetId(int newGearsetId, int gearsetId);
+
+    /// <summary>
+    /// Changes the gearset's name at the specified ID.
+    /// </summary>
+    /// <param name="gearsetId">The gearset ID to rename</param>
+    /// <param name="newGearsetName">The name to change the specified gearset to</param>
+    /// <returns>
+    /// <see langword="true" /> when renaming the gearset was successful, <see langword="false" /> when the gearset is invalid or the given name is empty.
+    /// </returns>
+    /// <remarks> Use <see cref="AgentGearSet.RenameGearset(int, CStringPointer)"/> to rename and send an update to the GearSetList addon </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8")]
+    public partial bool RenameGearset(int gearsetId, Utf8String* newGearsetName);
 
     /// <summary>
     /// Link a glamour plate to a specific gearset.
@@ -166,6 +198,15 @@ public unsafe partial struct RaptureGearsetModule {
     /// <returns>The ID of the <see cref="GearsetEntry"/>.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 83 F8 64")]
     public partial int ResolveIdFromEnabledIndex(byte enabledGearsetIndex);
+
+    /// <summary>
+    /// Shows a Gearset-related LogMessage.
+    /// </summary>
+    /// <param name="logMessageId">The LogMessage RowId.</param>
+    /// <param name="gearsetId">The ID of the gearset.</param>
+    /// <param name="gearsetName">The name of the gearset.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? B3"), GenerateStringOverloads]
+    public partial void ShowLogMessage(uint logMessageId, int gearsetId, CStringPointer gearsetName);
 
     [Flags]
     public enum GearsetFlag : byte {

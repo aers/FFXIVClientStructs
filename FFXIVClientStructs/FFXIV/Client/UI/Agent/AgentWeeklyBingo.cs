@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentWeeklyBingo
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.WeeklyBingo)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
@@ -25,4 +28,3 @@ public unsafe partial struct AgentWeeklyBingo {
 
     [FieldOffset(0xD8)] internal FixedSizeArray13<CStringPointer> _addonStrings;
 }
-

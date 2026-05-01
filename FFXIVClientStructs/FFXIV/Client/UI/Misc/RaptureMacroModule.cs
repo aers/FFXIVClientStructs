@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using HotbarSlotType = FFXIVClientStructs.FFXIV.Client.UI.Misc.RaptureHotbarModule.HotbarSlotType;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
-public partial struct AtkComponentRadioButton : ICreatable {
+public unsafe partial struct AtkComponentRadioButton : ICreatable<AtkComponentRadioButton> {
     [FieldOffset(0xF0)] public ushort GroupId;
     [FieldOffset(0xF2)] public bool AlwaysFireButtonClickEvent; // otherwise it depends on AtkGroupManager
 
@@ -21,5 +21,5 @@ public partial struct AtkComponentRadioButton : ICreatable {
     }
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 89 83 ?? ?? ?? ?? 48 8B C3")]
-    public partial void Ctor();
+    public partial AtkComponentRadioButton* Ctor();
 }

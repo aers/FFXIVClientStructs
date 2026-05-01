@@ -45,5 +45,5 @@ public unsafe partial struct hkaDefaultAnimationControl {
     [FieldOffset(0xB8)] public hkaDefaultAnimationControlMapperData* Mapper;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 48 8B 52 38")]
-    public partial void Ctor1(hkaDefaultAnimationControl* other);
+    public partial hkaDefaultAnimationControl* Ctor1(hkaDefaultAnimationControl* other);
 }

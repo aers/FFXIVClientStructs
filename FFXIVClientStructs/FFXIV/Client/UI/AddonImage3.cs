@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Component.GUI;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::AddonImage3

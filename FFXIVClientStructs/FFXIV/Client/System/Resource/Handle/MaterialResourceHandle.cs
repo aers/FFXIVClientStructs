@@ -1,4 +1,3 @@
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
@@ -12,44 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [Inherits<DefaultResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
 public unsafe partial struct MaterialResourceHandle {
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct TextureEntry {
-        [FieldOffset(0x0)]
-        public TextureResourceHandle* TextureResourceHandle;
-        [FieldOffset(0x8)]
-        public ushort PathOffset;
-        [FieldOffset(0xA)]
-        public ushort Flags;
-
-        public bool IsDX11 {
-            get => (Flags & 0x8000) != 0;
-            set => Flags = value ? (ushort)(Flags | 0x8000) : (ushort)(Flags & ~0x8000);
-        }
-
-        public ushort Index1 {
-            get => (ushort)(Flags & 0x001F);
-            set => Flags = (ushort)((Flags & ~0x001F) | (value & 0x001F));
-        }
-
-        public ushort Index2 {
-            get => (ushort)((Flags & 0x03E0) >> 5);
-            set => Flags = (ushort)((Flags & ~0x03E0) | ((value & 0x001F) << 5));
-        }
-
-        public ushort Index3 {
-            get => (ushort)((Flags & 0x7C00) >> 10);
-            set => Flags = (ushort)((Flags & ~0x7C00) | ((value & 0x001F) << 10));
-        }
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x4)]
-    public struct AttributeSetEntry {
-        [FieldOffset(0x0)]
-        public ushort NameOffset;
-        [FieldOffset(0x2)]
-        public ushort Index;
-    }
-
     // [FieldOffset(0xB8)] public ulong Length;
     /// <summary>
     /// The instantiated material. Its <see cref="Material.MaterialResourceHandle"/> will be the current structure.
@@ -153,4 +114,22 @@ public unsafe partial struct MaterialResourceHandle {
     /// <remarks><paramref name="stainChannel" /> 0 or 1. With the current MTRL file format, values from 0 to 3 make sense.</remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B FB EB 07")]
     public partial void ReadStainingTemplate(ushort* stainTable, byte stainId, Half* colorTable, uint stainChannel);
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public partial struct TextureEntry {
+        [FieldOffset(0x0)] public TextureResourceHandle* TextureResourceHandle;
+        [FieldOffset(0x8)] public ushort PathOffset;
+        [BitField<ushort>(nameof(Index1), 0, 5)]
+        [BitField<ushort>(nameof(Index2), 5, 5)]
+        [BitField<ushort>(nameof(Index3), 10, 5)]
+        [BitField<bool>(nameof(IsDX11), 15)]
+        [FieldOffset(0xA)] public ushort Flags;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x4)]
+    public struct AttributeSetEntry {
+        [FieldOffset(0x0)] public ushort NameOffset;
+        [FieldOffset(0x2)] public ushort Index;
+    }
 }

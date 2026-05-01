@@ -1,15 +1,17 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentBeginnersMansionProblem
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.BeginnersMansionProblem)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public partial struct AgentBeginnersMansionProblem {
 
-    [FieldOffset(0x28)] private ExcelSheetWaiter _sheetWaiter;
+    [FieldOffset(0x28)] private ExcelSheetWaiter SheetWaiter;
 
     [FieldOffset(0xC8)] public StdVector<nint> TutorialRows;
 

@@ -14,7 +14,7 @@ public unsafe partial struct AgentTelepotTown {
     public partial void TeleportToAetheryte(byte index);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xDE20)]
+[StructLayout(LayoutKind.Explicit, Size = 0xDFB0)]
 public struct AgentTelepotTownData {
     [FieldOffset(0x4)] public byte CurrentAetheryte; // the one you're standing at
 

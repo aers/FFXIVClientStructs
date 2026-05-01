@@ -8,12 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("PvPCharacter")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 83 ?? ?? ?? ?? 48 89 BB ?? ?? ?? ?? 48 89 BB ?? ?? ?? ?? 8D 4F ?? 48 89 BB ?? ?? ?? ?? 48 89 BB ?? ?? ?? ?? 0F 1F 40", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0xD18)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? BE ?? ?? ?? ?? 48 89 BB", 3)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD40)]
 public unsafe partial struct AddonPvPCharacter {
-    [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray21<ClassEntry> _classEntries;
+    [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray23<ClassEntry> _classEntries;
 
-    [FieldOffset(0xC50)] public PreviewController PreviewController;
+    [FieldOffset(0xC80)] public PreviewController PreviewController;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B B7 ?? ?? ?? ?? 49 8B 46 28")]
     public partial void UpdateClasses(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);

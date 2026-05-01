@@ -1,6 +1,3 @@
-using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyItemSearch
@@ -19,9 +16,9 @@ public unsafe partial struct InfoProxyItemSearch {
     [FieldOffset(0x20)] public uint SearchItemId;
 
     // Following are used for requesting item data from the server in RequestData
-    // [FieldOffset(0x24)] private byte Unk_0x24; // ?
-    // [FieldOffset(0x25)] private byte Unk_0x25; // ?
-    // [FieldOffset(0x28)] private byte Unk_0x28;
+    // [FieldOffset(0x24)] private byte Unk0x24; // ?
+    // [FieldOffset(0x25)] private byte Unk0x25; // ?
+    // [FieldOffset(0x28)] private byte Unk0x28;
 
     /// <summary>
     /// All items currently available on the general marketboard for the last specified search term (found in <see cref="SearchItemId"/>.
@@ -54,7 +51,7 @@ public unsafe partial struct InfoProxyItemSearch {
     [FieldOffset(0x5B95)] public bool WaitingForWishlistUpdate;
     [FieldOffset(0x5B96)] public bool WaitingForListings;
 
-    // [FieldOffset(0x5B96)] private byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
+    // [FieldOffset(0x5B96)] private byte Unk0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
     [MemberFunction("40 57 41 56 48 83 EC 48 83 3A 00")]
     public partial void ProcessItemHistory(nint packet);
@@ -87,41 +84,36 @@ public unsafe partial struct InfoProxyItemSearch {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe partial struct MarketBoardListing {
-    public const int Size = 0xB8;
-
-    // [FieldOffset(0x00)] private Utf8String Unk_0x00;
-
+[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+public partial struct MarketBoardListing {
+    /// <summary>
+    /// Only populated when item is being sold as a set (see Addon#6994).
+    /// </summary>
+    [FieldOffset(0x00)] public Utf8String CharacterName;
     [FieldOffset(0x68)] public ulong ListingId;
-    [FieldOffset(0x70)] public ulong SellingRetainerContentId; // ??
-    [FieldOffset(0x78)] public ulong SellingPlayerContentId;
+    [FieldOffset(0x70)] public ulong RetainerId;
+    [FieldOffset(0x78)] public ulong ContentId;
     [FieldOffset(0x80)] public ulong ArtisanId;
-
     [FieldOffset(0x88)] public uint UnitPrice;
     [FieldOffset(0x8C)] public uint TotalTax;
     [FieldOffset(0x90)] public uint Quantity;
     [FieldOffset(0x94)] public uint ItemId;
-
     /// <summary>
     /// The index of the retainer's inventory slot in the RetainerMarket inventory.
     /// </summary>
     [FieldOffset(0x98)] public ushort ContainerIndex;
-
     [FieldOffset(0x9A)] public ushort Durability;
     [FieldOffset(0x9C)] public ushort Spiritbond;
-
     /// <summary>
     /// List of materias associated with this item. Only valid up to the count specified in MateriaCount.
     /// </summary>
     [FieldOffset(0x9E), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
-
     [FieldOffset(0xA8)] public bool IsHqItem;
     [FieldOffset(0xA9)] public byte MateriaCount;
     [FieldOffset(0xAA)] public bool IsMannequin;
 
-    // [FieldOffset(0xAC)] private ushort Unk_0xAC;
-
+    [BitField<bool>(nameof(IsSellingAsSet), 0)]
+    [FieldOffset(0xAC)] private uint Flags; // Not entirely sure. Server sends this as byte, but it's stored as (u)int for the NumberArray
     /// <summary>
     /// The Town (from EXD) that this marketboard entry is from.
     /// </summary>
@@ -132,7 +124,7 @@ public unsafe partial struct MarketBoardListing {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
 public struct LastPurchasedMarketboardItem {
-    [FieldOffset(0x00)] public ulong SellingRetainerContentId;
+    [FieldOffset(0x00)] public ulong RetainerId;
     [FieldOffset(0x08)] public ulong ListingId;
     [FieldOffset(0x10)] public uint ItemId;
     [FieldOffset(0x14)] public uint Quantity;
@@ -152,8 +144,8 @@ public struct PlayerRetainerInfo {
     [FieldOffset(0x00)] public ulong RetainerId;
     [FieldOffset(0x08)] public byte TownId;
     [FieldOffset(0x09)] public bool SellingItems;
-    // [FieldOffset(0x0A)] private byte Unk_0x0A;
+    // [FieldOffset(0x0A)] private byte Unk0x0A;
 
-    // [FieldOffset(0x0C)] private int Unk_0x0C; // Some kind of timestamp?
+    // [FieldOffset(0x0C)] private int Unk0x0C; // Some kind of timestamp?
     [FieldOffset(0x10)] public Utf8String Name;
 }

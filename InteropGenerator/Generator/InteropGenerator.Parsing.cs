@@ -27,7 +27,7 @@ public sealed partial class InteropGenerator {
         token.ThrowIfCancellationRequested();
 
         // collect info on struct fields
-        ParseFields(structSymbol, token, isInherited, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields);
+        ParseFields(structSymbol, token, isInherited, out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<BitFieldInfo> bitFields, out EquatableArray<FieldInfo> publicFields);
         token.ThrowIfCancellationRequested();
 
         // other struct attributes
@@ -101,6 +101,7 @@ public sealed partial class InteropGenerator {
             virtualTableSignatureInfo,
             virtualTableFunctionCount,
             fixedSizeArrays,
+            bitFields,
             inheritanceInfoBuilder.ToImmutable(),
             structSize,
             extraInheritedStructInfo);
@@ -237,10 +238,15 @@ public sealed partial class InteropGenerator {
         }
 
         var constraints = string.Empty;
+        ImmutableArrayBuilder<string> typeArguments = new();
 
         if (methodSymbol.TypeParameters.Any()) {
             ImmutableArray<SymbolDisplayPart> symbolDisplayParts = methodSymbol.ToDisplayParts(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints));
-            constraints = string.Join("", symbolDisplayParts[1..]);
+            constraints = string.Join("", symbolDisplayParts[1..].Select(t => {
+                if (t.Kind != SymbolDisplayPartKind.InterfaceName) return t.ToString();
+                var typeArguments = ((INamedTypeSymbol)t.Symbol!).TypeArguments;
+                return typeArguments.Length <= 0 ? t.ToString() : $"{t.ToString()}<{string.Join(", ", typeArguments.Select(t => t.Name))}>";
+            }));
         }
 
         EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(methodSymbol, token);
@@ -253,7 +259,8 @@ public sealed partial class InteropGenerator {
                 constraints,
                 methodSymbol.IsStatic,
                 methodSymbol.Parameters.Select(p => ParseParameter(p, isInherited, token)).ToImmutableArray(),
-                inheritableAttributes
+                inheritableAttributes,
+                methodSymbol.TypeParameters.Select(t => t.Name).ToImmutableArray()
             );
 
         return true;
@@ -267,9 +274,10 @@ public sealed partial class InteropGenerator {
         isInherited ? ParseInheritedAttributes(parameterSymbol, token) : null);
 
     private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
-        out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields) {
+        out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<BitFieldInfo> bitFields, out EquatableArray<FieldInfo> publicFields) {
 
         using ImmutableArrayBuilder<FixedSizeArrayInfo> fixedSizeArrayBuilder = new();
+        using ImmutableArrayBuilder<BitFieldInfo> bitFieldBuilder = new();
         using ImmutableArrayBuilder<FieldInfo> publicFieldBuilder = new();
 
         foreach (IFieldSymbol fieldSymbol in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
@@ -307,6 +315,62 @@ public sealed partial class InteropGenerator {
 
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
             }
+
+            foreach (AttributeData attributeData in fieldSymbol.GetAttributes()) {
+                if (attributeData.AttributeClass is not { } attributeSymbol)
+                    continue;
+
+                if (!attributeSymbol.HasFullyQualifiedMetadataName(InteropTypeNames.BitFieldAttribute))
+                    continue;
+
+                if (!attributeData.TryGetConstructorArgument(0, out string? name) ||
+                    !attributeData.TryGetConstructorArgument(1, out int index) ||
+                    !attributeData.TryGetConstructorArgument(2, out int length))
+                    continue;
+
+                if (attributeSymbol.TypeArguments.Length != 1)
+                    continue;
+
+                // defaults
+                Accessibility accessibility = Accessibility.Public;
+                bool isPartial = false;
+                bool hasGetter = true;
+                bool hasSetter = true;
+
+                // check partial property definition
+                foreach (IPropertySymbol propertySymbol in structSymbol.GetMembers().OfType<IPropertySymbol>()) {
+                    if (propertySymbol.Name != name)
+                        continue;
+
+                    accessibility = propertySymbol.DeclaredAccessibility;
+                    isPartial = propertySymbol.IsPartialDefinition;
+                    hasGetter = propertySymbol.GetMethod != null;
+                    hasSetter = !propertySymbol.IsReadOnly && propertySymbol.SetMethod != null;
+
+                    break;
+                }
+
+                string typeName = attributeSymbol.TypeArguments[0].GetFullyQualifiedName();
+
+                EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(fieldSymbol, token);
+
+                BitFieldInfo bitFieldInfo = new(
+                    fieldSymbol.Name,
+                    name!,
+                    typeName,
+                    fieldSymbol.Type.GetFullyQualifiedName(),
+                    index,
+                    length,
+                    accessibility,
+                    isPartial,
+                    hasGetter,
+                    hasSetter,
+                    inheritableAttributes
+                );
+
+                bitFieldBuilder.Add(bitFieldInfo);
+            }
+
             if (isInherited && fieldSymbol.DeclaredAccessibility == Accessibility.Public) {
                 if (!fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.Runtime.InteropServices.FieldOffsetAttribute", out AttributeData? fieldOffsetAttributeData))
                     continue;
@@ -329,6 +393,7 @@ public sealed partial class InteropGenerator {
         }
 
         fixedSizeArrays = fixedSizeArrayBuilder.ToImmutable();
+        bitFields = bitFieldBuilder.ToImmutable();
         publicFields = publicFieldBuilder.ToImmutable();
     }
 

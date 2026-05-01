@@ -1,13 +1,15 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentConfigkey
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Configkey)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2240)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2248)]
 public unsafe partial struct AgentConfigkey {
     [FieldOffset(0x40)] public ConfigModule* ConfigModule;
     [FieldOffset(0x78)] public UIInputData* UIInputData;

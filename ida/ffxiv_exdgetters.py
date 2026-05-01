@@ -6,6 +6,7 @@
 from json import load
 from os import getenv
 from os.path import join
+import sys
 from luminapie.game_data import GameData, ParsedFileName
 from luminapie.excel import ExcelListFile, ExcelHeaderFile
 from abc import abstractmethod
@@ -418,13 +419,30 @@ if api is None:
     exit(1)
 
 
-f = open(join(getenv("APPDATA"), "XIVLauncher", "launcherConfigV3.json"), "r")
+if sys.platform.startswith("linux"):
+    launcher_ini = join(getenv("HOME"), ".xlcore", "launcher.ini")
+    game_path = None
 
-config = load(f)
+    f = open(launcher_ini, "r")
+    try:
+        for line in f:
+            if line.startswith("GamePath="):
+                game_path = line.split("=", 1)[1].strip()
+                break
+    finally:
+        f.close()
 
-f.close()
+    if not game_path:
+        raise ValueError("GamePath key not found in {0}".format(launcher_ini))
+else:
+    f = open(join(getenv("APPDATA"), "XIVLauncher", "launcherConfigV3.json"), "r")
+    try:
+        config = load(f)
+    finally:
+        f.close()
+    game_path = config["GamePath"]
 
-game_data = GameData(join(config["GamePath"], "game"))
+game_data = GameData(join(game_path, "game"))
 
 # nb: "pattern": ("func suffix", ("instance pointer sig" or None, offset from sig start or func start))
 exd_func_patterns: dict[str, tuple[str, tuple[str | None, int]]] = {

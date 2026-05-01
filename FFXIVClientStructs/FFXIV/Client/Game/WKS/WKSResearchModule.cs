@@ -5,13 +5,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 // Cosmic Research Information
 [GenerateInterop]
 [Inherits<WKSModuleBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe partial struct WKSResearchModule {
-    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray66<ushort> _analysis; // 11x toolClass * 6x type
-    [FieldOffset(0x8C), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;
-    [FieldOffset(0x97), FixedSizeArray] internal FixedSizeArray11<byte> _unlockedStages;
-    [FieldOffset(0xA2), FixedSizeArray] internal FixedSizeArray2<ushort> _ratePercentages;
-    [FieldOffset(0xA8)] public bool IsLoaded;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray77<ushort> _analysis; // 11x toolClass * 7x type
+    [FieldOffset(0xA2), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;
+    [FieldOffset(0xAD), FixedSizeArray] internal FixedSizeArray11<byte> _unlockedStages;
+    [FieldOffset(0xB8), FixedSizeArray] internal FixedSizeArray2<ushort> _ratePercentages;
+    [FieldOffset(0xC0)] public bool IsLoaded;
 
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 0F B7 D8 48 8B CF E8 ?? ?? ?? ?? 48 8B 4C 24")]
     public partial ushort GetCurrentAnalysis(byte toolClass, byte type);

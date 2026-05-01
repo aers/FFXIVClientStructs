@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // ctor "E8 ?? ?? ?? ?? 80 8F ?? ?? ?? ?? ?? 33 F6"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct ListPanel : ICreatable {
+public unsafe partial struct ListPanel : ICreatable<ListPanel> {
     [FieldOffset(0x8)] public StdVector<ListPanelEntry> Entries;
 
     // Width is the width of the container- used when aligning the entries
@@ -18,8 +18,8 @@ public unsafe partial struct ListPanel : ICreatable {
     [VirtualFunction(0)]
     public partial ListPanel* Dtor(byte freeFlags);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 8F ?? ?? ?? ?? ?? 33 F6")]
-    public partial void Ctor();
+    [MemberFunction("E8 ?? ?? ?? ?? 80 8F ?? ?? ?? ?? ?? 33 F6 80 8F ?? ?? ?? ?? ?? 41 B0 ?? 80 8F ?? ?? ?? ?? ?? BA")]
+    public partial ListPanel* Ctor();
 
     [MemberFunction("48 8B 41 08 48 89 41 10 33 C0")]
     public partial void Clear();

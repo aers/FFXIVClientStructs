@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
@@ -9,14 +10,21 @@ public unsafe partial struct TargetSystem {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
     public static partial TargetSystem* Instance();
 
+    [FieldOffset(0x20)] public CircleManager TargetCircleManager;
+
+    [FieldOffset(0x70)] public OutlineInfo TargetOutlineInfo;
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
     [FieldOffset(0x98)] public GameObject* GPoseTarget;
+    [FieldOffset(0xA0)] public GameObject* IdleCamTarget;
     [FieldOffset(0xD0)] public GameObject* MouseOverTarget;
     [FieldOffset(0xE0)] public GameObject* MouseOverNameplateTarget;
     [FieldOffset(0xF8)] public GameObject* FocusTarget;
     [FieldOffset(0x110)] public GameObject* PreviousTarget;
     [FieldOffset(0x140)] public GameObjectId TargetObjectId;
+    [FieldOffset(0x148)] public GameObjectArray TargetableObjectsOnScreen;
+
+    [Obsolete("Renamed to TargetableObjectsOnScreen", true)]
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
     [FieldOffset(0x2178)] public GameObjectArray ObjectFilterArray1;
@@ -47,6 +55,9 @@ public unsafe partial struct TargetSystem {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 8B 83")]
     public partial bool SetHardTarget(GameObject* hardTargetObject, bool ignoreTargetModes = false, bool a4 = false, int a5 = 0);
+
+    [MemberFunction("40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 63 05")]
+    public partial void HandleTargetingKeybinds();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C3 74 ?? B0 01")]
     public partial GameObject* GetSoftTarget();
@@ -79,6 +90,29 @@ public unsafe partial struct TargetSystem {
             return null;
         fixed (GameObjectArray* arrayPtr = &ObjectFilterArray1)
             return GetMouseOverObject(x, y, arrayPtr, camera);
+    }
+
+    // Client::Game::Control::TargetSystem::CircleManager
+    //   Client::Game::Object::IFilterCommand
+    [GenerateInterop]
+    [Inherits<IFilterCommand>]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public partial struct CircleManager {
+        [FieldOffset(0x08)] public bool WeaponDrawn;
+        [FieldOffset(0x10)] public Framework* Framework;
+        [FieldOffset(0x18)] public uint FilterGroupIndex; // 0-6, 7 = disabled, used to calculate the config key
+        [FieldOffset(0x1C)] private uint FilterGroupIndex2; // same?
+        [FieldOffset(0x20)] public bool CyclingEnabled;
+        [FieldOffset(0x21)] public bool CustomFilterEnabled;
+        [FieldOffset(0x22), FixedSizeArray] internal FixedSizeArray4<bool> _customFilters;
+        [FieldOffset(0x26), FixedSizeArray] internal FixedSizeArray11<bool> _targetFilters;
+    }
+
+    // Client::Game::Control::TargetSystem::OutlineInfo
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct OutlineInfo {
+        [FieldOffset(0x00)] public GameObject* MouseOverTarget;
+        [FieldOffset(0x08)] public GameObject* SoftTarget;
     }
 }
 

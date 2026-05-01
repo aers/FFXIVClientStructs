@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Sound;
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -51,7 +52,7 @@ public unsafe partial struct UIGlobals {
     public static partial uint GenerateEquippedItemsChecksum();
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B7 C5")]
-    public static partial void PlaySoundEffect(uint effectId, nint a2 = 0, nint a3 = 0, byte a4 = 0);
+    public static partial void PlaySoundEffect(uint effectId, SoundData** outSoundDataPad = null, SoundData** outSoundData = null, byte a4 = 0);
 
     public static void PlayChatSoundEffect(uint effectId) {
         if (effectId is < 1 or > 16)
@@ -77,4 +78,7 @@ public unsafe partial struct UIGlobals {
     /// </summary>
     [MemberFunction("40 53 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B C9"), GenerateStringOverloads]
     public static partial uint ComputeAddonNameHash(CStringPointer addonName);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 2F 33")]
+    public static partial int GetUIConst(uint rowId, int defaultValue);
 }

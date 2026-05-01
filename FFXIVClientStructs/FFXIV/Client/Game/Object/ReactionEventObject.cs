@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::ReactionEventObject

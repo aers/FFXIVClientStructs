@@ -12,6 +12,9 @@ public unsafe partial struct RelicNote {
     [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray10<byte> _monsterProgress;
     [FieldOffset(0x14)] public int ObjectiveProgress;
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B DA 4C 8B F1")]
+    public partial bool IsMonsterNoteTarget(Character.Character* chara);
+
     public byte GetMonsterProgress(int index)
         => index is > 9 or < 0 ? (byte)0 : MonsterProgress[index];
 

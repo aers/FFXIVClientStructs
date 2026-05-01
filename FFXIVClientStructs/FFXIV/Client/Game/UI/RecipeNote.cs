@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::RecipeNote
@@ -30,22 +28,24 @@ public unsafe partial struct RecipeNote {
     [FieldOffset(0x12A)] public uint ActiveCraftRequiresMeisterSoulCrystal;
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x470)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x480)]
     public partial struct RecipeData {
-        // E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 FF 48 85 C9 74 0C E8 ?? ?? ?? ?? 48 89 BE ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 48 89 5C 24   (7.1)
+        // E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 FF 48 85 C9 74 0C E8 ?? ?? ?? ?? 48 89 BE ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 48 89 5C 24 (7.1) (Client::Game::UI::RecipeNote.InitializeRecipeList)
         [FieldOffset(0x00)] public RecipeEntry* Recipes;
         [FieldOffset(0x08)] public int RecipeCount;
         [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray8<NoteBookDivisionIdsArray> _noteBookDivisionIds; // index is CraftType
-        [FieldOffset(0x458)] public ushort SelectedIndex;
-        [FieldOffset(0x45F), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableNoteBookDivisions; // index is CraftType
-        [FieldOffset(0x467), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableSecretNoteBookDivisions; // index is CraftType
-        public RecipeEntry* SelectedRecipe => Recipes + SelectedIndex;
+        [FieldOffset(0x468)] public ushort SelectedIndex;
+        [FieldOffset(0x46F), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableNoteBookDivisions; // index is CraftType
+        [FieldOffset(0x477), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableSecretNoteBookDivisions; // index is CraftType
+
+        public Span<RecipeEntry> RecipesSpan => new(Recipes, RecipeCount);
+        public RecipeEntry* SelectedRecipe => SelectedIndex < RecipeCount ? Recipes + SelectedIndex : null;
     }
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 66 * 2)]
+    [StructLayout(LayoutKind.Explicit, Size = 67 * 2)]
     public partial struct NoteBookDivisionIdsArray {
-        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray66<ushort> _noteBookDivisionIds;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray67<ushort> _noteBookDivisionIds;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
@@ -113,7 +113,7 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x3F8)] public ushort DurabilityFactor;
     }
 
-    [MemberFunction("48 89 4C 24 ?? 53 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B E9 E8 ?? ?? ?? ?? 45 33 C0")]
+    [MemberFunction("48 89 4C 24 ?? 53 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 4C 8B E1 E8")]
     public partial void InitializeRecipeList();
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 ?? ?? ?? ?? 4D 85 C9")]

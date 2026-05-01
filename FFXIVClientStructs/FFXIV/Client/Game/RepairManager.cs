@@ -1,11 +1,16 @@
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::RepairManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe partial struct RepairManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F 94 C0 45 33 C9", 3)]
     public static partial RepairManager* Instance();
+
+    [FieldOffset(0x08)] private ExcelSheet* ItemSheet;
+    [FieldOffset(0x10)] private ExcelSheetWaiter* SheetWaiter;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 03 75 46")]
     public partial bool RepairItem(InventoryType itemToRepairInventory, ushort itemToRepairSlot, bool isNpc);

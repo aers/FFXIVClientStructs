@@ -7,18 +7,18 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // For updating offsets:
 //    16 * (v6 + ConfigOptionCount * a6) + a1 + {ValuesFieldOffset}
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xECC0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xED10)]
 public unsafe partial struct ConfigModule {
     public static ConfigModule* Instance() {
         var uiModule = UI.UIModule.Instance();
         return uiModule == null ? null : uiModule->GetConfigModule();
     }
 
-    public const int ConfigOptionCount = 715;
+    public const int ConfigOptionCount = 746;
     [FieldOffset(0x28)] public UIModule* UIModule;
-    [FieldOffset(0x2C8), FixedSizeArray] internal FixedSizeArray715<Option> _options;
+    [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray746<Option> _options;
 
-    [FieldOffset(0x5C38), FixedSizeArray] internal FixedSizeArray715<OptionValue> _values;
+    [FieldOffset(0x6040), FixedSizeArray] internal FixedSizeArray2238<OptionValue> _values;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct Option {

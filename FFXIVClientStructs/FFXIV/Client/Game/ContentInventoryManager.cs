@@ -21,7 +21,7 @@ public unsafe partial struct ContentInventoryManager {
     [MemberFunction("E9 ?? ?? ?? ?? 8B D3 48 8B CE E8 ?? ?? ?? ?? 48 8B C8")]
     public partial ContentInventoryItem* GetInventorySlot(InventoryType inventoryType, short slotIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 49 8B 97")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 49 8B 95")]
     public partial ContentInventoryContainer* GetInventoryContainer(InventoryType inventoryType);
 
     /// <summary>

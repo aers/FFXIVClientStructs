@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 // Client::System::String::Utf8String
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
+public unsafe partial struct Utf8String : ICreatable<Utf8String>, IDisposable, IStaticNativeObjectOperation<Utf8String> {
     [FieldOffset(0x0)] public CStringPointer StringPtr;
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
     /// <remarks>String length including null terminator.</remarks>
@@ -102,7 +102,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public static partial int ToInteger(Utf8String* value, int fromBase = 0); // base 0 = detect format (0x hex, 0b bin, 0o oct)
 
     [MemberFunction("E8 ?? ?? ?? ?? F7 C3")]
-    public partial void Ctor();
+    public partial Utf8String* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF EB 15")]
     public partial Utf8String* Ctor_FromSequence(byte* str, nuint length);
@@ -134,22 +134,22 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public Utf8String* ToTitleCase() => ToUpper(true, true);
 
     [MemberFunction("40 53 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B DA 4C 3B C8")]
-    public partial Utf8String* SubStr(nint destinationAdress, ulong start, ulong length);
+    public partial Utf8String* SubStr(nint destinationAdress, ulong startIdx, long length = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 3B C3")]
-    public partial Utf8String* CopySubStrTo(Utf8String* destination, int start, int length);
+    public partial Utf8String* CopySubStrTo(Utf8String* destination, ulong startIdx, long length = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D ?? E8 ?? ?? ?? ?? 41 B4")]
     public partial Utf8String* Replace(Utf8String* toFind, Utf8String* replacement);
 
     [MemberFunction("E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 45 84 ED")]
-    public partial int IndexOf(Utf8String* toFind, int startIdx = 0);
+    public partial long IndexOf(Utf8String* toFind, ulong startIdx = 0);
 
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 17 45 33 ED 41 BA")]
-    public partial int FindFirstOf(Utf8String* charsToFind, int startIdx, bool exclude = false);
+    public partial long FindFirstOf(Utf8String* charsToFind, ulong startIdx = 0, bool exclude = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 48 8B F9 45 0F B6 E9")]
-    public partial int FindLastOf(Utf8String* toFind, int startIdx, bool exclude = false);
+    public partial long FindLastOf(Utf8String* toFind, ulong startIdx = 0, bool exclude = false);
 
     [MemberFunction("48 8B 01 0F B6 04")]
     public partial byte GetCharAt(ulong idx);

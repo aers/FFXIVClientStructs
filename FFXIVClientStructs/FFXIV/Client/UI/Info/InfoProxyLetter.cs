@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.String;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyLetter
@@ -41,4 +39,17 @@ public unsafe partial struct InfoProxyLetter {
             [FieldOffset(0x4)] public uint Count;
         }
     }
+
+    /// <summary></summary>
+    /// <param name="letterIndex">The letter that is being read.</param>
+    /// <param name="attatchmentSlot">The slot to be interacted with in the letter. (-1,0,1,2,3,4)</param>
+    /// <returns>If action is successful or not.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 8B 57 30 45 33 C0")]
+    public partial bool TakeAttachments(uint letterIndex, int attatchmentSlot);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 27 49 8B 07")]
+    public partial bool DeleteLetter(uint letterIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 0F 45 33 FF")]
+    public partial bool RequestRewardDelivery();
 }
