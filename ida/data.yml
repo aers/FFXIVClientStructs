@@ -4000,6 +4000,7 @@ classes:
     funcs:
       0x1400CEB10: ctor
       0x1400D1F30: Exit
+      0x1400D2B10: ExitFromWindow
       0x1400D2520: SetInactive
       0x1400D25E0: UpdateClipCursor
       0x1400D26E0: PauseResumeFrameTicks
@@ -5486,8 +5487,6 @@ classes:
       0x14047B5E0: Finalizer
       0x14047C030: CreateFileThread
   Client::System::File::FileAccessPath:
-    vtbls:
-      - ea: 0x142164CE8
     funcs:
       0x1400955B0: ctor
       0x1400955D0: ctor_FromUtf8String
@@ -9584,6 +9583,7 @@ classes:
       126: ShowContentIntroduction
       127: IsContentIntroductionInvisible
       128: HideContentIntroduction
+      130: IsUIReady
       131: ChangeUIMode
       132: InContentsReplay
       139: SetCursorVisibility

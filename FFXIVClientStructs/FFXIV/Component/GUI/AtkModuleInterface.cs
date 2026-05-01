@@ -9,6 +9,9 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(0)]
     public partial AtkModuleInterface* Dtor(byte freeFlags);
 
+    [VirtualFunction(4)]
+    public partial bool IsUIReady(bool ignoreHudInitialized = false);
+
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);
 
