@@ -9,6 +9,7 @@ import ida_typeinf
 import ida_hexrays
 import ida_name
 import ida_funcs
+import ida_srclang
 from structs_schema import *
 
 from abc import abstractmethod
@@ -16,28 +17,53 @@ from abc import abstractmethod
 # For more information about TERR_ constants, see:
 # https://docs.hex-rays.com/developer-guide/idapython/idapython-porting-guide-ida-9#type-information-error-codes
 
-class BaseIdaInterface(object):
-    @abstractmethod
-    def get_struct_id(self, name):
-        pass
+def _get_ida_major() -> int:
+    return idaapi.IDA_SDK_VERSION // 100
 
-    @abstractmethod
-    def get_enum_id(self, name):
-        pass
-
-    @abstractmethod
-    def delete_enum_members(self, eid: int):
-        """Remove all enum members
-
-        Args:
-            eid (int): The id of the enum
+class SrcInterface(object):
+    def mark_as_vtable(vtbl_name: str) -> str | None:
         """
-        pass
+        Mark a struct as a vtable (TAUDT_VFTABLE).
 
-    def enum_exists(self, name: str):
-        return self.get_enum_id(name) != idaapi.BADADDR
+        Returns:
+            An error string on failure, None on success.
+        """
+        tif = ida_typeinf.tinfo_t()
 
-    def get_idc_type_from_ida_type(self, type: str):
+        if not tif.get_named_type(None, vtbl_name):
+            return f"Type '{vtbl_name}' not found in type library"
+
+        if not tif.is_struct():
+            actual = "union" if tif.is_union() else "enum" if tif.is_enum() else "unknown"
+            return f"'{vtbl_name}' is not a struct (got {actual})"
+
+        udt = ida_typeinf.udt_type_data_t()
+        if not tif.get_udt_details(udt):
+            return f"Failed to retrieve UDT details for '{vtbl_name}'"
+
+        if udt.taudt_bits & ida_typeinf.TAUDT_VFTABLE:
+            return f"'{vtbl_name}' is already marked as a vtable"
+
+        udt.taudt_bits |= ida_typeinf.TAUDT_VFTABLE
+
+        if not tif.create_udt(udt, ida_typeinf.BTF_STRUCT):
+            return f"Failed to reconstruct UDT for '{vtbl_name}' after setting vtable flag"
+
+        if _get_ida_major() >= 9:
+            result = tif.set_named_type(None, vtbl_name)
+        else:
+            result = tif.set_named_type(
+                ida_typeinf.get_idati(),
+                vtbl_name,
+                ida_typeinf.NTF_REPLACE
+            )
+
+        if not result:
+            return f"Failed to write back '{vtbl_name}' to type library"
+
+        return None
+
+    def get_idc_type_from_ida_type(self, type: str) -> int:
         """Retrieve the idc type from the ida type.
 
         Args:
@@ -95,7 +121,7 @@ class BaseIdaInterface(object):
         else:
             return ida_bytes.stru_flag()
 
-    def get_idc_type_from_size(self, size: int, offset=0):
+    def get_idc_type_from_size(self, size: int, offset=0) -> int:
         if offset == 0:
             offset = size
         if offset % 8 == 0 and size >= 8:
@@ -107,7 +133,7 @@ class BaseIdaInterface(object):
         else:
             return ida_bytes.byte_flag()
 
-    def get_size_from_idc_type(self, type: int):
+    def get_size_from_idc_type(self, type: int) -> int:
         if type == ida_bytes.byte_flag():
             return 1
         elif type == ida_bytes.word_flag():
@@ -122,8 +148,36 @@ class BaseIdaInterface(object):
             return 8
         else:
             return 0
+        
+    def get_string_from_idc_type_and_sign(self, type: int, signed: bool = False) -> str:
+        if type == ida_bytes.byte_flag():
+            if signed:
+                return "size8_st"
+            else:
+                return "size8_t"
+        elif type == ida_bytes.word_flag():
+            if signed:
+                return "size16_st"
+            else:
+                return "size16_t"
+        elif type == ida_bytes.dword_flag():
+            if signed:
+                return "size32_st"
+            else:
+                return "size32_t"
+        elif type == ida_bytes.qword_flag():
+            if signed:
+                return "size32_st"
+            else:
+                return "size64_t"
+        elif type == ida_bytes.float_flag():
+            return "float"
+        elif type == ida_bytes.double_flag():
+            return "double"
+        else:
+            return ""
 
-    def is_signed(self, type: str):
+    def is_signed(self, type: str) -> bool:
         if (
             type == "__int8"
             or type == "__int16"
@@ -135,8 +189,166 @@ class BaseIdaInterface(object):
         else:
             return False
 
-    def get_size_from_ida_type(self, type: str):
+    def get_size_from_ida_type(self, type: str) -> int:
         return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type))
+
+    def select_parser(self):
+        """Sets the parser used for building struct data.
+
+        Args:
+            lang (srclang_t): The language the parser should use one of (SRCLANG_C, SRCLANG_CPP, SRCLANG_OBJC, SRCLANG_SWIFT, SRCLANG_GO)
+        """
+        ida_srclang.set_parser_argv("clang", "-x c++ -target x86_64-pc-win32")
+
+    def build_struct_string(self, struct: DefinedStruct, struct_lookup: dict[str, int], enum_lookup: dict[str, str]) -> tuple[str, str, list[str]]:
+        """Builds the srclang definition required to parse the object.
+        
+        Args:
+            struct (DefinedStruct): The struct data to build"""
+        struct_string_forward: str = ""
+        struct_string_define: str = ""
+        struct_string_vtables: list[str] = []
+        struct_name = struct.type
+
+        struct_string_forward += f"struct {struct_name};\n"
+        if (struct.virtual_functions):
+            struct_string_forward += f"struct {struct_name}_vtbl;\n"
+            struct_string_vtables.append(f"{struct_name}_vtbl")
+        
+        struct_string_define += f"struct {struct_name}"
+
+        prev_size = 0
+        contiguous_fields = True
+        for field in struct.fields:
+            offset = field.offset
+
+            while offset > prev_size:
+                contiguous_fields = False
+                fill_size = offset - prev_size
+                if self.full_padding:
+                    flag = self.get_idc_type_from_size(prev_size)
+                    size = self.get_size_from_idc_type(flag)
+                    if size > fill_size:
+                        flag = self.get_idc_type_from_size(
+                            fill_size, prev_size
+                        )
+                        size = self.get_size_from_idc_type(flag)
+
+                    struct_string_define += f"  {self.get_string_from_idc_type_and_sign(flag)} field_{prev_size:X};"
+                else:
+                    struct_string_define += f"  char field_{prev_size:X}[{fill_size}];"
+                
+                prev_size += size
+            
+            field_is_base = field.base and contiguous_fields
+            field_name = (
+                field.name
+                if not field_is_base
+                else "baseclass_{0:X}".format(offset)
+            )
+            field_type = field.type
+            if field_type == "__fastcall":
+                struct_string_define += f"  {field.return_type} ({field_type} *{field_name})("
+                for param in field.parameters:
+                    struct_string_define += param.type + " " + param.name + ", "
+                struct_string_define = struct_string_define[:-2] + ");"
+                prev_size += 8
+            elif (field_type in struct_lookup):
+                struct_string_define += f"  {field_type} {field_name};"
+                prev_size += struct_lookup[field_type]
+            elif (field_type in enum_lookup):
+                struct_string_define += f"  {field_type} {field_name};"
+                prev_size += self.get_size_from_ida_type(enum_lookup[field_type])
+            else:
+                struct_string_define += f"  {field_type} {field_name};"
+
+        if struct.size is not None and struct.size != 0:
+            while struct.size > prev_size:
+                fill_size = struct.size - prev_size
+                if self.full_padding:
+                    flag = self.get_idc_type_from_size(prev_size)
+                    size = self.get_size_from_idc_type(flag)
+                    if size > fill_size:
+                        flag = self.get_idc_type_from_size(
+                            fill_size, prev_size
+                        )
+                        size = self.get_size_from_idc_type(flag)
+
+                    struct_string_define += f"  {self.get_string_from_idc_type_and_sign(flag)} field_{prev_size:X};"
+                else:
+                    struct_string_define += f"  char field_{prev_size:X}[{fill_size}];"
+                
+                prev_size += size
+        
+        return (struct_string_forward, struct_string_define, struct_string_vtables)
+    
+    def parse_string(self, decl: str, vtables: list[str]):
+        """"""
+        ida_srclang.parse_decls_with_parser("clang", None, decl, False)
+        for vtable in vtables:
+            self.mark_as_vtable(vtable)
+
+class BaseIdaInterface(SrcInterface):
+    @abstractmethod
+    def get_struct_id(self, name):
+        pass
+
+    @abstractmethod
+    def get_enum_id(self, name):
+        pass
+
+    @abstractmethod
+    def delete_enum_members(self, eid: int):
+        """Remove all enum members
+
+        Args:
+            eid (int): The id of the enum
+        """
+        pass
+
+    def mark_as_vtable(vtbl_name: str) -> str | None:
+        """
+        Mark a struct as a vtable (TAUDT_VFTABLE).
+        Compatible with IDA 8.x and 9.x.
+        Returns an error string on failure, None on success.
+        """
+        tif = ida_typeinf.tinfo_t()
+
+        if not tif.get_named_type(None, vtbl_name):
+            return f"Type '{vtbl_name}' not found in type library"
+
+        if not tif.is_struct():
+            actual = "union" if tif.is_union() else "enum" if tif.is_enum() else "unknown"
+            return f"'{vtbl_name}' is not a struct (got {actual})"
+
+        udt = ida_typeinf.udt_type_data_t()
+        if not tif.get_udt_details(udt):
+            return f"Failed to retrieve UDT details for '{vtbl_name}'"
+
+        if udt.taudt_bits & ida_typeinf.TAUDT_VFTABLE:
+            return f"'{vtbl_name}' is already marked as a vtable"
+
+        udt.taudt_bits |= ida_typeinf.TAUDT_VFTABLE
+
+        if not tif.create_udt(udt, ida_typeinf.BTF_STRUCT):
+            return f"Failed to reconstruct UDT for '{vtbl_name}' after setting vtable flag"
+
+        if _get_ida_major() >= 9:
+            result = tif.set_named_type(None, vtbl_name)
+        else:
+            result = tif.set_named_type(
+                ida_typeinf.get_idati(),
+                vtbl_name,
+                ida_typeinf.NTF_REPLACE
+            )
+
+        if not result:
+            return f"Failed to write back '{vtbl_name}' to type library"
+
+        return None
+
+    def enum_exists(self, name: str):
+        return self.get_enum_id(name) != idaapi.BADADDR
 
     def clean_name(self, name: str):
         """Clean a name
@@ -238,8 +450,9 @@ class BaseIdaInterface(object):
             ptr_tinfo = array_tinfo
 
         return ptr_tinfo
+        
 
-if idaapi.IDA_SDK_VERSION < 900:
+if _get_ida_major() < 9:
     import ida_struct # pyright: ignore[reportMissingImports]
     import ida_enum # pyright: ignore[reportMissingImports]
 else:
@@ -247,7 +460,7 @@ else:
 
 class IdaInterface(BaseIdaInterface):
     # This is only for IDA 7 and 8 due to a change in the API for IDA 9
-    if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
+    if 7 <= _get_ida_major() < 9:
 
         def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
@@ -722,7 +935,7 @@ class IdaInterface(BaseIdaInterface):
             """
             return ida_bytes.enum_flag()
 
-    elif idaapi.IDA_SDK_VERSION >= 900:
+    elif _get_ida_major() >= 900:
 
         def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.

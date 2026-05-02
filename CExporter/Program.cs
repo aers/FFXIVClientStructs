@@ -13,11 +13,11 @@ public class Program {
         var noWrite = args.Contains("--no-write");
         var timeStart = DateTime.Now;
         var dir = new DirectoryInfo(Environment.CurrentDirectory);
-        while (dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
+        while (dir.FullName.Contains("scripts") && !dir.FullName.EndsWith("scripts")) {
             dir = dir.Parent!;
         }
-        while (!dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
-            dir = dir.GetDirectories("ida", SearchOption.AllDirectories).FirstOrDefault() ?? dir.Parent!;
+        while (!dir.FullName.Contains("scripts") && !dir.FullName.EndsWith("scripts")) {
+            dir = dir.GetDirectories("scripts", SearchOption.AllDirectories).FirstOrDefault() ?? dir.Parent!;
         }
 
         Exporter.ProcessTypes(quiet);

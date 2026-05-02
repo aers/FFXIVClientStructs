@@ -15,6 +15,23 @@ from time import time
 from structs_schema import *
 
 
+predefine = """
+typedef char  size8_st;
+typedef unsigned char  size8_t;
+typedef short size16_st;
+typedef unsigned short size16_t;
+typedef int   size32_st;
+typedef unsigned int   size32_t;
+typedef long long size64_st;
+typedef unsigned long long size64_t;
+
+#define DTOR(type) type *(__fastcall *Dtor)(type *__hidden self, size8_t freeFlags);
+"""
+
+struct_string_forward = ""
+struct_string_define = ""
+
+
 class BaseApi:
     @abstractmethod
     def can_run(self):
@@ -249,6 +266,7 @@ class BaseApi:
                     struct["union"],
                     static_member_functions,
                     static_members,
+                    struct["template_types"]
                 )
             )
         return DefinedStructExport(enums, structs)
@@ -367,6 +385,8 @@ if api is None:
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
+
+                # TODO: change this over to ida_srclang
                 fullname = self.clean_struct_name(struct.type)
                 if self.get_struct_id(fullname) == idaapi.BADADDR:
                     self.create_struct_type(fullname, struct.union)
