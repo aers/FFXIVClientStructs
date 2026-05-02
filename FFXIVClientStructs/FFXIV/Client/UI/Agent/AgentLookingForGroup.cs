@@ -50,6 +50,9 @@ public unsafe partial struct AgentLookingForGroup {
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 84 C0 74 07 C6 83 ?? ?? ?? ?? ?? 48 83 C4 20 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53")]
     public partial bool OpenListingByContentId(ulong contentId); // Actual call inlined
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F 10 81 ?? ?? ?? ?? 8B 99")]
+    public partial bool RequestCategoryListings(byte category);
+    
     [MemberFunction("E8 ?? ?? ?? ?? 8B 8B ?? ?? ?? ?? 85 C9 75 12")]
     public partial bool RequestListingsUpdate();
 
