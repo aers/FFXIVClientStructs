@@ -4830,6 +4830,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       5: Update
+      7: GetAddonCollision
       8: SetAddonVisibility
       9: GetAddonStatus
       10: RefreshAddon

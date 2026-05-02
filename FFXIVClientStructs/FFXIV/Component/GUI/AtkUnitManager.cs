@@ -65,6 +65,9 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9C98)] public AtkUnitManagerFlags Flags;
     [FieldOffset(0x9C99)] private byte Flags2;
 
+    [VirtualFunction(7)]
+    public partial void GetAddonCollision(AddonCollision* collisionInfo, short x, short y);
+
     [VirtualFunction(8)]
     public partial bool SetAddonVisibility(ushort addonId, bool visible);
 
@@ -143,4 +146,10 @@ public enum AtkUnitManagerFlags : byte {
     InGame = 0x20,
     Unk40 = 0x40,
     Unk80 = 0x80,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe struct AddonCollision {
+    [FieldOffset(0x00)] public AtkUnitBase* UnitBase;
+    [FieldOffset(0x08)] public AtkCollisionNode* CollisionNode;
 }
