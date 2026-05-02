@@ -675,7 +675,8 @@ public class Exporter {
                                 ProcessField(unionField, unionStartField.GetFieldOffset())
                             ],
                             MemberFunctions = [],
-                            StructTypeOverride = type.FixTypeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
+                            StructTypeOverride = type.FixTypeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}",
+                            TemplateTypes = []
                         });
                     } else
                         unions[index].Fields = [
@@ -720,7 +721,8 @@ public class Exporter {
                 Fields = ProcessFields(fields),
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray,
-                StructTypeOverride = overrideType
+                StructTypeOverride = overrideType,
+                TemplateTypes = []
             };
 
             foreach (var (unionAttr, fieldInfo) in unionOffsets.Where(t => !t.Key.IsStruct)) {
@@ -817,6 +819,7 @@ public class ProcessedStaticMembers {
     public required Type ReturnType;
 }
 
+// TODO: Export if struct is generic with types
 public class ProcessedStruct {
     public string? StructTypeOverride;
     public bool IsUnion;
@@ -830,6 +833,7 @@ public class ProcessedStruct {
     public required ProcessedMemberFunction[] MemberFunctions;
     public ProcessedMemberFunction[]? StaticMemberFunctions;
     public ProcessedStaticMembers[]? StaticMembers;
+    public required string[] TemplateTypes;
     [YamlIgnore]
     public required string StructTypeName;
     [YamlIgnore]
@@ -1046,6 +1050,13 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             }
             emitter.Emit(new SequenceEnd());
         }
+        emitter.Emit(new Scalar("template_types"));
+        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Flow));
+        foreach (var templateType in s.TemplateTypes)
+        {
+            emitter.Emit(new Scalar(templateType));
+        }
+        emitter.Emit(new SequenceEnd());
         emitter.Emit(new MappingEnd());
     }
 
