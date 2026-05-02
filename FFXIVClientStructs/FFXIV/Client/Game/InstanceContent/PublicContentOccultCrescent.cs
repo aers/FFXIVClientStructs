@@ -41,6 +41,7 @@ public unsafe partial struct PublicContentOccultCrescent {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
 public partial struct OccultCrescentMKDData {
+    // TODO: this needs updating, sheet changed
     [FieldOffset(0x00), CExporterExcelBegin("MKDData")] public uint QuestId;
     [FieldOffset(0x04)] public uint ZoneNameId; // Addon RowId
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<uint> _currencyItemIds;
@@ -50,21 +51,22 @@ public partial struct OccultCrescentMKDData {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x69)] // unsure how long
+[StructLayout(LayoutKind.Explicit, Size = 0x9C)] // unsure how long
 public partial struct OccultCrescentState {
-    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray16<uint> _supportJobExperience;
-    [FieldOffset(0x40)] public uint CurrentKnowledge;
-    [FieldOffset(0x44)] public uint NeededKnowledge;
-    [FieldOffset(0x48)] public uint NeededJobExperience;
-    [FieldOffset(0x4C)] public ushort Silver;
-    [FieldOffset(0x4E)] public ushort Gold;
-    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray16<byte> _supportJobLevels;
-    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedTeleportBitmask; // for TelepotTown
-    [FieldOffset(0x62)] public byte CurrentSupportJob; // MKDSupportJob RowId
-    [FieldOffset(0x63)] public byte KnowledgeLevelSync;
-    [FieldOffset(0x64)] private byte Unk64;
-    [FieldOffset(0x65)] private byte Unk65; // related to Sanguine Cipher item count, cur?
-    [FieldOffset(0x66)] private byte Unk66; // related to Sanguine Cipher item count, max?
-    [FieldOffset(0x67)] private byte Unk67;
-    [FieldOffset(0x68)] private byte Unk68; // flags
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray24<uint> _supportJobExperience;
+    [FieldOffset(0x60)] public uint CurrentKnowledge;
+    [FieldOffset(0x64)] public uint NeededKnowledge;
+    [FieldOffset(0x68)] public uint NeededJobExperience;
+    [FieldOffset(0x6C)] public ushort Silver;
+    [FieldOffset(0x6E)] public ushort Gold;
+    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray24<byte> _supportJobLevels;
+    
+    [FieldOffset(0x8E), FixedSizeArray] internal FixedSizeArray3<byte> _unlockedTeleportBitmask; // for TelepotTown
+    [FieldOffset(0x91)] public byte CurrentSupportJob; // MKDSupportJob RowId
+    [FieldOffset(0x92)] public byte KnowledgeLevelSync;
+    [FieldOffset(0x93)] private byte Unk93;
+    [FieldOffset(0x94)] private byte Unk94; // related to Sanguine Cipher item count, cur?
+    [FieldOffset(0x95)] private byte Unk95; // related to Sanguine Cipher item count, max?
+    [FieldOffset(0x96)] private byte Unk96;
+    [FieldOffset(0x97)] private byte Unk97; // flags
 }
