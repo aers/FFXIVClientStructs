@@ -142,8 +142,8 @@ class BaseApi:
                 DefinedStructEnum(
                     enum["name"],
                     enum["type"],
-                    enum["underlying"],
                     enum["namespace"],
+                    enum["underlying"],
                     enum["flags"],
                     enum["values"],
                 )
@@ -266,7 +266,7 @@ class BaseApi:
                     struct["union"],
                     static_member_functions,
                     static_members,
-                    struct["template_types"]
+                    []
                 )
             )
         return DefinedStructExport(enums, structs)
