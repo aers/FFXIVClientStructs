@@ -8,8 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // ctor "E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C9"
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? BA ?? ?? ?? ?? ?? ?? ?? 33 C9 48 8D 05 ?? ?? ?? ?? 48 89 83", 3, 389)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1380)]
-public unsafe partial struct PublicContentDirector {
+public partial struct PublicContentDirector {
     [FieldOffset(0xD30 + 0x00), CExporterExcelBegin("PublicContent")] public uint NameOffset;
     [FieldOffset(0xD30 + 0x04)] public uint MapIcon;
     [FieldOffset(0xD30 + 0x08)] public uint TextDataStart;

@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<EventHandler>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D BE ?? ?? ?? ?? 48 89 AE", 3, 278)]
 [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 public unsafe partial struct LuaEventHandler {
     [FieldOffset(0x1B8)] public LuaState* LuaState;
