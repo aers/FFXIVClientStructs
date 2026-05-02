@@ -77,31 +77,20 @@ public static partial class TypeExtensions {
         using var builderPooled = StringBuilderPool.Get(500);
         var builder = builderPooled.Builder;
         var name = type switch {
-            _ when type == typeof(void) => shouldLower ? type.Name.ToLower() : type.Name,
-            _ when type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
+            _ when type == typeof(void) => "void",
             _ when type == typeof(char) => "wchar_t",
-            _ when type == typeof(bool) => "char",
+            _ when type == typeof(CStringPointer) => "char*",
             _ when type == typeof(float) => "float",
             _ when type == typeof(double) => "double",
-            _ when type == typeof(short) => "__int16",
-            _ when type == typeof(int) => "int",
-            _ when type == typeof(long) || type == typeof(nint) => "__int64",
-            _ when type == typeof(ushort) => "unsigned __int16",
-            _ when type == typeof(uint) => "unsigned int",
-            _ when type == typeof(ulong) || type == typeof(nuint) => "unsigned __int64",
-            _ when type == typeof(sbyte) => "__int8",
-            _ when type == typeof(char*) => "wchar_t*",
-            _ when type == typeof(short*) => "__int16*",
-            _ when type == typeof(ushort*) => "unsigned __int16*",
-            _ when type == typeof(int*) => "int*",
-            _ when type == typeof(uint*) => "unsigned int*",
-            _ when type == typeof(long*) || type == typeof(nint*) => "__int64*",
-            _ when type == typeof(ulong*) || type == typeof(nuint*) => "unsigned __int64*",
-            _ when type == typeof(float*) => "float*",
-            _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
-            _ when type == typeof(void*) => "__int64",
-            _ when type == typeof(void**) => "__int64*",
-            _ when type == typeof(CStringPointer) => "char*",
+            _ when type == typeof(byte) || type == typeof(bool) => "size8_t",
+            _ when type == typeof(sbyte) => "size8_st",
+            _ when type == typeof(ushort) || type == typeof(Half) => "size16_t",
+            _ when type == typeof(short) => "size16_st",
+            _ when type == typeof(uint) => "size32_t",
+            _ when type == typeof(int) => "size32_st",
+            _ when type == typeof(long) || type == typeof(nint) => "size64_st",
+            _ when type == typeof(ulong) || type == typeof(nuint) => "size64_t",
+            _ when type.IsPointer() => $"{FixTypeName(type.GetElementType()!, shouldLower)}*", // able to handle infinite amount of pointers until stack size says no but this should never happen
             _ => type.SanitizeName()
         };
         return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();
