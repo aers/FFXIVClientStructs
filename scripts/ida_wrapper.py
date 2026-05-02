@@ -935,7 +935,7 @@ class IdaInterface(BaseIdaInterface):
             """
             return ida_bytes.enum_flag()
 
-    elif _get_ida_major() >= 900:
+    elif _get_ida_major() >= 9:
 
         def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
