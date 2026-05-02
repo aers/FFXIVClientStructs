@@ -4,7 +4,7 @@ public enum TerritoryIntendedUse : byte {
     Town = 0,
     Overworld = 1,
     Inn = 2,
-    Dungeon = 3, // Dungeons, Guildhests, Mahjong, Air Force One
+    Dungeon = 3, // Dungeons, Guildhests, Mahjong
     VariantDungeon = 4,
     MordionGaol = 5,
     OpeningArea = 6,
