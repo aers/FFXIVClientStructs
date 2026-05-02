@@ -61,6 +61,9 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 32 DB 0F B6 C3")]
     public static partial bool IsInIdleCam();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 45 84 ED 75 57")]
+    private partial void StartTerritoryTransition(uint localPlayerEntityId, uint nextTerritoryTypeId, nint a4, nint a5, nint a6, ushort conditionId, nint a8, nint a9);
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??")]
     public partial void QueueActiveFestivals(Festival festival1, Festival festival2, Festival festival3, Festival festival4, Festival festival5, Festival festival6, Festival festival7, Festival festival8); // Applies once the current "event" is done (GPose, Cutscene etc)
 

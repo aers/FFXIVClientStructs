@@ -15,6 +15,10 @@ public unsafe partial struct LobbyUIClient {
     [FieldOffset(0x30)] public StdVector<LobbyDataCenterWorldEntry> CurrentDataCenterWorlds;
 
     [FieldOffset(0x48)] public LobbySubscriptionInfo* SubscriptionInfo;
+
+    // Technically part of LobbyRequestCallback
+    [VirtualFunction(4)]
+    public partial void ReportError(LobbyStatusCode* status);
 }
 
 [GenerateInterop]
@@ -27,7 +31,7 @@ public unsafe partial struct LobbyDataCenterWorldEntry {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)] // size unknown
-public unsafe struct LobbySubscriptionInfo // name probably totally wrong
+public struct LobbySubscriptionInfo // name probably totally wrong
 {
     [FieldOffset(0x8)] public uint Flags;
 
@@ -36,4 +40,12 @@ public unsafe struct LobbySubscriptionInfo // name probably totally wrong
     [FieldOffset(0x30)] public uint TotalDaysSubscribed;
     [FieldOffset(0x34)] public uint DaysRemaining;
     [FieldOffset(0x38)] public uint DaysUntilNextVeteranRank;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+public struct LobbyStatusCode {
+    [FieldOffset(0x00)] public int Code;
+    [FieldOffset(0x08)] public int CodeType;
+    [FieldOffset(0x10)] public Utf8String String;
+    [FieldOffset(0x78)] public ushort ErrorSheetRow;
 }
