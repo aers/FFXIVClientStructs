@@ -59,7 +59,8 @@ public partial struct OccultCrescentState {
     [FieldOffset(0x68)] public uint NeededJobExperience;
     [FieldOffset(0x6C)] public ushort Silver;
     [FieldOffset(0x6E)] public ushort Gold;
-    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray24<byte> _supportJobLevels;
+
+    [FieldOffset(0x76), FixedSizeArray] internal FixedSizeArray24<byte> _supportJobLevels;
     
     [FieldOffset(0x8E), FixedSizeArray] internal FixedSizeArray3<byte> _unlockedTeleportBitmask; // for TelepotTown
     [FieldOffset(0x91)] public byte CurrentSupportJob; // MKDSupportJob RowId
