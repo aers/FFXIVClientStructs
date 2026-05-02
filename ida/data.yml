@@ -7290,10 +7290,10 @@ classes:
       92: ResolveDecalPath
       93: ResolveVfxPath
       94: ResolveEidPath
-      95: GetDyeFlorSlot
+      95: GetDyeForSlot
       96: GetSkeletonCount
       101: CreateDeformer
-      102: CreateRenderModelForMDL
+      102: CreateRenderModel
       108: IsFreeCompanyCrestVisibleOnSlot
       109: SetFreeCompanyCrestVisibleOnSlot
       110: SetFreeCompanyCrest
