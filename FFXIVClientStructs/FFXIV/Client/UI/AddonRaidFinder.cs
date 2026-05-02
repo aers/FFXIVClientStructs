@@ -20,15 +20,16 @@ public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x2C8)] public AtkComponentDropDownList* OrderByDropDownList;
     [FieldOffset(0x2D0)] public AtkComponentButton* DutyTypeButton;
 
-    [FieldOffset(0x390)] public Utf8String RaidsTooltipString;
-    [FieldOffset(0x3F8)] public Utf8String TrialsTooltipString;
-    [FieldOffset(0x460)] public Utf8String UltimatesTooltipString;
+    [FieldOffset(0x398), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tabTooltipStrings;
+    [FieldOffset(0x398), Obsolete("Use TabTooltipStrings[0]")] public Utf8String RaidsTooltipString;
+    [FieldOffset(0x400), Obsolete("Use TabTooltipStrings[1]")] public Utf8String TrialsTooltipString;
+    [FieldOffset(0x4D0), Obsolete("Use TabTooltipStrings[3]")] public Utf8String UltimatesTooltipString;
 
-    [FieldOffset(0x4EC)] public int HighlightedRow;
-    [FieldOffset(0x4F4)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
-    [FieldOffset(0x4F8)] public int SelectedTab;
+    [FieldOffset(0x56C)] public int HighlightedRow;
+    [FieldOffset(0x574)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
+    [FieldOffset(0x578)] public int SelectedTab;
 
-    [FieldOffset(0x500), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entries;
+    [FieldOffset(0x580), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entries;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
