@@ -58,7 +58,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x308)] public SlotStagingArea* PerSlotStagingArea;
 
-    [FieldOffset(0x350)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
+    [FieldOffset(0x350)] public MaterialResourceHandle** Materials; // size = SlotCount * MaterialsPerSlot
 
     [FieldOffset(0x358)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
@@ -99,7 +99,7 @@ public unsafe partial struct CharacterBase {
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
-    public Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
+    public Span<Pointer<MaterialResourceHandle>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 80 byte */, byte unk);
