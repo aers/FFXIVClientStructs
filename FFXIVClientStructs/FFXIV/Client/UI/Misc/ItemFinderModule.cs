@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -15,7 +16,8 @@ public unsafe partial struct ItemFinderModule {
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray24<uint> _requestItemIds;
     [FieldOffset(0xA8)] public bool IsRequestUnfulfilled;
-    [FieldOffset(0xA9)] public bool IsCabinetCached;
+    [FieldOffset(0xA9)] public Cabinet.CabinetState CabinetState;
+    [FieldOffset(0xA9), Obsolete("Invalid field. Use CabinetState.", true)] public bool IsCabinetCached;
     [FieldOffset(0xAA)] public bool IsRetainerManagerReady; // only temporary set to true until request is complete
     [FieldOffset(0xAB)] public bool IsSaddleBagCached;
     [FieldOffset(0xAC)] public bool IsGlamourDresserCached;
