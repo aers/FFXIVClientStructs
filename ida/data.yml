@@ -689,6 +689,9 @@ classes:
       0x141D3F710: ctor
       0x141D3F760: Finalizer
   Client::Network::LobbyClient::LobbyCharacterRequestCallback:
+    vtbls:
+      - ea: 0x14212C878
+        base: Application::Network::LobbyClient::LobbyRequestCallback
     funcs:
       0x14014E380: ctor # inlined (7.3)
   Client::Game::UI::ContentInterface:
