@@ -176,6 +176,20 @@ class SrcInterface(object):
             return "double"
         else:
             return ""
+    
+    def get_size_from_string(self, type: str) -> int:
+        """
+        Gets the size of a base type string.
+        """
+        if type == "size8_st" or type == "size8_t":
+            return 1
+        if type == "size16_st" or type == "size16_t":
+            return 2
+        if type == "size32_st" or type == "size32_t" or type == "float":
+            return 4
+        if type == "size64_st" or type == "size64_t" or type == "double" or type.endswith('*'):
+            return 8
+        return 0
 
     def is_signed(self, type: str) -> bool:
         if (
@@ -912,9 +926,7 @@ class IdaInterface(BaseIdaInterface):
             if mask == -1 and self.get_enum_bf(eid):
                 mask = self.get_enum_default_mask(eid)
 
-            # print(f"Adding value: {value} with name: {name} and mask: {mask}")
             ec = ida_enum.add_enum_member(eid, name, value, mask)
-            # print(f"Got error code: {ec}")
             
             if ec == ida_enum.ENUM_MEMBER_ERROR_MASK:
                 ida_enum.add_enum_member(eid, name, value)

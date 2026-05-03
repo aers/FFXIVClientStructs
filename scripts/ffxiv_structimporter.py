@@ -292,7 +292,7 @@ if api is None:
         import ida_funcs
         import ida_name
         import ida_kernwin
-        from ida_wrapper import IdaInterface
+        from ida.ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
