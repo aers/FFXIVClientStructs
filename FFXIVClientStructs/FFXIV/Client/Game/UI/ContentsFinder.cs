@@ -28,14 +28,6 @@ public unsafe partial struct ContentsFinder {
         GreedOnly = 1,
         Lootmaster = 2
     }
-
-    [Flags]
-    public enum Language : byte {
-        Japanese = 1,
-        English = 2,
-        German = 4,
-        French = 8
-    }
 }
 
 [GenerateInterop]
@@ -104,7 +96,20 @@ public unsafe partial struct ContentsFinderQueueInfo {
     public partial void OnQueueWithdrawn(uint logMessageId, ulong contentId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 55 00")]
-    public partial void OnQueuePop(ContentsFinderQueueState newState, uint contentId, nint a4, bool isInProgressParty, ContentsFinder.LootRule lootRule, ulong inProgressPartyStartTimestamp, nint a8, bool isUnrestrictedParty, bool isMinimalIL, bool isSilenceEcho, bool isExplorerMode, bool isLevelSync, bool isLimitedLeveling);
+    public partial void OnQueuePop(
+        ContentsFinderQueueState newState,
+        uint contentId,
+        nint a4,
+        bool isInProgressParty,
+        ContentsFinder.LootRule lootRule,
+        ulong inProgressPartyStartTimestamp,
+        nint a8,
+        bool isUnrestrictedParty,
+        bool isMinimalIL,
+        bool isSilenceEcho,
+        bool isExplorerMode,
+        bool isLevelSync,
+        bool isLimitedLeveling);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

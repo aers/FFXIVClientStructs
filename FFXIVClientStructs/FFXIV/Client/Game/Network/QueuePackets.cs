@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 public unsafe partial struct QueueUpdatePacket {
     [FieldOffset(0x00)] public ContentsFinderQueueState QueueState;
     [FieldOffset(0x01)] public byte ClassJobId;
-    [FieldOffset(0x02)] public ContentsFinder.Language LanguageFlags;
+    [FieldOffset(0x02)] public Language LanguageFlags;
     [FieldOffset(0x08)] public QueueFlags Flags;
     [FieldOffset(0x10)] public byte RouletteId;
     [FieldOffset(0x13)] public bool BeganQueue;
@@ -54,6 +54,14 @@ public unsafe partial struct QueueUpdatePacket {
         Unk30                      = 1UL << 30,
         Unk31                      = 1UL << 31,
         IsExplorer                 = 1UL << 32,
+    }
+
+    [Flags]
+    public enum Language : byte {
+        Japanese = 1,
+        English = 2,
+        German = 4,
+        French = 8
     }
 }
 
