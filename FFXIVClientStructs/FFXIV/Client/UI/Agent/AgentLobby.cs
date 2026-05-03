@@ -91,6 +91,12 @@ public unsafe partial struct AgentLobby {
     [MemberFunction("E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87")]
     public partial void OpenLoginWaitDialog(int position);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 4C 8B BC 24")]
+    public partial bool SendLoginRequestPacket(int characterEntryIdx);
+
+    [MemberFunction("40 53 56 57 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 8B 99")]
+    public partial void UpdateLoginPosition(int newPosition);
+
     [MemberFunction("40 56 41 56 41 57 48 83 EC 40 80 B9")]
     public partial void HandleLogout(bool isExiting, byte a3); // a3 is some kind of frame-based countdown for the lobby
 }

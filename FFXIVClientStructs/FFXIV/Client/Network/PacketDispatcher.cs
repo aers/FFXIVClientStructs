@@ -75,6 +75,12 @@ public unsafe partial struct PacketDispatcher {
     [MemberFunction("48 89 74 24 ?? 57 48 83 EC ?? 0F B6 42 ?? 48 8D 0D")]
     public static partial void HandleSpawnTreasurePacket(uint targetId, SpawnTreasurePacket* packet);
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 8B D9 48 8D 0D")]
+    public static partial void HandleQueueUpdatePacket(QueueUpdatePacket* packet);
+
+    [MemberFunction("40 53 48 83 EC 20 48 8B D9 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 1C")]
+    public static partial void HandleQueueInfoStatePacket(QueueInfoStatePacket* packet);
+
     [MemberFunction("40 53 57 48 83 EC 78 48 8B D9 48 8D 0D")]
     public static partial void HandleContentsFinderNotificationPacket(ContentsFinderNotificationPacket* packet);
 

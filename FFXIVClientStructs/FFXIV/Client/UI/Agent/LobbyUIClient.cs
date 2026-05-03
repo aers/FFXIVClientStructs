@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Application.Network.LobbyClient;
 using FFXIVClientStructs.FFXIV.Client.Network;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -5,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::LobbyUIClient
 //   Application::Network::LobbyClient::LobbyRequestCallback
 [GenerateInterop]
+[Inherits<LobbyRequestCallback>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8B F9 48 89 71 ?? 48 89 71 ?? 48 89 71 ?? 48 89 71 ?? 48 89 71", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x8C8)]
 public unsafe partial struct LobbyUIClient {
@@ -27,7 +29,7 @@ public unsafe partial struct LobbyDataCenterWorldEntry {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)] // size unknown
-public unsafe struct LobbySubscriptionInfo // name probably totally wrong
+public struct LobbySubscriptionInfo // name probably totally wrong
 {
     [FieldOffset(0x8)] public uint Flags;
 

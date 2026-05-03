@@ -28,6 +28,14 @@ public unsafe partial struct ContentsFinder {
         GreedOnly = 1,
         Lootmaster = 2
     }
+
+    [Flags]
+    public enum Language : byte {
+        Japanese = 1,
+        English = 2,
+        German = 4,
+        French = 8
+    }
 }
 
 [GenerateInterop]
@@ -36,6 +44,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<ContentsId> _queuedEntries;
 
     [FieldOffset(0x28)] public uint QueuedClassJobId;
+    [FieldOffset(0x38)] public ulong PoppedContentInProgressStartTimestamp; // unix timestamp
 
     [FieldOffset(0x40)] public int EnteredQueueTimestamp;
     [FieldOffset(0x44)] public int QueueReadyTimestamp;
@@ -47,6 +56,9 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x5A)] public byte QueuedContentRouletteId;
     [FieldOffset(0x5B)] public sbyte ClampedPositionInQueue;
     [FieldOffset(0x5C)] public sbyte PositionInQueue;
+    [FieldOffset(0x5D)] public ContentsFinder.LootRule PoppedContentLootRule;
+
+    [FieldOffset(0x60)] public bool PoppedContentIsInProgress;
 
     [FieldOffset(0x62)] public QueueInfoState InfoState;
 
@@ -57,6 +69,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x8A)] public bool PoppedContentIsLevelSync;
     [FieldOffset(0x8B)] public bool PoppedContentIsSilenceEcho;
     [FieldOffset(0x8C)] public bool PoppedContentIsExplorerMode;
+    [FieldOffset(0x8D)] public bool PoppedContentIsLimitedLeveling;
 
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
     public DateTime GetQueueReadyDateTime() => DateTime.UnixEpoch.AddSeconds(QueueReadyTimestamp);
@@ -82,8 +95,16 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 45 88 A7 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 0F B6 87")]
     public partial void QueueDuties(uint* entries, int entryCount, byte a4 = 0);
 
+    // Sends packet to withdraw from queue
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 0F B6 49 ?? 8D 41")]
     public partial void CancelQueue();
+
+    // Called when packet is received to withdraw from queue
+    [MemberFunction("4C 8B DC 53 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4C 8B F1")]
+    public partial void OnQueueWithdrawn(uint logMessageId, ulong contentId);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 55 00")]
+    public partial void OnQueuePop(ContentsFinderQueueState newState, uint contentId, nint a4, bool isInProgressParty, ContentsFinder.LootRule lootRule, ulong inProgressPartyStartTimestamp, nint a8, bool isUnrestrictedParty, bool isMinimalIL, bool isSilenceEcho, bool isExplorerMode, bool isLevelSync, bool isLimitedLeveling);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
@@ -95,7 +116,7 @@ public struct QueueInfoState {
     [FieldOffset(0x4)] public byte PositionInQueue;
 
     // ContentType: 0-3
-    [FieldOffset(0x5)] public bool AverageWaitTime;
+    [FieldOffset(0x5)] public byte AverageWaitTime;
 
     // ContentType: 1
     [FieldOffset(0x8)] public byte TanksFound;
