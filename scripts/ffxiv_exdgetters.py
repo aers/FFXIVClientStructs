@@ -45,7 +45,7 @@ if api is None:
         import ida_hexrays
         import ida_name
         import idc
-        from ida_wrapper import IdaInterface
+        from ida.ida_wrapper import IdaInterface
     except ImportError as e:
         print("Warning: Unable to load IDA failed with {0}".format(e))
     else:

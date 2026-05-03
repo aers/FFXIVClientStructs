@@ -309,7 +309,7 @@ if api is None:
         import ida_srclang
         import hashlib
         import copy
-        from ida_wrapper import IdaInterface
+        from ida.ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
