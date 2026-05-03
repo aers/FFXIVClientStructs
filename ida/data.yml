@@ -14998,6 +14998,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A6C2F0: ctor
+      0x140A6C500: CreateContext
+      0x140A6CBA0: SendEntryToAddon
+      0x140AD48B0: Dtor
   Client::UI::Agent::AgentTradeScreenImage:
     vtbls:
       - ea: 0x142198C30
@@ -23081,6 +23084,9 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413F5370: ctor
+      0x1413F5450: Finalizer
+      0x1413F6920: ShowTooltip
+      0x141447FB0: Dtor
   Client::UI::AddonTradeScreenImage: # 910
     vtbls:
       - ea: 0x1422599E0
