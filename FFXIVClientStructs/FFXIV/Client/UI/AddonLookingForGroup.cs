@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //       Component::GUI::AtkEventListener
 [Addon("LookingForGroup")]
 [GenerateInterop]
-[Inherits<AtkUnitBase>]
+[Inherits<AddonLookingForGroupBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x65C0)]
 public unsafe partial struct AddonLookingForGroup {
     [FieldOffset(0x6358)] public AtkComponentList* StandardViewList;
