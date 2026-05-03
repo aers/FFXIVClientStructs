@@ -52,7 +52,7 @@ public unsafe partial struct AgentLookingForGroup {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F 10 81 ?? ?? ?? ?? 8B 99")]
     public partial bool RequestCategoryListings(byte category);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B 8B ?? ?? ?? ?? 85 C9 75 12")]
     public partial bool RequestListingsUpdate();
 
