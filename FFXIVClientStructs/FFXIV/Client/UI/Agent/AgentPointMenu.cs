@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentPointMenu
@@ -32,25 +34,6 @@ public unsafe partial struct AgentPointMenu {
         [FieldOffset(0x120)] public StdVector<PointMenuEntry> Entries;
         [FieldOffset(0x138)] public uint EventType;
         [FieldOffset(0x13C)] public bool IsLoaded;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-    public struct ExcelSheetWaiter {
-        [FieldOffset(0x30)] public void* ScratchBuffer;
-        [FieldOffset(0x38)] private void* unk38;
-        [FieldOffset(0x40)] private void* unk40;
-        [FieldOffset(0x48)] private void* unkData48;
-        [FieldOffset(0x50)] private void* unkData50;
-        [FieldOffset(0x58)] private void* unk58;
-        [FieldOffset(0x60)] private void* unk60;
-        [FieldOffset(0x68)] private void* unk68;
-        [FieldOffset(0x70)] public void* OnLoadedCallback;
-        [FieldOffset(0x78)] public void* OnFailedCallback;
-        [FieldOffset(0x80)] public void* CallbackParam;
-        [FieldOffset(0x88)] public int SheetNumber;
-        [FieldOffset(0x8C)] private int unk8C;
-        [FieldOffset(0x90)] private void* unk90;
-        [FieldOffset(0x98)] private ushort flags98;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
