@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonCharaSelectWorldServer
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("_CharaSelectWorldServer")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
