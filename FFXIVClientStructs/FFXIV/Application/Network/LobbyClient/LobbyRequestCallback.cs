@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Application.Network.LobbyClient;
 
 // Application::Network::LobbyClient::LobbyRequestCallback
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 83 C4 20 5B C3 CC CC CC CC CC CC CC CC 33 C0 89 41 08", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe partial struct LobbyRequestCallback {

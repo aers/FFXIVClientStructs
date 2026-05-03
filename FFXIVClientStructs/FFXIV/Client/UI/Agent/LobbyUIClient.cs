@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::LobbyUIClient
 //   Application::Network::LobbyClient::LobbyRequestCallback
-[GenerateInterop(isInherited: true)]
+[GenerateInterop]
 [Inherits<LobbyRequestCallback>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8B F9 48 89 71 ?? 48 89 71 ?? 48 89 71 ?? 48 89 71 ?? 48 89 71", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x8C8)]
