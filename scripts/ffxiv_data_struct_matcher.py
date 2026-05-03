@@ -8,7 +8,7 @@ import ida_name
 import ida_kernwin
 import os
 import sys
-from ida_wrapper import IdaInterface
+from ida.ida_wrapper import IdaInterface
 from structs_schema import *
 from data_schema import *
 from yaml import load
