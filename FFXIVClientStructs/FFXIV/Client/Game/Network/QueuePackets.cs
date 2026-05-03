@@ -16,31 +16,46 @@ public unsafe partial struct QueueUpdatePacket {
 
     [Flags]
     public enum QueueFlags : ulong {
-        // Queue Pop Flags
-        ReqsDisabled = 0x8,
-        Unrestricted = 0x2000,
-        MinIlvl = 0x4000,
-        GreedOnly = 0x8000,
-        Lootmaster = 0x10000,
-        IsSynced = 0x200000,
-        LimitedLevelingRoulette = 0x400000,
-        SilenceEcho = 0x10000000,
-        IsExplorer = 0x100000000,
-        InProgressParty = 0x80,
+        None = 0,
+        Unk0 = 1UL << 0,
 
         // Queue Join Flags
-        Unk20 = 0x20,
-        Unk_A = 1 << 30,
-        Unk_B = 0x20000,
-        Unk_C = 0x400,
-        Unk_D = 0x40,
-        RequestJoinPartyInProgress = 0x2,
-        Unk_F = 0x20000000,
-        InitiatedByPartyMember = 0x4,
-        Unk_H = 0x10
+        RequestJoinPartyInProgress = 1UL << 1,
+        InitiatedByPartyMember     = 1UL << 2,
+
+        // Queue Pop Flags
+        ReqsDisabled               = 1UL << 3,
+        Unk4                       = 1UL << 4,
+        Unk5                       = 1UL << 5,
+        Unk6                       = 1UL << 6,
+        InProgressParty            = 1UL << 7,
+        Unk8                       = 1UL << 8,
+        Unk9                       = 1UL << 9,
+        Unk10                      = 1UL << 10,
+        GreedOnly                  = 1UL << 11,
+        Unk12                      = 1UL << 12,
+        Unrestricted               = 1UL << 13,
+        MinIlvl                    = 1UL << 14,
+        Unk15                      = 1UL << 15,
+        Lootmaster                 = 1UL << 16,
+        Unk17                      = 1UL << 17,
+        Unk18                      = 1UL << 18,
+        Unk19                      = 1UL << 19,
+        Unk20                      = 1UL << 20,
+        IsSynced                   = 1UL << 21,
+        LimitedLevelingRoulette    = 1UL << 22,
+        Unk23                      = 1UL << 23,
+        Unk24                      = 1UL << 24,
+        Unk25                      = 1UL << 25,
+        Unk26                      = 1UL << 26,
+        Unk27                      = 1UL << 27,
+        SilenceEcho                = 1UL << 28,
+        Unk29                      = 1UL << 29,
+        Unk30                      = 1UL << 30,
+        Unk31                      = 1UL << 31,
+        IsExplorer                 = 1UL << 32,
     }
 }
-
 
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
 public struct QueueInfoStatePacket {
