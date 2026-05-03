@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import TypeAlias
 
 
 @dataclass
@@ -62,10 +63,12 @@ class DefinedStructFixedField(DefinedStructField):
     size: int
     is_string: bool
 
+Fields: TypeAlias = list[DefinedStructField | DefinedStructFixedField]
+
 @dataclass
 class DefinedStruct(DefinedStructBase):
-    fields: list[DefinedStructField]
-    size: int | None
+    fields: Fields
+    size: int
     vtable_size: int | None
     virtual_functions: list[DefinedStructVFunc] | None
     member_functions: list[DefinedStructMemFunc]
