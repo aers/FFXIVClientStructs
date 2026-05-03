@@ -49,9 +49,6 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA 74 42")]
     public partial AtkResNode* SearchNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 3B DD")]
-    public partial AtkResNode* SearchNodeByIndex(uint idx);
-
     [MemberFunction("E8 ?? ?? ?? ?? 45 8B DD")]
     public partial AtkResNode* GetDuplicatedNode(uint nodeId, uint idx, uint nodeIdOffset);
 
