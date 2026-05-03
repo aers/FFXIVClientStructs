@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct AgentPointMenu {
     [FieldOffset(0x28)] public PointMenuContext* Context;
-    [FieldOffset(0x30)] public CompletionTree* CompletionData;
+    [FieldOffset(0x30)] public StdMap<int, int>* CompletionData;
     [FieldOffset(0x38)] public int Phase;
     [FieldOffset(0x3C)] public int SelectedIndex;
     [FieldOffset(0x40)] private uint unkInt40;
@@ -51,23 +51,6 @@ public unsafe partial struct AgentPointMenu {
         [FieldOffset(0x8C)] private int unk8C;
         [FieldOffset(0x90)] private void* unk90;
         [FieldOffset(0x98)] private ushort flags98;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct CompletionTree {
-        [FieldOffset(0x00)] public CompletionTreeNode* Head;
-        [FieldOffset(0x08)] public ulong Count;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
-    public struct CompletionTreeNode {
-        [FieldOffset(0x00)] public CompletionTreeNode* Left;
-        [FieldOffset(0x08)] public CompletionTreeNode* Parent;
-        [FieldOffset(0x10)] public CompletionTreeNode* Right;
-        [FieldOffset(0x18)] public byte Color;
-        [FieldOffset(0x19)] public byte IsNil;
-        [FieldOffset(0x1C)] public int Key;
-        [FieldOffset(0x20)] public int Bitfield;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
