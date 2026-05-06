@@ -2,11 +2,9 @@ import idaapi
 import idc
 import ida_bytes
 import ida_nalt
-import ida_kernwin
 import ida_search
 import ida_ida
 import ida_typeinf
-import ida_hexrays
 import ida_name
 import ida_funcs
 import ida_srclang
@@ -17,10 +15,144 @@ from abc import abstractmethod
 # For more information about TERR_ constants, see:
 # https://docs.hex-rays.com/developer-guide/idapython/idapython-porting-guide-ida-9#type-information-error-codes
 
+
 def _get_ida_major() -> int:
     return idaapi.IDA_SDK_VERSION // 100
 
-class SrcInterface(object):
+class BaseIdaInterface(object):
+    @abstractmethod
+    def get_struct_id(self, name):
+        pass
+
+    @abstractmethod
+    def get_enum_id(self, name):
+        pass
+
+    @abstractmethod
+    def delete_enum_members(self, eid: int):
+        """Remove all enum members
+
+        Args:
+            eid (int): The id of the enum
+        """
+        pass
+
+    def enum_exists(self, name: str):
+        return self.get_enum_id(name) != idaapi.BADADDR
+
+    def clean_name(self, name: str):
+        """Clean a name
+
+        Args:
+            name (str): The name
+
+        Returns:
+            str: The cleaned name
+        """
+        return name
+
+    def clean_struct_name(self, name: str):
+        """Clean a struct name
+
+        Args:
+            name (str): The struct name
+
+        Returns:
+            str: The cleaned struct name
+        """
+
+        if name == "Tm":
+            return "tm"  # tm is a keyword in IDA for the time struct but C# exports it as Tm
+        return (
+            name.replace(" ", "")
+            .replace("unsigned", "u")
+            .replace("__int64", "long")
+            .replace("__int32", "int")
+            .replace("__int16", "short")
+            .replace("__int8", "char")
+        )
+
+    def get_named_type(self, name: str):
+        """Retrieve a tinfo_t from the named type.
+
+        Args:
+            name (str): Name of the type.
+        """
+
+        tinfo = ida_typeinf.tinfo_t()
+        clean_name = self.clean_struct_name(name)
+        if (
+            self.get_struct_id(clean_name) != idaapi.BADADDR
+            or self.get_enum_id(clean_name) != idaapi.BADADDR
+        ):
+            if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
+                raise ValueError("{0} not found in IDA database".format(clean_name))
+            return tinfo
+
+        if name == "void":
+            idaapi.parse_decl(
+                tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
+            )
+            return tinfo.get_rettype()
+
+        terminated = name + ";"
+        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
+        tinfo_str = tinfo.dstr()
+        if tinfo_str == name or tinfo_str == clean_name:
+            return tinfo
+
+        terminated = clean_name + ";"
+        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
+        return tinfo
+
+    def get_tinfo_from_type(self, raw_type: str, array_size=0):
+        """Retrieve a tinfo_t from a raw type string.
+
+        Args:
+            raw_type (str): Raw type string.
+            array_size (int, optional): Size of the array. Defaults to 0.
+        """
+
+        type = raw_type.rstrip("*")
+        ptr_count = len(raw_type) - len(type)
+
+        type_tinfo = self.get_named_type(type)
+
+        ptr_tinfo = None
+        if ptr_count > 0:
+            for i in range(ptr_count):
+                ptr_tinfo = idaapi.tinfo_t()
+                if not ptr_tinfo.create_ptr(type_tinfo):
+                    print("! failed to create pointer")
+                    return None
+                type_tinfo = ptr_tinfo
+        else:
+            ptr_tinfo = type_tinfo
+
+        if array_size > 0:
+            array_tinfo = idaapi.tinfo_t()
+            if not array_tinfo.create_array(ptr_tinfo, array_size):
+                print("! failed to create array")
+                return None
+
+            ptr_tinfo = array_tinfo
+
+        return ptr_tinfo
+
+    def select_parser(self):
+        """Sets the parser used for building struct data."""
+        ida_srclang.set_parser_argv(
+            "clang",
+            "-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -fdelayed-template-parsing",
+        )
+
+    def parse_string(self, decl: str, vtables: list[str]):
+        """"""
+        ida_srclang.parse_decls_with_parser("clang", None, decl, False)
+        for vtable in vtables:
+            self.mark_as_vtable(vtable)
     def mark_as_vtable(vtbl_name: str) -> str | None:
         """
         Mark a struct as a vtable (TAUDT_VFTABLE).
@@ -34,7 +166,9 @@ class SrcInterface(object):
             return f"Type '{vtbl_name}' not found in type library"
 
         if not tif.is_struct():
-            actual = "union" if tif.is_union() else "enum" if tif.is_enum() else "unknown"
+            actual = (
+                "union" if tif.is_union() else "enum" if tif.is_enum() else "unknown"
+            )
             return f"'{vtbl_name}' is not a struct (got {actual})"
 
         udt = ida_typeinf.udt_type_data_t()
@@ -47,15 +181,15 @@ class SrcInterface(object):
         udt.taudt_bits |= ida_typeinf.TAUDT_VFTABLE
 
         if not tif.create_udt(udt, ida_typeinf.BTF_STRUCT):
-            return f"Failed to reconstruct UDT for '{vtbl_name}' after setting vtable flag"
+            return (
+                f"Failed to reconstruct UDT for '{vtbl_name}' after setting vtable flag"
+            )
 
         if _get_ida_major() >= 9:
             result = tif.set_named_type(None, vtbl_name)
         else:
             result = tif.set_named_type(
-                ida_typeinf.get_idati(),
-                vtbl_name,
-                ida_typeinf.NTF_REPLACE
+                ida_typeinf.get_idati(), vtbl_name, ida_typeinf.NTF_REPLACE
             )
 
         if not result:
@@ -148,71 +282,14 @@ class SrcInterface(object):
             return 8
         else:
             return 0
-        
-    def get_string_from_idc_type_and_sign(self, type: int, signed: bool = False) -> str:
-        if type == ida_bytes.byte_flag():
-            if signed:
-                return "size8_st"
-            else:
-                return "size8_t"
-        elif type == ida_bytes.word_flag():
-            if signed:
-                return "size16_st"
-            else:
-                return "size16_t"
-        elif type == ida_bytes.dword_flag():
-            if signed:
-                return "size32_st"
-            else:
-                return "size32_t"
-        elif type == ida_bytes.qword_flag():
-            if signed:
-                return "size32_st"
-            else:
-                return "size64_t"
-        elif type == ida_bytes.float_flag():
-            return "float"
-        elif type == ida_bytes.double_flag():
-            return "double"
-        else:
-            return ""
-    
-    def get_size_from_string(self, type: str) -> int:
-        """
-        Gets the size of a base type string.
-        """
-        if type == "size8_st" or type == "size8_t":
-            return 1
-        if type == "size16_st" or type == "size16_t":
-            return 2
-        if type == "size32_st" or type == "size32_t" or type == "float":
-            return 4
-        if type == "size64_st" or type == "size64_t" or type == "double" or type.endswith('*'):
-            return 8
-        return 0
-
-    def is_signed(self, type: str) -> bool:
-        if (
-            type == "__int8"
-            or type == "__int16"
-            or type == "__int32"
-            or type == "__int64"
-            or type == "int"
-        ):
-            return True
-        else:
-            return False
 
     def get_size_from_ida_type(self, type: str) -> int:
         return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type))
 
-    def select_parser(self):
-        """Sets the parser used for building struct data.
+    def set_func_name(self, ea, name, cmt):
+        ida_name.set_name(ea, name)
+        ida_bytes.set_cmt(ea, cmt, 0)
 
-        Args:
-            lang (srclang_t): The language the parser should use one of (SRCLANG_C, SRCLANG_CPP, SRCLANG_OBJC, SRCLANG_SWIFT, SRCLANG_GO)
-        """
-        ida_srclang.set_parser_argv("clang", "-x c++ -target x86_64-pc-win32")
 
     def build_struct_string(self, struct: DefinedStruct, struct_lookup: dict[str, int], enum_lookup: dict[str, str]) -> tuple[str, str, list[str]]:
         """Builds the srclang definition required to parse the object.
@@ -477,10 +554,11 @@ class BaseIdaInterface(SrcInterface):
         
 
 if _get_ida_major() < 9:
-    import ida_struct # pyright: ignore[reportMissingImports]
-    import ida_enum # pyright: ignore[reportMissingImports]
+    import ida_struct  # pyright: ignore[reportMissingImports]
+    import ida_enum  # pyright: ignore[reportMissingImports]
 else:
     print("Using IDA 9+ API")
+
 
 class IdaInterface(BaseIdaInterface):
     # This is only for IDA 7 and 8 due to a change in the API for IDA 9
@@ -765,7 +843,7 @@ class IdaInterface(BaseIdaInterface):
             offset: int,
             tif: ida_typeinf.tinfo_t,
             flag: int = 0,
-            is_string: bool = False
+            is_string: bool = False,
         ):
             """Set the info of a struct member
 
@@ -838,7 +916,7 @@ class IdaInterface(BaseIdaInterface):
                 eid (int): The id of the enum
             """
 
-            masks = [ -1 ]
+            masks = [-1]
             if idc.is_bf(eid):
                 mask = idc.get_first_bmask(eid)
                 while mask != idaapi.DEFMASK:
@@ -858,9 +936,9 @@ class IdaInterface(BaseIdaInterface):
                     eid,
                     ida_enum.get_enum_member_value(cid),
                     ida_enum.get_enum_member_serial(cid),
-                    ida_enum.get_enum_member_bmask(cid)
+                    ida_enum.get_enum_member_bmask(cid),
                 )
-                
+
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
 
@@ -904,12 +982,12 @@ class IdaInterface(BaseIdaInterface):
 
             if mask == ida_enum.DEFMASK:
                 mask >>= 1
-            
+
             return mask
-        
+
         def get_enum_name(self, eid: int):
             return idc.get_enum_name(eid)
-        
+
         def get_enum_bf(self, eid: int):
             return ida_enum.is_bf(eid)
 
@@ -937,7 +1015,7 @@ class IdaInterface(BaseIdaInterface):
                 mask = self.get_enum_default_mask(eid)
 
             ec = ida_enum.add_enum_member(eid, name, value, mask)
-            
+
             if ec == ida_enum.ENUM_MEMBER_ERROR_MASK:
                 ida_enum.add_enum_member(eid, name, value)
 
@@ -992,7 +1070,7 @@ class IdaInterface(BaseIdaInterface):
             """
             opinf = ida_nalt.opinfo_t()
             opinf.tid = ida_typeinf.get_named_type_tid(raw_type)
-            
+
             return opinf
 
         def get_enum_opinfo_from_type(self, raw_type: str):
@@ -1006,7 +1084,7 @@ class IdaInterface(BaseIdaInterface):
             """
             opinf = ida_nalt.opinfo_t()
             opinf.ec.tid = idc.get_enum(raw_type)
-            
+
             return opinf
 
         def search_binary(self, ea: int, pattern: str, flag: int):
@@ -1122,10 +1200,10 @@ class IdaInterface(BaseIdaInterface):
             tinfo = ida_typeinf.tinfo_t()
             if not tinfo.create_udt(udt):
                 return idc.BADADDR
-            
+
             if tinfo.set_named_type(None, name) != ida_typeinf.TERR_OK:
                 return idc.BADADDR
-            
+
             return tinfo.get_tid()
 
         def get_struct_id(self, name: str) -> int:
@@ -1195,9 +1273,9 @@ class IdaInterface(BaseIdaInterface):
                     nbytes = tinfo.get_size()
                 else:
                     raise ValueError("Cannot find type with tid {0}".format(typeid.tid))
-                
+
                 typeid = typeid.tid
-            
+
             ec = idc.add_struc_member(sid.get_tid(), name, offset, flag, typeid, nbytes)
             if ec != ida_typeinf.TERR_OK:
                 return False
@@ -1219,7 +1297,7 @@ class IdaInterface(BaseIdaInterface):
                 idx = tinfo.find_udm(name=name)
                 if idx == -1:
                     return True
-                
+
                 return tinfo.del_udm(idx)
             except:
                 return ida_typeinf.TERR_BAD_ARG
@@ -1237,13 +1315,13 @@ class IdaInterface(BaseIdaInterface):
                 tinfo = ida_typeinf.tinfo_t()
                 if not tinfo.get_type_by_tid(sid):
                     return -1
-                
+
                 size = tinfo.get_udt_nmembers()
                 tinfo.del_udms(0, size)
                 return size
             except:
                 return -1
-            
+
         def get_struct_member(
             self, sid: ida_typeinf.tinfo_t, offset: int
         ) -> ida_typeinf.udm_t:
@@ -1281,7 +1359,7 @@ class IdaInterface(BaseIdaInterface):
             offset: int,
             tif: ida_typeinf.tinfo_t,
             flag: int = 0,
-            is_string: bool = False
+            is_string: bool = False,
         ):
             """Set the info of a struct member
 
@@ -1296,8 +1374,10 @@ class IdaInterface(BaseIdaInterface):
                 tinfo_code_t: See ida_typeinfo.TERR_ constants
             """
             if offset != 0:
-                raise ValueError("IDA 9+ does not support offset != 0 in set_struct_member_info")
-            
+                raise ValueError(
+                    "IDA 9+ does not support offset != 0 in set_struct_member_info"
+                )
+
             memberIdx, _ = sid.get_udm_by_offset(member.offset)
             return sid.set_udm_type(index=memberIdx, tif=tif)
 
@@ -1323,7 +1403,7 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 int: The id of the enum
             """
-            
+
             return idc.get_enum(name)
 
         def remove_enum_member(self, eid: int, value: str, name: str):
@@ -1352,23 +1432,23 @@ class IdaInterface(BaseIdaInterface):
             """
             tif = ida_typeinf.tinfo_t()
             if not tif.get_type_by_tid(eid):
-                raise RuntimeError(f'Failed to get tinfo_t for enum {eid}')
+                raise RuntimeError(f"Failed to get tinfo_t for enum {eid}")
 
             eti = ida_typeinf.enum_type_data_t()
             if not tif.get_enum_details(eti):
-                raise RuntimeError(f'Failed to get enum details for enum id {eid}')
-            
+                raise RuntimeError(f"Failed to get enum details for enum id {eid}")
+
             # must clear values before groups
 
             values = []
-            for (idx, _, _) in eti.all_constants():
+            for idx, _, _ in eti.all_constants():
                 values.append(eti[idx].name)
 
             for name in values:
                 tif.del_edm(name)
 
             groups = []
-            for (idx, _) in eti.all_groups():
+            for idx, _ in eti.all_groups():
                 groups.append(eti[idx].name)
 
             for name in groups:
@@ -1416,7 +1496,7 @@ class IdaInterface(BaseIdaInterface):
             # from the default group for 64-bit enums.
             if mask == ida_typeinf.DEFMASK64:
                 mask >>= 1
-            
+
             return mask
 
         def set_enum_flag(self, eid: int, flag: int):
@@ -1427,13 +1507,13 @@ class IdaInterface(BaseIdaInterface):
                 flag (int): The flag to set
             """
             idc.set_enum_flag(eid, flag)
-        
+
         def get_enum_bf(self, eid: int):
             return idc.is_bf(eid)
-        
+
         def get_enum_name(self, eid: int):
             return idc.get_enum_name(eid)
-        
+
         def get_enum_bitmask_field(self, eid: int):
             name = self.get_enum_name(eid)
             bmask = self.get_enum_default_mask(eid)
@@ -1443,10 +1523,10 @@ class IdaInterface(BaseIdaInterface):
         def set_enum_as_bf(self, eid: int):
             if idc.is_bf(eid):
                 return
-            
+
             idc.set_enum_bf(eid, True)
 
-            (name, bmask) = self.get_enum_bitmask_field(eid)
+            name, bmask = self.get_enum_bitmask_field(eid)
 
             # this shouldn't happen under normal circumstances
             if idc.get_enum_member_by_name(f"{name}_Mask") != idaapi.BADADDR:
@@ -1472,10 +1552,12 @@ class IdaInterface(BaseIdaInterface):
             processedName = name
             while idc.get_enum_member_by_name(processedName) != idaapi.BADADDR:
                 if retries >= 3:
-                    raise RuntimeError(f"Error: too many duplicate enum member names for '{name}'")
+                    raise RuntimeError(
+                        f"Error: too many duplicate enum member names for '{name}'"
+                    )
                 retries += 1
                 processedName += "_"
-            
+
             # IDA 9.0 - 9.2 vary in how they handle errors.
             # IDA 9.0 will return a TERR_ code, while IDA 9.2 will raise an exception.
             # This will effectively convert the TERR_ to an equivalent ValueError for 9.0.
@@ -1498,5 +1580,6 @@ class IdaInterface(BaseIdaInterface):
                 int: The flag for an enum data type
             """
             return ida_bytes.enum_flag()
+
     else:
         raise RuntimeError("Unsupported IDA version")
