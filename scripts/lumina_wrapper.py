@@ -83,26 +83,28 @@ class ExcelColumnDefinition:
 
     def get_base_type_string(self):
         match self.type:
-            case ExcelColumnDataType.Bool | ExcelColumnDataType.UInt8:
-                return "size8_t"
+            case ExcelColumnDataType.Bool:
+                return "bool"
+            case ExcelColumnDataType.UInt8:
+                return "uint8_t"
             case ExcelColumnDataType.Int8:
-                return "size8_st"
+                return "int8_t"
             case ExcelColumnDataType.UInt16:
-                return "size16_t"
+                return "uint16_t"
             case ExcelColumnDataType.Int16:
-                return "size16_st"
+                return "int16_t"
             case ExcelColumnDataType.String | ExcelColumnDataType.UInt32:
-                return "size32_t"
+                return "uint32_t"
             case ExcelColumnDataType.Int32:
-                return "size32_st"
+                return "int32_t"
             case ExcelColumnDataType.Float32:
                 return "float"
             case ExcelColumnDataType.Int64:
-                return "size64_st"
+                return "int64_t"
             case ExcelColumnDataType.UInt64:
-                return "size64_t"
+                return "uint64_t"
             case _ if self.is_packed_bool():
-                return "size8_t"
+                return "uint8_t"
             case _:
                 raise ValueError(f"Unhandled type: {self.type}")
 
@@ -176,14 +178,11 @@ def get_excel_header_files() -> dict[str, list[ExcelColumnDefinition]]:
 
     root_exl = game_data_instance.GetFile[excel_list_type]("exd/root.exl")
 
-    excel_files: dict[int, str] = {}
-    excel_header_files: dict[str, list[ExcelColumnDefinition]] = {}
+    excel_header_files: dict[str, tuple[int, list[ExcelColumnDefinition]]] = {}
 
     for kvp in root_exl.ExdMap:
         key = kvp.Key
         value = kvp.Value
-        if value != -1:
-            excel_files[value] = key
 
         if value != -1:
             defs: list[ExcelColumnDefinition] = []
@@ -194,6 +193,6 @@ def get_excel_header_files() -> dict[str, list[ExcelColumnDefinition]]:
                         int(column_definition.Type), column_definition.Offset
                     )
                 )
-            excel_header_files[key] = sorted(defs)
+            excel_header_files[key] = (value, sorted(defs))
 
     return excel_header_files
