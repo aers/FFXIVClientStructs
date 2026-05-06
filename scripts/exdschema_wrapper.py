@@ -95,13 +95,21 @@ def get_exdschema_data(version: str):
 
 
 def get_size_from_string(type: str) -> int:
-    if type == "size8_st" or type == "size8_t":
+    """
+    Gets the int of a base type string.
+    """
+    if type == "int8_t" or type == "uint8_t" or type == "bool":
         return 1
-    if type == "size16_st" or type == "size16_t":
+    if type == "int16_t" or type == "uint16_t":
         return 2
-    if type == "size32_st" or type == "size32_t" or type == "float":
+    if type == "int32_t" or type == "uint32_t" or type == "float":
         return 4
-    if type == "size64_st" or type == "size64_t" or type == "double":
+    if (
+        type == "int64_t"
+        or type == "uint64_t"
+        or type == "double"
+        or type.endswith("*")
+    ):
         return 8
     return 0
 
@@ -113,7 +121,7 @@ def find_struct(structs: list[DefinedStruct], name: str):
     return None
 
 
-def create_struct_from_header_and_schema(
+def map_header_and_schema(
     header: list[ExcelColumnDefinition],
     schema: DefinitionFields,
     header_index_offset: int = 0,
@@ -129,10 +137,10 @@ def create_struct_from_header_and_schema(
         field = schema[index]
 
         if isinstance(field, RepeatDefinition):
-            exported = create_struct_from_header_and_schema(
-                header, field.fields, header_index, field.name
+            exported_enums, exported_structs = map_header_and_schema(
+                header, field.fields, header_index, schema_name + field.name
             )
-            if len(exported.structs) == 0:
+            if len(exported_structs) == 0:
                 base_type = definition.get_base_type_string()
                 fields.append(
                     DefinedStructFixedField(
@@ -149,15 +157,15 @@ def create_struct_from_header_and_schema(
                 fields.append(
                     DefinedStructFixedField(
                         field.name,
-                        exported.structs[-1].name,
+                        exported_structs[-1].name,
                         definition.offset,
                         False,
                         field.count,
                         False,
                     )
                 )
-                structs.extend(exported.structs)
-                enums.extend(exported.enums)
+                structs.extend(exported_structs)
+                enums.extend(exported_enums)
                 pass
         else:
             if definition.is_packed_bool():
@@ -241,4 +249,56 @@ def create_struct_from_header_and_schema(
             )
         )
 
-    return DefinedStructExport(enums, structs)
+    return (enums, structs)
+
+
+def create_struct_from_header_and_schema(
+    headers: dict[str, tuple[int, list[ExcelColumnDefinition]]],
+    schemas: dict[str, DefinitionFields],
+) -> tuple[DefinedStructExport, dict[str, int]]:
+    struct_export = DefinedStructExport([], [])
+    excel_map: dict[str, int] = {}
+    for excel_header_name in headers:
+        index, header = headers[excel_header_name]
+        schema = schemas[excel_header_name]
+        excel_map[excel_header_name] = index
+        enums, structs = map_header_and_schema(header, schema, 0, excel_header_name)
+        struct_export.enums.extend(enums)
+        struct_export.structs.extend(structs)
+    
+    struct_export.enums.append(DefinedStructEnum(
+        "SheetsEnum",
+        "Component::Exd::SheetsEnum",
+        "Component::Exd",
+        "uint32_t",
+        False,
+        excel_map))
+
+    return (struct_export, excel_map)
+
+exd_func_patterns: dict[str, tuple[str, tuple[str | None, int]]] = {
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B6 C1 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B7 C1 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B7 81 ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? BA", 8)),
+    "40 53 48 83 EC 20 48 8B 05 ? ? ? ? 44 8B C1 8B DA BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("44 8B C1 8B DA BA", 6)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 84 D2 BA ? ? ? ? 48 8B 88 ? ? ? ? 74 07 E8": ("Row", ("44 8B C1 84 D2 BA", 6)),
+    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowAndSubRowId", ("C1 48 C7 44 24 ? ? ? ? ? BA", 11)),
+    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B C1 44 0F ? CA BA ? ? ? ? 48 C7 44 24 28 ? ? ? ? 48 C7 44 24 20 ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowAndSubRowId", ("44 8B C1 44 0F ? CA BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowIndex", ("05 ? ? ? ? 44 8D 81 ? ? ? ? BA", 13)),
+    "48 83 EC 28 8D 41 ? 3D ? ? ? ? 77 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowIndex", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("SheetIndex", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E9 ? ? ? ?": ("RowCount", (None, 8))
+}
+
+exd_comment_patterns: dict[str, int] = {
+    "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 40 2B 00 00": 8,
+    "48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F": 8,
+    "48 8B 05 ? ? ? ? 44 8B C1 8B DA BA": 13,
+    "48 8B 05 ? ? ? ? 44 8B C1 BA": 11,
+    "48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA": 23,
+    "48 8B 05 ? ? ? ? 44 8B C1 84 D2 BA": 13,
+    "48 8B 05 ? ? ? ? 44 8B C1 44 0F ? CA BA": 15,
+    "48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA": 15
+}
