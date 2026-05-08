@@ -23150,7 +23150,6 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413F3B80: ctor
-      0x1413F3C60: Finalizer
       0x1413F5130: ShowTooltip
   Client::UI::AddonTradeScreenImage: # 910
     vtbls:
