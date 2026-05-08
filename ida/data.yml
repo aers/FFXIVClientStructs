@@ -23153,7 +23153,6 @@ classes:
       0x1413F3B80: ctor
       0x1413F3C60: Finalizer
       0x1413F5130: ShowTooltip
-      0x1414467C0: Dtor
   Client::UI::AddonTradeScreenImage: # 910
     vtbls:
       - ea: 0x142259CD0
