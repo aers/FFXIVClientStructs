@@ -21,7 +21,7 @@ public unsafe partial struct AgentPointMenu {
     [MemberFunction("40 55 41 56 41 57 48 83 EC ?? 48 8B 01 45 8B F8")]
     public partial PointMenuContext* CreateContext(uint eventType, int unk);
     
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 55 57 41 54 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 0F 29 B4 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 3B DE 72 F0")]
     public partial void SendEntryToAddon(uint index);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x140)]
