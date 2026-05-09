@@ -13,6 +13,15 @@ public struct BoneSimulators {
     [FieldOffset(0x60)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_5;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x78)]
+public struct BoneCollisions {
+    [FieldOffset(0x00)] public StdVector<Pointer<CollisionBase>> BoneCollision_1;
+    [FieldOffset(0x18)] public StdVector<Pointer<CollisionBase>> BoneCollision_2;
+    [FieldOffset(0x30)] public StdVector<Pointer<CollisionBase>> BoneCollision_3;
+    [FieldOffset(0x48)] public StdVector<Pointer<CollisionBase>> BoneCollision_4;
+    [FieldOffset(0x60)] public StdVector<Pointer<CollisionBase>> BoneCollision_5;
+}
+
 // Client::Graphics::Physics::BonePhysicsModule
 [StructLayout(LayoutKind.Explicit, Size = 0x590)]
 [GenerateInterop]
@@ -23,6 +32,7 @@ public unsafe partial struct BonePhysicsModule {
     [FieldOffset(0x94)] public float WindVariation;
     [FieldOffset(0x98)] public Skeleton* Skeleton;
     [FieldOffset(0xA0)] public BoneSimulators BoneSimulators;
+    [FieldOffset(0x118)] public BoneCollisions BoneCollisions;
     [FieldOffset(0x190), FixedSizeArray] internal FixedSizeArray5<Pointer<ResourceHandle>> _bonePhysicsResourceHandles;
     [FieldOffset(0x1B8)] public float FrameDeltaTime;
     [FieldOffset(0x578)] public float OverrideSimulationTime;

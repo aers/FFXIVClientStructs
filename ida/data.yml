@@ -25741,6 +25741,71 @@ classes:
   Common::Component::BGCollision::Math::AABB:
     funcs:
       0x14206C9A0: ctorTransformed
+  Client::Graphics::Physics::CollisionBase:
+    vtbls:
+      - ea: 0x142451CA0
+        base: Client::Graphics::ReferencedClassBase
+    funcs:
+      0x141C832D0: Ctor
+  Client::Graphics::Physics::CollisionEllipsoid:
+    vtbls:
+      - ea: 0x142429B40
+        base: Client::Graphics::Physics::CollisionBase
+    funcs:
+      0x141BD7530: Ctor
+  Client::Graphics::Physics::CollisionPlane:
+    vtbls:
+      - ea: 0x142429B90
+        base: Client::Graphics::Physics::CollisionBase
+    funcs:
+      0x141BD8A90: Ctor
+  Client::Graphics::Physics::CollisionNormalPlane:
+    vtbls:
+      - ea: 0x142429BE0
+        base: Client::Graphics::Physics::CollisionPlane
+    funcs:
+      0x141BD9450: Ctor
+  Client::Graphics::Physics::CollisionSphere:
+    vtbls:
+      - ea: 0x142429938
+        base: Client::Graphics::Physics::CollisionBase
+    funcs:
+      0x141BD2950: Ctor
+  Client::Graphics::Physics::CollisionThreePointPlane:
+    vtbls:
+      - ea: 0x142429C30
+        base: Client::Graphics::Physics::CollisionPlane
+    funcs:
+      0x141BD99D0: Ctor
+  Client::Graphics::Physics::CollisionCapsule:
+    vtbls:
+      - ea: 0x142429988
+        base: Client::Graphics::Physics::CollisionBase
+    funcs:
+      0x141BD4720: Ctor
+  Client::Graphics::Physics::ConstraintBase:
+    vtbls:
+      - ea: 0x14242FEE0
+    funcs:
+      0x141C89310: Ctor
+  Client::Graphics::Physics::ConstraintAttract:
+    vtbls:
+      - ea: 0x14242FF08
+        base: Client::Graphics::Physics::ConstraintBase
+    funcs:
+      0x141C29600: Ctor
+  Client::Graphics::Physics::ConstraintPin:
+    vtbls:
+      - ea: 0x142430090
+        base: Client::Graphics::Physics::ConstraintBase
+    funcs:
+      0x141C29A60: Ctor
+  Client::Graphics::Physics::ConstraintSpring:
+    vtbls:
+      - ea: 0x1424300B8
+        base: Client::Graphics::Physics::ConstraintBase
+    funcs:
+      0x141C29C50: Ctor
   # havok
   hkArrayUtil:
     funcs:

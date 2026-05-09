@@ -16,6 +16,7 @@ public unsafe partial struct BoneSimulator {
     // They are hardcoded to roughly 1/60 (0.016666668) and 60 (59.999996) in cases where the sheet isn't used.
     [FieldOffset(0x50)] public float SimulationTime;
     [FieldOffset(0x54)] public float SimulationTimeInv; // 1/SimulationTime
+    [FieldOffset(0x90)] public StdVector<ConstraintBase> Constraints;
     [FieldOffset(0xF6)] public bool IsStarted; // Flag that is set to true when the simulator starts, and is quickly reset
     [FieldOffset(0xF7)] public bool IsStopped; // Same as Start, but when the simulator is requested to stop
     [FieldOffset(0xF8)] public bool IsReset; // When set to true, resets the bone simulator
