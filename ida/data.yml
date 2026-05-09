@@ -24983,8 +24983,13 @@ classes:
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
       - ea: 0x14230F390
+    vfuncs:
+      0: Dtor
+      1: ClearSkeleton
     funcs:
-      0x1419315B0: ctor
+      0x1419315B0: Ctor
+      0x1419318A0: Finalizer
+      0x141931AA0: SetSkeleton
       0x141931D40: Reset
       0x141931F10: Update
       0x1419335E0: UpdateWithoutIntegration

@@ -17,6 +17,8 @@ public unsafe partial struct BoneSimulator {
     [FieldOffset(0x50)] public float SimulationTime;
     [FieldOffset(0x54)] public float SimulationTimeInv; // 1/SimulationTime
     [FieldOffset(0x90)] public StdVector<ConstraintBase> Constraints;
+    [FieldOffset(0x6C)] public ushort ConstraintLoop;
+    [FieldOffset(0x6E)] public ushort CollisionLoop;
     [FieldOffset(0xF6)] public bool IsStarted; // Flag that is set to true when the simulator starts, and is quickly reset
     [FieldOffset(0xF7)] public bool IsStopped; // Same as Start, but when the simulator is requested to stop
     [FieldOffset(0xF8)] public bool IsReset; // When set to true, resets the bone simulator
@@ -24,6 +26,9 @@ public unsafe partial struct BoneSimulator {
     [FieldOffset(0x444)] public bool IsSimulating;
     [FieldOffset(0x445)] public bool IsTimeIntegrating; // Whether the simulator is integrating (time stepping) on this frame
     [FieldOffset(0x446)] public bool IsCollidable;
+    [FieldOffset(0x447)] public bool ContinuousCollisions;
+    [FieldOffset(0x448)] public bool UsingGroundPlane;
+    [FieldOffset(0x449)] public bool FixedLength;
 
     /// <summary> Non-exhaustive list of physics groups </summary>
     public enum PhysicsGroup : uint {
@@ -37,6 +42,19 @@ public unsafe partial struct BoneSimulator {
         Ears = 18,
     }
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 74 24 ?? 4C 8B E8")]
+    public partial BoneSimulator* Ctor();
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 93")]
+    public partial void Finalizer();
+
+    [VirtualFunction(0)]
+    public partial void Dtor(byte freeFlags);
+
+    /// <remarks> Resets a lot of stuff and clears the Skeleton field? </remarks>
+    [VirtualFunction(1)]
+    public partial void ClearSkeleton();
+
     /// <remarks> Called when IsTimeIntegrating is true. </remarks>
     [MemberFunction("40 55 53 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 44 0F 29 94 24")]
     public partial void Update(BonePhysicsModule* bonePhysicsModule);
@@ -48,4 +66,8 @@ public unsafe partial struct BoneSimulator {
     /// <remarks> Reset this bone simulator. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 77 ?? 48 8D 8E")]
     public partial void Reset();
+
+    /// <remarks> Sets the skeleton for this bone simulator, also calls Reset. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 44 24 ?? 41 89 45")]
+    public partial void SetSkeleton(Skeleton* skeleton);
 }
