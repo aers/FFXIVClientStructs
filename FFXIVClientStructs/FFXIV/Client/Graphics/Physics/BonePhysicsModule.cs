@@ -46,4 +46,8 @@ public unsafe partial struct BonePhysicsModule {
     /// <summary> Limits the returned value to 60 FPS, used to set BoneSimulator.SimulationTime. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5E F0 F3 0F 11 43")]
     public partial float GetSimulationTime();
+
+    /// <summary> Creates job data based on the lists in BoneSimulators and BoneCollisions. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F ?? 48 83 EB ?? 75 ?? 48 8B 45")]
+    public partial void CreateJobData(BonePhysicsUpdater* updater);
 }

@@ -24953,6 +24953,7 @@ classes:
       0x1417ECF30: ctor
       0x1417ED0C0: Initialize
       0x1417EDB20: Update
+      0x1417EE080: CollisionObjectTask
       0x1417EE0E0: BoneSimulatorTask
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
@@ -24963,6 +24964,7 @@ classes:
       0x1418B0CA0: ctor
       0x1418B0E00: Finalizer
       0x1418B0EE0: Initialize
+      0x1418B14D0: CreateJobData
       0x1418B44F0: GetSimulationTime
       0x1418B4590: GetSimulationTimeInv
   Client::Graphics::Physics::BoneKineDriverModule:
