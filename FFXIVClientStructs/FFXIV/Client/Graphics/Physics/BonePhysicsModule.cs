@@ -50,4 +50,8 @@ public unsafe partial struct BonePhysicsModule {
     /// <summary> Creates job data based on the lists in BoneSimulators and BoneCollisions. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7F ?? 48 83 EB ?? 75 ?? 48 8B 45")]
     public partial void CreateJobData(BonePhysicsUpdater* updater);
+
+    /// <summary> Loads data into the vector in BoneSimulators and BoneCollisions corresponding to resourceIndex. This resource handle is then stored in BonePhysicsResourceHandles. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 48 8B CB FF C6")]
+    public partial void Load(ResourceHandle* handle, uint resourceIndex);
 }

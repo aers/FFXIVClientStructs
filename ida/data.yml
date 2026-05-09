@@ -24965,6 +24965,7 @@ classes:
       0x1418B0E00: Finalizer
       0x1418B0EE0: Initialize
       0x1418B14D0: CreateJobData
+      0x1418B1600: Load
       0x1418B44F0: GetSimulationTime
       0x1418B4590: GetSimulationTimeInv
   Client::Graphics::Physics::BoneKineDriverModule:
