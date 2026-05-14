@@ -6731,6 +6731,9 @@ classes:
   Client::Graphics::Kernel::Context:
     funcs:
       0x140240750: PushBackCommand
+      0x14023FB20: AllocateCommand
+      0x1402EEAA0: AllocateSpecificCommand
+      0x14023BBC0: SetRenderTargets
 #oldfail       0x140377E90: PrepareModel
 #oldfail       0x1403DEC50: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContextBase:
