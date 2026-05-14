@@ -157,7 +157,7 @@ public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x18)] public float ClearDepth;
     [FieldOffset(0x1C)] public int ClearStencil;
     [CExporterTypeForce("D3D11_VIEWPORT*")]
-    [FieldOffset(0x20)] public void* ViewportPtr; // optional
+    [FieldOffset(0x20)] public void* ClearRectangle; // optional
     [FieldOffset(0x28)] public float Left;
     [FieldOffset(0x2C)] public float Top;
     [FieldOffset(0x30)] public float Width;
