@@ -47,7 +47,7 @@ public unsafe partial struct ImmediateContext {
     [FieldOffset(0x17B8)] public void* D3D11DeviceContext_2;
 
     //[FieldOffset(0x1D70)] public InputLayout* CurrentInputLayout;
-    [CExporterTypeForce("D3D11_PRIMITIVE_TOPOLOGY")]
+    [CExporterTypeForce("D3D11_PRIMITIVE_TOPOLOGY", true)]
     [FieldOffset(0x17D8)] public int CurrentPrimitiveTopology;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 47 58")]
