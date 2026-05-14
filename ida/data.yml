@@ -7929,8 +7929,13 @@ classes:
   Component::GUI::AtkServer:
     vtbls:
       - ea: 0x142171BE8
+    vfuncs:
+      1: Dtor
     funcs:
       0x140639BE0: ctor
+      0x14063B250: Draw
+      0x1406E5900: ProcessUICommands
+      0x1406E64A0: ProcessUICommandsAlt
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x142171C78
@@ -9719,6 +9724,7 @@ classes:
       0x140787A90: Update
       0x140787F00: HandleInputUpdate
       0x14078D100: ProcessChatBoxEntry
+      0x140787E10: Draw2D
       0x14078DEC0: PropagateLevelChange
       0x14078DF10: PropagateClassJobChange
       0x1407861F0: ScreenShotCallback
