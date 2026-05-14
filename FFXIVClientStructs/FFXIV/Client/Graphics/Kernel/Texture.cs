@@ -29,6 +29,14 @@ public unsafe partial struct Texture {
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 
+    // Each mip of each array element needs its own render target
+    [FieldOffset(0x80)] public TextureMipRenderTarget* MipRenderTargets;
+
+    public TextureMipRenderTarget* GetMipRenderTarget(int mipLevel, int arrayElementIndex = 0) {
+        // Each mip is stored contiguously. So all elements of the first mip, then the second, etc.
+        return &MipRenderTargets[mipLevel * ArraySize + arrayElementIndex];
+    }
+
     public static Texture* CreateTexture2D(int width, int height, byte mipLevel, TextureFormat textureFormat, TextureFlags flags, uint unk) {
         var size = stackalloc int[2];
         size[0] = width;
@@ -47,6 +55,11 @@ public unsafe partial struct Texture {
 
     [VirtualFunction(3u)]
     public partial void DecRef();
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+public unsafe struct TextureMipRenderTarget {
+    [FieldOffset(0x00)] public void* D3D11RenderTargetViewOrDepthStencilView; // ID3D11RenderTargetView(1?) or ID3D11DepthStencilView(1?)
 }
 
 // See also DXGI_FORMATs that end with the same names.
