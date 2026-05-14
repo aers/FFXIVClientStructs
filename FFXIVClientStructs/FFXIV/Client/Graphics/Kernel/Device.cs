@@ -12,7 +12,7 @@ public unsafe partial struct Device {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
 
-    [FieldOffset(0x8)] public Context* ContextArray; // Client::Graphics::Kernel::Context array
+    [FieldOffset(0x8)] public void* ContextArray; // TODO: We have a struct for this now (breaking change)
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
     [FieldOffset(0x28)] private CallbackManager* Unk28;
     [FieldOffset(0x30)] private CallbackManager* Unk30;

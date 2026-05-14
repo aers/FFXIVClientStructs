@@ -12,6 +12,8 @@ public unsafe partial struct ImmediateContext {
 
     [FieldOffset(0x08)] public Rectangle CurrentScissorRect;
 
+    [Obsolete("Not necessarily the backbuffer, just the current primary render target. Prefer CurrentRenderTargets.")]
+    [FieldOffset(0x28)] public Texture* BackBufferReference;
     /// <summary>
     /// The currently bound render targets.
     /// </summary>
