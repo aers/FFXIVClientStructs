@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Common.Math;
+
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::Device
@@ -10,7 +12,7 @@ public unsafe partial struct Device {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
 
-    [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
+    [FieldOffset(0x8)] public Context* ContextArray; // Client::Graphics::Kernel::Context array
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
     [FieldOffset(0x28)] private CallbackManager* Unk28;
     [FieldOffset(0x30)] private CallbackManager* Unk30;
@@ -111,8 +113,8 @@ public unsafe struct RenderCommandBufferGroup {
 public unsafe partial struct RenderCommandSetTarget {
     [FieldOffset(0x0)] public int SwitchType;
     [FieldOffset(0x4)] public int RenderTargetCount;
-    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray4<Pointer<Texture>> _renderTargets;
-    [FieldOffset(0x28)] public Texture* DepthBuffer;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _renderTargets;
+    [FieldOffset(0x30)] public Texture* DepthBuffer;
     [FieldOffset(0x38)] private float Unk0;
     [FieldOffset(0x3C)] private float Unk1;
 }
@@ -133,28 +135,33 @@ public unsafe partial struct RenderCommandViewport {
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct RenderCommandScissorsRect {
     [FieldOffset(0x0)] public int SwitchType;
-    [FieldOffset(0x4)] public int Left;
-    [FieldOffset(0x8)] public int Top;
-    [FieldOffset(0xC)] public int Right;
-    [FieldOffset(0x10)] public int Bottom;
+    [FieldOffset(0x4)] public Rectangle Rectangle;
+}
+
+public enum ClearFlags : uint {
+    None = 0,
+    Color = (1 << 0),
+    Depth = (1 << 1),
+    Stencil = (1 << 2),
 }
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x0)] public int SwitchType;
-    [FieldOffset(0x4)] public float ClearType;
+    [FieldOffset(0x4)] public ClearFlags ClearFlags;
     [FieldOffset(0x8)] public float ColorB;
     [FieldOffset(0xC)] public float ColorG;
     [FieldOffset(0x10)] public float ColorR;
     [FieldOffset(0x14)] public float ColorA;
     [FieldOffset(0x18)] public float ClearDepth;
     [FieldOffset(0x1C)] public int ClearStencil;
-    [FieldOffset(0x20)] public int ClearCheck;
-    [FieldOffset(0x24)] public float Top;
+    [CExporterTypeForce("D3D11_VIEWPORT*")]
+    [FieldOffset(0x20)] public void* ViewportPtr; // optional
     [FieldOffset(0x28)] public float Left;
-    [FieldOffset(0x2C)] public float Width;
-    [FieldOffset(0x30)] public float Height;
-    [FieldOffset(0x34)] public float MinZ;
-    [FieldOffset(0x38)] public float MaxZ;
+    [FieldOffset(0x2C)] public float Top;
+    [FieldOffset(0x30)] public float Width;
+    [FieldOffset(0x34)] public float Height;
+    [FieldOffset(0x38)] public float MinZ;
+    [FieldOffset(0x3C)] public float MaxZ;
 }

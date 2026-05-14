@@ -133,6 +133,7 @@ functions:
   0x141D692FC: std::_Xlength_error
   0x1401E7740: std::deque::_Growmap
   0x1406E22A0: IntToString
+  0x1402406C0: HalfToFloat
   0x14005F250: GetStdOut
   0x14005F260: vsprintf_s
   0x14005F2C0: vswprintf_s
@@ -6745,6 +6746,17 @@ classes:
         base: Client::Graphics::Kernel::Device::ImmediateContextBase
     funcs:
       0x140234380: ProcessCommands
+      0x140231AA0: PreprocessCommands
+      0x1402345F0: ExecuteCommands
+      0x140240AA0: SetBlendState
+      0x140240E20: SetDepthStencilState
+      0x140241A00: SetRasterizerState
+      0x140241AA0: SetVertexShader
+      0x1402417C0: SetPixelShader
+      0x14022B770: SetViewport
+      0x14022D250: SetDefaultState
+      0x14022ACE0: DoClearCommandViaDraw
+      0x14022ABB0: DoClearCommand
 #oldfail       0x14036D6C0: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:
