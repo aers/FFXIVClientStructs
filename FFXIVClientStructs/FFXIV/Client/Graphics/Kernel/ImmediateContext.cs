@@ -21,7 +21,7 @@ public unsafe partial struct ImmediateContext {
     /// </summary>
     [FieldOffset(0x50)] public Texture* CurrentDepthStencilBuffer;
 
-    [FieldOffset(0xAC)] public uint CurrentDepthStateObfuscated; // The 5 bits of depth state in PackedDepthStencilDesc but sometimes obfuscated for some reason
+    [FieldOffset(0xAC)] public uint CurrentDepthState; // The 5 bits of depth state in PackedDepthStencilDesc with the stencil fields masked out
     [FieldOffset(0xB0)] public PackedDepthStencilDesc CurrentStencilState; // With the depth fields masked out
     // 0xC8: InputLayoutDesc
 
