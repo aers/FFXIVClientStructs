@@ -93,9 +93,9 @@ class DefinedStructExport:
     structs: list[DefinedStruct]
 
 
-def get_yaml(stream) -> DefinedStructExport:
+def get_yaml(stream, loader = Loader) -> DefinedStructExport:
     dic: YamlExport = load(
-        stream, Loader
+        stream, loader
     )
     enums = []
     structs = []
