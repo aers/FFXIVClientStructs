@@ -265,6 +265,8 @@ class SrcInterface(object):
         if struct.virtual_functions:
             struct_string_define += f"{short_name}_vtbl* __vtable;"
 
+        offset = 0
+
         for field in struct.fields:
             if field.type in base_fields_used:
                 continue
@@ -284,12 +286,13 @@ class SrcInterface(object):
                 struct_string_define += f"{field_define[:-1]}[{field.size}];"
                 prev_size += field_define_size * field.size
             elif field_type == "__fastcall":
-                struct_string_define += (
+                fastcall_field_define = ""
+                fastcall_field_define += (
                     f"{field.return_type} ({field_type} *{field_name})("
                 )
                 for param in field.parameters:
-                    struct_string_define += param.type + " " + param.name + ", "
-                struct_string_define = struct_string_define[:-1] + ");"
+                    fastcall_field_define += param.type + " " + param.name + ", "
+                struct_string_define += fastcall_field_define[:-1] + ");"
                 prev_size += 8
             else:
                 field_define, field_define_size = self.get_string_define_and_size(field, struct.namespace, struct_lookup, enum_lookup)
