@@ -293,7 +293,58 @@ public class Exporter {
         }
     }
 
+    private static (string typeOverride, Type[] typeOverrideTemplates) ProcessStdField(Type fieldType) {
+        const string basicString = "BasicString";
+        string[] pointerValuesType = ["Vector", "Deque", "Span"];
+        var pointerCount = 0;
+        while (fieldType.IsPointer()) {
+            fieldType = fieldType.GetPointerType();
+            pointerCount++;
+        }
+        var readOnlyNameSpan = fieldType.Name.AsSpan()[3..];
+        Span<char> stdNameSpan = stackalloc char[readOnlyNameSpan.Length + 5];
+        stdNameSpan.Clear();
+        ExporterStatics.StdCppNamespace.AsSpan().CopyTo(stdNameSpan);
+        if (readOnlyNameSpan[^2] == '`') {
+            for (var i = 0; i < readOnlyNameSpan.Length; i++) {
+                if (readOnlyNameSpan[i] == '`') break;
+                stdNameSpan[5 + i] = char.ToLower(readOnlyNameSpan[i]);
+            }
+        } else {
+            if (readOnlyNameSpan.CompareTo(basicString.AsSpan(), StringComparison.InvariantCultureIgnoreCase) != 0) {
+                for (var i = 0; i < readOnlyNameSpan.Length; i++) {
+                    if (readOnlyNameSpan[i] == '`') break;
+                    stdNameSpan[5 + i] = char.ToLower(readOnlyNameSpan[i]);
+                }
+            } else {
+                throw new NotImplementedException("Yell at me to fix this if it happens.");
+            }
+        }
+        var generics = fieldType.GenericTypeArguments;
+        var shouldBePointer = false;
+        foreach(var pointerType in pointerValuesType) {
+            if (!readOnlyNameSpan.StartsWith(pointerType)) continue;
+            shouldBePointer = true;
+            break;
+        }
+        while (stdNameSpan[^1] == '\0') stdNameSpan = stdNameSpan[..^1];
+        var genericsDefine = generics.Select(t => t is { Namespace: ExporterStatics.StdNamespacePrefix } ? ProcessStdField(t) : (t.FixTypeName(), [shouldBePointer ? t.MakePointerType() : t])).ToArray();
+        return ($"{stdNameSpan}<{string.Join(',', genericsDefine.Select(t => t.typeOverride))}>{new string('*', pointerCount)}", genericsDefine.SelectMany(t => t.typeOverrideTemplates).ToArray());
+    }
+
     private static ProcessedField ProcessField(FieldInfo field, int offset) {
+        if (field.FieldType is { Namespace: ExporterStatics.StdNamespacePrefix }) {
+            var (typeOverride, typeOverrideTemplates) = ProcessStdField(field.FieldType);
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                IsBase = field.IsDirectBase(),
+                FieldTypeOverride = typeOverride,
+                FieldTypeOverrideTemplates = typeOverrideTemplates,
+                Bits = []
+            };
+        }
         if (field.FieldType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
             var fieldTypeOverride = $"RedBlackTree::Node<{field.FieldType.GetGenericArguments()[0].FixTypeName()}>*";
             _processType.Add(new ProcessingType(field.FieldType, fieldTypeOverride[..^1]));
@@ -600,7 +651,6 @@ public class Exporter {
 
             var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
             ProcessedMemberFunction[] memberFunctionsArray = [];
-            //if (type == typeof(lua_State)) Debugger.Break();
             if (memberFunctionClass != null) {
                 var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
                 foreach (var memberFunction in memberFunctions) {
@@ -780,6 +830,7 @@ public class ProcessedBitField {
 public class ProcessedField {
     public string? FieldTypeOverride;
     public bool? FieldTypeOverrideCheck;
+    public Type[]? FieldTypeOverrideTemplates;
     public required Type FieldType;
     public required string FieldName;
     public required int FieldOffset;
@@ -832,14 +883,14 @@ public class ProcessedStruct {
             if (_dependencyNames.Length == 0) {
                 _dependencyNames = Fields
                     .Where(t => {
-                        if (t.FieldTypeOverride != null) {
-                            if (t.FieldTypeOverride.EndsWith('*') || t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") || ExporterStatics.BaseTypeNames.Contains(t.FieldTypeOverride))
-                                return false;
-                            return !t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value;
-                        }
-                        return (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!(t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()));
+                        if (t.FieldTypeOverride == null) return (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && !t.FieldType.ShouldNotExportType() && !ExporterStatics.BaseTypeNames.Contains(t.FieldType.FixTypeName());
+                        if (t.FieldTypeOverride.EndsWith('*') || t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") || ExporterStatics.BaseTypeNames.Contains(t.FieldTypeOverride)) return false;
+                        return !t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value;
                     })
-                    .Select(t => t.FieldTypeOverride ?? t.FieldType.FixTypeName()).Distinct().ToArray();
+                    .SelectMany(t => {
+                        if (t.FieldTypeOverride?.StartsWith(ExporterStatics.StdCppNamespace) ?? false) return t.FieldTypeOverrideTemplates!.Where(k => !k.ShouldNotExportType()).Select(k => k.FixTypeName()).Where(k => !ExporterStatics.BaseTypeNames.Contains(k));
+                        return [t.FieldTypeOverride ?? t.FieldType.FixTypeName()];
+                    }).Distinct().ToArray();
             }
             return _dependencyNames;
         }
@@ -1040,8 +1091,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         }
         emitter.Emit(new Scalar("template_types"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Flow));
-        foreach (var templateType in s.TemplateTypes)
-        {
+        foreach (var templateType in s.TemplateTypes) {
             emitter.Emit(new Scalar(templateType));
         }
         emitter.Emit(new SequenceEnd());
