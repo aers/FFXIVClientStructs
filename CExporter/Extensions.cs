@@ -216,6 +216,8 @@ public static partial class TypeExtensions {
         }
 
         public bool ShouldNotExportType() => type.IsPointer() || type.IsPrimitive || type.IsFixedBuffer() || type.IsEnum || type.IsBaseType();
+
+        public bool IsGenericTypeParameterOrPointer() => type.IsGenericTypeParameter || (type.IsPointer() && type.GetPointerType().IsGenericTypeParameterOrPointer());
     }
 
 }

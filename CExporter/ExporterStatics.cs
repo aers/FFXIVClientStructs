@@ -11,6 +11,7 @@ public static class ExporterStatics {
     // ReSharper disable once InconsistentNaming
     public const string FFXIVNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.FFXIV)}";
     public const string StdNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.STD)}";
+    public const string StdHelperNamespacePrefix = $"{StdNamespacePrefix}.{nameof(FFXIVClientStructs.STD.Helper)}";
     public const string InteropNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.Interop)}";
     public const string HavokNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.Havok)}";
     public const string StdCppNamespace = "std::";
