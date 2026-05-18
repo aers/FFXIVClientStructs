@@ -17,7 +17,6 @@ public partial struct AgentRaidFinder {
     [StructLayout(LayoutKind.Explicit, Size = 0x110)]
     public partial struct TabData {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<TabEntryData> _entries;
-
         [FieldOffset(0xA0)] public int EntryCount;
 
         [FieldOffset(0xA8)] public Utf8String Label;
