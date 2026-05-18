@@ -14,7 +14,7 @@ public unsafe partial struct AgentCabinet {
     [FieldOffset(0x40)] public uint SelectedItemId;        // game item ID of the selected item
 
     [FieldOffset(0x49)] public byte SelectedCategoryIndex; // dropdown selection as (index + 1); 
-    [FieldOffset(0x4A)] public byte PendingUpdate;         // set to 1 on category change; triggers item list rebuild in Update
+    [FieldOffset(0x4A)] public bool PendingUpdate;         // set to true on category change; triggers item list rebuild in Update
 
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray140<RaptureAtkModule.ItemCache> _itemCaches;
 
