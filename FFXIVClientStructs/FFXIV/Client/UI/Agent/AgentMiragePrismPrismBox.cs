@@ -30,7 +30,7 @@ public unsafe partial struct AgentMiragePrismPrismBox {
 [StructLayout(LayoutKind.Explicit, Size = 0x123A00)]
 public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x00)] private byte Unk00;
-    [FieldOffset(0x01)] public byte IsAsyncLoadComplete; // Set to true once all async item-name loads have completed. gates the sort and page-index update in Update.
+    [FieldOffset(0x01)] public bool IsAsyncLoadComplete; // Set to true once all async item-name loads have completed. gates the sort and page-index update in Update.
     [FieldOffset(0x02)] public byte PendingTabIndex; // Pending tab/slot filter to apply. written by context actions, cleared to 13 (All) once processed
 
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8000<PrismBoxItem> _prismBoxItems;
@@ -49,10 +49,10 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x11AE74)] public uint FilterSettingsAddonId;
     [FieldOffset(0x11AE78)] public bool IsPopulatingList;
     [FieldOffset(0x11AE7B)] private byte Unk11AE7B;
-    [FieldOffset(0x11AE7C)] public byte IsAddonReady;
+    [FieldOffset(0x11AE7C)] public bool IsAddonReady;
     [FieldOffset(0x11AE7D)] private byte Unk11AE7D;
     [FieldOffset(0x11AE7E)] private byte Unk11AE7E;
-    [FieldOffset(0x11AE7F)] public byte IsPositionSaved;
+    [FieldOffset(0x11AE7F)] public bool IsPositionSaved;
 
     [FieldOffset(0x11AE84)] public int CrystallizeCategory;
     [FieldOffset(0x11AE88)] public ushort CrystallizeItemIndex;
