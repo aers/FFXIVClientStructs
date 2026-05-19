@@ -46,7 +46,7 @@ public unsafe partial struct BgObject {
     /// <returns>Success or failure.</returns>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 8B C2 C7 44 24")]
     [GenerateStringOverloads]
-    public partial bool SetModel(ResourceCategory* modelResourceCategory, CStringPointer modelResourcePath);
+    public partial bool SetModel(ResourceCategory* modelResourceCategory, CStringPointer modelResourcePath); // TODO: modelResourceCategory should be `ResourceHandleType *` and renamed to `resourceHandleType`
 
     [GenerateStringOverloads]
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 30 48 8B D7")]
