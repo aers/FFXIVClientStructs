@@ -14,11 +14,12 @@ public unsafe partial struct InventoryManager {
 
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
     /// <remarks>
-    /// Used to calculate the average item level of equipped items in various places,
+    /// Used to calculate the average item level or to get equipped items in various places,
     /// for example in the agents MiragePrismMiragePlate, Status or TryOn.<br/>
     /// Can be EquippedItems or RetainerEquippedItems.
     /// </remarks>
-    [FieldOffset(0x1E10)] public InventoryType ItemLevelInventoryType;
+    [FieldOffset(0x1E10)] public InventoryType EquippedItemsInventoryType;
+    [FieldOffset(0x1E10), Obsolete("Renamed to EquippedItemsInventoryType")] public InventoryType ItemLevelInventoryType;
 
     // Seems to be reused for FATE HandIns and Mail too??!
     /// <remarks>
