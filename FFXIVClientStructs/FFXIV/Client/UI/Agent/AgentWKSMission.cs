@@ -11,7 +11,9 @@ public unsafe partial struct AgentWKSMission {
     [FieldOffset(0x28)] public MissionData* Data;
     [FieldOffset(0x30)] public uint SelectedEntry;
     [FieldOffset(0x34)] public byte SelectedTab;
+    [FieldOffset(0x35)] private bool HasSavedTab;
     [FieldOffset(0x38)] public Utf8String MapTitle;
+    [FieldOffset(0xA0)] private bool BypassItemLevelCheck; // Wild guess as no low level gatherer/crafter was available. Gets set if ReceiveVent EventKind is 3. See MissionData.StartStep
 
     [MemberFunction("40 53 48 83 EC ?? 8B DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? E8 ?? ?? ?? ?? 48 83 B8 ?? ?? ?? ?? ?? 74 ?? E8 ?? ?? ?? ?? 0F B7 D3")]
     public partial void StartMission(ushort missionUnitId);
@@ -25,6 +27,9 @@ public unsafe partial struct AgentWKSMission {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 81 C2")]
     public partial bool GetProvisionalMissions(StdVector<MissionEntry>* list);
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B EA E8")]
+    public partial bool GetCriticalMissions(StdVector<MissionEntry>* list);
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 4A ?? 85 C9")]
     public partial bool GetMissionLog(StdVector<MissionEntry>* list);
 
@@ -33,6 +38,8 @@ public unsafe partial struct AgentWKSMission {
         [FieldOffset(0x01)] public byte SelectedJobIndex;
         [FieldOffset(0x02)] public byte SelectedTabIndex;
         [FieldOffset(0x03)] public byte SelectedFilterIndex;
+        [FieldOffset(0x04)] private byte StartStep;  // This gets set if ReceiveVent EventKind is 3 and somewho involved with ControlFlags and missions average item level
+        [FieldOffset(0x05)] public bool IsMissionLog;
 
         [FieldOffset(0x08)] public uint SelectedMissionUnitId;
         [FieldOffset(0x0C)] public MissionFlags SelectedMissionFlags;
@@ -46,7 +53,9 @@ public unsafe partial struct AgentWKSMission {
         [FieldOffset(0x90)] public Utf8String ItemLevelWarningText;
         [FieldOffset(0xF8)] public StdVector<MissionEntry> MissionList;
 
+        [FieldOffset(0x115)] private byte MissionLogTabIndex; // used instead of SelectedTabIndex when IsMissionLog is set
         [FieldOffset(0x118)] public byte UpdateFlags;
+        [FieldOffset(0x119)] private byte ControlFlags; // Bit 2 gets set when Addon closes
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
@@ -54,7 +63,7 @@ public unsafe partial struct AgentWKSMission {
         [FieldOffset(0x00)] public uint MissionUnitId;
         [FieldOffset(0x04)] public uint IconId;
 
-        [FieldOffset(0x14)] public MissionFlags Flags; // maybe byte?
+        [FieldOffset(0x14)] public MissionFlags Flags;
         /// <summary>
         /// 1,2,3,4 = D,C,B,A (LevelGroup)<br/>
         /// 12 = Weather-restricted<br/>
@@ -63,6 +72,8 @@ public unsafe partial struct AgentWKSMission {
         /// 15 = Critical (IsSpecialQuest)<br/>
         /// </summary>
         [FieldOffset(0x18)] public byte MissionGroup;
+        /// <summary>ClassJob index derived from WKSMissionUnit.ClassJobCategory.</summary>
+        [FieldOffset(0x19)] public byte ClassJobIndex;
     }
 
     [Flags]
@@ -73,6 +84,8 @@ public unsafe partial struct AgentWKSMission {
         Silver = 1 << 2,
         Gold = 1 << 3,
         WeatherRestricted = 1 << 4,
-        Locked = 1 << 5
+        Locked = 1 << 5,
+        //WeatherActive = 1 << 7, // Couldn't check enough due to large timespans between missions
+        //CurrentlyActive = 1 << 11, // Couldn't check enough due to large timespans between missions
     }
 }
