@@ -41,7 +41,7 @@ public unsafe partial struct PackedDepthStencilDesc {
     //                                         D  (BackFaceStencilIndependent)
     //                                     d dd   (FrontFaceStencilDepthFailOpMinusOne)
     //                                  ppp       (FrontFaceStencilPassOpMinusOne)
-    //                       ???? ????            (--often masked out, unsure--)
+    //                       rrrr rrrr            (StencilRef)
     //            RRRR RRRR                       (StencilReadMask)
     // WWWW WWWW                                  (StencilWriteMask)
     // xxxx xxxx  xxxx xxxx  xxxx xxxx  xxxx xxxx
@@ -49,7 +49,7 @@ public unsafe partial struct PackedDepthStencilDesc {
     [BitField<byte>(nameof(FrontFaceStencilDepthFailOpMinusOne), 2, 3)]
     [BitField<byte>(nameof(FrontFaceStencilPassOpMinusOne), 5, 3)]
     [FieldOffset(0x04)] internal byte _secondPart;
-
+    [FieldOffset(0x05)] public byte StencilRef;
     [FieldOffset(0x06)] public byte StencilReadMask;
     [FieldOffset(0x07)] public byte StencilWriteMask;
 
