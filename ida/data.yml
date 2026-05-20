@@ -4095,6 +4095,8 @@ classes:
       0x142081C70: ctor
       0x142081B80: ctor_From
       0x142081CA0: Finalizer
+    vfuncs:
+      0: Dtor
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x14211C050
@@ -4691,6 +4693,8 @@ classes:
         base: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
     funcs:
       0x14207B380: ctor
+      0x14207CAE0: AddWaiter
+      0x14207E7D0: RemoveWaiter
   Component::Excel::ExcelPage:
     funcs:
       0x1420828D0: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
@@ -14323,6 +14327,16 @@ classes:
     vtbls:
       - ea: 0x1421ED560
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::UI::Agent::AgentContentsFinderInterface:
+    funcs:
+      0x140C29C90: ctor
+      0x140C29D20: CancelWaiters
+      0x140C29E10: SetAgent
+      0x140C29E20: LoadContentFinderCondition
+      0x140C2A520: LoadContentRoulette
+      0x140C2A090: LoadInstanceContent
+      0x140C2A7F0: GetReceivedRewardCount
+      0x140C2A870: GetMaxReceivedRewardCount
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x1421F0FC0

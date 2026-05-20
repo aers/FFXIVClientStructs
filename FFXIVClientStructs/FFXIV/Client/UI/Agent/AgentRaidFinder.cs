@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2368)]
 public partial struct AgentRaidFinder {
+    [FieldOffset(0x38)] public AgentContentsFinderInterface InterfaceSub;
     [FieldOffset(0x2C)] public uint SelectedEntry;
 
     [FieldOffset(0x1EA8), FixedSizeArray] internal FixedSizeArray4<TabData> _tabs; // filled here: 40 55 53 57 41 54 41 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B D9 (a1 is the agent)
