@@ -126,7 +126,7 @@ public unsafe partial struct UIModule {
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
     [MemberFunction("48 83 EC ?? ?? ?? ?? FF 50 ?? 48 8B C8 48 83 C4 ?? E9 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 40 53 48 83 EC ?? ?? ?? ?? 48 8B D9")]
-    public partial long Draw2D();
+    public partial void Draw2D();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct UIModuleHandler {
