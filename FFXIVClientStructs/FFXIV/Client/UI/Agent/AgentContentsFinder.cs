@@ -112,6 +112,8 @@ public unsafe partial struct AgentContentsFinderReward {
 
     [FieldOffset(0x7D0)] public ExcelSheet* ItemSheet;
 
+    [FieldOffset(0x7E0)] public AgentInterface* AgentInterface;
+    [FieldOffset(0x7E8)] public ulong EventKind;
     [FieldOffset(0x7F0), FixedSizeArray] internal FixedSizeArray7<ItemWrap> _normalRewards;
     [FieldOffset(0xD68), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _unkRewards;
     [FieldOffset(0x1150), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _bonusRewards; // "In Need" and "Completion Bonus"
@@ -131,9 +133,9 @@ public unsafe partial struct AgentContentsFinderReward {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-    public partial struct RewardWrap {
+    public partial struct RewardWrap { // TODO: this is the same as AgentContentsFinderInterface.RewardsData
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray7<InventoryItem> _items;
         [FieldOffset(0x1F8), FixedSizeArray] internal FixedSizeArray9<int> _rewards;
-        [FieldOffset(0x21C)] private byte Unk21C; // 7.1
+        [FieldOffset(0x21C)] public bool LimitedTimeBonus;
     }
 }

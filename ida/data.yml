@@ -227,6 +227,7 @@ functions:
   0x1409AA6C0: ToObjStrId
   0x1409AA780: ToActStrId
   0x140C14D30: GenerateEquippedItemsChecksum # for Banners; unused
+  0x140C27800: HasReachedExpansionMaxLevel
   0x140E88EF0: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140FBD580: ConvertRawToMapPosX
   0x140FBD610: ConvertRawToMapPosY
@@ -14338,6 +14339,22 @@ classes:
       0x140C2A090: LoadInstanceContent
       0x140C2A7F0: GetReceivedRewardCount
       0x140C2A870: GetMaxReceivedRewardCount
+  Client::UI::Agent::AgentContentsFinderReward:
+    funcs:
+      0x140ACCCA0: ctor
+      0x140F04A70: Finalize
+      0x140F04B80: Clear
+  Client::UI::Agent::AgentContentsFinderInterface::RewardsContainer:
+    funcs:
+      0x140ACFEB0: Finalize
+      0x140C5A5B0: ctor
+      0x140C5EE40: CopyFrom
+      0x140C607D0: Clear
+  Client::UI::Agent::AgentContentsFinderInterface::RewardsData:
+    funcs:
+      0x140ACCC30: ctor
+      0x140AD7B40: Clear
+      0x140FA61F0: CopyFrom
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x1421F0FC0
