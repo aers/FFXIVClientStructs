@@ -73,7 +73,10 @@ public unsafe partial struct ImmediateContext {
     public partial ulong SetPixelShader(PixelShader* pixelShader, void** constantBuffers);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 57 7C")]
-    public partial void SetViewport(Rectangle* viewportRectangle);
+    public partial void SetViewport(IntRectangle* viewportRectangle, float minDepth, float maxDepth);
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B D7 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 7F")]
+    public partial void SetMultiViewports(uint viewportCount, IntRectangle* viewports, float* minDepths, float* maxDepths);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 4A 10")]
     public partial void SetDefaultState();

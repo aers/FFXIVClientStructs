@@ -108,10 +108,20 @@ public unsafe struct RenderCommandBufferGroup {
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandClearDepth* ClearDepthCommand;
 }
 
+public enum RenderCommandType : int {
+    SetTarget = 0,
+    Viewport = 1,
+    MultiViewport = 2,
+    ScissorRect = 3,
+    Clear = 4,
+}
+
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct RenderCommandSetTarget {
+    [Obsolete("Use Type instead.")]
     [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x0)] public RenderCommandType Type;
     [FieldOffset(0x4)] public int RenderTargetCount;
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _renderTargets;
     [FieldOffset(0x30)] public Texture* DepthBuffer;
@@ -122,20 +132,46 @@ public unsafe partial struct RenderCommandSetTarget {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct RenderCommandViewport {
+    [Obsolete("Use Type instead.")]
     [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x0)] public RenderCommandType Type;
+    [FieldOffset(0x4)] public IntRectangle ViewportRect;
+    [Obsolete("Use ViewportRect.Left.")]
     [FieldOffset(0x04)] public int TopLeftY;
+    [Obsolete("Use ViewportRect.Top.")]
     [FieldOffset(0x08)] public int TopLeftX;
+    [Obsolete("Use ViewportRect.Right.")]
     [FieldOffset(0x0C)] public int BottomRightY;
+    [Obsolete("Use ViewportRect.Bottom.")]
     [FieldOffset(0x10)] public int BottomRightX;
     [FieldOffset(0x14)] public float MinDepth;
     [FieldOffset(0x18)] public float MaxDepth;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+public unsafe partial struct RenderCommandMultiViewport {
+    [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray5<IntRectangle> _viewportRects;
+    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray5<float> _minDepths;
+    [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray5<float> _maxDepths;
+    [FieldOffset(0x7C)] public uint ViewportCount;
+}
+
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct RenderCommandScissorsRect {
+    [Obsolete("Use Type instead.")]
     [FieldOffset(0x0)] public int SwitchType;
-    [FieldOffset(0x4)] public Rectangle Rectangle;
+    [FieldOffset(0x0)] public RenderCommandType Type;
+    [FieldOffset(0x4)] public IntRectangle ScissorRect;
+    [Obsolete("Use ScissorRect.Left.")]
+    [FieldOffset(0x4)] public int Left;
+    [Obsolete("Use ScissorRect.Top.")]
+    [FieldOffset(0x8)] public int Top;
+    [Obsolete("Use ScissorRect.Right.")]
+    [FieldOffset(0xC)] public int Right;
+    [Obsolete("Use ScissorRect.Bottom.")]
+    [FieldOffset(0x10)] public int Bottom;
 }
 
 public enum ClearFlags : uint {
@@ -148,19 +184,31 @@ public enum ClearFlags : uint {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct RenderCommandClearDepth {
+    [Obsolete("Use Type instead.")]
     [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x0)] public RenderCommandType Type;
+    [Obsolete("This is incorrect. Use ClearFlags.")]
+    [FieldOffset(0x4)] public float ClearType;
     [FieldOffset(0x4)] public ClearFlags ClearFlags;
     [FieldOffset(0x8)] public float ColorB;
     [FieldOffset(0xC)] public float ColorG;
     [FieldOffset(0x10)] public float ColorR;
     [FieldOffset(0x14)] public float ColorA;
     [FieldOffset(0x18)] public float ClearDepth;
-    [FieldOffset(0x1C)] public int ClearStencil;
-    [CExporterTypeForce("D3D11_VIEWPORT*")]
-    [FieldOffset(0x20)] public void* ClearRectangle; // optional
+    [FieldOffset(0x1C)] public byte ClearStencil;
+    [FieldOffset(0x1D)] public byte StencilReference;
+    [Obsolete("This is incorrect. Use ClearRectangle.")]
+    [FieldOffset(0x20)] public int ClearCheck;
+    [CExporterTypeForce("D3D11_RECT*")]
+    [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, points at ClearRectangle if set
+    [FieldOffset(0x28)] public IntRectangle ClearRectangle;
+    [Obsolete("This is incorrect. Use ClearRectangle.Left instead.")]
     [FieldOffset(0x28)] public float Left;
+    [Obsolete("This is incorrect. Use ClearRectangle.Top instead.")]
     [FieldOffset(0x2C)] public float Top;
+    [Obsolete("This is incorrect. Use ClearRectangle.Right instead.")]
     [FieldOffset(0x30)] public float Width;
+    [Obsolete("This is incorrect. Use ClearRectangle.Bottom instead.")]
     [FieldOffset(0x34)] public float Height;
     [FieldOffset(0x38)] public float MinZ;
     [FieldOffset(0x3C)] public float MaxZ;

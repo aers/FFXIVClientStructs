@@ -6754,6 +6754,7 @@ classes:
       0x140241AA0: SetVertexShader
       0x1402417C0: SetPixelShader
       0x14022B770: SetViewport
+      0x14022D6A0: SetMultiViewports
       0x14022D250: SetDefaultState
       0x14022ACE0: DoClearCommandViaDraw
       0x14022ABB0: DoClearCommand
