@@ -44,7 +44,7 @@ public unsafe partial struct ExcelSheet {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x06)]
     public struct ColumnInfo {
-        [FieldOffset(0x00)] private ExcelColumnType ColumnType;
+        [FieldOffset(0x00), CExporterIgnore] private ExcelColumnType ColumnType;
         [FieldOffset(0x00)] public ushort Type; // TODO: use ExcelColumnType
         [FieldOffset(0x02)] public ushort Index;
         [FieldOffset(0x04)] public ushort Offset;
