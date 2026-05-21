@@ -19,12 +19,12 @@ public unsafe partial struct EffectContainer {
     [FieldOffset(0x44)] public float GroundTiltSpeed;
     [FieldOffset(0x50)] public float FlightTiltAngle;
     [FieldOffset(0x54)] public float FlightTiltSpeed;
-    
+
     [FieldOffset(0x40), Obsolete("Invalid since 7.1")] public byte TiltParam1Type;
     [FieldOffset(0x44), Obsolete("Invalid since 7.1")] public float TiltParam1Value;
     [FieldOffset(0x48), Obsolete("Invalid since 7.1")] public byte TiltParam2Type;
     [FieldOffset(0x4C), Obsolete("Invalid since 7.1")] public float TiltParam2Value;
-    
+
     /// <summary>
     /// Called when mounting/dismounting and maybe other state changes to set new tilt values 
     /// </summary>
