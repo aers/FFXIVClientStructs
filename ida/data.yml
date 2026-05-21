@@ -4118,6 +4118,9 @@ classes:
     funcs:
       0x14207E8A0: ctor
       0x14207FB20: ExcelSheetContainerFromData
+      0x14207FF50: GetLanguage
+      0x14207FFA0: GetSheetByIndex
+      0x14207FFC0: GetSheetByName
   Common::Component::Environment::AllocatorInterface:
     vtbls:
       - ea: 0x14216D4E0
@@ -4694,7 +4697,22 @@ classes:
         base: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
     funcs:
       0x14207B380: ctor
+      0x14207BB40: CopyFrom
       0x14207CAE0: AddWaiter
+      0x14207D270: ClearAllocatedRows
+      0x14207D290: GetColumnIndex
+      0x14207DD00: GetAllocatedRowCount
+      0x14207DD20: GetStartColumn
+      0x14207DD30: GetSubRowByDescriptor
+      0x14207DE70: GetRowById
+      0x14207DFB0: GetColumnStringByDescriptor
+      0x14207E1C0: GetRowByDescriptor
+      0x14207E360: GetSheetName
+      0x14207E370: GetColumnOffset
+      0x14207E420: GetColumnIndex2
+      0x14207E430: GetColumnType
+      0x14207E450: GetColumnTypeLength
+      0x14207E460: GetWaiterCount
       0x14207E7D0: RemoveWaiter
   Component::Excel::ExcelPage:
     funcs:
@@ -4749,7 +4767,8 @@ classes:
       0x14207AB70: IsColumnRsv  # (ExcelRow* this, size_t nColumnIndex) -> bool
       0x14207A130: CalculateStringColumnHash  # static (char* pStringOffsetBytes)
       0x14207A470: ResolveStringColumnIndirection  # static (char* pStringOffsetBytes)
-      0x14207AAE0: GetFirstColumnAsString
+      0x14207AAE0: GetColumnString
+      0x14207AB60: HasData
   Component::Excel::ExcelRowDescriptor:
     # size 0x08+
     # 0x00: nRowId: int
@@ -15950,6 +15969,7 @@ classes:
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x1421BA0A0
+        base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::Event::DailyQuestMap:
     funcs:
       0x140E05DC0: ctor
