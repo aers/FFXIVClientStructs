@@ -197,10 +197,10 @@ public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x18)] public float ClearDepth;
     [FieldOffset(0x1C)] public byte ClearStencil;
     [FieldOffset(0x1D)] public byte StencilReference;
-    [Obsolete("This is incorrect. Use ClearRectangle.")]
+    [Obsolete("This is incorrect. Use ClearRectanglePtr.")]
     [FieldOffset(0x20)] public int ClearCheck;
     [CExporterTypeForce("D3D11_RECT*")]
-    [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, points at ClearRectangle if set
+    [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
     [FieldOffset(0x28)] public IntRectangle ClearRectangle;
     [Obsolete("This is incorrect. Use ClearRectangle.Left instead.")]
     [FieldOffset(0x28)] public float Left;
