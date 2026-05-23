@@ -17,12 +17,13 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0xA1)] public byte StringArrayIndex;
     [FieldOffset(0xA2)] public ushort DataSize;
     [FieldOffset(0xA4)] public ushort DictSize;
-    [FieldOffset(0xA6)] private ushort UnkA6; //10 * DataSize
-    [FieldOffset(0xA8)] private ushort UnkA8; //10 * DataSize
+    [FieldOffset(0xA6)] public ushort NumberArrayEntryCountIndex; //10 * DataSize
+    [FieldOffset(0xA8)] private ushort NumberArrayEntryCountIndex2; //10 * DataSize
+    [FieldOffset(0xAA)] public ushort StringArrayGroupsCountIndex; // Addon#1696
     [FieldOffset(0xB0)] public CharacterData* CharData;
     [FieldOffset(0xB8)] public CharacterIndex* IndexData;
     [FieldOffset(0xC0)] public DisplayGroup FilterGroup;
-    [FieldOffset(0xC4)] public byte MoveSelector; // 0x9 Not Selected or 0xB Selected
+    [FieldOffset(0xC4)] public byte MoveSelector; // TODO: uint // 0x9 Not Selected or 0xB Selected
     [FieldOffset(0xCA)] public Sorting SortGroup;
     //[FieldOffset(0xAC)] private uint UnkAC; // Some kind of flag mask for OnlineStatus check InfoProxyCommonlist_vf14
 
@@ -70,7 +71,7 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x20)] public uint ExtraFlags;
         // 4 bytes empty
         // 4 bytes unknown
-        [FieldOffset(0x24)] public byte Sort;
+        [FieldOffset(0x24)] public byte Sort; // TODO: ushort
         // 1 byte
         [FieldOffset(0x26)] public ushort CurrentWorld;
         [FieldOffset(0x28)] public ushort HomeWorld;
