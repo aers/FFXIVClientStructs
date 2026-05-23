@@ -15,6 +15,10 @@ public unsafe partial struct InfoProxyFriendList {
     [FieldOffset(0x1C0)] public Utf8String Str4;
     [FieldOffset(0x228)] public Utf8String Str5;
     [FieldOffset(0x290), FixedSizeArray] internal FixedSizeArray200<NameBuffer> _names;
+    /// <summary>
+    /// Indexed using the <see cref="InfoProxyCommonList.CharacterData.Sort"/> field.
+    /// </summary>
+    [FieldOffset(0x37B0), FixedSizeArray]  internal FixedSizeArray200<int> _timeStamps;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
