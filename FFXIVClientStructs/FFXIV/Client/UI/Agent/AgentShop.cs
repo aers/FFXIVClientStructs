@@ -1,3 +1,4 @@
+using static FFXIVClientStructs.FFXIV.Client.Game.InventoryItem;
 using AtkEventInterface = FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface.AtkEventInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -19,6 +20,7 @@ public unsafe partial struct AgentShop {
 
     [FieldOffset(0xB8)] public ShopItem* ItemReceive;
     [FieldOffset(0xC0)] public ShopItem* ItemCost; // there is 3 of these for every item
+    [FieldOffset(0xC8)] public ShopRetainerBuybackItem* ItemRetainerBuyback; // array of 20
 
     [FieldOffset(0xD0)] public int ItemReceiveCount;
 
@@ -27,8 +29,9 @@ public unsafe partial struct AgentShop {
     [FieldOffset(0x100)] public int SelectedItemIndex;
     [FieldOffset(0x104)] public int SelectedItemStackSize;
 
-    public Span<ShopItem> ItemReceiveSpan => ItemReceive == null ? new Span<ShopItem>() : new Span<ShopItem>(ItemReceive, ItemReceiveCount);
-    public Span<ShopItem> ItemCostSpan => ItemCost == null ? new Span<ShopItem>() : new Span<ShopItem>(ItemCost, ItemCostCount);
+    public Span<ShopItem> ItemReceiveSpan => ItemReceive != null ? new Span<ShopItem>(ItemReceive, ItemReceiveCount) : [];
+    public Span<ShopItem> ItemCostSpan => ItemCost != null ? new Span<ShopItem>(ItemCost, ItemCostCount) : [];
+    public Span<ShopRetainerBuybackItem> ItemRetainerBuybackSpan => ItemRetainerBuyback != null ? new Span<ShopRetainerBuybackItem>(ItemRetainerBuyback, 20) : [];
 
     [StructLayout(LayoutKind.Explicit, Size = 0x240)]
     public struct ShopItem {
@@ -45,5 +48,18 @@ public unsafe partial struct AgentShop {
         [FieldOffset(0x21C)] public uint ItemId;
         //[FieldOffset(0x220)] private uint Unk220;
         [FieldOffset(0x224)] public uint MaxStack;
+    }
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public partial struct ShopRetainerBuybackItem {
+        [FieldOffset(0x00)] public uint ItemId;
+        [FieldOffset(0x04)] public uint Quantity;
+
+        [FieldOffset(0x14)] public uint Price;
+
+        [FieldOffset(0x1E)] public ItemFlags Flags;
+
+        [FieldOffset(0x22)] internal FixedSizeArray5<ushort> _materia; // not entirely sure
     }
 }
