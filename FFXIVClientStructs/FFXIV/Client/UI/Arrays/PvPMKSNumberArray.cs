@@ -96,10 +96,6 @@ public unsafe partial struct PvPMKSNumberArray {
             [FieldOffset(25 * 4), FixedSizeArray] internal FixedSizeArray10<uint> _statusStackCounts;
             [FieldOffset(35 * 4), FixedSizeArray] internal FixedSizeArray10<uint> _statusIconIds;
             [FieldOffset(45 * 4), FixedSizeArray] internal FixedSizeArray10<bool> _statusDispellables;
-            /// <summary>
-            /// True if the player hasn't disconnected.
-            /// </summary>
-            [FieldOffset(46 * 4)] public bool IsInMatch;
         }
     }
     
