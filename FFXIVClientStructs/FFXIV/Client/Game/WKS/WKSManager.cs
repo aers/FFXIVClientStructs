@@ -96,30 +96,24 @@ public unsafe partial struct WKSManager {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1088)]
     public partial struct WKSState {
-        [FieldOffset(0x00)] private ushort Unk00;
-        [FieldOffset(0x04)] private byte Unk04;
-        [FieldOffset(0x08)] private ushort Unk08;
-
+        [FieldOffset(0x00)] private byte Unk00; // written as word, read as byte. used for arrays after Scores depending
+        [FieldOffset(0x01)] private byte Unk01;
+        [FieldOffset(0x04)] public int ProjectState;
+        [FieldOffset(0x08)] private ushort Unk08; // also project related
         /// <remarks>RowId of WKSDevGrade sheet.</remarks>
         [FieldOffset(0x0A)] public ushort DevGrade;
-
-        [FieldOffset(0x0C)] private uint Unk0C;
-
+        [FieldOffset(0x0C)] public int ProjectTimestamp; // for Addon#16889 and Addon#16890
         /// <remarks>For Hub upgrades. RowId of WKSFateControl sheet.</remarks>
         [FieldOffset(0x10)] public ushort CurrentFateControlRowId;
         /// <remarks>For Hub upgrades. Id of Fate in FateManager.</remarks>
         [FieldOffset(0x12)] public ushort CurrentFateId;
-
         [FieldOffset(0x14)] private byte Unk14; // Seems like some state flags which are checked in IsFunctionUnlocked. Bit 0 seems like "hub is built/active" 
-		
         /// <remarks>0-based WKSPioneeringTrail row index for the currently visited planet (sheet row = this + 1).</remarks>
         [FieldOffset(0x15)] public byte CurrentPlanetIndex; // Full row is highest subrow where WKSPioneeringTrail[row][sub].ActivationStage <= WKSState.DevGrade
-		
         /// <remarks>0-based WKSPioneeringTrail row index for the latest unlocked planet. (sheet row = this + 1)</remarks>
         [FieldOffset(0x16)] public byte LatestPlanetIndex;
 
         [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray11<WKSJobState> _jobStates;
-
         /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
         [FieldOffset(0xE30)] public ushort CurrentMissionUnitRowId;
 
@@ -133,6 +127,7 @@ public unsafe partial struct WKSManager {
 
         [FieldOffset(0xE81), FixedSizeArray(isBitArray: true, bitCount: 1704)] internal FixedSizeArray213<byte> _missionCompletionFlags;
         [FieldOffset(0xF56), FixedSizeArray(isBitArray: true, bitCount: 1704)] internal FixedSizeArray213<byte> _missionGoldFlags;
+
         [FieldOffset(0x102C), FixedSizeArray] internal FixedSizeArray11<int> _scores; // cosmic class scores
     }
 }
