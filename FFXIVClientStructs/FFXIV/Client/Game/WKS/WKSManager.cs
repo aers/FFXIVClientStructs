@@ -13,6 +13,8 @@ public unsafe partial struct WKSManager {
     public static partial WKSManager* Instance();
 
     [FieldOffset(0x18)] public ushort TerritoryId;
+    /// <summary>Set to 1 when WKS territory loads; cleared on unload. Checked by <see cref="IsFunctionUnlocked"/>.</summary>
+    [FieldOffset(0x1A)] public bool IsLoaded;
 
     [FieldOffset(0x50)] public WKSState State;
 
@@ -54,6 +56,12 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0x1150)] private void* UnkStruct1150;
     [FieldOffset(0x1158)] public StdVector<Pointer<WKSModuleBase>> Modules;
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 0F B7 DA 48 8B F9 E8 ?? ?? ?? ?? 8B CB")]
+    public partial void Load(ushort territoryId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F8 49 8B 4E")]
+    public partial bool IsFunctionUnlocked(byte functionRowId);
+
     public bool IsMissionCompleted(uint missionUnitId) => State.MissionCompletionFlags.CheckBitInSpan(missionUnitId);
 
     public bool IsMissionGolded(uint missionUnitId) => State.MissionGoldFlags.CheckBitInSpan(missionUnitId);
@@ -66,16 +74,51 @@ public unsafe partial struct WKSManager {
         Failed = 5,
     }
 
+    [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+    public struct WKSMissionState {
+        [FieldOffset(0x00)] public ushort MissionUnitId;
+        /// <remarks>Used by AgentWKSMission to set silver/gold mission flags when this is 1 or 2.</remarks>
+        [FieldOffset(0x04)] public uint MissionFlag;
+        [FieldOffset(0x08)] private ushort Unk8;
+        [FieldOffset(0x0A)] public byte Condition; // Needs more testing, but was set to 1 when Critical Mission was abandoned. Could be a bool for showing locked out status?
+    }
+
+    /// <summary>Per-job state block. WKSState contains 11 of these (one per cosmic class job).</summary>
+    [StructLayout(LayoutKind.Explicit, Size = 0x148)]
+    public struct WKSJobState {
+        [FieldOffset(0xB0)] public WKSMissionState ExtraBasicMission; // This held a single extra A-rank mission entry. Emitted by AgentWKSMission.GetBasicMissions. Purpose yet unclear.
+        [FieldOffset(0xC0)] public StdVector<WKSMissionState> SequentialMissions;
+        [FieldOffset(0xD8)] public StdVector<WKSMissionState> ProvisionalMissions;
+        [FieldOffset(0xF0)] public StdVector<WKSMissionState> CriticalMissions;
+        [FieldOffset(0x108)] public uint CriticalMissionData; // All jobs with currently open critical missions hold the same value. (e.g. 1779307018). Purpose yet unclear.
+    }
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1088)]
     public partial struct WKSState {
-        /// <remarks> RowId of WKSDevGrade sheet. </remarks>
+        [FieldOffset(0x00)] private ushort Unk00;
+        [FieldOffset(0x04)] private byte Unk04;
+        [FieldOffset(0x08)] private ushort Unk08;
+
+        /// <remarks>RowId of WKSDevGrade sheet.</remarks>
         [FieldOffset(0x0A)] public ushort DevGrade;
 
-        /// <remarks> For Hub upgrades. RowId of WKSFateControl sheet. </remarks>
+        [FieldOffset(0x0C)] private uint Unk0C;
+
+        /// <remarks>For Hub upgrades. RowId of WKSFateControl sheet.</remarks>
         [FieldOffset(0x10)] public ushort CurrentFateControlRowId;
-        /// <remarks> For Hub upgrades. Id of Fate in FateManager. </remarks>
+        /// <remarks>For Hub upgrades. Id of Fate in FateManager.</remarks>
         [FieldOffset(0x12)] public ushort CurrentFateId;
+
+        [FieldOffset(0x14)] private byte Unk14; // Seems like some state flags which are checked in IsFunctionUnlocked. Bit 0 seems like "hub is built/active" 
+		
+        /// <remarks>0-based WKSPioneeringTrail row index for the currently visited planet (sheet row = this + 1).</remarks>
+        [FieldOffset(0x15)] public byte CurrentPlanetIndex; // Full row is highest subrow where WKSPioneeringTrail[row][sub].ActivationStage <= WKSState.DevGrade
+		
+        /// <remarks>0-based WKSPioneeringTrail row index for the latest unlocked planet. (sheet row = this + 1)</remarks>
+        [FieldOffset(0x16)] public byte LatestPlanetIndex;
+
+        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray11<WKSJobState> _jobStates;
 
         /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
         [FieldOffset(0xE30)] public ushort CurrentMissionUnitRowId;
