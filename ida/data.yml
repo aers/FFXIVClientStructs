@@ -15145,6 +15145,7 @@ classes:
       0x140A76750: StartMission # no xrefs
       0x140A726D0: GetBasicMissions
       0x140A72950: GetProvisionalMissions
+      0x140A72D50: GetCriticalMissions # no xrefs
       0x140A73030: GetMissionLog
   Client::UI::Agent::AgentWKSMissionInfomation:
     vtbls:
