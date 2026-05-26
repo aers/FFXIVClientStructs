@@ -44,6 +44,9 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(60)]
     public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
 
+    [VirtualFunction(70)]
+    public partial void CancelByPlayerMovement(bool a2, bool a3);
+
     // [VirtualFunction(76)]
     // public partial void ProcessListenItemCallback(?);
 

@@ -15353,6 +15353,7 @@ classes:
       59: ProcessFormatStringCallback
       60: ProcessActionTimelineCallback
       61: ProcessDirectorUpdate
+      70: CancelByPlayerMovement
       76: ProcessListenItemCallback
       159: CancelInteraction
       205: GetTitle # lua function "GetEventHandlerTitle"
