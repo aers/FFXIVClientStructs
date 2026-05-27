@@ -11329,7 +11329,8 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x1408C85C0: CalculateFloatHeight
-      0x1408c9440: LoadTiltData
+      0x1408c9440: LoadMountTiltData
+      0x1408C9760: LoadPlayerTiltData
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
       - ea: 0x14218C850
