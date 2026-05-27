@@ -43,7 +43,7 @@ public unsafe partial struct EffectContainer {
 
     [FieldOffset(0x6C)] public TiltOrigin RiderFlightSwimTiltOrigin;
     [FieldOffset(0x6D)] public byte RiderFlightSwimUnk1;
-    [FieldOffset(0x6E)] public ushort RiderFlightSwimUnk2;
+    [FieldOffset(0x6E)] public byte RiderFlightSwimUnk2;
     [FieldOffset(0x70)] public float RiderFlightSwimTiltAngle;
     [FieldOffset(0x74)] public float RiderFlightSwimTiltSpeed;
     [FieldOffset(0x78)] public TiltFlags RiderFlightSwimReverseTilt;
