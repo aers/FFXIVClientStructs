@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct EnvLocationLayoutInstance {
     [FieldOffset(0x30)] public EnvLocation* GraphicsObject;
-    [FieldOffset(0x38)] private void* _unk_38; // Array of 0x4C structures memcpy'd from the file
-    [FieldOffset(0x40)] private int _unk_40; // Count of _unk_38
-    [FieldOffset(0x44)] private uint _unk_44;
+    [FieldOffset(0x38)] private void* Unk38; // Array of 0x4C structures memcpy'd from the file
+    [FieldOffset(0x40)] private int Unk40; // Count of Unk38
+    [FieldOffset(0x44)] private uint Unk44;
 }
