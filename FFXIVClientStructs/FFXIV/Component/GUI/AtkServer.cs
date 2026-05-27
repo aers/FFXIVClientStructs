@@ -56,11 +56,11 @@ public unsafe partial struct AtkServer {
     public partial AtkServer* Dtor(byte flags);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 54 41 56 41 57 48 83 EC 50 44 8B 05")]
-    public partial ulong Draw(bool a2);
+    public partial void Draw(bool a2);
 
     [MemberFunction("E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 56")]
-    public partial ulong ProcessUICommands(bool a2);
+    public partial void ProcessUICommands(bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 4C 8D 5C 24")]
-    public partial ulong ProcessUICommandsAlt(bool a2);
+    public partial void ProcessUICommandsAlt(bool a2);
 }

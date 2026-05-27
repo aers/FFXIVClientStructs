@@ -64,10 +64,10 @@ public unsafe partial struct ImmediateContext {
     public partial void SetRasterizerState(PackedRasterizerStateDesc rasterizerState);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 46 68")]
-    public partial ulong SetVertexShader(VertexShader* vertexShader, void** constantBuffers);
+    public partial void SetVertexShader(VertexShader* vertexShader, void** constantBuffers);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 46 78")]
-    public partial ulong SetPixelShader(PixelShader* pixelShader, void** constantBuffers);
+    public partial void SetPixelShader(PixelShader* pixelShader, void** constantBuffers);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 57 7C")]
     public partial void SetViewport(IntRectangle* viewportRectangle, float minDepth, float maxDepth);
@@ -91,5 +91,5 @@ public unsafe partial struct ImmediateContext {
     public partial void PreprocessCommands(RenderCommandBufferGroup* renderCommands, uint renderCommandCount);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 83 ?? ?? ?? ?? 3C 01 73 70")]
-    public partial RenderCommandBufferGroup* ExecuteCommands();
+    public partial void ExecuteCommands();
 }
