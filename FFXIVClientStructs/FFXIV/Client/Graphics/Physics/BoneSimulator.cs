@@ -49,7 +49,7 @@ public unsafe partial struct BoneSimulator {
     public partial void Finalizer();
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial BoneSimulator* Dtor(byte freeFlags);
 
     /// <remarks> Resets a lot of stuff and clears the Skeleton field? </remarks>
     [VirtualFunction(1)]
@@ -69,5 +69,5 @@ public unsafe partial struct BoneSimulator {
 
     /// <remarks> Sets the skeleton for this bone simulator, also calls Reset. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 44 24 ?? 41 89 45")]
-    public partial void SetSkeleton(Skeleton* skeleton);
+    public partial bool SetSkeleton(Skeleton* skeleton);
 }
