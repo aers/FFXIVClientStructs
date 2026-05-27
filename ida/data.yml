@@ -7466,6 +7466,8 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x140455530: ctor
+      0x140798B70: TryCreate
+      0x140798BF0: TryDestroy
   Client::Graphics::Scene::EnvSpace:
     vtbls:
       - ea: 0x142162168
@@ -7493,6 +7495,8 @@ classes:
       - ea: 0x1421622F8
     funcs:
       0x1404582A0: ctor
+      0x1404590E0: AddLocation
+      0x140459130: RemoveLocation
   Client::Graphics::Scene::ResidentResourceManager::ResourceList:
     vtbls:
       - ea: 0x1421625B8

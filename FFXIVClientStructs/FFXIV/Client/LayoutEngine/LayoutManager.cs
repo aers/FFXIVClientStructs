@@ -27,7 +27,7 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x080)] public float FestivalLayersAddTimer; // dt * 30
     [FieldOffset(0x084)] public float FestivalLayersRemoveTimer; // dt * 30
     [FieldOffset(0x088)] public void* StreamingManager;
-    [FieldOffset(0x090)] public void* Environment;
+    [FieldOffset(0x090)] public void* Environment; // TODO: Change to LayoutEnvironment*
     [FieldOffset(0x098)] public void* OBSetManager;
     [FieldOffset(0x0A0)] public OutdoorAreaLayoutData* OutdoorAreaData;
     [FieldOffset(0x0A8)] public OutdoorExteriorLayoutData* OutdoorExteriorData;
