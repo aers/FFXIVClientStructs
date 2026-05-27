@@ -7488,6 +7488,9 @@ classes:
       0x140453160: LoadAnimationData
       0x140450B50: ResetFlags
       0x140450F70: SetModel
+  Client::Graphics::Scene::BgObjectStainBuffer:
+    funcs:
+      0x140277070: Initialize
   Client::Graphics::Scene::EnvScene:
     vtbls:
       - ea: 0x1421622F8
