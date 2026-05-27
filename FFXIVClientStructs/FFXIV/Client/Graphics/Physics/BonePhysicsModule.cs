@@ -43,18 +43,18 @@ public unsafe partial struct BonePhysicsModule {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public struct BoneSimulators {
-    [FieldOffset(0x00)] public StdVector<Pointer<BoneSimulator>> BoneSimulator1;
-    [FieldOffset(0x18)] public StdVector<Pointer<BoneSimulator>> BoneSimulator2;
-    [FieldOffset(0x30)] public StdVector<Pointer<BoneSimulator>> BoneSimulator3;
-    [FieldOffset(0x48)] public StdVector<Pointer<BoneSimulator>> BoneSimulator4;
-    [FieldOffset(0x60)] public StdVector<Pointer<BoneSimulator>> BoneSimulator5;
+    [FieldOffset(0x00)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_1;
+    [FieldOffset(0x18)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_2;
+    [FieldOffset(0x30)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_3;
+    [FieldOffset(0x48)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_4;
+    [FieldOffset(0x60)] public StdVector<Pointer<BoneSimulator>> BoneSimulator_5;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public struct BoneCollisions {
-    [FieldOffset(0x00)] public StdVector<Pointer<CollisionBase>> BoneCollision1;
-    [FieldOffset(0x18)] public StdVector<Pointer<CollisionBase>> BoneCollision2;
-    [FieldOffset(0x30)] public StdVector<Pointer<CollisionBase>> BoneCollision3;
-    [FieldOffset(0x48)] public StdVector<Pointer<CollisionBase>> BoneCollision4;
-    [FieldOffset(0x60)] public StdVector<Pointer<CollisionBase>> BoneCollision5;
+    [FieldOffset(0x00)] public StdVector<Pointer<CollisionBase>> BoneCollision_1;
+    [FieldOffset(0x18)] public StdVector<Pointer<CollisionBase>> BoneCollision_2;
+    [FieldOffset(0x30)] public StdVector<Pointer<CollisionBase>> BoneCollision_3;
+    [FieldOffset(0x48)] public StdVector<Pointer<CollisionBase>> BoneCollision_4;
+    [FieldOffset(0x60)] public StdVector<Pointer<CollisionBase>> BoneCollision_5;
 }
