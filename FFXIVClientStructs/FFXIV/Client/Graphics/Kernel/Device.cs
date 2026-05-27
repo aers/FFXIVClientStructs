@@ -143,6 +143,7 @@ public struct RenderCommandViewport {
     [FieldOffset(0x10), Obsolete("Use ViewportRect.Bottom.")] public int BottomRightX;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public partial struct RenderCommandMultiViewport {
     [FieldOffset(0x0)] public int SwitchType;
