@@ -108,7 +108,7 @@ public unsafe partial struct BgObjectStainBuffer {
     /// </summary>
     /// <param name="modelResource">The handle of the model resource to set this stain buffer up for.</param>
     /// <returns>Always true.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 41 0F B6 D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 41 0F B6 D6")]
     public partial bool Initialize(ModelResourceHandle* modelResource);
 }
 
