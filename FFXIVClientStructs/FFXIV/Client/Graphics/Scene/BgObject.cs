@@ -71,8 +71,9 @@ public unsafe partial struct BgObject {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x14)]
-public struct BgObjectStainBuffer {
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x38, Pack = 0x04)]
+public unsafe partial struct BgObjectStainBuffer {
     /// <summary>
     /// The original byte color for the stain.
     /// </summary>
@@ -85,6 +86,30 @@ public struct BgObjectStainBuffer {
     /// The formula is: <c>pow(value / 255.0f, 2.0f)</c>
     /// </remarks>
     [FieldOffset(0x04)] public Vector4 LinearFloatColor;
+
+    // Unclear what kind of resource handle these are. They are loaded from a path in the mdl file, and I haven't seen them actually used.
+    [FieldOffset(0x18)] public ResourceHandle* LoadedResource;
+    [FieldOffset(0x20)] public ResourceHandle* LoadingResource;
+
+    /// <summary>
+    /// Three flags populated from the model resource.
+    /// </summary>
+    [BitField<bool>(nameof(Flag0), 0)]
+    [BitField<bool>(nameof(Flag1), 1)] // Seems to control whether the staining resources are loaded
+    [BitField<bool>(nameof(Flag2), 2)]
+    [FieldOffset(0x30)] private byte _flags;
+
+    internal partial bool Flag0 { get; set; }
+    internal partial bool Flag1 { get; set; }
+    internal partial bool Flag2 { get; set; }
+
+    /// <summary>
+    /// Sets up this stain buffer to be used with an instance of the given model resource.
+    /// </summary>
+    /// <param name="modelResource">The handle of the model resource to set this stain buffer up for.</param>
+    /// <returns>Always true.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 41 0F B6 D6")]
+    public partial bool Initialize(ModelResourceHandle* modelResource);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
@@ -92,4 +117,5 @@ public unsafe struct BgObjectAnimationData {
     [FieldOffset(0x00)] public CharacterBase.SkeletonAnimationContainer SkeletonAnimationContainer;
     [FieldOffset(0x100)] public SkeletonResourceHandle* AsyncSkeletonResourceHandle;
     [FieldOffset(0x108)] public ResourceHandle* AsyncPapResourceHandle;
+    [FieldOffset(0x110)] public Render.Skeleton* RenderSkeleton;
 }
