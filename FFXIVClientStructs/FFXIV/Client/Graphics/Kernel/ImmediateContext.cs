@@ -38,19 +38,16 @@ public unsafe partial struct ImmediateContext {
     [FieldOffset(0x730)] public GeometryShader* CurrentGeometryShader;
     [FieldOffset(0xB20)] public HullShader* CurrentHullShader;
 
-    [CExporterTypeForce("ID3D11DeviceContext*", true)]
-    [FieldOffset(0xBE8)] public void* D3D11DeviceContext;
+    [FieldOffset(0xBE8), CExporterTypeForce("ID3D11DeviceContext*", true)] public void* D3D11DeviceContext;
 
     [FieldOffset(0xF10)] public DomainShader* CurrentDomainShader;
 
     [FieldOffset(0x17B3)] public byte BlendStateFlag; // Might be a bool to force creation of an underlying ID3D11BlendState*
     [FieldOffset(0x17B4)] public PackedBlendStateDesc CurrentBlendState;
-    [CExporterTypeForce("ID3D11DeviceContext*", true)]
-    [FieldOffset(0x17B8)] public void* D3D11DeviceContext_2;
+    [FieldOffset(0x17B8), CExporterTypeForce("ID3D11DeviceContext*", true)] public void* D3D11DeviceContext_2;
 
     //[FieldOffset(0x1D70)] public InputLayout* CurrentInputLayout;
-    [CExporterTypeForce("D3D11_PRIMITIVE_TOPOLOGY", true)]
-    [FieldOffset(0x17D8)] public int CurrentPrimitiveTopology;
+    [FieldOffset(0x17D8), CExporterTypeForce("D3D11_PRIMITIVE_TOPOLOGY", true)] public int CurrentPrimitiveTopology;
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 47 58")]
     public partial void SetBlendState(PackedBlendStateDesc blendState);
