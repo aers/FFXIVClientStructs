@@ -27,7 +27,7 @@ public unsafe partial struct AgentTryon {
     [FieldOffset(0x369)] private bool Unk369;
     // 2 bytes gap
     [FieldOffset(0x36C)] public InventoryType EquippedItemsInventoryType;
-    [FieldOffset(0x1E10), Obsolete("Renamed to EquippedItemsInventoryType")] public InventoryType ItemLevelInventoryType;
+    [FieldOffset(0x36C), Obsolete("Renamed to EquippedItemsInventoryType")] public InventoryType ItemLevelInventoryType;
     [FieldOffset(0x370), FixedSizeArray] internal FixedSizeArray14<TryOnItem> _tryOnItems; // contains items that are tried on, including the ones for the "Save/Delete Outfit" toggle
     [FieldOffset(0x4F8), FixedSizeArray] internal FixedSizeArray14<TryOnItem> _gearItems; // contains items for the "Display Gear" toggle
 
