@@ -112,7 +112,7 @@ public struct ResourceHandleType {
     [FieldOffset(0x0), CExporterIgnore] public uint Value;
     [FieldOffset(0x0)] public HandleCategory Category;
     [FieldOffset(0x2)] private byte Unknown0A;
-    [FieldOffset(0x3)] public byte Expansion; // Should be CategoryMapIndex
+    [FieldOffset(0x3)] public byte Expansion; // TODO: Should be CategoryMapIndex
 
     public static explicit operator ResourceHandleType(ResourceCategory value) {
         return new() {
