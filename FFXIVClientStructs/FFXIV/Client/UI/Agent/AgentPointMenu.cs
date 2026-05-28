@@ -19,7 +19,7 @@ public unsafe partial struct AgentPointMenu {
 
     // Allocates a PointMenuContext and loads Excel Sheet PointMenu (1181)
     [MemberFunction("40 55 41 56 41 57 48 83 EC ?? 48 8B 01 45 8B F8")]
-    public partial PointMenuContext* CreateContext(uint eventType, int unk);
+    public partial void CreateContext(int eventType, int unk);
     
     [MemberFunction("E8 ?? ?? ?? ?? FF C3 3B DE 72 F0")]
     public partial void SendEntryToAddon(uint index);
@@ -29,10 +29,10 @@ public unsafe partial struct AgentPointMenu {
         [FieldOffset(0x00)] public AgentPointMenu* Agent;
         [FieldOffset(0x08)] private void* unk08;
         [FieldOffset(0x10)] private void* unk10;
-        [FieldOffset(0x18)] public ExcelSheetWaiter SheetWaiter;
+        [FieldOffset(0x18)] private ExcelSheetWaiter SheetWaiter; // SheetWaiter is in a substruct size of 0xA0
         [FieldOffset(0xB8)] public Utf8String TitleText;
         [FieldOffset(0x120)] public StdVector<PointMenuEntry> Entries;
-        [FieldOffset(0x138)] public uint EventType;
+        [FieldOffset(0x138)] public int EventType;
         [FieldOffset(0x13C)] public bool IsLoaded;
     }
 
