@@ -295,7 +295,8 @@ public enum BattleNpcSubKind : byte {
     Pet = 2,
     /// <summary> Chocobo Companion </summary>
     Buddy = 3,
-
+    /// <summary> Player </summary>
+    Player = 4,
     /// <summary> Enemies, Guards </summary>
     Combatant = 5,
     /// <summary> Chocobos in Chocobo Racing </summary>
