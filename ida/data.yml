@@ -3062,7 +3062,7 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
-      0x140A6B860: ctor
+      0x140C0B570: ctor
       0x140C0B670: Finalizer
       0x140C0B780: SetRequest
       0x140C0BAC0: GetRequests
