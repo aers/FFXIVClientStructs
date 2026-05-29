@@ -3062,7 +3062,7 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
-      0x140A6B860: ctor
+      0x140C0B570: ctor
       0x140C0B670: Finalizer
       0x140C0B780: SetRequest
       0x140C0BAC0: GetRequests
@@ -15116,6 +15116,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A6AAE0: ctor
+      0x140A6ACF0: CreateContext
+      0x140A6B390: SendEntryToAddon
   Client::UI::Agent::AgentTradeScreenImage:
     vtbls:
       - ea: 0x142199040
@@ -23236,6 +23238,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413F3B80: ctor
+      0x1413F5130: ShowTooltip
   Client::UI::AddonTradeScreenImage: # 910
     vtbls:
       - ea: 0x142259CD0
