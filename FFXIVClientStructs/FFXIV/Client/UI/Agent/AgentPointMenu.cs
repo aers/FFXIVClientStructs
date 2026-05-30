@@ -20,7 +20,7 @@ public unsafe partial struct AgentPointMenu {
     // Allocates a PointMenuContext and loads Excel Sheet PointMenu (1181)
     [MemberFunction("40 55 41 56 41 57 48 83 EC ?? 48 8B 01 45 8B F8")]
     public partial void CreateContext(int pointMenu, int pointMenuChoiceIdx);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? FF C3 3B DE 72 F0")]
     public partial void SendEntryToAddon(uint index);
 
