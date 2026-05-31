@@ -20,7 +20,7 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x20)] public ExcelSheet* AddonSheet;
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
-    [FieldOffset(0x130)] internal nint Resources;
+    [FieldOffset(0x130)] public AtkServer* AtkServer;
     [FieldOffset(0x1D0)] public AtkFontManager AtkFontManager;
     [FieldOffset(0x268)] public AtkTextureResourceManager AtkTextureResourceManager;
     [FieldOffset(0x2C0)] public AtkUnitManager* AtkUnitManager;
