@@ -16027,6 +16027,22 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1419E3F10: ctor
+  Client::Game::Event::UICallbackBaseInterface:
+    vtbls:
+      - ea: 0x1421C2860
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::Event::UICallbackBase<Client::Game::Event::CraftEventHandler>:
+    vtbls:
+      - ea: 0x1421D34E0
+        base: Client::Game::Event::UICallbackBaseInterface
+  Client::Game::Event::NormalCraftCallback:
+    vtbls:
+      - ea: 0x1421D3510
+        base: Client::Game::Event::UICallbackBase<Client::Game::Event::CraftEventHandler>
+  Client::Game::Event::AutoCraftCallback:
+    vtbls:
+      - ea: 0x1421D3540
+        base: Client::Game::Event::UICallbackBase<Client::Game::Event::CraftEventHandler>
   Client::Game::Event::GatheringEventHandler: # 0x03
     vtbls:
       - ea: 0x1421D3630
