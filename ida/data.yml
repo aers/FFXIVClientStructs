@@ -2710,8 +2710,8 @@ classes:
       0x140636FC0: GetInt
       0x140637000: GetUInt  # these two could be backwards
       0x140637040: GetFloat
-      0x140637060: GetManagedString
-      0x140637080: GetString
+      0x140637060: GetString
+      0x140637080: GetConstString
       0x1406370A0: SetManagedString
       0x140637130: Copy # = operator
       0x1406371A0: EqualTo # == operator
