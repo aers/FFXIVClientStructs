@@ -76,6 +76,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x2338)] public uint NameId;
 
     [FieldOffset(0x2344)] public uint CompanionOwnerId; // TODO: Find a better name as it is used to index into FurnitureMemory for IndoorHousing
+    [FieldOffset(0x2348)] public ObjectType ObjectType;
 
     [FieldOffset(0x2350)] public ulong AccountId;
     [FieldOffset(0x2358)] public ulong ContentId;

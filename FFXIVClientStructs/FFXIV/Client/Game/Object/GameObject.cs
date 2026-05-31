@@ -77,6 +77,9 @@ public unsafe partial struct GameObject {
     [VirtualFunction(2)]
     public partial ObjectKind GetObjectKind();
 
+    [VirtualFunction(3)]
+    public partial ObjectType GetObjectType();
+
     [VirtualFunction(4)]
     public partial bool GetIsTargetable();
 
@@ -282,6 +285,25 @@ public enum ObjectKind : byte {
     ReactionEventObject = 14,
     Ornament = 15,
     CardStand = 16
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x04)]
+public partial struct ObjectType : IEquatable<ObjectType>, IComparable<ObjectType> {
+    [BitField<byte>(nameof(PetMirageId), 8, 8)]
+    [FieldOffset(0x00)] public uint Value;
+
+    /// <remarks> Only valid if <see cref="GameObject.ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/> and <see cref="GameObject.BattleNpcSubKind"/> is <see cref="BattleNpcSubKind.Pet"/>. </remarks>
+    public partial byte PetMirageId { get; set; }
+
+    public static implicit operator uint(ObjectType ot) => ot.Value;
+    public static unsafe implicit operator ObjectType(uint ot) => *(ObjectType*)&ot;
+    public bool Equals(ObjectType other) => Value == other.Value;
+    public override bool Equals(object? obj) => obj is ObjectType other && Equals(other);
+    public override int GetHashCode() => Value.GetHashCode();
+    public static bool operator ==(ObjectType left, ObjectType right) => left.Value == right.Value;
+    public static bool operator !=(ObjectType left, ObjectType right) => left.Value != right.Value;
+    public int CompareTo(ObjectType other) => Value.CompareTo(other);
 }
 
 /// <summary>
