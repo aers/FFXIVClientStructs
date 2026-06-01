@@ -95,9 +95,6 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     [FieldOffset(0x1AD)] private byte Unk1AD; // flags for dragdrop
     // 2 bytes nothing?
 
-    [FieldOffset(0xC8), Obsolete("Renamed to ScrollBarComponent", true)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
-    [FieldOffset(0x193), Obsolete("Renamed to IsScrollBarEnabled", true)] public bool ScrollbarEnabled;
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0")]
     public partial AtkComponentList* Ctor();
 
@@ -148,10 +145,6 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     /// <remarks> rendererNodeId is the node id of the ListItemRenderer to use. if 0, it uses FirstAtkComponentListItemRenderer </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D3 85 ED")]
     public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, byte columnCount, uint rendererNodeId = 0);
-
-    [Obsolete("Use GetComponentItemRendererById", true)]
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
-    public partial AtkComponentListItemRenderer* GetItemRendererByNodeId(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 FF 04")]
     public partial void SetItemCount(short value);

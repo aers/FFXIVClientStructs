@@ -43,10 +43,6 @@ public unsafe partial struct CharaView : ICreatable<CharaView> {
     [FieldOffset(0x30A)] public bool CharacterLoaded;
     [FieldOffset(0x30B)] public bool IsInSanctumOfTheTwelve;
 
-    [Obsolete("Incorrectly inherited by CharaViewPortrait. Do not call this; copy the code and adapt it to the correct type.", true)]
-    public static CharaView* Create()
-        => IMemorySpace.GetUISpace()->Create<CharaView>();
-
     [MemberFunction("E8 ?? ?? ?? ?? 33 ED C6 86 ?? ?? ?? ?? ?? 48 8D 05")]
     public partial CharaView* Ctor();
 

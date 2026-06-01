@@ -15,10 +15,6 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
     [MemberFunction("40 53 41 55 48 81 EC ?? ?? ?? ?? 0F B7 84 24")]
     public partial bool Open(uint itemId, InventoryType inventoryType, int slot, ushort crystallizeAddonId, ushort prismBoxAddonId, bool enableStoring);
 
-    [Obsolete("Missing a parameter. Please use other overload.", true)]
-    public void Open(uint itemId, InventoryType inventoryType, int slot, int openerAddonId, bool enableStoring)
-        => Open(itemId, inventoryType, slot, (ushort)openerAddonId, 0, enableStoring);
-
     // OpenPreview in data.yml
     public void Open(uint itemId) => Open(itemId, InventoryType.Invalid, 0, 0, 0, false);
 
