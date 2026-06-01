@@ -1066,6 +1066,12 @@ classes:
     funcs:
       0x1407B6670: ctor
   Client::System::Resource::Handle::ResourceHandleFactory:
+    vtbls:
+      - ea: 0x142143C28
+    vfuncs:
+      0: Dtor
+      1: Create
+      2: ResourceHandleSize
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Component::Excel::ExcelLanguageEvent:
     vtbls:
