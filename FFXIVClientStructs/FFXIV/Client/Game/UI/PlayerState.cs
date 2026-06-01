@@ -75,9 +75,6 @@ public unsafe partial struct PlayerState {
     /// 2 = Immortal Flames
     /// </remarks>
     [FieldOffset(0x2D1), FixedSizeArray] internal FixedSizeArray3<byte> _GCRanks;
-    [FieldOffset(0x2D1), Obsolete("Use GCRanks[0]", true)] public byte GCRankMaelstrom;
-    [FieldOffset(0x2D2), Obsolete("Use GCRanks[1]", true)] public byte GCRankTwinAdders;
-    [FieldOffset(0x2D3), Obsolete("Use GCRanks[2]", true)] public byte GCRankImmortalFlames;
     [FieldOffset(0x2D4)] public ushort HomeAetheryteId;
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;

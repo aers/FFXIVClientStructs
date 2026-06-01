@@ -18,7 +18,6 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xA8)] public bool IsRequestUnfulfilled;
     /// <remarks> See <see cref="Cabinet.CabinetState"/> </remarks>
     [FieldOffset(0xA9)] public byte CabinetState;
-    [FieldOffset(0xA9), Obsolete("Invalid type. Use CabinetState.", true)] public bool IsCabinetCached;
     [FieldOffset(0xAA)] public bool IsRetainerManagerReady; // only temporary set to true until request is complete
     [FieldOffset(0xAB)] public bool IsSaddleBagCached;
     [FieldOffset(0xAC)] public bool IsGlamourDresserCached;

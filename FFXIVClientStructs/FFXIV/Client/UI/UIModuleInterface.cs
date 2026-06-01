@@ -224,7 +224,4 @@ public enum UIModulePacketType {
     TofuRealTimeUpdate = 38,
     TofuStopShare = 39,
     TofuConfirmation = 40,
-
-    [Obsolete("Renamed to ZoneInit", true)]
-    InitZone = 5,
 }

@@ -228,18 +228,6 @@ public enum SoundBus {
     Housing = 19,
     /// <remarks>  2 Tracks, 3D </remarks>
     RandomWind = 20,
-
-    [Obsolete("Renamed to Music", true)] Bgm1 = 1,
-    [Obsolete("Renamed to SE", true)] Se1 = 2,
-    [Obsolete("Renamed to BG", true)] Env1 = 5,
-    [Obsolete("Renamed to Foot", true)] Se2 = 6,
-    [Obsolete("Renamed to PlacedNPC", true)] Se3 = 7,
-    [Obsolete("Renamed to TimeStretchBGM", true)] Bgm2 = 8,
-    [Obsolete("Renamed to Zingle", true)] Bgm3 = 9,
-    [Obsolete("Renamed to BGEnv", true)] Env2 = 11,
-    [Obsolete("Renamed to Walla", true)] Env3 = 12,
-    [Obsolete("Renamed to Orchestrion", true)] Bgm4 = 16,
-    [Obsolete("Renamed to Instruments", true)] Perform = 17,
 }
 
 public enum SoundVolumeCategory {

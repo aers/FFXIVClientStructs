@@ -41,9 +41,6 @@ public unsafe partial struct AtkComponentDragDrop : ICreatable<AtkComponentDragD
     [MemberFunction("E8 ?? ?? ?? ?? F2 41 0F 10 87")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkTooltipArgs* tooltipArgs);
 
-    [Obsolete("Invalid parameters. Use overload without targetNode.", true)]
-    public void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs) => AttachTooltip(type, parentId, tooltipArgs);
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7E ?? 48 85 FF 75")]
     public partial void DetachTooltip();
 
