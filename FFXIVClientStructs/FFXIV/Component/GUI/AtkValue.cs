@@ -154,7 +154,7 @@ public unsafe partial struct AtkValue {
             AtkValueType.Float => Float.ToString(),
             AtkValueType.String or AtkValueType.ManagedString => String.ToString(),
             AtkValueType.WideString => Marshal.PtrToStringUni((nint)WideString) ?? string.Empty,
-            AtkValueType.String8 => String.ToString(),
+            AtkValueType.ConstString => String.ToString(),
             AtkValueType.Vector or AtkValueType.ManagedVector => Vector != null ? Vector->ToString() : "null",
             AtkValueType.Pointer => $"0x{(nint)Pointer:X}",
             AtkValueType.AtkValues => $"0x{(nint)AtkValues:X}",
