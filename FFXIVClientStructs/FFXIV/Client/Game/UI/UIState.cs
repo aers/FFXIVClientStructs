@@ -111,7 +111,7 @@ public unsafe partial struct UIState {
 
     // BitCount: TripleTriadResident.RowCount
     /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
-    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 131)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
+    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 132)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
 
     // unk byte
 
