@@ -7,7 +7,7 @@ globals:
   0x142111E44: g_FloatSix # 6f
   0x142113030: g_MemoryPoolConfig # { int BlockSize; int BlockCount; }[10], last entry is special for the lookup table
   0x1428F45C0: g_MemoryPoolsStart
-#fail   0x1428E3890: g_MemoryPoolsEnd
+  0x1428F4610: g_MemoryPoolsEnd
   0x14211AEAC: g_FloatTwenty # 20f
 #fail   0x141F0C404: g_ConfigFileName
   0x142126990: g_NumberArraySizes
@@ -936,7 +936,7 @@ classes:
       - ea: 0x14218A770
   Client::Game::SheetWaiterBase:
     vtbls:
-#fail       - ea: 0x14218AC68
+      - ea: 0x14218A788
         base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::InstanceContent::ContentSheetWaiter:
     vtbls:
@@ -1286,7 +1286,7 @@ classes:
         base: Client::Network::Socket::PollerWinsock
   Client::Network::Socket::SocketWinsock:
     vtbls:
-#fail       - ea: 0x1422D9520
+      - ea: 0x1422D8AF0
         base: Client::Network::Socket::SocketBase
   Client::Network::Socket::SocketImpl:
     vtbls:
@@ -1553,7 +1553,7 @@ classes:
     instances:
       - ea: 0x1428A8030
     vtbls:
-#fail       - ea: 0x14219A8A8
+      - ea: 0x14219A108
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140AF6C30: Initialize
@@ -2286,11 +2286,11 @@ classes:
       0: Dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x1421C4550
+      - ea: 0x1421C3F08
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x1421C4598
+      - ea: 0x1421C3F50
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -3087,7 +3087,7 @@ classes:
       0x140C15480: ctor # unused, inlined
       0x140C15640: IsSelectUseTicketInactive
       0x140C157E0: UpdateAetheryteList
-#fail       0x140C16E20: Teleport
+      0x140C163C0: Teleport
       0x140C172D0: GetTeleportCost
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
@@ -3925,7 +3925,7 @@ classes:
         base: Client::System::Common::NonCopyable
   Client::Sound::ISoundData:
     vtbls:
-#fail       - ea: 0x142158720
+      - ea: 0x142159098
         base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
     vfuncs:
       3: GetSoundController
@@ -4185,7 +4185,7 @@ classes:
     vtbls:
       - ea: 0x14257DB70
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x14256CBB8
+      - ea: 0x14257DB78
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -4195,9 +4195,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x14256CE30
+      - ea: 0x14257DDF0
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x14256CE88
+      - ea: 0x14257DE48
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -4244,7 +4244,7 @@ classes:
     vtbls:
       - ea: 0x14257D9C8
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x14256CA98
+      - ea: 0x14257DA58
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -5086,7 +5086,7 @@ classes:
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x142193938
+      - ea: 0x142193198
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       11: AddPage
@@ -11428,7 +11428,7 @@ classes:
       - ea: 0x14218F738
   Client::UI::Shell::RaptureShellCommandInterface:
      vtbls:
-#fail       - ea: 0x14218FEE8
+      - ea: 0x14218F748
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -11766,7 +11766,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x1421931A8
+      - ea: 0x142192A08
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -15935,19 +15935,19 @@ classes:
       - ea: 0x1422CE330
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x1422CEB10
+      - ea: 0x1422CE340
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x1422CEB20
+      - ea: 0x1422CE350
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x1422CEB38
+      - ea: 0x1422CE368
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::NpcRepairCallback:
     vtbls:
-#fail       - ea: 0x1422CD998
+      - ea: 0x1422CD1C8
         base: Client::Game::Event::TalkCallback # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -16092,19 +16092,19 @@ classes:
       0x141759220: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
     vtbls:
-#fail       - ea: 0x1422C68C0
+      - ea: 0x1422C5F98
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x1428BE540
     vtbls:
-#fail       - ea: 0x1422C68F0
+      - ea: 0x1422C5FC0
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x1428BE570
     vtbls:
-#fail       - ea: 0x1422C6920
+      - ea: 0x1422C5FF0
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
@@ -18673,7 +18673,7 @@ classes:
       0x14156B790: ctor
   Client::UI::AddonScreenLog::AddonChild:
     vtbls:
-#fail       - ea: 0x14226BFE0
+      - ea: 0x14226B550
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenLog: # 93
     vtbls:
