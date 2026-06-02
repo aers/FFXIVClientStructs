@@ -66,6 +66,7 @@ public unsafe partial struct WKSManager {
 
     public bool IsMissionGolded(uint missionUnitId) => State.MissionGoldFlags.CheckBitInSpan(missionUnitId);
 
+    [Obsolete("Use WKSMissionModule.MissionRank instead")]
     public enum MissionRank {
         None,
         Bronze,
@@ -90,7 +91,9 @@ public unsafe partial struct WKSManager {
         [FieldOffset(0xC0)] public StdVector<WKSMissionState> SequentialMissions;
         [FieldOffset(0xD8)] public StdVector<WKSMissionState> ProvisionalMissions;
         [FieldOffset(0xF0)] public StdVector<WKSMissionState> CriticalMissions;
-        [FieldOffset(0x108)] public uint CriticalMissionData; // All jobs with currently open critical missions hold the same value. (e.g. 1779307018). Purpose yet unclear.
+        [FieldOffset(0x108)] private int CriticalMissionTimestamp; // All jobs with currently open critical missions seem to hold the same value
+
+        [FieldOffset(0x108), Obsolete("Wrongly documented field as this is most likely a timestamp", true)] public uint CriticalMissionData;
     }
 
     [GenerateInterop]
@@ -114,14 +117,13 @@ public unsafe partial struct WKSManager {
         [FieldOffset(0x16)] public byte LatestPlanetIndex;
 
         [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray11<WKSJobState> _jobStates;
-        /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
-        [FieldOffset(0xE30)] public ushort CurrentMissionUnitRowId;
+        [FieldOffset(0xE30)] public WKSMissionModule.MissionState CurrentMission;
 
-        [FieldOffset(0xE3C)] public uint CurrentScore;
-        [FieldOffset(0xE40)] public MissionRank CurrentRank;
-
-        [FieldOffset(0xE46)] public ushort CollectedTotal;
-        [FieldOffset(0xE48)] public byte CollectedIndividual;
+        [FieldOffset(0xE30), Obsolete("Use CurrentMission.MissionUnitRowId")] public ushort CurrentMissionUnitRowId;
+        [FieldOffset(0xE3C), Obsolete("Use CurrentMission.Score")] public uint CurrentScore;
+        [FieldOffset(0xE40), Obsolete("Use CurrentMission.Rank")] public MissionRank CurrentRank;
+        [FieldOffset(0xE46), Obsolete("Use CurrentMission.CollectedTotal")] public ushort CollectedTotal;
+        [FieldOffset(0xE48), Obsolete("Use CurrentMission.CollectedIndividual")] public byte CollectedIndividual;
 
         [FieldOffset(0xE74)] public uint FishingBait;
 
