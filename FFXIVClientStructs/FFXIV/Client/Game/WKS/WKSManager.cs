@@ -92,6 +92,8 @@ public unsafe partial struct WKSManager {
         [FieldOffset(0xD8)] public StdVector<WKSMissionState> ProvisionalMissions;
         [FieldOffset(0xF0)] public StdVector<WKSMissionState> CriticalMissions;
         [FieldOffset(0x108)] private int CriticalMissionTimestamp; // All jobs with currently open critical missions seem to hold the same value
+
+        [FieldOffset(0x108), Obsolete("Wrongly documented field as this is most likely a timestamp", true)] public uint CriticalMissionData;
     }
 
     [GenerateInterop]
