@@ -35,7 +35,7 @@ public unsafe partial struct ExcelSheet {
     public partial uint GetAllocatedRowCount();
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8D 74 24")]
-    public partial IExcelRowWrapper* GetRowByDescriptor(ExcelRowDescriptor* descriptor, uint* outErrorCode = null);
+    public partial IExcelRowWrapper* GetRowByDescriptor(ExcelRowDescriptor* descriptor, uint* outErrorCode = null); // No xref possibly inlined somewhere
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 49 89 44 0E")]
     public partial IExcelRowWrapper* GetSubRowByDescriptor(ExcelRowDescriptor* descriptor, uint* outErrorCode = null);
