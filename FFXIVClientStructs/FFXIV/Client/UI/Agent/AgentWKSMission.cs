@@ -73,6 +73,7 @@ public unsafe partial struct AgentWKSMission {
         /// 13 = Time-restricted<br/>
         /// 14 = Sequential (LockedBehind)<br/>
         /// 15 = Critical (IsSpecialQuest)<br/>
+        /// 16 = Master<br/>
         /// </summary>
         [FieldOffset(0x18)] public byte MissionGroup;
         /// <summary>ClassJob index derived from WKSMissionUnit.ClassJobCategory.</summary>
@@ -88,7 +89,7 @@ public unsafe partial struct AgentWKSMission {
         Gold = 1 << 3,
         WeatherRestricted = 1 << 4,
         Locked = 1 << 5,
-        //WeatherActive = 1 << 7, // Couldn't check enough due to large timespans between missions
-        //CurrentlyActive = 1 << 11, // Couldn't check enough due to large timespans between missions
+        ConditionLocked = 1 << 7,
+        CurrentlyActive = 1 << 11
     }
 }
