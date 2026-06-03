@@ -30,6 +30,9 @@ public unsafe partial struct AgentWKSMission {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B EA E8")]
     public partial bool GetCriticalMissions(StdVector<MissionEntry>* list);
 
+	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 4C 8B F2 48 8B D9 E8 ?? ?? ?? ?? 48 8B 4B")]
+    public partial bool GetMasterMissions(StdVector<MissionEntry>* list);
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 4A ?? 85 C9")]
     public partial bool GetMissionLog(StdVector<MissionEntry>* list);
 
