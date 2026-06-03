@@ -127,7 +127,7 @@ globals:
 
 functions:
   0x14005B120: VectorConstructorIterator
-  0x14005B120: VectorDestructorIterator
+  0x14005B170: VectorDestructorIterator
   0x14005DC90: WinMain
 #fail   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
 #fail   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
