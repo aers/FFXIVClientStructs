@@ -42,18 +42,18 @@ public unsafe partial struct WKSManager {
 
     [FieldOffset(0x107C), FixedSizeArray, Obsolete("Use State.Scores")] internal FixedSizeArray11<int> _scores; // cosmic class scores
 
-    [FieldOffset(0x10F8)] private void* UnkStruct10F8;
-    [FieldOffset(0x1100)] private void* UnkStruct1100;
-    [FieldOffset(0x1108)] public WKSMechaEventModule* MechaEventModule;
-    [FieldOffset(0x1110)] private void* UnkStruct1110;
-    [FieldOffset(0x1118)] private void* UnkStruct1118;
-    [FieldOffset(0x1120)] private void* EmergencyInfoModule; // Red Alert
-    [FieldOffset(0x1128)] private void* UnkStruct1128;
-    [FieldOffset(0x1130)] private void* UnkStruct1130;
+    [FieldOffset(0x10F8)] private void* LivelyActorGroupTable; // LivelyActorGroup stuff. Not a module!
+    [FieldOffset(0x1100)] private void* SharedGroupModule;
+    [FieldOffset(0x1108)] public WKSMechaEventModule* MechaEventModule; // Mech Ops
+    [FieldOffset(0x1110)] private void* JobStateModule; // Mission List
+    [FieldOffset(0x1118)] private void* AchievementModule; // Starward Standings?
+    [FieldOffset(0x1120)] private void* EmergencyModule; // Red Alert
+    [FieldOffset(0x1128)] private void* FortuneModule; // Cosmic Fortunes (Scammingway)
+    [FieldOffset(0x1130)] private void* PraiseHologramModule;
     [FieldOffset(0x1138)] public WKSMissionModule* MissionModule; // Stellar Missions
     [FieldOffset(0x1140)] public WKSResearchModule* ResearchModule;
-    [FieldOffset(0x1148)] private void* UnkStruct1148;
-    [FieldOffset(0x1150)] private void* UnkStruct1150;
+    [FieldOffset(0x1148)] private void* LogModule; // Just prints LogMessages?
+    [FieldOffset(0x1150)] private void* TreasureModule; // Artifact Search
     [FieldOffset(0x1158)] public StdVector<Pointer<WKSModuleBase>> Modules;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 0F B7 DA 48 8B F9 E8 ?? ?? ?? ?? 8B CB")]

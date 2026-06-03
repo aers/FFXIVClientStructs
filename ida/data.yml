@@ -2591,15 +2591,20 @@ classes:
       0: Dtor
       1: SetIntData
       2: ProcessPacket
-  Client::Game::WKS::WKSMissionModule: # Stellar Missions
+  Client::Game::WKS::WKSMechaEvent:
+    funcs:
+      0x141A61010: Initialize
+      0x141A61700: Finalizer
+      0x141A62670: IsPilotRegistrationTimeframeOpen
+      0x141A626B0: IsTeleportTimeframeOpen
+      0x141A62700: GetEventProgressPercentage
+  Client::Game::WKS::WKSMechaEventModule: # Mech Ops
     vtbls:
-      - ea: 0x142407738
+      - ea: 0x1423D1830
         base: Client::Game::WKS::WKSModuleBase
     funcs:
-      0x141A679A0: ctor
-      0x141A68480: InitiateMission
-      0x141A685E0: ReportMission
-      0x141A68690: AbandonMission
+      0x141A24350: ctor
+      0x141A27CE0: PrintLogMessage<int>
   Client::Game::WKS::WKSResearchModule: # Cosmic Research Information
     vtbls:
       - ea: 0x1424073B0
@@ -2617,20 +2622,68 @@ classes:
       0x141A650E0: GetRatePercentage
       0x141A653B0: GetUnlockedStage
       0x141A658D0: GetClassJobLevel
-  Client::Game::WKS::WKSMechaEventModule: # Mecha Events
+  Client::Game::WKS::WKSJobStateModule: # Mission List
     vtbls:
-      - ea: 0x1423D1830
+      - ea: 0x142407560
         base: Client::Game::WKS::WKSModuleBase
     funcs:
-      0x141A24350: ctor
-      0x141A27CE0: PrintLogMessage<int>
-  Client::Game::WKS::WKSMechaEvent:
+      0x141A65AE0: ctor
+  Client::Game::WKS::WKSEmergencyModule: # Red Alert
+    vtbls:
+      - ea: 0x142432950
+        base: Client::Game::WKS::WKSModuleBase
     funcs:
-      0x141A61010: Initialize
-      0x141A61700: Finalizer
-      0x141A62670: IsPilotRegistrationTimeframeOpen
-      0x141A626B0: IsTeleportTimeframeOpen
-      0x141A62700: GetEventProgressPercentage
+      0x141AC54F0: ctor
+      0x141AC57E0: RegisterModule
+  Client::Game::WKS::WKSMissionModule: # Stellar Missions
+    vtbls:
+      - ea: 0x142407738
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141A679A0: ctor
+      0x141A68480: InitiateMission
+      0x141A685E0: ReportMission
+      0x141A68690: AbandonMission
+  Client::Game::WKS::WKSAchievementModule:
+    vtbls:
+      - ea: 0x142407910
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141A6CD30: ctor
+      0x141A6CF70: RegisterModule
+  Client::Game::WKS::WKSFortuneModule: # Cosmic Fortunes
+    vtbls:
+      - ea: 0x142407978
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141A6EF40: ctor
+      0x141A6F0C0: RegisterModule
+  Client::Game::WKS::WKSPraiseHologramModule:
+    vtbls:
+      - ea: 0x142407C30
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141A6FF30: ctor
+      0x141A700E0: RegisterModule
+  Client::Game::WKS::WKSSharedGroupModule:
+    vtbls:
+      - ea: 0x142432790
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141AC1F80: ctor
+  Client::Game::WKS::WKSLogModule:
+    vtbls:
+      - ea: 0x142432B10
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141AC6ED0: ctor
+  Client::Game::WKS::WKSTreasureModule: # Artifact Search
+    vtbls:
+      - ea: 0x142432CC0
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141ACB870: ctor
+      0x141ACBAE0: RegisterModule
   Client::Game::WKS::WKSMechaEventStageHandlerBase:
     vtbls:
       - ea: 0x142406FA0
