@@ -34,8 +34,14 @@ public unsafe partial struct ExcelSheet {
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 BD")]
     public partial uint GetAllocatedRowCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 49 89 44 0E")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8D 74 24")]
     public partial IExcelRowWrapper* GetRowByDescriptor(ExcelRowDescriptor* descriptor, uint* outErrorCode = null);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 49 89 44 0E")]
+    public partial IExcelRowWrapper* GetSubRowByDescriptor(ExcelRowDescriptor* descriptor, uint* outErrorCode = null);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 ?? B0 ?? EB")]
+    public partial IExcelRowWrapper* GetRowByIndex(uint rowIndex, ExcelRowDescriptor* descriptor);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D3 48 8B F8")]
     public partial IExcelRowWrapper* GetRowById(uint rowId, uint* outErrorCode = null);

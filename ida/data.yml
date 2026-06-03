@@ -4776,7 +4776,8 @@ classes:
       0x14207D4D0: GetSubRowByDescriptor
       0x14207D610: GetRowById
       0x14207D750: GetColumnStringByDescriptor
-      0x14207D960: GetRowByDescriptor
+      0x14207D960: GetRowByIndex
+      0x14207D9D0: GetRowByDescriptor
       0x14207DB00: GetSheetName
       0x14207DB10: GetColumnOffset
       0x14207DBC0: GetColumnIndex2
