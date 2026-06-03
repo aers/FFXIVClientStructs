@@ -75,23 +75,45 @@ public unsafe partial struct WKSManager {
         Failed = 5,
     }
 
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
-    public struct WKSMissionState {
+    public partial struct WKSMissionState {
         [FieldOffset(0x00)] public ushort MissionUnitId;
         /// <remarks>Used by AgentWKSMission to set silver/gold mission flags when this is 1 or 2.</remarks>
         [FieldOffset(0x04)] public uint MissionFlag;
-        [FieldOffset(0x08)] private ushort Unk8;
+        [FieldOffset(0x08)] private byte Unk8;
+        [FieldOffset(0x09)] private byte Unk9;
         [FieldOffset(0x0A)] public byte Condition; // Needs more testing, but was set to 1 when Critical Mission was abandoned. Could be a bool for showing locked out status?
     }
 
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
+    public partial struct WKSMissionClassState {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray3<WKSMissionState> _missions;
+        [FieldOffset(0x24)] private byte Unk24;
+        [FieldOffset(0x26)] private uint Unk26;
+    }
+
+    [GenerateInterop]
+    [Inherits<WKSMissionState>]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public partial struct WKSMasterMissionState {
+        [FieldOffset(0x0C)] private uint UnkC; // Highest Score?
+    }
+
     /// <summary>Per-job state block. WKSState contains 11 of these (one per cosmic class job).</summary>
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x148)]
-    public struct WKSJobState {
+    public partial struct WKSJobState {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray4<WKSMissionClassState> _missionClasses;
         [FieldOffset(0xB0)] public WKSMissionState ExtraBasicMission; // This held a single extra A-rank mission entry. Emitted by AgentWKSMission.GetBasicMissions. Purpose yet unclear.
+
         [FieldOffset(0xC0)] public StdVector<WKSMissionState> SequentialMissions;
         [FieldOffset(0xD8)] public StdVector<WKSMissionState> ProvisionalMissions;
         [FieldOffset(0xF0)] public StdVector<WKSMissionState> CriticalMissions;
         [FieldOffset(0x108)] private int CriticalMissionTimestamp; // All jobs with currently open critical missions seem to hold the same value
+
+        [FieldOffset(0x110), FixedSizeArray] internal FixedSizeArray3<WKSMasterMissionState> _masterMissions;
 
         [FieldOffset(0x108), Obsolete("Wrongly documented field as this is most likely a timestamp", true)] public uint CriticalMissionData;
     }

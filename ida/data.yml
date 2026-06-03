@@ -126,6 +126,8 @@ globals:
   0x142F7A4A0: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
+  0x14005B120: VectorConstructorIterator
+  0x14005B120: VectorDestructorIterator
   0x14005DC90: WinMain
 #fail   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
 #fail   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
@@ -2573,6 +2575,15 @@ classes:
       0x140ECA9A0: IsFunctionUnlocked
       0x140ECAB40: AddModule
       0x140ECAB70: RemoveModule
+  Client::Game::WKS::WKSManager::WKSMissionState:
+    funcs:
+      0x140ACAAA0: Clear
+  Client::Game::WKS::WKSManager::WKSMissionClassState:
+    funcs:
+      0x140ECDBA0: Clear
+  Client::Game::WKS::WKSManager::WKSMasterMissionState:
+    funcs:
+      0x140ECD9C0: Clear
   Client::Game::WKS::WKSModuleBase:
     vtbls:
       - ea: 0x1423D17F0
