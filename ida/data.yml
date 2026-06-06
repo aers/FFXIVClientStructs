@@ -3573,7 +3573,7 @@ classes:
       0x140C41930: Initialize
       0x140C41B70: QueueYell
       0x140C42130: Update
-      0x140B64200: HandleYell
+      0x140C42A00: HandleYell
   Client::Game::UI::CharaCard:
     instances:
       - ea: 0x142AE3D08
