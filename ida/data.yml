@@ -454,9 +454,6 @@ functions:
   0x141C2FC20: FollowTargetRecast # bool (nint a1-a6)
   0x140972D40: FreeCompanyDialogPacketReceive # (InfoProxyInterface* ptr, byte* packetData)
   0x1417975B0: SnipeTask # ulong (EventSceneModuleImplBase* scene, lua_State* state)
-  0x140B6FC50: ContentDirector_IsPlayCutscene # ulong (lua_State* state)
-  0x141A20CF0: MassivePcContentDirector_IsPlayCutscene # ulong (lua_State* state)
-  0x140E52E40: GoldSaucerDirector_IsPlayCutscene # ulong (lua_State* state)
   0x1419A5C70: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
 
 classes:
@@ -1595,6 +1592,7 @@ classes:
         base: Client::Game::Event::GoldSaucerDirector
     funcs:
       0x140E6AF80: ctor
+      0x140E52E40: IsPlayCutscene
   Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
     vtbls:
       - ea: 0x1421C7090
@@ -7947,7 +7945,7 @@ classes:
       0x140B9E480: GetQuestUI8B
       0x140B9E520: GetQuestUI8C
       0x140B9E5C0: GetQuestUI8D
-      0x140B9E660: GetQuestUI8E
+      0x140B9E660: GetQuestUI8E # aka. GetQuestBranch
       0x140B9E700: GetQuestUI8F
       0x140B9E7A0: GetQuestUI8A
       0x140B9E880: GetQuestI16B
@@ -16724,6 +16722,72 @@ classes:
     funcs:
       0x140B66880: ctor
       0x140B66FC0: SetGlobalParametersContentName
+      0x140B66BA0: GetSequence
+      0x140BA0180: GetI8A
+      0x140B9FD90: GetI8B
+      0x140B9FE00: GetI8C
+      0x140B9FE70: GetI8D
+      0x140B9FEE0: GetI8E
+      0x140B9FF50: GetI8F
+      0x140B9FFC0: GetI8G
+      0x140BA0030: GetI8H
+      0x140BA00A0: GetI8I
+      0x140BA0110: GetI8J
+      0x140BA05C0: GetUI8A
+      0x140BA01F0: GetUI8B
+      0x140BA0250: GetUI8C
+      0x140BA02B0: GetUI8D
+      0x140BA0320: GetUI8E
+      0x140BA0390: GetUI8F
+      0x140BA0400: GetUI8G
+      0x140BA0470: GetUI8H
+      0x140BA04E0: GetUI8I
+      0x140BA0550: GetUI8J # aka. GetBranch
+      0x140BA1DF0: GetUI8AH
+      0x140BA1610: GetUI8BH
+      0x140BA16F0: GetUI8CH
+      0x140BA17D0: GetUI8DH
+      0x140BA18B0: GetUI8EH
+      0x140BA1990: GetUI8FH
+      0x140BA1A70: GetUI8GH
+      0x140BA1B50: GetUI8HH
+      0x140BA1C30: GetUI8IH
+      0x140BA1D10: GetUI8JH
+      0x140BA1E60: GetUI8AL
+      0x140BA1680: GetUI8BL
+      0x140BA1760: GetUI8CL
+      0x140BA1840: GetUI8DL
+      0x140BA1920: GetUI8EL
+      0x140BA1A00: GetUI8FL
+      0x140BA1AE0: GetUI8GL
+      0x140BA1BC0: GetUI8HL
+      0x140BA1CA0: GetUI8IL
+      0x140BA1D80: GetUI8JL
+      0x140BA0880: GetI16A
+      0x140BA0640: GetI16B
+      0x140BA06D0: GetI16C
+      0x140BA0760: GetI16D
+      0x140BA07F0: GetI16E
+      0x140BA0B10: GetUI16A
+      0x140BA08F0: GetUI16B
+      0x140BA0980: GetUI16C
+      0x140BA0A10: GetUI16D
+      0x140BA0AA0: GetUI16E
+      0x140BA0C70: GetI32A
+      0x140BA0BB0: GetI32B
+      0x140BA0DF0: GetUI32A
+      0x140BA0D30: GetUI32B
+      0x140BA14B0: GetBitFlag8
+      0x140BA13F0: GetBitFlag16
+      0x140BA1330: GetBitFlag24
+      0x140BA1270: GetBitFlag32
+      0x140BA11B0: GetBitFlag40
+      0x140BA10F0: GetBitFlag48
+      0x140BA1030: GetBitFlag56
+      0x140BA0F70: GetBitFlag64
+      0x140BA0EB0: GetBitFlag72
+      0x140BA1570: GetBitFlag80
+      0x140B67BB0: IsTourism
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x1421B9910
@@ -17430,6 +17494,14 @@ classes:
     vtbls:
       - ea: 0x1421C3548
         base: Client::Game::Event::Director
+    funcs:
+      0x140E0B850: SetDirectorTodo
+      0x140E0B490: GetName
+      0x140E09150: SetDirectorObjective
+      0x140E091D0: SetContentBGM
+      0x140E09230: ResetContentBGM
+      0x140E09260: SetTodoFractionBarDirect
+      0x140E093A0: ResetTodoDirect
   Client::Game::Event::TreasureHuntDirector:
     vtbls:
       - ea: 0x14219A8D0
@@ -17620,6 +17692,12 @@ classes:
     vtbls:
       - ea: 0x142396DC8
         base: Client::Game::Event::LeveDirector
+    funcs:
+      0x141A0BBF0: SetDirectorTodo
+      0x141A0B950: GetName
+      0x141A099C0: GetEntry
+      0x141A09B60: SetListenEmote
+      0x141A09BE0: GetVariation
   Client::Game::InstanceContent::ContentDirector:
     vtbls:
       - ea: 0x1421A6750
@@ -17635,6 +17713,7 @@ classes:
     funcs:
       0x140B6D100: ctor
       0x140B6ECD0: ApplyMapEffect
+      0x140B6FC50: IsPlayCutscene
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x142326CE0
@@ -17646,6 +17725,10 @@ classes:
     funcs:
       0x1419A5860: ctor
       0x1419A5B00: Finalizer
+      0x1419A87D0: ShowScreenInfo
+      0x1419A8880: OnStartCutscene
+      0x1419A8910: OnEndCutscene
+      0x1419A8990: OnFinishCutscene
   Client::Game::InstanceContent::InstanceContentGuildOrderDirector:
     vtbls:
       - ea: 0x14235B738
@@ -18756,12 +18839,17 @@ classes:
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x140BAF8F0: ctor
+      0x140BB00A0: OnEndCutscene
+      0x140BB0120: OnFinishCutscene
+      0x140BB0190: ShowScreenInfo
   Client::Game::InstanceContent::PartyContentDirector:
     vtbls:
       - ea: 0x142425910
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x140BB0C70: ctor
+      0x141AA8B70: OnEndCutscene
+      0x141AA8BD0: OnFinishCutscene
   Client::Game::InstanceContent::PublicContentTripleTriad:
     vtbls:
       - ea: 0x1421AA090
@@ -18876,6 +18964,11 @@ classes:
       334: ClearAdditionalTodo
     funcs:
       0x141A1B2A0: ctor
+      0x141A20CF0: IsPlayCutscene
+      0x141A20DC0: OnEndCutscene
+      0x141A20E90: OnFinishCutscene
+      0x141A20F30: ShowScreenInfo
+      0x141A21010: BGControl
   Client::Game::MassivePcContent::MassivePcContentCosmicExploration: # ContentId (MassivePcContent RowId?) 1 and 2: Sinus Ardorum and Phaenna
     vtbls:
       - ea: 0x1423CF300
