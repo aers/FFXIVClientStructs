@@ -44,7 +44,7 @@ public unsafe partial struct EventFramework {
 
     [FieldOffset(0x45D8)] public DailyQuestMap DailyQuests;
     [FieldOffset(0x45E8)] public Utf8String DailySelectTitle; // Addon#102442 for SelectIconString
-    [FieldOffset(0x46B8)] public Utf8String DailySelectSubTitle; // Addon#102443 for SelectIconString
+    [FieldOffset(0x4650)] public Utf8String DailySelectSubTitle; // Addon#102443 for SelectIconString
     [FieldOffset(0x46B8)] public Utf8String DailySelectAllowance; // formatted Addon#102444 for SelectIconString
 
     [FieldOffset(0x476A), FixedSizeArray] internal FixedSizeArray8<Festival> _festivals; // copied from PlayerState, used by GPose (maybe more) to check if Fan Festival frames/stamps should be displayed
