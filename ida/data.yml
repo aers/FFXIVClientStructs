@@ -457,7 +457,6 @@ functions:
   0x140B6FC50: ContentDirector_IsPlayCutscene # ulong (lua_State* state)
   0x141A20CF0: MassivePcContentDirector_IsPlayCutscene # ulong (lua_State* state)
   0x140E52E40: GoldSaucerDirector_IsPlayCutscene # ulong (lua_State* state)
-  0x141A7E7F0: CustomTalk_IsPlayCutsceneContent # ulong (lua_State* state)
   0x1419A5C70: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
 
 classes:
@@ -7695,10 +7694,288 @@ classes:
       - ea: 0x1421A7400
     vfuncs:
       0: Dtor
+    funcs:
+      0x140B89770: IsPc
+      0x140B89800: IsEventNpc
+      0x140B89890: IsBattleNpc
+      0x140B89940: IsPet
+      0x140B899E0: IsRetainer
+      0x140B89A70: IsCompanion
+      0x140B89B00: IsEventObject
+      0x140B89B90: IsHousingEventObject
+      0x140B89C20: IsAetheryte
+      0x140B89140: GetKind
+      0x140B891C0: GetEntityId
+      0x140B89260: GetBaseId
+      0x140B892F0: GetLayoutId
+      0x140B89370: GetNameId
+      0x140B894A0: GetContentId
+      0x140B89530: IsContent
+      0x140B893F0: GetPosition
+      0x140B89CF0: SetSceneEndRollback
+      0x140B89630: IsInCircle
+      0x140B89F60: PositionTargetSide
   Client::Game::Event::LuaPc:
     vtbls:
       - ea: 0x1421A74A0
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B8E390: GetCurrentEvent
+      0x140B8E500: GetQuestSequence
+      0x140B8E6A0: GetQuestRewardItemArrayIndex
+      0x140B8E760: GetClassJob
+      0x140B8E800: GetClass
+      0x140B8E910: GetClassLevel
+      0x140B8EA70: GetJobLevel
+      0x140B8EB30: GetClassLevelMax
+      0x140B8EBE0: GetBattleClassLevelMax
+      0x140B8EC70: GetCrafterClassLevelMax
+      0x140B8ED00: GetGathererClassLevelMax
+      0x140B8EDC0: GetFirstClass
+      0x140B8EE70: IsJob
+      0x140B8EF00: GetSex
+      0x140B8EF70: GetRace
+      0x140B8EFE0: GetTribe
+      0x140B8F050: GetBirthMonth
+      0x140B8F0B0: GetGuardianDeity
+      0x140B8F200: IsQuestCompleted
+      0x140B8F3C0: IsQuestCompletedWithRedo
+      0x140B8F500: IsQuestAccepted
+      0x140B8F680: IsQuestAcceptedWithRedo
+      0x140B8F7D0: IsQuestAcceptQualified
+      0x140B8FA90: IsEpicQuestAccepted
+      0x140B8FB30: IsEpicQuestAcceptedAny
+      0x140B8FBF0: GetLegacyEpicQuestWeapon
+      0x140B8FCB0: GetLegacyEpicQuestSequence
+      0x140B8FD30: GetNumOfNewLetters
+      0x140B8FDE0: GetNumOfDeniedLetters
+      0x140B8FE90: GetLetterBoxUsage
+      0x140B8FF50: GetHomePoint
+      0x140B90000: IsAetheryte
+      0x140B900D0: GetFavoritePoint
+      0x140B90170: IsFavoritePoint
+      0x140B90210: GetEmptyFavoriteIndex
+      0x140B902A0: IsFavoritePointSecurityToken
+      0x140B90340: IsFavoritePointSecurityTokenEmpty
+      0x140B903C0: GetFavoritePointSecurityToken
+      0x140B90440: IsFavoritePointPSPlus
+      0x140B904D0: GetFavoritePointPSPlus
+      0x140B90540: IsEnablePSPlus
+      0x140B905B0: IsFavoritePointPSPlusEmpty
+      0x140B90630: IsFavoritePointNSO
+      0x140B906C0: GetFavoritePointNSO
+      0x140B90730: IsEnableNSO
+      0x140B907A0: IsFavoritePointNSOEmpty
+      0x140B90830: IsReward
+      0x140B90910: IsHowTo
+      0x140B90A10: IsChocoboTaxiStand
+      0x140B90AF0: GetGil
+      0x140B90BA0: GetGoldSaucerCoin
+      0x140B90C20: GetGoldSaucerCoinRateAndCap
+      0x140B90CB0: GetCompanySeals
+      0x140B90D50: GetMaxCompanySeals
+      0x140B90E20: GetAllaganTomestone
+      0x140B90EE0: IsLimitedCurrency
+      0x140B90F60: GetCurrencyLimitCap
+      0x140B90FE0: GetCurrencyLimitCounter
+      0x140B91080: IsMount
+      0x140B91150: IsMountLink
+      0x140B91220: IsMountLinkInContent
+      0x140B91300: IsFlying
+      0x140B913C0: CheckMountAcquire
+      0x140B91490: IsParty
+      0x140B915A0: IsPartyLeader
+      0x140B91680: GetEquippedItem
+      0x140B91740: GetEquippedItemLevel
+      0x140B91820: GetEquippedItemEquipLevel
+      0x140B918F0: GetNumOfPartyMembers
+      0x140B91A40: IsPartyMemberSameTerritory
+      0x140B91B80: IsAllPartyMemberEquippedItem
+      0x140B91C40: IsAnyPartyMemberEquippedItem
+      0x140B91D30: GetAlliancePartyNum
+      0x140B91E50: GetAllianceMemberNum
+      0x140B92030: GetNumOfItems
+      0x140B92300: GetNumOfNqItems
+      0x140B92420: GetNumOfHqItems
+      0x140B92540: GetMaxItemStackable
+      0x140B92630: GetNumOfEmptyItemSlots
+      0x140B926F0: IsClassJobBattle
+      0x140B927D0: IsClassJobFighter
+      0x140B928B0: IsClassJobSorcerer
+      0x140B92990: IsClassJobGatherer
+      0x140B92A70: IsClassJobCrafter
+      0x140B92B50: IsClassJobCategory
+      0x140B92CD0: IsChocoboTaxiPossible
+      0x140B92E20: GetGrandCompany
+      0x140B92ED0: GetGrandCompanyRank
+      0x140B93050: IsItemsEquipped
+      0x140B931E0: IsAnyItemsEquipped
+      0x140B93390: IsRelicWeapon010Equipped
+      0x140B93420: IsRelicWeapon020Equipped
+      0x140B934B0: IsRelicWeapon025Equipped
+      0x140B93540: IsRelicWeapon030Equipped
+      0x140B935D0: IsRelicWeapon040Equipped
+      0x140B93660: IsRelicWeapon050Equipped
+      0x140B936F0: IsRelicWeapon060Equipped
+      0x140B93890: HaveAnyRelicWeapon010
+      0x140B93AD0: HaveAnyRelicWeapon020
+      0x140B93CD0: HaveAnyRelicWeapon025
+      0x140B93ED0: HaveAnyRelicWeapon030
+      0x140B940D0: HaveAnyRelicWeapon050
+      0x140B942D0: HaveAnyRelicWeapon060
+      0x140B94490: HaveAnyCompletedRelicWeapon020
+      0x140B94630: HaveAnyCompletedRelicWeapon050
+      0x140B94750: IsRelicWeapon020Completed
+      0x140B94890: IsRelicWeapon030EnhanceMode
+      0x140B949E0: IsRelicWeapon030Completed
+      0x140B94B50: IsRelicWeapon050Completed
+      0x140B94CA0: HaveAtmaAll
+      0x140B94EA0: HaveRelicUpgradeItems050
+      0x140B95100: HaveRelicWeapon010
+      0x140B95350: HaveRelicWeapon020
+      0x140B95540: HaveRelicWeapon025
+      0x140B95730: HaveRelicWeapon030
+      0x140B95990: HaveRelicWeapon040
+      0x140B95C50: HaveRelicWeapon050
+      0x140B95DE0: GetRelicWeapon000CatalogIds
+      0x140B95E60: GetRelicWeapon010CatalogIds
+      0x140B95EE0: GetRelicWeapon020CatalogIds
+      0x140B95F60: GetRelicWeapon025CatalogIds
+      0x140B95FE0: GetRelicWeapon030CatalogIds
+      0x140B96060: GetRelicWeapon040CatalogIds
+      0x140B960E0: GetRelicWeapon040CatalogIdsNoSub
+      0x140B96160: GetRelicWeapon040CatalogIdsOwned
+      0x140B96330: GetRelicWeapon050CatalogIds
+      0x140B963B0: GetRelicWeapon050CatalogIdsNoSub
+      0x140B96430: GetRelicWeapon050CatalogIdsOwned
+      0x140B96580: GetRelicWeapon060CatalogIds
+      0x140B96600: GetRelicWeapon060CatalogIdsOwned
+      0x140B96750: GetRelicWeapon030GradeupItemCatalogIds
+      0x140B96800: GetTradeRelicWeapon020CatalogId
+      0x140B968C0: GetTradeRelicWeapon025CatalogId
+      0x140B96980: GetTradeRelicWeapon030CatalogId
+      0x140B96A40: GetTradeRelicWeapon040CatalogId
+      0x140B96B00: GetTradeRelicWeapon050CatalogId
+      0x140B96BC0: GetTradeRelicWeapon060CatalogId
+      0x140B96CF0: GetRelic050MagiciteWork
+      0x140B96E20: GetWeddingEquipmentCatalogIds
+      0x140B97070: GetWeddingPlan
+      0x140B97280: IsAllPartyEngagementRingEquipped
+      0x140B97390: IsExistPartyEngagementTarget
+      0x140B97440: SaveFestivalQuestWorkFlag
+      0x140B974E0: GetFestivalQuestWorkFlag
+      0x140B975C0: GetPartySpecificValue
+      0x140B976F0: IsExistAllPartyMemberInClient
+      0x140B977E0: IsMeisterFlag
+      0x140B97880: IsMeisterFlagMaxCount
+      0x140B97920: IsLegacy
+      0x140B979D0: IsWarriorOfLight
+      0x140B97A90: IsPersonalRoomKicked
+      0x140B97B80: IsGcRankUpQuestCompleted
+      0x140B97CC0: IsMonsterNoteGcRankCompleted
+      0x140B97D90: GetStartTown
+      0x140B97E30: IsInstanceContentUnlocked
+      0x140B97EE0: IsInstanceContentCompleted
+      0x140B97F90: IsInstanceContentWeeklyReward
+      0x140B98050: IsInstanceContentEnableFinder
+      0x140B980F0: IsPublicContentUnlocked
+      0x140B98170: IsPublicContentCompleted
+      0x140B98200: IsContentFinderUnlocked
+      0x140B98290: IsBuddyExist
+      0x140B98320: IsBuddyInStable
+      0x140B98400: IsCompanionExist
+      0x140B98510: IsInOwnLand
+      0x140B985D0: IsHousingGardeningOwner
+      0x140B986B0: IsFreeCompany
+      0x140B98780: IsFcAuthority
+      0x140B98940: IsHousingAuthority
+      0x140B98B40: IsActionReward
+      0x140B98C10: GetHp
+      0x140B98CB0: GetHpPercent
+      0x140B98D50: GetHpMax
+      0x140B98DE0: GetMp
+      0x140B98E80: GetMpPercent
+      0x140B98F20: GetMpMax
+      0x140B98FE0: IsRight
+      0x140B99110: IsStatus
+      0x140B99250: GetStatusSystemParam
+      0x140B992F0: IsQuestEffect
+      0x140B993D0: IsInRedo
+      0x140B99460: IsInBattle
+      0x140B994F0: IsLoginSecurityToken
+      0x140B99580: GetRelicId
+      0x140B99610: GetRelicNoteId
+      0x140B996C0: GetRelicNoteEventItemId
+      0x140B99790: GetRelicMateriaParam
+      0x140B99880: GetNumOfRelicNoteCompleted
+      0x140B999A0: GetNextRelicNoteEventItemId
+      0x140B99AF0: IsRelicNoteIllegal
+      0x140B99B90: IsRelicNoteCompleted
+      0x140B99C10: GetDeliveryLevel
+      0x140B99CA0: GetNeedDailySupplyPoint
+      0x140B99D60: IsDailyQuestCompleted
+      0x140B99E40: IsJoinedGATE
+      0x140B99F00: IsFinishedGATE
+      0x140B99FD0: IsContentFinderEntry
+      0x140B9A090: GetCompanion
+      0x140B9A170: IsCondition
+      0x140B9A240: IsBeginnerGuideFlags
+      0x140B9A2E0: IsTutorialContentCompletedAny
+      0x140B9A350: IsTutorialGimmickContentCompleted
+      0x140B9A3E0: IsMentor
+      0x140B9A4B0: IsBattleMentorLatest
+      0x140B9A590: IsLiveMentorLatest
+      0x140B9A650: IsMentorQualified
+      0x140B9A700: IsBecameMentor
+      0x140B9A780: SaveAnimaWeapon5EventItems
+      0x140B9A7C0: GetAnimaWeapon7EnhancePoint
+      0x140B9A810: IsEquipAnimaWeapon
+      0x140B9A890: IsTripleTriadMatchingEntry
+      0x140B9A940: IsTripleTriadRoomUnlocked
+      0x140B9A9F0: IsMobHuntOrderTypeUnlocked
+      0x140B9AAB0: IsReplaying
+      0x140B9AB40: IsWorldTravelling
+      0x140B9ABB0: IsAnyENpcChasing
+      0x140B9AC80: IsRegistEquipItem
+      0x140B9ADC0: IsOpenedNormalRaidRoulette
+      0x140B9E090: GetQuestI8B
+      0x140B9E130: GetQuestI8C
+      0x140B9E1D0: GetQuestI8D
+      0x140B9E270: GetQuestI8E
+      0x140B9E310: GetQuestI8F
+      0x140B9E3B0: GetQuestI8A
+      0x140B9E480: GetQuestUI8B
+      0x140B9E520: GetQuestUI8C
+      0x140B9E5C0: GetQuestUI8D
+      0x140B9E660: GetQuestUI8E
+      0x140B9E700: GetQuestUI8F
+      0x140B9E7A0: GetQuestUI8A
+      0x140B9E880: GetQuestI16B
+      0x140B9E940: GetQuestI16C
+      0x140B9EA00: GetQuestI16A
+      0x140B9EB00: GetQuestUI16B
+      0x140B9EBB0: GetQuestUI16C
+      0x140B9EC60: GetQuestUI16A
+      0x140B9ED60: GetQuestI32A
+      0x140B9EEA0: GetQuestUI32A
+      0x140B9EFE0: GetQuestBitFlag40
+      0x140B9F0D0: GetQuestBitFlag32
+      0x140B9F1C0: GetQuestBitFlag24
+      0x140B9F2B0: GetQuestBitFlag16
+      0x140B9F3A0: GetQuestBitFlag8
+      0x140B9F490: GetQuestBitFlag48
+      0x140B9F570: GetQuestUI8BH
+      0x140B9F620: GetQuestUI8BL
+      0x140B9F6D0: GetQuestUI8CH
+      0x140B9F780: GetQuestUI8CL
+      0x140B9F830: GetQuestUI8DH
+      0x140B9F8E0: GetQuestUI8DL
+      0x140B9F990: GetQuestUI8EH
+      0x140B9FA40: GetQuestUI8EL
+      0x140B9FAF0: GetQuestUI8FH
+      0x140B9FBA0: GetQuestUI8FL
+      0x140B9FC50: GetQuestUI8AH
+      0x140B9FD00: GetQuestUI8AL
   Client::Game::Event::LuaAetheryte:
     vtbls:
       - ea: 0x1421A7490
@@ -7707,26 +7984,64 @@ classes:
     vtbls:
       - ea: 0x1421A7480
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B8D740: GetSharedGroupTimelineState
+      0x140B8D7D0: IsTarget
+      0x140B8D8A0: IsNeedHousingAuthorityCheck
+      0x140B8D9C0: GetHousingPlantPotStatus
+      0x140B8DB00: GetHousingPlantPotCropCatalogId
   Client::Game::Event::LuaEventObject:
     vtbls:
       - ea: 0x1421A7470
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B8CB90: GetSharedGroupTimelineState
+      0x140B8CC20: GetHousingGardeningIndex
+      0x140B8CCC0: GetHousingGardeningPlantIndex
+      0x140B8CDF0: GetHousingGardeningPlantStatus
+      0x140B8CFB0: GetHousingGardeningPlantCrop
+      0x140B8D180: IsNeedHousingAuthorityCheck
   Client::Game::Event::LuaCompanion:
     vtbls:
       - ea: 0x1421A7460
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B8C8E0: IsImmobile
+      0x140B8C970: IsDancing
   Client::Game::Event::LuaRetainer:
     vtbls:
       - ea: 0x1421A7450
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B9E000: GetRace
+      0x140B9DF90: GetTribe
+      0x140B9DF20: GetSex
+      0x140B8C1F0: GetClassJob
+      0x140B8C280: GetClassLevel
   Client::Game::Event::LuaBattleNpc:
     vtbls:
       - ea: 0x1421A7440
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B8B7B0: GetClassJob
+      0x140B8B840: GetClassLevel
+      0x140B8B8D0: GetHp
+      0x140B8BA10: GetHpMax
+      0x140B8B970: GetHpPercent
+      0x140B8BAA0: GetMp
+      0x140B8BBE0: GetMpMax
+      0x140B8BB40: GetMpPercent
+      0x140B8BC70: IsDying
+      0x140B8BD00: IsInBattle
   Client::Game::Event::LuaEventNpc:
     vtbls:
       - ea: 0x1421A7430
         base: Client::Game::Event::LuaActor
+    funcs:
+      0x140B9DEA0: GetRace
+      0x140B9DE20: GetTribe
+      0x140B9DDA0: GetSex
+      0x140B8B360: IsNearChasing
   Component::Exd::ExdModule:
     vtbls:
       - ea: 0x14216DD28
@@ -15492,6 +15807,366 @@ classes:
       0x140B60950: ResumeWithStringIntegers
       0x140B609B0: HandleLuaResumeResult
       0x140BA1F70: ResumeWithString
+      0x140B63F10: AddNestEventHandler
+      0x140B63FD0: YieldEventScene
+      0x140B64200: FormatString
+      0x140B64760: GetAddonText
+      0x140B647F0: GetInfoLogMessageId
+      0x140B64860: GrandCompanyAssignment
+      0x140B64920: GetTerritoryType
+      0x140B649B0: SetMyChocoboName
+      0x140B64A40: Dismount
+      0x140B64AD0: CheckInnCondition
+      0x140B64B40: GetEvent
+      0x140B64BA0: GetEventArg
+      0x140B64C00: IsTerritoryTypeHousing
+      0x140B64C80: GetCurrentTerritoryType
+      0x140B64CF0: IsEnterTerritoryEventLogin
+      0x140B64D80: CompareString
+      0x140B64EF0: CompareFixedPhrase
+      0x140B65050: SetIsOnlyNonStackItemNpcTrade
+      0x140B650C0: IsSkipTransportCutSceneConfig
+      0x140B65190: GetAllaganTomestoneCatalogId
+      0x140B65200: GetFestivalPhase
+      0x140B652A0: CheckFestival
+      0x140B653C0: LogMessageNoSkip
+      0x140B658E0: GetEventHandlerTitle
+      0x140B659B0: IsCurrentEventClientEvent
+      0x140B65A20: PlayClientEventScene
+      0x140B65CB0: GetRandom
+      0x140B65D40: CallFunction
+      0x140B65E40: SceneJump
+      0x140B660F0: GetServerValue
+      0x140B661E0: IsEventSetQualified
+      0x140B662C0: SetTemporaryValue
+      0x140B66340: DisableUIFunction
+      0x140B663F0: EnableUIFunction
+      0x140EA3D00: GetHWDDevelopmentLevel
+      0x1417D2ED0: Talk
+      0x1417D2F00: TalkAsync
+      0x1417D2F30: SystemTalk
+      0x1417D2F60: CloseTalk
+      0x1417D2F90: OK
+      0x1417D2FC0: OKCheck
+      0x1417D2FF0: YesNo
+      0x1417D3020: YesNoCount
+      0x1417D3050: YesNoCheck
+      0x1417D3080: YesNoAddon
+      0x1417D30B0: YesNoAddonCheck
+      0x1417D30E0: YesNoStartFate
+      0x1417D3110: YesNoItem
+      0x1417D3140: YesNoItemCheck
+      0x1417D3170: Menu
+      0x1417D31A0: List
+      0x1417D31D0: Letter
+      0x1417D3200: NpcTrade
+      0x1417D3230: CancelNpcTrade
+      0x1417D3260: QuestAccepted
+      0x1417D3290: QuestCompleted
+      0x1417D32C0: LeveAccepted
+      0x1417D32F0: LeveCompleted
+      0x1417D3320: LeveStart
+      0x1417D3350: LeveSuccess
+      0x1417D3380: LeveFailed
+      0x1417D33B0: ScreenImage
+      0x1417D33E0: ScreenImageAndTextSimple
+      0x1417D3410: LoadEventPicture
+      0x1417D3440: WaitForLoadEventPicture
+      0x1417D3470: EventPicture
+      0x1417D34A0: EventPictureOffset
+      0x1417D34D0: EventImageLoad
+      0x1417D3500: EventImageRelease
+      0x1417D3530: EventImageWaitForLoad
+      0x1417D3560: EventImageSetVisible
+      0x1417D3590: EventImageSetAnchor
+      0x1417D35C0: EventImageSetPivot
+      0x1417D35F0: EventImageSetPriority
+      0x1417D3620: EventImageWaitForAnim
+      0x1417D3650: EventImageSetPos
+      0x1417D3680: EventImageAnimPos
+      0x1417D36B0: EventImageWaitForAnimPos
+      0x1417D36E0: EventImageSetScale
+      0x1417D3710: EventImageAnimScale
+      0x1417D3740: EventImageWaitForAnimScale
+      0x1417D3770: EventImageSetAngle
+      0x1417D37A0: EventImageAnimAngle
+      0x1417D37D0: EventImageWaitForAnimAngle
+      0x1417D3800: EventImageSetTransparency
+      0x1417D3830: EventImageAnimTransparency
+      0x1417D3860: EventImageWaitForAnimTransparency
+      0x1417D3890: LearningAction
+      0x1417D38C0: LearningQuestRewardAction
+      0x1417D38F0: LearningTrait
+      0x1417D3920: BattleTalk
+      0x1417D3950: Prompt
+      0x1417D3980: PromptName
+      0x1417D39B0: NpcRepair
+      0x1417D39E0: CutSceneReplay
+      0x1417D3A10: CompanyChest
+      0x1417D3A40: FreeCompanyExchange
+      0x1417D3A70: FreeCompanyCrestEditor
+      0x1417D3AA0: FreeCompanyCrestDecal
+      0x1417D3AD0: MateriaMeld
+      0x1417D3B00: Materialize
+      0x1417D3B30: SuspendedMateriaExchange
+      0x1417D3B60: SuspendedMateriaSell
+      0x1417D3B90: LegacyItemStorage
+      0x1417D3BC0: HousingKickStorage
+      0x1417D3BF0: Cabinet
+      0x1417D3C20: ItemSearchWidget
+      0x1417D3C50: HowTo
+      0x1417D3C80: CloseHowTo
+      0x1417D3D00: GrayoutMenu
+      0x1417D3D30: IconMenu
+      0x1417D3D60: GridMenu
+      0x1417D3D90: ResultMenu
+      0x1417D3DC0: ScenarioMessage
+      0x1417D3DF0: LogMessage
+      0x1417D3E20: BalloonTalk
+      0x1417D3E50: ScreenGC
+      0x1417D3E80: Inventory
+      0x1417D3EB0: CloseInventory
+      0x1417D3EE0: GrandCompanyRankUp
+      0x1417D3F10: SetNpcTradeItem
+      0x1417D3F40: FCOrganizeSheet
+      0x1417D3F70: TripleTriadCardToCoin
+      0x1417D3FA0: GoldSaucerBuyCoin
+      0x1417D3FD0: InputNumeric
+      0x1417D4000: ContentFinder
+      0x1417D4030: ContentFinderByCondition
+      0x1417D4060: HousingPortal
+      0x1417D4090: HousingGardeningPlant
+      0x1417D40C0: HousingGardeningPlantFertilizer
+      0x1417D40F0: RefreshMonsterNote
+      0x1417D4120: MateriaTrade
+      0x1417D4150: RelicSphereUpgrade
+      0x1417D4180: HousingPersonalRoomPortal
+      0x1417D41B0: MiniGame
+      0x1417D41E0: MobHuntBoard
+      0x1417D4210: HousingBuddyList
+      0x1417D4240: HousingBuddySelectReward
+      0x1417D4270: HousingBuddySelectFood
+      0x1417D42A0: HousingBuddyMenu
+      0x1417D42D0: Wedding
+      0x1417D4300: HousingWheelControlMenu
+      0x1417D4330: HousingWheelSelectEnergy
+      0x1417D4360: HouseRetainerSaleHistory
+      0x1417D4390: HouseRetainerSaleItem
+      0x1417D43C0: OpenSelectString
+      0x1417D43F0: SkyIslandAetherialExchange
+      0x1417D4420: TutorialContent
+      0x1417D4450: HousingPlantPotSeed
+      0x1417D4480: HousingPlantPotFertilize
+      0x1417D44B0: LogMessageContentOpen
+      0x1417D44E0: MentorQualified
+      0x1417D4510: MentorConfirm
+      0x1417D4540: OpenLuaUI
+      0x1417D4570: ShortTalk
+      0x1417D45A0: ShortTalkWithLineVoice
+      0x1417D45D0: CloseShortTalk
+      0x1417D4600: FakeNotice
+      0x1417D4630: Wait
+      0x1417D4660: CreateCharacter
+      0x1417D4690: CreateCharacterWithSub
+      0x1417D46C0: CreateCharacterPc
+      0x1417D46F0: CreateCharacterPcByLayoutId
+      0x1417D4720: CreateObject
+      0x1417D4750: BindCharacter
+      0x1417D4780: BindObject
+      0x1417D47B0: BindRetainer
+      0x1417D47E0: PlayCamera
+      0x1417D4810: PlayIdleCamera
+      0x1417D4840: UpdownPan
+      0x1417D4870: UpdownPan2
+      0x1417D48A0: SidePan
+      0x1417D48D0: SidePan2
+      0x1417D4900: WaitForPan
+      0x1417D4930: PlayTwoShotCamera_
+      0x1417D4960: PlayLandscapeCamera
+      0x1417D4990: PlayWorldPositionCamera
+      0x1417D49C0: PlayTargetRelationCamera
+      0x1417D49F0: PlayTargetAdjustCamera
+      0x1417D4A20: FadeIn
+      0x1417D4A50: FadeOut
+      0x1417D4A80: WaitForFade
+      0x1417D4AB0: LoadMovePosition
+      0x1417D4AE0: PlayCutScene
+      0x1417D4B60: GetCutSceneMultiResult
+      0x1417D4B90: UpdownDolly
+      0x1417D4BC0: SideDolly
+      0x1417D4BF0: WaitForDolly
+      0x1417D4C20: Zoom
+      0x1417D4C50: WaitForZoom
+      0x1417D4C80: FollowLookAt
+      0x1417D4CB0: CameraCollisionMode
+      0x1417D4CE0: Gyro
+      0x1417D4D10: WaitForGyro
+      0x1417D4D40: Orbit
+      0x1417D4D70: WaitForOrbit
+      0x1417D4DA0: PlayScreenShake
+      0x1417D4DD0: StopScreenShake
+      0x1417D4E00: PlayHandShake
+      0x1417D4E30: StopHandShake
+      0x1417D4E60: PlayBGM
+      0x1417D4E90: PlayBGMWithVolume
+      0x1417D4EC0: StopBGM
+      0x1417D4EF0: PlaySE
+      0x1417D4F20: ChangeBGMVolume
+      0x1417D4F50: ChangeEnvSoundVolume
+      0x1417D4F80: ResetEnvSoundVolume
+      0x1417D4FB0: Skip
+      0x1417D5020: ResetSkip
+      0x1417D5090: IsSkipped
+      0x1417D5100: IsEventSceneSkipped
+      0x1417D5170: Logout
+      0x1417D51A0: Shutdown
+      0x1417D51D0: BeginCutScene
+      0x1417D5200: EndCutScene
+      0x1417D5230: InvisibleStandCharacter
+      0x1417D5260: InvisibleStandObject
+      0x1417D5290: RevisibleStandObject
+      0x1417D52C0: DOF
+      0x1417D52F0: DisableDOF
+      0x1417D5320: ColorFilter
+      0x1417D5350: DisableColorFilter
+      0x1417D5380: Vignetting
+      0x1417D53B0: DisableVignetting
+      0x1417D53E0: Weather
+      0x1417D5410: GetWeather
+      0x1417D5440: ChangeWeather
+      0x1417D5470: WaitForChangeWeather
+      0x1417D54A0: WorldTime
+      0x1417D54D0: ContinueBattleBGM
+      0x1417D5500: ContinueEventBGM
+      0x1417D5530: StopEventBGM
+      0x1417D5560: ContinueEventBGMUntilWarp
+      0x1417D5590: LastingBGM
+      0x1417D55C0: ResetBGM
+      0x1417D55F0: SetPadMode
+      0x1417D5660: CancelEventScene
+      0x1417D5690: MakeRetainer
+      0x1417D56C0: HairMake
+      0x1417D56F0: PlayStaffRoll
+      0x1417D5720: PlayToBeContinued
+      0x1417D5750: BeginCutSceneReplay
+      0x1417D57A0: WaitForBuildHouse
+      0x1417D57D0: DisableSceneSkip
+      0x1417D5800: EnableSceneSkip
+      0x1417D5830: GetHouseSize
+      0x1417D5860: PlayHousingCamera
+      0x1417D5890: WaitForFeedBuddy
+      0x1417D58C0: CreateChocobo
+      0x1417D58F0: GetRacingChocoboStain
+      0x1417D5940: GetRacingChocoboEquip
+      0x1417D59A0: GetRacingChocoboItemStain
+      0x1417D59D0: IsSkipHousingCutSceneConfig
+      0x1417D5A40: IsWorkshopTerritory
+      0x1417D5AA0: GetIdleCameraInterval
+      0x1417D5B00: WaitForIdleCamera
+      0x1417D5B30: IsIdleCameraFadeDisabled
+      0x1417D5BA0: GetObjKind
+      0x1417D5BD0: GroupPose
+      0x1417D5C00: Snipe
+      0x1417D5C30: WhiteFadeIn
+      0x1417D5C60: WhiteFadeOut
+      0x1417D5C90: WaitForWhiteFade
+      0x1417D5CC0: PlayTargetAimingCamera
+      0x1417D5CF0: PlayDirectionalAimingCamera
+      0x1417D5D20: StopAimingCamera
+      0x1417D5D50: IsEventTutorialFlag
+      0x1417D5D80: SetEventTutorialFlag
+      0x1417D5DB0: Position
+      0x1417D5DE0: PositionCamera
+      0x1417D5E10: ResetPosition
+      0x1417D5E40: Visible
+      0x1417D5E70: Direction
+      0x1417D5EA0: Distance
+      0x1417D5ED0: CancelMove
+      0x1417D5F00: PlaySharedGroupTimeline
+      0x1417D5F30: PlaySharedGroupTimelineSkippable
+      0x1417D5F60: CheckSharedGroupTimelineState
+      0x1417D5F90: SetSharedGroupTimelineState
+      0x1417D5FC0: WaitForSharedGroupTimeline
+      0x1417D5FF0: PlayQuestGimmickReaction
+      0x1417D6020: ResetGimmickSharedGroupTimelineStateByIndexes
+      0x1417D6050: PlayActionTimeline
+      0x1417D6080: CancelActionTimeline
+      0x1417D60B0: CancelActionTimelineAll
+      0x1417D60E0: WaitForActionTimeline
+      0x1417D6110: WaitForActionTimelineLoad
+      0x1417D6140: GetActionTimelineId
+      0x1417D6170: PlayEmote
+      0x1417D61A0: CancelEmote
+      0x1417D61D0: WaitForEmote
+      0x1417D6200: IsEmoting
+      0x1417D6230: IsLoopEmoting
+      0x1417D6260: IsActionMoving
+      0x1417D62E0: IsExecAction
+      0x1417D6310: TurnTo
+      0x1417D6340: TurnFromLayout
+      0x1417D6370: TurnToObject
+      0x1417D63A0: NoLookAtTurnToObject
+      0x1417D63D0: TurnToLayout
+      0x1417D6400: TurnToCamera
+      0x1417D6430: TurnToDefault
+      0x1417D6460: WaitForTurn
+      0x1417D6490: IsPause
+      0x1417D6510: Idle
+      0x1417D6540: LookAt
+      0x1417D6570: LookAtEID
+      0x1417D65A0: LookAtLayout
+      0x1417D65D0: LookAtCamera
+      0x1417D6600: LookAtTwoHead
+      0x1417D6630: LookAtLayoutTwoHead
+      0x1417D6660: EyeLookAt
+      0x1417D6690: EyeLookAtYawPitch
+      0x1417D66C0: WaitForLookAt
+      0x1417D66F0: Move
+      0x1417D6720: WaitForMove
+      0x1417D6750: PathMove
+      0x1417D6780: WaitForPathMove
+      0x1417D67B0: FootStep
+      0x1417D67E0: EndEventRollback
+      0x1417D6810: PlayVfx
+      0x1417D6840: EnableVfx
+      0x1417D6870: DisableVfx
+      0x1417D68A0: PlayEventVfx
+      0x1417D68D0: StopEventVfx
+      0x1417D6900: KickTriggerEventVfx
+      0x1417D6930: PlayManagedVfx
+      0x1417D6960: CancelManagedVfx
+      0x1417D6990: TriggerManagedVfx
+      0x1417D69C0: Transparency
+      0x1417D69F0: WaitForTransparency
+      0x1417D6A20: WalkIn
+      0x1417D6A50: WalkOut
+      0x1417D6A80: PathWalkIn
+      0x1417D6AB0: PathWalkOut
+      0x1417D6AE0: PathCurveWalkIn
+      0x1417D6B10: PathCurveWalkOut
+      0x1417D6B40: FlyIn # aka. SwimIn
+      0x1417D6B70: FlyOut # aka. SwimOut
+      0x1417D6BA0: BattleMode
+      0x1417D6BD0: BattleModeEx
+      0x1417D6C00: EquipWeapon
+      0x1417D6C30: EquipArmor
+      0x1417D6C60: Equip
+      0x1417D6C90: EquipQuestModel
+      0x1417D6CC0: NpcEquip
+      0x1417D6CF0: AutoShake
+      0x1417D6D20: AutoShakeBugFix236127
+      0x1417D6D50: IsAutoShaking
+      0x1417D6D80: IsKnockBacking
+      0x1417D6E00: IsMoveForbidden
+      0x1417D6E30: IsJumping
+      0x1417D6E60: SetMount
+      0x1417D6E90: SetFlying
+      0x1417D6EC0: IsSwimming
+      0x1417D6EF0: SetLodHigh
+      0x1417D6F20: SetGlassesAccessories
+      0x1417D6F50: IsItemObtainable
+      0x1417D6F80: CheckItemsObtainable
+      0x1417D6FB0: CheckItemsObtainableRareCheck
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x1422CE758
@@ -16092,12 +16767,86 @@ classes:
       0x140DFA4C0: IsTodoChecked
       0x140DFA580: GetTodoArgs
       0x140DFD400: OnQuestRowRead
+      0x140DF6530: QuestOffer
+      0x140DF67B0: QuestReward
+      0x140DF7190: QuestUnqualified
+      0x140DF81A0: YesNoQuestBattle
+      0x140DF7CF0: GetQuestBattleProgress
+      0x140DF44D0: GetQuestId
+      0x140DF4530: IsExistFate
+      0x140DF4F20: IsBattleNpcOwner
+      0x140DF5300: IsBattleNpcTriggerOwner
+      0x140DF5640: IsGuardNpcOwner
+      0x140DF5990: IsOwnersGuardNpcNear
+      0x140DF6220: IsBattleNpcAlive
+      0x140DF8450: SetWeddingFestivalParam
+      0x140DF8580: GetWeddingReservedFlag
+      0x140DF8600: GetGsWeeklyLotOffsetTime
+      0x140DF8660: GetQuestAcceptClassJob
+      0x140DF8700: GetEventItemTargetByLayoutId
+      0x140DF87C0: SaveAnimaWeaponQuestGender
+      0x140DF8890: GetAnimaWeaponQuestGender
+      0x140DF8940: OpenAnimaWeapon5TradeItem
+      0x140DF8A00: OpenAnimaWeapon5StatusAllocation
+      0x140DF8AB0: OpenAnimaWeapon5StatusReallocation
+      0x140DF8B60: ResetAnimaWeapon5Status
+      0x140DF8BF0: CloseUIAnimaWeapon5
+      0x140DF8C20: IsInEventRange
+      0x140DF8DA0: StartFreeMove
+      0x140DF8E40: EndFreeMove
+      0x140DF8F10: CheckFreeMove
+      0x140DF8FC0: CheckAction
+      0x141978460: ReserveSequentialEvent
+      0x1419786D0: CancelSequentialEvent
+      0x141978980: CheckEndSequentialEvent
+      0x141978A20: CheckActiveSequentialEvent
+      0x141978AD0: CheckStartedSequentialEvent
+      0x141978C70: GetStartedMovableSequentialEventByAnother
+      0x141978D20: CancelMovableSequentialEventAllByAnother
+      0x140DF5D40: GetQuestGuardBNpcEventHandlerId
+      0x140DF5EF0: RemoveQuestGuardBNpc
+      0x140E09900: GetFreeWorkU8
+      0x140E09810: GetFreeWorkU4
+      0x140E09700: GetFreeWorkU2
+      0x140E09620: GetFreeWorkBitFlag
+      0x140E09EE0: SetFreeWorkU8
+      0x140E09DF0: SetFreeWorkU4
+      0x140E09CC0: SetFreeWorkU2
+      0x140E09BC0: SetFreeWorkBitFlag
+      0x141AB5080: ClearFreeWork
+      0x141AB5000: ProgressTodo
+      0x141AB4F80: SyncWorkOperation
+      0x14196F730: GetCustomTodoWork
+      0x14196F9F0: IsCompletedCustomTodo
+      0x14196FCB0: GetCompletedCustomTodoCount
+      0x14196FB20: IsAllCompletedCustomTodo
+      0x14196F860: RequestCustomTodo
+      0x141969840: CheckExclusiveQuestEffect
   Client::Game::Event::WarpEventHandler: # 0x02
     vtbls:
       - ea: 0x14238D4C0
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1419E3660: ctor
+      0x1419E59C0: GetWarpId
+      0x1419E4DF0: IsQualified
+      0x1419E4ED0: IsGilQualified
+      0x1419E4FB0: IsClassLevelQualified
+      0x1419E50A0: IsQuestQualified
+      0x1419E5180: IsRewardQualified
+      0x1419E5230: GetGil
+      0x1419E52A0: GetClassLevel
+      0x1419E5310: GetQuest
+      0x1419E5380: GetReward
+      0x1419E5430: WarpYesNo
+      0x1419E54E0: GetPreCutSceneId
+      0x1419E5550: GetPostCutSceneId
+      0x1419E55D0: IsPreCutSceneExist
+      0x1419E5660: IsPostCutSceneExist
+      0x1419E56F0: IsPopRangeOutOfTerritory
+      0x1419E57D0: IsSkipCutSceneConfig
+      0x1419E58A0: GetPopRangeTerritoryType
+      0x1419E5930: IsPopRangeHousingTerritory
   Client::Game::Event::UICallbackBaseInterface:
     vtbls:
       - ea: 0x1421C2218
@@ -16177,12 +16926,49 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1419E0BE0: ctor
+      0x1419E1970: GetAetheryteId
+      0x1419E1A10: IsFieldAetheryte
+      0x1419E1AB0: IsTownAetheryte
+      0x1419E1B50: IsAethernet
+      0x1419E22C0: OverrideFavoriteMenu
+      0x1419E2360: GetAethernetTownId
+      0x1419E2490: IsHousingQualified
+      0x1419E25A0: GetFavoritePointMax
+      0x1419E3580: OpenWorldTravelUI
+      0x1419E25E0: GetTelepoPlaceNameKey
+      0x1419E2650: IsTown
+      0x1419E26C0: IsWorldTravelAetheryte
+      0x1419E2740: IsHomePoint
+      0x1419E27C0: IsFavoritePoint
+      0x1419E2840: IsFavoritePointSecurityToken
+      0x1419E28C0: IsEnableFavoritePointSecurityToken
+      0x1419E2900: IsPSPlatform
+      0x1419E2940: IsFavoritePointPSPlus
+      0x1419E29A0: IsNSPlatform
+      0x1419E29E0: IsFavoritePointNSO
+      0x1419E2A40: OpenNSORequirementDialog
+      0x1419E2A70: OpenTeleportTown
   Client::Game::Event::GuildleveAssignmentEventHandler: # 0x06
     vtbls:
       - ea: 0x1423936E8
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1419F2250: ctor
+      0x1419F4120: GuildleveAssignmentList
+      0x1419F46F0: GuildleveAssignmentTalk
+      0x1419F4780: GuildleveRewardMenu
+      0x1419F49A0: HasNextReward
+      0x1419F4B00: HaveAdditionalRewards
+      0x1419F4D10: GetRewardPenalty
+      0x1419F4A40: AdvanceReward
+      0x1419F4AA0: ResetReward
+      0x1419F4E30: SetReward
+      0x1419F4EE0: HaveCompanyLeve
+      0x1419F4F50: HaveMaelstromLeve
+      0x1419F4FC0: HaveTwinAdderLeve
+      0x1419F5030: HaveImmortalLeve
+      0x1419F50A0: HaveMultiTicketLeve
+      0x1419F5110: HideBattleLeve
   Client::Game::Event::DefaultTalkEventHandler: # 0x09
     vtbls:
       - ea: 0x14238C2D0
@@ -16198,6 +16984,153 @@ classes:
     vtbls:
       - ea: 0x14240B940
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x141A7CBA0: CreateLinkshell
+      0x141A7CC50: DisbandLinkshell
+      0x141A7CD00: RenameLinkshell
+      0x141A7CFA0: LoadRetainerCreation
+      0x141A7D030: LoadRetainerRemake
+      0x141A7D120: CreateRetainer
+      0x141A7D1F0: RemakeRetainer
+      0x141A7D2C0: CallRetainer
+      0x141A7D3D0: GetMarketSellTaxRates
+      0x141A7D460: RemoveRetainer
+      0x141A7D550: MarketRegister
+      0x141A7D680: SelectRetainer
+      0x141A7D710: SetCurrentRetainerIndex
+      0x141A7D7B0: SendRetainerCharaMake
+      0x141A7E760: GetContentFinderStatus
+      0x141A7D870: SetCharaMakeCondition
+      0x141A7D920: DepopRetainer
+      0x141A7DA40: GetRetainerName
+      0x141A7DAF0: GetRetainerEmployedCount
+      0x141A7DB60: IsCurrentRetainerActive
+      0x141A7DBE0: GetAvailableRetainerSlots
+      0x141A7DC50: GetAvailableRetainerSlotsSync
+      0x141A7DDA0: IsRetainerRemake
+      0x141A7DE10: IsVentureTask
+      0x141A7DE90: CanRetainerJobChange
+      0x141A7DCC0: IsHousingIndoorTerritory
+      0x141A7DD30: GetEmptySlotsInBag
+      0x141A7CF10: CheckLinkshellCount
+      0x141A7DF50: GetFcStatus
+      0x141A7E070: CreateFreeCompany
+      0x141A7E1B0: CreateFreeCompanyPayGil
+      0x141A7E310: RenameFcTag
+      0x141A7E3E0: DisbandFreeCompany
+      0x141A7E5F0: MoveGrandCompany
+      0x141A7CDD0: GetLinkshellList
+      0x141A7E690: GetGcRankUpCondition
+      0x141A7DFE0: CheckFcChestEmpty
+      0x141A7E490: FcHouseCheckResult
+      0x141A7E520: RenameFcName
+      0x141A826E0: ResolveHairMake
+      0x141A7E8B0: GetPersonalRoomStatus
+      0x141A7E970: IsInMyPersonalRoom
+      0x141A7E9E0: IsVisiblePersonalRoomEntrance
+      0x141A7EAA0: IsTargetablePersonalRoomEntrance
+      0x141A7EB50: IsInMansion
+      0x141A7EBC0: GetBuddyStableInfo
+      0x141A7EC60: TrainBuddy
+      0x141A7ED50: LogTrainedBuddy
+      0x141A7EDB0: HasBuddyTrainingItem
+      0x141A7EE20: CanTrainMyBuddy
+      0x141A7EF00: LogBuddy
+      0x141A7F440: FeedBuddy
+      0x141A7F4F0: PlayFeedBuddyScene
+      0x141A7F570: HasBuddyFeedItem
+      0x141A7F5E0: IsAutoRemoveBuddy
+      0x141A7F660: BackAutoRemoveBuddy
+      0x141A7F6E0: OpenMyBuddyProfile
+      0x141A7F7A0: CloseMyBuddyProfile
+      0x141A7F800: IsPersonalHouseLandBuddyStable
+      0x141A7F8C0: GetRemainedSec
+      0x141A7E7F0: IsPlayCutsceneContent
+      0x141A7F950: InterpretWheelSlotInfo
+      0x141A7FA30: HandleWheelSlot
+      0x141A802F0: RequestRacingChocoboParam
+      0x141A800C0: PrepareWeatherForecast
+      0x141A80140: OpenWeatherForecast
+      0x141A80210: GetWeatherForecastDetail
+      0x141A80380: HasRacingChocobo
+      0x141A803F0: GetRacingChocoboTrainingPossibleNum
+      0x141A80460: HasRacingChocoboTrainingItem
+      0x141A804D0: OpenFodderInventory
+      0x141A80560: GetFodderItemParam
+      0x141A80630: CanUseRacingChocoboItem
+      0x141A806F0: GetRacingChocoboName
+      0x141A80760: DumpRacingChocoboLog
+      0x141A80BA0: HasRacingChocoboAbilityItem
+      0x141A80C10: CanLearnRacingChocoboAbility
+      0x141A80C80: OpenRacingChocoboAbilityInventory
+      0x141A80D10: HasRacingChocoboAbilityForgetItem
+      0x141A80D80: CanForgetRacingChocoboAbility
+      0x141A80DF0: GetRacingChocoboLearnAbility
+      0x141A80E70: HasRacingChocoboFoalItem
+      0x141A80EE0: OpenRacingChocoboFoalInventory
+      0x141A80F70: OpenRacingChocoboName
+      0x141A81000: MakeRacingChocoboName
+      0x141A810C0: CanRetireRacingChocobo
+      0x141A81130: GetRacingChocoboAbility
+      0x141A811C0: HasRacingChocoboRegistrationCardItem
+      0x141A81230: HasRacingChocoboRetireItem
+      0x141A812A0: CanRacingChocoboCoupling
+      0x141A81310: OpenRacingChocoboCoupling
+      0x141A813A0: OpenRacingChocoboFarewell
+      0x141A81410: CanRacingChocoboTrainingTalk
+      0x141A81490: CanRacingChocoboCouplingTalk
+      0x141A81510: IsChocoboRaceTutorialClear
+      0x141A815A0: IsChocoboRaceAllOpen
+      0x141A81630: GetNextGateInfo
+      0x141A816C0: IsRunningGate
+      0x141A81710: IsAcceptingGate
+      0x141A81760: GetRunningGateType
+      0x141A817C0: GetRunningGatePositionType
+      0x141A81820: EntryTripleTriadCompetition
+      0x141A818B0: RewardTripleTriadCompetition
+      0x141A81940: OpenTripleTriadRanking
+      0x141A819E0: CanOpenTripleTriadRanking
+      0x141A81A30: OpenMinionBattleRanking
+      0x141A81AD0: GetDailyLotPrice
+      0x141A81B30: RequestAirshipsInfo
+      0x141A81D00: GetAirshipNum
+      0x141A81D60: GetAirshipInfo
+      0x141A81BC0: RequestAirshipParam
+      0x141A81C60: RequestAirshipExplorationResult
+      0x141A81F10: UpdateMiniAirship
+      0x141A81F90: HasAllAirshipParts
+      0x141A82020: PlayAirshipTimeline
+      0x141A82090: OpenAirshipPartsMenu
+      0x141A82140: OpenAirshipPartsRepairMenu
+      0x141A822C0: OpenAirshipExploration
+      0x141A82370: OpenAirshipExplorationResult
+      0x141A82430: OpenAirshipExplorationDetailCancel
+      0x141A82200: OpenAirshipPartsStainMenu
+      0x141A82500: PutAirshipRewardLog
+      0x141A825A0: RemoveMiniAirship
+      0x141A82600: IsAirshipContentUnlockPoint
+      0x141A82680: VoyagerSetCurrentExplorationExecutionNum
+      0x141A7FB50: HasAutoRemoveThings
+      0x141A7FC00: PrepareAutoRemoveStorage
+      0x141A7FC70: CanAcquiredWithdrawGil
+      0x141A7FD40: OpenOrchestrionMenu
+      0x141A7FDE0: OpenOrchestrionPlaylistMenu
+      0x141A7FE70: OpenHousingEditVase
+      0x141A7FF70: IsEventSceneTargetExists
+      0x141A828C0: CloseUIAnimaWeapon5
+      0x141A828F0: EntryTripleTriadMatching
+      0x141A82980: CancelTripleTriadMatchingEntry
+      0x141A7FFE0: IsAllowedToBuyKuganeLand
+      0x141A80050: IsAllowedToBuyIshgardLand
+      0x141A829D0: GetCatalogIdFromCurrency
+      0x141A82A50: GetCurrencyByCatalogId
+      0x141A82AD0: CreatePvPTeam
+      0x141A82B60: SetOrbitCamera
+      0x141A82BE0: GetOpenContentCandidateName
+      0x141A82ED0: GetCFLanguage
+      0x141A82F20: GetCFHalfway
+      0x141A82DB0: GetQuestEventAreaEntranceInfo
+      0x141A82F80: RequestNestDescription
   Client::Game::Event::CustomTalkResidentEventHandler:
     vtbls:
       - ea: 0x142441FC0
@@ -16216,6 +17149,12 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1419FA4A0: ctor
+      0x1419FC260: CraftLeveTalk
+      0x1419FC4D0: CraftLeveNpcTrade
+      0x1419FC880: CraftLeveRewardMenu
+      0x1419FC9E0: FinishAdditionalTrade
+      0x1419FCC40: HaveAdditionalRewards
+      0x1419FCDC0: GetRemainingAdditionalTradeNum
   Client::Game::Gimmick::GimmickEventHandler:
     vtbls:
       - ea: 0x1424274C0
@@ -16242,14 +17181,25 @@ classes:
     vtbls:
       - ea: 0x14238F7D0
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1419E96A0: GetChocoboTaxiStandId
+      0x1419E9740: GetFare
+      0x1419E9F40: ChocoboTaxiMenu
   Client::Game::Event::OpeningEventHandler: # 0x13
     vtbls:
       - ea: 0x14238E658
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1419E8410: EnableEventRange
+      0x1419E84E0: DisableEventRange
+      0x1419E85C0: GetQuestId
+      0x1419E8620: GetSelectControlModeType
   Client::Game::Event::ExitRangeEventHandler: # 0x14
     vtbls:
       - ea: 0x14238EF20
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1419E8F30: IsConfirmDismount
   Client::Game::Event::FishingEventHandler: # 0x15
     vtbls:
       - ea: 0x1421D3808
@@ -16273,6 +17223,7 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x1419B44C0: ctor
+      0x1419B47D0: ContentTalk
   Client::Game::Event::GuildOrderGuideEventHandler: # 0x17
     vtbls:
       - ea: 0x14235F0F0
@@ -16293,6 +17244,8 @@ classes:
     vtbls:
       - ea: 0x14238DD90
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x1419E7110: GetSequence
   Client::Game::Event::SpecialShopEventHandler: # 0x1B
     vtbls:
       - ea: 0x1422C69B0
@@ -16650,6 +17603,11 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x1419FE760: ctor
+      0x1419FFBB0: GetLeveId
+      0x1419FFB10: PlayLeveStartAction
+      0x1419FFB90: HideDirectorTodo
+      0x1419FFD20: GetAfterCompleteWarpPlaceID
+      0x1419FFE80: IsWarpToAssignmentNpc
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
       - ea: 0x142396440
