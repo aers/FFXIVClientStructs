@@ -8241,6 +8241,14 @@ classes:
   Client::Game::Control::MoveControl::SplineVector2:
     vtbls:
       - ea: 0x14216F160
+  Client::Game::Control::MoveControl::MoveController:
+    vtbls:
+      - ea: 0x14218C440
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x1408D92B0: Finalizer
+      0x141809E70: ctor
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
       - ea: 0x142A9DE30
