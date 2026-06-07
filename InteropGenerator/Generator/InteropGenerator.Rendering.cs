@@ -263,6 +263,7 @@ public sealed partial class InteropGenerator {
             foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
                 writer.WriteLine(inheritedAttribute);
             }
+            writer.WriteLine("[global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]");
             writer.WriteLine(methodInfo.GetDeclarationStringForStringOverload("string", paramsToOverload));
             using (writer.WriteBlock()) {
                 foreach (string overloadParamName in paramsToOverload) {
