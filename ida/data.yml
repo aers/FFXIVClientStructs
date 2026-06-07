@@ -17574,6 +17574,7 @@ classes:
       0x140B7A270: ProcessEventYield
       0x140B872F0: ProcessInitializeScene
       0x140B7B1C0: ProcessSystemLogMessage
+      0x140B7C170: SetDirectorData
       0x140B7CB80: SetTerritoryTypeId
       0x140B7CDE0: ProcessDirectorUpdate
       0x140B7DF70: ProcessMapEffect

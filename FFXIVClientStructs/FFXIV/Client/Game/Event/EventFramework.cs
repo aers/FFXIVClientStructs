@@ -121,6 +121,19 @@ public unsafe partial struct EventFramework {
     [MemberFunction("40 53 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 41 8B F9")]
     public partial void ProcessDirectorUpdate(EventId eventId, uint category, uint arg1, uint arg2, uint arg3, uint arg4, uint arg5, uint arg6);
 
+    /// <summary>
+    /// Finds one or more <see cref="Director"/>(s) in <see cref="DirectorModule.DirectorList"/>
+    /// with a matching <paramref name="eventId"/>, and sets the data to the values provided
+    /// before calling <see cref="Director"/>.SetSequence and <see cref="Director"/>.Synchronize.
+    /// </summary>
+    /// <param name="eventId"><see cref="EventId"/> to look for in <see cref="DirectorModule.DirectorList"/>.</param>
+    /// <param name="sequence">Value to set in <see cref="Director.Sequence"/>.</param>
+    /// <param name="unknown">Value to set in <see cref="Director.Unknown2E9"/></param>
+    /// <param name="unionDataBuffer">Buffer that will be copied to <see cref="Director.UnionData"/>.</param>
+    /// <param name="length">The number of bytes that will be copied from <paramref name="unionDataBuffer"/>. This value is hardcoded to 12.</param>
+    [MemberFunction("89 54 24 10 48 89 4C 24 ?? 53 56 57 41 55 41 57 48 83 EC 30 48 8B 99")]
+    public partial void SetDirectorData(EventId eventId, byte sequence, byte unknown, byte* unionDataBuffer, ulong length);
+
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
         if (instanceDirector == null || instanceDirector->InstanceContentType != instanceContentType)
