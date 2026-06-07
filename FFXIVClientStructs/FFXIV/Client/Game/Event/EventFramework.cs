@@ -130,7 +130,7 @@ public unsafe partial struct EventFramework {
     /// <param name="sequence">Value to set in <see cref="Director.Sequence"/>.</param>
     /// <param name="unknown">Value to set in <see cref="Director.Unknown2E9"/></param>
     /// <param name="unionDataBuffer">Buffer that will be copied to <see cref="Director.UnionData"/>.</param>
-    /// <param name="length">The number of bytes that will be copied from <paramref name="unionDataBuffer"/>. This value is hardcoded to 12.</param>
+    /// <param name="length">The number of bytes that will be copied from <paramref name="unionDataBuffer"/>. The game always provides a value of 12, but it supports other values.</param>
     [MemberFunction("89 54 24 10 48 89 4C 24 ?? 53 56 57 41 55 41 57 48 83 EC 30 48 8B 99")]
     public partial void SetDirectorData(EventId eventId, byte sequence, byte unknown, byte* unionDataBuffer, ulong length);
 
