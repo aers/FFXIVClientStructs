@@ -1694,37 +1694,37 @@ public class InheritsAttributeTests {
                                           public const int StructSize = 5;
                                           public bool TestBool1
                                           {
-                                              get => BitOps.GetBit<byte>(_testField1, 0);
+                                              readonly get => BitOps.GetBit<byte>(_testField1, 0);
                                               set => _testField1 = BitOps.SetBit<byte>(_testField1, 0, value);
                                           }
                                           public bool TestBool2
                                           {
-                                              get => BitOps.GetBit<byte>(_testField1, 1);
+                                              readonly get => BitOps.GetBit<byte>(_testField1, 1);
                                               set => _testField1 = BitOps.SetBit<byte>(_testField1, 1, value);
                                           }
                                           public bool TestBool3
                                           {
-                                              get => BitOps.GetBit<uint>(_testField2, 0);
+                                              readonly get => BitOps.GetBit<uint>(_testField2, 0);
                                               set => _testField2 = BitOps.SetBit<uint>(_testField2, 0, value);
                                           }
                                           public ushort TestShort1
                                           {
-                                              get => (ushort)BitOps.GetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16));
+                                              readonly get => (ushort)BitOps.GetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16), (uint)value);
                                           }
                                           public ushort TestShort2
                                           {
-                                              get => (ushort)BitOps.GetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4));
+                                              readonly get => (ushort)BitOps.GetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4), (uint)value);
                                           }
                                           public global::BaseStruct.TestEnum TestEnum1
                                           {
-                                              get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 22, BitOps.CreateLowBitMask<uint>(2));
+                                              readonly get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 22, BitOps.CreateLowBitMask<uint>(2));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 22, BitOps.CreateLowBitMask<uint>(2), (uint)value);
                                           }
                                           public global::BaseStruct.TestEnum TestEnum2
                                           {
-                                              get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2));
+                                              readonly get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2), (uint)value);
                                           }
                                       }
@@ -1822,7 +1822,7 @@ public class InheritsAttributeTests {
                             
                                 public partial bool TestBool2 { get; }
                             
-                                public partial bool TestBool3 { get; set; }
+                                public partial bool TestBool3 { readonly get; set; }
                             
                                 public partial ushort TestShort1 { get; set; }
                             
@@ -1857,7 +1857,7 @@ public class InheritsAttributeTests {
                                           }
                                           public partial bool TestBool3
                                           {
-                                              get => BitOps.GetBit<uint>(_testField2, 0);
+                                              readonly get => BitOps.GetBit<uint>(_testField2, 0);
                                               set => _testField2 = BitOps.SetBit<uint>(_testField2, 0, value);
                                           }
                                           public partial ushort TestShort1

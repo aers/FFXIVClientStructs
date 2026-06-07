@@ -14,5 +14,6 @@ internal record BitFieldInfo(
     bool IsPartial,
     bool HasGetter,
     bool HasSetter,
+    bool IsReadonlyGetter,
     EquatableArray<string> InheritableAttributes
 );

@@ -455,11 +455,11 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"{SyntaxFacts.GetText(bitField.Accessibility)} {(bitField.IsPartial ? "partial " : "")}{bitField.Type} {bitField.Name}");
             using (writer.WriteBlock()) {
                 if (bitField.Type == "bool") {
-                    if (bitField.HasGetter) writer.WriteLine($"get => BitOps.GetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index});");
+                    if (bitField.HasGetter) writer.WriteLine($"{(bitField.IsReadonlyGetter && bitField.HasSetter ? "readonly " : "")}get => BitOps.GetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index});");
                     if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBit<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, value);");
                 } else {
                     string mask = $"BitOps.CreateLowBitMask<{bitField.BackingType}>({bitField.Length})";
-                    if (bitField.HasGetter) writer.WriteLine($"get => ({bitField.Type})BitOps.GetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask});");
+                    if (bitField.HasGetter) writer.WriteLine($"{(bitField.IsReadonlyGetter && bitField.HasSetter ? "readonly " : "")}get => ({bitField.Type})BitOps.GetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask});");
                     if (bitField.HasSetter) writer.WriteLine($"set => {bitField.FieldName} = BitOps.SetBits<{bitField.BackingType}>({bitField.FieldName}, {bitField.Index}, {mask}, ({bitField.BackingType})value);");
                 }
             }

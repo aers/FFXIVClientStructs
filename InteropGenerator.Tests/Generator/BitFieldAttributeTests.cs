@@ -35,37 +35,37 @@ public partial class BitFieldAttributeTests {
                               {
                                   public bool TestBool1
                                   {
-                                      get => BitOps.GetBit<byte>(_testField1, 0);
+                                      readonly get => BitOps.GetBit<byte>(_testField1, 0);
                                       set => _testField1 = BitOps.SetBit<byte>(_testField1, 0, value);
                                   }
                                   public bool TestBool2
                                   {
-                                      get => BitOps.GetBit<byte>(_testField1, 1);
+                                      readonly get => BitOps.GetBit<byte>(_testField1, 1);
                                       set => _testField1 = BitOps.SetBit<byte>(_testField1, 1, value);
                                   }
                                   public global::TestStruct.TestEnum TestEnum1
                                   {
-                                      get => (global::TestStruct.TestEnum)BitOps.GetBits<byte>(_testField1, 2, BitOps.CreateLowBitMask<byte>(2));
+                                      readonly get => (global::TestStruct.TestEnum)BitOps.GetBits<byte>(_testField1, 2, BitOps.CreateLowBitMask<byte>(2));
                                       set => _testField1 = BitOps.SetBits<byte>(_testField1, 2, BitOps.CreateLowBitMask<byte>(2), (byte)value);
                                   }
                                   public bool TestBool3
                                   {
-                                      get => BitOps.GetBit<uint>(_testField2, 0);
+                                      readonly get => BitOps.GetBit<uint>(_testField2, 0);
                                       set => _testField2 = BitOps.SetBit<uint>(_testField2, 0, value);
                                   }
                                   public ushort TestShort1
                                   {
-                                      get => (ushort)BitOps.GetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16));
+                                      readonly get => (ushort)BitOps.GetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16));
                                       set => _testField2 = BitOps.SetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16), (uint)value);
                                   }
                                   public ushort TestShort2
                                   {
-                                      get => (ushort)BitOps.GetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4));
+                                      readonly get => (ushort)BitOps.GetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4));
                                       set => _testField2 = BitOps.SetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4), (uint)value);
                                   }
                                   public global::TestStruct.TestEnum TestEnum2
                                   {
-                                      get => (global::TestStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2));
+                                      readonly get => (global::TestStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2));
                                       set => _testField2 = BitOps.SetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2), (uint)value);
                                   }
                               }
@@ -84,7 +84,8 @@ public partial class BitFieldAttributeTests {
                             {
                                 [BitField<bool>(nameof(TestBool1), 0)]
                                 [BitField<bool>(nameof(TestBool2), 1)]
-                                [BitField<TestEnum>(nameof(TestEnum1), 2, 2)]
+                                [BitField<bool>(nameof(TestReadonlyBool3), 2)]
+                                [BitField<TestEnum>(nameof(TestEnum1), 3, 2)]
                                 internal byte _testField1;
                             
                                 [BitField<bool>(nameof(TestBool3), 0)]
@@ -102,6 +103,8 @@ public partial class BitFieldAttributeTests {
                                 public partial bool TestBool1 { get; set; }
                             
                                 public partial bool TestBool2 { get; }
+                            
+                                public partial bool TestReadonlyBool3 { readonly get; set; }
                             
                                 public partial TestEnum TestEnum1 { get; set; }
                             
@@ -128,10 +131,15 @@ public partial class BitFieldAttributeTests {
                                   {
                                       get => BitOps.GetBit<byte>(_testField1, 1);
                                   }
+                                  public partial bool TestReadonlyBool3
+                                  {
+                                      readonly get => BitOps.GetBit<byte>(_testField1, 2);
+                                      set => _testField1 = BitOps.SetBit<byte>(_testField1, 2, value);
+                                  }
                                   public partial global::TestStruct.TestEnum TestEnum1
                                   {
-                                      get => (global::TestStruct.TestEnum)BitOps.GetBits<byte>(_testField1, 2, BitOps.CreateLowBitMask<byte>(2));
-                                      set => _testField1 = BitOps.SetBits<byte>(_testField1, 2, BitOps.CreateLowBitMask<byte>(2), (byte)value);
+                                      get => (global::TestStruct.TestEnum)BitOps.GetBits<byte>(_testField1, 3, BitOps.CreateLowBitMask<byte>(2));
+                                      set => _testField1 = BitOps.SetBits<byte>(_testField1, 3, BitOps.CreateLowBitMask<byte>(2), (byte)value);
                                   }
                                   public partial bool TestBool3
                                   {
