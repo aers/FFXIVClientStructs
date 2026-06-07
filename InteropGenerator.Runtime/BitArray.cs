@@ -2,6 +2,7 @@
 // https://github.com/dotnet/runtime
 // Licensed under the MIT license. See InteropGenerator/ThirdPartyLicenses.txt for details.
 
+using System.Diagnostics.Contracts;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
@@ -67,7 +68,7 @@ public readonly unsafe struct BitArray(byte* ptr, int bitCount) {
     /// <returns>The value of the bit at position <paramref name="index"/>.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is greater than or equal to <see cref="Count"/>.</exception>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Get(int index) {
         ArgumentOutOfRangeException.ThrowIfNegative(index, nameof(index));
         ArgumentOutOfRangeException.ThrowIfGreaterThan(index, bitCount, nameof(index));
@@ -111,7 +112,7 @@ public readonly unsafe struct BitArray(byte* ptr, int bitCount) {
     /// <see langword="true"/> if the bit was successfully retrieved; 
     /// otherwise, <see langword="false"/>.
     /// </returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryGet(int index, out bool value) {
         if ((uint)index >= (uint)bitCount) {
             value = false;
