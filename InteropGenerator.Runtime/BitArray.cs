@@ -74,7 +74,7 @@ public readonly unsafe struct BitArray(byte* ptr, int bitCount) {
         ArgumentOutOfRangeException.ThrowIfGreaterThan(index, bitCount, nameof(index));
 
         (uint byteIndex, uint bitOffset) = Math.DivRem((uint)index, 8);
-        return ((ptr[byteIndex]) & (1 << (int)bitOffset)) != 0;
+        return (ptr[byteIndex] & (1 << (int)bitOffset)) != 0;
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ public readonly unsafe struct BitArray(byte* ptr, int bitCount) {
         }
 
         (uint byteIndex, uint bitOffset) = Math.DivRem((uint)index, 8);
-        value = ((ptr[byteIndex]) & (1 << (int)bitOffset)) != 0;
+        value = (ptr[byteIndex] & (1 << (int)bitOffset)) != 0;
         return true;
     }
 
