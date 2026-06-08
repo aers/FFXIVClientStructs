@@ -115,6 +115,8 @@ public unsafe partial struct WKSManager {
 
         [FieldOffset(0x110), FixedSizeArray] internal FixedSizeArray3<WKSMasterMissionState> _masterMissions;
 
+        [FieldOffset(0x140)] public ushort BonusMasterMissionUnitId;
+
         [FieldOffset(0x108), Obsolete("Wrongly documented field as this is most likely a timestamp", true)] public uint CriticalMissionData;
     }
 
@@ -146,6 +148,8 @@ public unsafe partial struct WKSManager {
         [FieldOffset(0xE40), Obsolete("Use CurrentMission.Rank")] public MissionRank CurrentRank;
         [FieldOffset(0xE46), Obsolete("Use CurrentMission.CollectedTotal")] public ushort CollectedTotal;
         [FieldOffset(0xE48), Obsolete("Use CurrentMission.CollectedIndividual")] public byte CollectedIndividual;
+
+        [FieldOffset(0xE70)] public byte ConsecutiveGoldCount;
 
         [FieldOffset(0xE74)] public uint FishingBait;
 

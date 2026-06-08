@@ -30,6 +30,9 @@ public unsafe partial struct AgentWKSMission {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B EA E8")]
     public partial bool GetCriticalMissions(StdVector<MissionEntry>* list);
 
+	[MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 4C 8B F2 48 8B D9 E8 ?? ?? ?? ?? 48 8B 4B")]
+    public partial bool GetMasterMissions(StdVector<MissionEntry>* list);
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 4A ?? 85 C9")]
     public partial bool GetMissionLog(StdVector<MissionEntry>* list);
 
@@ -70,6 +73,7 @@ public unsafe partial struct AgentWKSMission {
         /// 13 = Time-restricted<br/>
         /// 14 = Sequential (LockedBehind)<br/>
         /// 15 = Critical (IsSpecialQuest)<br/>
+        /// 16 = Master<br/>
         /// </summary>
         [FieldOffset(0x18)] public byte MissionGroup;
         /// <summary>ClassJob index derived from WKSMissionUnit.ClassJobCategory.</summary>
@@ -85,7 +89,7 @@ public unsafe partial struct AgentWKSMission {
         Gold = 1 << 3,
         WeatherRestricted = 1 << 4,
         Locked = 1 << 5,
-        //WeatherActive = 1 << 7, // Couldn't check enough due to large timespans between missions
-        //CurrentlyActive = 1 << 11, // Couldn't check enough due to large timespans between missions
+        ConditionLocked = 1 << 7,
+        CurrentlyActive = 1 << 11
     }
 }
