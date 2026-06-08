@@ -294,7 +294,7 @@ public partial struct ObjectType : IEquatable<ObjectType>, IComparable<ObjectTyp
     [FieldOffset(0x00)] public uint Value;
 
     /// <remarks> Only valid if <see cref="GameObject.ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/> and <see cref="GameObject.BattleNpcSubKind"/> is <see cref="BattleNpcSubKind.Pet"/>. </remarks>
-    public partial byte PetMirageId { get; set; }
+    public partial byte PetMirageId { readonly get; set; }
 
     public static implicit operator uint(ObjectType ot) => ot.Value;
     public static unsafe implicit operator ObjectType(uint ot) => *(ObjectType*)&ot;

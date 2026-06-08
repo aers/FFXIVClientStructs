@@ -68,10 +68,10 @@ public unsafe partial struct ActionEffectHandler {
         [FieldOffset(0x21)] public byte NumTargets;
 
         /// <remarks> If this flag is set, the message will be printed to the action log when processing the action. </remarks>
-        public partial bool ShowInLog { get; set; }
+        public partial bool ShowInLog { readonly get; set; }
 
         /// <remarks> If this flag is set, the animation lock is applied to caster even though <c>SourceSequence == 0</c>. </remarks>
-        public partial bool ForceAnimationLock { get; set; }
+        public partial bool ForceAnimationLock { readonly get; set; }
     }
 
     /// <summary>

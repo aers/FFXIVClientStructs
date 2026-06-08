@@ -125,30 +125,30 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial bool IsReady { get; }
 
     /// <summary> If addon should have <seealso cref="FireCallback"/> triggered and if <seealso cref="Hide"/> or <seealso cref="Close"/> should be called </summary>
-    public partial bool ShouldFireCallbackAndHideOrClose { get; set; }
+    public partial bool ShouldFireCallbackAndHideOrClose { readonly get; set; }
 
     /// <summary> Disables loading from/saving to AddonConfig </summary>
-    public partial bool DisableAddonConfig { get; set; }
+    public partial bool DisableAddonConfig { readonly get; set; }
 
     /// <summary> Enables TextNodes to be populated (before OnSetup) </summary>
-    public partial bool EnableTextNodePopulation { get; set; }
+    public partial bool EnableTextNodePopulation { readonly get; set; }
 
     /// <summary> Enable Filter (Modal window with backdrop) </summary>
-    public partial bool EnableFilter { get; set; }
+    public partial bool EnableFilter { readonly get; set; }
 
     /// <summary> Disables the "Scale Window" option in the title bar context menu </summary>
-    public partial bool DisableUserScaling { get; set; }
+    public partial bool DisableUserScaling { readonly get; set; }
 
     /// <summary> Forces the addon to remain visible (but uninteractable) when using Toggle UI Display Mode </summary>
-    public partial bool IgnoreUIDisplayMode { get; set; }
+    public partial bool IgnoreUIDisplayMode { readonly get; set; }
 
     public uint DepthLayer {
-        get => BitOps.GetBits(Flags198, 16, 0b1111u);
+        readonly get => BitOps.GetBits(Flags198, 16, 0b1111u);
         set => SetDepthLayer(value);
     }
 
     public bool IsVisible {
-        get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.IsVisible);
+        readonly get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.IsVisible);
         set => VisibilityState = value
             ? VisibilityState | AtkUnitBaseVisibilityState.IsVisible
             : VisibilityState & ~AtkUnitBaseVisibilityState.IsVisible;
@@ -464,10 +464,10 @@ public partial struct OperationGuide {
     [FieldOffset(0x08)] public uint AddonTransientId;
 
     /// <summary> The point of the node to anchor to. </summary>
-    public partial OperationGuidePoint RelativePoint { get; set; }
+    public partial OperationGuidePoint RelativePoint { readonly get; set; }
 
     /// <summary> The point of this OperationGuide. </summary>
-    public partial OperationGuidePoint Point { get; set; }
+    public partial OperationGuidePoint Point { readonly get; set; }
 }
 
 public enum OperationGuidePoint : byte {
