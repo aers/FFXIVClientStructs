@@ -38,18 +38,6 @@ public unsafe partial struct AtkComponentTreeList : ICreatable<AtkComponentTreeL
         int itemCount,
         ListComponentCallBackInterface* callBackInterface = null);
 
-    [Obsolete("Use LoadAtkValues with callBackInterface parameter", true)]
-    public void LoadAtkValues(
-        int atkValuesCount,
-        AtkValue* atkValues,
-        int uintValuesOffset,
-        int stringValuesOffset,
-        int uintValuesCountPerItem,
-        int stringValuesCountPerItem,
-        int itemCount,
-        nint a9)
-        => LoadAtkValues(atkValuesCount, atkValues, uintValuesOffset, stringValuesOffset, uintValuesCountPerItem, stringValuesCountPerItem, itemCount, (ListComponentCallBackInterface*)a9);
-
     /// <remarks>
     /// Expands the given group and collapses all other groups.<br/>
     /// After calling this, you might also want to set <see cref="LayoutRefreshPending"/> to <c>true</c>.

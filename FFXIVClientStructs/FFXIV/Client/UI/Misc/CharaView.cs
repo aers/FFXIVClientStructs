@@ -37,14 +37,11 @@ public unsafe partial struct CharaView : ICreatable<CharaView> {
     [FieldOffset(0xEC)] public float ZoomRatio;
 
     [FieldOffset(0xF8), FixedSizeArray] internal FixedSizeArray14<CharaViewItem> _items;
-
+    // [FieldOffset(0x2B8)] struct of size 0x50
     [FieldOffset(0x308)] public byte FreeCompanyCrestBitfield;
     [FieldOffset(0x309)] public bool CharacterDataCopied;
     [FieldOffset(0x30A)] public bool CharacterLoaded;
-
-    [Obsolete("Incorrectly inherited by CharaViewPortrait. Do not call this; copy the code and adapt it to the correct type.", true)]
-    public static CharaView* Create()
-        => IMemorySpace.GetUISpace()->Create<CharaView>();
+    [FieldOffset(0x30B)] public bool IsInSanctumOfTheTwelve;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 ED C6 86 ?? ?? ?? ?? ?? 48 8D 05")]
     public partial CharaView* Ctor();
@@ -152,7 +149,7 @@ public struct CharaViewItem {
     [FieldOffset(0x4)] public byte Stain1Id;
     [FieldOffset(0x5)] public byte GlamourStain0Id;
     [FieldOffset(0x6)] public byte GlamourStain1Id;
-    //[FieldOffset(0x7)] private byte Unk7;
+    [FieldOffset(0x7)] public bool ApplyCompanyCrest;
     [FieldOffset(0x8)] public uint ItemId;
     [FieldOffset(0xC)] public uint GlamourItemId;
     [FieldOffset(0x10)] public ulong ModelMain; // WeaponModelId or EquipmentModelId

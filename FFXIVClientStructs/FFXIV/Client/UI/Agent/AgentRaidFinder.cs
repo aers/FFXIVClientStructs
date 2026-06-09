@@ -10,14 +10,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public partial struct AgentRaidFinder {
     [FieldOffset(0x2C)] public uint SelectedEntry;
 
+    [FieldOffset(0x38)] public AgentContentsFinderInterface InterfaceSub;
+    [FieldOffset(0x8B8)] public AgentContentsFinderReward RewardsSub;
+
     [FieldOffset(0x1EA8), FixedSizeArray] internal FixedSizeArray4<TabData> _tabs; // filled here: 40 55 53 57 41 54 41 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B D9 (a1 is the agent)
     [FieldOffset(0x22E8)] public uint SelectedTab;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x110)]
     public partial struct TabData {
-        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray5<TabEntryData> _entries;
-
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<TabEntryData> _entries;
         [FieldOffset(0xA0)] public int EntryCount;
 
         [FieldOffset(0xA8)] public Utf8String Label;

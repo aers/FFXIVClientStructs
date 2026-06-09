@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Game.Control.MoveControl;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
@@ -11,10 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x2370)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3, 87)]
 public unsafe partial struct Character {
-    [FieldOffset(0x600)] public MovementStateOptions MovementState;
-    [BitField<bool>(nameof(IsSwimming), 5)] // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
-    [FieldOffset(0x628)] public byte Flags628;
-
+    [FieldOffset(0x1F0)] public MoveController MoveController;
     [FieldOffset(0x630)] public EmoteController EmoteController;
     [FieldOffset(0x670)] public MountContainer Mount;
     [FieldOffset(0x6D8)] public CompanionContainer CompanionData;
@@ -76,6 +74,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x2338)] public uint NameId;
 
     [FieldOffset(0x2344)] public uint CompanionOwnerId; // TODO: Find a better name as it is used to index into FurnitureMemory for IndoorHousing
+    [FieldOffset(0x2348)] public ObjectType ObjectType;
 
     [FieldOffset(0x2350)] public ulong AccountId;
     [FieldOffset(0x2358)] public ulong ContentId;
@@ -89,6 +88,15 @@ public unsafe partial struct Character {
     [FieldOffset(0x2369)] public byte SoundVolumeCategory;
     [FieldOffset(0x236A)] public byte SoundVolumeCategoryOverride;
     [FieldOffset(0x236B)] private byte SoundFlags; // 0x40 = SoundVolumeCategory determined
+
+    [FieldOffset(0x600), Obsolete("Moved to MoveController.MovementState")] public MovementStateOptions MovementState;
+    [FieldOffset(0x628), Obsolete] public byte Flags628;
+
+    [Obsolete("Moved to MoveController.IsSwimming")]
+    public bool IsSwimming {
+        get => MoveController.IsSwimming;
+        set => MoveController.IsSwimming = value;
+    }
 
     public bool IsWeaponDrawn => Timeline.IsWeaponDrawn;
     public bool IsCasting => VirtualTable != null && GetCastInfo() is var info && info != null && info->IsCasting;
@@ -178,6 +186,7 @@ public unsafe partial struct Character {
     public partial ForayInfo* GetForayInfo();
 }
 
+// TODO: move to FFXIVClientStructs.FFXIV.Client.Game.Control.MoveControl
 public enum MovementStateOptions : byte {
     Normal = 0,
     Flying = 1,

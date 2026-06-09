@@ -102,7 +102,7 @@ public unsafe partial struct UIState {
 
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x1A0EB), FixedSizeArray(isBitArray: true, bitCount: 1432)] internal FixedSizeArray179<byte> _seenCutscenes;
+    [FieldOffset(0x1A0EB), FixedSizeArray(isBitArray: true, bitCount: 1435)] internal FixedSizeArray180<byte> _seenCutscenes;
 
     // BitCount: TripleTriadCardSheet.RowCount
     /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
@@ -111,7 +111,7 @@ public unsafe partial struct UIState {
 
     // BitCount: TripleTriadResident.RowCount
     /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
-    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 131)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
+    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 132)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
 
     // unk byte
 

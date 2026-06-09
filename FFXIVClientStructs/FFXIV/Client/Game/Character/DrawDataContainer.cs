@@ -91,10 +91,11 @@ public unsafe partial struct DrawDataContainer {
         LFinger = 9,
     }
 
+    // TODO: do we rename MainHand to Main and OffHand to Sub?
     public enum WeaponSlot : uint {
-        MainHand = 0,
-        OffHand = 1,
-        Unk = 2, // TODO: CraftTool?
+        MainHand = 0, // WEAPON_SLOT_MAIN
+        OffHand = 1, // WEAPON_SLOT_SUB
+        System = 2, // WEAPON_SLOT_SYSTEM - used for crafter's tool
     }
 }
 

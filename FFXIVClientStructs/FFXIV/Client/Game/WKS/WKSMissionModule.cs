@@ -14,4 +14,26 @@ public unsafe partial struct WKSMissionModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? B0 01 E9 ?? ?? ?? ?? 49 8B C8")]
     public partial void AbandonMission();
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public unsafe partial struct MissionState {
+        /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
+        [FieldOffset(0x00)] public ushort MissionUnitRowId;
+
+        [FieldOffset(0x0C)] public ushort Score; // TODO: uint
+
+        [FieldOffset(0x10)] public MissionRank Rank;
+        [FieldOffset(0x14)] private byte Unk14; // bool? status?
+
+        [FieldOffset(0x16)] public ushort CollectedTotal;
+        [FieldOffset(0x18)] public byte CollectedIndividual;
+    }
+
+    public enum MissionRank {
+        None,
+        Bronze,
+        Silver,
+        Gold,
+        Failed = 5,
+    }
 }

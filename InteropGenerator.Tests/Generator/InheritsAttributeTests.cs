@@ -1694,37 +1694,37 @@ public class InheritsAttributeTests {
                                           public const int StructSize = 5;
                                           public bool TestBool1
                                           {
-                                              get => BitOps.GetBit<byte>(_testField1, 0);
+                                              readonly get => BitOps.GetBit<byte>(_testField1, 0);
                                               set => _testField1 = BitOps.SetBit<byte>(_testField1, 0, value);
                                           }
                                           public bool TestBool2
                                           {
-                                              get => BitOps.GetBit<byte>(_testField1, 1);
+                                              readonly get => BitOps.GetBit<byte>(_testField1, 1);
                                               set => _testField1 = BitOps.SetBit<byte>(_testField1, 1, value);
                                           }
                                           public bool TestBool3
                                           {
-                                              get => BitOps.GetBit<uint>(_testField2, 0);
+                                              readonly get => BitOps.GetBit<uint>(_testField2, 0);
                                               set => _testField2 = BitOps.SetBit<uint>(_testField2, 0, value);
                                           }
                                           public ushort TestShort1
                                           {
-                                              get => (ushort)BitOps.GetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16));
+                                              readonly get => (ushort)BitOps.GetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 2, BitOps.CreateLowBitMask<uint>(16), (uint)value);
                                           }
                                           public ushort TestShort2
                                           {
-                                              get => (ushort)BitOps.GetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4));
+                                              readonly get => (ushort)BitOps.GetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 18, BitOps.CreateLowBitMask<uint>(4), (uint)value);
                                           }
                                           public global::BaseStruct.TestEnum TestEnum1
                                           {
-                                              get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 22, BitOps.CreateLowBitMask<uint>(2));
+                                              readonly get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 22, BitOps.CreateLowBitMask<uint>(2));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 22, BitOps.CreateLowBitMask<uint>(2), (uint)value);
                                           }
                                           public global::BaseStruct.TestEnum TestEnum2
                                           {
-                                              get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2));
+                                              readonly get => (global::BaseStruct.TestEnum)BitOps.GetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2));
                                               set => _testField2 = BitOps.SetBits<uint>(_testField2, 24, BitOps.CreateLowBitMask<uint>(2), (uint)value);
                                           }
                                       }
@@ -1822,7 +1822,7 @@ public class InheritsAttributeTests {
                             
                                 public partial bool TestBool2 { get; }
                             
-                                public partial bool TestBool3 { get; set; }
+                                public partial bool TestBool3 { readonly get; set; }
                             
                                 public partial ushort TestShort1 { get; set; }
                             
@@ -1857,7 +1857,7 @@ public class InheritsAttributeTests {
                                           }
                                           public partial bool TestBool3
                                           {
-                                              get => BitOps.GetBit<uint>(_testField2, 0);
+                                              readonly get => BitOps.GetBit<uint>(_testField2, 0);
                                               set => _testField2 = BitOps.SetBit<uint>(_testField2, 0, value);
                                           }
                                           public partial ushort TestShort1
@@ -1966,6 +1966,7 @@ public class InheritsAttributeTests {
                                       unsafe partial struct BaseStruct
                                       {
                                           public const int StructSize = 4;
+                                          [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
@@ -1997,6 +1998,7 @@ public class InheritsAttributeTests {
                                                     /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                     public int TestFunction(int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg) => BaseStruct.TestFunction(argOne, stringArg);
+                                                    [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
@@ -2050,6 +2052,7 @@ public class InheritsAttributeTests {
                                       {
                                           public const int StructSize = 4;
                                           [global::System.ObsoleteAttribute("This function is obsolete")]
+                                          [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
@@ -2084,6 +2087,7 @@ public class InheritsAttributeTests {
                                                     [global::System.ObsoleteAttribute("This function is obsolete")]
                                                     public int TestFunction(int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg) => BaseStruct.TestFunction(argOne, stringArg);
                                                     [global::System.ObsoleteAttribute("This function is obsolete")]
+                                                    [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
@@ -2140,6 +2144,7 @@ public class InheritsAttributeTests {
                                       {
                                           public const int StructSize = 4;
                                           [global::TestAttribute]
+                                          [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
@@ -2174,6 +2179,7 @@ public class InheritsAttributeTests {
                                                     [global::TestAttribute]
                                                     public int TestFunction(int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg) => BaseStruct.TestFunction(argOne, stringArg);
                                                     [global::TestAttribute]
+                                                    [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
@@ -2895,6 +2901,7 @@ public class InheritsAttributeTests {
                                        }
                                        [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                        public partial void BaseA_B_vf0(global::InteropGenerator.Runtime.CStringPointer arg) => VirtualTable->BaseA_B_vf0((BaseA_B*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                       [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                        public void BaseA_B_vf0(string arg)
                                        {
                                            int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
@@ -3088,6 +3095,7 @@ public class InheritsAttributeTests {
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public static void BaseA_StaticFunction() => BaseA_A.BaseA_StaticFunction();
+                                                [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                                 public void BaseA_B_vf0(string arg)
                                                 {
                                                     int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
@@ -3209,6 +3217,7 @@ public class InheritsAttributeTests {
                                               /// <remarks>Method inherited from parent class <see cref="BaseB">BaseB</see>.</remarks>
                                               [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                               public void BaseB_method() => BaseB.BaseB_method();
+                                              [global::System.Runtime.CompilerServices.SkipLocalsInitAttribute]
                                               public void BaseA_B_vf0(string arg)
                                               {
                                                   int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);

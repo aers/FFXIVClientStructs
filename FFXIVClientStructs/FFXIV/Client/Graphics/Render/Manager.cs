@@ -18,6 +18,7 @@ public unsafe partial struct Manager {
     // [FieldOffset(0x2E160)] private UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
     [FieldOffset(0x2E390)] public WaterRenderer WaterRenderer;
     [FieldOffset(0x2E910)] public VerticalFogRenderer VerticalFogRenderer;
+    [FieldOffset(0x38358)] public bool Is3DRenderingDisabled;
 
     // [FieldOffset(0x487F8)] private UnknownRenderer1 UnknownRenderer1; // 0xE0
     // [FieldOffset(0x488E0)] private UnknownRenderer2 UnknownRenderer2; // 0x7A10 Grass?

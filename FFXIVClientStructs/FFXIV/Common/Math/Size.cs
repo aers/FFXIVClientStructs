@@ -15,4 +15,7 @@ public struct Size : IEquatable<Size>, IComparable<Size> {
     public static bool operator ==(Size left, Size right) => left.Value == right.Value;
     public static bool operator !=(Size left, Size right) => left.Value != right.Value;
     public int CompareTo(Size other) => Value.CompareTo(other);
+
+    public override string ToString() => ((System.Numerics.Vector2)this).ToString();
+    public string ToString(string? format, IFormatProvider? formatProvider) => ((System.Numerics.Vector2)this).ToString(format, formatProvider);
 }

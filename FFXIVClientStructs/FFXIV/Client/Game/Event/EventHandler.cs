@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
@@ -20,8 +21,16 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x88)] public SceneFlag SceneFlags;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
+    [FieldOffset(0x98)] private ExcelSheetWaiter* UnkExcelSheetWaiter1;
+    [FieldOffset(0xA0)] private ExcelSheet* UnkExcelSheet1;
+    [FieldOffset(0xA8)] private ExcelSheetWaiter* UnkExcelSheetWaiter2;
+    [FieldOffset(0xB0)] private ExcelSheet* UnkExcelSheet2;
+    [FieldOffset(0xB8)] private ExcelSheetWaiter* UnkExcelSheetWaiter3;
+    [FieldOffset(0xC0)] private ExcelSheet* UnkExcelSheet3;
+    [FieldOffset(0xC8)] private Utf8String UnkSheetName; // sheet set to UnkExcelSheet3, for FormatStringCallback?
 
-    [FieldOffset(0xC8)] private Utf8String UnkString0;
+    [FieldOffset(0x158)] private ExcelSheetWaiter* UnkExcelSheetWaiter4;
+    [FieldOffset(0x160)] private ExcelSheet* UnkExcelSheet4; // TripleTriadCard, XBMBattleDetailAction
 
     [VirtualFunction(0)]
     public partial EventHandler* Dtor(byte freeFlags);
@@ -34,6 +43,9 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(60)]
     public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
+
+    [VirtualFunction(70)]
+    public partial void CancelByPlayerMovement(bool a2, bool a3);
 
     // [VirtualFunction(76)]
     // public partial void ProcessListenItemCallback(?);

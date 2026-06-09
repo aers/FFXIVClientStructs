@@ -9,6 +9,8 @@ public readonly unsafe struct Pointer<T> : IEquatable<Pointer<T>>, IComparable<P
         Value = p;
     }
 
+    public bool IsNull => Value is null;
+
     public TNew* Cast<TNew>() where TNew : unmanaged => (TNew*)Value;
 
     public static implicit operator T*(Pointer<T> p) => p.Value;

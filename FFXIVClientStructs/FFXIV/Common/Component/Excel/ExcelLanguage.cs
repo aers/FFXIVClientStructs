@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
+// Common::Component::Excel::ExcelLanguage
 public enum ExcelLanguage {
     None,
     Japanese, // ja

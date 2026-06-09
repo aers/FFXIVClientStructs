@@ -76,7 +76,7 @@ public unsafe partial struct AtkTextNode : ICreatable<AtkTextNode> {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
     public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0, bool addZeroPadding = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 28 5F 5D")]
+    [MemberFunction("48 85 C9 0F 84 ?? ?? ?? ?? 55 48 83 EC ?? B2")]
     public partial void ResizeNodeForCurrentText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]

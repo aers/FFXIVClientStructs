@@ -121,50 +121,34 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
-    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons", true)] public byte NumOpenPopups;
-    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId", true)] public ushort ContextMenuParentId;
-    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration", true)] public uint OpenTransitionDuration;
-    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration", true)] public uint CloseTransitionDuration;
-    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale", true)] public float OpenTransitionScale;
-    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale", true)] public float CloseTransitionScale;
-    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX", true)] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY", true)] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX", true)] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY", true)] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId", true)] public short OpenSoundEffectId;
-
     /// <summary> Gets a value indicating whether OnSetup was called </summary>
     public partial bool IsReady { get; }
 
-    /// <summary> Disables the "Close" option in the title bar context menu and prevents the window from being closed via input (ESC or similar). </summary>
-    [Obsolete("Use ShouldFireCallbackAndHideOrClose.", true)]
-    public bool DisableUserClose { get => ShouldFireCallbackAndHideOrClose; set => ShouldFireCallbackAndHideOrClose = value; }
-
     /// <summary> If addon should have <seealso cref="FireCallback"/> triggered and if <seealso cref="Hide"/> or <seealso cref="Close"/> should be called </summary>
-    public partial bool ShouldFireCallbackAndHideOrClose { get; set; }
+    public partial bool ShouldFireCallbackAndHideOrClose { readonly get; set; }
 
     /// <summary> Disables loading from/saving to AddonConfig </summary>
-    public partial bool DisableAddonConfig { get; set; }
+    public partial bool DisableAddonConfig { readonly get; set; }
 
     /// <summary> Enables TextNodes to be populated (before OnSetup) </summary>
-    public partial bool EnableTextNodePopulation { get; set; }
+    public partial bool EnableTextNodePopulation { readonly get; set; }
 
     /// <summary> Enable Filter (Modal window with backdrop) </summary>
-    public partial bool EnableFilter { get; set; }
+    public partial bool EnableFilter { readonly get; set; }
 
     /// <summary> Disables the "Scale Window" option in the title bar context menu </summary>
-    public partial bool DisableUserScaling { get; set; }
+    public partial bool DisableUserScaling { readonly get; set; }
 
     /// <summary> Forces the addon to remain visible (but uninteractable) when using Toggle UI Display Mode </summary>
-    public partial bool IgnoreUIDisplayMode { get; set; }
+    public partial bool IgnoreUIDisplayMode { readonly get; set; }
 
     public uint DepthLayer {
-        get => BitOps.GetBits(Flags198, 16, 0b1111u);
+        readonly get => BitOps.GetBits(Flags198, 16, 0b1111u);
         set => SetDepthLayer(value);
     }
 
     public bool IsVisible {
-        get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.IsVisible);
+        readonly get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.IsVisible);
         set => VisibilityState = value
             ? VisibilityState | AtkUnitBaseVisibilityState.IsVisible
             : VisibilityState & ~AtkUnitBaseVisibilityState.IsVisible;
@@ -249,7 +233,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]
-    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6);
+    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6); // TODO: a4 type should be ResourceCategory default to `ResourceCategory.Ui`
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 45 33 C9 F3 0F 59 0D")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
@@ -480,10 +464,10 @@ public partial struct OperationGuide {
     [FieldOffset(0x08)] public uint AddonTransientId;
 
     /// <summary> The point of the node to anchor to. </summary>
-    public partial OperationGuidePoint RelativePoint { get; set; }
+    public partial OperationGuidePoint RelativePoint { readonly get; set; }
 
     /// <summary> The point of this OperationGuide. </summary>
-    public partial OperationGuidePoint Point { get; set; }
+    public partial OperationGuidePoint Point { readonly get; set; }
 }
 
 public enum OperationGuidePoint : byte {

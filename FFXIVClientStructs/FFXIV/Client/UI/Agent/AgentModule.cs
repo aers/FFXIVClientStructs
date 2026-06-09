@@ -210,8 +210,6 @@ public enum AgentId : uint {
     ChocoboBreed = 172,
     GoldSaucerMiniGame = 173,
     TripleTriad = 174,
-    [Obsolete("Renamed to TripleTriad", true)]
-    TrippleTriad = 174,
     TripleTriadRuleAnnounce = 175,
     TripleTriadRuleSetting = 176,
     Unk177 = 177,

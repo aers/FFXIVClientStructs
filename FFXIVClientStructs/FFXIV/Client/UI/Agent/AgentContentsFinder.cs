@@ -112,6 +112,8 @@ public unsafe partial struct AgentContentsFinderReward {
 
     [FieldOffset(0x7D0)] public ExcelSheet* ItemSheet;
 
+    [FieldOffset(0x7E0)] public AgentInterface* AgentInterface;
+    [FieldOffset(0x7E8)] public ulong EventKind;
     [FieldOffset(0x7F0), FixedSizeArray] internal FixedSizeArray7<ItemWrap> _normalRewards;
     [FieldOffset(0xD68), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _unkRewards;
     [FieldOffset(0x1150), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _bonusRewards; // "In Need" and "Completion Bonus"
@@ -120,7 +122,7 @@ public unsafe partial struct AgentContentsFinderReward {
     [FieldOffset(0x15C0)] public uint ItemRewardCount; // Actual items, not EXP
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-    public unsafe partial struct ItemWrap {
+    public partial struct ItemWrap {
         [FieldOffset(0x00)] public InventoryItem Item;
         [FieldOffset(0x48)] public uint IsValid; // 0x0 not valid, 0x2 valid
         [FieldOffset(0x4C)] public uint ItemId;
@@ -131,29 +133,9 @@ public unsafe partial struct AgentContentsFinderReward {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-    public unsafe partial struct RewardWrap {
+    public partial struct RewardWrap { // TODO: this is the same as AgentContentsFinderInterface.RewardsData
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray7<InventoryItem> _items;
         [FieldOffset(0x1F8), FixedSizeArray] internal FixedSizeArray9<int> _rewards;
-        [FieldOffset(0x21C)] private byte Unk21C; // 7.1
-    }
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x880)]
-public unsafe partial struct AgentContentsFinderInterface {
-    [FieldOffset(0x00)] public AgentContentsFinder* AgentContentsFinder;
-    [FieldOffset(0x10)] public Utf8String Description;
-    [FieldOffset(0x78)] private UnkItemsSub UnkSub;
-
-    [FieldOffset(0x840)] public ExcelSheet* InstanceContentSheet;
-    [FieldOffset(0x848)] public ExcelSheet* ContentFinderConditionTransientSheet;
-    [FieldOffset(0x850)] public ExcelSheet* InstanceContentRewardItemSheet;
-    [FieldOffset(0x858)] public nint ExcelSheetWaiterInstanceContent;
-    [FieldOffset(0x860)] public nint ExcelSheetWaiterContentFinderConditionTransient;
-    [FieldOffset(0x868)] public nint ExcelSheetWaiterInstanceContentRewardItem;
-
-    [FieldOffset(0x870)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x7C8)]
-    private unsafe partial struct UnkItemsSub {
+        [FieldOffset(0x21C)] public bool LimitedTimeBonus;
     }
 }

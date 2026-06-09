@@ -154,7 +154,7 @@ public unsafe partial struct HudStatus {
         [FieldOffset(0xD)] public byte StatusIndex;
 
         [MemberFunction("E8 ?? ?? ?? ?? 6B DD 2B")]
-        public partial uint ProcessStatuses(int maxIndex, int entityId1, int entityId2, StatusManager* statusManager, PlayerState* playerState, char unk1, char unk2, char unk3, nint unk4, int unk5);
+        public partial uint ProcessStatuses(int maxIndex, int entityId1, int entityId2, StatusManager* statusManager, PlayerState* playerState, char unk1, char unk2, char unk3, nint unk4, int unk5); // TODO: use bool instead of char
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC, Pack = 0x4)]

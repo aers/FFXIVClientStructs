@@ -116,9 +116,8 @@ class BaseApi:
 
     def get_yaml(self):
         # type: () -> DefinedStructExport
-        dic = load(
-            open(self.get_file_path), Loader=Loader
-        )  # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
+        with open(self.get_file_path, "r") as fd:
+            dic = load(fd, Loader=Loader)  # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
         enums = []
         structs = []
         for enum in dic["enums"]:
@@ -259,7 +258,8 @@ class BaseApi:
         path = os.path.join(os.path.dirname(self.get_file_path), "data.yml")
         if not os.path.exists(path):
             return None
-        return load(open(path), Loader=Loader)
+        with open(path, "r") as fd:
+            return load(fd, Loader=Loader)
 
 
 api = None
@@ -702,6 +702,8 @@ if api is None:
             from ghidra.ghidra_builtins import *
         except ImportError:
             pass
+
+        from yaml import SafeLoader as Loader
 
         from ghidra.program.model.data import *
         from ghidra.program.model.listing import *

@@ -75,9 +75,6 @@ public unsafe partial struct PlayerState {
     /// 2 = Immortal Flames
     /// </remarks>
     [FieldOffset(0x2D1), FixedSizeArray] internal FixedSizeArray3<byte> _GCRanks;
-    [FieldOffset(0x2D1), Obsolete("Use GCRanks[0]", true)] public byte GCRankMaelstrom;
-    [FieldOffset(0x2D2), Obsolete("Use GCRanks[1]", true)] public byte GCRankTwinAdders;
-    [FieldOffset(0x2D3), Obsolete("Use GCRanks[2]", true)] public byte GCRankImmortalFlames;
     [FieldOffset(0x2D4)] public ushort HomeAetheryteId;
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;
@@ -106,7 +103,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x3F4), FixedSizeArray(isBitArray: true, bitCount: 329)] internal FixedSizeArray42<byte> _unlockedFishingSpots;
     // BitCount: FishParameterSheet.Last(row => row.IsInLog).RowId
     /// <remarks> Use <see cref="IsFishCaught"/>. </remarks>
-    [FieldOffset(0x41F), FixedSizeArray(isBitArray: true, bitCount: 1511)] internal FixedSizeArray189<byte> _caughtFish;
+    [FieldOffset(0x41F), FixedSizeArray(isBitArray: true, bitCount: 1516)] internal FixedSizeArray190<byte> _caughtFish;
     [FieldOffset(0x4E0)] public uint NumFishCaught;
     [FieldOffset(0x4E4)] public uint FishingBait;
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 48 8B F2"

@@ -75,28 +75,28 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     [FieldOffset(0xB0)] public uint DrawFlags;
 
     /// <summary> Is dirty (has updates to be drawn) </summary>
-    public partial bool IsDirty { get; set; }
+    public partial bool IsDirty { readonly get; set; }
 
     /// <summary> Stops rapid cursor navigation Up </summary>
-    public partial bool IsStoppingRapidCursorNavigationUp { get; set; }
+    public partial bool IsStoppingRapidCursorNavigationUp { readonly get; set; }
 
     /// <summary> Stops rapid cursor navigation Down </summary>
-    public partial bool IsStoppingRapidCursorNavigationDown { get; set; }
+    public partial bool IsStoppingRapidCursorNavigationDown { readonly get; set; }
 
     /// <summary> Stops rapid cursor navigation Left </summary>
-    public partial bool IsStoppingRapidCursorNavigationLeft { get; set; }
+    public partial bool IsStoppingRapidCursorNavigationLeft { readonly get; set; }
 
     /// <summary> Stops rapid cursor navigation Right </summary>
-    public partial bool IsStoppingRapidCursorNavigationRight { get; set; }
+    public partial bool IsStoppingRapidCursorNavigationRight { readonly get; set; }
 
     /// <summary> Change CursorType to Clickable on hover </summary>
-    public partial bool IsClickableCursorOnHover { get; set; }
+    public partial bool IsClickableCursorOnHover { readonly get; set; }
 
     /// <summary> Change CursorType to TextInput on hover </summary>
-    public partial bool IsTextInputCursorOnHover { get; set; }
+    public partial bool IsTextInputCursorOnHover { readonly get; set; }
 
     /// <summary> Use elliptical collision instead of rectangular </summary>
-    public partial bool IsEllipticalCollision { get; set; }
+    public partial bool IsEllipticalCollision { readonly get; set; }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 ?? 5B C3 33 DB")]
     public partial AtkResNode* Ctor();
