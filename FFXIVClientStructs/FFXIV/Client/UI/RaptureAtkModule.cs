@@ -151,6 +151,7 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x24)] public uint ClassJobId;
         [FieldOffset(0x2C)] public uint Icon;
         [FieldOffset(0x30)] public Utf8String Name;
+        [FieldOffset(0x98)] public byte* NameOverride;
         [FieldOffset(0xA0)] public Utf8String FcName;
         [FieldOffset(0x108)] public Utf8String Title;
         [FieldOffset(0x170)] public Utf8String DisplayTitle;
