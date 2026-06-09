@@ -53,6 +53,7 @@ public enum MapRangeFlag3 : byte {
     Unk0 = 1 << 0,
     /// <remarks> Sets Status#1945 "Hoofing It - Unable to summon or ride mounts, or to equip fashion accessories." </remarks>
     MountsAndOrnamentsDisabled = 1 << 1,
+    /// <remarks> Displays LogMessage#181 "Only Lalafells may enter this area." </remarks>
     LalafellOnly = 1 << 2,
     Unk3 = 1 << 3,
     Unk4 = 1 << 4,
