@@ -105,7 +105,8 @@ public unsafe struct RenderCommandBufferGroup {
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandSetTarget* SetTargetCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandViewport* ViewportCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandScissorsRect* ScissorsRectCommand;
-    [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandClearDepth* ClearDepthCommand;
+    [FieldOffset(0x8), CExporterUnion("RenderCommand"), Obsolete("Use ClearCommand.")] public RenderCommandClearDepth* ClearDepthCommand;
+    [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandClear* ClearCommand;
 }
 
 public enum RenderCommandType : int {
