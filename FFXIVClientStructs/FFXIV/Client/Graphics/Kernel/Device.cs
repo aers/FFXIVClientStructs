@@ -165,6 +165,25 @@ public struct RenderCommandScissorsRect {
     [FieldOffset(0x10), Obsolete("Use ScissorRect.Bottom.")] public int Bottom;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x40), Obsolete("Use RenderCommandClear.")]
+public unsafe partial struct RenderCommandClearDepth {
+    [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x4)] public float ClearType;
+    [FieldOffset(0x8)] public float ColorB;
+    [FieldOffset(0xC)] public float ColorG;
+    [FieldOffset(0x10)] public float ColorR;
+    [FieldOffset(0x14)] public float ColorA;
+    [FieldOffset(0x18)] public float ClearDepth;
+    [FieldOffset(0x1C)] public int ClearStencil;
+    [FieldOffset(0x20)] public int ClearCheck;
+    [FieldOffset(0x24)] public float Top;
+    [FieldOffset(0x28)] public float Left;
+    [FieldOffset(0x2C)] public float Width;
+    [FieldOffset(0x30)] public float Height;
+    [FieldOffset(0x34)] public float MinZ;
+    [FieldOffset(0x38)] public float MaxZ;
+}
+
 public enum ClearFlags : uint {
     None = 0,
     Color = 1 << 0,
@@ -173,7 +192,7 @@ public enum ClearFlags : uint {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe struct RenderCommandClearDepth {
+public unsafe struct RenderCommandClear {
     [FieldOffset(0x0)] public RenderCommandType Type;
     [FieldOffset(0x4)] public ClearFlags ClearFlags;
     [FieldOffset(0x8)] public float ColorB;
@@ -183,16 +202,8 @@ public unsafe struct RenderCommandClearDepth {
     [FieldOffset(0x18)] public float ClearDepth;
     [FieldOffset(0x1C)] public byte ClearStencil;
     [FieldOffset(0x1D)] public byte StencilReference;
-    [FieldOffset(0x20), CExporterTypeForce("D3D11_RECT*")] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
+    [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
     [FieldOffset(0x28)] public IntRectangle ClearRectangle;
     [FieldOffset(0x38)] public float MinZ;
     [FieldOffset(0x3C)] public float MaxZ;
-
-    [FieldOffset(0x0), Obsolete("Use Type instead.")] public int SwitchType;
-    [FieldOffset(0x4), Obsolete("This is incorrect. Use ClearFlags.")] public float ClearType;
-    [FieldOffset(0x20), Obsolete("This is incorrect. Use ClearRectanglePtr.")] public int ClearCheck;
-    [FieldOffset(0x28), Obsolete("This is incorrect. Use ClearRectangle.Left instead.")] public float Left;
-    [FieldOffset(0x2C), Obsolete("This is incorrect. Use ClearRectangle.Top instead.")] public float Top;
-    [FieldOffset(0x30), Obsolete("This is incorrect. Use ClearRectangle.Right instead.")] public float Width;
-    [FieldOffset(0x34), Obsolete("This is incorrect. Use ClearRectangle.Bottom instead.")] public float Height;
 }

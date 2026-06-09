@@ -79,10 +79,10 @@ public unsafe partial struct ImmediateContext {
     public partial void SetDefaultState();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 7F ?? ?? 0F 84 ?? ?? ?? ?? 48 83 7F")]
-    public partial void DoClearCommandViaDraw(RenderCommandClearDepth* clearCommand);
+    public partial void DoClearCommandViaDraw(RenderCommandClear* clearCommand);
 
     [MemberFunction("48 89 6C 24 ?? 56 48 83 EC 40 48 83 7A")] // inlined in some places
-    public partial void DoClearCommand(RenderCommandClearDepth* clearCommand);
+    public partial void DoClearCommand(RenderCommandClear* clearCommand);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B 18 45 33 FF")]
     public partial void ProcessCommands(RenderCommandBufferGroup* renderCommands, uint renderCommandCount);
