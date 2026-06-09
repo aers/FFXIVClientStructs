@@ -17,6 +17,8 @@ public unsafe partial struct BGMSystem {
     [FieldOffset(0xE0)] private float UnkBattleBGMDuration0;
     [FieldOffset(0xE4)] private float UnkBattleBGMDuration1;
 
+    [FieldOffset(0xF2)] public bool BGMPlayZoneInOnly; // from MapRangeFlag2
+
     [FieldOffset(0xF8)] public bool LastingBGM;
     [FieldOffset(0xF9)] public bool ContinueBGMUntilWarp;
 
