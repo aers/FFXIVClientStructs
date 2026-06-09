@@ -2292,6 +2292,14 @@ classes:
       - ea: 0x1421C3EC0
     vfuncs:
       0: Dtor
+      1: IsActive
+      2: GetCurrentWeatherId
+      3: SetNextWeather
+      4: GetNextWeatherId
+      5: Update
+      6: GetDaytimeFadeLength
+      7: GetIsCurrentWeatherForced
+      8: GetIsNextWeatherForced
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
       - ea: 0x1421C3F08
