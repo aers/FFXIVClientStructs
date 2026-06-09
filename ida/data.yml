@@ -518,6 +518,15 @@ classes:
     funcs:
       0x140844730: ctor
       0x1408445A0: Refresh
+  Client::Game::ColliderProvider:
+    instances:
+      - ea: 0x142AB1390
+    funcs:
+      0x1408624D0: Initialize
+      0x140862520: Update
+      0x140862500: Clear
+      0x140862C60: GetHasColliders
+      0x140862C70: GetColliderList
   Client::Game::BGMSystem:
     instances:
       - ea: 0x142AB1428
