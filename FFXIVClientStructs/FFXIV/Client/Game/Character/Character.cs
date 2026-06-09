@@ -171,6 +171,9 @@ public unsafe partial struct Character {
     [VirtualFunction(78)]
     public partial StatusManager* GetStatusManager();
 
+    [VirtualFunction(79)]
+    internal partial StatusManager* GetStatusManager2();
+
     /// <summary>
     /// Gets the <see cref="CastInfo"/> struct for this Character.
     /// May be null for certain Character subclasses, e.g. <see cref="Companion"/>.
@@ -179,11 +182,17 @@ public unsafe partial struct Character {
     [VirtualFunction(80)]
     public partial CastInfo* GetCastInfo();
 
+    [VirtualFunction(81)]
+    internal partial CastInfo* GetCastInfo2();
+
     [VirtualFunction(82)]
     public partial ActionEffectHandler* GetActionEffectHandler();
 
     [VirtualFunction(84)]
     public partial ForayInfo* GetForayInfo();
+
+    [VirtualFunction(85)]
+    internal partial ForayInfo* GetForayInfo2();
 }
 
 // TODO: move to FFXIVClientStructs.FFXIV.Client.Game.Control.MoveControl

@@ -11523,13 +11523,13 @@ classes:
     vfuncs:
       77: GetModelChara
       78: GetStatusManager
-      79: GetStatusManager_2
+      79: GetStatusManager2
       80: GetCastInfo
-      81: GetCastInfo_2
+      81: GetCastInfo2
       82: GetActionEffectHandler
       83: GetScreenLogManager
       84: GetForayInfo
-      85: GetForayInfo_2
+      85: GetForayInfo2
     funcs:
       0x1408D87E0: ctor
       0x140896A90: IsValidClientObject
