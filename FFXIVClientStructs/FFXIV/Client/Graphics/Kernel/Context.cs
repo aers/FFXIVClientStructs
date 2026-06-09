@@ -22,7 +22,7 @@ public unsafe partial struct Context {
     public partial void* AllocateCommand(ulong size);
 
     [MemberFunction("4C 8B C9 4D 8D 50 0F")]
-    public partial void* AllocateSpecificCommand(int commandType, ulong size);
+    public partial void* AllocateSpecificCommand(RenderCommandType commandType, ulong size);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6E 6C")]
     public partial void PushBackCommand(void* command);
