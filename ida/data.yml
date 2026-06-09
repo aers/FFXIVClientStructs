@@ -6841,7 +6841,7 @@ classes:
         base: Client::Graphics::Kernel::Device::ImmediateContextBase
     funcs:
       0x1402341B0: ProcessCommands
-      0x1402341DB: PreprocessCommands
+      0x1402318D0: PreprocessCommands
       0x140234DA0: ExecuteCommands
       0x140230369: SetBlendState
       0x14022D2C0: SetDepthStencilState
