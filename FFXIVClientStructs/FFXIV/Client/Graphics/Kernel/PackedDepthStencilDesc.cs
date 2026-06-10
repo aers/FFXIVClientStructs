@@ -80,7 +80,7 @@ public unsafe partial struct PackedDepthStencilDesc {
     private partial byte BackFaceStencilPassOpMinusOne { get; set; }
     public byte BackFaceStencilPassOp {
         get => (byte)(BackFaceStencilPassOpMinusOne + 1);
-        set => BackFaceStencilPassOpMinusOne = (byte)(value + 1);
+        set => BackFaceStencilPassOpMinusOne = (byte)(value - 1);
     }
 
     private partial byte FrontFaceStencilFuncMinusOne { get; set; }
@@ -104,6 +104,6 @@ public unsafe partial struct PackedDepthStencilDesc {
     private partial byte FrontFaceStencilPassOpMinusOne { get; set; }
     public byte FrontFaceStencilPassOp {
         get => (byte)(FrontFaceStencilPassOpMinusOne + 1);
-        set => FrontFaceStencilPassOpMinusOne = (byte)(value + 1);
+        set => FrontFaceStencilPassOpMinusOne = (byte)(value - 1);
     }
 }

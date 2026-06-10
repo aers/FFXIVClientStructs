@@ -20,12 +20,12 @@ public unsafe partial struct AtkServer {
     [FieldOffset(0x50)] public ShaderCodeResourceHandle* FontEmbossVSResource;
     [FieldOffset(0x58)] public ShaderCodeResourceHandle* PrimitiveUIPSResource;
     [FieldOffset(0x60)] public ShaderCodeResourceHandle* PrimitiveUINaviMapPSResource;
-    [FieldOffset(0x68)] public ShaderCodeResourceHandle* PrimitiveUResourceIAreaMapPSResource;
+    [FieldOffset(0x68)] public ShaderCodeResourceHandle* PrimitiveUIResourceAreaMapPSResource;
     [FieldOffset(0x70)] public ShaderCodeResourceHandle* PrimitiveUICharaViewPSResource;
     [FieldOffset(0x78)] public ShaderCodeResourceHandle* FontPSResource;
     [FieldOffset(0x80)] public ShaderCodeResourceHandle* FontEdgePSResource;
     [FieldOffset(0x88)] public ShaderCodeResourceHandle* FontGlarePSResource;
-    [FieldOffset(0x90)] public ShaderCodeResourceHandle* FontHightlightPSResource;
+    [FieldOffset(0x90)] public ShaderCodeResourceHandle* FontHighlightPSResource;
     [FieldOffset(0x98)] public ShaderCodeResourceHandle* FontEmbossPSResource;
     [FieldOffset(0xA0)] public ShaderCodeResourceHandle* PrimitiveUIMaskPSResource;
 
