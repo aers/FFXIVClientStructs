@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 public unsafe partial struct TerritoryInfo {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? BA ?? ?? ?? ?? F3 0F 5C 05", 3)]
     public static partial TerritoryInfo* Instance();
-    
+
     [FieldOffset(0x08)] public float FlyingHeightMaxErrTimer;
     [FieldOffset(0x0C)] public float DismountTimer;
     [FieldOffset(0x10)] public float LalafellOnlyAreaTeleportTimer;
