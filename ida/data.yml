@@ -11533,7 +11533,6 @@ classes:
     funcs:
       0x1408D87E0: ctor
       0x140896A90: IsValidClientObject
-      0x1408D4DC0: CalculateMovementSpeedMultiplier
       0x14090C660: GetVfxDuration
       0x140907910: GetGMRank
       0x140908620: GetPartMasterId
@@ -11670,14 +11669,15 @@ classes:
       # 0x1413136A0: ctor # inlined at 0x1408CF5C4
       0x1408A8CD0: GetCompanionDataID
       0x1408A8AE0: SetupCompanion
-  Client::Game::Character::BlacklistProxyContainer: # real name is unknown, probably has nothing to do with blacklist
+  Client::Game::Character::RepresentationContainer:
     vtbls:
       - ea: 0x14218C398
         base: Client::Game::Character::ContainerInterface
     funcs:
+      0x1408D4D80: SendTitleIdUpdate
+      0x1408D4DC0: CalculateMovementSpeedMultiplier
       0x1408D53A0: FreezeMotion
       0x1408D56D0: ResumeMotion
-      0x1408D4D80: SendTitleIdUpdate
   Client::Game::Character::ContainerInterface:
     vtbls:
       - ea: 0x14218C148

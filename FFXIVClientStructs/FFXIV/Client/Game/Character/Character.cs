@@ -31,6 +31,7 @@ public unsafe partial struct Character {
 
     // 0x1AA8: start of some substructure
     [FieldOffset(0x1B28)] public ModelContainer ModelContainer;
+    [FieldOffset(0x1B80)] public RepresentationContainer RepresentationContainer;
 
     /// <remarks> Instance ID of an Event NPC. Used by QuestEventHandler. Seen for Event NPCs that turn into Battle NPCs (during quests, for example.) </remarks>
     [FieldOffset(0x1BC0)] public uint EventNpcInstanceId;
