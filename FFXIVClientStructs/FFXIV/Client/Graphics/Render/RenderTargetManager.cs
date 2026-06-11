@@ -129,7 +129,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x560)] internal Texture* Unk560;
     [FieldOffset(0x568)] internal Texture* Unk568;
     [FieldOffset(0x570)] public Texture* SwapChainBackBuffer; // apparently BackBuffer, see 48 89 87 ?? ?? ?? ?? 48 8B 47 ?? 48 89 87 ?? ?? ?? ?? 8B 06
-    [FieldOffset(0x578)] public Texture* DepthStencil2; // apparently DepthStencil
+    [FieldOffset(0x578)] public Texture* SwapChainDepthStencil; // apparently DepthStencil
     [FieldOffset(0x580)] internal Texture* Unk580;
     [FieldOffset(0x588)] internal Texture* Unk588;
     [FieldOffset(0x590)] internal Texture* Unk590;
