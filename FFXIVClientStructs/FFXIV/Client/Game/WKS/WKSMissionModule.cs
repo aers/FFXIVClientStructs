@@ -20,8 +20,8 @@ public unsafe partial struct WKSMissionModule {
         /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
         [FieldOffset(0x00)] public ushort MissionUnitRowId;
 
-        [FieldOffset(0x0C)] public ushort Score; // TODO: uint
-
+        [FieldOffset(0x0C), Obsolete("Use ScoreUInt", true)] public ushort Score;
+        [FieldOffset(0x0C)] public uint ScoreUInt; // TODO: change name back to Score...
         [FieldOffset(0x10)] public MissionRank Rank;
         [FieldOffset(0x14)] private byte Unk14; // bool? status?
 

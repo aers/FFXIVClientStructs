@@ -31,6 +31,7 @@ public unsafe partial struct Character {
 
     // 0x1AA8: start of some substructure
     [FieldOffset(0x1B28)] public ModelContainer ModelContainer;
+    [FieldOffset(0x1B80)] public RepresentationContainer RepresentationContainer;
 
     /// <remarks> Instance ID of an Event NPC. Used by QuestEventHandler. Seen for Event NPCs that turn into Battle NPCs (during quests, for example.) </remarks>
     [FieldOffset(0x1BC0)] public uint EventNpcInstanceId;
@@ -171,6 +172,9 @@ public unsafe partial struct Character {
     [VirtualFunction(78)]
     public partial StatusManager* GetStatusManager();
 
+    [VirtualFunction(79)]
+    internal partial StatusManager* GetStatusManager2();
+
     /// <summary>
     /// Gets the <see cref="CastInfo"/> struct for this Character.
     /// May be null for certain Character subclasses, e.g. <see cref="Companion"/>.
@@ -179,11 +183,17 @@ public unsafe partial struct Character {
     [VirtualFunction(80)]
     public partial CastInfo* GetCastInfo();
 
+    [VirtualFunction(81)]
+    internal partial CastInfo* GetCastInfo2();
+
     [VirtualFunction(82)]
     public partial ActionEffectHandler* GetActionEffectHandler();
 
     [VirtualFunction(84)]
     public partial ForayInfo* GetForayInfo();
+
+    [VirtualFunction(85)]
+    internal partial ForayInfo* GetForayInfo2();
 }
 
 // TODO: move to FFXIVClientStructs.FFXIV.Client.Game.Control.MoveControl

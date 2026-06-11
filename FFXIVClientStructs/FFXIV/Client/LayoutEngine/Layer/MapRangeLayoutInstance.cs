@@ -41,16 +41,20 @@ public enum MapRangeFlag2 : byte {
     RestBonusEnabled = 1 << 3,
     LiftEnabled = 1 << 4,
     HousingEnabled = 1 << 5,
-    Unk7 = 1 << 6,
-    Unk8 = 1 << 7,
+    /// <remarks> Displays LogMessage#846: "Your mount can fly no higher." </remarks>
+    LogFlyingHeightMaxErr = 1 << 6,
+    /// <remarks> Displays LogMessage#849: "There are no aether currents beyond this point. You cannot fly any further." </remarks>
+    FlyingDisabled = 1 << 7,
 }
 
 [Flags]
 public enum MapRangeFlag3 : byte {
     None = 0,
     Unk0 = 1 << 0,
-    Unk1 = 1 << 1,
-    Unk2 = 1 << 2,
+    /// <remarks> Sets Status#1945 "Hoofing It - Unable to summon or ride mounts, or to equip fashion accessories." </remarks>
+    MountsAndOrnamentsDisabled = 1 << 1,
+    /// <remarks> Displays LogMessage#181 "Only Lalafells may enter this area." </remarks>
+    LalafellOnly = 1 << 2,
     Unk3 = 1 << 3,
     Unk4 = 1 << 4,
     Unk5 = 1 << 5,
