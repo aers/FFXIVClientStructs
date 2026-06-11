@@ -8,6 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 public partial struct EventObject {
     [FieldOffset(0x1A0), CExporterExcel("EObj")] public nint EObjRowPtr;
     [FieldOffset(0x1A8), CExporterExcel("ExportedSG")] public nint ExportedSGRowPtr;
+    [FieldOffset(0x1B2)] public ushort SharedTimelineState; // ActorControl category 0x199 (SetSharedTimelineState) sets this field
+    [FieldOffset(0x1B8)] public byte Flags;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 8B 44 24 70 BE ?? ?? ?? ??")]
     public partial void PlayAnimation(uint entityId, uint actionId, ulong unknown);
