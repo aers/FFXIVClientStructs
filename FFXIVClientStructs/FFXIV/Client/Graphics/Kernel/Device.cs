@@ -192,19 +192,17 @@ public enum ClearFlags : uint {
     Stencil = 1 << 2,
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct RenderCommandClear {
     [FieldOffset(0x0)] public RenderCommandType Type;
     [FieldOffset(0x4)] public ClearFlags ClearFlags;
-    [FieldOffset(0x8)] public float ColorB;
+    [FieldOffset(0x8)] public float ColorR;
     [FieldOffset(0xC)] public float ColorG;
-    [FieldOffset(0x10)] public float ColorR;
+    [FieldOffset(0x10)] public float ColorB;
     [FieldOffset(0x14)] public float ColorA;
     [FieldOffset(0x18)] public float ClearDepth;
     [FieldOffset(0x1C)] public byte ClearStencil;
     [FieldOffset(0x1D)] public byte StencilReference;
     [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
     [FieldOffset(0x28)] public IntRectangle ClearRectangle;
-    [FieldOffset(0x38)] public float MinZ;
-    [FieldOffset(0x3C)] public float MaxZ;
 }
