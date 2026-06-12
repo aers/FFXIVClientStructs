@@ -15,7 +15,7 @@ public unsafe partial struct Director {
     [FieldOffset(0x2E0)] public uint ContentId;
     [FieldOffset(0x2E4)] public byte ContentFlags; // 1 = Tourism (Explorer Mode)
     [FieldOffset(0x2E8)] public byte Sequence;
-    [FieldOffset(0x2E9)] public byte Unknown2E9; // Set in EventFramework.SetDirectorData
+    [FieldOffset(0x2E9)] private byte Unk2E9; // Set in EventFramework.SetDirectorData
     [FieldOffset(0x2EA), FixedSizeArray] internal FixedSizeArray12<byte> _unionData; // I8A-I8J, UI8A-UI8J, Branch etc.
     [FieldOffset(0x2F8)] public Utf8String Title;
     [FieldOffset(0x360)] public Utf8String Objective; // name based on the Lua function "SetDirectorObjective"
