@@ -15,7 +15,6 @@ public unsafe partial struct AtkStage {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18", 3, isPointer: true)]
     public static partial AtkStage* Instance();
 
-    [FieldOffset(0x08)] public AtkServer* AtkServer;
     [FieldOffset(0x10)] public AtkFontManager* AtkFontManager;
     [FieldOffset(0x18)] public AtkTextureResourceManager* AtkTextureResourceManager;
     [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
