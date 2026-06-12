@@ -27,6 +27,6 @@ public unsafe partial struct Context {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6E 6C")]
     public partial void PushBackCommand(void* command);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 B8")]
     public partial void SetRenderTargets(int renderTargetCount, Texture** renderTargetTextures, Texture* depthStencilTexture, short a4, short a5, short a6, short a7); // last params believed to be a rectangle
 }

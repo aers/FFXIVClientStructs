@@ -192,7 +192,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 FF 48 89 43")]
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 DD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 DD 74")]
     public partial AtkComponentBase* GetComponentByNodeId(uint nodeId);
 
     public AtkComponentNode* GetComponentNodeById(uint nodeId) {
