@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Common.Math;
+
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::Device
@@ -10,7 +12,7 @@ public unsafe partial struct Device {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
 
-    [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
+    [FieldOffset(0x8)] public void* ContextArray; // TODO: We have a struct for this now (breaking change)
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
     [FieldOffset(0x28)] private CallbackManager* Unk28;
     [FieldOffset(0x30)] private CallbackManager* Unk30;
@@ -71,7 +73,7 @@ public unsafe partial struct Device {
     // Client::Graphics::Kernel::Device::CallbackManager
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public unsafe partial struct CallbackManager {
+    public partial struct CallbackManager {
         [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION
 
         [FieldOffset(0x30)] public Entry* Entries;
@@ -89,7 +91,7 @@ public unsafe partial struct Device {
 
         // Unsure about the names of things inside CallbackManager though
         [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-        public unsafe partial struct Entry {
+        public struct Entry {
             [FieldOffset(0x0)] public void* Function;
             [FieldOffset(0x8)] public void* Context;
         }
@@ -103,44 +105,68 @@ public unsafe struct RenderCommandBufferGroup {
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandSetTarget* SetTargetCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandViewport* ViewportCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandScissorsRect* ScissorsRectCommand;
-    [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandClearDepth* ClearDepthCommand;
+    [FieldOffset(0x8), CExporterUnion("RenderCommand"), Obsolete("Use ClearCommand.")] public RenderCommandClearDepth* ClearDepthCommand;
+    [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandClear* ClearCommand;
+}
+
+public enum RenderCommandType : int {
+    SetTarget = 0,
+    Viewport = 1,
+    MultiViewport = 2,
+    ScissorRect = 3,
+    Clear = 4,
 }
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct RenderCommandSetTarget {
-    [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x0)] public RenderCommandType Type;
     [FieldOffset(0x4)] public int RenderTargetCount;
-    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray4<Pointer<Texture>> _renderTargets;
-    [FieldOffset(0x28)] public Texture* DepthBuffer;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _renderTargets;
+    [FieldOffset(0x30)] public Texture* DepthBuffer;
     [FieldOffset(0x38)] private float Unk0;
     [FieldOffset(0x3C)] private float Unk1;
+
+    [FieldOffset(0x0), Obsolete("Use Type instead.")] public int SwitchType;
 }
 
-[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe partial struct RenderCommandViewport {
-    [FieldOffset(0x0)] public int SwitchType;
-    [FieldOffset(0x04)] public int TopLeftY;
-    [FieldOffset(0x08)] public int TopLeftX;
-    [FieldOffset(0x0C)] public int BottomRightY;
-    [FieldOffset(0x10)] public int BottomRightX;
+public struct RenderCommandViewport {
+    [FieldOffset(0x0)] public RenderCommandType Type;
+    [FieldOffset(0x4)] public IntRectangle ViewportRect;
     [FieldOffset(0x14)] public float MinDepth;
     [FieldOffset(0x18)] public float MaxDepth;
+
+    [FieldOffset(0x0), Obsolete("Use Type instead.")] public int SwitchType;
+    [FieldOffset(0x04), Obsolete("Use ViewportRect.Left.")] public int TopLeftY;
+    [FieldOffset(0x08), Obsolete("Use ViewportRect.Top.")] public int TopLeftX;
+    [FieldOffset(0x0C), Obsolete("Use ViewportRect.Right.")] public int BottomRightY;
+    [FieldOffset(0x10), Obsolete("Use ViewportRect.Bottom.")] public int BottomRightX;
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe partial struct RenderCommandScissorsRect {
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+public partial struct RenderCommandMultiViewport {
     [FieldOffset(0x0)] public int SwitchType;
-    [FieldOffset(0x4)] public int Left;
-    [FieldOffset(0x8)] public int Top;
-    [FieldOffset(0xC)] public int Right;
-    [FieldOffset(0x10)] public int Bottom;
+    [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray5<IntRectangle> _viewportRects;
+    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray5<float> _minDepths;
+    [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray5<float> _maxDepths;
+    [FieldOffset(0x7C)] public uint ViewportCount;
 }
 
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+public struct RenderCommandScissorsRect {
+    [FieldOffset(0x0)] public RenderCommandType Type;
+    [FieldOffset(0x4)] public IntRectangle ScissorRect;
+
+    [FieldOffset(0x0), Obsolete("Use Type instead.")] public int SwitchType;
+    [FieldOffset(0x4), Obsolete("Use ScissorRect.Left.")] public int Left;
+    [FieldOffset(0x8), Obsolete("Use ScissorRect.Top.")] public int Top;
+    [FieldOffset(0xC), Obsolete("Use ScissorRect.Right.")] public int Right;
+    [FieldOffset(0x10), Obsolete("Use ScissorRect.Bottom.")] public int Bottom;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x40), Obsolete("Use RenderCommandClear.")]
 public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x0)] public int SwitchType;
     [FieldOffset(0x4)] public float ClearType;
@@ -157,4 +183,26 @@ public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x30)] public float Height;
     [FieldOffset(0x34)] public float MinZ;
     [FieldOffset(0x38)] public float MaxZ;
+}
+
+public enum ClearFlags : uint {
+    None = 0,
+    Color = 1 << 0,
+    Depth = 1 << 1,
+    Stencil = 1 << 2,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe struct RenderCommandClear {
+    [FieldOffset(0x0)] public RenderCommandType Type;
+    [FieldOffset(0x4)] public ClearFlags ClearFlags;
+    [FieldOffset(0x8)] public float ColorR;
+    [FieldOffset(0xC)] public float ColorG;
+    [FieldOffset(0x10)] public float ColorB;
+    [FieldOffset(0x14)] public float ColorA;
+    [FieldOffset(0x18)] public float ClearDepth;
+    [FieldOffset(0x1C)] public byte ClearStencil;
+    [FieldOffset(0x1D)] public byte StencilReference;
+    [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
+    [FieldOffset(0x28)] public IntRectangle ClearRectangle;
 }

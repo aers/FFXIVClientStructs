@@ -135,6 +135,7 @@ functions:
   0x141D68A9C: std::_Xlength_error
   0x1401E7570: std::deque::_Growmap
   0x1406E19E0: IntToString
+  0x14030A7B5: HalfToFloat
   0x14005F250: GetStdOut
   0x14005F260: vsprintf_s
   0x14005F2C0: vswprintf_s
@@ -5098,6 +5099,7 @@ classes:
       0x1406ACC10: UpdateSubscribedAddons
       0x1406AD3A0: UpdateAtkUIColorHolder
       0x1400FCEE0: OpenSatisfactionSupply
+      0x1406AB810: Draw2D
   Client::UI::ExdSheetWaiter:
     vtbls:
       - ea: 0x142129598
@@ -6842,6 +6844,9 @@ classes:
   Client::Graphics::Kernel::Context:
     funcs:
       0x140240580: PushBackCommand
+      0x14023F950: AllocateCommand
+      0x1406EE3C0: AllocateSpecificCommand
+      0x14023B9F0: SetRenderTargets
 #oldfail       0x140377E10: PrepareModel
 #oldfail       0x1403DEC50: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContextBase:
@@ -6853,6 +6858,18 @@ classes:
         base: Client::Graphics::Kernel::Device::ImmediateContextBase
     funcs:
       0x1402341B0: ProcessCommands
+      0x1402318D0: PreprocessCommands
+      0x140234DA0: ExecuteCommands
+      0x140230369: SetBlendState
+      0x14022D2C0: SetDepthStencilState
+      0x14022D2CC: SetRasterizerState
+      0x14022D35A: SetVertexShader
+      0x14022D37A: SetPixelShader
+      0x140234522: SetViewport
+      0x140234543: SetMultiViewports
+      0x1402323E7: SetDefaultState
+      0x1402346C8: DoClearCommandViaDraw
+      0x14022A9E0: DoClearCommand
 #oldfail       0x14036D640: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:
@@ -8356,8 +8373,13 @@ classes:
   Component::GUI::AtkServer:
     vtbls:
       - ea: 0x142171858
+    vfuncs:
+      0: Dtor
     funcs:
       0x140639320: ctor
+      0x14063A990: Draw
+      0x14063AE81: ProcessUICommands
+      0x14063AE44: ProcessUICommandsAlt
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x1421718E8
@@ -10147,6 +10169,7 @@ classes:
       0x140787290: Update
       0x140787700: HandleInputUpdate
       0x14078C900: ProcessChatBoxEntry
+      0x140787610: Draw2D
       0x14078D6C0: PropagateLevelChange
       0x14078D710: PropagateClassJobChange
       0x1407859F0: ScreenShotCallback
