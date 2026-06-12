@@ -6859,16 +6859,16 @@ classes:
     funcs:
       0x1402341B0: ProcessCommands
       0x1402318D0: PreprocessCommands
-      0x140234DA0: ExecuteCommands
-      0x140230369: SetBlendState
-      0x14022D2C0: SetDepthStencilState
-      0x14022D2CC: SetRasterizerState
-      0x14022D35A: SetVertexShader
-      0x14022D37A: SetPixelShader
-      0x140234522: SetViewport
-      0x140234543: SetMultiViewports
-      0x1402323E7: SetDefaultState
-      0x1402346C8: DoClearCommandViaDraw
+      0x140234420: ExecuteCommands
+      0x1402408D0: SetBlendState
+      0x140240C50: SetDepthStencilState
+      0x140241830: SetRasterizerState
+      0x1402418D0: SetVertexShader
+      0x1402415F0: SetPixelShader
+      0x14022B5A0: SetViewport
+      0x14022D4D0: SetMultiViewports
+      0x14022D080: SetDefaultState
+      0x14022AB10: DoClearCommandViaDraw
       0x14022A9E0: DoClearCommand
 #oldfail       0x14036D640: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
@@ -8378,8 +8378,8 @@ classes:
     funcs:
       0x140639320: ctor
       0x14063A990: Draw
-      0x14063AE81: ProcessUICommands
-      0x14063AE44: ProcessUICommandsAlt
+      0x1406E5040: ProcessUICommands
+      0x1406E5BE0: ProcessUICommandsAlt
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x1421718E8
