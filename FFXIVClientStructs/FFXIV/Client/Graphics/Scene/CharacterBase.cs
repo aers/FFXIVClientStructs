@@ -112,9 +112,8 @@ public unsafe partial struct CharacterBase {
     /// Can also perform other setup tasks on the slot, such as <see cref="ColorTableTextures"/>.
     /// </summary>
     /// <param name="slot">The slot to set up.</param>
-    /// <returns>Unknown yet. The typing is as conservative as possible.</returns>
     [MemberFunction("89 54 24 ?? 55 56 41 56 48 81 EC")]
-    public partial nint SetupSlotModel(uint slot);
+    public partial nint SetupSlotModel(uint slot); // TODO: change return type to void
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
