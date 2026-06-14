@@ -23,6 +23,10 @@ public unsafe partial struct AgentPurify {
     [FieldOffset(0xFC)] public uint AutoItemId;
     [FieldOffset(0x100)] public ushort AutoItemsLeft;
     [FieldOffset(0x102)] public ushort AutoItemCount;
+    [FieldOffset(0x104)] private uint Unk104;
+    [FieldOffset(0x108)] private byte Unk108;
+    [FieldOffset(0x110)] private StdVector<PurifyItem> Unk110;
+    [FieldOffset(0x128)] private byte Unk128;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 48 8B CB")]
     public partial void ReduceItem(InventoryItem* item);
