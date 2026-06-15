@@ -46,9 +46,7 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x21E0)] public Balloon Balloon;
     [FieldOffset(0x2260)] public NpcYellBalloon YellBalloon;
-
-    [FieldOffset(0x22E8)] public float Alpha;
-
+    [FieldOffset(0x22E8)] public float Alpha; // TODO: array of 4 (see 41 83 F8 ?? 73 ?? 41 8B C0 F3 0F 11 8C 81)
     [FieldOffset(0x22F8)] public Companion* CompanionObject; // minion
     [FieldOffset(0x2300), FixedSizeArray(isString: true)] internal FixedSizeArray7<byte> _freeCompanyTag;
 
