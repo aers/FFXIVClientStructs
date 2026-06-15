@@ -7373,7 +7373,8 @@ classes:
       18: GetAttachBoneWorldLocation
       19: GetAttachBoneLocalLocation
       21: HasAttachBone
-      24: UpdateTint
+      24: SetTint
+      25: GetTint
       26: SetTransparency
       27: GetTransparency
     funcs:
