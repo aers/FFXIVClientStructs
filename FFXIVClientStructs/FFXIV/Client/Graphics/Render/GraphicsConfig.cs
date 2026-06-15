@@ -17,6 +17,8 @@ public unsafe partial struct GraphicsConfig {
     [FieldOffset(0x12)] public bool ShadowLOD;
     [FieldOffset(0x13)] public bool ShadowBgLOD;
 
+    [FieldOffset(0x15)] public bool CharaWetness;
+    [FieldOffset(0x16)] public bool CharaOutline; // based on the state of AtkUnitManagerFlags.UiHidden
     [FieldOffset(0x17)] public bool ParallaxOcclusion;
     [FieldOffset(0x18)] public bool Tessellation;
 
