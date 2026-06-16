@@ -6583,7 +6583,7 @@ classes:
       0x14048D4C0: GetAgentSXTBattleLog
       0x14048D4D0: GetAgentFGSHud
       0x14048D4E0: GetAgentQuickPanel
-      0x14048D4F0: GetAgentUnk507
+      0x14048D4F0: GetAgentEventImage
       0x14048D500: GetAgentContext # no xrefs
       0x14048D510: GetAgentInventoryContext
       0x1404951B0: PropagateGameEvent
@@ -14161,6 +14161,14 @@ classes:
     funcs:
       0x14173C250: ctor
       0x14173C2F0: Finalizer
+  Client::UI::Agent::AgentSelectCustomString:
+    vtbls:
+      - ea: 0x142167768
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentSelectStringEventGimmick:
+    vtbls:
+      - ea: 0x1421677E8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentReconstructionBox:
     vtbls:
       - ea: 0x1421BEF90
@@ -14212,6 +14220,12 @@ classes:
   Client::UI::Agent::AgentAlarm::Alarm:
     funcs:
       0x140EFD300: CompareTo
+  Client::UI::Agent::AgentMountainClimbingResult:
+    vtbls:
+      - ea: 0x1421F3C28
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410D5780: ctor
   Client::UI::Agent::AgentMerchantSetting:
     vtbls:
       - ea: 0x1421F1038
@@ -14942,6 +14956,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1410A3470: ctor
+  Client::UI::Agent::AgentGoldSaucerHud:
+    vtbls:
+      - ea: 0x1421F2D78
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410A1610: ctor
   Client::UI::Agent::AgentTripleTriad:
     vtbls:
       - ea: 0x1421F2E90
@@ -14961,6 +14981,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1410E36F0: ctor
+  Client::UI::Agent::TripleTriadRule:
+    vtbls:
+      - ea: 0x1421F4280
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410E46B0: ctor
   Client::UI::Agent::TripleTriadSchedule:
     vtbls:
       - ea: 0x1421F33E0
@@ -15736,6 +15762,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A930D0: ctor
+  Client::UI::Agent::AgentMKDLore:
+    vtbls:
+      - ea: 0x140A90CF0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A90CF0: ctor
   Client::UI::Agent::AgentMKDLoreBook:
     vtbls:
       - ea: 0x1421992F0
@@ -15765,6 +15797,52 @@ classes:
   Client::UI::Agent::AgentConfigCharacterChatLogMiniTalk:
     vtbls:
       - ea: 0x142167968
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentToggleContextMenu:
+    vtbls:
+      - ea: 0x142166320
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1404A6900: ctor
+  Client::UI::Agent::AgentXBMMonsterNotebook:
+    vtbls:
+      - ea: 0x142199AA8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AA74A0: ctor
+  Client::UI::Agent::AgentXBMPetParty:
+    vtbls:
+      - ea: 0x142199920
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AA1590: ctor
+  Client::UI::Agent::AgentXBMStageDetailList:
+    vtbls:
+      - ea: 0x1421998A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9DB30: ctor
+  Client::UI::Agent::AgentXBMStageList:
+    vtbls:
+      - ea: 0x142199B90
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AABEC0: ctor
+  Client::UI::Agent::AgentXBMStageMap:
+    vtbls:
+      - ea: 0x142199C58
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AACDF0: ctor
+  Client::UI::Agent::AgentEventImage:
+    vtbls:
+      - ea: 0x1421EDA48
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F66B80: ctor
+  Client::UI::Agent::AgentKeyBoardInput:
+    vtbls:
+      - ea: 0x1421679E8
         base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
