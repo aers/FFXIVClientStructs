@@ -6485,6 +6485,7 @@ classes:
     funcs:
       0x1404835D0: ctor
       0x140483600: Finalizer
+      0x140483720: SetOpenerEventInterface
       0x140483730: ShowAddon
       0x140483770: HideAddon
       0x1404837B0: IsAddonShown
