@@ -6526,18 +6526,18 @@ classes:
       0x1404952E0: GetAgentByInternalId
       0x1404952F0: GetAgentByInternalId_2  # dupe?
       0x140495390: HideAgent
-#oldfail       0x14026A7D0: HideAgentIfActive
+      0x1404953B0: HideAgentIfActive
       0x140495400: IsAgentActive
       0x140495160: HideAll
-#oldfail       0x14028E610: GetAgentScenarioTree
-#oldfail       0x14028E620: GetAgentMateriaAttach
-#oldfail       0x140258CA0: GetAgentGoldSaucerReward
+      0x14048D180: GetAgentScenarioTree
+      0x14048D190: GetAgentMateriaAttach
+      0x14048D1A0: GetAgentGoldSaucerReward
       0x14048D1B0: GetAgentCharacterTitleSelect
       0x14048D1C0: GetAgentReadyCheck
       0x14048D1E0: GetAgentHwdMonument
       0x14048D1F0: GetAgentMycItemBox
       0x14048D200: GetAgentMycItemBag
-#oldfail       0x140246B90: GetAgentMycDuelRequest
+      0x14048D210: GetAgentMycDuelRequest
       0x14048D220: GetAgentMycBattleAreaInfo
       0x14048D230: GetAgentTourismMenu
       0x14048D240: GetAgentMJIHud
@@ -6549,25 +6549,41 @@ classes:
       0x14048D2B0: GetAgentMJINekomimiRequest
       0x14048D2C0: GetAgentTripleTriadRuleAnnounce
       0x14048D2D0: GetAgentTripleTriadRuleSetting
+      0x14048D2E0: GetAgentUnk177
       0x14048D2F0: GetAgentTripleTriadTournamentMatchList
-      # 0x140247410: GetAgentPerformanceMode # no xrefs
+      0x14048D300: GetAgentFishRelease
+      0x14048D310: GetAgentPerformanceMode # no xrefs
+      0x14048D320: GetAgentSharlayanCraftworksSupply
+      0x14048D330: GetAgentBankaCraftworksSupply
       0x14048D340: GetAgentCutsceneReplay
       0x14048D350: GetAgentPvPHeader
+      0x14048D360: GetAgentPvPSpectator
       0x14048D370: GetAgentBannerList
       0x14048D380: GetAgentBannerEditor
       0x14048D390: GetAgentBannerUpdateView
-#oldfail       0x14028EA20: GetAgentFittingShop
+      0x14048D3A0: GetAgentUnk410
+      0x14048D3B0: GetAgentBannerPreview
+      0x14048D3C0: GetAgentFittingShop
       0x14048D3D0: GetAgentCharaCard
       0x14048D3E0: GetAgentCharaCardDesignSetting
       0x14048D3F0: GetAgentCharaCardProfileSetting
+      0x14048D400: GetAgentPvPMKSRankRating
       0x14048D410: GetAgentEmjIntro
       0x14048D420: GetAgentMap
-#oldfail       0x14028E9B0: GetAgentTofuList
+      0x14048D430: GetAgentTofuList
+      0x14048D440: GetAgentTofuPreview
+      0x14048D450: GetAgentTofuEdit
+      0x14048D460: GetAgentTofuImport
+      0x14048D470: GetAgentTofuExport
       0x14048D480: GetAgentBannerParty
       0x14048D490: GetAgentBannerMIP
+      0x14048D4A0: GetAgentUnk144 # no xrefs
+      0x14048D4B0: GetAgentMandervilleWeapon # no xrefs
       0x14048D4C0: GetAgentSXTBattleLog
       0x14048D4D0: GetAgentFGSHud
-      # 0x14047DA40: GetAgentContext # no xrefs
+      0x14048D4E0: GetAgentQuickPanel
+      0x14048D4F0: GetAgentUnk507
+      0x14048D500: GetAgentContext # no xrefs
       0x14048D510: GetAgentInventoryContext
       0x1404951B0: PropagateGameEvent
       0x140495420: PropagateLevelChange
