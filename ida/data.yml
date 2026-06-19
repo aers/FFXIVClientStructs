@@ -15764,7 +15764,7 @@ classes:
       0x140A930D0: ctor
   Client::UI::Agent::AgentMKDLore:
     vtbls:
-      - ea: 0x140A90CF0
+      - ea: 0x142199380
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A90CF0: ctor
