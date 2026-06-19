@@ -25,18 +25,30 @@ public unsafe partial struct ClientObjectManager {
         [FieldOffset(0x0E)] public ushort MemoryIndex;
     }
 
+    // TODO: change return type to int
+    // TODO: change index type to int
+    // TODO: change param type to bool with default false
     [MemberFunction("E8 ?? ?? ?? ?? 41 89 44 FC ??")]
     public partial uint CreateBattleCharacter(uint index = 0xFFFFFFFF, byte param = 0);
 
+    // TODO: change return type to BattleChara*
+    // TODO: change index type to int
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 4D 85 C0")]
-    public partial Character.Character* GetObjectByIndex(ushort id);
+    public partial Character.Character* GetObjectByIndex(ushort index);
 
+    // TODO: change return type to int
     [MemberFunction("E8 ?? ?? ?? ?? 8B E8 4C 8D 35")]
-    public partial uint GetIndexByObject(GameObject* character);
+    public partial uint GetIndexByObject(GameObject* gameObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? C6 43 49 00")]
-    public partial void DeleteObjectByIndex(ushort id, byte param);
+    // TODO: change index type to int
+    // TODO: change param type to bool with default false
+    [MemberFunction("E8 ?? ?? ?? ?? 41 C7 44 BE")]
+    public partial void DeleteObjectByIndex(ushort index, byte param);
 
+    // TODO: add param default value false
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 48 8B CB 83 F8 FF")]
-    public partial uint CalculateNextAvailableIndex();
+    public partial int CalculateNextAvailableIndex(bool param);
+
+    [Obsolete("Use CalculateNextAvailableIndex overload with bool parameter")]
+    public uint CalculateNextAvailableIndex() => (uint)CalculateNextAvailableIndex(false);
 }
