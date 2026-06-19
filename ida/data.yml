@@ -11757,6 +11757,7 @@ classes:
       - ea: 0x14218C418
         base: Client::Game::Character::ContainerInterface
     funcs:
+      0x1408B4A10: GetOrnamentObject
       0x1408B4A20: HasOrnament
       0x1408B4A50: SetupOrnament
   Client::Game::Character::VfxContainer:
