@@ -4188,10 +4188,8 @@ classes:
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x14211DEF0
-    vfuncs:
-      1: GetSheetByIndex
-      2: GetSheetByName
-      3: GetLanguage
+    funcs:
+      0x1401E4960: GetLanguage
   Common::Component::Excel::ExcelResourceListener:
     vtbls:
       - ea: 0x1425797A0
