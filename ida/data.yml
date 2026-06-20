@@ -1763,7 +1763,7 @@ classes:
   Client::Game::NpcYellBalloon:
     funcs:
       0x141947120: Reset
-      0x141947180: Ctor
+      0x141947180: ctor
       0x1419471E0: dtor
       0x141947240: Initialize # (this, chara*)
       0x141947290: Update
@@ -26350,7 +26350,7 @@ classes:
       0: dtor
       1: ClearSkeleton
     funcs:
-      0x141932730: Ctor
+      0x141932730: ctor
       0x141932A20: Finalizer
       0x141932C20: SetSkeleton
       0x141932EC0: Reset
@@ -27117,66 +27117,66 @@ classes:
       - ea: 0x142460720
         base: Client::Graphics::ReferencedClassBase
     funcs:
-      0x141C847B0: Ctor
+      0x141C847B0: ctor
   Client::Graphics::Physics::CollisionEllipsoid:
     vtbls:
       - ea: 0x14243A898
         base: Client::Graphics::Physics::CollisionBase
     funcs:
-      0x141BD8610: Ctor
+      0x141BD8610: ctor
   Client::Graphics::Physics::CollisionPlane:
     vtbls:
       - ea: 0x14243A8E8
         base: Client::Graphics::Physics::CollisionBase
     funcs:
-      0x141BD9B70: Ctor
+      0x141BD9B70: ctor
   Client::Graphics::Physics::CollisionNormalPlane:
     vtbls:
       - ea: 0x14243A938
         base: Client::Graphics::Physics::CollisionPlane
     funcs:
-      0x141BDA530: Ctor
+      0x141BDA530: ctor
   Client::Graphics::Physics::CollisionSphere:
     vtbls:
       - ea: 0x14243A7F8
         base: Client::Graphics::Physics::CollisionBase
     funcs:
-      0x141BD3A30: Ctor
+      0x141BD3A30: ctor
   Client::Graphics::Physics::CollisionThreePointPlane:
     vtbls:
       - ea: 0x14243A988
         base: Client::Graphics::Physics::CollisionPlane
     funcs:
-      0x141BDAAB0: Ctor
+      0x141BDAAB0: ctor
   Client::Graphics::Physics::CollisionCapsule:
     vtbls:
       - ea: 0x14243A848
         base: Client::Graphics::Physics::CollisionBase
     funcs:
-      0x141BD5800: Ctor
+      0x141BD5800: ctor
   Client::Graphics::Physics::ConstraintBase:
     vtbls:
       - ea: 0x14243F8E0
     funcs:
-      0x141C8A7F0: Ctor
+      0x141C8A7F0: ctor
   Client::Graphics::Physics::ConstraintAttract:
     vtbls:
       - ea: 0x14243F908
         base: Client::Graphics::Physics::ConstraintBase
     funcs:
-      0x141C2AAB0: Ctor
+      0x141C2AAB0: ctor
   Client::Graphics::Physics::ConstraintPin:
     vtbls:
       - ea: 0x14243F930
         base: Client::Graphics::Physics::ConstraintBase
     funcs:
-      0x141C2AED0: Ctor
+      0x141C2AED0: ctor
   Client::Graphics::Physics::ConstraintSpring:
     vtbls:
       - ea: 0x14243F958
         base: Client::Graphics::Physics::ConstraintBase
     funcs:
-      0x141C2B0C0: Ctor
+      0x141C2B0C0: ctor
   # havok
   hkArrayUtil:
     funcs:
