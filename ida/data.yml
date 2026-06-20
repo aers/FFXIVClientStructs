@@ -186,7 +186,6 @@ functions:
 #fail   0x14064BB40: GetLocalTextParameter
   0x1407B17A0: FormatNumber
   0x1407DD5D0: ComputeAddonNameHash
-  0x1409AF2F0: Client::UI::Misc::ScreenLog_ConvertLogMessageIdToScreenLogKind
   0x140835C50: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x140835D40: GetEventItemName
   0x140835ED0: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
@@ -2740,7 +2739,7 @@ classes:
       0x140088580: ctor  # empty string ctor
       0x1400885C0: ctor_copy # copy constructor
       0x140088640: ctor_FromCStr # from null-terminated string
-      0x140088690: ctor_FromSequence # (FFXIVString, char * str, size_t size)
+      0x140088690: ctor_FromSequence # (Utf8String*, char* str, size_t size)
       0x140088B20: Copy
       0x140089070: dtor
       0x1400890A0: SetString
@@ -3430,6 +3429,9 @@ classes:
       0x140C4F6D0: AddActionLogMessage
       0x140C4FC90: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
       0x140C4FD70: AddToScreenLogWithScreenLogKind
+  Client::UI::Misc::ScreenLog:
+    funcs:
+      0x1409AF2F0: ConvertLogMessageIdToScreenLogKind
   Client::Game::UI::MarkingController:
     instances:
       - ea: 0x142AD6900 # note: it's actually a member of UIState instance
@@ -3988,7 +3990,7 @@ classes:
       0x140416970: PlayClipSound
       0x140416BC0: PlayLayoutSound
       0x1404173A0: PlayBGMSound
-      0x1404174D0: PlayGayaTitleSound
+      0x1404174D0: PlayGAYATitleSound
       0x1404175F0: PlayOrchestrionSound
       0x140417820: PlaySystemSound
       0x140417970: PlayMovieSound
@@ -4864,7 +4866,7 @@ classes:
     funcs:
       0x1406FC940: HasSubRowsBeginningFrom  # (ExcelRowDescriptor* this, short* nFirstSubRowIndex)
 #fail       0x141FB7E30: Assign0xFFFF  # (ExcelRowDescriptor* this)
-#fail       0x141FB7FB0: AssignIndividual  # (ExcelRowDescriptor* this, int nRowId, short* pSubRowIds, short nSubRowCount)
+      0x142083A80: AssignIndividual  # (ExcelRowDescriptor* this, int nRowId, short* pSubRowIds, short nSubRowCount)
       0x1418F3C10: AssignCopy  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that)
 #fail       0x141FB7CF0: AssignClearThenCopy  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that)
 #fail       0x141FB7D90: AssignByRowId  # (ExcelRowDescriptor* this, int nRowId)
@@ -6351,7 +6353,7 @@ classes:
       0x140B2ECE0: HandleEventYieldPacket
       0x140B2F170: HandleSystemLogMessagePacket
       0x140B32EB0: HandleSpawnPlayerPacket
-      0x140B32FB0: HandleSpawnNPCPacket
+      0x140B32FB0: HandleSpawnNpcPacket
       0x140B330B0: HandleSpawnBossPacket
       0x140B331A0: HandleDespawnCharacterPacket
       0x140B33310: HandleStatusEffectListPlayerPacket
@@ -7458,6 +7460,7 @@ classes:
       - ea: 0x142162270
         base: Client::Graphics::Scene::DrawObject
     vfuncs: # 111
+      50: GetModelType
       52: ForceWetness
       53: ResetWetness
       56: LoadSlot
@@ -7509,8 +7512,9 @@ classes:
       0x14043B940: PopulateMaterialsFromStaging
       0x14043BB20: LoadMDLSubFilesIntoStaging
       0x14043BD20: LoadMDLSubFilesForSlot
+      0x14043C900: SetupSlotModel
 #oldfail       0x14049C4C0: UpdateWetness
-      0x14046B600: Finalizer
+      0x14046B600: Destroy
       0x1408D3300: Create
       0x14044A1D0: CreateSlotStorage
   Client::Graphics::Scene::Human:
@@ -9126,7 +9130,7 @@ classes:
       - ea: 0x142172FD8
         base: Component::GUI::AtkDragDropInterface
     funcs:
-#oldfail       0x14064FD50: ctor # no xrefs, inlined @ 0x14064B78B
+      0x140692CE0: ctor # no xrefs, inlined @ 0x14064B78B
       0x140692DE0: Finalizer # no xrefs
       #0x14059AEE0: RemoveAllEvents # 7.0: no longer exists. instead there is a new function to remove individual events - see 0x140671AFA
       0x1406976E0: StartDragDrop
@@ -9302,7 +9306,7 @@ classes:
       - ea: 0x1421739A8
         base: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
     funcs:
-      # 0x140695050: ctor # inlined in AtkUldManager_CreateAtkComponent
+      0x1406B7E50: ctor # inlined in AtkUldManager_CreateAtkComponent
       0x1406B6270: SetText
       0x1406B6B00: InsertText
       0x1406B71E0: HasEvaluatedText
@@ -9414,7 +9418,7 @@ classes:
     funcs:
       0x1406CAA20: SetMapScale
       0x1406CAA60: SetMapSize
-      0x1406CAAA0: SetMapPosition
+      0x1406CAAA0: SetMapOffset
       0x1406CB030: ctor
   Component::GUI::AtkComponentPreview:
     vtbls:
@@ -9601,8 +9605,8 @@ classes:
       0x1407134A0: ctor
       # 0x1405FB860: SetInteriorFixture # inlined @ 1406CDF00
       0x140716FF0: SetActiveFestivals
-      0x14071B380: SetOutdoorExteriorData
-      0x14071B440: GetOutdoorExteriorData
+      0x14071B380: SetOutdoorPlotExterior
+      0x14071B440: GetOutdoorPlotExterior
       0x14071F100: GetLayoutInstance
   Client::LayoutEngine::OutdoorAreaLayoutData:
     funcs:
@@ -9903,6 +9907,9 @@ classes:
     vtbls:
       - ea: 0x14217ECD8
         base: Client::LayoutEngine::Group::SGActionController
+  Client::LayoutEngine::FileSceneTimelineDescription:
+    funcs:
+      0x141BEF570: GetC010Data
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
       - ea: 0x142182288
@@ -11053,7 +11060,7 @@ classes:
 #oldfail       0x140800790: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
 #oldfail       0x1407C8AE0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
       0x1407D7C90: SetDutyActionSlot                 # (this, slotId, actionId)
-#oldfail       0x1407C8C40: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
+      0x1407D79A0: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x1407D7A00: ExecuteDutyActionSlot             # (this, slotId)
 #oldfail       0x140801B60: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function?
       0x1407D3A10: GrandCompanyUpdateTask            # (this) -> void
@@ -11331,7 +11338,7 @@ classes:
       0x1408003A0: ctor
       0x140800740: IsInHistory
       0x140800790: GetHistoryEntry
-      0x1408007E0: AddHistoryEntry
+      0x1408007E0: AddToHistory
   Client::UI::Misc::RecommendEquipModule:
     funcs:
       0x1409C48B0: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank) # no xrefs
@@ -12666,7 +12673,7 @@ classes:
       0x141031FA0: ctor
       0x141032E00: ReceiveSearchComment
       0x1410329C0: ExamineCharacter
-  Client::UI::Agent::AgentTelepotTown:
+  Client::UI::Agent::AgentTeleportTown:
     vtbls:
       - ea: 0x1421BC038
         base: Client::UI::Agent::AgentInterface
@@ -12961,7 +12968,7 @@ classes:
       0x140FF9FE0: PreviewWindowSetup
       0x140FFA850: CreateGearsetInternal
       0x140FFAA10: DeleteGearset
-      0x140FFAF10: UpdateGearsetInternal
+      0x140FFAF10: UpdateGearset
       0x140FFB070: ReassignSetNumber
       0x140FFB290: ReassignGearsetId
       0x140FFB420: MoveGearsetUpOrDown
@@ -13254,6 +13261,8 @@ classes:
     vtbls:
       - ea: 0x1421BAAF0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140CBF6D0: OpenRetainerTaskResult
   Client::UI::Agent::AgentRetainerTaskSupply:
     vtbls:
       - ea: 0x1421BAB70
@@ -13898,6 +13907,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14104ADE0: ctor
+      0x14104AA60: OpenResult
   Client::UI::Agent::AgentRecipeItemContext:
     vtbls:
       - ea: 0x1421676E8
@@ -15476,7 +15486,7 @@ classes:
       0x140A4B230: ctor
       0x140A4CFE0: RenameBoard 
       0x140A4D1C0: ContextMenuOptions
-  Client::UI::Agent::AgentTofuList::TofuListData:
+  Client::UI::Agent::TofuListData:
     funcs:
       0x140AE2120: ReviewSelectedBoard
       0x140AE6D60: RenameItem
@@ -22670,6 +22680,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412F7700: ctor
+      0x1412F9810: UpdateClasses
   Client::UI::AddonPvpProfileActionAdditional: # 592
   Client::UI::AddonPvpProfileActionTraits: # 593
   Client::UI::AddonPvpProfileActionQuickChat: # 594
@@ -25066,6 +25077,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411865C0: ctor
+      0x141186800: OnWorldListItemPopulate
   Client::UI::AddonJournalDetail:
     vtbls:
       - ea: 0x14221CF08
@@ -26636,6 +26648,7 @@ classes:
         base: Client::System::Scheduler::Instance::LayoutReferenceObject
     funcs:
       0x14199A3D0: ctorPrefab
+      0x14199A580: InsertObject
   Client::System::Scheduler::Instance::LayoutMemberObject:
     vtbls:
       - ea: 0x14243C080
