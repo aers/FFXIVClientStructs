@@ -12647,6 +12647,9 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x141014560: ctor
+      0x141014BF0: OpenHowTo
+      0x141014ED0: GetAdjustedHowToText # static
+      0x141015260: GetAdjustedHowToIconId
   Client::UI::Agent::AgentHowToNotice:
     vtbls:
       - ea: 0x1421F0590
