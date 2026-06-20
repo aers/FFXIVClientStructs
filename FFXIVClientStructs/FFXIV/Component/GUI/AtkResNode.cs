@@ -168,7 +168,7 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     public partial AtkComponentList* GetAsAtkComponentList();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4C 35 97")]
-    public partial AtkComponentDropDownList* GetAsAtkComponentDropdownList();
+    public partial AtkComponentDropDownList* GetAsAtkComponentDropdownList(); // TODO: fix capitalization -> GetAsAtkComponentDropDownList
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 07 48 8B F8 48 85 C0")]
     public partial AtkComponentTab* GetAsAtkComponentTab();
