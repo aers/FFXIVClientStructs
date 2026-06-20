@@ -56,7 +56,7 @@ public unsafe partial struct AtkValue {
     public AtkValue(AtkValue* other) => CtorCopy(other);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45")]
-    public partial AtkValue* CtorCopy(AtkValue* other);
+    public partial AtkValue* CtorCopy(AtkValue* other); // TODO: rename to Ctor_Copy
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF FE")]
     public partial void Dtor();
