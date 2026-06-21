@@ -26259,7 +26259,7 @@ classes:
       30: GetInputDeltaHMultiplier
       31: GetInputDeltaVMultiplier
     funcs:
-#oldfail       0x141794E80: UpdateRotation
+      0x14189F1D0: UpdateRotation
       0x1418A2230: ctor
       0x140792400: WorldToViewportPoint
   Client::Game::LowCutCamera:
