@@ -16984,7 +16984,7 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x140DEEC20: ctor
-      0x140DEEEA0: dtor
+      0x140DEEEA0: Finalizer
       0x140DFBEF0: IsTodoChecked
       0x140DFBFB0: GetTodoArgs
       0x140DFEE30: OnQuestRowRead
