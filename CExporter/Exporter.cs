@@ -588,8 +588,11 @@ public class Exporter {
                     var returnType = f.FieldType.GetFunctionPointerReturnType();
                     if (memberFunction?.Item3 != returnType) memberFunction = null;
                     _processType.Add(f.FieldType.GetFunctionPointerReturnType());
+                    var vfName = f.Name;
+                    if (vfName.StartsWith("Ctor") || vfName.StartsWith("Dtor"))
+                        vfName = char.ToLowerInvariant(vfName[0]) + vfName[1..]; // lowercase ctor/dtor
                     return new ProcessedVirtualFunction {
-                        VirtualFunctionName = f.Name,
+                        VirtualFunctionName = vfName,
                         Offset = f.GetFieldOffset(),
                         VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
                         VirtualFunctionParameters = parameterTypes.Select((p, i) => ProcessVirtualParameter(p, i, memberFunction?.Item2)).ToArray()
