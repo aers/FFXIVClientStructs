@@ -110,13 +110,13 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
             notFoundSigs += 1;
             continue;
         }
-        
+
         if (!nint.TryParse(theClass.Vtbls[0].Ea.AsSpan(4), NumberStyles.HexNumber, null, out nint address)) {
             notfoundOutputs.Add($"Unable to parse data.yml offset {theClass.Instances[0].Ea} for class {className} StaticVirtualTable");
             notFoundSigs += 1;
             continue;
         }
-        
+
         if (addr.Value == 0) {
             failedOutputs.Add($"{addr.Name} - {addr.String} failed to resolve, data.yml has {address:X}");
             failedSigs += 1;
@@ -132,7 +132,7 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
         matchedSigs += 1;
         continue;
     }
-    
+
     if (functionName.StartsWith("Ctor") || functionName.StartsWith("Dtor"))
         functionName = char.ToLowerInvariant(functionName[0]) + functionName[1..]; // lowercase ctor/dtor
 
@@ -146,13 +146,13 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
     }
 
     var key = theClass.Funcs.FirstOrDefault(x => x.Value == functionName).Key!;
-    
+
     if (!nint.TryParse(key.AsSpan(4), NumberStyles.HexNumber, null, out nint dataAddress)) {
         notfoundOutputs.Add($"Unable to parse data.yml offset {key} for class {className} function {functionName}");
         notFoundSigs += 1;
         continue;
     }
-    
+
     if (addr.Value == 0) {
         failedOutputs.Add($"{addr.Name} - {addr.String} failed to resolve, data.yml has {dataAddress:X}");
         failedSigs += 1;
