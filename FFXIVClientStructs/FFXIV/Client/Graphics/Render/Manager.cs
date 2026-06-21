@@ -18,19 +18,22 @@ public unsafe partial struct Manager {
     // [FieldOffset(0x2E160)] private UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
     [FieldOffset(0x2E390)] public WaterRenderer WaterRenderer;
     [FieldOffset(0x2E910)] public VerticalFogRenderer VerticalFogRenderer;
-    [FieldOffset(0x38358)] public bool Is3DRenderingDisabled;
+    [FieldOffset(0x2EA68)] public LightShaftRenderer LightShaftRenderer;
+    [FieldOffset(0x2EB50)] public GrassRenderer GrassRenderer;
+    [FieldOffset(0x36570)] public StarRenderer StarRenderer;
+    [FieldOffset(0x36640)] public CloudRenderer CloudRenderer;
+    [FieldOffset(0x36AC0)] public WeatherRenderer RainRenderer;
+    [FieldOffset(0x36BB0)] private WeatherRenderer UnkWeatherRenderer; // unused?!
+    [FieldOffset(0x36CA0)] public WeatherRenderer DustRenderer;
+    [FieldOffset(0x36D90)] public ShadowMaskRenderer ShadowMaskRenderer;
+    [FieldOffset(0x36F38)] public FigureRenderer FigureRenderer;
+    // [FieldOffset(0x36FA0)] private UnknownRenderer36FA0 UnknownRenderer; // 0x148, BGGlass renderer? unused?!
+    [FieldOffset(0x370E8)] public Footprint Footprint;
+    [FieldOffset(0x37128)] public Raindrop Raindrop;
 
-    // [FieldOffset(0x487F8)] private UnknownRenderer1 UnknownRenderer1; // 0xE0
-    // [FieldOffset(0x488E0)] private UnknownRenderer2 UnknownRenderer2; // 0x7A10 Grass?
-    // [FieldOffset(0x502F0)] private UnknownRenderer3 UnknownRenderer3; // 0xD0 Sky?
-    // [FieldOffset(0x503C0)] private UnknownRenderer4 UnknownRenderer4; // 0x480
-    // [FieldOffset(0x50840)] private UnknownRenderer5 UnknownRenderer5_1; // 0xE0 Clouds?
-    // [FieldOffset(0x50920)] private UnknownRenderer5 UnknownRenderer5_2; // 0xE0
-    // [FieldOffset(0x50A00)] private UnknownRenderer5 UnknownRenderer5_3; // 0xE0
-    // [FieldOffset(0x50AE0)] private UnknownRenderer6 UnknownRenderer6; // 0x1A8
-    // [FieldOffset(0x50C88)] private UnknownRenderer7 UnknownRenderer7; // 0x68
-    // [FieldOffset(0x50CF0)] private Unk1 Unk1; // 0x40
-    // [FieldOffset(0x50D30)] private Unk2 Unk2; // 0x40
+    // [FieldOffset(0x381C0)] private ReflectionStruct Reflection; // 0x140?
+
+    [FieldOffset(0x38358)] public bool Is3DRenderingDisabled;
 
     // TODO check and update for 7.2
     public enum RenderViews : uint {

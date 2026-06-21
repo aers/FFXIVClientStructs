@@ -6947,12 +6947,15 @@ classes:
     vfuncs:
       5: UpdateConstantBuffer
     funcs:
+      0x14025EDB0: ctor
       0x140260D70: SetMatrices
       0x14026CD80: MakeProjectionMatrix # unused, inlined in 7.0 around 14042EA2D (approx)
   Client::Graphics::Render::ShadowCamera:
     vtbls:
       - ea: 0x142142AC0
         base: Client::Graphics::Render::Camera
+    funcs:
+      0x140260FF0: ctor
   Client::Graphics::Render::Camera_CascadeShadow:
     vtbls:
       - ea: 0x142142B00
@@ -7030,6 +7033,7 @@ classes:
       - ea: 0x142142EB0
         base: Client::Graphics::Render::BaseRenderer
     funcs:
+      0x1402801A0: ctor
       0x140281D60: OnRenderMaterial
   Client::Graphics::Render::GeometryInstancingRenderer:
     vtbls:
@@ -7042,6 +7046,8 @@ classes:
     vtbls:
       - ea: 0x142142F88
         base: Client::Graphics::Render::GeometryInstancingRenderer
+    funcs:
+      0x140288DD0: ctor
   Client::Graphics::JobSystem<Client::Graphics::Render::TerrainRenderer>:
     vtbls:
       - ea: 0x142142FF8
@@ -7049,6 +7055,8 @@ classes:
     vtbls:
       - ea: 0x142143000
         base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x14028F240: ctor
   Client::Graphics::Render::UnknownRenderer:
     vtbls:
       - ea: 0x142143070
@@ -7060,6 +7068,8 @@ classes:
     vtbls:
       - ea: 0x1421430E0
         base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x140296B60: ctor
   Client::Graphics::JobSystem<Client::Graphics::Render::VerticalFogRenderer>:
     vtbls:
       - ea: 0x142143238
@@ -7067,6 +7077,57 @@ classes:
     vtbls:
       - ea: 0x142143240
         base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::LightShaftRenderer>:
+    vtbls:
+      - ea: 0x1421432A8
+  Client::Graphics::Render::LightShaftRenderer:
+    vtbls:
+      - ea: 0x1421432B0
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::Render::FigureRenderer:
+    vtbls:
+      - ea: 0x1421431A8
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::GrassRenderer>:
+    vtbls:
+      - ea: 0x142143178
+  Client::Graphics::Render::GrassRenderer:
+    vtbls:
+      - ea: 0x142143180
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::Render::StarRenderer:
+    vtbls:
+      - ea: 0x142143300
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::Render::CloudRenderer:
+    vtbls:
+      - ea: 0x1421432D8
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::Render::WeatherRenderer:
+    vtbls:
+      - ea: 0x1421431D0
+        base: Client::Graphics::Render::BaseRenderer
+  Client::Graphics::JobSystem<Client::Graphics::Render::ShadowMaskRenderer>:
+    vtbls:
+      - ea: 0x142143330
+  Client::Graphics::Render::ShadowMaskRenderer:
+    vtbls:
+      - ea: 0x142143338
+        base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x1402B39A0: ctor # inlined
+  Client::Graphics::Render::Footprint::Renderer:
+    vtbls:
+      - ea: 0x142143788
+  Client::Graphics::Render::Footprint:
+    vtbls:
+      - ea: 0x142143360
+  Client::Graphics::Render::Raindrop::Renderer:
+    vtbls:
+      - ea: 0x142143790
+  Client::Graphics::Render::Raindrop:
+    vtbls:
+      - ea: 0x142143368
 #  Client::Graphics::Render::ShadowMaskUnit: # 7.0: think this class is gone
 #    vtbls:
 #      - ea: 0x1419F0740
@@ -7081,6 +7142,9 @@ classes:
   Client::Graphics::Render::Updater<Client::Graphics::Render::PostBoneDeformerBase>:
     vtbls:
       - ea: 0x142143388
+  Client::Graphics::Singleton<Client::Graphics::Render::Manager>:
+    vtbls:
+      - ea: 0x142143378
   Client::Graphics::Render::Manager:
     instances:
       - ea: 0x1428EFBA0
@@ -7089,7 +7153,7 @@ classes:
       - ea: 0x142143390
         base: Client::Graphics::Singleton
     funcs:
-#oldfail       0x1403DBE00: ctor
+      0x1402B5E20: ctor
       0x1402B6C10: Initialize
       0x1402B75F0: Terminate
       0x1402B8920: CreateCamera
