@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 // Client::Graphics::Render::Raindrop
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public struct Raindrop {
+public unsafe struct Raindrop {
     [FieldOffset(0x08)] public Renderer* RaindropRenderer;
 
     // Client::Graphics::Render::Raindrop::Renderer
