@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -132,8 +133,8 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(155)] public partial ??? ShowEventFadeOut(???);
     [VirtualFunction(159)] public partial void ToggleUi(UiFlags flags, bool enable, bool disableTransition = true);
     // [VirtualFunction(160)] public partial ??? ToggleUi_2(???);
-    // [VirtualFunction(162)] public partial ??? LoadScreenHideUi(???);
-    // [VirtualFunction(163)] public partial ??? LoadScreenShowUi(???);
+    [VirtualFunction(162)] public partial void LoadScreenHideUi(WarpType warpType);
+    [VirtualFunction(163)] public partial void LoadScreenShowUi(WarpType warpType, bool a3, bool a4);
     // [VirtualFunction(165)] public partial ??? AnnounceHowTo(???);
     // [VirtualFunction(167)] public partial ??? HideHowTo(???);
     [VirtualFunction(169)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);

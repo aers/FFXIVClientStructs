@@ -3296,6 +3296,14 @@ classes:
       0x140E10C50: Finalizer
       0x140E10AE0: LoadAreaVFXToLocalPlayer
       0x140E10D70: Update
+  Client::Game::UI::WarpInfo:
+    instances:
+      - ea: 0x1428A3210
+    funcs:
+      0x1408602E0: Initialize
+      0x140860360: Finalizer
+      0x140860550: Update
+      0x1408630F0: IsWarping
   Client::Game::Conditions:
     instances:
       - ea: 0x142AE05F0
@@ -6425,6 +6433,7 @@ classes:
       0x140B48A20: HandleDeepDungeonPartyInfoPacket
       0x140B48A60: HandleDeepDungeonChestInfoPacket
       0x140B48AA0: HandleDeepDungeonBlacklistPacket
+      0x140B49BF0: HandlePrepareZoningPacket
       0x140B4A0F0: HandleMapEffectPacket
       0x140B4A6D0: HandleQuestManagerUnkArray2SecondHalfPacket
       0x140B4A720: HandleQuestManagerUnkArray2SecondHalfEntryPacket

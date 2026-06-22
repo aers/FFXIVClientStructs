@@ -82,8 +82,8 @@ public enum AgentGameEvent {
     LoadingStarted, // UI hidden
     LoggedOut,
     Unk4,
-    Unk5, // Entering Duty?
-    Unk6, // Entering Duty?
-    Unk7, // Leaving Duty?
+    EnterInstanceContent,
+    Unk6,
+    LeaveInstanceContent,
     Unk8
 }
