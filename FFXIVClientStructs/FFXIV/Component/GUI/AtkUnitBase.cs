@@ -63,6 +63,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1AC)] public uint ShowTransitionDuration;
     [FieldOffset(0x1B0)] public uint HideTransitionDuration;
     [BitField<UiFlags>(nameof(UiFlags), 0, 7)]
+    [BitField<bool>(nameof(DisableCloseOnLoadScreen), 24, 1)]
     [FieldOffset(0x1B4)] public uint Flags1B4; // set by SetFlag, bits 24-30 setting flags?!
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     /// <remarks> Used for dialogs, context menus and other windows that cause inputs to be blocked. Checked in <see cref="ShouldIgnoreInputs"/>. </remarks>
@@ -141,6 +142,9 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     /// <summary> Forces the addon to remain visible (but uninteractable) when using Toggle UI Display Mode </summary>
     public partial bool IgnoreUIDisplayMode { readonly get; set; }
+
+    /// <summary> If this is <see langword="true"/>, this window will hide for the load screen (<c>UIModule.LoadScreenHideUi</c>) instead of getting closed. </summary>
+    public partial bool DisableCloseOnLoadScreen { readonly get; set; }
 
     public uint DepthLayer {
         readonly get => BitOps.GetBits(Flags198, 16, 0b1111u);
