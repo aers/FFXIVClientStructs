@@ -11,8 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 public unsafe partial struct InfoProxySearch {
     [FieldOffset(0xD0)] public byte SearchType;
     [FieldOffset(0xD8)] public ulong ContentId; // set to ulong.MaxValue to disable
-    [FieldOffset(0xE0)] public ushort SearchArea; // TerritoryTypeId, 0 = all areas
-    [FieldOffset(0xE2)] public ushort SearchSubArea;
+    [FieldOffset(0xE0)] public ushort SearchLocation; // PlayerSearchLocation, 0 = all
+    [FieldOffset(0xE2)] public ushort SearchSubLocation; // PlayerSearchSubLocation
     [FieldOffset(0xE8)] public ulong ClassFilter; // set to ulong.MaxValue to disable
     [FieldOffset(0xF0)] public ulong ClassFilterHigh; // set to ulong.MaxValue to disable
     [FieldOffset(0x100), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _searchName;
