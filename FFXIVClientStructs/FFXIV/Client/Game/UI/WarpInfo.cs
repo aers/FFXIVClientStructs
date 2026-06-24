@@ -92,7 +92,7 @@ public enum WarpType {
     Unk24 = 24,
     Event = 25, // anything InstanceContent and, so far discovered, at under water teleports in The Ruby Sea
     Dive = 26,
-    Unk27 = 27,
+    WorldTransfer = 27,
     Unk28 = 28,
     Unk29 = 29,
     Unk30 = 30,
