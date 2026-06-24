@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-// Client::UI::Info::InfoProxy24
+// Client::UI::Info::InfoProxyContentMember
 //   Client::UI::Info::InfoProxyCommonList
 //     Client::UI::Info::InfoProxyPageInterface
 //       Client::UI::Info::InfoProxyInterface
@@ -17,7 +17,7 @@ public unsafe partial struct InfoProxyContentMember {
     public struct ContentMemberData {
         [FieldOffset(0x0)] public uint EntityId;
         [FieldOffset(0x4)] public uint TimeElapsedSeconds;
-        [FieldOffset(0x8)] public ushort Location; // TerritoryTypeId
+        [FieldOffset(0x8)] public ushort Location; // TerritoryType
         [FieldOffset(0xA)] public byte UIPriority; // from ClassJob sheet
         [FieldOffset(0xB)] public byte Flags; // bit0 = IsExploringDungeon
         [FieldOffset(0xC)] public byte MKDSupportJob;
