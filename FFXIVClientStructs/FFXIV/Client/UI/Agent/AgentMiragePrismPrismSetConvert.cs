@@ -27,9 +27,17 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         [FieldOffset(0x0C)] public ushort CrystallizeAddonId; // MiragePrismPrismBoxCrystallize, the opener
         [FieldOffset(0x0E)] public ushort PrismBoxAddonId; // MiragePrismPrismBoxAddonId
 
+        [FieldOffset(0x10)] public SetConvertState State;
+        [FieldOffset(0x14)] public uint SelectedSetIndex;
         [FieldOffset(0x18)] public int ContextMenuItemIndex;
-
-        [FieldOffset(0x2C)] public bool EnableSorting;
+        [FieldOffset(0x1C)] public uint YesNoAddonId;
+        [FieldOffset(0x24)] public uint GlamourPrismCount;
+        /// <summary>Index for <see cref="MirageManager.PrismBoxItemIds"/></summary>
+        [FieldOffset(0x28)] public uint PrismBoxIndex;
+        [FieldOffset(0x2C), Obsolete("Renamed to EnableStoring")] public bool EnableSorting;
+        [FieldOffset(0x2C)] public bool EnableStoring; // false = preview mode
+        [FieldOffset(0x2D)] public bool StoreInExistingOutfit; // false = will be a new outfit, set on Open
+        [FieldOffset(0x38)] public uint ItemSetCount;
 
         [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray5<ItemSet> _itemSets;
         [FieldOffset(0x2C0)] public uint NumItemsInSet;
@@ -43,6 +51,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         public struct ItemSet {
             [FieldOffset(0x00)] public uint ItemId;
             [FieldOffset(0x04)] public uint IconId;
+            [FieldOffset(0x08)] public uint SlotUnlockMask;
 
             [FieldOffset(0x10)] public Utf8String Name;
         }
@@ -51,7 +60,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         public struct ItemSetItem {
             [FieldOffset(0x00)] public uint ItemId;
             [FieldOffset(0x04)] public uint IconId;
-            [FieldOffset(0x08)] private uint SlotIndex; // probably? seems to match MainHand, OffHand, Head, Body etc.
+            [FieldOffset(0x08)] public uint MirageStoreSetItemColumn; // column index of MirageStoreSetItem
 
             [FieldOffset(0x0C)] public InventoryType InventoryType;
 
@@ -75,4 +84,13 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
             [FieldOffset(0x18)] public bool IsLoaded;
         }
     }
+}
+
+public enum SetConvertState : uint {
+    None = 0, // idle/closed
+    Loading = 1, // loads the icons/names
+    Unk2 = 2,
+    Unk3 = 3,
+    RefreshHandInSlots = 4,
+    Ready = 5,
 }
