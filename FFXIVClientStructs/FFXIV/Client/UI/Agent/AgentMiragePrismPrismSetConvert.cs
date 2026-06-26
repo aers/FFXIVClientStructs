@@ -18,6 +18,14 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
     // OpenPreview in data.yml
     public void Open(uint itemId) => Open(itemId, InventoryType.Invalid, 0, 0, 0, false);
 
+    /// <summary>Scans inventory for matching pieces and populates <see cref="AgentData.HandIns"/>.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 83 BB ?? ?? ?? ?? ?? 74 AA")]
+    public partial void PopulateHandInItems(InventoryType container, int slot, int a3);
+
+    /// <summary>Validates <see cref="AgentData.Items"/> and refreshes the SetConvert addon.</summary>
+    [MemberFunction("E9 ?? ?? ?? ?? 48 83 C4 28 41 5E 5D E9 ?? ?? ?? ?? 48 83 C4 28")]
+    public partial void ValidateItems();
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1940)]
     public partial struct AgentData {
