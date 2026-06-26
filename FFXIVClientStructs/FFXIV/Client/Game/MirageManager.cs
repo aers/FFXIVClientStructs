@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::MirageManager
@@ -51,7 +53,7 @@ public unsafe partial struct MirageManager {
     /// <summary>
     /// Deposits gear into dresser as a <b>new</b> outfit set.
     /// </summary>
-    /// <param name="setItemId">Which outfit set this is (MirageStoreSetItem row id).</param>
+    /// <param name="setItemId">MirageStoreSetItem row id</param>
     /// <param name="containers">Containers where each piece is. Must be in order of MirageStoreSetItem. Leftover slots use <see cref="InventoryType.Invalid"/></param>
     /// <param name="slots">Slots where each piece is. Leftovers must be 0.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 08 48 8B 47 28")]
@@ -60,7 +62,7 @@ public unsafe partial struct MirageManager {
     /// <summary>
     /// Deposits gear into dresser into an <b>existing</b> outfit set.
     /// </summary>
-    /// <param name="prismBoxIndex">Which dresser slot the outfit occupies (<see cref="PrismBoxItemIds"/> index).</param>
+    /// <param name="prismBoxIndex"><see cref="PrismBoxItemIds"/> index (see also <seealso cref="AgentMiragePrismPrismSetConvert.AgentData.PrismBoxIndex"/>)</param>
     /// <param name="containers">Same as <see cref="StoreOutfitAsNewPrismBoxEntry"/></param>
     /// <param name="slots">Same as <see cref="StoreOutfitAsNewPrismBoxEntry"/></param>
     [MemberFunction("E8 ?? ?? ?? ?? EB 1A E8 ?? ?? ?? ?? 8B 57 40")]
