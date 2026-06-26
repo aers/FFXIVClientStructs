@@ -27,7 +27,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         [FieldOffset(0x0C)] public ushort CrystallizeAddonId; // MiragePrismPrismBoxCrystallize, the opener
         [FieldOffset(0x0E)] public ushort PrismBoxAddonId; // MiragePrismPrismBoxAddonId
 
-        [FieldOffset(0x10)] public SetConvertState State;
+        [FieldOffset(0x10)] public AddonState State;
         [FieldOffset(0x14)] public uint SelectedSetIndex;
         [FieldOffset(0x18)] public int ContextMenuItemIndex;
         [FieldOffset(0x1C)] public uint YesNoAddonId;
@@ -42,8 +42,8 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray5<ItemSet> _itemSets;
         [FieldOffset(0x2C0)] public uint NumItemsInSet;
         [FieldOffset(0x2C4), FixedSizeArray] internal FixedSizeArray9<ItemSetItem> _items;
-        [FieldOffset(0x408)] private uint Unk408;
-        [FieldOffset(0x40C)] private uint Unk40C;
+        [FieldOffset(0x408)] public uint HandInItemCount;
+        [FieldOffset(0x40C)] public uint HandInItemValidCount; // ones that are able to be turned in (i.e. 100% condition)
         [FieldOffset(0x410), FixedSizeArray] internal FixedSizeArray190<HandInItem> _handIns;
         [FieldOffset(0x18D8)] public Utf8String HandInItemName; // for tooltip?
 
@@ -86,7 +86,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
     }
 }
 
-public enum SetConvertState : uint {
+public enum AddonState : uint {
     None = 0, // idle/closed
     Loading = 1, // loads the icons/names
     Unk2 = 2,

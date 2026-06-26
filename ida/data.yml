@@ -1840,6 +1840,8 @@ classes:
       0x140893120: Clear
       0x1408931E0: RequestPrismBox
       0x140893380: IsSetSlotUnlocked
+      0x1408935F0: StoreOutfitAsNewEntry
+      0x140893840: StoreOutfitIntoExistingEntry
       0x140893B20: RestorePrismBoxItem
       0x140893D00: RestorePrismBoxSetItem
       0x1408945F0: RequestGlamourPlates
@@ -14173,6 +14175,8 @@ classes:
     funcs:
       0x140DB0840: Open # todo: check this (7.4)
       0x140DB0B10: OpenPreview
+      0x140DB1EB0: PopulateHandInItems
+      0x140DB2980: ValidateItems
   Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
     funcs:
 #fail       0x140C36B10: ctor # inlined (7.3)
