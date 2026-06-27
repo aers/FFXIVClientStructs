@@ -22,4 +22,7 @@ public unsafe partial struct AtkComponentRadioButton : ICreatable<AtkComponentRa
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 89 83 ?? ?? ?? ?? 48 8B C3")]
     public partial AtkComponentRadioButton* Ctor();
+
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 2C 57")]
+    public partial bool SetActive();
 }

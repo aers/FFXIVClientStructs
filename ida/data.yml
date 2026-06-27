@@ -9430,6 +9430,7 @@ classes:
     funcs:
       0x1406C2730: ctor
       0x1406C2760: Finalizer
+      0x1406C2710: SetActive
   Component::GUI::AtkComponentTab:
     vtbls:
       - ea: 0x142173B20
