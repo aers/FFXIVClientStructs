@@ -11,8 +11,8 @@ public unsafe partial struct RecipeNote {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<uint> _jobs;  // CraftType -> ClassJob
 
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
-    // ActiveCraft Ingredients info, structure with unions, dunno
-    // ActiveCraft Crystals info, something from 0x2F8?
+    [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray6<ActiveCraftRequiredIngredient> _activeCraftRequiredIngredients;
+
     [FieldOffset(0x110)] public uint ActiveCraftStatusRequired;
     [FieldOffset(0x114)] public uint ActiveCraftItemRequired;
     [FieldOffset(0x118)] public ushort ActiveCraftRecipeId;
@@ -24,8 +24,14 @@ public unsafe partial struct RecipeNote {
     [FieldOffset(0x124)] public byte ActiveCraftCrystals0Amount;
     [FieldOffset(0x125)] public byte ActiveCraftCrystals1Amount;
     [FieldOffset(0x126)] public byte ActiveCraftCraftType;
+    [FieldOffset(0x127)] private bool Unk127; // Flags & 1
+    [FieldOffset(0x128)] private bool Unk128;
 
-    [FieldOffset(0x12A)] public uint ActiveCraftRequiresMeisterSoulCrystal;
+    [FieldOffset(0x12A)] public byte ActiveCraftRequiresMeisterSoulCrystal;
+
+    [FieldOffset(0x12C)] public ushort CraftingRecipeId;
+    [FieldOffset(0x12E), FixedSizeArray] internal FixedSizeArray6<byte> _craftIngredientNQAmounts;
+    [FieldOffset(0x134), FixedSizeArray] internal FixedSizeArray6<byte> _craftIngredientHQAmounts;
 
     [FieldOffset(0xB0C)] public bool IsRecipeListReady;
 
@@ -37,6 +43,7 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x08)] public int RecipeCount;
         [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray8<NoteBookDivisionIdsArray> _noteBookDivisionIds; // index is CraftType
         [FieldOffset(0x468)] public ushort SelectedIndex;
+        [FieldOffset(0x46C)] private byte Unk46C;
         [FieldOffset(0x46F), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableNoteBookDivisions; // index is CraftType
         [FieldOffset(0x477), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableSecretNoteBookDivisions; // index is CraftType
 
@@ -50,8 +57,20 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray67<ushort> _noteBookDivisionIds;
     }
 
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct ActiveCraftRequiredIngredient {
+        [FieldOffset(0x00)] public uint ItemId;
+        [FieldOffset(0x04)] private ushort Unk4; // RecipeIngredient.Unk0
+        [FieldOffset(0x06)] private ushort Unk6; // RecipeIngredient.Unk2
+        [FieldOffset(0x08)] public byte NQAmount;
+        [FieldOffset(0x09)] public byte HQAmount;
+    }
+
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
     public struct RecipeIngredient {
+        [FieldOffset(0x00)] private ushort Unk0;
+        [FieldOffset(0x02)] private ushort Unk2;
+
         [FieldOffset(0x08)] public byte NQCount;
         [FieldOffset(0x09)] public byte HQCount;
 
@@ -71,7 +90,7 @@ public unsafe partial struct RecipeNote {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x400)]
-    public unsafe partial struct RecipeEntry {
+    public partial struct RecipeEntry {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray6<RecipeIngredient> _ingredients;
         [FieldOffset(0x330), FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
         [FieldOffset(0x338)] public Utf8String ItemName;
