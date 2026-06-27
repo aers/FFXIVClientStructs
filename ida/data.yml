@@ -19648,6 +19648,7 @@ classes:
     funcs:
       0x1412CA250: ctor
       0x1412CC880: IsZoomed
+      0x1412D11C0: ChangeTab
   Client::UI::AddonContextMenu: # 31
     vtbls:
       - ea: 0x1421FA5F8
