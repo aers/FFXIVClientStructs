@@ -32,4 +32,7 @@ public unsafe partial struct AddonChatLog {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? 49 8B B6")]
     public partial bool IsZoomed();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD B2")]
+    public partial void ChangeTab(int tabIndex);
 }
