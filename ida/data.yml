@@ -6028,6 +6028,14 @@ classes:
     vtbls:
       - ea: 0x142147B60
         base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::CloudAssetResourceHandle:
+    vtbls:
+      - ea: 0x142147B78
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CloudAssetResourceHandleFactory:
+    vtbls:
+      - ea: 0x142147CE0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::LookAtIkResourceHandle:
     vtbls:
       - ea: 0x142147CF8
