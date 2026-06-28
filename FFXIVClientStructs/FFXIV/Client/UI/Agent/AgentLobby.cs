@@ -30,7 +30,8 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xCC8)] public StdVector<Utf8String> VersionStrings;
     [FieldOffset(0xCE0)] public Utf8String DisplayedVersionString;
 
-    [FieldOffset(0xD60), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
+    [FieldOffset(0xD60)] public Utf8String GameSession;
+    [FieldOffset(0xDC8), FixedSizeArray] internal FixedSizeArray7<Utf8String> _unkUtf8Strings;
 
     [FieldOffset(0x11D8)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x11D9)] public byte SelectedCharacterIndex;
@@ -109,6 +110,7 @@ public unsafe partial struct LobbyData {
 
     [FieldOffset(0x8D8)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
 
+    [FieldOffset(0x8F4)] public uint SessionId;
     [FieldOffset(0x8F8)] public ulong ContentId;
     [FieldOffset(0x900)] public Utf8String HomeWorldName;
     [FieldOffset(0x968)] public Utf8String HomeWorldName2;
