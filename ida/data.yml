@@ -9948,6 +9948,10 @@ classes:
     vtbls:
       - ea: 0x142178420
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::CullingBoxLayoutInstance:
+    vtbls:
+      - ea: 0x142178B70
+        base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
       - ea: 0x14217DA48

@@ -282,8 +282,11 @@ public enum InstanceType : byte {
     ColliderLayer8 = 87,
     ColliderLayer9 = 88,
     ColliderLayer10 = 89,
-    Culling = 90,
+    CullingBox = 90,
     Unk91 = 91,
     Unk92 = 92,
     Unk93 = 93,
+
+    [Obsolete("Renamed to CullingBox")]
+    Culling = 90,
 }
