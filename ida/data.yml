@@ -1840,8 +1840,8 @@ classes:
       0x140893120: Clear
       0x1408931E0: RequestPrismBox
       0x140893380: IsSetSlotUnlocked
-      0x1408935F0: StoreOutfitAsNewEntry
-      0x140893840: StoreOutfitIntoExistingEntry
+      0x1408935F0: StoreNewOutfit
+      0x140893840: StoreExistingOutfit
       0x140893B20: RestorePrismBoxItem
       0x140893D00: RestorePrismBoxSetItem
       0x1408945F0: RequestGlamourPlates

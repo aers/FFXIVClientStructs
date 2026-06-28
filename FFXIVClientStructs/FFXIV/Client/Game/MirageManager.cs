@@ -57,16 +57,16 @@ public unsafe partial struct MirageManager {
     /// <param name="containers">Containers where each piece is. Must be in order of MirageStoreSetItem. Leftover slots use <see cref="InventoryType.Invalid"/></param>
     /// <param name="slots">Slots where each piece is. Leftovers must be 0.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 08 48 8B 47 28")]
-    public partial bool StoreOutfitAsNewPrismBoxEntry(uint setItemId, InventoryType* containers, ushort* slots);
+    public partial bool StoreNewOutfit(uint setItemId, InventoryType* containers, ushort* slots);
 
     /// <summary>
     /// Deposits gear into dresser into an <b>existing</b> outfit set.
     /// </summary>
     /// <param name="prismBoxIndex"><see cref="PrismBoxItemIds"/> index (see also <seealso cref="AgentMiragePrismPrismSetConvert.AgentData.PrismBoxIndex"/>)</param>
-    /// <param name="containers">Same as <see cref="StoreOutfitAsNewPrismBoxEntry"/></param>
-    /// <param name="slots">Same as <see cref="StoreOutfitAsNewPrismBoxEntry"/></param>
+    /// <param name="containers">Same as <see cref="StoreNewOutfit"/></param>
+    /// <param name="slots">Same as <see cref="StoreNewOutfit"/></param>
     [MemberFunction("E8 ?? ?? ?? ?? EB 1A E8 ?? ?? ?? ?? 8B 57 40")]
-    public partial bool StoreOutfitIntoExistingPrismBoxEntry(uint prismBoxIndex, InventoryType* containers, ushort* slots);
+    public partial bool StoreExistingOutfit(uint prismBoxIndex, InventoryType* containers, ushort* slots);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
