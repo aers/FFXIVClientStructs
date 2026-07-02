@@ -4089,6 +4089,13 @@ classes:
       0x140060C80: Finalizer
       0x140060DB0: AddTask
       0x140060E20: ExecuteAllTasks
+  Client::System::Framework::TaskManager::JobPool:
+    funcs:
+      0x14005FE50: ctor
+  Client::System::Framework::TaskManager::JobPool::InnerThread:
+    vtbls:
+      - ea: 0x142109328
+        base: Client::System::Threading::Thread
   Client::System::Framework::JobListInterface:
     vtbls:
       - ea: 0x142108330
