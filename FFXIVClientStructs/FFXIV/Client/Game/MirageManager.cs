@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::MirageManager
@@ -47,6 +49,24 @@ public unsafe partial struct MirageManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 0B F3")]
     public partial bool IsSetSlotUnlocked(uint itemIndex, int slot);
+
+    /// <summary>
+    /// Deposits gear into dresser as a <b>new</b> outfit set.
+    /// </summary>
+    /// <param name="setItemId">MirageStoreSetItem row id</param>
+    /// <param name="containers">Containers where each piece is. Must be in order of MirageStoreSetItem. Leftover slots use <see cref="InventoryType.Invalid"/></param>
+    /// <param name="slots">Slots where each piece is. Leftovers must be 0.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 08 48 8B 47 28")]
+    public partial bool StoreNewOutfit(uint setItemId, InventoryType* containers, ushort* slots);
+
+    /// <summary>
+    /// Deposits gear into dresser into an <b>existing</b> outfit set.
+    /// </summary>
+    /// <param name="prismBoxIndex"><see cref="PrismBoxItemIds"/> index (see also <seealso cref="AgentMiragePrismPrismSetConvert.AgentData.PrismBoxIndex"/>)</param>
+    /// <param name="containers">Same as <see cref="StoreNewOutfit"/></param>
+    /// <param name="slots">Same as <see cref="StoreNewOutfit"/></param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 1A E8 ?? ?? ?? ?? 8B 57 40")]
+    public partial bool StoreExistingOutfit(uint prismBoxIndex, InventoryType* containers, ushort* slots);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]

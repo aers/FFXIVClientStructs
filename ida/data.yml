@@ -1840,6 +1840,8 @@ classes:
       0x140893120: Clear
       0x1408931E0: RequestPrismBox
       0x140893380: IsSetSlotUnlocked
+      0x1408935F0: StoreNewOutfit
+      0x140893840: StoreExistingOutfit
       0x140893B20: RestorePrismBoxItem
       0x140893D00: RestorePrismBoxSetItem
       0x1408945F0: RequestGlamourPlates
@@ -9288,6 +9290,7 @@ classes:
       0x1406A2DF0: LoadAtkValues
       0x1406A37C0: ExpandGroupExclusively
       0x1406A48F0: GetItem
+      0x1406A4BD0: IsItemGroupHeader
       0x1406A4C30: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
       0x1406A4CF0: Finalizer # no xrefs
       0x1406A7620: CreateItem # inlined (7.3)
@@ -14171,6 +14174,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140DA9AD0: ctor
+      0x140DABCD0: HandleCrystallizeCallback
+      0x140DACBE0: LoadPrismBoxItems
+      0x140DADB30: ShouldFilterPrismBoxItem
+      0x140DAE5C0: UpdateCrystallizePopulate
+      0x140DAE170: PopulateCrystallizeAndFireRefresh
+      0x140DAED60: ScanCrystallizeInventoryForCategory
       0x140DADDD0: UpdateItems
   Client::UI::Agent::AgentMiragePrismPrismItemDetail:
     vtbls:
@@ -14186,6 +14195,8 @@ classes:
     funcs:
       0x140DB0840: Open # todo: check this (7.4)
       0x140DB0B10: OpenPreview
+      0x140DB1EB0: PopulateHandInItems
+      0x140DB2980: ValidateItems
   Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
     funcs:
 #fail       0x140C36B10: ctor # inlined (7.3)
@@ -23033,6 +23044,8 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141273410: ctor
+      0x141274120: ToggleGearsetFilter
+      0x1412741F0: SwitchCategory
   Client::UI::AddonMiragePrismPrismBoxFilter: # 642
     vtbls:
       - ea: 0x14222BF90
