@@ -1,14 +1,12 @@
 version: 2026.06.18.0000.0000
 
 globals:
-  0x142112DA8: g_FloatHalf # 0.5f
-  0x142112E08: g_FloatOne # 1f
-  0x14211BA98: g_FloatOneAndAHalf # 1.5f
-  0x142112E44: g_FloatSix # 6f
+  0x142112E1C: g_Common::Math::HalfPI
+  0x142112E2C: g_Common::Math::PI
+  0x142112E48: g_Common::Math::TwoPI
   0x142113ED0: g_MemoryPoolConfig # { int BlockSize; int BlockCount; }[10], last entry is special for the lookup table
   0x1428E15C0: g_MemoryPoolsStart
   0x1428E1610: g_MemoryPoolsEnd
-  0x14211BA9C: g_FloatTwenty # 20f
 #fail   0x141F0C404: g_ConfigFileName
   0x1421272D0: g_NumberArraySizes
   0x1421274E0: g_StringArraySizes
