@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::GameObjectManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4D1C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4D20)]
 public unsafe partial struct GameObjectManager {
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
     public static partial GameObjectManager* Instance();
