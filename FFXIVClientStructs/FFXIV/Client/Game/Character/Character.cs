@@ -25,7 +25,7 @@ public unsafe partial struct Character {
     [BitField<bool>(nameof(IsOffhandDrawn), 0)]
     [FieldOffset(0x1980)] public byte WeaponFlags;
     [FieldOffset(0x1988)] public VfxContainer Vfx;
-
+    [FieldOffset(0x1A78)] public TargetStatusContainer TargetStatusContainer;
     [FieldOffset(0x1A90)] public EffectContainer Effects;
     [FieldOffset(0x1B10)] public CharacterSetupContainer CharacterSetup;
 

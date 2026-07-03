@@ -7475,6 +7475,8 @@ classes:
       25: GetTint
       26: SetTransparency
       27: GetTransparency
+      28: SetTargetStatus
+      29: GetTargetStatus
     funcs:
       0x14041DD80: ctor
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
@@ -11587,6 +11589,9 @@ classes:
       11: GetSex
       12: EnableDraw
       13: DisableDraw
+      14: UpdateNextDistanceAndTargetStatus
+      15: SetTargetStatus
+      16: SetDistance
       17: SetDrawObject
       23: GetDrawObject
       24: GetCharacterBase
@@ -11948,6 +11953,13 @@ classes:
       0x1408C5480: UpdateBannerHeadDirection
       0x1408C5550: SetBannerEyesFollowingCamera
       0x1408C55A0: UpdateBannerEyeDirection
+  Client::Game::Character::TargetStatusContainer:
+    vtbls:
+      - ea: 0x14218C250
+        base: Client::Game::Character::ContainerInterface
+    funcs:
+      0x1408C7AB0: UpdateNextDistanceAndTargetStatus # inlined in GameObject.UpdateNextDistanceAndTargetStatus
+      0x1408C7C70: DetermineTargetStatus
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x142163238

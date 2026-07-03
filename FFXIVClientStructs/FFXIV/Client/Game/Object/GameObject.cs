@@ -30,9 +30,18 @@ public unsafe partial struct GameObject {
     /// <remarks> Use only when <see cref="ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/>. </remarks>
     [FieldOffset(0x91), CExporterUnion("SubKind")] public BattleNpcSubKind BattleNpcSubKind;
     [FieldOffset(0x92)] public byte Sex;
-    [FieldOffset(0x94)] public byte YalmDistanceFromPlayerX;
-    [FieldOffset(0x95)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
-    [FieldOffset(0x96)] public byte YalmDistanceFromPlayerZ;
+    /// <remarks> Is set to the value of <see cref="NextTargetStatus"/> via <see cref="SetTargetStatus"/> called in <c>GameObjectManager.Update</c>. </remarks>
+    [FieldOffset(0x93)] public byte CurrentTargetStatus;
+    /// <summary> Distance to the LocalPlayer. </summary>
+    /// <remarks> Is set to the value of <see cref="NextDistance"/> via <see cref="SetDistance"/> called in <c>GameObjectManager.Update</c>. </remarks>
+    [FieldOffset(0x94)] public byte CurrentDistance;
+    [FieldOffset(0x94), Obsolete("Renamed to CurrentDistance")] public byte YalmDistanceFromPlayerX;
+    /// <remarks> Calculated in <see cref="UpdateNextDistanceAndTargetStatus"/> right before <c>GameObjectManager.Update</c> sets it to <see cref="CurrentTargetStatus"/> via <see cref="SetTargetStatus"/>. </remarks>
+    [FieldOffset(0x95)] public byte NextTargetStatus;
+    [FieldOffset(0x95), Obsolete("Renamed to NextTargetStatus")] public byte TargetStatus;
+    /// <remarks> Calculated in <see cref="UpdateNextDistanceAndTargetStatus"/> right before <c>GameObjectManager.Update</c> sets it to <see cref="CurrentDistance"/> via <see cref="SetDistance"/>. </remarks>
+    [FieldOffset(0x96)] public byte NextDistance;
+    [FieldOffset(0x96), Obsolete("Renamed to NextDistance")] public byte YalmDistanceFromPlayerZ;
     [FieldOffset(0x9A)] public ObjectTargetableFlags TargetableStatus; // Determines whether the game object can be targeted by the user
     [FieldOffset(0xB0)] public Vector3 Position;
     [FieldOffset(0xC0)] public float Rotation;
@@ -100,6 +109,17 @@ public unsafe partial struct GameObject {
 
     [VirtualFunction(13)]
     public partial void DisableDraw();
+
+    [VirtualFunction(14)]
+    public partial void UpdateNextDistanceAndTargetStatus();
+
+    /// <remarks> Also propagates it to the mount and ornament objects, if available.</remarks>
+    [VirtualFunction(15)]
+    public partial void SetTargetStatus(byte targetStatus);
+
+    /// <remarks> Also propagates it to the mount and ornament objects, if available.</remarks>
+    [VirtualFunction(16)]
+    public partial void SetDistance(byte distance);
 
     [VirtualFunction(17)]
     public partial void SetDrawObject(DrawObject* drawObject);
