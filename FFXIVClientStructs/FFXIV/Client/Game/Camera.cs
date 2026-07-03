@@ -146,4 +146,5 @@ public enum CameraControlMode {
     LockonFirstPerson = 3,
     FirstPersonUnk = 4,
     LockonThirdPerson = 5,
+    LockonUnk6 = 6,
 }
