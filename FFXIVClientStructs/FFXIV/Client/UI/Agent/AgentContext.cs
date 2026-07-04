@@ -1,4 +1,5 @@
 using System.Drawing;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -22,13 +23,14 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0xD80)] public Utf8String ContextMenuTitle;
     [FieldOffset(0xDE8)] public Point Position;
     [FieldOffset(0xDF0)] public uint OwnerAddon;
-
+    [FieldOffset(0xDF4)] public uint YesNoAddon;
+    [FieldOffset(0xDF8)] public int ContextMenuDepthLayer;
     [FieldOffset(0xE00)] public InfoProxyCommonList.CharacterData ContextMenuTarget;
     [FieldOffset(0xE70)] public InfoProxyCommonList.CharacterData* CurrentContextMenuTarget;
-
+    [FieldOffset(0xE78)] private Utf8String UnkE78; // set for some "Copy" entry
     [FieldOffset(0xEE0)] public Utf8String TargetName;
     [FieldOffset(0xF48)] public Utf8String YesNoTargetName;
-
+    [FieldOffset(0xFB0)] private uint UnkFB0; // has something to do with "Kick from Novice Network"
     [FieldOffset(0xFB8)] public ulong TargetAccountId;
     [FieldOffset(0xFC0)] public ulong TargetContentId;
     [FieldOffset(0xFC8)] public ulong YesNoTargetAccountId;
@@ -38,10 +40,11 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0xFE8)] public short TargetHomeWorldId; // can be -1 if unknown
     [FieldOffset(0xFEA)] public short YesNoTargetHomeWorldId; // can be -1 if unknown
     [FieldOffset(0xFEC)] public byte YesNoEventId;
-
     [FieldOffset(0xFF0)] public int TargetSex;
     [FieldOffset(0xFF4)] public uint TargetMountSeats;
-
+    [FieldOffset(0xFF8)] public HouseId HouseId; // used for "Bar from Property"
+    [FieldOffset(0x1000)] public HouseId YesNoHouseId;
+    [FieldOffset(0x1008), FixedSizeArray] internal FixedSizeArray20<Utf8String> _entryTexts; // used for Link Shell and Circle
     [FieldOffset(0x1828)] public void* UpdateChecker; // AgentContextUpdateChecker*, if handler returns false the menu closes
     [FieldOffset(0x1830)] public long UpdateCheckerParam; //objectid of the target or list index of an addon or other things
     [FieldOffset(0x1838)] public BlockFunctionsFlag ContextMenuBlockFunctionsFlags;
