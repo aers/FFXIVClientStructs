@@ -112,7 +112,7 @@ public unsafe partial struct DrawObject {
     /// <returns>How transparent this draw object is, from 0.0 being fully opaque to 1.0 being fully transparent.</returns>
     [VirtualFunction(27)]
     public partial float GetTransparency();
-    
+
     [VirtualFunction(28)]
     public partial void SetTargetStatus(int targetStatus);
 
