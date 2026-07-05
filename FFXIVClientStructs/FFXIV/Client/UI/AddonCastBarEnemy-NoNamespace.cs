@@ -1,11 +1,13 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace FFXIVClientStructs.FFXIV.Client.UI;
+// TODO: remove this file
 
 // Client::UI::AddonCastBarEnemy
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Obsolete("This struct is not within a namespace. Use FFXIVClientStructs.FFXIV.Client.UI.AddonCastBarEnemy", true)]
 [Addon("CastBarEnemy")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
