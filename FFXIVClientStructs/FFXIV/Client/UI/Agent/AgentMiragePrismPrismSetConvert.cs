@@ -35,7 +35,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         [FieldOffset(0x0C)] public ushort CrystallizeAddonId; // MiragePrismPrismBoxCrystallize, the opener
         [FieldOffset(0x0E)] public ushort PrismBoxAddonId; // MiragePrismPrismBoxAddonId
 
-        [FieldOffset(0x10)] public AddonState State;
+        [FieldOffset(0x10)] public SetConvertAddonState State;
         [FieldOffset(0x14)] public uint SelectedSetIndex;
         [FieldOffset(0x18)] public int ContextMenuItemIndex;
         [FieldOffset(0x1C)] public uint ConfirmationAddonId; // MiragePrismPrismSetConvertC
@@ -93,13 +93,13 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
             [FieldOffset(0x18)] public bool IsLoaded;
         }
     }
+}
 
-    public enum AddonState : uint {
-        None = 0, // idle/closed
-        Loading = 1, // loads the icons/names
-        Unk2 = 2,
-        Unk3 = 3,
-        RefreshHandInSlots = 4,
-        Ready = 5,
-    }
+public enum SetConvertAddonState : uint {
+    None = 0, // idle/closed
+    Loading = 1, // loads the icons/names
+    Unk2 = 2,
+    Unk3 = 3,
+    RefreshHandInSlots = 4,
+    Ready = 5,
 }
