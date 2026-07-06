@@ -9282,9 +9282,11 @@ classes:
       0x1406A2DF0: LoadAtkValues
       0x1406A37C0: ExpandGroupExclusively
       0x1406A48F0: GetItem
-      0x1406A4BD0: IsItemGroupHeader
+      0x1406A49B0: FindItemGroup
+      0x1406A4BD0: IsItemSectionHeader
       0x1406A4C30: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
       0x1406A4CF0: Finalizer # no xrefs
+      0x1406A7430: CalculateVisibleItemHeightAndCount
       0x1406A7620: CreateItem # inlined (7.3)
   Component::GUI::AtkModule:
     vtbls:
