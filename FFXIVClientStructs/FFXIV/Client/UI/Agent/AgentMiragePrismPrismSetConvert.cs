@@ -92,13 +92,13 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
             [FieldOffset(0x18)] public bool IsLoaded;
         }
     }
-}
 
-public enum AddonState : uint {
-    None = 0, // idle/closed
-    Loading = 1, // loads the icons/names
-    Unk2 = 2,
-    Unk3 = 3,
-    RefreshHandInSlots = 4,
-    Ready = 5,
+    public enum AddonState : uint {
+        None = 0, // idle/closed
+        Loading = 1, // loads the icons/names
+        Unk2 = 2,
+        Unk3 = 3,
+        RefreshHandInSlots = 4,
+        Ready = 5,
+    }
 }
