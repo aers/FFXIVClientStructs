@@ -14184,7 +14184,7 @@ classes:
     funcs:
       0x140DB0840: Open # todo: check this (7.4)
       0x140DB0B10: OpenPreview
-      0x140DB1EB0: PopulateHandInItems
+      0x140DB1EB0: PopulateHandInItem
       0x140DB2980: ValidateItems
   Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
     funcs:
