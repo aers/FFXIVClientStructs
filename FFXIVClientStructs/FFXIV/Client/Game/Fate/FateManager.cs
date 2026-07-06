@@ -10,7 +10,7 @@ public unsafe partial struct FateManager {
     [StaticAddress("48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87", 6, isPointer: true)]
     public static partial FateManager* Instance();
 
-    [FieldOffset(0x00)] private StdVector<GameObjectId> UnkVector;
+    [FieldOffset(0x00)] public StdVector<GameObjectId> FateStartNPCs;
     [FieldOffset(0x18)] private Utf8String UnkString;
     [FieldOffset(0x80)] public FateDirector* FateDirector;
     [FieldOffset(0x88)] public FateContext* CurrentFate;
