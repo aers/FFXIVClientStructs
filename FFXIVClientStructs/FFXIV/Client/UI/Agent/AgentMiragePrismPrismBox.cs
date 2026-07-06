@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -24,6 +25,9 @@ public unsafe partial struct AgentMiragePrismPrismBox {
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A")]
     public partial void UpdateItems(bool resetTabIndex, bool a2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 46 28 C6 80 ?? ?? ?? ?? ??")]
+    public partial bool PopulateCrystallizeAndFireRefresh();
 }
 
 [GenerateInterop]
@@ -36,7 +40,7 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8000<PrismBoxItem> _prismBoxItems;
     [FieldOffset(0x119408)] public PrismBoxItem TempContextItem;
 
-    // 7.1: 6,400 (0x1900) bytes were added here
+    // [FieldOffset(0x11AD98), FixedSizeArray] internal FixedSizeArray800<ulong> _unk11AD98; // 800x 8 bytes each { dword, byte, padding byte, byte }
 
     [FieldOffset(0x11AD98), FixedSizeArray] internal FixedSizeArray50<int> _pageItemIndexes;
     [FieldOffset(0x11AE60)] public int TempContextItemIndex;
@@ -48,19 +52,24 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x11AE70)] public uint ItemCount;
     [FieldOffset(0x11AE74)] public uint FilterSettingsAddonId;
     [FieldOffset(0x11AE78)] public bool IsPopulatingList;
+    [FieldOffset(0x11AE79)] public bool IsPopulatingComplete;
     [FieldOffset(0x11AE7B)] private byte Unk11AE7B;
     [FieldOffset(0x11AE7C)] public bool IsAddonReady;
     [FieldOffset(0x11AE7D)] private byte Unk11AE7D;
     [FieldOffset(0x11AE7E)] private byte Unk11AE7E;
     [FieldOffset(0x11AE7F)] public bool IsPositionSaved;
 
+    [FieldOffset(0x11AE80)] private int Unk11AE80; // something with the category
     [FieldOffset(0x11AE84)] public int CrystallizeCategory;
     [FieldOffset(0x11AE88)] public ushort CrystallizeItemIndex;
     [FieldOffset(0x11AE8A)] public ushort CrystallizeItemCount;
+    [FieldOffset(0x11AE8C)] public ushort CrystallizeTreeRowCount;
+    [FieldOffset(0x11AE8E)] private ushort Unk11AE8E; // cursor related?
 
     [FieldOffset(0x11AE90), FixedSizeArray] internal FixedSizeArray140<PrismBoxCrystallizeItem> _crystallizeItems;
     [FieldOffset(0x11BDE0)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
 
+    [FieldOffset(0x11BE00), FixedSizeArray] internal FixedSizeArray1962<AtkValue> _atkValues;
     [FieldOffset(0x1238A0)] public uint PendingState;
     [FieldOffset(0x1238A4)] public uint PendingStateStep;
     [FieldOffset(0x1238A8)] public uint LastProcessedStep;
