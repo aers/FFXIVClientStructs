@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -39,7 +40,7 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8000<PrismBoxItem> _prismBoxItems;
     [FieldOffset(0x119408)] public PrismBoxItem TempContextItem;
 
-    // 7.1: 6,400 (0x1900) bytes were added here
+    // [FieldOffset(0x11AD98), FixedSizeArray] internal FixedSizeArray800<ulong> _unk11AD98; // 800x 8 bytes each { dword, byte, padding byte, byte }
 
     [FieldOffset(0x11AD98), FixedSizeArray] internal FixedSizeArray50<int> _pageItemIndexes;
     [FieldOffset(0x11AE60)] public int TempContextItemIndex;
@@ -68,6 +69,7 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x11AE90), FixedSizeArray] internal FixedSizeArray140<PrismBoxCrystallizeItem> _crystallizeItems;
     [FieldOffset(0x11BDE0)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
 
+    [FieldOffset(0x11BE00), FixedSizeArray] internal FixedSizeArray1962<AtkValue> _atkValues;
     [FieldOffset(0x1238A0)] public uint PendingState;
     [FieldOffset(0x1238A4)] public uint PendingStateStep;
     [FieldOffset(0x1238A8)] public uint LastProcessedStep;

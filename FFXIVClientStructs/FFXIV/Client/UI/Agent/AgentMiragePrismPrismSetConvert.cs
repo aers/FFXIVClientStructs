@@ -20,7 +20,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
 
     /// <summary>Scans inventory for matching pieces and populates <see cref="AgentData.HandIns"/>.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 83 BB ?? ?? ?? ?? ?? 74 AA")]
-    public partial void PopulateHandInItems(InventoryType container, int slot, int a3);
+    public partial void PopulateHandInItem(InventoryType container, uint itemId, bool a4 = false);
 
     /// <summary>Validates <see cref="AgentData.Items"/> and refreshes the SetConvert addon.</summary>
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 C4 28 41 5E 5D E9 ?? ?? ?? ?? 48 83 C4 28")]
@@ -38,7 +38,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
         [FieldOffset(0x10)] public AddonState State;
         [FieldOffset(0x14)] public uint SelectedSetIndex;
         [FieldOffset(0x18)] public int ContextMenuItemIndex;
-        [FieldOffset(0x1C)] public uint YesNoAddonId;
+        [FieldOffset(0x1C)] public uint ConfirmationAddonId; // MiragePrismPrismSetConvertC
         [FieldOffset(0x24)] public uint GlamourPrismCount;
         /// <summary>Index for <see cref="MirageManager.PrismBoxItemIds"/></summary>
         [FieldOffset(0x28)] public uint PrismBoxIndex;
@@ -71,6 +71,7 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
             [FieldOffset(0x08)] public uint MirageStoreSetItemColumn; // column index of MirageStoreSetItem
 
             [FieldOffset(0x0C)] public InventoryType InventoryType;
+            [FieldOffset(0x10)] public InventoryType ArmouryInventoryType;
 
             [FieldOffset(0x14)] public uint Slot;
         }
