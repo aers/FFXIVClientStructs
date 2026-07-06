@@ -6902,6 +6902,7 @@ classes:
       0x14022D430: SetDefaultState
       0x14022AEC0: DoClearCommandViaDraw
       0x14022AD90: DoClearCommand
+      0x14022B340: DoSetTargetCommand
 #oldfail       0x14036DBA0: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:

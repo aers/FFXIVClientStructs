@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe struct AtkUICommandEntry {
     [FieldOffset(0x00)] public uint SortKey;
     [FieldOffset(0x04)] private uint Unk04; // unused padding
-    [FieldOffset(0x08), CExporterUnion("AtkUICommand")] public AtkUICommandClipMask* ClipMaskCommand;
-    [FieldOffset(0x08), CExporterUnion("AtkUICommand")] public AtkUICommandDraw* DrawCommand;
+    [FieldOffset(0x08)] public AtkUICommand* Command;
 }
 
 public enum AtkUICommandType : uint {
@@ -29,19 +28,26 @@ public enum AtkUICommandFormat : ushort {
     ClipMask = 3,
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public unsafe struct AtkUICommandClipMask {
+[GenerateInterop(isInherited: true)]
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
+public partial struct AtkUICommand {
     [FieldOffset(0x00)] public AtkUICommandType Type;
     [FieldOffset(0x04)] public AtkUICommandFormat Format;
+}
+
+[GenerateInterop]
+[Inherits<AtkUICommand>]
+[StructLayout(LayoutKind.Explicit, Size = 0x60)]
+public unsafe partial struct AtkUICommandClipMask {
     [FieldOffset(0x08)] public uint Flags;
     [FieldOffset(0x10)] public Texture* MaskTexture;
     [FieldOffset(0x20)] public Matrix4x4 Transform;
 }
 
+[GenerateInterop]
+[Inherits<AtkUICommand>]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe struct AtkUICommandDraw {
-    [FieldOffset(0x00)] public AtkUICommandType Type;
-    [FieldOffset(0x04)] public AtkUICommandFormat Format;
+public unsafe partial struct AtkUICommandDraw {
     [FieldOffset(0x08)] public PackedBlendStateDesc BlendState;
     [FieldOffset(0x10)] public Texture* Texture;
     [FieldOffset(0x18)] private uint Unk18;
