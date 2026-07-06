@@ -102,6 +102,7 @@ public unsafe partial struct Device {
 public unsafe struct RenderCommandBufferGroup {
     [FieldOffset(0x0)] private int Unk0;
     [FieldOffset(0x4)] private int Unk1;
+    [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommand* Command;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandSetTarget* SetTargetCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandViewport* ViewportCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandScissorsRect* ScissorsRectCommand;
@@ -117,10 +118,16 @@ public enum RenderCommandType : int {
     Clear = 4,
 }
 
+[GenerateInterop(isInherited: true)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4)]
+public partial struct RenderCommand {
+    [FieldOffset(0x0)] public RenderCommandType Type;
+}
+
 [GenerateInterop]
+[Inherits<RenderCommand>]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct RenderCommandSetTarget {
-    [FieldOffset(0x0)] public RenderCommandType Type;
     [FieldOffset(0x4)] public int RenderTargetCount;
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _renderTargets;
     [FieldOffset(0x30)] public Texture* DepthBuffer;
@@ -130,9 +137,10 @@ public unsafe partial struct RenderCommandSetTarget {
     [FieldOffset(0x0), Obsolete("Use Type instead.")] public int SwitchType;
 }
 
+[GenerateInterop]
+[Inherits<RenderCommand>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public struct RenderCommandViewport {
-    [FieldOffset(0x0)] public RenderCommandType Type;
+public partial struct RenderCommandViewport {
     [FieldOffset(0x4)] public IntRectangle ViewportRect;
     [FieldOffset(0x14)] public float MinDepth;
     [FieldOffset(0x18)] public float MaxDepth;
@@ -145,18 +153,20 @@ public struct RenderCommandViewport {
 }
 
 [GenerateInterop]
+[Inherits<RenderCommand>]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public partial struct RenderCommandMultiViewport {
-    [FieldOffset(0x0)] public int SwitchType;
+    [FieldOffset(0x0), Obsolete("Use Type")] public int SwitchType;
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray5<IntRectangle> _viewportRects;
     [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray5<float> _minDepths;
     [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray5<float> _maxDepths;
     [FieldOffset(0x7C)] public uint ViewportCount;
 }
 
+[GenerateInterop]
+[Inherits<RenderCommand>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public struct RenderCommandScissorsRect {
-    [FieldOffset(0x0)] public RenderCommandType Type;
+public partial struct RenderCommandScissorsRect {
     [FieldOffset(0x4)] public IntRectangle ScissorRect;
 
     [FieldOffset(0x0), Obsolete("Use Type instead.")] public int SwitchType;
@@ -185,16 +195,10 @@ public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x38)] public float MaxZ;
 }
 
-public enum ClearFlags : uint {
-    None = 0,
-    Color = 1 << 0,
-    Depth = 1 << 1,
-    Stencil = 1 << 2,
-}
-
+[GenerateInterop]
+[Inherits<RenderCommand>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct RenderCommandClear {
-    [FieldOffset(0x0)] public RenderCommandType Type;
+public unsafe partial struct RenderCommandClear {
     [FieldOffset(0x4)] public ClearFlags ClearFlags;
     [FieldOffset(0x8)] public float ColorR;
     [FieldOffset(0xC)] public float ColorG;
@@ -205,4 +209,12 @@ public unsafe struct RenderCommandClear {
     [FieldOffset(0x1D)] public byte StencilReference;
     [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
     [FieldOffset(0x28)] public IntRectangle ClearRectangle;
+}
+
+[Flags]
+public enum ClearFlags : uint {
+    None = 0,
+    Color = 1 << 0,
+    Depth = 1 << 1,
+    Stencil = 1 << 2,
 }
