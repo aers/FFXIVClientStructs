@@ -52,6 +52,9 @@ public unsafe partial struct AtkServer {
     [FieldOffset(0x4C0)] public Texture* WhiteTexture; // 4x4 solid white
     [FieldOffset(0x4C8)] public Texture* BlackTexture; // 4x4 solid black
 
+    [FieldOffset(0x580)] public AtkUICommandEntry* UICommandList;
+    [FieldOffset(0x588)] public uint UICommandCount;
+
     [VirtualFunction(0)]
     public partial AtkServer* Dtor(byte flags);
 

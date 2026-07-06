@@ -84,6 +84,9 @@ public unsafe partial struct ImmediateContext {
     [MemberFunction("48 89 6C 24 ?? 56 48 83 EC 40 48 83 7A")] // inlined in some places
     public partial void DoClearCommand(RenderCommandClear* clearCommand);
 
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? B1 48")]
+    public partial void DoSetTargetCommand(RenderCommandSetTarget* command);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 30 FF 15")]
     public partial void ProcessCommands(RenderCommandBufferGroup* renderCommands, uint renderCommandCount);
 
