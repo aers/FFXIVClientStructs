@@ -9,8 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F78)]
 public unsafe partial struct Context {
+    /// <summary>
+    /// Sort key stamped onto every command pushed via <see cref="PushBackCommand"/>.
+    /// Commands are executed by SortKey ordering rather than submission order.
+    /// </summary>
     [BitField<byte>(nameof(CurrentSubViewIndex), 28, 4)]
-    [FieldOffset(0x008)] private uint _flags;
+    [FieldOffset(0x008)] public uint SortKey;
     [FieldOffset(0x00C)] public int ViewIndex;
     [FieldOffset(0x010)] public void* CommandAllocationBase;
 
