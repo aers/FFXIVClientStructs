@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace InteropGenerator.Runtime;
@@ -139,66 +140,138 @@ public sealed class Resolver {
         if (_resolverCache is not null && ResolveFromCache())
             return;
 
-        var remainingAddresses = Addresses.Where(a => a.Value == 0);
-        int remainingCount = remainingAddresses.Count();
+        var remainingAddresses = Addresses.Where(a => a.Value == 0).ToArray();
+        var remainingCount = remainingAddresses.Length;
         if (remainingCount == 0)
             return;
 
-        var buckets = new Address[256][];
-        foreach (var group in remainingAddresses.GroupBy(a => (byte)a.Bytes[0]))
-            buckets[group.Key] = [.. group];
+        var addressValues = (nint*)NativeMemory.AllocZeroed((nuint)remainingCount * (nuint)sizeof(nint));
+        var buckets = new BucketAddressEntry*[256];
+        var bucketData = new ulong*[256];
+        var bucketLengths = new int[256]; // the amount of addresses in a bucket
 
-        var partitioner = Partitioner.Create(0, _textSectionSize, _textSectionSize / Environment.ProcessorCount);
+        try {
+            var grouped = remainingAddresses
+                .Select((addr, idx) => new { Address = addr, GlobalIndex = idx })
+                .GroupBy(item => (byte)item.Address.Bytes[0]);
 
-        Parallel.ForEach(partitioner, (range, loopState) => {
+            foreach (var group in grouped) {
+                byte firstByte = group.Key;
+                var addresses = group.ToArray();
+                bucketLengths[firstByte] = addresses.Length;
+
+                int ulongCount = addresses.Sum(x => x.Address.Bytes.Length) * 2;
+
+                buckets[firstByte] = (BucketAddressEntry*)NativeMemory.Alloc((nuint)addresses.Length * (nuint)sizeof(BucketAddressEntry));
+                bucketData[firstByte] = (ulong*)NativeMemory.Alloc((nuint)ulongCount * sizeof(ulong));
+
+                ulong* dataPtr = bucketData[firstByte];
+                for (int i = 0; i < addresses.Length; i++) {
+                    var address = addresses[i];
+                    int bytesLen = address.Address.Bytes.Length;
+
+                    buckets[firstByte][i] = new BucketAddressEntry {
+                        ValuePtr = &addressValues[address.GlobalIndex],
+                        BytesPtr = dataPtr,
+                        MaskPtr = dataPtr + bytesLen,
+                        BytesLen = bytesLen,
+                        AddressIndex = address.GlobalIndex
+                    };
+
+                    fixed (ulong* pSrcBytes = address.Address.Bytes)
+                    fixed (ulong* pSrcMask = address.Address.Mask) {
+                        Buffer.MemoryCopy(pSrcBytes, dataPtr, bytesLen * sizeof(ulong), bytesLen * sizeof(ulong));
+                        Buffer.MemoryCopy(pSrcMask, dataPtr + bytesLen, bytesLen * sizeof(ulong), bytesLen * sizeof(ulong));
+                    }
+
+                    dataPtr += bytesLen * 2;
+                }
+            }
+
+            var partitioner = Partitioner.Create(0, _textSectionSize, _textSectionSize / Environment.ProcessorCount);
             var textPtr = (byte*)_targetSpace + _textSectionOffset;
 
-            for (int location = range.Item1; !loopState.IsStopped && location < range.Item2; location++) {
-                var currentByte = textPtr[location];
-                var bucket = buckets[currentByte];
-                if (bucket is null)
-                    continue;
-
-                var targetLocationAsUlong = (ulong*)(textPtr + location);
-
-                for (int i = 0; i < bucket.Length; i++) {
-                    var address = bucket[i];
-                    if (Volatile.Read(ref address.Value) != 0)
+            Parallel.ForEach(partitioner, (range, loopState) => {
+                for (int location = range.Item1; !loopState.IsStopped && location < range.Item2; location++) {
+                    var currentByte = textPtr[location];
+                    var bucket = buckets[currentByte];
+                    if (bucket == null)
                         continue;
 
-                    int count;
-                    var length = address.Bytes.Length;
-
-                    for (count = 0; count < length; count++) {
-                        if ((address.Mask[count] & address.Bytes[count]) != (address.Mask[count] & targetLocationAsUlong[count]))
-                            break;
-                    }
-
-                    if (count != length)
+                    var bucketLength = bucketLengths[currentByte];
+                    if (bucketLength == 0)
                         continue;
 
-                    int outLocation = location;
-                    foreach (ushort relOffset in address.RelativeFollowOffsets) {
-                        int relativeOffset = *(int*)(textPtr + outLocation + relOffset);
-                        outLocation = outLocation + relOffset + 4 + relativeOffset;
-                    }
+                    var targetLocationAsUlong = (ulong*)(textPtr + location);
 
-                    nint finalAddress = _baseAddress + _textSectionOffset + outLocation;
+                    for (int i = 0; i < bucketLength; i++) {
+                        ref readonly var target = ref bucket[i];
+                        if (*target.ValuePtr != 0)
+                            continue;
 
-                    if (Interlocked.CompareExchange(ref address.Value, finalAddress, 0) == 0) {
-                        if (_resolverCache?.Cache.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
-                            _cacheChanged |= true;
+                        int count;
+                        for (count = 0; count < target.BytesLen; count++) {
+                            if ((target.MaskPtr[count] & target.BytesPtr[count]) != (target.MaskPtr[count] & targetLocationAsUlong[count]))
+                                break;
+                        }
 
-                        if (Interlocked.Decrement(ref remainingCount) == 0) {
-                            loopState.Stop();
-                            return;
+                        if (count != target.BytesLen)
+                            continue;
+
+                        var outLocation = location;
+                        var originalAddress = remainingAddresses[target.AddressIndex];
+                        foreach (ushort relOffset in originalAddress.RelativeFollowOffsets) {
+                            var relativeOffset = *(int*)(textPtr + outLocation + relOffset);
+                            outLocation = outLocation + relOffset + 4 + relativeOffset;
+                        }
+
+                        var finalAddress = _baseAddress + _textSectionOffset + outLocation;
+
+                        if (Interlocked.CompareExchange(ref *target.ValuePtr, finalAddress, 0) == 0) {
+                            if (Interlocked.Decrement(ref remainingCount) == 0) {
+                                loopState.Stop();
+                                return;
+                            }
                         }
                     }
                 }
+            });
+
+            for (int i = 0; i < remainingAddresses.Length; i++) {
+                var foundAddress = addressValues[i];
+
+                if (foundAddress != 0) {
+                    var address = remainingAddresses[i];
+
+                    address.Value = foundAddress;
+
+                    int outLocation = (int)(foundAddress - _baseAddress - _textSectionOffset);
+                    if (_resolverCache?.Cache.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
+                        _cacheChanged |= true;
+                }
             }
-        });
+        } finally {
+            NativeMemory.Free(addressValues);
+
+            for (int i = 0; i < 256; i++) {
+                if (buckets[i] != null)
+                    NativeMemory.Free(buckets[i]);
+
+                if (bucketData[i] != null)
+                    NativeMemory.Free(bucketData[i]);
+            }
+        }
 
         SaveCache();
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+    private unsafe struct BucketAddressEntry {
+        public nint* ValuePtr;
+        public ulong* BytesPtr;
+        public ulong* MaskPtr;
+        public int BytesLen;
+        public int AddressIndex;
     }
 
     public void RegisterAddress(Address address) {
