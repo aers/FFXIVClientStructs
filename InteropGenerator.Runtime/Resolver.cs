@@ -1,14 +1,11 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace InteropGenerator.Runtime;
 
 public sealed class Resolver {
     private static readonly Lazy<Resolver> Instance = new(() => new Resolver());
-
-    private readonly List<Address>?[] _preResolveArray = new List<Address>[256];
 
     public readonly HashSet<Address> Addresses = new();
 
@@ -25,7 +22,6 @@ public sealed class Resolver {
 
     private int _textSectionOffset;
     private int _textSectionSize;
-    private int _totalBuckets;
 
     private Resolver() {
     }
@@ -90,87 +86,85 @@ public sealed class Resolver {
         var sectionCursor = sectionHeader;
         for (var i = 0; i < numSections; i++) {
             var sectionName = BitConverter.ToInt64(sectionCursor);
-
-            // .text
-            if (sectionName == 0x747865742E) {
-                // .text
+            if (sectionName == 0x747865742E) { // .text
                 _textSectionOffset = BitConverter.ToInt32(sectionCursor.Slice(12, 4));
                 _textSectionSize = BitConverter.ToInt32(sectionCursor.Slice(8, 4));
+                break;
             }
 
             sectionCursor = sectionCursor[40..]; // advance by 40
         }
     }
-    private void LoadCache(string version) {
-        if (_cacheFile is not { Exists: true }) {
-            _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
-            return;
-        }
 
+    private void LoadCache(string version) {
         try {
-            var json = File.ReadAllText(_cacheFile.FullName);
-            _resolverCache = JsonSerializer.Deserialize(json, ResolverCacheSerializerContext.Default.ResolverCache);
-            if (_resolverCache is null ||
-                _resolverCache.Version != version)
-                _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
-        } catch {
-            _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
-        }
+            if (_cacheFile is { Exists: true }) {
+                using var file = File.OpenRead(_cacheFile.FullName);
+                _resolverCache = JsonSerializer.Deserialize(file, ResolverCacheSerializerContext.Default.ResolverCache);
+
+                if (_resolverCache?.Version == version)
+                    return;
+            }
+        } catch { }
+
+        _resolverCache = new ResolverCache(version, new ConcurrentDictionary<string, long>());
     }
 
     private void SaveCache() {
-        if (_cacheFile == null || _resolverCache == null || _cacheChanged == false)
+        if (_cacheFile == null || _resolverCache == null || !_cacheChanged)
             return;
+
         var json = JsonSerializer.Serialize(_resolverCache, ResolverCacheSerializerContext.Default.ResolverCache);
         if (string.IsNullOrWhiteSpace(json))
             return;
+
         if (_cacheFile.Directory is { Exists: false })
             Directory.CreateDirectory(_cacheFile.Directory.FullName);
+
         File.WriteAllText(_cacheFile.FullName, json);
     }
 
     private bool ResolveFromCache() {
         foreach (var address in Addresses) {
-            if (address.Value == 0) {
-                if (_resolverCache!.Cache.TryGetValue(address.CacheKey, out var offset)) {
-                    address.Value = (nint)(offset + _baseAddress);
-                    var firstByte = (byte)address.Bytes[0];
-                    if (_preResolveArray[firstByte] != null) {
-                        _preResolveArray[firstByte]!.Remove(address);
-                        if (_preResolveArray[firstByte]!.Count == 0) {
-                            _preResolveArray[firstByte] = null;
-                            _totalBuckets--;
-                        }
-                    }
-                }
-            }
+            if (address.Value == 0 && _resolverCache!.Cache.TryGetValue(address.CacheKey, out var offset))
+                address.Value = (nint)(offset + _baseAddress);
         }
-
         return Addresses.All(a => a.Value != 0);
     }
 
-    // This function is a bit messy, but everything to make it cleaner is slower, so don't bother.
     public unsafe void Resolve() {
         if (_targetSpace == 0)
-            throw new Exception("[FFXIVClientStructs.Resolver] Attempted to call Resolve() without initializing the search space.");
+            throw new Exception("[InteropGenerator.Runtime.Resolver] Attempted to call Resolve() without initializing the search space.");
 
-        if (_resolverCache is not null) {
-            if (ResolveFromCache())
-                return;
-        }
+        if (_resolverCache is not null && ResolveFromCache())
+            return;
 
-        var targetSpan = new ReadOnlySpan<byte>(_targetSpace.ToPointer(), _targetLength)[_textSectionOffset..];
+        var remainingAddresses = Addresses.Where(a => a.Value == 0);
+        int remainingCount = remainingAddresses.Count();
+        if (remainingCount == 0)
+            return;
 
-        for (var location = 0; location < _textSectionSize; location++) {
-            if (_preResolveArray[targetSpan[location]] is not null) {
-                var availableAddresses = _preResolveArray[targetSpan[location]]!.ToArray();
+        var buckets = new Address[256][];
+        foreach (var group in remainingAddresses.GroupBy(a => (byte)a.Bytes[0]))
+            buckets[group.Key] = [.. group];
 
-                var targetLocationAsUlong = MemoryMarshal.Cast<byte, ulong>(targetSpan[location..]);
+        var partitioner = Partitioner.Create(0, _textSectionSize, _textSectionSize / Environment.ProcessorCount);
 
-                var avLen = availableAddresses.Length;
+        Parallel.ForEach(partitioner, (range, loopState) => {
+            var textPtr = (byte*)_targetSpace + _textSectionOffset;
 
-                for (var i = 0; i < avLen; i++) {
-                    var address = availableAddresses[i];
+            for (int location = range.Item1; location < range.Item2; location++) {
+                var currentByte = textPtr[location];
+                var bucket = buckets[currentByte];
+                if (bucket is null)
+                    continue;
+
+                var targetLocationAsUlong = (ulong*)(textPtr + location);
+
+                for (int i = 0; i < bucket.Length; i++) {
+                    var address = bucket[i];
+                    if (Volatile.Read(ref address.Value) != 0)
+                        continue;
 
                     int count;
                     var length = address.Bytes.Length;
@@ -180,61 +174,38 @@ public sealed class Resolver {
                             break;
                     }
 
-                    if (count == length) {
-                        var outLocation = location;
+                    if (count != length)
+                        continue;
 
-                        foreach (var relOffset in address.RelativeFollowOffsets) {
-                            var relativeOffset =
-                                BitConverter.ToInt32(targetSpan.Slice(outLocation + relOffset, 4));
-                            outLocation = outLocation + relOffset + 4 + relativeOffset;
-                        }
+                    int outLocation = location;
+                    foreach (ushort relOffset in address.RelativeFollowOffsets) {
+                        int relativeOffset = *(int*)(textPtr + outLocation + relOffset);
+                        outLocation = outLocation + relOffset + 4 + relativeOffset;
+                    }
 
-                        address.Value = _baseAddress + _textSectionOffset + outLocation;
+                    nint finalAddress = _baseAddress + _textSectionOffset + outLocation;
 
+                    if (Interlocked.CompareExchange(ref address.Value, finalAddress, 0) == 0) {
                         if (_resolverCache?.Cache.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
-                            _cacheChanged = true;
+                            _cacheChanged |= true;
 
-                        _preResolveArray[targetSpan[location]]!.Remove(address);
-                        if (_preResolveArray[targetSpan[location]]!.Count == 0) {
-                            _preResolveArray[targetSpan[location]] = null;
-                            _totalBuckets--;
-                            if (_totalBuckets == 0)
-                                goto outLoop;
+                        if (Interlocked.Decrement(ref remainingCount) == 0) {
+                            loopState.Stop();
+                            return;
                         }
                     }
                 }
             }
-        }
-outLoop:;
+        });
 
         SaveCache();
     }
 
     public void RegisterAddress(Address address) {
-        if (Addresses.Add(address)) {
-            var firstByte = (byte)address.Bytes[0];
-
-            if (_preResolveArray[firstByte] is null) {
-                _preResolveArray[firstByte] = new List<Address>();
-                _totalBuckets++;
-            }
-
-            _preResolveArray[firstByte]!.Add(address);
-        }
+        Addresses.Add(address);
     }
 
     public void UnregisterAddress(Address address) {
-        if (Addresses.Remove(address) &&
-            address.Value != 0) {
-            var firstByte = (byte)address.Bytes[0];
-
-            if (_preResolveArray[firstByte] != null) {
-                _preResolveArray[firstByte]!.Remove(address);
-                if (_preResolveArray[firstByte]!.Count == 0) {
-                    _preResolveArray[firstByte] = null;
-                    _totalBuckets--;
-                }
-            }
-        }
+        Addresses.Remove(address);
     }
 }
