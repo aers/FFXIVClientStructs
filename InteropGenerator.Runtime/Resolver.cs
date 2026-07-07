@@ -160,15 +160,15 @@ public sealed class Resolver {
                 var addresses = group.ToArray();
                 bucketLengths[firstByte] = addresses.Length;
 
-                int ulongCount = addresses.Sum(x => x.Address.Bytes.Length) * 2;
+                var ulongCount = addresses.Sum(x => x.Address.Bytes.Length) * 2;
 
                 buckets[firstByte] = (BucketAddressEntry*)NativeMemory.Alloc((nuint)addresses.Length * (nuint)sizeof(BucketAddressEntry));
                 bucketData[firstByte] = (ulong*)NativeMemory.Alloc((nuint)ulongCount * sizeof(ulong));
 
-                ulong* dataPtr = bucketData[firstByte];
-                for (int i = 0; i < addresses.Length; i++) {
+                var dataPtr = bucketData[firstByte];
+                for (var i = 0; i < addresses.Length; i++) {
                     var address = addresses[i];
-                    int bytesLen = address.Address.Bytes.Length;
+                    var bytesLen = address.Address.Bytes.Length;
 
                     buckets[firstByte][i] = new BucketAddressEntry {
                         ValuePtr = &addressValues[address.GlobalIndex],
@@ -192,7 +192,7 @@ public sealed class Resolver {
             var textPtr = (byte*)_targetSpace + _textSectionOffset;
 
             Parallel.ForEach(partitioner, (range, loopState) => {
-                for (int location = range.Item1; !loopState.IsStopped && location < range.Item2; location++) {
+                for (var location = range.Item1; !loopState.IsStopped && location < range.Item2; location++) {
                     var currentByte = textPtr[location];
                     var bucket = buckets[currentByte];
                     if (bucket == null)
@@ -204,7 +204,7 @@ public sealed class Resolver {
 
                     var targetLocationAsUlong = (ulong*)(textPtr + location);
 
-                    for (int i = 0; i < bucketLength; i++) {
+                    for (var i = 0; i < bucketLength; i++) {
                         ref readonly var target = ref bucket[i];
                         if (*target.ValuePtr != 0)
                             continue;
@@ -220,7 +220,7 @@ public sealed class Resolver {
 
                         var outLocation = location;
                         var originalAddress = remainingAddresses[target.AddressIndex];
-                        foreach (ushort relOffset in originalAddress.RelativeFollowOffsets) {
+                        foreach (var relOffset in originalAddress.RelativeFollowOffsets) {
                             var relativeOffset = *(int*)(textPtr + outLocation + relOffset);
                             outLocation = outLocation + relOffset + 4 + relativeOffset;
                         }
@@ -237,7 +237,7 @@ public sealed class Resolver {
                 }
             });
 
-            for (int i = 0; i < remainingAddresses.Length; i++) {
+            for (var i = 0; i < remainingAddresses.Length; i++) {
                 var foundAddress = addressValues[i];
 
                 if (foundAddress != 0) {
@@ -245,7 +245,7 @@ public sealed class Resolver {
 
                     address.Value = foundAddress;
 
-                    int outLocation = (int)(foundAddress - _baseAddress - _textSectionOffset);
+                    var outLocation = (int)(foundAddress - _baseAddress - _textSectionOffset);
                     if (_resolverCache?.Cache.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
                         _cacheChanged |= true;
                 }
@@ -253,7 +253,7 @@ public sealed class Resolver {
         } finally {
             NativeMemory.Free(addressValues);
 
-            for (int i = 0; i < 256; i++) {
+            for (var i = 0; i < 256; i++) {
                 if (buckets[i] != null)
                     NativeMemory.Free(buckets[i]);
 
@@ -265,7 +265,7 @@ public sealed class Resolver {
         SaveCache();
     }
 
-    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+    [StructLayout(LayoutKind.Sequential)]
     private unsafe struct BucketAddressEntry {
         public nint* ValuePtr;
         public ulong* BytesPtr;
