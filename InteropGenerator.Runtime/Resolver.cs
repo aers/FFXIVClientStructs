@@ -153,7 +153,7 @@ public sealed class Resolver {
         Parallel.ForEach(partitioner, (range, loopState) => {
             var textPtr = (byte*)_targetSpace + _textSectionOffset;
 
-            for (int location = range.Item1; location < range.Item2; location++) {
+            for (int location = range.Item1; !loopState.IsStopped && location < range.Item2; location++) {
                 var currentByte = textPtr[location];
                 var bucket = buckets[currentByte];
                 if (bucket is null)
