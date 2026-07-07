@@ -13,8 +13,8 @@ public unsafe partial struct InfoProxySearch {
     [FieldOffset(0xD8)] public ulong JobMask; // 0xFFFFFFFFFFFFFFFF = all
     [FieldOffset(0xE0)] public ushort LevelMin;
     [FieldOffset(0xE2)] public ushort LevelMax;
-    [FieldOffset(0xE8)] public byte LanguageMask; // bit1=JP, bit2=EN, bit3=DE, bit4=FR, 0xFF = all
-    [FieldOffset(0xF0)] public byte GrandCompanyMask; // bit0=Maelstrom, bit1=TwinAdder, bit2=ImmortalFlames, 0xFF = all
+    [FieldOffset(0xE8)] public byte GrandCompanyMask; // bit1=Maelstrom, bit2=TwinAdder, bit3=ImmortalFlames, 0xFF = all
+    [FieldOffset(0xF0)] public byte LanguageMask; // bit0=JP, bit1=EN, bit2=DE, bit3=FR, 0xFF = all
     [FieldOffset(0xF8)] public ulong OnlineStatusMask; // 0 = unset (defaults to 1ul << 47 = Online only)
     [FieldOffset(0x100), FixedSizeArray] internal FixedSizeArray50<ushort> _locationIDs; // PlaceName IDs from PlayerSearchSubLocation.PlaceName
     [FieldOffset(0x164), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
