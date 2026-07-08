@@ -16,9 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x2470)]
 public unsafe partial struct Companion {
     [FieldOffset(0x2370)] public CompanionType CompanionType;
-    [FieldOffset(0x2374)] public ushort Model;
+    [FieldOffset(0x2374)] public ushort CompanionModel;
     [FieldOffset(0x2376)] public ushort FollowMountId;
-    [FieldOffset(0x2378)] public byte Scale;
+    [FieldOffset(0x2378)] public byte CompanionScale;
     [FieldOffset(0x2379), FixedSizeArray] internal FixedSizeArray2<byte> _inactiveIdle;
     [FieldOffset(0x237B)] private byte FollowMountUnknown12;
     [FieldOffset(0x237C)] private byte FollowMountUnknown13;
