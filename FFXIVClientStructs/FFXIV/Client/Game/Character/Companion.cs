@@ -18,13 +18,13 @@ public unsafe partial struct Companion {
     [FieldOffset(0x2370)] public CompanionType CompanionType;
     [FieldOffset(0x2374)] public ushort Model;
     [FieldOffset(0x2376)] public ushort FollowMountId;
-    [FieldOffset(0x2378)] public byte CompanionScale;
-    [FieldOffset(0x2379), FixedSizeArray] internal FixedSizeArray2<byte> _companionInactiveIdle;
+    [FieldOffset(0x2378)] public byte Scale;
+    [FieldOffset(0x2379), FixedSizeArray] internal FixedSizeArray2<byte> _inactiveIdle;
     [FieldOffset(0x237B)] private byte FollowMountUnknown12;
     [FieldOffset(0x237C)] private byte FollowMountUnknown13;
     [FieldOffset(0x237D)] private byte FollowMountUnknown14;
-    [FieldOffset(0x237E)] public byte CompanionInactiveBattle;
-    [FieldOffset(0x237F)] public byte CompanionInactiveWandering;
+    [FieldOffset(0x237E)] public byte InactiveBattle;
+    [FieldOffset(0x237F)] public byte InactiveWandering;
     [FieldOffset(0x2380)] private uint FollowMountUnknown0;
     [FieldOffset(0x2384)] private uint FollowMountUnknown1;
     [FieldOffset(0x2388)] private uint FollowMountUnknown2;
