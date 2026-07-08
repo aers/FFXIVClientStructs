@@ -12,5 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x2390)]
 public unsafe partial struct Ornament {
     [FieldOffset(0x2370)] public uint OrnamentId;
-    [FieldOffset(0x2374)] public byte AttachmentPoint;
+    /// <summary> OrnamentCustomizeGroup RowId </summary>
+    [FieldOffset(0x2374)] public uint CustomizeGroupId;
+    [FieldOffset(0x2374), Obsolete("Incorrect name. Use CustomizeGroupId")] public byte AttachmentPoint;
 }
