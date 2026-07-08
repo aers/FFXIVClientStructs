@@ -94,7 +94,7 @@ public unsafe partial struct Companion {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct VfxList {
         [FieldOffset(0x08)] public GameObject* OwnerObject;
-        // array of 3 VfxData* here
+        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<Pointer<VfxData>> _vfxData;
     }
 }
 
