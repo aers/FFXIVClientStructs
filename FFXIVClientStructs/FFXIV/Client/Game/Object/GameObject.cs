@@ -304,7 +304,8 @@ public enum ObjectKind : byte {
     Cutscene = 13,
     ReactionEventObject = 14,
     Ornament = 15,
-    CardStand = 16
+    CardStand = 16,
+    FollowMount = 17,
 }
 
 [GenerateInterop]

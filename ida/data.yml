@@ -11815,7 +11815,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       # 0x1413136A0: ctor # inlined at 0x1408CF5C4
-      0x1408A94C0: GetCompanionDataID
+      0x1408A94C0: GetCompanionId
       0x1408A92D0: SetupCompanion
   Client::Game::Character::RepresentationContainer:
     vtbls:
@@ -26320,6 +26320,10 @@ classes:
 #       0x141464BD0: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
 #       0x1413EB940: VectorResize_ShaderNode
 #       0x141464510: VectorResize_VertexShader
+  Client::Game::Character::Companion::VfxList:
+    vtbls:
+      - ea: 0x14218C9D0
+        base: Client::Graphics::Vfx::VfxDataListenner
   Client::Game::Character::Companion:
     vtbls:
       - ea: 0x14218C9E0
@@ -26329,6 +26333,7 @@ classes:
     funcs:
       0x1408D97E0: ctor
       0x141749310: PlaceCompanion
+      0x1417428E0: GetFollowMountId
   Client::Game::Character::Ornament:
     vtbls:
       - ea: 0x14218C6F8
