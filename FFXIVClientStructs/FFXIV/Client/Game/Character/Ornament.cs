@@ -11,6 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [Inherits<Character>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2390)]
 public unsafe partial struct Ornament {
-    [FieldOffset(0x2380)] public uint OrnamentId;
-    [FieldOffset(0x2384)] public byte AttachmentPoint;
+    [FieldOffset(0x2370)] public uint OrnamentId;
+    [FieldOffset(0x2374)] public byte AttachmentPoint;
 }
