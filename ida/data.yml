@@ -26327,8 +26327,8 @@ classes:
       - ea: 0x14218CCA0
         base: Client::Game::Character::CharacterData
     funcs:
+      0x1408D97E0: ctor
       0x141749310: PlaceCompanion
-      # 0x141402A60: ctor # inlined @ 1408a74e5
   Client::Game::Character::Ornament:
     vtbls:
       - ea: 0x14218C6F8
