@@ -21,6 +21,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x22)] public ushort PartsListCount;
     [FieldOffset(0x24)] public ushort ObjectCount;
     [FieldOffset(0x26)] public ushort DuplicateObjectCount; // duplicated components created by AtkUldManager::DuplicateNode post-load
+    // TODO: use UldResourceHandle*
     [FieldOffset(0x28)] public ResourceHandle* UldResourceHandle; // addons release this reference, components do not
     [FieldOffset(0x30)] public DuplicateNodeInfo* DuplicateNodeInfoList; // these are nodes duplicated by the loader during load
     [FieldOffset(0x38)] public AtkTimelineManager* TimelineManager;

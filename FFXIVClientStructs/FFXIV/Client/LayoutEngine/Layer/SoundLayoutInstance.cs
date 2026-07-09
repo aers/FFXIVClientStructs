@@ -5,13 +5,16 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
+// Client::LayoutEngine::Layer::SoundLayoutInstance
+//   Client::LayoutEngine::ILayoutInstance
+//   Client::System::Resource::ResourceEventListener
 [GenerateInterop(isInherited: true)]
 [Inherits<ILayoutInstance>]
 [Inherits<ResourceEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct SoundLayoutInstance {
     [FieldOffset(0x40)] public uint PathCrc;
-    [FieldOffset(0x48)] public ResourceHandle* Handle;
+    [FieldOffset(0x48)] public ResourceHandle* Handle; // TODO: use SoundResourceHandle*
     [FieldOffset(0x50)] public Vector3 Translation;
     [FieldOffset(0x60)] public Quaternion Rotation;
     [FieldOffset(0x70)] public Vector3 Scale;

@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 // Client::System::Resource::Handle::ShaderCodeResourceHandle
 //   Client::System::Resource::Handle::ResourceHandle
 //     Client::System::Common::NonCopyable
+// .shcd
 [GenerateInterop]
 [Inherits<ResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]

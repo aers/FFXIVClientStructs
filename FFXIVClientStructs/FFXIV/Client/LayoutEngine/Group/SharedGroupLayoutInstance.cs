@@ -22,7 +22,7 @@ public unsafe partial struct SharedGroupLayoutInstance {
     /// </summary>
     public const byte ObjectStainCount = 0xC9;
 
-    [FieldOffset(0x038)] public ResourceHandle* ResourceHandle;
+    [FieldOffset(0x038)] public ResourceHandle* ResourceHandle; // TODO: use SharedGroupResourceHandle*
     [FieldOffset(0x040)] public LayoutSharedGroupObject* TimelineObject;
     [FieldOffset(0x050)] public Transform Transform;
     [FieldOffset(0x080)] public ChildNodeContainer Instances;
