@@ -48,7 +48,7 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x1A4)] public float LastUpdateDT; // set to dt on update
     [FieldOffset(0x1A8)] public int LastUpdateOdd; // flips between 0 and 1 on update, presumably for some double buffering somewhere
     [FieldOffset(0x1C0)] public StringTable ResourcePaths;
-    [FieldOffset(0x1E0)] public ResourceHandle* LvbResourceHandle;
+    [FieldOffset(0x1E0)] public ResourceHandle* LvbResourceHandle; // TODO: use LevelSceneResourceHandle*
     [FieldOffset(0x1E8)] public StdVector<Pointer<ResourceHandle>> LayerGroupResourceHandles;
     [FieldOffset(0x218)] public StdMap<uint, Pointer<Terrain.TerrainManager>> Terrains;
     [FieldOffset(0x228)] public StdMap<ushort, Pointer<Layer.LayerManager>> Layers;
@@ -60,9 +60,9 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x298)] public StdMap<uint, Pointer<Filter>> Filters;
     // 0x2C0: some map
     // 0x2D0: vector<LayoutU3*> streamingoriginupdatelisteners
-    [FieldOffset(0x308)] public ResourceHandle* SvbResourceHandle;
-    [FieldOffset(0x310)] public ResourceHandle* LcbResourceHandle;
-    [FieldOffset(0x318)] public ResourceHandle* UwbResourceHandle;
+    [FieldOffset(0x308)] public ResourceHandle* SvbResourceHandle; // TODO: use SkyVisibilityResourceHandle*
+    [FieldOffset(0x310)] public ResourceHandle* LcbResourceHandle; // TODO: use ClipAABBResourceHandle*
+    [FieldOffset(0x318)] public ResourceHandle* UwbResourceHandle; // TODO: use UdwResourceHandle*
     // 0x320: instance pools
     // 0xB90: gfx bg object pool ptr
 

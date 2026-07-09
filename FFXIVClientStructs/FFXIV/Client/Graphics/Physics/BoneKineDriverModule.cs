@@ -12,6 +12,6 @@ public unsafe partial struct BoneKineDriverModule {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct PartialSkeletonEntry {
-        [FieldOffset(0x00)] public ResourceHandle* KineDriverResourceHandle;
+        [FieldOffset(0x00)] public ResourceHandle* KineDriverResourceHandle; // TODO: use KineDriverResourceHandle*
     }
 }

@@ -116,6 +116,6 @@ public unsafe partial struct BgObjectStainBuffer {
 public unsafe struct BgObjectAnimationData {
     [FieldOffset(0x00)] public CharacterBase.SkeletonAnimationContainer SkeletonAnimationContainer;
     [FieldOffset(0x100)] public SkeletonResourceHandle* AsyncSkeletonResourceHandle;
-    [FieldOffset(0x108)] public ResourceHandle* AsyncPapResourceHandle;
+    [FieldOffset(0x108)] public ResourceHandle* AsyncPapResourceHandle; // TODO: use PartialAnimationPackResourceHandle*
     [FieldOffset(0x110)] public Render.Skeleton* RenderSkeleton;
 }
