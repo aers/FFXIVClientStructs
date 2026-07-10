@@ -26824,6 +26824,7 @@ classes:
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
     funcs:
       0x141E6D4B0: SetPosition
+      0x141E6D600: SetIsNonPositional
       0x141E6D6B0: SetPlaybackSpeed
       0x141E6D660: SetPlaybackSpeed2 # something with speed of sound?
       0x141E6DD60: SetMidiNote
