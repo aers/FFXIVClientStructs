@@ -4017,6 +4017,8 @@ classes:
       - ea: 0x142159458
         base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
     vfuncs:
+      1: Update
+      2: TryReset
       3: GetSoundController
       5: SetIsLoadingSoundResource
       6: GetIsLoadingSoundResource
