@@ -173,6 +173,18 @@ public unsafe partial struct SoundManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 5F ?? BE ?? ?? ?? ?? ?? ?? ?? 48 85 C9 74 ?? 4C 39 77"), GenerateStringOverloads]
     public partial void PlayWeatherSound(CStringPointer path, uint fadeDuration);
 
+    /// <summary>
+    /// Takes a <see cref="SoundData"/> instance from this manager's free list and moves it to the playing list.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 0F 84 ?? ?? ?? ?? 44 0F B6 74 24")]
+    public partial SoundData* AcquireSoundData();
+
+    /// <summary>
+    /// Returns a <see cref="SoundData"/> instance to this manager's free list from the playing list.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 77")]
+    public partial void ReleaseSoundData(SoundData* soundData);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 256 * 0xD0)]
     public partial struct SoundDataMemory {
