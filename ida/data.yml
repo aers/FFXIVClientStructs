@@ -4017,6 +4017,8 @@ classes:
       - ea: 0x142159458
         base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
     vfuncs:
+      1: Update
+      2: TryReset
       3: GetSoundController
       5: SetIsLoadingSoundResource
       6: GetIsLoadingSoundResource
@@ -26824,6 +26826,7 @@ classes:
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
     funcs:
       0x141E6D4B0: SetPosition
+      0x141E6D600: SetIsNonPositional
       0x141E6D6B0: SetPlaybackSpeed
       0x141E6D660: SetPlaybackSpeed2 # something with speed of sound?
       0x141E6DD60: SetMidiNote
