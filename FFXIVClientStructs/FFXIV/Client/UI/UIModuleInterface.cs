@@ -180,7 +180,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(242)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(243)] public partial ??? ShowRaceCountdownEnd_2(???);
 
-    [VirtualFunction(247)] public partial bool ShouldLimitFps();
+    [VirtualFunction(248)] public partial bool ShouldLimitFps();
 }
 
 public enum UIModulePacketType {
