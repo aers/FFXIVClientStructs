@@ -15,6 +15,6 @@ public partial struct SoundController {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 8B BE")]
     public partial void SetPosition(Vector4 position);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4B 38 40 84 FF")] // 0x141E6D600
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4B 38 40 84 FF")]
     public partial void SetIsNonPositional(bool isPositional);
 }
