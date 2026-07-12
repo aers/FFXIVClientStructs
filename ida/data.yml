@@ -9873,6 +9873,10 @@ classes:
       0x1407077C0: InitAnimationHandlers
       0x1407071A0: InitTimelines
       0x1406FE9F0: ReapplyStain
+      0x1407065C0: IsTimelineIndexValid
+      0x140706420: PlayTimeline
+      0x140706520: StopTimeline
+      0x1407065F0: IsTimelinePlaying
       0x1407985B0: GetObjectStainColorByIndex # static
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
     vtbls:
@@ -11609,6 +11613,9 @@ classes:
       15: SetTargetStatus
       16: SetDistance
       17: SetDrawObject
+      20: PlayTimeline
+      21: StopTimeline
+      22: IsTimelinePlaying
       23: GetDrawObject
       24: GetCharacterBase
       25: UpdateRadius
@@ -11618,6 +11625,7 @@ classes:
       36: Update
       47: GetCenterPosition
       48: GetNameId
+      49: UpdateSharedTimelineState
       54: GetTargetType
       55: PositionModified
       56: RotationModified
@@ -16037,6 +16045,8 @@ classes:
       232: GetOccupiedConditionId
       233: GetOccupiedPermissionId
       251: GetScriptVersion
+      253: UpdateSharedTimelineState
+      254: UpdateTimelinesByBitmask
       258: GetDescription
       259: GetReliefText
       260: GetTimeRemaining # pass current unix timestamp as a2
@@ -26223,7 +26233,9 @@ classes:
         base: Client::Game::Object::GameObject
     funcs:
       0x140898A40: GetEventHandlers
+      0x14174DCC0: SetSharedTimelineState
       0x14174DE10: PlayAnimation
+      0x14174DF40: UpdateTimelinesByBitmask
   Client::Game::Object::Treasure:
     vtbls:
       - ea: 0x1422C5020

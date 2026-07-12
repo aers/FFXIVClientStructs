@@ -46,7 +46,11 @@ public unsafe partial struct SharedGroupLayoutInstance {
     [FieldOffset(0x120)] public uint PrefabFlags1; // 0x1 = load started; 0x3 = load failed or contents added; 0x4 = failed to add contents
     [FieldOffset(0x12C)] public uint PrefabFlags2; // 0x8 = colliders active
 
-    // [FieldOffset(0x14C), FixedSizeArray] internal FixedSizeArray16<byte> _timelineIndices; // used by EventObjAnimation ActorControl packet, some kind of simple lookup table
+    /// <remarks>Used by EventObjAnimation ActorControl packet, it's some kind of simple lookup table.</remarks>
+    [FieldOffset(0x154), FixedSizeArray] internal FixedSizeArray16<byte> _timelineIndices;
+
+    /// <remarks> Set in PlayAnimation, it's an index into TimelineIndices.</remarks>
+    [FieldOffset(0x16D)] public byte PlayingTimelineIndex;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 FF C7 4D 8D 76 ?? 44 3B 7B")]
     public partial bool InitAnimationHandlers(void* fileData);
@@ -70,6 +74,26 @@ public unsafe partial struct SharedGroupLayoutInstance {
     /// <returns>The sRGB color for the given object stain.</returns>
     [MemberFunction("33 C0 81 F9 ?? ?? ?? ?? 0F 42 C1")]
     public static partial ByteColor* GetObjectStainColorByIndex(byte stainIndex);
+
+    /// <summary> Checks if this timeline is currently playing. </summary>
+    /// <summary> Stops this timeline's playback. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 85 EF 74 ?? 84 C0")]
+    public partial bool IsTimelinePlaying(uint index);
+
+    /// <summary> Stops this timeline's playback. </summary>
+    /// <param name="index">Index into TimelineIndices.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 80 F9")]
+    public partial bool StopTimeline(uint index);
+
+    /// <summary> Start playing this timeline. </summary>
+    /// <param name="index">Index into TimelineIndices.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 B6")]
+    public partial bool PlayTimeline(uint index, uint a1);
+
+    /// <summary> Checks if the timeline index is in range, and actually backed by something. </summary>
+    /// <param name="index">Index into TimelineIndices.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 3B FD")]
+    public partial bool IsTimelineIndexValid(uint index);
 
     /// <summary>
     /// Attempts to set the stain on the models in this group.
