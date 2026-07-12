@@ -5618,8 +5618,14 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x1404738F0: Finalizer
       0x140473960: OpenFile
-      0x1404738F0: Close
+      0x140473AF0: Read
+      0x140473BA0: ReadAt
+      0x140473C50: Write
+      0x140473CF0: SetFilePointer
+      0x140473D40: GetFileSize
+      0x140473D80: Close
   Client::System::File::FileHandle:
     funcs:
       0x1404760F0: Reset
@@ -5669,6 +5675,14 @@ classes:
       0x1400D5310: Copy
       0x140095F10: SetPathUtf8String
       0x1400956E0: dtor
+  Client::System::File::SqPackManager:
+    funcs:
+      0x141882A90: ResolveSqPackPath
+      0x141882EC0: ctor
+      0x1418831F0: LoadSqPack
+      0x141883600: LoadDataFiles # inlined in LoadSqPack
+      0x141883760: TryGetOffsetFromIndex
+      0x1418839C0: TryGetOffsetFromIndex2
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
       - ea: 0x1421446A0
