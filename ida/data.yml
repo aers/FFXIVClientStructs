@@ -5618,6 +5618,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x1404738C0: ctor
       0x1404738F0: Finalizer
       0x140473960: OpenFile
       0x140473AF0: Read
