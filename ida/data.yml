@@ -26222,6 +26222,7 @@ classes:
       - ea: 0x1422C4DB0
         base: Client::Game::Object::GameObject
     funcs:
+      0x140898A40: GetEventHandlers
       0x14174DE10: PlayAnimation
   Client::Game::Object::Treasure:
     vtbls:
