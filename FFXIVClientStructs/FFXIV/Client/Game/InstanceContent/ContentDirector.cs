@@ -45,7 +45,7 @@ public unsafe partial struct ContentDirector {
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
     public struct MapEffectItem {
-        [FieldOffset(0x00)] public uint LayoutId; // ContentDirectorManagedSG.Unknown0
+        [FieldOffset(0x00)] public uint LayoutId;
         [FieldOffset(0x05)] public byte Unknown1; // ContentDirectorManagedSG.Unknown1
         [FieldOffset(0x08)] public ushort State;
         [FieldOffset(0x0A)] public byte Flags;
