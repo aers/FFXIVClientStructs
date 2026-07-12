@@ -18003,6 +18003,7 @@ classes:
     funcs:
       0x140B6D8A0: ctor
       0x140B6F470: ApplyMapEffect
+      0x140B6F2E0: PlayMapEffectTimeline
       0x140B703F0: IsPlayCutscene
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
