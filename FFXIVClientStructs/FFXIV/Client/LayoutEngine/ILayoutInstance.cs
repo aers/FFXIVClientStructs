@@ -69,6 +69,10 @@ public unsafe partial struct ILayoutInstance {
     [VirtualFunction(21)]
     public partial bool HavePrimary();
 
+    /// <summary>If the primary object has been loaded.</summary>
+    [VirtualFunction(21)]
+    public partial bool IsPrimaryLoaded();
+
     [VirtualFunction(23)]
     public partial Graphics.Scene.Object* GetGraphics();
 
@@ -150,6 +154,10 @@ public unsafe partial struct ILayoutInstance {
 
     [VirtualFunction(72)]
     public partial Vector4* GetBoundingSphereImpl(Vector4* result);
+
+    /// <summary>If we have a primary object and its been loaded. Basically HavePrimary() and IsPrimaryLoaded() in one call.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 75 ?? 8B D5")]
+    public partial bool IsPrimaryReady();
 
     // vf73: getWorldBB, uses AABB with padded vec3's
     // vf74: get transform split into RT matrix + scale

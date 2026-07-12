@@ -253,6 +253,10 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
     public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
 
+    /// <summary>If we have a SharedGroupLayoutInstance and it's loaded.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 33 FF 48 89 B4 24")]
+    public partial bool IsSharedGroupLoaded();
+
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct NamePlateColors {
         [FieldOffset(0x00), CExporterIgnore] public ulong Data;

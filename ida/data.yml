@@ -9636,6 +9636,7 @@ classes:
       17: GetTransform
       18: SetTransform
       21: HavePrimary
+      22: IsPrimaryLoaded
       23: GetGraphics
       24: GetGraphics2
       25: SetGraphics
@@ -9663,6 +9664,8 @@ classes:
       70: GetTransformImpl
       71: SetTransformImpl
       72: GetBoundingSphereImpl
+    funcs:
+      0x1406FA0E0: IsPrimaryReady
   Client::LayoutEngine::LayoutWorld:
     instances:
       - ea: 0x142A8BB60
@@ -11641,6 +11644,7 @@ classes:
       0x1408985D0: UpdateVisualRotation
       0x140898780: UpdateVisualScale
       0x140898AB0: GetEventHandlers
+      0x1408991E0: IsSharedGroupLoaded
       0x140899230: IsReadyToDraw
       0x140899B70: SetEventId
       0x140899BE0: SetFateId
