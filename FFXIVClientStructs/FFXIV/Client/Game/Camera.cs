@@ -95,6 +95,9 @@ public unsafe partial struct Camera {
 
     [VirtualFunction(31)]
     public partial float GetInputDeltaVMultiplier();
+
+    [MemberFunction("48 83 EC ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? B8")]
+    public static partial CameraInputSource GetCameraInputSource();
 }
 
 // Client::Game::LobbyCamera
@@ -147,4 +150,11 @@ public enum CameraControlMode {
     FirstPersonUnk = 4,
     LockonThirdPerson = 5,
     LockonUnk6 = 6,
+}
+
+public enum CameraInputSource {
+    None = 0,
+    Keyboard = 1,
+    Analog = 2,
+    MouseDrag = 3,
 }
