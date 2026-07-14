@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Common;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
+// Client::System::File::FileHandleManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct FileHandleManager {

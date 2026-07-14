@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 // inlined ctor, see FileManager ctor
 
+// Client::System::File::FileDescriptor
 /// <summary>
 /// Describes a filesystem operation to be performed.
 /// </summary>
