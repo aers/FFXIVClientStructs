@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.File;
 // https://github.com/NotAdam/Lumina/blob/12d0e8d418d8dc49f04e6bee1d06bae2905232c6/src/Lumina/Data/Structs/SqPackIndexHeader.cs
 // https://github.com/perchbirdd/ResLogger2.Common/blob/c9a57f45f49d933c7a3e227d488d1c5eb62144a3/src/IndexFile.cs
 [StructLayout(LayoutKind.Explicit, Size = 0x400)]
-public struct SqPackIndexHeader {
+public unsafe struct SqPackIndexHeader {
     [FieldOffset(0x00)] public uint Size;
     [FieldOffset(0x04)] public uint Version;
     [FieldOffset(0x08)] public uint IndexDataOffset;
