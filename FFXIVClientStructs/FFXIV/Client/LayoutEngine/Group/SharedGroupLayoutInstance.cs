@@ -87,6 +87,7 @@ public unsafe partial struct SharedGroupLayoutInstance {
 
     /// <summary> Start playing this timeline. </summary>
     /// <param name="index">Index into TimelineIndices.</param>
+    /// <param name="a1"></param>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 B6")]
     public partial bool PlayTimeline(uint index, uint a1);
 
