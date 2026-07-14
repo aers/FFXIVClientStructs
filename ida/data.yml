@@ -586,6 +586,8 @@ classes:
     instances:
       - ea: 0x1428914B0
     funcs:
+      0x140619670: HasKeyboardCameraInput
+      0x1406199B0: HasAnalogCameraInput
       0x140619C40: Update
       0x140619E90: GetInputStatus
       0x141811080: IsAutoRunning # static function, might belong in a different class.
@@ -1052,6 +1054,7 @@ classes:
         base: Client::System::Input::InputDevice
     funcs:
       0x141782F20: ctor
+      0x141783410: ScheduleCursorMove # static
   Client::System::Input::KeyboardDeviceInterface:
     vtbls:
       - ea: 0x14216D118
@@ -26403,6 +26406,7 @@ classes:
       30: GetInputDeltaHMultiplier
       31: GetInputDeltaVMultiplier
     funcs:
+      0x1418973E0: GetCameraInputSource # static
       0x14189DEF0: UpdateRotation
       0x1418A0F50: ctor
       0x1407915B0: WorldToViewportPoint
