@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 // Client::System::File::SqPackHeader
