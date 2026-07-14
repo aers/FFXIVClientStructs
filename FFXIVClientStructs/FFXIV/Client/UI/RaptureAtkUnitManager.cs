@@ -21,7 +21,6 @@ public unsafe partial struct RaptureAtkUnitManager {
     [FieldOffset(0x9D10)] public UiFlags UiFlags;
 
     [FieldOffset(0x9D20)] public byte EffectiveUiHighScale; // effective value of UiHighScale config option after being capped by resolution
-
     [FieldOffset(0x9D21)] public bool IsEditingHudLayout;
 
     [FieldOffset(0x9D24)] public bool IsUiFading; // true whenever FadeMiddleBack is active
