@@ -1,4 +1,3 @@
-
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.File;

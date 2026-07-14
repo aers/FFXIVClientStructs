@@ -8,10 +8,6 @@ public unsafe partial struct FileAccessPath {
     [FieldOffset(0x208)] public char* LongStringPtr;
 
     public override string ToString() {
-        if (LongStringPtr == null)
-            fixed (char* p = Buffer)
-                return new string(p);
-        else
-            return new string(LongStringPtr);
+        return LongStringPtr != null ? new string(LongStringPtr) : BufferString;
     }
 }
