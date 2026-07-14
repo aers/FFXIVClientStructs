@@ -11674,6 +11674,7 @@ classes:
       0x140899B70: SetEventId
       0x140899BE0: SetFateId
       0x140899C00: SetEventState
+      0x140899C80: SetVisibility
       0x14089A340: GetAsCharacter
       0x14089A370: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
       0x14089A540: DistanceBetweenHitboxesXZ # static

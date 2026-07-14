@@ -42,7 +42,9 @@ public unsafe partial struct GameObject {
     /// <remarks> Calculated in <see cref="UpdateNextDistanceAndTargetStatus"/> right before <c>GameObjectManager.Update</c> sets it to <see cref="CurrentDistance"/> via <see cref="SetDistance"/>. </remarks>
     [FieldOffset(0x96)] public byte NextDistance;
     [FieldOffset(0x96), Obsolete("Renamed to NextDistance")] public byte YalmDistanceFromPlayerZ;
+    [FieldOffset(0x97)] public byte Visibility;
     [FieldOffset(0x9A)] public ObjectTargetableFlags TargetableStatus; // Determines whether the game object can be targeted by the user
+    [FieldOffset(0x9B)] public ObjectUpdateFlags UpdateFlags;
     [FieldOffset(0xB0)] public Vector3 Position;
     [FieldOffset(0xC0)] public float Rotation;
     [FieldOffset(0xC4)] public float Scale;
@@ -152,6 +154,9 @@ public unsafe partial struct GameObject {
 
     [VirtualFunction(34)]
     public partial void SetReadyToDraw();
+
+    [VirtualFunction(36)]
+    public partial void Update();
 
     [VirtualFunction(47)]
     public partial void GetCenterPosition(Vector3* outCenter);
@@ -275,6 +280,19 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 33 FF 48 89 B4 24")]
     public partial bool IsSharedGroupLoaded();
 
+    /// <summary>Sets EventState to a new value.</summary>
+    [MemberFunction("80 89 ?? ?? ?? ?? ?? 88 51")]
+    public partial void SetEventState(byte eventState);
+
+    /// <summary>Sets Visibility to a new value.</summary>
+    /// <param name="visibility">0 shows the object, 1 hides it.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4F ?? 89 8E")]
+    public partial void SetVisibility(byte visibility);
+
+    /// <summary>Sets EventId to a new value.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 56 ?? 48 8B 4F")]
+    public partial void SetEventId(EventId eventId);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct NamePlateColors {
         [FieldOffset(0x00), CExporterIgnore] public ulong Data;
@@ -385,6 +403,7 @@ public enum TargetType {
 
 [Flags]
 public enum ObjectTargetableFlags : byte {
+    Unk0 = 1 << 0, // Seen in SpawnObject/SpawnTreasure packets
     IsTargetable = 1 << 1,
     Unk1 = 1 << 2, // This flag is used but purpose is unclear
     ReadyToDraw = 1 << 6
@@ -406,4 +425,17 @@ public enum VisibilityFlags : ulong {
     None = 0,
     Model = 1ul << 1,
     Nameplate = 1ul << 11
+}
+
+[Flags]
+public enum ObjectUpdateFlags : byte {
+    /// <summary>Seen when Name is modified.</summary>
+    Name = 1,
+    Unk2 = 2,
+    /// <summary>Seen when EventId is modified.</summary>
+    EventId = 4,
+    /// <summary>Seen when TargetableStatus is modified.</summary>
+    TargetableStatus = 8,
+    Unk16 = 16,
+    Unk32 = 32,
 }

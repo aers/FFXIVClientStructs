@@ -10,8 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 public unsafe partial struct EventObject {
     [FieldOffset(0x1A0), CExporterExcel("EObj")] public nint EObjRowPtr;
     [FieldOffset(0x1A8), CExporterExcel("ExportedSG")] public nint ExportedSGRowPtr;
-    [FieldOffset(0x1B2)] public ushort SharedTimelineState; // ActorControl category 0x199 (SetSharedTimelineState) sets this field
+    [FieldOffset(0x1B2)] public ushort SharedTimelineState; // ActorControl category 0x199 (SetSharedTimelineState) sets this field and it can also be set when spawned by SpawnObjectPacket.
+    /// <summary>Arbritrary value set in SpawnObjectPacket. How it's used depends on GameObject.SubKind.</summary>
+    [FieldOffset(0x1B4)] public uint Arg;
     [FieldOffset(0x1B8)] public byte Flags;
+
     /// <summary>Changes the currently playing timelines based on a bitmask.</summary>
     /// <param name="sharedTimelineState">Only sets SharedTimelineState, does not have any other effect in this function.</param>
     /// <param name="bitmask">Each bit represents a timeline index in the SharedGroup. Setting a bit means play, an unset bit means stop.</param>

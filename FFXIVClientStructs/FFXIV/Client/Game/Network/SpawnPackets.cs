@@ -122,9 +122,11 @@ public partial struct CommonSpawnData {
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public struct SpawnObjectPacket {
     [FieldOffset(0x00)] public byte ObjectIndex;
-    [FieldOffset(0x01)] public byte ObjectKind;
-    [FieldOffset(0x02)] public byte TargetableStatus;
-    [FieldOffset(0x03)] public byte Visibility;
+    [FieldOffset(0x01)] public byte ObjectKind; // TODO: Use ObjectKind enum
+    [FieldOffset(0x02), Obsolete("Use IsTargetable")] public byte TargetableStatus;
+    [FieldOffset(0x02)] public bool IsTargetable;
+    [FieldOffset(0x03), Obsolete("Use IsHidden")] public byte Visibility;
+    [FieldOffset(0x03)] public bool IsHidden;
     /// <remarks> <see cref="HousingObjectId"/> when <see cref="ObjectKind.HousingEventObject"/>. </remarks>
     [FieldOffset(0x04)] public uint BaseId;
     [FieldOffset(0x08)] public uint EntityId;
@@ -136,16 +138,15 @@ public struct SpawnObjectPacket {
     /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
     [FieldOffset(0x18)] public uint GimmickId;
     [FieldOffset(0x1C)] public float Radius;
-    [FieldOffset(0x20)] private ushort Unk20; // SharedGroupTimelineState?
     [FieldOffset(0x22)] public ushort Rotation;
     /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
     [FieldOffset(0x24)] public ushort FateId;
     /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
     [FieldOffset(0x26)] public byte EventState;
-    [FieldOffset(0x27)] private byte Unk27;
-    [FieldOffset(0x28)] private uint Unk28;
-    [FieldOffset(0x2C)] private uint Unk2C;
-    [FieldOffset(0x30)] private uint Unk30;
+    /// <remarks> Used by <see cref="ObjectKind.GatheringPoint"/>, <see cref="ObjectKind.EventObj"/>, <see cref="ObjectKind.AreaObject"/>. </remarks>
+    [FieldOffset(0x2C)] public uint Arg1;
+    /// <remarks> Used by <see cref="ObjectKind.GatheringPoint"/>, <see cref="ObjectKind.EventObj"/>, <see cref="ObjectKind.HousingEventObject"/>. </remarks>
+    [FieldOffset(0x30)] public uint Arg2;
     [FieldOffset(0x34)] public float PositionX;
     [FieldOffset(0x38)] public float PositionY;
     [FieldOffset(0x3C)] public float PositionZ;
@@ -161,15 +162,17 @@ public partial struct SpawnTreasurePacket {
     [FieldOffset(0x0E)] public byte ObjectIndex;
     [FieldOffset(0x0F)] public byte ItemCount;
     [FieldOffset(0x10)] public byte EventState;
-    [FieldOffset(0x11)] public byte CofferKind;
-    [FieldOffset(0x12)] public byte Visibility;
+    [FieldOffset(0x11)] public byte CofferKind; // TODO: Change to Treasure.TreasureKind
+    [FieldOffset(0x12), Obsolete("Use IsHidden")] public byte Visibility;
+    [FieldOffset(0x12)] public bool IsHidden;
 
     [FieldOffset(0x14)] public float CountdownTime;
     [FieldOffset(0x18)] public float CountdownStartTime;
     [FieldOffset(0x1C)] public float ClaimTime;
     [FieldOffset(0x20)] public EventId EventId;
     [FieldOffset(0x24)] public uint ExportedSGRowId;
-    [FieldOffset(0x28)] public byte TargetableStatus;
+    [FieldOffset(0x28), Obsolete("Use NotTargetable")] public byte TargetableStatus;
+    [FieldOffset(0x28)] public bool NotTargetable;
 
     [FieldOffset(0x2A)] public ushort PositionX;
     [FieldOffset(0x2C)] public ushort PositionY;
