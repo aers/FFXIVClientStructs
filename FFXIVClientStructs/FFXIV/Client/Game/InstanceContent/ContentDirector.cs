@@ -34,6 +34,19 @@ public unsafe partial struct ContentDirector {
     [VirtualFunction(329)]
     public partial uint GetContentTimeMax();
 
+    /// <summary>Changes the state of a map effect.</summary>
+    /// <param name="index">Index into MapEffects.</param>
+    /// <param name="state">The new state for this MapEffect.</param>
+    /// <param name="timelineIndex">Which timeline to play.</param>
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B FA 41 0F B7 E8")]
+    public partial void ApplyMapEffect(uint index, ushort state, ushort timelineIndex);
+
+    /// <summary>Handles changes the timeline for a map effect</summary>
+    /// <param name="index">Index into MapEffects.</param>
+    /// <param name="timelineIndex">Which timeline to play.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 3A C3 74 ?? 44 0F B7 C5")]
+    public partial bool PlayMapEffectTimeline(uint index, ushort timelineIndex);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x608)]
     public partial struct MapEffectList {
@@ -45,7 +58,7 @@ public unsafe partial struct ContentDirector {
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
     public struct MapEffectItem {
-        [FieldOffset(0x00)] public uint LayoutId; // ContentDirectorManagedSG.Unknown0
+        [FieldOffset(0x00)] public uint LayoutId;
         [FieldOffset(0x05)] public byte Unknown1; // ContentDirectorManagedSG.Unknown1
         [FieldOffset(0x08)] public ushort State;
         [FieldOffset(0x0A)] public byte Flags;

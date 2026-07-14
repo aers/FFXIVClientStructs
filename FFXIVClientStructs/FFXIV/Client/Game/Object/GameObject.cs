@@ -124,6 +124,18 @@ public unsafe partial struct GameObject {
     [VirtualFunction(17)]
     public partial void SetDrawObject(DrawObject* drawObject);
 
+    /// <summary> Start playing this timeline. </summary>
+    [VirtualFunction(20)]
+    public partial bool PlayTimeline(uint index, uint a2);
+
+    /// <summary> Stops this timeline's playback. </summary>
+    [VirtualFunction(21)]
+    public partial bool StopTimeline(uint index);
+
+    /// <summary> Checks if this timeline is currently playing. </summary>
+    [VirtualFunction(22)]
+    public partial bool IsTimelinePlaying(uint index);
+
     [VirtualFunction(23)]
     public partial DrawObject* GetDrawObject();
 
@@ -146,6 +158,12 @@ public unsafe partial struct GameObject {
 
     [VirtualFunction(48)]
     public partial uint GetNameId();
+
+    /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
+    /// <param name="oldSharedTimelineState">The old SharedTimelineState value.</param>
+    /// <param name="newSharedTimelineState">The new SharedTimelineState value.</param>
+    [VirtualFunction(49)]
+    public partial void UpdateSharedTimelineState(ushort oldSharedTimelineState, ushort newSharedTimelineState);
 
     [VirtualFunction(54)]
     public partial TargetType GetTargetType();
@@ -252,6 +270,10 @@ public unsafe partial struct GameObject {
     /// <returns><paramref name="vector" /></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
     public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
+
+    /// <summary>If we have a SharedGroupLayoutInstance and it's loaded.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 33 FF 48 89 B4 24")]
+    public partial bool IsSharedGroupLoaded();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct NamePlateColors {

@@ -62,6 +62,22 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
+    /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
+    /// <param name="gameObject">The game object to update.</param>
+    /// <param name="oldSharedTimelineState">The new SharedTimelineState value.</param>
+    /// <param name="newSharedTimelineState">The old SharedTimelineState value.</param>
+    /// <param name="timelineIndices">Seems to modify newSharedTimelineState in in some EventHandlers.</param>
+    [VirtualFunction(253)]
+    public partial void UpdateSharedTimelineState(GameObject* gameObject, ushort oldSharedTimelineState, ushort newSharedTimelineState, ulong timelineIndices);
+
+    /// <summary>Changes the currently playing timelines based on a bitmask.</summary>
+    /// <param name="gameObject">The game object to update.</param>
+    /// <param name="sharedTimelineState">The new SharedTimelineState value.</param>
+    /// <param name="bitmask">The new timeline bitmask.</param>
+    /// <param name="unused">Unused and can be left empty.</param>
+    [VirtualFunction(254)]
+    public partial void UpdateTimelinesByBitmask(GameObject* gameObject, uint sharedTimelineState, uint bitmask, ulong unused);
+
     [VirtualFunction(258)]
     public partial void GetDescription(Utf8String* outDescription);
 
