@@ -59,7 +59,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x34)] public uint NameId;
     [FieldOffset(0x38)] public uint LayoutId;
     [FieldOffset(0x3C)] public uint ObjectType; // depends on ObjectKind? can be CompanionOwnerId, can also be FurnitureMemory index
-    [FieldOffset(0x40)] public uint EventId;
+    [FieldOffset(0x40)] public uint EventId; // TODO: Change to EventId
     [FieldOffset(0x44)] public uint OwnerId;
     [FieldOffset(0x48)] public uint TetherTargetId;
     [FieldOffset(0x4C)] public uint MaxHealthPoints;
@@ -68,7 +68,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x58)] public ushort FateId;
     [FieldOffset(0x5A)] public ushort MaxResourcePoints; // MP/GP/CP
     [FieldOffset(0x5C)] public ushort ResourcePoints;
-    [FieldOffset(0x5E)] private ushort Unk5E;
+    [FieldOffset(0x5E)] public ushort Behavior;
     [FieldOffset(0x60)] public ushort ModelChara;
     [FieldOffset(0x62)] public ushort Rotation;
     [FieldOffset(0x64)] public ushort MountId;
@@ -76,7 +76,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x68)] public ushort FollowMountId;
     [FieldOffset(0x6A)] public ushort OrnamentId;
     [FieldOffset(0x6C)] public ushort TetherId;
-    [FieldOffset(0x6E)] public byte SpawnIndex; // unused
+    [FieldOffset(0x6E)] public byte SpawnIndex;
     [FieldOffset(0x6F)] public CharacterModes CharacterMode;
     [FieldOffset(0x70)] public byte ModeParam;
     [FieldOffset(0x71)] public ObjectKind ObjectKind;
@@ -87,7 +87,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x76)] public byte Level;
     [FieldOffset(0x77)] public byte ClassJobId;
     [FieldOffset(0x78)] public byte EventState;
-    [FieldOffset(0x79)] private byte Unk79; // GameObject+0x97
+    [FieldOffset(0x79)] public bool IsHidden;
     [FieldOffset(0x7A)] public byte CombatTagType;
     [FieldOffset(0x7B)] public byte BuddyEquipHead;
     [FieldOffset(0x7C)] public byte BuddyEquipChest;
