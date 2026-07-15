@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Cutscene)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x128)]
 public unsafe partial struct AgentCutscene {
     [FieldOffset(0x30)] public uint SkipDialogAddonId;
     [FieldOffset(0x38)] public AtkModuleInterface.AtkEventInterface* SkipCallback;
