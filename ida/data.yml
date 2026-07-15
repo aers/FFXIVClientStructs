@@ -2862,6 +2862,8 @@ classes:
       0x14066E700: GetDuplicatedNode
       0x14066AD80: UpdateDrawNodeList
       0x14066AFF0: TraverseNode
+      0x14066B060: CountDrawNodeCallback
+      0x14066B070: AddDrawNodeCallback
       0x14066D180: Finalizer
       0x140668920: SetupTimelineFromULDResourceHandle # CreateTimeline
       0x1406687B0: SetupComponentTimelineFromULDResourceHandle
@@ -9097,6 +9099,7 @@ classes:
       0x1406710D0: GetScaledWidth
       0x140671110: GetScaledHeight
       0x140671150: CalculateBounds
+      0x140671290: GetCollisionNodeAtCoords
       0x140671A80: SetFlag
       0x140671B70: SetAddonParamUnknown1
       0x140671DE0: GetUnitBaseAttachmentPositionInfo
@@ -9128,6 +9131,8 @@ classes:
       0x1406752C0: FireCallback
       0x1406760D0: MoveDelta
       0x140678290: UpdateCollisionNodeList
+      0x1406793B0: PopulateCollisionNodeList
+      0x140679510: CountCollisionNodes
       0x140678ED0: SetOperationGuide
       0x140678CF0: SetOperationGuideEx
       0x140678F20: ClearOperationGuide
@@ -9150,6 +9155,7 @@ classes:
       14: GetAtkResNode
       15: GetFocusNode
       17: InitializeFromComponentData
+      18: GetCollisionNodeAtCoords
     funcs:
       0x14068C7A0: ctor
       0x14068CA20: GetOwnerNodePosition
@@ -12973,6 +12979,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140581210: ctor
+      0x1405812C0: Show
+      0x140581480: Hide
   Client::UI::Agent::AgentCatch:
     vtbls:
       - ea: 0x1421ED758
@@ -21924,6 +21932,9 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14167C290: ctor
+      0x1416A3150: dtor
+      0x14167C3B0: ReceiveEvent
+      0x14167C750: OnRefresh
   Client::UI::AddonSubmarinePartsMenu: # 405
     vtbls:
       - ea: 0x1422AC4B8

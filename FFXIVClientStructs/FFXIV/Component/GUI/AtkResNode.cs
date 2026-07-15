@@ -69,9 +69,13 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     [BitField<bool>(nameof(IsStoppingRapidCursorNavigationRight), 7)]
     // Bit 8: Don't make visible on new timeline label
     [BitField<byte>(nameof(ClipCount), 9, 8)]
+    [BitField<bool>(nameof(IsDrawDisabled), 18)]
+    [BitField<bool>(nameof(IsCollisionClipped), 19)]
     [BitField<bool>(nameof(IsClickableCursorOnHover), 20)]
+    [BitField<bool>(nameof(IsRenderedOnTop), 21)]
     [BitField<bool>(nameof(IsTextInputCursorOnHover), 22)]
     [BitField<bool>(nameof(IsEllipticalCollision), 23)]
+    [BitField<bool>(nameof(IsTransformedCollision), 24)]
     [FieldOffset(0xB0)] public uint DrawFlags;
 
     /// <summary> Is dirty (has updates to be drawn) </summary>
@@ -89,14 +93,28 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     /// <summary> Stops rapid cursor navigation Right </summary>
     public partial bool IsStoppingRapidCursorNavigationRight { readonly get; set; }
 
+    /// <summary> Disables drawing this node. </summary>
+    /// <remarks> Also ignored by addon collision selection. </remarks>
+    public partial bool IsDrawDisabled { readonly get; set; }
+
+    /// <summary> Enables clip-aware addon collision selection for this node. </summary>
+    /// <remarks> Requires <see cref="AtkUnitBase.EnableCollisionClipping"/> on the owning addon. </remarks>
+    public partial bool IsCollisionClipped { readonly get; set; }
+
     /// <summary> Change CursorType to Clickable on hover </summary>
     public partial bool IsClickableCursorOnHover { readonly get; set; }
+
+    /// <summary> Renders this node on top of regular nodes. </summary>
+    public partial bool IsRenderedOnTop { readonly get; set; }
 
     /// <summary> Change CursorType to TextInput on hover </summary>
     public partial bool IsTextInputCursorOnHover { readonly get; set; }
 
     /// <summary> Use elliptical collision instead of rectangular </summary>
     public partial bool IsEllipticalCollision { readonly get; set; }
+
+    /// <summary> Uses transformed coordinates for collision. </summary>
+    public partial bool IsTransformedCollision { readonly get; set; }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 ?? 5B C3 33 DB")]
     public partial AtkResNode* Ctor();

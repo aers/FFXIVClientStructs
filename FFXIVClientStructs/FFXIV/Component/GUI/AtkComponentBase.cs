@@ -94,6 +94,10 @@ public unsafe partial struct AtkComponentBase : ICreatable<AtkComponentBase> {
     [VirtualFunction(17)]
     public partial void InitializeFromComponentData(void* data); // AtkUldComponentDataBase* ?
 
+    /// <summary> Gets the collision node at the given screen coordinates. </summary>
+    [VirtualFunction(18)]
+    public partial AtkResNode* GetCollisionNodeAtCoords(short x, short y);
+
     public AtkResNode* GetResNodeById(uint id) {
         var node = GetNodeById(id);
         return node != null && node->GetNodeType() == NodeType.Res ? node : null;
