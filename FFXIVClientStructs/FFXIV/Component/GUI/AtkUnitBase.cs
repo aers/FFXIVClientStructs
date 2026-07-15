@@ -57,6 +57,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1A4)] public byte Flags1A4;
     [BitField<bool>(nameof(EnableTextNodePopulation), 5)]
     [BitField<bool>(nameof(DisableShowOnOpen), 6)]
+    [BitField<bool>(nameof(EnableCollisionClipping), 7)]
     [FieldOffset(0x1A5)] public byte Flags1A5;
     // 2 bytes padding
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
@@ -133,6 +134,10 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     /// <summary> Enables TextNodes to be populated (before OnSetup) </summary>
     public partial bool EnableTextNodePopulation { readonly get; set; }
+
+    /// <summary> Enables clip-aware collision selection for nodes with <see cref="AtkResNode.IsCollisionClipped"/>. </summary>
+    /// <remarks> Uses the nearest parent node with <see cref="NodeFlags.Clip"/>. </remarks>
+    public partial bool EnableCollisionClipping { readonly get; set; }
 
     /// <summary> Enable Filter (Modal window with backdrop) </summary>
     public partial bool EnableFilter { readonly get; set; }
@@ -271,6 +276,9 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 0C 48 8B CF")]
     public partial AtkEvent* RegisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener, AtkResNode* node);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8D B3")]
+    public partial bool UnregisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener);
 
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
