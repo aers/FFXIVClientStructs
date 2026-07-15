@@ -70,7 +70,7 @@ public unsafe partial struct ILayoutInstance {
     public partial bool HavePrimary();
 
     /// <summary>If the primary object has been loaded.</summary>
-    [VirtualFunction(21)]
+    [VirtualFunction(22)]
     public partial bool IsPrimaryLoaded();
 
     [VirtualFunction(23)]
