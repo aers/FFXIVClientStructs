@@ -12979,8 +12979,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140581210: ctor
-      0x1405812C0: Show
-      0x140581480: Hide
   Client::UI::Agent::AgentCatch:
     vtbls:
       - ea: 0x1421ED758
@@ -21932,9 +21930,6 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14167C290: ctor
-      0x1416A3150: dtor
-      0x14167C3B0: ReceiveEvent
-      0x14167C750: OnRefresh
   Client::UI::AddonSubmarinePartsMenu: # 405
     vtbls:
       - ea: 0x1422AC4B8
