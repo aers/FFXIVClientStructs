@@ -6527,6 +6527,7 @@ classes:
       11: OnLevelChange
       12: OnClassJobChange
     funcs:
+      0x1401E68C0: HideIfActive # static?!
       0x140482790: ctor
       0x1404827C0: Finalizer
       0x1404828E0: SetOpenerEventInterface
@@ -10131,6 +10132,7 @@ classes:
       # 0x1406416C0: ctor # inlined @ 0x14075CDAD
       0x14077E2D0: HandleInputUpdate
       0x14077EA80: DisablePadMouseMode
+      0x14077EE70: SetCutsceneSkipCallback
       0x14077F1B0: CanEnterIdleCam
       0x14077F210: CanEnterGPose
       0x14077FB40: CheckCastCancel
@@ -10223,6 +10225,8 @@ classes:
       84: GetLogFilterConfig
       86: EnableCutsceneInputMode
       87: DisableCutsceneInputMode
+      88: SetCutsceneSkipCallback
+      89: IsCutsceneSkipCallbackSet
       92: EnterGPose
       93: ExitGPose
       94: IsInGPose
