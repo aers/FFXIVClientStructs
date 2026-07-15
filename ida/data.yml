@@ -12926,6 +12926,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F5F4C0: ctor
+      0x140F5FAB0: OpenSkipDialog
   Client::UI::Agent::AgentCutsceneReplay:
     vtbls:
       - ea: 0x1421EE3C8
