@@ -14,7 +14,7 @@ public unsafe partial struct UIInputModule {
 
     [FieldOffset(0x26)] public bool IsPadMouseModeEnabled;
 
-    [FieldOffset(0x38)] public AtkModuleInterface.AtkEventInterface* CutsceneSkipCallback;
+    [FieldOffset(0x38)] public AtkModuleInterface.AtkEventInterface* CutsceneSkipCallback; // Client::System::Scheduler::Control::UIControl*
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? ?? ?? ?? FF 90 ?? ?? ?? ?? 48 8B C8 33 D2 48 83 C4")]
     public partial void DisablePadMouseMode(bool playSoundEffect = true);
