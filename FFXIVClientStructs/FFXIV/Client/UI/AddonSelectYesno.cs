@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonSelectYesNo
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[Addon("SelectYesNo")]
+[Addon("SelectYesno")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
