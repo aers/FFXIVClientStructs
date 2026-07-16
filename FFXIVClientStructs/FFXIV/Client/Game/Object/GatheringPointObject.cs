@@ -20,9 +20,13 @@ public unsafe partial struct GatheringPointObject {
     public unsafe partial struct GatheringPointObjectImplBase {
         [FieldOffset(0x08)] public GatheringPointEventHandler* EventHandler;
         [FieldOffset(0x10)] public byte RemainingCount;
+        [FieldOffset(0x11)] private bool Unk11;
+        [FieldOffset(0x12)] private bool Unk12;
+        [FieldOffset(0x13)] private bool Unk13; // Unsure where it's read, but needed for nodes to spawn.
         [FieldOffset(0x14)] private bool Unk14;
         [FieldOffset(0x15)] private bool Unk15;
         [FieldOffset(0x16)] private byte Unk16;
+        [FieldOffset(0x17)] private byte Unk17;
 
         [FieldOffset(0x18)] public GatheringPointObject* Object;
 

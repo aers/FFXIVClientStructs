@@ -6,23 +6,24 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [Inherits<EventHandler>]
 [StructLayout(LayoutKind.Explicit, Size = 0x428)]
 public unsafe partial struct GatheringEventHandler {
+    [FieldOffset(0x2C8)] public int Icon;
     /// <remarks> Index into the GatheringPoint Excel sheet. </remarks>
     [FieldOffset(0x2E8)] public uint RowId;
     /// <remarks> Index into the GatheringPointBase Excel sheet. </remarks>
     [FieldOffset(0x2EC)] public uint BaseRowId;
-    [FieldOffset(0x2C8)] public int Icon;
     [FieldOffset(0x2F0)] public ushort GatheringPointBonus0;
     [FieldOffset(0x2F2)] public ushort GatheringPointBonus1;
-    [FieldOffset(0x308)] private byte Unknown0; // GatheringPoint.Unknown0
-    [FieldOffset(0x30B)] public byte Count;
-    [FieldOffset(0x30E)] public ushort GatheringSubCategory;
     [FieldOffset(0x306)] public GatheringType GatheringType;
-    /// <remarks> From the Type column in the GatheringPoint Excel sheet. </remarks>
     [FieldOffset(0x307)] public byte Type;
+    [FieldOffset(0x308)] private byte Unknown0; // GatheringPoint.Unknown0
+    /// <remarks> From the Type column in the GatheringPoint Excel sheet. </remarks>
     [FieldOffset(0x309)] public byte GatheringLevel;
     /// <remarks> Flags are currently unknown, they are set in Setup. </remarks>
     [FieldOffset(0x310)] public byte Flags;
     [FieldOffset(0x311)] private byte Unknown1; // GatheringPoint.Unknown1
+    [FieldOffset(0x30A)] public byte RemainingCount;
+    [FieldOffset(0x30B)] public byte Count;
+    [FieldOffset(0x30E)] public ushort GatheringSubCategory;
 
     /// <summary>Reads Excel data and some fields sent by the server that were stored in GatheringPointObject.</summary>
     /// <param name="rowId">Index into the GatheringPoint Excel sheet.</param>
