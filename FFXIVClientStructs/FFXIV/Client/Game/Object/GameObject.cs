@@ -293,6 +293,9 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 56 ?? 48 8B 4F")]
     public partial void SetEventId(EventId eventId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 16 48 8B 4F"), GenerateStringOverloads]
+    public partial void SetName(CStringPointer name);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct NamePlateColors {
         [FieldOffset(0x00), CExporterIgnore] public ulong Data;

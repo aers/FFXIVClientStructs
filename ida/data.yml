@@ -17252,6 +17252,7 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x140E8A4C0: ctor
+      0x140E87E40: Setup
   Client::Game::Event::ShopEventHandler: # 0x04
     vtbls:
       - ea: 0x1422C6048
@@ -26274,6 +26275,9 @@ classes:
   Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase:
     vtbls:
       - ea: 0x1422C5290
+    vfuncs:
+      0: dtor
+      12: GetName
   Client::Game::Object::GatheringPointObject::GatheringPointObjectImpl:
     vtbls:
       - ea: 0x1422C5300
@@ -26282,6 +26286,8 @@ classes:
     vtbls:
       - ea: 0x1422C5370
         base: Client::Game::Object::GameObject
+    funcs:
+      0x1417503C0: Setup
   Client::Game::Object::AreaObject:
     vtbls:
       - ea: 0x1422C55E0
