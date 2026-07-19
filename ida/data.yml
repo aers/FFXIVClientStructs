@@ -2345,7 +2345,7 @@ classes:
       0x140B18060: SendAddBonusReward
       0x140B180B0: SendAddEntryAndBonusReward
       0x140B18100: ResetCommandSent
-      0x140B18110: IsCommandSent
+      0x140B18110: GetIsCommandSent
       0x140B18120: GetRandomInteger
       0x140B18130: GetIsCustomTalkActive
       0x140B18140: SetCustomTalkActive
