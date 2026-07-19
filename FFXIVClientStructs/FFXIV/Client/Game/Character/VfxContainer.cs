@@ -9,9 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
 public partial struct VfxContainer {
-    /// <remarks>
-    /// [6] = Omen
-    /// </remarks>
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray14<Pointer<VfxData>> _vfxData;
 
     [FieldOffset(0xA0), FixedSizeArray] internal FixedSizeArray2<Tether> _tethers;

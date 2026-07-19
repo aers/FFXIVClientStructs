@@ -11909,6 +11909,13 @@ classes:
       0x1408B3C10: GetOrnamentObject
       0x1408B3C20: HasOrnament
       0x1408B3C50: SetupOrnament
+  Client::Game::Character::LiveVfxContainer:
+    vtbls:
+      - ea: 0x14218C228
+        base: Client::Game::Character::ContainerInterface
+    funcs:
+      0x1408C5880: UpdateVfx
+      0x1408C5F60: PlayVfx
   Client::Game::Character::VfxContainer:
     vtbls:
       - ea: 0x14218C2A0
