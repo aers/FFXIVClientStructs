@@ -7,8 +7,8 @@ public partial struct ClientBase {
     [FieldOffset(0x0)] public Utf8String Host;
     [FieldOffset(0x68)] public ushort Port;
     [FieldOffset(0x6C)] public TransportLayers TransportLayer;
-    [FieldOffset(0x70)] public ushort ReconnectDelayMs; // Milliseconds to wait before the next connection attempt.
-    [FieldOffset(0x72)] public ushort IdleSendIntervalMs; // Milliseconds of idle time before issuing a send.
+    [FieldOffset(0x70)] public ushort ReconnectDelayMS; // Milliseconds to wait before the next connection attempt.
+    [FieldOffset(0x72)] public ushort IdleSendIntervalMS; // Milliseconds of idle time before issuing a send.
     /// <remarks>
     /// Stores the connection ticket. When the login callback supplies a nonzero entity ID, it replaces the ticket with its <c>%u</c>-formatted value.
     /// </remarks>
