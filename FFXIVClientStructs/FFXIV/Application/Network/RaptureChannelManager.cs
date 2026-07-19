@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Application.Network;
 
-// Application::Network::UI::RaptureChannelManager
+// Application::Network::RaptureChannelManager
 // Used by ZoneClient and ChatClient
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x118)]
