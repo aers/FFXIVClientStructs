@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::FashionCheckManager
+// Fashion Report
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct FashionCheckManager {
@@ -44,7 +45,8 @@ public unsafe partial struct FashionCheckManager {
         [FieldOffset(0x00)] public byte Score;
         [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray11<uint> _itemIds;
         [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
-        [FieldOffset(0x34), FixedSizeArray] internal FixedSizeArray11<byte> _stainIds;
+        [FieldOffset(0x34), FixedSizeArray] internal FixedSizeArray6<byte> _stain0Ids;
+        [FieldOffset(0x3A), FixedSizeArray] internal FixedSizeArray6<byte> _stain1Ids;
         [FieldOffset(0x3F)] private byte Unk3F;
         [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray11<byte> _itemEvaluations;
     }
