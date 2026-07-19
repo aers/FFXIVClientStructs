@@ -21,8 +21,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x9D8)] public ReaperShroudContainer ReaperShroud;
     [FieldOffset(0xA30)] public TimelineContainer Timeline;
     [FieldOffset(0xD80)] public LookAtContainer LookAt;
-
-    [BitField<bool>(nameof(IsOffhandDrawn), 0)]
+    [FieldOffset(0x1960)] public LifeSkillContainer LifeSkillContainer;
+    [BitField<bool>("IsOffhandDrawn", 0), Obsolete("Use LifeSkillContainer.IsOffhandDrawn")]
     [FieldOffset(0x1980)] public byte WeaponFlags;
     [FieldOffset(0x1988)] public VfxContainer Vfx;
     [FieldOffset(0x1A78)] public TargetStatusContainer TargetStatusContainer;
