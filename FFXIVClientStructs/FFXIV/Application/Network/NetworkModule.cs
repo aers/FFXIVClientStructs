@@ -35,8 +35,8 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xAB0)] public ZoneLoginCallbackInterface* ZoneLoginCallback;
     [FieldOffset(0xAB8)] public LogoutCallbackInterface* LogoutCallback;
 
-    [FieldOffset(0xA70)] private ZoneClient* ZoneClient;
-    [FieldOffset(0xA78)] private ChatClient* ChatClient;
+    [FieldOffset(0xA70)] public ZoneClient* ZoneClient;
+    [FieldOffset(0xA78)] public ChatClient* ChatClient;
 
     [FieldOffset(0xAA1)] public bool WinSockInitialized;
     [FieldOffset(0xAA8)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
