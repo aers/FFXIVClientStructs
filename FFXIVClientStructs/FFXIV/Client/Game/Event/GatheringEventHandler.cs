@@ -30,7 +30,7 @@ public unsafe partial struct GatheringEventHandler {
     /// <param name="gatheringPointRow">Row data for this gathering point.</param>
     /// <param name="gatheringPointObject">The object used to read the relevant fields from.</param>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 44 0F B6 91")]
-    public partial void Setup(uint rowId, [CExporterExcel("GatheringPoint")] void* gatheringPointRow, GatheringPointObject *gatheringPointObject);
+    public partial void Setup(uint rowId, [CExporterExcel("GatheringPoint")] void* gatheringPointRow, GatheringPointObject* gatheringPointObject);
 }
 
 /// <summary> Corresponds to rows in the GatheringPoint Excel sheet. </summary>
