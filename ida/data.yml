@@ -2323,7 +2323,7 @@ classes:
       0x140E0E9B0: GetWeatherForDaytime
   Client::Game::FashionCheckManager: # Fashion Report
     instances:
-      - ea: 0x142AB4B88
+      - ea: 0x142AB4BA8
         pointer: true
     funcs:
       0x140B17C20: Initialize
@@ -2423,7 +2423,7 @@ classes:
       0x1419696A0: dtor
   Client::Game::DawnManager:
     instances:
-      - ea: 0x142AB4B90
+      - ea: 0x142AB4B88
         pointer: true
     funcs:
       0x140AFE1A0: Initialize
@@ -17842,7 +17842,7 @@ classes:
       0x140E52CD0: ctor
   Client::Game::EurekaStoryProgressManager:
     instances:
-      - ea: 0x142AB4BA8
+      - ea: 0x142AB4B90
         pointer: true
     funcs:
       0x140B1B0E0: Initialize
