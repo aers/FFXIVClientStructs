@@ -35,9 +35,9 @@ public unsafe partial struct AgentFashion {
     public partial struct FashionCheckDataStruct {
         [FieldOffset(0x00)] public ushort WeeklyTheme;
         [FieldOffset(0x02)] public byte Remaining;
-        [FieldOffset(0x03)] public byte Score;
+        [FieldOffset(0x03)] public byte HighScore;
         [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray11<ushort> _itemThemes;
-        [FieldOffset(0x1A)] public byte HighScore;
+        [FieldOffset(0x1A)] public byte Score;
         [FieldOffset(0x1B), FixedSizeArray] internal FixedSizeArray11<byte> _itemEvaluations;
     }
 

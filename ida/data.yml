@@ -2336,11 +2336,11 @@ classes:
       0x140B17DF0: SetPlayerInfo
       0x140B17E00: SetThemeData
       0x140B17E20: SetEquipEvaluations
-      0x140B17E30: SetHighScore
-      0x140B17FC0: GetScore
+      0x140B17E30: SetHighScoreData
+      0x140B17FC0: GetHighScore
       0x140B17FD0: GetRemaining
       0x140B17FF0: GetEquipEvaluations
-      0x140B18000: GetHighScore
+      0x140B18000: GetHighScoreData
       0x140B18010: SendAddEntryReward
       0x140B18060: SendAddBonusReward
       0x140B180B0: SendAddEntryAndBonusReward

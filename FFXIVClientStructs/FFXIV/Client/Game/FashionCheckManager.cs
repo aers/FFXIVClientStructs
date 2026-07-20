@@ -19,7 +19,7 @@ public unsafe partial struct FashionCheckManager {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8, Pack = 8)]
     public struct PlayerInfoData {
-        [FieldOffset(0x00)] public byte Score;
+        [FieldOffset(0x00)] public byte HighScore;
         [FieldOffset(0x01)] public byte Remaining;
     }
 
@@ -53,7 +53,7 @@ public unsafe partial struct FashionCheckManager {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x20, Pack = 8)]
     public partial struct PreviewData {
-        [FieldOffset(0x00)] public byte Score;
+        [FieldOffset(0x00)] public byte HighScore;
         [FieldOffset(0x01)] public byte Remaining;
         /// <remarks> FashionCheckWeeklyTheme RowId </remarks>
         [FieldOffset(0x02)] public ushort WeeklyTheme;
