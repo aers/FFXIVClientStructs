@@ -97,7 +97,7 @@ public unsafe partial struct Achievement {
     /// <summary> Marks an achievement complete and adds it to the recent completion history. </summary>
     /// <remarks> Any near-completion result slot containing this achievement is cleared and reset to Invalid. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C8 ?? ?? ?? FF 52 ?? 8B 54 24 ?? 48 8B C8")]
-    public partial void SetAchievementComplete(uint achievementID);
+    public partial void SetAchievementCompleted(uint achievementID);
 
     /// <summary> Replaces one byte of the shared achievement agent state map. </summary>
     [MemberFunction("8B C2 44 88 84 08 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 4C 8B D9")]
