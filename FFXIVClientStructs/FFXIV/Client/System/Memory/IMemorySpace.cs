@@ -36,7 +36,7 @@ public unsafe partial struct IMemorySpace {
     public static partial void CreateMemorySpaces();
 
     [MemberFunction("E8 ?? ?? ?? ?? FF 4B 78")]
-    public static partial void Free(void* ptr, ulong size);
+    public static partial void Free(void* ptr, ulong size); // TODO: remove size arg
 
     [MemberFunction("4C 8B D9 0F B6 D2")]
     public static partial void Memset(void* ptr, int value, ulong size);
@@ -98,6 +98,6 @@ public unsafe partial struct IMemorySpace {
     }
 
     public static void Free<T>(T* ptr) where T : unmanaged {
-        Free(ptr, (ulong)sizeof(T));
+        Free(ptr, (ulong)sizeof(T)); // TODO: remove size arg
     }
 }
