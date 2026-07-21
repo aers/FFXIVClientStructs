@@ -69,7 +69,7 @@ public unsafe partial struct Achievement {
     [FieldOffset(0x648), FixedSizeArray(isBitArray: true, bitCount: 4080)] internal FixedSizeArray510<byte> _itemBarterWarningCompletedAchievements;
 
     /// <summary> Requests the main completed achievement bitmap </summary>
-    [MemberFunction("48 83 EC ?? C7 41 ?? ?? ?? ?? ?? 45 33 C9 B9 ?? ?? ?? ?? C7 44 24 ?? ?? ?? ?? ?? 45 33 C0 33 D2 E8 ?? ?? ?? ?? 48 83 C4 ?? C3 CC CC CC CC CC CC 48 83 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C3 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 83 F8")]
     public partial bool RequestCompletedAchievements();
 
     /// <summary> Requests Achievement Progress from the server. </summary>
@@ -77,10 +77,10 @@ public unsafe partial struct Achievement {
     public partial void RequestAchievementProgress(uint achievementID);
 
     /// <summary> Requests data for a FATE progress tab.</summary>
-    [MemberFunction("48 83 EC ?? 0F B6 D2 45 33 C9 45 33 C0 C7 44 24 ?? ?? ?? ?? ?? B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 83 C4 ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC 40 53 48 83 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 54 24 ?? C6 86")]
     public partial bool RequestFateProgressTab(byte tabIndex);
 
-    [MemberFunction("40 53 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? 4C 8B 00 48 8B C8 41 FF 90 ?? ?? ?? ?? 48 8B C8 BA ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 48 8B D3 48 8B C8 48 83 C4 ?? 5B E9 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 81 FA")]
+    [MemberFunction("E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 80 39")]
     public partial void HandleFateProgressTabPacket(void* packet);
 
     /// <summary> Receives Achievement Progress requested with <see cref="RequestAchievementProgress"/>. </summary>
@@ -122,11 +122,11 @@ public unsafe partial struct Achievement {
     /// <summary>
     /// Clears the login notification near-completion bitmap and resets only its state to <see cref="AchievementState.Invalid"/>.
     /// </summary>
-    [MemberFunction("33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 81")]
+    [MemberFunction("E8 ?? ?? ?? ?? C6 45 ?? ?? 45 33 F6")]
     public partial void ResetLoginNearCompletionAchievements();
 
     /// <summary> Returns the load state for a near-completion result slot. </summary>
-    [MemberFunction("83 FA ?? 73 ?? 8B C2 8B 84 81 ?? ?? ?? ?? C3 33 C0 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 45 8B C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C8 83 F8 ?? 76 ?? 41 8D 56")]
     public partial AchievementState GetNearCompletionAchievementState(NearCompletionAchievementSlot slot);
 
     /// <summary> Checks whether an achievement belongs to a loaded near-completion result slot. </summary>
