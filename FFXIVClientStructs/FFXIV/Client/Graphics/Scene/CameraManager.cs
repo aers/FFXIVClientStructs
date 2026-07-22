@@ -11,5 +11,6 @@ public unsafe partial struct CameraManager {
     [FieldOffset(0x50)] public int CameraIndex;
     [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray14<Pointer<Camera>> _cameras;
 
+    [FieldOffset(0xE0)] public OffscreenCamera* OffscreenCamera; // Used for rendering offscreen items that are displayed via charaview[0]
     public Camera* CurrentCamera => Cameras[CameraIndex];
 }
