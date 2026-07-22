@@ -110,26 +110,8 @@ public unsafe partial struct AddonItemDetail {
     [FieldOffset(0x6B0)] public AtkResNode* BonusesGroup;
     [FieldOffset(0x6B8)] public AtkTextNode* BonusesTitle;
     [FieldOffset(0x6C0), FixedSizeArray] internal FixedSizeArray4<BonusEntry> _bonuses;
-    // [FieldOffset(0x720), FixedSizeArray] internal FixedSizeArray6<same size as BonusEntry> _unk; // not sure what this is, but it's set in the same function as Bonuses
-    // remove these when array is known:
-    [FieldOffset(0x720)] private AtkComponentNode* Unk720;
-    [FieldOffset(0x728)] private AtkTextNode* Unk728;
-    [FieldOffset(0x730)] private AtkTextNode* Unk730;
-    [FieldOffset(0x738)] private AtkComponentNode* Unk738;
-    [FieldOffset(0x740)] private AtkTextNode* Unk740;
-    [FieldOffset(0x748)] private AtkTextNode* Unk748;
-    [FieldOffset(0x750)] private AtkComponentNode* Unk750;
-    [FieldOffset(0x758)] private AtkTextNode* Unk758;
-    [FieldOffset(0x760)] private AtkTextNode* Unk760;
-    [FieldOffset(0x768)] private AtkComponentNode* Unk768;
-    [FieldOffset(0x770)] private AtkTextNode* Unk770;
-    [FieldOffset(0x778)] private AtkTextNode* Unk778;
-    [FieldOffset(0x780)] private AtkComponentNode* Unk780;
-    [FieldOffset(0x788)] private AtkTextNode* Unk788;
-    [FieldOffset(0x790)] private AtkTextNode* Unk790;
-    [FieldOffset(0x798)] private AtkComponentNode* Unk798;
-    [FieldOffset(0x7A0)] private AtkTextNode* Unk7A0;
-    [FieldOffset(0x7A8)] private AtkTextNode* Unk7A8;
+    // SetBonuses initializes six additional entries with the same layout; their purpose is still unknown.
+    [FieldOffset(0x720), FixedSizeArray] internal FixedSizeArray6<BonusEntry> _unkBonusEntries;
     [FieldOffset(0x7B4)] public short OffsetX;
     [FieldOffset(0x7B6)] public short OffsetY;
 
