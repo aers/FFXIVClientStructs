@@ -136,6 +136,9 @@ public unsafe partial struct AddonItemDetail {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 45 ?? 83 F8 ?? 77 ?? 48 8B 07 48 8B CF FF 50 ?? B2 ?? 48 8B CF 44 0F BF F0")]
     public partial void UpdateGroupPositions(NumberArrayData* numberArray, StringArrayData* stringArray);
 
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B 42 ?? 4C 8B EA")]
+    public partial void GenerateTooltip(NumberArrayData* numberArray, StringArrayData* stringArray);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct MateriaEntry {
         [FieldOffset(0x00)] public AtkComponentBase* Group;
