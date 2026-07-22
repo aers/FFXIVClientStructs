@@ -22,6 +22,13 @@ public unsafe partial struct GameObjectManager {
     // [FieldOffset(0x4D14)] internal float Unk4D14; // default "0.9"
     // [FieldOffset(0x4D18)] internal float Unk4D18; // default "0.8"
 
+    /// <summary>
+    /// Returns the limit of drawable candidate objects for this frame.
+    /// </summary>
+    /// <remarks>Others will call DisableDraw() in Update</remarks>
+    [MemberFunction("40 56 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 8B 41")]
+    public partial uint GetDrawLimit(GameObjectId objectId);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4CD0)]
     public unsafe partial struct ObjectArrays {
