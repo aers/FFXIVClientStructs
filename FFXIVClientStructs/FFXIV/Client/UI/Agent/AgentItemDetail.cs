@@ -36,6 +36,8 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x13C)] private int Unk13C;
     [FieldOffset(0x148)] public Utf8String String1;
     [FieldOffset(0x1B0)] public Utf8String String2;
+    // OnGameEvent writes this byte for login/logout events; its specific state meaning is unconfirmed.
+    [FieldOffset(0x218)] private byte Unk218;
     // HandleItemHover writes 0x0100 at 0x219, resetting this byte and setting Flag2.
     [FieldOffset(0x219)] private byte Unk219;
     [FieldOffset(0x21A)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show

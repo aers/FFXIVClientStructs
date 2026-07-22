@@ -18,7 +18,7 @@ public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x3C)] public uint ActionId;
     [FieldOffset(0x40)] public uint OriginalId; // Example: Summon Topaz
     [FieldOffset(0x44)] public uint AdjustedId; // Example: Summon Titan II
-    [FieldOffset(0x4C)] private int Unk4C;
+    [FieldOffset(0x4C)] public uint Flags;
     [FieldOffset(0x50)] private int Unk50;
     [FieldOffset(0x54)] private int Unk54;
 

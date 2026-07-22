@@ -45,6 +45,9 @@ public unsafe partial struct AddonActionDetail {
     [FieldOffset(0x350)] private AtkTextNode* Unk350;
     [FieldOffset(0x358)] private AtkResNode* Unk358;
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 42 28 48 8B F1 48 8B B9 ?? ?? ?? ??")]
+    public partial void UpdateGroupPositions(NumberArrayData* numberArray);
+
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC 40 48 8B 42 28 4C 8B FA 48 8B F1 49 8B E8")]
     public partial void GenerateTooltip(NumberArrayData* numberArray, StringArrayData* stringArray);
 }
