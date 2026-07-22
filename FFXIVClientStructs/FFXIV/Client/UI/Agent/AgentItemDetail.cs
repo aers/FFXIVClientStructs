@@ -33,10 +33,18 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x128)] public byte Flag1; // Related to checking the inventory
     [FieldOffset(0x134)] public int MaxStackSize;
     [FieldOffset(0x138)] public uint ItemId;
+    [FieldOffset(0x13C)] private int Unk13C;
     [FieldOffset(0x148)] public Utf8String String1;
     [FieldOffset(0x1B0)] public Utf8String String2;
     [FieldOffset(0x21A)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show
+    [FieldOffset(0x21C)] private byte Unk21C;
     [FieldOffset(0x21E)] public byte Flag3; // If set to zero, avoids an early return in addon->Show()
+
+    /// <remarks>
+    /// <paramref name="unk128"/> is written as a 32-bit value at offset <c>0x128</c>.
+    /// </remarks>
+    [MemberFunction("48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 48 83 EC 20 8B FA 41 8B E9 BA A1 00 00 00 41 8B F0 48 8B D9 E8 ?? ?? ?? ??")]
+    public partial void HandleItemHover(DetailKind detailKind, uint typeOrId, uint index, int buyQuantity, uint unk128);
 
     [MemberFunction("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 F9 48 81 EC A8 00 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 F7 48 8B 5D 7F 4C 8B F1 8B 4D 77 49 8B F9 44 8B 6D 6F 49 8B F0 4C 89 4D AF 4C 8B FA")]
     public partial bool OnItemHovered(InventoryItem** item, InventoryType* inventoryType, ushort* slot, uint index, uint typeOrId, InventoryItem* fallbackItem);

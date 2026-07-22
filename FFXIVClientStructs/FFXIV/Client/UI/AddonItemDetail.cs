@@ -139,6 +139,18 @@ public unsafe partial struct AddonItemDetail {
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B 42 ?? 4C 8B EA")]
     public partial void GenerateTooltip(NumberArrayData* numberArray, StringArrayData* stringArray);
 
+    [MemberFunction("40 53 56 57 41 56 48 83 EC 78 48 8B DA 0F 29 74 24 50 49 8B 50 28 48 8B F9 48 8B 89 E0 04 00 00")]
+    public partial void SetEquipRestrictionInfo(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("48 89 54 24 10 41 54 41 55 41 57 48 83 EC 70 48 8B 42 28 4C 8B F9 48 8B 89 B0 06 00 00 4D 8B E8 4C 8B E2 F6 40 14 10")]
+    public partial void SetBonuses(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("4C 89 44 24 18 48 89 4C 24 08 53 57 41 55 48 83 EC 50 48 8B 42 28 48 8B D9 48 8B 89 A8 05 00 00 49 8B F8 4C 8B EA 8B 40 14")]
+    public partial void SetMateria(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("40 56 57 41 56 48 83 EC 30 48 8B 42 28 49 8B F0 4C 8B F2 48 8B F9 F6 40 14 40 75 32 48 8B 89 B8 04 00 00")]
+    public partial void SetSpiritbondInfo(NumberArrayData* numberArray, StringArrayData* stringArray);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct MateriaEntry {
         [FieldOffset(0x00)] public AtkComponentBase* Group;
