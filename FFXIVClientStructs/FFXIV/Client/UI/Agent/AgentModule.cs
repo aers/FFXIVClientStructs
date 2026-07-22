@@ -525,26 +525,23 @@ public enum AgentId : uint {
     MKDRelicGrowth = 487,
     MKDRelicGrowth2 = 488,
     MKDRelicGrowth3 = 489,
-    Unk490 = 490, // most likely MKDRelicGrowth4 coming in 7.55
+    MKDRelicGrowth3Customize = 490,
     QuickPanel = 491,
     EventTutorial = 492,
     ConfigCharacterChatLogMiniTalk = 493,
     ToggleContextMenu = 494,
-    Unk495 = 495,
-    Unk496 = 496,
-    Unk497 = 497,
-    Unk498 = 498, // related to XBM tooltip
-    Unk499 = 499, // related to XBM tooltip
+    ColorPicker = 495,
+    ConfigShare = 496,
+    XBMContentsMainHUD = 497,
+    XBMItemDetail = 498,
+    XBMBattleMonsterDetail = 499,
     XBMMonsterNotebook = 500,
     XBMPetParty = 501,
     XBMStageDetailList = 502,
     XBMStageList = 503,
     XBMStageMap = 504,
-    Unk505 = 505,
-    Unk506 = 506,
+    XBMResult = 505,
+    XBMRanking = 506,
     EventImage = 507,
     KeyBoardInput = 508,
-    // no idea where these went
-    //Unk488 = 488, // new in 7.3 - ColorPicker? used by ConfigCharacterChatLogMiniTalk
-    //Unk489 = 489, // new in 7.4 - ConfigShareMain? most likely not fully implemented yet. also opens WebURL#31: https://sqex.to/OOrr1
 }

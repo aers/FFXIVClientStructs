@@ -6800,6 +6800,10 @@ classes:
     vtbls:
       - ea: 0x142166C58
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentColorPicker:
+    vtbls:
+      - ea: 0x142166CD8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLetterEdit:
     vtbls:
       - ea: 0x142168078
@@ -13225,6 +13229,12 @@ classes:
     vtbls:
       - ea: 0x142166D58
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentConfigShare:
+    vtbls:
+      - ea: 0x142167260
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14050D0E0: ctor
   Client::UI::Agent::AgentCreditPlayer:
     vtbls:
       - ea: 0x1421672E0
@@ -15975,6 +15985,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
       - ea: 0x142199540
         base: Common::Component::Excel::ExcelSheetWaiter
+  Client::UI::Agent::AgentMKDRelicGrowth3:
+    vtbls:
+      - ea: 0x1421995D0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A94A90: ctor
+  Client::UI::Agent::AgentMKDRelicGrowth3Customize:
+    vtbls:
+      - ea: 0x142199650
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A96570: ctor
   Client::UI::Agent::AgentQuickPanel:
     vtbls:
       - ea: 0x1421BA808
@@ -16007,6 +16029,24 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AA0290: ctor
+  Client::UI::Agent::AgentXBMItemDetail:
+    vtbls:
+      - ea: 0x142199860
+        base: Client::UI::Agent::AgentItemDetailBase
+    funcs:
+      0x140AA5AE0: ctor
+  Client::UI::Agent::AgentXBMBattleMonsterDetail:
+    vtbls:
+      - ea: 0x1421998E8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AA5EF0: ctor
+  Client::UI::Agent::AgentXBMContentsMainHUD:
+    vtbls:
+      - ea: 0x1421996E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A96C20: ctor
   Client::UI::Agent::AgentXBMStageDetailList:
     vtbls:
       - ea: 0x142199760
@@ -16025,6 +16065,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AABAF0: ctor
+  Client::UI::Agent::AgentXBMResult:
+    vtbls:
+      - ea: 0x142199BC8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AABC90: ctor
+  Client::UI::Agent::AgentXBMRanking:
+    vtbls:
+      - ea: 0x142199C58
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AACE30: ctor
   Client::UI::Agent::AgentEventImage:
     vtbls:
       - ea: 0x1421EE568

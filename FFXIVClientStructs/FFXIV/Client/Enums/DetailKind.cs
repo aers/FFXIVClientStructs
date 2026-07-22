@@ -28,7 +28,7 @@ public enum DetailKind : byte {
     MJIKeyItem = 22,
     MJICraftworksObject = 23,
     Cabinet = 24,
-    Unk25 = 25, // XBM Item?
+    XBMItem = 25,
     TradeRemote = 26,
     HandIn = 27,
     RepairRequest = 28,
@@ -69,5 +69,5 @@ public enum DetailKind : byte {
     Unk61 = 61,
     Unk62 = 62,
     Unk63 = 63,
-    Unk64 = 64, // XBM Action?
+    XBMBattleMonster = 64,
 }
