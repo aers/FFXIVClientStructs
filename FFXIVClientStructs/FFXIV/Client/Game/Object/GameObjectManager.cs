@@ -27,7 +27,7 @@ public unsafe partial struct GameObjectManager {
     /// </summary>
     /// <remarks>Others will call DisableDraw() in Update</remarks>
     [MemberFunction("40 56 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 8B 41")]
-    public partial uint GetDrawLimit(GameObjectId objectId);
+    public partial uint GetDrawLimit();
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4CD0)]
