@@ -1494,6 +1494,7 @@ classes:
       0x140AFAFC0: ctor
       0x140AFB090: LookupAreaObjectByOwnerId
       0x140AFB240: Update
+      0x140AFAB70: GetDrawLimit
       0x140AFB690: UpdateMountAndCompanionMovement # maybe?
       0x140AFB900: UpdateLookAt
       0x140AFBD60: DeleteAllModels
