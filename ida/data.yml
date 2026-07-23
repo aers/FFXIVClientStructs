@@ -636,6 +636,7 @@ classes:
       0x141CF10D0: InitializeLobbyConnection
       0x141CF19A0: DtorHelper
       0x141CF6C30: Update
+      0x141CF25D0: SendPacket
   Application::Network::ZoneClient:
     funcs:
       0x141CF80E0: ctor
@@ -6398,6 +6399,7 @@ classes:
       0x140482630: SetCurrentInstance
       0x140482650: GetCurrentInstance
       0x140481220: HasZoneConnection
+      0x140481420: SendPacket
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x1421642F8
