@@ -25,7 +25,12 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkCompon
     [FieldOffset(0x19E)] public short DragDropMouseDownPosY;
     [FieldOffset(0x1A0)] private short Unk1A0DragDropOwnerNodeScreenX;
     [FieldOffset(0x1A2)] private short Unk1A2DragDropOwnerNodeScreenY;
-    [FieldOffset(0x1A4)] public int RowTemplateNodeCount; // TODO: also contains flags!
+    [FieldOffset(0x1A4), Obsolete("Use RowTemplateNodeCountByte")] public int RowTemplateNodeCount; // TODO: also contains flags!
+
+    // TODO: Change this to a struct / use bitfield generator
+    [FieldOffset(0x1A4)] public byte RowTemplateNodeCountByte; // TODO: change name back to RowTemplateNodeCount
+    [FieldOffset(0x1A5)] private byte Unk1A5;
+    [FieldOffset(0x1A6)] private ushort Unk1A6;
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??")]
     public partial AtkComponentListItemRenderer* Ctor();
