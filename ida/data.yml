@@ -8455,6 +8455,7 @@ classes:
     funcs:
       0x1408D9AA0: Finalizer
       0x14180A4E0: ctor
+      0x141813DB0: IsFlying
       0x141814950: IsDiving
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
