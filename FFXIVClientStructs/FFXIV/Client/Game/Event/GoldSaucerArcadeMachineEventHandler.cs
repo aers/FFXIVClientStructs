@@ -63,14 +63,26 @@ public unsafe partial struct GoldSaucerArcadeMachineEventHandler {
     [FieldOffset(0x57D)] public byte CurrentRound;
     [FieldOffset(0x580)] private uint Flags;
 
+    [MemberFunction("48 8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 40 53 48 83 EC ?? 66 89 91")]
+    public static partial BattleChara* GetLocalPlayer();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 45 33 C0 33 D2 48 8B CE")]
+    public static partial void BeginAgentGame();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D7 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B CB 48 83 C4 ?? 5F 5B E9 ?? ?? ?? ?? 3B BB")]
+    public static partial void PrepareNextRound();
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 BC 24 ?? ?? ?? ?? ?? 0F 86")]
+    public static partial void ShowRoundResult();
+
+    [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 0F B7 D9 45 33 C0 B9 ?? ?? ?? ?? 33 D2 E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 8B D3 48 89 6C 24")]
+    public static partial GoldSaucerArcadeMachineEventHandler* Create(ushort eventID);
+    
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 E8 ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D B7")]
     public partial GoldSaucerArcadeMachineEventHandler* Ctor();
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? B8")]
     public partial void Finalizer();
-
-    [MemberFunction("48 8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 40 53 48 83 EC ?? 66 89 91")]
-    public static partial BattleChara* GetLocalPlayer();
 
     [MemberFunction("40 53 48 83 EC ?? 66 89 91 ?? ?? ?? ?? 48 8B D9 33 D2")]
     public partial void SetProgress(ushort progress);
@@ -93,20 +105,8 @@ public unsafe partial struct GoldSaucerArcadeMachineEventHandler {
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B CD 45 8B C6 41 0F B6 D7")]
     public partial void CloseGameUI();
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 45 33 C0 33 D2 48 8B CE")]
-    public static partial void BeginAgentGame();
-
     [MemberFunction("40 57 48 83 EC ?? 48 8B F9 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 48 8B 10 48 8B C8 FF 92")]
     public partial void ResetAgentAndSharedTimelines();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D7 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B CB 48 83 C4 ?? 5F 5B E9 ?? ?? ?? ?? 3B BB")]
-    public static partial void PrepareNextRound();
-
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 BC 24 ?? ?? ?? ?? ?? 0F 86")]
-    public static partial void ShowRoundResult();
-
-    [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 0F B7 D9 45 33 C0 B9 ?? ?? ?? ?? 33 D2 E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 8B D3 48 89 6C 24")]
-    public static partial GoldSaucerArcadeMachineEventHandler* Create(ushort eventID);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 89 6C 24 ?? 48 8D 99")]
     public partial void StartGame();
@@ -139,10 +139,10 @@ public unsafe partial struct GoldSaucerArcadeMachineEventHandler {
     [Inherits<ExcelSheetWaiter>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct SheetWaiter {
-        [FieldOffset(0x30)] private ulong RefCount;
+        [FieldOffset(0x30)] public ulong RefCount;
         [FieldOffset(0x38)] public GoldSaucerArcadeMachineEventHandler* EventHandler;
-        [FieldOffset(0x40)] private void* Callback;
-        [FieldOffset(0x48)] private int CallbackThisOffset;
+        [FieldOffset(0x40)] public void* Callback;
+        [FieldOffset(0x48)] public int CallbackThisOffset;
         [FieldOffset(0x50)] public ExcelSheet* ExcelSheet;
         [FieldOffset(0x58)] public bool IsLoaded;
     }
