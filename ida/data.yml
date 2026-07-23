@@ -17755,7 +17755,7 @@ classes:
     funcs:
       0x140E78130: ctor
       0x140E782D0: Finalizer
-      0x140E78480: GetLocalPlayer
+      0x140E78480: GetLocalPlayer #static
       0x140E78490: SetProgress
       0x140E78630: PauseTimer
       0x140E78670: ResumeTimer
@@ -17764,11 +17764,11 @@ classes:
       0x140E796A0: ReceiveEvent
       0x140E798B0: OpenGameUI
       0x140E79980: CloseGameUI
-      0x140E79A20: BeginAgentGame
+      0x140E79A20: BeginAgentGame #static
       0x140E79A70: ResetAgentAndSharedTimelines
-      0x140E79B00: PrepareNextRound
-      0x140E79B50: ShowRoundResult
-      0x140E79BA0: Create
+      0x140E79B00: PrepareNextRound #static
+      0x140E79B50: ShowRoundResult #static
+      0x140E79BA0: Create #static
       0x140E79D70: StartGame
       0x140E79FE0: FinalizeGame
       0x140E7A100: ClearEventSceneTasks
