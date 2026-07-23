@@ -169,6 +169,10 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 66 0F 6F 05")]
     public partial void ToggleScrollSnapping(bool enabled);
 
+    /// <remarks> flagType 1 enables renderer drag handling. flagType 2 uses the renderer's alternate drag origin. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 84 FF 75 ?? 45 33 C9")]
+    public partial void SetItemRendererFlags(uint flagType, bool enabled, uint rendererNodeId = 0);
+
     /// <remarks> iconId is unused </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 41 81 4C 24 ?? ?? ?? ?? ?? 41 C6 44 24 ?? ?? 33 D2")]
     public partial void SetDragDropPayloadData(uint iconId, int int2, int int1);
