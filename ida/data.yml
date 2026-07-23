@@ -16148,10 +16148,12 @@ classes:
       0x140B4F8B0: ctor
       0x140B53E90: QueueFormatStringCallback
       0x140B53F40: QueueActionTimelineCallback
+      0x140B55190: DispatchEvent
     vfuncs:
       0: dtor
       6: Terminate
       7: IsUnlocked
+      26: ProcessUIEvent # CustomTalkEventHandler calls lua function "OnUI"
       40: ProcessYield
       59: ProcessFormatStringCallback
       60: ProcessActionTimelineCallback

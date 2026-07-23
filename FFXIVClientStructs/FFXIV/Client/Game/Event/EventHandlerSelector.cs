@@ -21,6 +21,8 @@ public unsafe partial struct EventHandlerSelector {
     public unsafe partial struct Option {
         [FieldOffset(0x00)] public int GlobalIndex; // index in Options array
         [FieldOffset(0x08)] public EventHandler* Handler;
+        [FieldOffset(0x10)] public EventType EventType;
+        [FieldOffset(0x14)] public uint EventParam;
         [FieldOffset(0x18)] public ushort IconId;
         [FieldOffset(0x1C)] public int LocalIndex; // sequence index for a single fill invocation, not sure what this is exactly
     }

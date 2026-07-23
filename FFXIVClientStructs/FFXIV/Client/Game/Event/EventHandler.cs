@@ -16,6 +16,10 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
+    [FieldOffset(0x64)] public EventType EventType;
+    [FieldOffset(0x68)] public uint EventParam;
+    [FieldOffset(0x6C)] private byte EventUnk20; // EventState.Unk20
+    [FieldOffset(0x70)] public GameObject* EventGameObject;
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
     [FieldOffset(0x88)] public SceneFlag SceneFlags;
@@ -34,6 +38,9 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(0)]
     public partial EventHandler* Dtor(byte freeFlags);
+
+    [VirtualFunction(25)]
+    public partial void ProcessUIEvent(UIEventType type);
 
     [VirtualFunction(40)]
     public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
@@ -101,6 +108,9 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(270)]
     public partial int GetRecommendedLevel();
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 41 0F B6 C0 41 8B F9")]
+    public partial void DispatchEvent(GameObject* gameObject, EventType eventType, uint eventParam);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 FF 87")]
     public partial bool QueueFormatStringCallback(Utf8String* str, StdDeque<TextParameter>* parameters, ulong callbackParam);
@@ -582,4 +592,14 @@ public enum SceneFlag : ulong {
 
     SetEObjBase = SetBase & ~InvisEObj,
     SetInvisBase = SetBase | InvisAll,
+}
+
+public enum EventType : byte {
+    UIEvent = 21, // EventParam: UIEventType
+}
+
+public enum UIEventType {
+    TitleDeedHouseShop = 1, // UI_EVENT_TITLE_DEED_HOUSE_SHOP
+    GroupPose = 2, // UI_EVENT_GROUP_POSE
+    IdleCamera = 3, // UI_EVENT_IDLE_CAMERA
 }
