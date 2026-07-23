@@ -16,6 +16,7 @@ public unsafe partial struct GameMain {
 
     [FieldOffset(0x260)] public ZoneSharedGroupManager ZoneSharedGroupManager;
 
+    [FieldOffset(0xB08)] public PvPDuelManager PvPDuelManager;
     [FieldOffset(0xB28)] public JobGaugeManager JobGaugeManager;
 
     [FieldOffset(0xBA0)] public ContentsReplayManager ContentsReplayManager;

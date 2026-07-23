@@ -516,6 +516,21 @@ classes:
     funcs:
       0x140844E90: ctor
       0x140844D00: Refresh
+  Client::Game::PvPDuelManager:
+    vtbls:
+      - ea: 0x14216EE38
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140B271D0: Initialize
+      0x140B27200: Update
+      0x140B27330: RequestDuel
+      0x140B27550: CanRequestDuel
+      0x140B276A0: IsInWolvesDen
+      0x140B27700: IsInDuel
+      0x140B27760: IsDuelingTogether
+      0x140B27960: ProcessPacket
+      0x140B27A80: ProcessIncomingRequestPacket
+      0x140B27F60: IsWithinRange
   Client::Game::ColliderProvider:
     instances:
       - ea: 0x142A9E410
@@ -3796,8 +3811,8 @@ classes:
     instances:
       - ea: 0x142A80790
     funcs:
-      0x1408FC520: ctor
-      0x1408FC550: dtor
+      0x1408FC520: Initialize
+      0x1408FC550: Finalizer
       0x1408FC590: Tick
       0x1408FC5B0: OverrideStatusRemaining
       0x1408FC610: GetStatusManager

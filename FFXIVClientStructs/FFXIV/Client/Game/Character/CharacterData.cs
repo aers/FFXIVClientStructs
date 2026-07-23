@@ -7,8 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct CharacterData {
-    [FieldOffset(0x8)] public float ModelScale;
-    [FieldOffset(0xC)] public uint Health;
+    [FieldOffset(0x08)] public float ModelScale;
+    [FieldOffset(0x0C)] public uint Health;
     [FieldOffset(0x10)] public uint MaxHealth;
     [FieldOffset(0x14)] public uint Mana;
     [FieldOffset(0x18)] public uint MaxMana;
@@ -27,7 +27,8 @@ public unsafe partial struct CharacterData {
     [FieldOffset(0x2F)] public byte Map; // ENpcResident.Map
     [FieldOffset(0x30)] public byte OnlineStatus;
     [FieldOffset(0x31)] public byte Battalion; // used for determining friend/enemy state
-
+    [FieldOffset(0x32)] private byte Unk32; // some PvP duel state
+    [FieldOffset(0x33)] private byte Unk33;
     [BitField<bool>(nameof(IsHostile), 0)]
     [BitField<bool>(nameof(InCombat), 1)]
     [FieldOffset(0x34)] public byte Flags;
