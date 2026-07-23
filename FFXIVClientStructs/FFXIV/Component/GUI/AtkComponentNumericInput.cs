@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [GenerateInterop]
 [Inherits<AtkComponentInputBase>]
-[Inherits<AtkTextInput.AtkTextInputEventInterface>(0x1E0)]
+[Inherits<AtkTextInput.AtkTextInputEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct AtkComponentNumericInput : ICreatable<AtkComponentNumericInput> {
     [FieldOffset(0x1E8)] public AtkComponentButton* PlusButtonComponent;
