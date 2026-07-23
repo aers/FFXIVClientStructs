@@ -35,17 +35,41 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(0)]
     public partial EventHandler* Dtor(byte freeFlags);
 
+    [VirtualFunction(2)]
+    public partial void Initialize();
+
+    [VirtualFunction(8)]
+    public partial void ResetState(GameObject* sceneGameObject);
+
+    [VirtualFunction(28)]
+    public partial void EnterEvent(GameObject* sceneGameObject, byte eventState);
+
     [VirtualFunction(40)]
-    public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
+    public partial void ProcessYield(short scene, byte yieldID, int* intParams, byte intParamCount);
+
+    [VirtualFunction(52)]
+    public partial bool ProcessEventSceneTask(uint taskID);
+
+    [VirtualFunction(58)]
+    public partial void EndEvent(bool a2, uint a3, uint exitReason);
 
     [VirtualFunction(59)]
     public partial void ProcessFormatStringCallback(bool success, Utf8String* str, ulong callbackParam);
 
     [VirtualFunction(60)]
-    public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
+    public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineID, ulong callbackParam);
+
+    [VirtualFunction(62)]
+    public partial void OnDirectorUpdate(uint value0, uint value1, uint value2, uint value3, uint value4);
 
     [VirtualFunction(70)]
     public partial void CancelByPlayerMovement(bool a2, bool a3);
+
+    [VirtualFunction(89)]
+    public partial void HandleStartOrEndCommand(uint command);
+
+    [VirtualFunction(90)]
+    public partial void HandleMenuResult(int selectedOption, int menuType);
 
     // [VirtualFunction(76)]
     // public partial void ProcessListenItemCallback(?);
@@ -61,6 +85,9 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
+
+    [VirtualFunction(250)]
+    public partial bool ShouldDismissOrnament();
 
     /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
     /// <param name="gameObject">The game object to update.</param>
