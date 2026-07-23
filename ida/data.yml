@@ -17774,7 +17774,6 @@ classes:
       0x140E7A100: ClearEventSceneTasks
       0x140E7A160: ShowBalloonMessage
       0x140E7A2E0: ResetAgentStatesExcept
-      0x140E7A350: SetAgentState6
       0x140E7A3A0: UpdateAgentAndDirectorTodo
       0x140E7A510: SendAgentResultUpdate
       0x140E7A5B0: SendAgentPhaseMessage
