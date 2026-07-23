@@ -8440,6 +8440,7 @@ classes:
     funcs:
       0x1408D9AA0: Finalizer
       0x14180A4E0: ctor
+      0x141814950: IsDiving
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
       - ea: 0x142A8AEB0
@@ -11843,7 +11844,10 @@ classes:
       0x140614CD0: PlayEmote
       0x1406150D0: IsEmoting
       0x140615110: IsInEmoteLoop
-      0x140616FA0: GetPoseState
+      0x140615730: TryGetEmoteConditionInfo # static
+      0x140616400: GetPosture
+      0x140616FA0: GetCPoseState
+      0x140618180: SetMode
       0x140618330: GetPoseKind
   Client::Game::Control::EmoteController::FindChairInfo:
     vtbls:
@@ -12016,6 +12020,8 @@ classes:
       # 0x14142EA80: SetSlotSpeed # inlined @ 0x1408B6A6F and other occurrences
       0x1408BF180: GetHeightAdjustActionTimelineRowId
       0x1408BFDE0: SetLipsOverrideTimeline
+      0x1408C1320: IsSittingOnGround
+      0x1408C1340: IsSittingInChair
       0x1408C1DE0: ClearBannerData
       0x1408C2260: GetCurrentBannerTimelineTimestamp
   Client::Game::Character::LookAtContainer:

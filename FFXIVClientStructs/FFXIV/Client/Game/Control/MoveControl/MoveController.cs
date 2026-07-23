@@ -11,4 +11,7 @@ public unsafe partial struct MoveController {
     [FieldOffset(0x410)] public MovementStateOptions MovementState;
     [BitField<bool>(nameof(IsSwimming), 5)] // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
     [FieldOffset(0x438)] private byte Flags438;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F8 40 80 E6")]
+    public partial bool IsDiving();
 }
