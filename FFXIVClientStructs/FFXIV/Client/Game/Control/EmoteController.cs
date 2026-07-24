@@ -28,6 +28,12 @@ public unsafe partial struct EmoteController {
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 44 0F B7 44 24")]
     public partial bool PlayEmote(uint emoteId, PlayEmoteOption* options);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 E8 41 B7")]
+    public static partial bool TryGetEmoteDetails(uint emoteId, EmoteDetails* outEmoteDetails);
+
+    [MemberFunction("E8 ?? ?? ?? ?? FF C8 33 DB")]
+    public partial Posture GetPosture();
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 FF 0F 84 ?? ?? ?? ?? 8B CF")]
     public partial int GetPoseKind();
 
@@ -37,14 +43,25 @@ public unsafe partial struct EmoteController {
     [MemberFunction("E8 ?? ?? ?? ?? FE C3 44 8B F0")]
     public static partial byte GetAvailablePoses(PoseType pose);
 
-    public enum PoseType : byte {
-        Idle = 0,
-        WeaponDrawn = 1,
-        Sit = 2,
-        GroundSit = 3,
-        Doze = 4,
-        Umbrella = 5,
-        Accessory = 6,
+    [StructLayout(LayoutKind.Explicit, Size = 0x21)]
+    public struct EmoteDetails {
+        [FieldOffset(0x00)] public CStringPointer Name;
+        [FieldOffset(0x08)] public uint UnlockLink;
+        [FieldOffset(0x0C)] public int TextCommand;
+        [FieldOffset(0x10)] public uint Icon;
+        [FieldOffset(0x14)] public ushort Order;
+        /// <remarks> When the value is <c>3</c> (Expressions), all conditions are overwritten with <see langword="true"/> in the calling function. </remarks>
+        [FieldOffset(0x16)] public byte EmoteCategory;
+        [FieldOffset(0x17)] public bool SittingOnGround;
+        [FieldOffset(0x18)] public bool SittingInChair;
+        [FieldOffset(0x19)] public bool Mounted;
+        [FieldOffset(0x1A)] public bool Fishing;
+        [FieldOffset(0x1B)] public bool Standing;
+        [FieldOffset(0x1C)] public bool Swimming;
+        [FieldOffset(0x1D)] public bool Diving;
+        [FieldOffset(0x1E)] public bool HoldingTorch;
+        [FieldOffset(0x1F)] public bool WearingFashionAccessory;
+        [FieldOffset(0x20)] public bool HoldingUmbrella;
     }
 
     // Client::Game::Control::EmoteController::PlayEmoteOption
@@ -58,5 +75,25 @@ public unsafe partial struct EmoteController {
         /// <remarks> For example, this might be useful to set for spawning characters in a sitting pose. </remarks>
         [FieldOffset(0x11)] public bool DisableSitDownAnimation; // or DisableInitAnimation?
         [FieldOffset(0x18)] public ILayoutInstance* Layout;
+    }
+
+    public enum PoseType : byte {
+        Idle = 0,
+        WeaponDrawn = 1,
+        Sit = 2,
+        GroundSit = 3,
+        Doze = 4,
+        Umbrella = 5,
+        Accessory = 6,
+    }
+
+    public enum Posture {
+        Normal = 0, // not existing, standing, ..., fallback
+        SittingOnGround = 1,
+        SittingInChair = 2,
+        Mounted = 3,
+        Dozing = 4,
+        Swimming = 5,
+        Diving = 6,
     }
 }

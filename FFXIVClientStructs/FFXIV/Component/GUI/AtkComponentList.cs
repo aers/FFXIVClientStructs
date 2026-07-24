@@ -142,12 +142,24 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     [VirtualFunction(44)]
     public partial bool DispatchEvent(AtkEventType eventType, AtkEvent* atkEvent, AtkEventData* atkEventData, uint selectedIndex, bool handled);
 
+    [VirtualFunction(45)]
+    public partial AtkResNode* GetSelectedItemAtkResNode();
+
     /// <remarks> rendererNodeId is the node id of the ListItemRenderer to use. if 0, it uses FirstAtkComponentListItemRenderer </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D3 85 ED")]
     public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, byte columnCount, uint rendererNodeId = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 FF 04")]
     public partial void SetItemCount(short value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 8E ?? ?? ?? ?? B8")]
+    public partial void SetVisibleColumnCount(short columnCount);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 8F ?? ?? ?? ?? 41 B1")]
+    public partial void SetVisibleRowCount(short rowCount);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4F ?? 41 8B DC")]
+    public partial void SetSize(ushort width, ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 FF 79 ?? 44 39 75"), GenerateStringOverloads]
     public partial void SetItemLabel(int index, CStringPointer text);
@@ -168,6 +180,19 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 66 0F 6F 05")]
     public partial void ToggleScrollSnapping(bool enabled);
+
+    [MemberFunction("48 8B 81 C8 00 00 00 48 85 C0 74 08 0F B6 80 37 01 00 00 C3 C3")]
+    public partial bool IsScrollBarBeingDragged();
+
+    [MemberFunction("48 8B 81 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 85 C0 74")]
+    public partial void ToggleScrollBarVisibility(bool visible);
+
+    /// <remarks> flagType 1 enables renderer drag handling. flagType 2 uses the renderer's alternate drag origin. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 40 84 FF 75 ?? 45 33 C9")]
+    public partial void SetItemRendererFlags(uint flagType, bool enabled, uint rendererNodeId = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B D5")]
+    public partial void ToggleDroppingDisabled(bool disabled);
 
     /// <remarks> iconId is unused </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 41 81 4C 24 ?? ?? ?? ?? ?? 41 C6 44 24 ?? ?? 33 D2")]

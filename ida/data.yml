@@ -516,6 +516,21 @@ classes:
     funcs:
       0x140844E90: ctor
       0x140844D00: Refresh
+  Client::Game::PvPDuelManager:
+    vtbls:
+      - ea: 0x14216EE38
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140B271D0: Initialize
+      0x140B27200: Update
+      0x140B27330: RequestDuel
+      0x140B27550: CanRequestDuel
+      0x140B276A0: IsInWolvesDen
+      0x140B27700: IsInDuel
+      0x140B27760: IsDuelingTogether
+      0x140B27960: ProcessPacket
+      0x140B27A80: ProcessIncomingRequestPacket
+      0x140B27F60: IsWithinRange
   Client::Game::ColliderProvider:
     instances:
       - ea: 0x142A9E410
@@ -621,6 +636,7 @@ classes:
       0x141CF10D0: InitializeLobbyConnection
       0x141CF19A0: DtorHelper
       0x141CF6C30: Update
+      0x141CF25D0: SendPacket
   Application::Network::ZoneClient:
     funcs:
       0x141CF80E0: ctor
@@ -3796,8 +3812,8 @@ classes:
     instances:
       - ea: 0x142A80790
     funcs:
-      0x1408FC520: ctor
-      0x1408FC550: dtor
+      0x1408FC520: Initialize
+      0x1408FC550: Finalizer
       0x1408FC590: Tick
       0x1408FC5B0: OverrideStatusRemaining
       0x1408FC610: GetStatusManager
@@ -6383,6 +6399,7 @@ classes:
       0x140482630: SetCurrentInstance
       0x140482650: GetCurrentInstance
       0x140481220: HasZoneConnection
+      0x140481420: SendPacket
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x1421642F8
@@ -8440,6 +8457,8 @@ classes:
     funcs:
       0x1408D9AA0: Finalizer
       0x14180A4E0: ctor
+      0x141813DB0: IsFlying
+      0x141814950: IsDiving
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
       - ea: 0x142A8AEB0
@@ -11843,7 +11862,10 @@ classes:
       0x140614CD0: PlayEmote
       0x1406150D0: IsEmoting
       0x140615110: IsInEmoteLoop
-      0x140616FA0: GetPoseState
+      0x140615730: TryGetEmoteConditionInfo # static
+      0x140616400: GetPosture
+      0x140616FA0: GetCPoseState
+      0x140618180: SetMode
       0x140618330: GetPoseKind
   Client::Game::Control::EmoteController::FindChairInfo:
     vtbls:
@@ -12016,6 +12038,8 @@ classes:
       # 0x14142EA80: SetSlotSpeed # inlined @ 0x1408B6A6F and other occurrences
       0x1408BF180: GetHeightAdjustActionTimelineRowId
       0x1408BFDE0: SetLipsOverrideTimeline
+      0x1408C1320: IsSittingOnGround
+      0x1408C1340: IsSittingInChair
       0x1408C1DE0: ClearBannerData
       0x1408C2260: GetCurrentBannerTimelineTimestamp
   Client::Game::Character::LookAtContainer:
@@ -16127,12 +16151,14 @@ classes:
       0x140B4F8B0: ctor
       0x140B53E90: QueueFormatStringCallback
       0x140B53F40: QueueActionTimelineCallback
+      0x140B55190: DispatchEvent
     vfuncs:
       0: dtor
       2: Initialize
       6: Terminate
       7: IsUnlocked
       8: ResetState
+      26: ProcessUIEvent # CustomTalkEventHandler calls lua function "OnUI"
       28: EnterEvent
       40: ProcessYield
       52: ProcessEventSceneTask

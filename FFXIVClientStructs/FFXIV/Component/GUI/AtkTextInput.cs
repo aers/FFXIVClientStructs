@@ -23,11 +23,23 @@ public unsafe partial struct AtkTextInput {
     [FieldOffset(0xFE)] public short SelectionStart;
     [FieldOffset(0x100)] public short SelectionEnd;
 
+    [FieldOffset(0x1D8)] public short PreviousLineCursorDelta;
+    [FieldOffset(0x1DA)] public short NextLineCursorDelta;
+    [FieldOffset(0x1DC)] public short CurrentLineStart;
+    [FieldOffset(0x1DE)] public short CurrentLineEnd;
+
     [FieldOffset(0x1E0)] public ClipBoard ClipboardData;
     [FieldOffset(0x2C0)] public Utf8String CopyBufferRaw;
     [FieldOffset(0x328)] public Utf8String CopyBufferFiltered;
 
+    [FieldOffset(0x738)] public Utf8String RawTextBeforeSelection;
+    [FieldOffset(0x7A0)] public Utf8String RawSelectedText;
+    [FieldOffset(0x808)] public Utf8String RawTextAfterSelection;
     [FieldOffset(0x870)] public Utf8String RawInputString;
+
+    [FieldOffset(0x940)] public Utf8String EvaluatedTextBeforeSelection;
+    [FieldOffset(0x9A8)] public Utf8String EvaluatedSelectedText;
+    [FieldOffset(0xA10)] public Utf8String EvaluatedTextAfterSelection;
     [FieldOffset(0xA78)] public Utf8String EvaluatedInputString;
 
     [FieldOffset(0xC18)] public ushort CompletionDepth;
