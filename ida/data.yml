@@ -2456,6 +2456,46 @@ classes:
       0x141969520: GetInstance
       0x141968D30: ctor
       0x1419696A0: dtor
+  Client::Game::QuestEffectBase:
+    vtbls:
+      - ea: 0x1423152A0
+    vfuncs:
+      0: dtor
+      1: GetResult
+      5: GetLogMessageId
+      6: SuppressLogMessage
+  Client::Game::QuestEffectTransformationStatus:
+    vtbls:
+      - ea: 0x1424310A8
+        base: Client::Game::QuestEffectBase
+    funcs:
+      0x141C2DAE0: ctor
+  Client::Game::QuestEffectQuestStatusParam:
+    vtbls:
+      - ea: 0x142315310
+        base: Client::Game::QuestEffectBase
+  Client::Game::QuestEffectSequentialEvent:
+    vtbls:
+      - ea: 0x1424310E0
+        base: Client::Game::QuestEffectBase
+    funcs:
+      0x141C2DD80: ctor
+  Client::Game::QuestEffectFreeWork:
+    vtbls:
+      - ea: 0x142315348
+        base: Client::Game::QuestEffectBase
+  Client::Game::QuestEffectInventoryItem:
+    vtbls:
+      - ea: 0x142315380
+        base: Client::Game::QuestEffectBase
+  Client::Game::QuestEffectDemiatma:
+    vtbls:
+      - ea: 0x1423153B8
+        base: Client::Game::QuestEffectBase
+  Client::Game::QuestEffectPlayerLevel:
+    vtbls:
+      - ea: 0x142315498
+        base: Client::Game::QuestEffectBase
   Client::Game::DawnManager:
     instances:
       - ea: 0x142AB4B88
