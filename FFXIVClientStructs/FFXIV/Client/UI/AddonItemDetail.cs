@@ -110,31 +110,28 @@ public unsafe partial struct AddonItemDetail {
     [FieldOffset(0x6B0)] public AtkResNode* BonusesGroup;
     [FieldOffset(0x6B8)] public AtkTextNode* BonusesTitle;
     [FieldOffset(0x6C0), FixedSizeArray] internal FixedSizeArray4<BonusEntry> _bonuses;
-    // [FieldOffset(0x720), FixedSizeArray] internal FixedSizeArray6<same size as BonusEntry> _unk; // not sure what this is, but it's set in the same function as Bonuses
-    // remove these when array is known:
-    [FieldOffset(0x720)] private AtkComponentNode* Unk720;
-    [FieldOffset(0x728)] private AtkTextNode* Unk728;
-    [FieldOffset(0x730)] private AtkTextNode* Unk730;
-    [FieldOffset(0x738)] private AtkComponentNode* Unk738;
-    [FieldOffset(0x740)] private AtkTextNode* Unk740;
-    [FieldOffset(0x748)] private AtkTextNode* Unk748;
-    [FieldOffset(0x750)] private AtkComponentNode* Unk750;
-    [FieldOffset(0x758)] private AtkTextNode* Unk758;
-    [FieldOffset(0x760)] private AtkTextNode* Unk760;
-    [FieldOffset(0x768)] private AtkComponentNode* Unk768;
-    [FieldOffset(0x770)] private AtkTextNode* Unk770;
-    [FieldOffset(0x778)] private AtkTextNode* Unk778;
-    [FieldOffset(0x780)] private AtkComponentNode* Unk780;
-    [FieldOffset(0x788)] private AtkTextNode* Unk788;
-    [FieldOffset(0x790)] private AtkTextNode* Unk790;
-    [FieldOffset(0x798)] private AtkComponentNode* Unk798;
-    [FieldOffset(0x7A0)] private AtkTextNode* Unk7A0;
-    [FieldOffset(0x7A8)] private AtkTextNode* Unk7A8;
+    // SetBonuses initializes six additional entries with the same layout; their purpose is still unknown.
+    [FieldOffset(0x720), FixedSizeArray] internal FixedSizeArray6<BonusEntry> _unkBonusEntries;
     [FieldOffset(0x7B4)] public short OffsetX;
     [FieldOffset(0x7B6)] public short OffsetY;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 45 ?? 83 F8 ?? 77 ?? 48 8B 07 48 8B CF FF 50 ?? B2 ?? 48 8B CF 44 0F BF F0")]
     public partial void UpdateGroupPositions(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B 42 ?? 4C 8B EA")]
+    public partial void GenerateTooltip(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("40 53 56 57 41 56 48 83 EC 78 48 8B DA 0F 29 74 24 50 49 8B 50 28 48 8B F9 48 8B 89 E0 04 00 00")]
+    public partial void SetEquipRestrictionInfo(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("48 89 54 24 10 41 54 41 55 41 57 48 83 EC 70 48 8B 42 28 4C 8B F9 48 8B 89 B0 06 00 00 4D 8B E8 4C 8B E2 F6 40 14 10")]
+    public partial void SetBonuses(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("4C 89 44 24 18 48 89 4C 24 08 53 57 41 55 48 83 EC 50 48 8B 42 28 48 8B D9 48 8B 89 A8 05 00 00 49 8B F8 4C 8B EA 8B 40 14")]
+    public partial void SetMateria(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("40 56 57 41 56 48 83 EC 30 48 8B 42 28 49 8B F0 4C 8B F2 48 8B F9 F6 40 14 40 75 32 48 8B 89 B8 04 00 00")]
+    public partial void SetSpiritbondInfo(NumberArrayData* numberArray, StringArrayData* stringArray);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct MateriaEntry {

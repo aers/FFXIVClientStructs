@@ -18,10 +18,15 @@ public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x3C)] public uint ActionId;
     [FieldOffset(0x40)] public uint OriginalId; // Example: Summon Topaz
     [FieldOffset(0x44)] public uint AdjustedId; // Example: Summon Titan II
+    [FieldOffset(0x4C)] public uint Flags;
+    [FieldOffset(0x50)] private int Unk50;
+    [FieldOffset(0x54)] private int Unk54;
 
+    [FieldOffset(0x68)] private byte Unk68;
     [FieldOffset(0x69)] public bool IsLovmActionDetail;
+    [FieldOffset(0x6C)] private byte Unk6C;
 
-    // flag & 1 = get AdjustedActionId
+    // flags & 1 = get AdjustedActionId
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 F8 0F")]
-    public partial void HandleActionHover(DetailKind actionKind, uint actionId, int flag, bool isLovmActionDetail, int a5, int a6);
+    public partial void HandleActionHover(DetailKind actionKind, uint actionId, int flags, bool isLovmActionDetail, int unk50, int unk54);
 }
