@@ -12,6 +12,7 @@ public unsafe partial struct ActionTimelineSequencer {
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray14<Pointer<Pointer<SchedulerTimeline>>> _schedulerTimelines; // technically incorrect, but it's really all we need
 
     [FieldOffset(0xE0), FixedSizeArray] internal FixedSizeArray14<ushort> _timelineIds; // The timeline active in each slot or 0 when none
+    [FieldOffset(0xFB), FixedSizeArray] internal FixedSizeArray14<ushort> _timelineRowIds; // The excel rowId, should match _timelineIds
     [FieldOffset(0x154), FixedSizeArray] internal FixedSizeArray14<float> _timelineSpeeds; // Speed for each slot
 
     [FieldOffset(0x1C8)] public Character.Character* Parent;
