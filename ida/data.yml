@@ -11747,6 +11747,7 @@ classes:
       0x140B5A2C0: GetLuaCompanion
       0x140B5A300: GetLuaEventObj
       0x140B5A340: GetLuaAetheryte
+      0x140E20C70: IsHousingGardeningPlant
       0x1419EFE50: PlayFootStepSound
   Client::Game::Character::CustomizeData:
     funcs:
