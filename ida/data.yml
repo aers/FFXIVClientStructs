@@ -7589,8 +7589,13 @@ classes:
       - ea: 0x1421613D8
         base: Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>
     funcs:
+      0x140420D10: ctor
       0x1404210E0: Update
-#oldfail       0x1404866D0: ctor
+      0x140421580: SetActiveCamera
+  Client::Graphics::Scene::OffscreenCamera:
+    vtbls:
+      - ea: 142161388
+        base: Client::Graphics::Scene::Camera
   Client::Graphics::Scene::CharacterUtility:
     instances:
       - ea: 0x1428E1F00
