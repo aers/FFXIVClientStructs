@@ -7594,7 +7594,7 @@ classes:
       0x140421580: SetActiveCamera
   Client::Graphics::Scene::OffscreenCamera:
     vtbls:
-      - ea: 142161388
+      - ea: 0x142161388
         base: Client::Graphics::Scene::Camera
   Client::Graphics::Scene::CharacterUtility:
     instances:
