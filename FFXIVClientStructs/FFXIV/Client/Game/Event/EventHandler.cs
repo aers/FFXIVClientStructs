@@ -39,6 +39,9 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(0)]
     public partial EventHandler* Dtor(byte freeFlags);
 
+    [VirtualFunction(20)]
+    public partial void ProcessEnterTerritory(ushort territoryTypeId);
+
     [VirtualFunction(25)]
     public partial void ProcessUIEvent(UIEventType type);
 
@@ -595,6 +598,7 @@ public enum SceneFlag : ulong {
 }
 
 public enum EventType : byte {
+    EnterTerritory = 15, // EventParam: TerritoryType Id
     UIEvent = 21, // EventParam: UIEventType
 }
 

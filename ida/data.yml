@@ -16156,6 +16156,7 @@ classes:
       0: dtor
       6: Terminate
       7: IsUnlocked
+      20: ProcessEnterTerritory
       26: ProcessUIEvent # CustomTalkEventHandler calls lua function "OnUI"
       40: ProcessYield
       59: ProcessFormatStringCallback
