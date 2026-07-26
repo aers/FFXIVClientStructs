@@ -123,8 +123,8 @@ enums:
     "Preview": 23
     "HoldButton": 24
     "Portrait": 25
-    "Unk26": 26
-    "Unk27": 27
+    "XBMItem": 26
+    "XBMContentStageEventMap": 27
 - type: Component::GUI::AtkCursorNavigationStopFlag
   name: AtkCursorNavigationStopFlag
   underlying: int
@@ -5320,6 +5320,7 @@ enums:
   namespace: Client.Game.Event
   flags: False
   values:
+    "EnterTerritory": 15
     "UIEvent": 21
 - type: Client::Game::Event::SceneFlag
   name: SceneFlag
@@ -8746,6 +8747,26 @@ structs:
     name: TimelineIds
     offset: 224
     size: 14
+    is_string: False
+  - type: unsigned __int16
+    name: TimelineIds2
+    offset: 252
+    size: 14
+    is_string: False
+  - type: unsigned __int16
+    name: TimelineIds3
+    offset: 280
+    size: 14
+    is_string: False
+  - type: unsigned __int16
+    name: TimelineIds4
+    offset: 308
+    size: 14
+    is_string: False
+  - type: unsigned __int16
+    name: Unk150
+    offset: 336
+    size: 2
     is_string: False
   - type: float
     name: TimelineSpeeds
@@ -16214,6 +16235,9 @@ structs:
     offset: 88
     size: 14
     is_string: False
+  - type: Client::Graphics::Scene::OffscreenCamera*
+    name: OffscreenCamera
+    offset: 224
   virtual_functions: []
   member_functions: []
   static_members:
@@ -30526,6 +30550,67 @@ structs:
     name: ComponentMap
     offset: 16
   virtual_functions: []
+  member_functions: []
+- type: Component::GUI::AtkComponentXBMContentStageEventMap::Entry
+  name: Entry
+  namespace: Component.GUI
+  union: False
+  size: 432
+  fields:
+  - type: unsigned int
+    name: TemplateNodeId
+    offset: 0
+  - type: byte
+    name: ComponentCount
+    offset: 4
+  - type: byte
+    name: EventMapEntryIndices
+    offset: 5
+    size: 30
+    is_string: False
+  - type: Component::GUI::AtkComponentBase*
+    name: Components
+    offset: 40
+    size: 30
+    is_string: False
+  - type: unsigned int
+    name: TimelineStates
+    offset: 280
+    size: 30
+    is_string: False
+  - type: char
+    name: IsCurrentEvent
+    offset: 400
+    size: 30
+    is_string: False
+  member_functions: []
+- type: Component::GUI::AtkComponentXBMContentStageEventMap::EventMapRowEntry
+  name: EventMapRowEntry
+  namespace: Component.GUI
+  union: False
+  size: 13
+  fields:
+  - type: byte
+    name: X
+    offset: 0
+  - type: byte
+    name: Y
+    offset: 1
+  - type: byte
+    name: Type
+    offset: 2
+  - type: byte
+    name: EventIndex
+    offset: 3
+  - type: byte
+    name: LinkedEventIndex
+    offset: 4
+  - type: unsigned int
+    name: State
+    offset: 8
+  - type: char
+    name: IsStateLoaded
+    offset: 12
   member_functions: []
 - type: Component::GUI::AtkCrestManager
   name: AtkCrestManager
@@ -58453,6 +58538,45 @@ structs:
     name: ShowHeader
     offset: 55
   member_functions: []
+- type: Component::GUI::AtkUldComponentDataXBMContentStageEventMap
+  name: AtkUldComponentDataXBMContentStageEventMap
+  namespace: Component.GUI
+  union: False
+  size: 32
+  fields:
+  - type: Component::GUI::AtkUldComponentDataBase
+    name: AtkUldComponentDataBase
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: TemplateNodeIds
+    offset: 12
+    size: 5
+    is_string: False
+  member_functions: []
+- type: Component::GUI::AtkUldComponentDataXBMItem
+  name: AtkUldComponentDataXBMItem
+  namespace: Component.GUI
+  union: False
+  size: 32
+  fields:
+  - type: Component::GUI::AtkUldComponentDataBase
+    name: AtkUldComponentDataBase
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: IconComponentNodeId
+    offset: 12
+  - type: unsigned int
+    name: NameTextNodeId
+    offset: 16
+  - type: unsigned int
+    name: TypeTextNodeId
+    offset: 20
+  - type: unsigned int
+    name: DescriptionTextNodeId
+    offset: 24
+  member_functions: []
 - type: Component::GUI::AtkUldComponentInfo
   name: AtkUldComponentInfo
   namespace: Component.GUI
@@ -60765,6 +60889,65 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
+  member_functions: []
+- type: Client::Game::Event::LuaAetheryte
+  name: LuaAetheryte
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaActor
+    name: LuaActor
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaCharacter
+  name: LuaCharacter
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaActor
+    name: LuaActor
+    offset: 0
+    base: true
+  member_functions: []
+- type: Client::Game::Event::LuaCompanion
+  name: LuaCompanion
+  namespace: Client.Game.Event
+  union: False
+  size: 144
+  fields:
+  - type: Client::Game::Event::LuaActor
+    name: LuaActor
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaEventObject
+  name: LuaEventObject
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaActor
+    name: LuaActor
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaHousingEventObject
+  name: LuaHousingEventObject
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaActor
+    name: LuaActor
+    offset: 0
+    base: true
+  virtual_functions: []
   member_functions: []
 - type: Client::Game::GcArmyData
   name: GcArmyData
@@ -83455,6 +83638,41 @@ structs:
     name: Callback
     offset: 32
   member_functions: []
+- type: Client::Game::Event::LuaNpc
+  name: LuaNpc
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaCharacter
+    name: LuaCharacter
+    offset: 0
+    base: true
+  member_functions: []
+- type: Client::Game::Event::LuaPc
+  name: LuaPc
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaCharacter
+    name: LuaCharacter
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaRetainer
+  name: LuaRetainer
+  namespace: Client.Game.Event
+  union: False
+  size: 144
+  fields:
+  - type: Client::Game::Event::LuaCharacter
+    name: LuaCharacter
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>
   name: LuaScriptLoader`1
   namespace: Client.Game.Event
@@ -97546,6 +97764,30 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Event::LuaBattleNpc
+  name: LuaBattleNpc
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaNpc
+    name: LuaNpc
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaEventNpc
+  name: LuaEventNpc
+  namespace: Client.Game.Event
+  union: False
+  size: 136
+  fields:
+  - type: Client::Game::Event::LuaNpc
+    name: LuaNpc
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Event::ModuleBase
   name: ModuleBase
   namespace: Client.Game.Event
@@ -107634,6 +107876,44 @@ structs:
       name: this
     - type: Client::Graphics::Scene::EnvLocation*
       name: location
+- type: Client::Graphics::Scene::OffscreenCamera
+  name: OffscreenCamera
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 272
+  fields:
+  - type: Client::Graphics::Scene::Camera
+    name: Camera
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::Graphics::Scene::OffscreenCamera*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: CleanupRender
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::OffscreenCamera*
+      name: this
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::OffscreenCamera*
+      name: this
+  - name: UpdateRender
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::OffscreenCamera*
+      name: this
+  member_functions: []
 - type: Client::Graphics::Scene::VfxObject
   name: VfxObject
   namespace: Client.Graphics.Scene
@@ -121619,6 +121899,337 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentRadioButton*
       name: this
+- type: Component::GUI::AtkComponentXBMContentStageEventMap
+  name: AtkComponentXBMContentStageEventMap
+  namespace: Component.GUI
+  union: False
+  size: 2408
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkComponentXBMContentStageEventMap::Entry
+    name: Entries
+    offset: 192
+    size: 5
+    is_string: False
+  - type: unsigned __int16
+    name: GridSize
+    offset: 2352
+  - type: unsigned __int16
+    name: GridHalfSize
+    offset: 2354
+  - type: unsigned int
+    name: XBMContentStageEventMapRowId
+    offset: 2356
+  - type: byte
+    name: LoadState
+    offset: 2360
+  - type: Component::GUI::AtkComponentBase*
+    name: CurrentEventMarkerComponent
+    offset: 2368
+  - type: Component::GUI::AtkComponentXBMContentStageEventMap::EventMapRowEntry*
+    name: EventMapEntries
+    offset: 2376
+  - type: unsigned __int64
+    name: EventMapEntryCapacity
+    offset: 2384
+  - type: byte
+    name: EventMapEntryCount
+    offset: 2392
+  - type: byte
+    name: CurrentEventIndex
+    offset: 2393
+  - type: char
+    name: IsEventMapLoaded
+    offset: 2394
+  - type: char
+    name: ShouldReloadEventMap
+    offset: 2395
+  - type: char
+    name: IsEventMapLoading
+    offset: 2396
+  - type: char
+    name: UseEventHandlerState
+    offset: 2397
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: SheetWaiter
+    offset: 2400
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: char
+      name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: __int64
+      name: data
+  - name: GetCollisionNodeAtCoords
+    offset: 144
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMContentStageEventMap*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  member_functions: []
+- type: Component::GUI::AtkComponentXBMItem
+  name: AtkComponentXBMItem
+  namespace: Component.GUI
+  union: False
+  size: 552
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkComponentIcon*
+    name: IconComponent
+    offset: 192
+  - type: Component::GUI::AtkTextNode*
+    name: NameTextNode
+    offset: 200
+  - type: Component::GUI::AtkTextNode*
+    name: TypeTextNode
+    offset: 208
+  - type: Component::GUI::AtkTextNode*
+    name: DescriptionTextNode
+    offset: 216
+  - type: Client::System::String::Utf8String
+    name: NameText
+    offset: 224
+  - type: Client::System::String::Utf8String
+    name: TypeText
+    offset: 328
+  - type: Client::System::String::Utf8String
+    name: DescriptionText
+    offset: 432
+  - type: unsigned int
+    name: XBMItemId
+    offset: 536
+  - type: unsigned __int16
+    name: OriginalDescriptionHeight
+    offset: 540
+  - type: char
+    name: ShowPossessionCount
+    offset: 542
+  - type: char
+    name: ResizeDescriptionToText
+    offset: 543
+  - type: char
+    name: IsItemLoaded
+    offset: 544
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: char
+      name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: __int64
+      name: data
+  - name: GetCollisionNodeAtCoords
+    offset: 144
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentXBMItem*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  member_functions: []
 - type: Component::GUI::AtkCounterNode
   name: AtkCounterNode
   namespace: Component.GUI
@@ -122843,6 +123454,270 @@ structs:
     return_type: char
     parameters:
     - type: Client::Game::Object::HousingEventObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: ray
+    - type: Common::Math::Vector3*
+      name: outHitPosition
+    - type: char*
+      name: outModelChecked
+  member_functions: []
+- type: Client::Game::Object::HousingFlowerPotObject
+  name: HousingFlowerPotObject
+  namespace: Client.Game.Object
+  union: False
+  size: 464
+  fields:
+  - type: Client::Game::Object::HousingObject
+    name: HousingObject
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetObjectType
+    offset: 24
+    return_type: Client::Game::Object::ObjectType
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: char*
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: char
+      name: adjustByTransformation
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: UpdateNextDistanceAndTargetStatus
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: SetTargetStatus
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: byte
+      name: targetStatus
+  - name: SetDistance
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: byte
+      name: distance
+  - name: SetDrawObject
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: Client::Graphics::Scene::DrawObject*
+      name: drawObject
+  - name: PlayTimeline
+    offset: 160
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: unsigned int
+      name: index
+    - type: unsigned int
+      name: a2
+  - name: StopTimeline
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: unsigned int
+      name: index
+  - name: IsTimelinePlaying
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: unsigned int
+      name: index
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetCharacterBase
+    offset: 192
+    return_type: Client::Graphics::Scene::CharacterBase*
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: color
+    - type: char
+      name: includeMount
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: outHandlers
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: Update
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: GetCenterPosition
+    offset: 376
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: outCenter
+  - name: GetNameId
+    offset: 384
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+  - name: GetTargetType
+    offset: 432
+    return_type: Client::Game::Object::TargetType
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: PositionModified
+    offset: 440
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: RotationModified
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: IsDead
+    offset: 464
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: IsNotMounted
+    offset: 472
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: Terminate
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: dtor
+    offset: 488
+    return_type: Client::Game::Object::GameObject*
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: IsCharacter
+    offset: 496
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: OnInitialize
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
+      name: this
+  - name: IntersectsRay
+    offset: 560
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::HousingFlowerPotObject*
       name: this
     - type: Client::Graphics::Ray*
       name: ray
@@ -139259,6 +140134,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -173892,6 +174775,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -174128,6 +175019,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -174328,6 +175227,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -193618,6 +194525,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -193809,6 +194724,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -194018,6 +194941,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -216875,6 +217806,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -217092,6 +218031,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -221252,6 +222199,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -232905,6 +233860,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -233093,6 +234056,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -233282,6 +234253,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -233470,6 +234449,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -233658,6 +234645,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -233936,6 +234931,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -236085,6 +237088,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -236281,6 +237292,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -236469,6 +237488,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -239506,6 +240533,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -239728,6 +240763,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -239936,6 +240979,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -240326,6 +241377,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -240562,6 +241621,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -240765,6 +241832,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -241518,6 +242593,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -242303,6 +243386,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -242528,6 +243619,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -242764,6 +243863,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -243137,6 +244244,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -243430,6 +244545,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -243952,6 +245075,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
@@ -244565,6 +245696,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
   - name: ProcessUIEvent
     offset: 200
     return_type: void
