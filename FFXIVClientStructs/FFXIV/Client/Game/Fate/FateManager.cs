@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
@@ -17,6 +18,9 @@ public unsafe partial struct FateManager {
     [FieldOffset(0x90)] public StdVector<Pointer<FateContext>> Fates;
     [FieldOffset(0xA8)] public ushort SyncedFateId;
     [FieldOffset(0xAF)] public byte FateJoined;
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 55 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 44 0F B6 25")]
+    public partial void HandleFateRewardPacket(FateRewardPacket* packet);
 
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 4C 8B D2 4C 8B 89")]
     public partial bool IsInFateRadius(Vector3* position);
