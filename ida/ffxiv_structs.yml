@@ -15818,19 +15818,44 @@ structs:
   union: False
   size: 24
   fields:
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 8
   - type: Client::Graphics::Physics::ConstraintType
     name: Type
     offset: 16
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Physics::ConstraintBase*
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintBase*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetSkeleton
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintBase*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C7 43 ?? ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 43 ?? 48 89 43 ?? 89 43 ?? 48 8B C3 C7 43
     return_type: Client::Graphics::Physics::ConstraintBase*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::ConstraintBase*
       name: this
     - type: Client::Graphics::Physics::ConstraintType
       name: type
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? F3 0F 10 44 24 ?? B0 ?? F3 0F 10 4C 24 ?? F3 0F 11 43
+    return_type: char
+    name: SetSkeleton
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintBase*
+      name: this
+    - type: Client::Graphics::Render::Skeleton*
+      name: skeleton
 - type: Client::Graphics::ReferencedClassBase
   name: ReferencedClassBase
   namespace: Client.Graphics
@@ -17589,7 +17614,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 F6 45 32 F6
     return_type: Client::System::File::FileInterface*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::System::File::FileInterface*
       name: this
@@ -19265,13 +19290,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? F7 C3
     return_type: Client::System::String::Utf8String*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 8B CF EB 15
     return_type: Client::System::String::Utf8String*
-    name: Ctor_FromSequence
+    name: ctor_FromSequence
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -19281,7 +19306,7 @@ structs:
       name: length
   - signature: E8 ?? ?? ?? ?? C7 44 F5
     return_type: void
-    name: Dtor
+    name: dtor
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
@@ -30496,7 +30521,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 0F B6 CE 89 74 24
     return_type: Component::GUI::AtkComponentListItemPopulator*
-    name: CtorWithRenderer
+    name: ctorWithRenderer
     parameters:
     - type: Component::GUI::AtkComponentListItemPopulator*
       name: this
@@ -30506,7 +30531,7 @@ structs:
       name: populateWithRenderer
   - signature: E8 ?? ?? ?? ?? 45 0F B6 CD
     return_type: Component::GUI::AtkComponentListItemPopulator*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentListItemPopulator*
       name: this
@@ -35857,6 +35882,21 @@ structs:
     name: Last
     offset: 8
   - type: Component::GUI::SimpleTweenAnimation*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<System::Numerics::Vector3>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: System::Numerics::Vector3*
+    name: First
+    offset: 0
+  - type: System::Numerics::Vector3*
+    name: Last
+    offset: 8
+  - type: System::Numerics::Vector3*
     name: End
     offset: 16
   member_functions: []
@@ -42800,7 +42840,7 @@ structs:
   member_functions:
   - signature: C7 41 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B C1
     return_type: Client::Graphics::Physics::CollisionBase*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionBase*
       name: this
@@ -42816,11 +42856,25 @@ structs:
     name: ConstraintBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Physics::ConstraintBase*
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintAttract*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetSkeleton
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintAttract*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F0 EB ?? 33 F6 F3 0F 10 44 24
     return_type: Client::Graphics::Physics::ConstraintAttract*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::ConstraintAttract*
       name: this
@@ -42834,11 +42888,25 @@ structs:
     name: ConstraintBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Physics::ConstraintBase*
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintPin*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetSkeleton
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintPin*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F0 48 8B 57
     return_type: Client::Graphics::Physics::ConstraintPin*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::ConstraintPin*
       name: this
@@ -42852,11 +42920,25 @@ structs:
     name: ConstraintBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Physics::ConstraintBase*
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintSpring*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetSkeleton
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::ConstraintSpring*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F0 EB ?? 33 F6 F3 0F 10 84 24
     return_type: Client::Graphics::Physics::ConstraintSpring*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::ConstraintSpring*
       name: this
@@ -49854,7 +49936,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 48 8B CE
     return_type: Client::UI::Agent::AgentModule*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::UI::Agent::AgentModule*
       name: this
@@ -52128,7 +52210,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 80 8F ?? ?? ?? ?? ?? 33 F6 80 8F ?? ?? ?? ?? ?? 41 B0 ?? 80 8F ?? ?? ?? ?? ?? BA
     return_type: Client::UI::ListPanel*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::UI::ListPanel*
       name: this
@@ -52790,7 +52872,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4D 8D 4E 30 49 8B D6
     return_type: Client::UI::Misc::CharaViewCharacterData*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
@@ -57881,7 +57963,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 45 33 ED
     return_type: Component::GUI::AtkTexture*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
@@ -58882,7 +58964,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45
     return_type: Component::GUI::AtkValue*
-    name: CtorCopy
+    name: ctorCopy
     parameters:
     - type: Component::GUI::AtkValue*
       name: this
@@ -58890,7 +58972,7 @@ structs:
       name: other
   - signature: E8 ?? ?? ?? ?? 83 FF FE
     return_type: void
-    name: Dtor
+    name: dtor
     parameters:
     - type: Component::GUI::AtkValue*
       name: this
@@ -64085,7 +64167,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 4C 8B E8
     return_type: Client::Graphics::Physics::BoneSimulator*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::BoneSimulator*
       name: this
@@ -64139,7 +64221,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 89 5C 24
     return_type: Client::Graphics::Physics::CollisionCapsule*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionCapsule*
       name: this
@@ -64157,7 +64239,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 0F 28 05
     return_type: Client::Graphics::Physics::CollisionEllipsoid*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionEllipsoid*
       name: this
@@ -64175,7 +64257,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 33 C0
     return_type: Client::Graphics::Physics::CollisionPlane*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionPlane*
       name: this
@@ -64195,7 +64277,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 33 C9
     return_type: Client::Graphics::Physics::CollisionSphere*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionSphere*
       name: this
@@ -64302,7 +64384,7 @@ structs:
   member_functions:
   - signature: 66 0F 6F 0D ?? ?? ?? ?? 0F 57 C0
     return_type: Client::Graphics::Scene::Human::DrawData*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Scene::Human::DrawData*
       name: this
@@ -80759,7 +80841,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 80 A6 ?? ?? ?? ?? ?? B8
     return_type: Client::UI::PreviewController*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::UI::PreviewController*
       name: this
@@ -82116,7 +82198,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B C3 89 7B 58
     return_type: Component::GUI::AtkSimpleTween*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkSimpleTween*
       name: this
@@ -82298,13 +82380,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8D 46 78
     return_type: Component::GUI::AtkTimer*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkTimer*
       name: this
   - signature: 40 55 56 48 83 EC 28 8B EA 48 8B F1 F6 C2 02 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 7C 24 ?? 48 8B 79 F8 4C 89 74 24
     return_type: Component::GUI::AtkTimer*
-    name: Dtor
+    name: dtor
     parameters:
     - type: Component::GUI::AtkTimer*
       name: this
@@ -83091,7 +83173,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 4C 89 01 33 C0
     return_type: Animation::Rig::hkaPose*
-    name: Ctor1
+    name: ctor1
     parameters:
     - type: Animation::Rig::hkaPose*
       name: this
@@ -83103,7 +83185,7 @@ structs:
       name: pose
   - signature: 40 53 48 83 EC 30 4C 89 01
     return_type: Animation::Rig::hkaPose*
-    name: Ctor2
+    name: ctor2
     parameters:
     - type: Animation::Rig::hkaPose*
       name: this
@@ -84139,7 +84221,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 C0 48 8D 4B 58
     return_type: Client::Game::InventoryItem*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
@@ -85718,7 +85800,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 66 89 83
     return_type: Client::Graphics::Physics::CollisionNormalPlane*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionNormalPlane*
       name: this
@@ -85736,7 +85818,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? BA
     return_type: Client::Graphics::Physics::CollisionThreePointPlane*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionThreePointPlane*
       name: this
@@ -94786,7 +94868,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 FF 41 39 7C 24
     return_type: Common::Base::System::IO::IStream::hkIstream*
-    name: Ctor1
+    name: ctor1
     parameters:
     - type: Common::Base::System::IO::IStream::hkIstream*
       name: this
@@ -94794,7 +94876,7 @@ structs:
       name: sr
   - signature: E8 ?? ?? ?? ?? 4C 8B C3 48 8B D7 48 8B 48 10
     return_type: Common::Base::System::IO::IStream::hkIstream*
-    name: Ctor2
+    name: ctor2
     parameters:
     - type: Common::Base::System::IO::IStream::hkIstream*
       name: this
@@ -94802,7 +94884,7 @@ structs:
       name: filename
   - signature: E8 ?? ?? ?? ?? 4C 8D 44 24 ?? 48 8B D5 48 8B 48 10
     return_type: Common::Base::System::IO::IStream::hkIstream*
-    name: Ctor3
+    name: ctor3
     parameters:
     - type: Common::Base::System::IO::IStream::hkIstream*
       name: this
@@ -94812,7 +94894,7 @@ structs:
       name: memSize
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 55 60
     return_type: void
-    name: Dtor
+    name: dtor
     parameters:
     - type: Common::Base::System::IO::IStream::hkIstream*
       name: this
@@ -94859,7 +94941,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 C7 41 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B F9 48 C7 41 ?? ?? ?? ?? ?? 4C 8B C2 48 8B 0D ?? ?? ?? ?? 48 8D 54 24 ?? 41 B9 ?? ?? ?? ?? 48 8B 01 FF 50 28
     return_type: Common::Base::System::IO::OStream::hkOstream*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Common::Base::System::IO::OStream::hkOstream*
       name: this
@@ -94867,7 +94949,7 @@ structs:
       name: filename
   - signature: E8 ?? ?? ?? ?? 44 8B 44 24 ?? 4C 8B 7C 24 ??
     return_type: void
-    name: Dtor
+    name: dtor
     parameters:
     - type: Common::Base::System::IO::OStream::hkOstream*
       name: this
@@ -95750,7 +95832,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F1 48 89 01 41 0F B6 F8
     return_type: Component::Completion::CategoryData*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::Completion::CategoryData*
       name: this
@@ -96841,7 +96923,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F8 48 89 BB ?? ?? ?? ?? C7 43 ?? ?? ?? ?? ??
     return_type: Animation::Playback::hkaAnimatedSkeleton*
-    name: Ctor1
+    name: ctor1
     parameters:
     - type: Animation::Playback::hkaAnimatedSkeleton*
       name: this
@@ -96849,7 +96931,7 @@ structs:
       name: skeleton
   - signature: 48 89 5C 24 ?? 41 56 48 83 EC 20 48 8D 05
     return_type: void
-    name: Dtor
+    name: dtor
     parameters:
     - type: Animation::Playback::hkaAnimatedSkeleton*
       name: this
@@ -105218,7 +105300,7 @@ structs:
   member_functions:
   - signature: 48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08
     return_type: Component::GUI::AtkComponentBase*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -105573,7 +105655,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 ?? 5B C3 33 DB
     return_type: Component::GUI::AtkResNode*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -106276,7 +106358,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8B CB 48 89 07
     return_type: Animation::Playback::Control::hkaAnimationControl*
-    name: Ctor1
+    name: ctor1
     parameters:
     - type: Animation::Playback::Control::hkaAnimationControl*
       name: this
@@ -112699,7 +112781,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentButton*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentButton*
       name: this
@@ -113004,7 +113086,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? C3
     return_type: Component::GUI::AtkComponentGuildLeveCard*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentGuildLeveCard*
       name: this
@@ -113134,7 +113216,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 ?? ?? ?? ?? 48 8B C1 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 89 51 ?? 48 89 51 ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 66 C7 81
     return_type: Component::GUI::AtkComponentIconText*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentIconText*
       name: this
@@ -113264,7 +113346,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 48 8B D9 48 8D 05 ?? ?? ?? ?? 33 C9 33 D2 41 B8 ?? ?? ?? ?? 48 89 4B 08
     return_type: Component::GUI::AtkComponentJournalCanvas*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentJournalCanvas*
       name: this
@@ -113764,7 +113846,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0
     return_type: Component::GUI::AtkComponentList*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentList*
       name: this
@@ -114311,7 +114393,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentPortrait*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentPortrait*
       name: this
@@ -114538,7 +114620,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentScrollBar*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentScrollBar*
       name: this
@@ -114755,7 +114837,7 @@ structs:
       name: dispatchEvent29
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentSlider*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentSlider*
       name: this
@@ -114897,7 +114979,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 ?? ?? ?? ?? 48 8B C1 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 48 89 51 ?? 89 51 ?? 48 89 51 ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 89 91
     return_type: Component::GUI::AtkComponentTextNineGrid*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentTextNineGrid*
       name: this
@@ -115071,7 +115153,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 0F 57 C0
     return_type: Component::GUI::AtkComponentWindow*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentWindow*
       name: this
@@ -121318,7 +121400,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 ED C6 86 ?? ?? ?? ?? ?? 48 8D 05
     return_type: Client::UI::Misc::CharaView*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::UI::Misc::CharaView*
       name: this
@@ -121675,7 +121757,7 @@ structs:
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8D 05 ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentDragDrop*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentDragDrop*
       name: this
@@ -121889,7 +121971,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 89 83 ?? ?? ?? ?? 48 8B C3
     return_type: Component::GUI::AtkComponentRadioButton*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentRadioButton*
       name: this
@@ -123934,6 +124016,320 @@ structs:
       name: this
     - type: byte*
       name: data
+- type: Client::LayoutEngine::Layer::PopRangeLayoutInstance
+  name: PopRangeLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 160
+  fields:
+  - type: Client::LayoutEngine::Layer::RangeLayoutInstance
+    name: RangeLayoutInstance
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: PopType
+    offset: 112
+  - type: unsigned int
+    name: PositionCount
+    offset: 116
+  - type: float
+    name: InnerRadiusRatio
+    offset: 120
+  - type: StdVector<System::Numerics::Vector3>
+    name: Positions
+    offset: 128
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::SoundLayoutInstance
   name: SoundLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -133729,7 +134125,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentHoldButton*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentHoldButton*
       name: this
@@ -133902,7 +134298,7 @@ structs:
   member_functions:
   - signature: 45 33 C0 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 4C 89 41 ?? ?? ?? ?? BA
     return_type: Component::GUI::AtkComponentIcon*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentIcon*
       name: this
@@ -134498,7 +134894,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 0F 57 C0
     return_type: Component::GUI::AtkComponentTreeList*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
@@ -134586,7 +134982,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? C1 FB 04
     return_type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
       name: this
@@ -134635,13 +135031,13 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 8B CB 48 89 9F
     return_type: Component::SteamApi::SteamApi*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 FF 15 ?? ?? ?? ?? 48 8D 8B
     return_type: void
-    name: Dtor
+    name: dtor
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
@@ -134743,7 +135139,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 48 8B 52 38
     return_type: Animation::Playback::Control::Default::hkaDefaultAnimationControl*
-    name: Ctor1
+    name: ctor1
     parameters:
     - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl*
       name: this
@@ -135293,7 +135689,7 @@ structs:
   member_functions:
   - signature: 45 33 C0 C6 41 08 00
     return_type: Client::Game::UI::InstanceContent::ContentUI*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::Game::UI::InstanceContent::ContentUI*
       name: this
@@ -136422,7 +136818,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 33 FF 48 8D 8B ?? ?? ?? ?? 48 89 03 89 BB ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C3
     return_type: Component::GUI::AtkComponentTab*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentTab*
       name: this
@@ -137980,7 +138376,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 48 89 58 ?? 89 58 ?? 48 89 58 ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 66 89 98 ?? ?? ?? ?? 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 88 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 48 89 98 ?? ?? ?? ?? 89 98
     return_type: Component::GUI::AtkComponentGaugeBar*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentGaugeBar*
       name: this
@@ -138345,7 +138741,7 @@ structs:
   member_functions:
   - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentListItemRenderer*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentListItemRenderer*
       name: this
@@ -138577,7 +138973,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 88 98
     return_type: Component::GUI::AtkComponentMap*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentMap*
       name: this
@@ -139361,7 +139757,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 D2 48 8D 9F
     return_type: Component::GUI::AtkUnitBase*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -193613,7 +194009,7 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 7C 24 ?? EB ?? 33 F6
     return_type: Client::UI::Misc::CharaViewPortrait*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
@@ -204636,7 +205032,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 86 ?? ?? ?? ?? ?? ?? ?? ??
     return_type: Component::GUI::AtkComponentNumericInput*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentNumericInput*
       name: this
@@ -233699,7 +234095,7 @@ structs:
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83
     return_type: Component::GUI::AtkComponentTextInput*
-    name: Ctor
+    name: ctor
     parameters:
     - type: Component::GUI::AtkComponentTextInput*
       name: this
