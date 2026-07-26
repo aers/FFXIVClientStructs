@@ -7100,8 +7100,8 @@ classes:
       0x140272C90: ctor
       0x140272E60: SetupFromModelResourceHandle
       0x140274750: ModelDrawInit
-#oldfail       0x140395EF0: GetAttributeIndex
-#oldfail       0x140394B20: GetShapeIndex
+      0x140274640: GetAttributeIndex
+      0x140274700: GetShapeIndex
   Client::Graphics::Render::Light:
     vtbls:
       - ea: 0x142141D18
