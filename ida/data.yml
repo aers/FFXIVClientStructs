@@ -27472,8 +27472,12 @@ classes:
   Client::Graphics::Physics::ConstraintBase:
     vtbls:
       - ea: 0x142430E40
+    vfuncs:
+      0: dtor
+      1: ResetSkeleton
     funcs:
       0x141C89710: ctor
+      0x141C89730: SetSkeleton
   Client::Graphics::Physics::ConstraintAttract:
     vtbls:
       - ea: 0x142430E68
