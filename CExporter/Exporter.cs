@@ -619,12 +619,15 @@ public class Exporter {
                         _processType.Add(memberFunctionReturnType.Type);
                     else
                         memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
+                    var funcName = memberFunction.Name;
+                    if (funcName.StartsWith("Ctor") || funcName.StartsWith("Dtor"))
+                        funcName = char.ToLowerInvariant(funcName[0]) + funcName[1..]; // lowercase ctor/dtor
                     memberFunctionsArray =
                     [
                         .. memberFunctionsArray,
                         new ProcessedMemberFunction {
                             MemberFunctionSignature = memberFunctionAddress!.Signature,
-                            MemberFunctionName = memberFunction.Name,
+                            MemberFunctionName = funcName,
                             MemberFunctionReturnType = memberFunctionReturnType,
                             MemberFunctionParameters = [
                                 new ProcessedField {
