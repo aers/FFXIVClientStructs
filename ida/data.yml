@@ -6615,7 +6615,7 @@ classes:
       0x140494320: HideAll
       0x14048C340: GetAgentScenarioTree
       0x14048C350: GetAgentMateriaAttach
-      0x14048C360: GetAgentGoldSaucerReward
+      0x14048C360: GetAgentFateReward
       0x14048C370: GetAgentCharacterTitleSelect
       0x14048C380: GetAgentReadyCheck
       0x14048C3A0: GetAgentHwdMonument
@@ -13029,7 +13029,7 @@ classes:
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x14052EA10: Finalizer
-  Client::UI::Agent::AgentGoldSaucerReward:
+  Client::UI::Agent::AgentFateReward:
     vtbls:
       - ea: 0x1421EE728
         base: Client::UI::Agent::AgentInterface

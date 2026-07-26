@@ -111,7 +111,8 @@ public enum AgentId : uint {
     CutsceneReplay = 73,
     MonsterNote = 74,
     ItemSearch = 75, // MarketBoard
-    GoldSaucerReward = 76,
+    [Obsolete("Renamed to FateReward")] GoldSaucerReward = 76,
+    FateReward = 76, // GoldSaucerReward, MJIReward, WKSReward, FateReward
     FateProgress = 77, // Shared FATE
     Catch = 78,
     FreeCompany = 79,
