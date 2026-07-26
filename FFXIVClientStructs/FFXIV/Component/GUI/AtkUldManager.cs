@@ -220,8 +220,4 @@ public enum ComponentType : byte {
     Portrait = 25,
     XBMItem = 26,
     XBMContentStageEventMap = 27,
-    [Obsolete("Use XBMItem")]
-    Unk26 = XBMItem,
-    [Obsolete("Use XBMContentStageEventMap")]
-    Unk27 = XBMContentStageEventMap,
 }

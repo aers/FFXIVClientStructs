@@ -9678,6 +9678,14 @@ classes:
     funcs:
       0x1406DF370: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
       0x1406DF360: GetCollisionNode
+  Component::GUI::AtkComponentXBMItem:
+    vtbls:
+      - ea: 0x142174618
+        base: Component::GUI::AtkComponentBase
+  Component::GUI::AtkComponentXBMContentStageEventMap:
+    vtbls:
+      - ea: 0x1421746B8
+        base: Component::GUI::AtkComponentBase
   Client::LayoutEngine::IManagerBase:
     vtbls:
       - ea: 0x142175860
