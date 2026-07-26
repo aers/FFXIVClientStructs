@@ -25,6 +25,7 @@ public unsafe partial struct Weapon {
     [FieldOffset(0xA40)] public Texture* FreeCompanyCrest;
     [FieldOffset(0xA48)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
     [FieldOffset(0xA50)] public ChangedWeaponData* ChangedData;
+    [FieldOffset(0xA58)] public CharacterBase* AttachTarget;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct ChangedWeaponData {
