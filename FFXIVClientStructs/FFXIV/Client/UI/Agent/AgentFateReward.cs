@@ -25,7 +25,7 @@ public unsafe partial struct AgentFateReward {
         // For GoldSaucerReward the Id is the index in this array of Addon RowIds: 9980, 9981, 9982, 9984, 9983, 9986, 9985, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996
         // For WKSReward the Id is a byte, followed by a byte with flags
         [FieldOffset(0x78)] public uint Id;
-        [FieldOffset(0x7C)] private byte EurekaFate;
+        [FieldOffset(0x7C)] public uint EurekaFate;
         [FieldOffset(0x80)] public uint Experience; // Experience, Island EXP, ...
         [FieldOffset(0x84)] public byte ExperienceFlags;
         [FieldOffset(0x88)] public uint CurrencyAmount; // Gil, Seafarer's Cowrie, ...
