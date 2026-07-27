@@ -60,8 +60,8 @@ public unsafe partial struct AgentFateReward {
 
     public enum RewardType : byte {
         FateReward = 0,
-        Unk1 = 1, // ContentReward?
-        Unk2 = 2, // TreasureHuntReward?
+        DynamicEventReward = 1,
+        TreasureHuntReward = 2,
         GoldSaucerReward = 3,
         MJIReward = 4,
         WKSReward = 5,

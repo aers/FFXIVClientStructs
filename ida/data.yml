@@ -13081,9 +13081,9 @@ classes:
     funcs:
       0x140F6B200: ctor
       0x140F6B4A0: HandleFateReward # type 0
-      0x140F6B610: HandleType1Reward # type variable, but only called with type 1
+      0x140F6B610: HandleDynamicEventReward # type variable, but only called with type 1
       0x140F6B800: HandleGoldSaucerReward # type 3
-      0x140F6B8B0: HandleType2Reward # type 2
+      0x140F6B8B0: HandleTreasureHuntReward # type 2
       0x140F6BA30: HandleMJIReward # type 4
       0x140F6BB00: HandleWKSReward # type 5
       0x140F6C390: EnqueueReward
