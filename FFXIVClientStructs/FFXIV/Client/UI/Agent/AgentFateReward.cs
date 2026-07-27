@@ -27,30 +27,21 @@ public unsafe partial struct AgentFateReward {
         // For WKSReward the Id is a byte, followed by a byte with flags
         [FieldOffset(0x78)] public uint Id;
         [FieldOffset(0x7C)] private byte EurekaFate;
-        [FieldOffset(0x7D)] private byte Unk7D;
-        [FieldOffset(0x7E)] private byte Unk7E;
-        [FieldOffset(0x7F)] private byte Unk7F;
         [FieldOffset(0x80)] public uint Experience; // Experience, Island EXP, ...
-        [FieldOffset(0x84)] private byte Unk84;
-        [FieldOffset(0x85)] private byte Unk85;
-        [FieldOffset(0x86)] private byte Unk86;
-        [FieldOffset(0x87)] private byte Unk87;
+        [FieldOffset(0x84)] public byte ExperienceFlags;
         [FieldOffset(0x88)] public uint CurrencyAmount; // Gil, Seafarer's Cowrie, ...
-        [FieldOffset(0x8C)] private uint Unk8C;
+        [FieldOffset(0x8C)] public byte CurrencyFlags;
         [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray5<ItemReward> _items;
         [FieldOffset(0x108)] public byte FateTokenTypeId;
-        [FieldOffset(0x109)] private byte Unk109;
-        [FieldOffset(0x10A)] private byte Unk10A;
-        [FieldOffset(0x10B)] private byte Unk10B;
         [FieldOffset(0x10C)] public uint FateTokenTypeItemId;
         [FieldOffset(0x110)] public uint FateTokenTypeAmount;
-        [FieldOffset(0x114)] private uint Unk114;
         [FieldOffset(0x118), CExporterExcel("Item")] public void* FateTokenTypeItemRow;
-        [FieldOffset(0x120)] private byte Unk120;
-        [FieldOffset(0x121)] private byte Unk121;
-        [FieldOffset(0x122)] private byte Unk122;
+        [FieldOffset(0x120)] public byte FateTokenTypeFlags;
         [FieldOffset(0x128)] public byte GrandCompany;
         [FieldOffset(0x12C)] public byte GCSealsAmount;
+        [FieldOffset(0x130), FixedSizeArray] internal FixedSizeArray3<AdditionalItemReward> _additionalItems;
+        [FieldOffset(0x160)] public byte ItemProcessedBits;
+        [FieldOffset(0x161)] public byte ItemProcessedCount;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
         public unsafe struct ItemReward {
@@ -58,6 +49,13 @@ public unsafe partial struct AgentFateReward {
             [FieldOffset(0x04)] public uint Amount;
             [FieldOffset(0x08), CExporterExcel("Item")] public void* ItemRow;
             [FieldOffset(0x10)] public byte Flags;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public unsafe struct AdditionalItemReward {
+            [FieldOffset(0x00)] public uint ItemId;
+            [FieldOffset(0x04)] public uint Amount;
+            [FieldOffset(0x08), CExporterExcel("Item")] public void* ItemRow;
         }
     }
 
