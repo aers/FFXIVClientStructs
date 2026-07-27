@@ -57,7 +57,7 @@ public unsafe partial struct AgentFateReward {
             [FieldOffset(0x00)] public uint ItemId;
             [FieldOffset(0x04)] public uint Amount;
             [FieldOffset(0x08), CExporterExcel("Item")] public void* ItemRow;
-            [FieldOffset(0x10)] public uint Flags;
+            [FieldOffset(0x10)] public byte Flags;
             [FieldOffset(0x14)] private uint Unk14;
         }
     }
