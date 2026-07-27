@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.String;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // Client::Game::InstanceContent::InstanceContentDirector
@@ -82,6 +84,8 @@ public partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0xA7), CExporterExcelEnd] private byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
 
     [FieldOffset(0xDE0)] public ContentDirector.MapEffectList ManagedSharedGroups;
+
+    [FieldOffset(0x1A60), FixedSizeArray] internal FixedSizeArray12<Utf8String> _commonInstanceContentTexts;
 }
 
 public enum InstanceContentType : byte {
