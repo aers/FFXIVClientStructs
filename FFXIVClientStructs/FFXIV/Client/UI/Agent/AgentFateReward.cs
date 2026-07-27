@@ -37,7 +37,7 @@ public unsafe partial struct AgentFateReward {
         [FieldOffset(0x118), CExporterExcel("Item")] public void* FateTokenTypeItemRow;
         [FieldOffset(0x120)] public byte FateTokenTypeFlags;
         [FieldOffset(0x128)] public byte GrandCompany;
-        [FieldOffset(0x12C)] public byte GCSealsAmount;
+        [FieldOffset(0x12C)] public uint GCSealsAmount;
         [FieldOffset(0x130), FixedSizeArray] internal FixedSizeArray3<AdditionalItemReward> _additionalItems;
         [FieldOffset(0x160)] public byte ItemProcessedBits;
         [FieldOffset(0x161)] public byte ItemProcessedCount;
