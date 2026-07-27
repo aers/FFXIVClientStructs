@@ -94,5 +94,5 @@ public unsafe partial struct ImmediateContext {
     public partial void PreprocessCommands(RenderCommandBufferGroup* renderCommands, uint renderCommandCount);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 83 ?? ?? ?? ?? 3C 01 73 70")]
-    public partial void ExecuteCommands();
+    public partial void ExecuteCommands(uint renderCommandCount, uint* a3, RenderCommandBufferGroup* renderCommands);
 }
