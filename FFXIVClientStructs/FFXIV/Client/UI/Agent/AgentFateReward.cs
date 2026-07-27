@@ -14,7 +14,6 @@ public unsafe partial struct AgentFateReward {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 48 81 C4 ?? ?? ?? ?? 41 5E")]
     public partial void EnqueueReward(Reward* reward);
 
-    // struct layout seems to differ between RewardTypes? unsure
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x168)]
     public unsafe partial struct Reward {
