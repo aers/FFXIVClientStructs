@@ -19,10 +19,10 @@ public unsafe partial struct AgentFateReward {
     [StructLayout(LayoutKind.Explicit, Size = 0x168)]
     public unsafe partial struct Reward {
         [FieldOffset(0x00)] public RewardType Type;
-        [FieldOffset(0x01)] private bool Unk01;
+        [FieldOffset(0x01)] public bool IsSuccess;
         [FieldOffset(0x08)] public Utf8String Name;
         [FieldOffset(0x70)] public uint Icon;
-        [FieldOffset(0x74)] private uint Unk74;
+        [FieldOffset(0x74)] public uint Medal;
         // For GoldSaucerReward the Id is the index in this array of Addon RowIds: 9980, 9981, 9982, 9984, 9983, 9986, 9985, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996
         // For WKSReward the Id is a byte, followed by a byte with flags
         [FieldOffset(0x78)] public uint Id;
