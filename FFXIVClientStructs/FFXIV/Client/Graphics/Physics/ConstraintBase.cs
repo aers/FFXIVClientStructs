@@ -15,7 +15,7 @@ public unsafe partial struct ConstraintBase {
     public partial ConstraintBase* Ctor(ConstraintType type);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? F3 0F 10 44 24 ?? B0 ?? F3 0F 10 4C 24 ?? F3 0F 11 43")]
-    public partial bool SetSkeleton(Skeleton *skeleton);
+    public partial bool SetSkeleton(Skeleton* skeleton);
 
     [VirtualFunction(0)]
     public partial ConstraintBase* Dtor(byte freeFlags);
