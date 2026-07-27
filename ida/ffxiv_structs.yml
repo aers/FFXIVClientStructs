@@ -2941,7 +2941,7 @@ enums:
     "CutsceneReplay": 73
     "MonsterNote": 74
     "ItemSearch": 75
-    "GoldSaucerReward": 76
+    "FateReward": 76
     "FateProgress": 77
     "Catch": 78
     "FreeCompany": 79
@@ -7050,6 +7050,18 @@ enums:
     "Available": 0
     "NotYetAvailable": 1
     "NotCurrentlyAvailable": 3
+- type: Client::UI::Agent::AgentFateReward::RewardType
+  name: RewardType
+  underlying: byte
+  namespace: Client.UI.Agent
+  flags: False
+  values:
+    "FateReward": 0
+    "Unk1": 1
+    "Unk2": 2
+    "GoldSaucerReward": 3
+    "MJIReward": 4
+    "WKSReward": 5
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::FocusType
   name: FocusType
   underlying: unsigned __int16
@@ -8172,6 +8184,26 @@ structs:
       name: this
     - type: Client::Game::Character::CustomizeData*
       name: source
+- type: Client::Game::Character::DrawData
+  name: DrawData
+  namespace: Client.Game.Character
+  union: False
+  size: 72
+  fields:
+  - type: Client::Graphics::Scene::DrawObject*
+    name: DrawObject
+    offset: 8
+  - type: Client::Graphics::Scene::CharacterBase*
+    name: CharacterBase
+    offset: 16
+  - type: Client::System::Resource::Handle::AttachOffsetResourceHandle*
+    name: AttachOffsetResourceHandle
+    offset: 24
+  - type: unsigned int
+    name: Slot
+    offset: 44
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Character::EquipmentModelId
   name: EquipmentModelId
   namespace: Client.Game.Character
@@ -12145,6 +12177,19 @@ structs:
     size: 192
     is_string: True
   member_functions: []
+- type: Client::Game::Network::FateRewardPacket::ItemReward
+  name: ItemReward
+  namespace: Client.Game.Network
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: Amount
+    offset: 4
+  member_functions: []
 - type: Client::Game::Network::HousingPortalPacket::HouseInfoEntry
   name: HouseInfoEntry
   namespace: Client.Game.Network
@@ -12302,26 +12347,20 @@ structs:
     name: VfxId
     offset: 6
   - type: unsigned __int16
-    name: Unk8
+    name: LoadingScreenVfxId
     offset: 8
   - type: byte
     name: WarpType
     offset: 10
   - type: byte
-    name: UnkB
+    name: HideCharacter
     offset: 11
   - type: byte
-    name: UnkC
+    name: FadeOutDelay
     offset: 12
   - type: byte
     name: Flags
     offset: 13
-  - type: byte
-    name: UnkE
-    offset: 14
-  - type: byte
-    name: UnkF
-    offset: 15
   member_functions: []
 - type: Client::Game::Network::QueueUpdatePacket
   name: QueueUpdatePacket
@@ -12864,6 +12903,76 @@ structs:
     name: OwnerType
     offset: 4
   member_functions: []
+- type: Client::Game::QuestEffectBase
+  name: QuestEffectBase
+  namespace: Client.Game
+  union: False
+  size: 16
+  fields: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::QuestEffectBase*
+    parameters:
+    - type: Client::Game::QuestEffectBase*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: GetResult
+    offset: 8
+    return_type: int
+    parameters:
+    - type: Client::Game::QuestEffectBase*
+      name: this
+    - type: unsigned int
+      name: param1
+    - type: unsigned int
+      name: param2
+    - type: unsigned __int16
+      name: questId
+  - name: GetLogMessageId
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::QuestEffectBase*
+      name: this
+  - name: SuppressLogMessage
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::Game::QuestEffectBase*
+      name: this
+  member_functions: []
+- type: Client::Game::QuestEffectManager
+  name: QuestEffectManager
+  namespace: Client.Game
+  union: False
+  size: 424
+  fields:
+  - type: Client::Game::QuestEffectBase*
+    name: EffectHandlers
+    offset: 0
+    size: 47
+    is_string: False
+  - type: unsigned __int16
+    name: UnkQuestId
+    offset: 392
+  - type: unsigned __int16
+    name: UnkQuestEffectId
+    offset: 394
+  - type: unsigned __int16
+    name: UnkColliderInstanceId
+    offset: 396
+  - type: byte
+    name: Flags
+    offset: 400
+  member_functions: []
+  static_members:
+  - signature: 4C 8B 35 ?? ?? ?? ?? 0F B7 C8
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::QuestEffectManager
 - type: Client::Game::RaceChocoboAttributeValues
   name: RaceChocoboAttributeValues
   namespace: Client.Game
@@ -21548,6 +21657,28 @@ structs:
     name: IsStainUnlocked
     offset: 24
   member_functions: []
+- type: Client::UI::Agent::AgentFateReward::Reward::ItemReward
+  name: ItemReward
+  namespace: Client.UI.Agent
+  union: False
+  size: 24
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: Amount
+    offset: 4
+  - type: Component::Exd::Sheets::Item*
+    name: ItemRow
+    offset: 8
+  - type: unsigned int
+    name: Flags
+    offset: 16
+  - type: unsigned int
+    name: Unk14
+    offset: 20
+  member_functions: []
 - type: Client::UI::Agent::AgentFreeCompany::FreeCompanyActionTimer
   name: FreeCompanyActionTimer
   namespace: Client.UI.Agent
@@ -27477,21 +27608,19 @@ structs:
       name: a3
     - type: char
       name: a4
-  - name: ShowGoldSaucerReward
+  - name: ShowFateReward
     offset: 1352
     return_type: void
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte
-      name: type
+    - type: Client::Game::Network::FateRewardPacket*
+      name: packet
+    - type: Client::Game::Network::FateRewardPacket::ItemReward*
+      name: items
     - type: unsigned int
-      name: mgp
-    - type: unsigned int
-      name: rewardItemId
-    - type: unsigned int
-      name: rewardItemCount
-  - name: HideGoldSaucerReward
+      name: itemCount
+  - name: HideFateReward
     offset: 1360
     return_type: void
     parameters:
@@ -27849,8 +27978,6 @@ structs:
     offset: 1320
   - name: HideHowTo
     offset: 1336
-  - name: HideGoldSaucerReward_2
-    offset: 1368
   - name: OpenMiniGame
     offset: 1424
   - name: HideHousingHarvest
@@ -33004,6 +33131,18 @@ structs:
     name: MyFirstIter
     offset: 8
   member_functions: []
+- type: ContainerInterface::ContainerProxy<Client::UI::Agent::AgentFateReward::Reward>
+  name: ContainerProxy`1
+  namespace: ContainerInterface
+  union: False
+  fields:
+  - type: StdDeque<Client::UI::Agent::AgentFateReward::Reward>*
+    name: MyCont
+    offset: 0
+  - type: ContainerInterface::IteratorBase12<Client::UI::Agent::AgentFateReward::Reward>*
+    name: MyFirstIter
+    offset: 8
+  member_functions: []
 - type: ContainerInterface::ContainerProxy<Client::UI::Agent::BalloonInfo>
   name: ContainerProxy`1
   namespace: ContainerInterface
@@ -33136,6 +33275,18 @@ structs:
     name: MyProxy
     offset: 0
   - type: ContainerInterface::IteratorBase12<Client::System::String::Utf8String>*
+    name: MyNextIter
+    offset: 8
+  member_functions: []
+- type: ContainerInterface::IteratorBase12<Client::UI::Agent::AgentFateReward::Reward>
+  name: IteratorBase12`1
+  namespace: ContainerInterface
+  union: False
+  fields:
+  - type: ContainerInterface::ContainerProxy<Client::UI::Agent::AgentFateReward::Reward>*
+    name: MyProxy
+    offset: 0
+  - type: ContainerInterface::IteratorBase12<Client::UI::Agent::AgentFateReward::Reward>*
     name: MyNextIter
     offset: 8
   member_functions: []
@@ -33275,6 +33426,27 @@ structs:
     name: ContainerBase
     offset: 0
   - type: Client::System::String::Utf8String**
+    name: Map
+    offset: 8
+  - type: unsigned __int64
+    name: MapSize
+    offset: 16
+  - type: unsigned __int64
+    name: MyOff
+    offset: 24
+  - type: unsigned __int64
+    name: MySize
+    offset: 32
+  member_functions: []
+- type: StdDeque<Client::UI::Agent::AgentFateReward::Reward>
+  name: StdDeque`1
+  namespace: ''
+  union: False
+  fields:
+  - type: ContainerInterface::ContainerProxy<Client::UI::Agent::AgentFateReward::Reward>*
+    name: ContainerBase
+    offset: 0
+  - type: Client::UI::Agent::AgentFateReward::Reward**
     name: Map
     offset: 8
   - type: unsigned __int64
@@ -36911,37 +37083,6 @@ structs:
       name: companionId
     - type: unsigned int
       name: param
-- type: Client::Game::Character::DrawObjectData
-  name: DrawObjectData
-  namespace: Client.Game.Character
-  union: False
-  size: 112
-  fields:
-  - type: Client::Game::Character::WeaponModelId
-    name: ModelId
-    offset: 0
-  - type: Client::Graphics::Scene::DrawObject*
-    name: DrawObject
-    offset: 24
-  - type: byte
-    name: State
-    offset: 96
-    bits:
-    - type: byte
-      offset: 0
-      size: 1
-      name: UnkBits0
-    - type: byte
-      offset: 1
-      size: 1
-      name: IsHidden
-  - type: unsigned __int16
-    name: Flags1
-    offset: 98
-  - type: byte
-    name: Flags2
-    offset: 100
-  member_functions: []
 - type: Client::Game::Character::EffectContainer
   name: EffectContainer
   namespace: Client.Game.Character
@@ -37065,6 +37206,47 @@ structs:
     parameters:
     - type: Client::Game::Character::EffectContainer*
       name: this
+- type: Client::Game::Character::LifeSkillContainer
+  name: LifeSkillContainer
+  namespace: Client.Game.Character
+  union: False
+  size: 40
+  fields:
+  - type: Client::Game::Character::ContainerInterface
+    name: ContainerInterface
+    offset: 0
+    base: true
+  - type: int
+    name: UnkActionTimelineId1
+    offset: 16
+  - type: int
+    name: UnkActionTimelineId2
+    offset: 20
+  - type: int
+    name: UnkActionTimelineId3
+    offset: 24
+  - type: byte
+    name: VfxType1
+    offset: 28
+  - type: byte
+    name: VfxType2
+    offset: 29
+  - type: byte
+    name: VfxType3
+    offset: 30
+  - type: byte
+    name: Unk1F
+    offset: 31
+  - type: byte
+    name: WeaponFlags
+    offset: 32
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: IsOffhandDrawn
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Character::ModelContainer
   name: ModelContainer
   namespace: Client.Game.Character
@@ -39092,6 +39274,28 @@ structs:
     name: Unknown3
     offset: 60
   member_functions: []
+- type: Client::Game::Network::ActorSetPosPacket
+  name: ActorSetPosPacket
+  namespace: Client.Game.Network
+  union: False
+  size: 24
+  fields:
+  - type: unsigned __int16
+    name: Rotation
+    offset: 0
+  - type: byte
+    name: WarpType
+    offset: 2
+  - type: byte
+    name: Arg
+    offset: 3
+  - type: unsigned int
+    name: TransitionTerritoryFilterKey
+    offset: 4
+  - type: System::Numerics::Vector3
+    name: Position
+    offset: 8
+  member_functions: []
 - type: Client::Game::Network::CrossRealmListingSegmentPacket
   name: CrossRealmListingSegmentPacket
   namespace: Client.Game.Network
@@ -39108,6 +39312,51 @@ structs:
     name: Entries
     offset: 16
     size: 4
+    is_string: False
+  member_functions: []
+- type: Client::Game::Network::FateRewardPacket
+  name: FateRewardPacket
+  namespace: Client.Game.Network
+  union: False
+  size: 72
+  fields:
+  - type: unsigned int
+    name: Experience
+    offset: 0
+  - type: unsigned int
+    name: BonusExperience
+    offset: 4
+  - type: unsigned int
+    name: GilAmount
+    offset: 8
+  - type: unsigned int
+    name: GCSealsAmount
+    offset: 12
+  - type: unsigned int
+    name: Unk10
+    offset: 16
+  - type: unsigned int
+    name: FateTokenTypeAmount
+    offset: 20
+  - type: unsigned __int16
+    name: FateId
+    offset: 24
+  - type: unsigned __int16
+    name: Unk1A
+    offset: 26
+  - type: byte
+    name: FateTokenTypeId
+    offset: 28
+  - type: byte
+    name: Unk1D
+    offset: 29
+  - type: byte
+    name: Unk1E
+    offset: 30
+  - type: Client::Game::Network::FateRewardPacket::ItemReward
+    name: ItemRewards
+    offset: 32
+    size: 5
     is_string: False
   member_functions: []
 - type: Client::Game::Network::QueueInfoStatePacket
@@ -43099,6 +43348,22 @@ structs:
       name: renderModelCallback
     - type: Client::Graphics::Render::ModelRenderer::Callback*
       name: renderMaterialCallback
+  - signature: E8 ?? ?? ?? ?? 66 41 3B C7 74 ?? 41 83 FE
+    return_type: __int16
+    name: GetAttributeIndex
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+    - type: char*
+      name: attributeName
+  - signature: E8 ?? ?? ?? ?? 66 41 3B C4 74 ?? 0F B6 C8 8B D7
+    return_type: __int16
+    name: GetShapeIndex
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+    - type: char*
+      name: shapeName
 - type: Client::Graphics::Render::RenderTargetManager
   name: RenderTargetManager
   namespace: Client.Graphics.Render
@@ -60837,6 +61102,46 @@ structs:
     name: ResponseFlags
     offset: 345
   member_functions: []
+- type: Client::Game::Character::DrawObjectData
+  name: DrawObjectData
+  namespace: Client.Game.Character
+  union: False
+  size: 112
+  fields:
+  - type: Client::Game::Character::WeaponModelId
+    name: ModelId
+    offset: 0
+  - type: Client::Graphics::Scene::Weapon*
+    name: Weapon
+    offset: 8
+  - type: Client::Game::Character::DrawData
+    name: DrawData
+    offset: 16
+  - type: byte
+    name: State
+    offset: 96
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: UnkBits0
+    - type: byte
+      offset: 1
+      size: 1
+      name: IsHidden
+  - type: unsigned __int16
+    name: Flags1
+    offset: 98
+  - type: byte
+    name: Flags2
+    offset: 100
+  - type: unsigned __int16
+    name: UnkWeaponTimelineId
+    offset: 102
+  - type: unsigned __int16
+    name: UnkTimelineId
+    offset: 104
+  member_functions: []
 - type: Client::Game::Control::CharacterLookAtTargetParam::Target
   name: Target
   namespace: Client::Game::Control::CharacterLookAtTargetParam
@@ -70998,6 +71303,108 @@ structs:
       name: this
     - type: byte
       name: classJobId
+  member_functions: []
+- type: Client::UI::Agent::AgentFateReward::Reward
+  name: Reward
+  namespace: Client.UI.Agent
+  union: False
+  size: 360
+  fields:
+  - type: Client::UI::Agent::AgentFateReward::RewardType
+    name: Type
+    offset: 0
+  - type: char
+    name: Unk01
+    offset: 1
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 8
+  - type: unsigned int
+    name: Icon
+    offset: 112
+  - type: unsigned int
+    name: Unk74
+    offset: 116
+  - type: unsigned int
+    name: Id
+    offset: 120
+  - type: byte
+    name: EurekaFate
+    offset: 124
+  - type: byte
+    name: Unk7D
+    offset: 125
+  - type: byte
+    name: Unk7E
+    offset: 126
+  - type: byte
+    name: Unk7F
+    offset: 127
+  - type: unsigned int
+    name: Experience
+    offset: 128
+  - type: byte
+    name: Unk84
+    offset: 132
+  - type: byte
+    name: Unk85
+    offset: 133
+  - type: byte
+    name: Unk86
+    offset: 134
+  - type: byte
+    name: Unk87
+    offset: 135
+  - type: unsigned int
+    name: CurrencyAmount
+    offset: 136
+  - type: unsigned int
+    name: Unk8C
+    offset: 140
+  - type: Client::UI::Agent::AgentFateReward::Reward::ItemReward
+    name: Items
+    offset: 144
+    size: 5
+    is_string: False
+  - type: byte
+    name: FateTokenTypeId
+    offset: 264
+  - type: byte
+    name: Unk109
+    offset: 265
+  - type: byte
+    name: Unk10A
+    offset: 266
+  - type: byte
+    name: Unk10B
+    offset: 267
+  - type: unsigned int
+    name: FateTokenTypeItemId
+    offset: 268
+  - type: unsigned int
+    name: FateTokenTypeAmount
+    offset: 272
+  - type: unsigned int
+    name: Unk114
+    offset: 276
+  - type: Component::Exd::Sheets::Item*
+    name: FateTokenTypeItemRow
+    offset: 280
+  - type: byte
+    name: Unk120
+    offset: 288
+  - type: byte
+    name: Unk121
+    offset: 289
+  - type: byte
+    name: Unk122
+    offset: 290
+  - type: byte
+    name: GrandCompany
+    offset: 296
+  - type: byte
+    name: GCSealsAmount
+    offset: 300
   member_functions: []
 - type: Client::UI::Agent::AgentFishGuide
   name: AgentFishGuide
@@ -83836,6 +84243,14 @@ structs:
     name: FateJoined
     offset: 175
   member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 55 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 44 0F B6 25
+    return_type: void
+    name: HandleFateRewardPacket
+    parameters:
+    - type: Client::Game::Fate::FateManager*
+      name: this
+    - type: Client::Game::Network::FateRewardPacket*
+      name: packet
   - signature: 48 8B 81 ?? ?? ?? ?? 4C 8B D2 4C 8B 89
     return_type: char
     name: IsInFateRadius
@@ -88370,6 +88785,144 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentDawnStory*
       name: this
+- type: Client::UI::Agent::AgentFateReward
+  name: AgentFateReward
+  namespace: Client.UI.Agent
+  union: False
+  size: 88
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: StdDeque<Client::UI::Agent::AgentFateReward::Reward>
+    name: Rewards
+    offset: 40
+  - type: int
+    name: IsRewardPending
+    offset: 80
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 48 81 C4 ?? ?? ?? ?? 41 5E
+    return_type: void
+    name: EnqueueReward
+    parameters:
+    - type: Client::UI::Agent::AgentFateReward*
+      name: this
+    - type: Client::UI::Agent::AgentFateReward::Reward*
+      name: reward
 - type: Client::UI::Agent::AgentFieldMarker
   name: AgentFieldMarker
   namespace: Client.UI.Agent
@@ -115817,162 +116370,6 @@ structs:
     return_type: Client::Game::CameraInputSource
     name: GetCameraInputSource
     parameters: []
-- type: Client::Game::Character::DrawDataContainer
-  name: DrawDataContainer
-  namespace: Client.Game.Character
-  union: False
-  size: 616
-  fields:
-  - type: Client::Game::Character::ContainerInterface
-    name: ContainerInterface
-    offset: 0
-    base: true
-  - type: Client::Game::Character::DrawObjectData
-    name: WeaponData
-    offset: 16
-    size: 3
-    is_string: False
-  - type: Client::Game::Character::EquipmentModelId
-    name: EquipmentModelIds
-    offset: 464
-    size: 10
-    is_string: False
-  - type: Client::Game::Character::CustomizeData
-    name: CustomizeData
-    offset: 544
-  - type: byte
-    name: Flags1
-    offset: 574
-    bits:
-    - type: byte
-      offset: 0
-      size: 1
-      name: IsHatHidden
-  - type: byte
-    name: Flags2
-    offset: 575
-    bits:
-    - type: byte
-      offset: 0
-      size: 1
-      name: IsWeaponHidden
-    - type: byte
-      offset: 1
-      size: 3
-      name: UnkBits1
-    - type: byte
-      offset: 4
-      size: 1
-      name: IsVisorToggled
-    - type: byte
-      offset: 5
-      size: 1
-      name: VieraEarsHidden
-  - type: unsigned __int16
-    name: GlassesIds
-    offset: 576
-    size: 2
-    is_string: False
-  - type: Client::UI::Agent::CrestData
-    name: FreeCompanyCrestData
-    offset: 600
-  - type: byte
-    name: FreeCompanyCrestBitfield
-    offset: 608
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? B1 ?? 41 FF C6
-    return_type: void
-    name: LoadEquipment
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: Client::Game::Character::DrawDataContainer::EquipmentSlot
-      name: slot
-    - type: Client::Game::Character::EquipmentModelId*
-      name: modelId
-    - type: char
-      name: force
-  - signature: E8 ?? ?? ?? ?? 4C 8B 45 7F
-    return_type: void
-    name: LoadWeapon
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: Client::Game::Character::DrawDataContainer::WeaponSlot
-      name: slot
-    - type: Client::Game::Character::WeaponModelId
-      name: weaponData
-    - type: byte
-      name: redrawOnEquality
-    - type: byte
-      name: a5
-    - type: byte
-      name: skipGameObject
-    - type: byte
-      name: a7
-    - type: char
-      name: a8
-  - signature: E8 ?? ?? ?? ?? 8B 46 54 0F BA E0 08
-    return_type: void
-    name: HideWeapons
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: char
-      name: hide
-  - signature: E8 ?? ?? ?? ?? 0F B6 55 C9
-    return_type: void
-    name: HideHeadgear
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: unsigned int
-      name: unk
-    - type: char
-      name: hide
-  - signature: 44 0F B6 81 ?? ?? ?? ?? 41 0F B6 C0 41 80 E0 7F
-    return_type: void
-    name: HideLegacyTattoo
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: char
-      name: hide
-  - signature: E8 ?? ?? ?? ?? 41 0F B6 D6 48 8B CB
-    return_type: void
-    name: SetVisor
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: char
-      name: state
-  - signature: E8 ?? ?? ?? ?? EB 50 44 8B 03
-    return_type: void
-    name: SetGlasses
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: int
-      name: index
-    - type: unsigned __int16
-      name: id
-  - signature: E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 41 BD
-    return_type: void
-    name: HideVieraEars
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: char
-      name: hide
-  - signature: 48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B6 B9
-    return_type: void
-    name: HandleGearsetDrawDataPacket
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: Client::Game::Network::GearsetDrawDataPacket*
-      name: packet
 - type: Client::Game::CharamakeAvatarSaveDataContainer
   name: CharamakeAvatarSaveDataContainer
   namespace: Client.Game
@@ -122653,6 +123050,173 @@ structs:
     - type: byte
       name: freeFlags
   member_functions: []
+- type: Client::Game::Character::DrawDataContainer
+  name: DrawDataContainer
+  namespace: Client.Game.Character
+  union: False
+  size: 616
+  fields:
+  - type: Client::Game::Character::ContainerInterface
+    name: ContainerInterface
+    offset: 0
+    base: true
+  - type: Client::Game::Character::DrawObjectData
+    name: WeaponData
+    offset: 16
+    size: 3
+    is_string: False
+  - type: Client::Game::Character::DrawObjectData
+    name: UnkWeaponData
+    offset: 352
+    size: 1
+    is_string: False
+  - type: Client::Game::Character::EquipmentModelId
+    name: EquipmentModelIds
+    offset: 464
+    size: 10
+    is_string: False
+  - type: Client::Game::Character::CustomizeData
+    name: CustomizeData
+    offset: 544
+  - type: __int16
+    name: ArrowAttributeId
+    offset: 570
+  - type: __int16
+    name: AttachAttributeId
+    offset: 572
+  - type: byte
+    name: Flags1
+    offset: 574
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: IsHatHidden
+  - type: byte
+    name: Flags2
+    offset: 575
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: IsWeaponHidden
+    - type: byte
+      offset: 1
+      size: 3
+      name: UnkBits1
+    - type: byte
+      offset: 4
+      size: 1
+      name: IsVisorToggled
+    - type: byte
+      offset: 5
+      size: 1
+      name: VieraEarsHidden
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 576
+    size: 2
+    is_string: False
+  - type: Client::UI::Agent::CrestData
+    name: FreeCompanyCrestData
+    offset: 600
+  - type: byte
+    name: FreeCompanyCrestBitfield
+    offset: 608
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? B1 ?? 41 FF C6
+    return_type: void
+    name: LoadEquipment
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: Client::Game::Character::DrawDataContainer::EquipmentSlot
+      name: slot
+    - type: Client::Game::Character::EquipmentModelId*
+      name: modelId
+    - type: char
+      name: force
+  - signature: E8 ?? ?? ?? ?? 4C 8B 45 7F
+    return_type: void
+    name: LoadWeapon
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: Client::Game::Character::DrawDataContainer::WeaponSlot
+      name: slot
+    - type: Client::Game::Character::WeaponModelId
+      name: weaponData
+    - type: byte
+      name: redrawOnEquality
+    - type: byte
+      name: a5
+    - type: byte
+      name: skipGameObject
+    - type: byte
+      name: a7
+    - type: char
+      name: a8
+  - signature: E8 ?? ?? ?? ?? 8B 46 54 0F BA E0 08
+    return_type: void
+    name: HideWeapons
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: char
+      name: hide
+  - signature: E8 ?? ?? ?? ?? 0F B6 55 C9
+    return_type: void
+    name: HideHeadgear
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: unsigned int
+      name: unk
+    - type: char
+      name: hide
+  - signature: 44 0F B6 81 ?? ?? ?? ?? 41 0F B6 C0 41 80 E0 7F
+    return_type: void
+    name: HideLegacyTattoo
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: char
+      name: hide
+  - signature: E8 ?? ?? ?? ?? 41 0F B6 D6 48 8B CB
+    return_type: void
+    name: SetVisor
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: char
+      name: state
+  - signature: E8 ?? ?? ?? ?? EB 50 44 8B 03
+    return_type: void
+    name: SetGlasses
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: int
+      name: index
+    - type: unsigned __int16
+      name: id
+  - signature: E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 41 BD
+    return_type: void
+    name: HideVieraEars
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: char
+      name: hide
+  - signature: 48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B6 B9
+    return_type: void
+    name: HandleGearsetDrawDataPacket
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: Client::Game::Network::GearsetDrawDataPacket*
+      name: packet
 - type: Client::Game::Event::DirectorModule
   name: DirectorModule
   namespace: Client.Game.Event
@@ -176863,6 +177427,9 @@ structs:
   - type: Client::Graphics::Scene::Weapon::ChangedWeaponData*
     name: ChangedData
     offset: 2640
+  - type: Client::Graphics::Scene::CharacterBase*
+    name: AttachTarget
+    offset: 2648
   virtual_functions:
   - name: dtor
     offset: 0
@@ -246561,14 +247128,9 @@ structs:
   - type: Client::Game::Character::LookAtContainer
     name: LookAt
     offset: 3456
-  - type: byte
-    name: WeaponFlags
-    offset: 6528
-    bits:
-    - type: byte
-      offset: 0
-      size: 1
-      name: IsOffhandDrawn
+  - type: Client::Game::Character::LifeSkillContainer
+    name: LifeSkillContainer
+    offset: 6496
   - type: Client::Game::Character::VfxContainer
     name: Vfx
     offset: 6536
@@ -250368,21 +250930,19 @@ structs:
       name: a3
     - type: char
       name: a4
-  - name: ShowGoldSaucerReward
+  - name: ShowFateReward
     offset: 1352
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte
-      name: type
+    - type: Client::Game::Network::FateRewardPacket*
+      name: packet
+    - type: Client::Game::Network::FateRewardPacket::ItemReward*
+      name: items
     - type: unsigned int
-      name: mgp
-    - type: unsigned int
-      name: rewardItemId
-    - type: unsigned int
-      name: rewardItemCount
-  - name: HideGoldSaucerReward
+      name: itemCount
+  - name: HideFateReward
     offset: 1360
     return_type: void
     parameters:
