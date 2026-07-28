@@ -7,7 +7,7 @@ using FFXIVClientStructs.FFXIV.Component.Text;
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xCE8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCF0)]
 public unsafe partial struct AtkTextInput {
     [FieldOffset(0x8)] public AtkTextInputEventInterface* TargetTextInputEventInterface;
     [FieldOffset(0x10)] public CompletionModule* CompletionModule;

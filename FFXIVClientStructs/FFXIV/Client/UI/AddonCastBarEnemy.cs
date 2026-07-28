@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("CastBarEnemy")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x530)]
+[StructLayout(LayoutKind.Explicit, Size = 0x538)]
 public unsafe partial struct AddonCastBarEnemy {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray10<CastBarPositionStruct> _castBarPositions;
     [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray10<CastBarInfoStruct> _castBarInfo;

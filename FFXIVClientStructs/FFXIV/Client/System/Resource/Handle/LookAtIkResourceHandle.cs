@@ -7,5 +7,5 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 // .laik
 [GenerateInterop]
 [Inherits<DefaultResourceHandle>]
-[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public partial struct LookAtIkResourceHandle;
