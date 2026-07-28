@@ -17288,7 +17288,7 @@ structs:
       name: entityId
     - type: Client::Game::Network::ActorCastPacket*
       name: packet
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 0F B6 7B
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B 4B
     return_type: void
     name: HandleMapEffectPacket
     parameters:
@@ -31975,7 +31975,7 @@ structs:
     - type: byte
       name: flags
   member_functions:
-  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC ?? 65 4C 8B 34 25
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 54 41 56 41 57 48 83 EC ?? 44 8B 05
     return_type: void
     name: Draw
     parameters:
@@ -59167,7 +59167,7 @@ structs:
       name: atkTimeLineManager
     - type: Component::GUI::AtkResNode*
       name: node
-  - signature: E8 ?? ?? ?? ?? 0F B7 47 0E
+  - signature: E8 ?? ?? ?? ?? 0F B7 45 ?? FF C6
     return_type: void
     name: BindTimeline
     parameters:
@@ -86058,7 +86058,7 @@ structs:
       name: this
     - type: Client::Graphics::Kernel::RenderCommandClear*
       name: clearCommand
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? B1 48
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? F3 0F 10 5F
     return_type: void
     name: DoSetTargetCommand
     parameters:
@@ -96777,7 +96777,7 @@ structs:
   name: AtkTextInput
   namespace: Component.GUI
   union: False
-  size: 3304
+  size: 3312
   fields:
   - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface*
     name: TargetTextInputEventInterface
@@ -99080,7 +99080,7 @@ structs:
     - type: char*
       name: outModelChecked
   member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 8B 44 24 70 BE ?? ?? ?? ??
+  - signature: 4C 8B DC 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 49 89 6B ?? 48 8B D9 49 89 7B
     return_type: void
     name: PlayAnimation
     parameters:
@@ -99102,7 +99102,7 @@ structs:
       name: sharedTimelineState
     - type: unsigned int
       name: bitmask
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 8B 44 24 70 BE ?? ?? ?? ??
+  - signature: E8 ?? ?? ?? ?? 33 DB 8B F8 85 C0 74 ?? 66 90 48 8B 4C
     return_type: int
     name: GetEventHandlers
     parameters:
@@ -105940,7 +105940,7 @@ structs:
       name: this
     - type: Component::GUI::AtkComponentBase*
       name: component
-  - signature: E8 ?? ?? ?? ?? B3 05
+  - signature: E8 ?? ?? ?? ?? 4C 69 EE
     return_type: void
     name: SetCursorNavigationInfo
     parameters:
@@ -114446,7 +114446,7 @@ structs:
       name: this
     - type: __int16
       name: columnCount
-  - signature: E8 ?? ?? ?? ?? 8B 8F ?? ?? ?? ?? 41 B1
+  - signature: E8 ?? ?? ?? ?? 8B 8F ?? ?? ?? ?? 41 B1 ?? 8B 87
     return_type: void
     name: SetVisibleRowCount
     parameters:
@@ -129013,7 +129013,7 @@ structs:
   name: LookAtIkResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
-  size: 200
+  size: 272
   fields:
   - type: Client::System::Resource::Handle::DefaultResourceHandle
     name: DefaultResourceHandle
@@ -135612,7 +135612,7 @@ structs:
     parameters:
     - type: Component::SteamApi::SteamApi*
       name: this
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 FF 15 ?? ?? ?? ?? 48 8D 8B
+  - signature: 40 53 48 83 EC ?? 48 8B D9 FF 15 ?? ?? ?? ?? 48 8D 8B
     return_type: void
     name: dtor
     parameters:
@@ -213577,7 +213577,7 @@ structs:
   name: AddonCastBarEnemy
   namespace: Client.UI
   union: False
-  size: 1328
+  size: 1336
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -222476,7 +222476,7 @@ structs:
   name: AgentLobby
   namespace: Client.UI.Agent
   union: False
-  size: 9072
+  size: 9176
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -222517,122 +222517,125 @@ structs:
   - type: Client::System::String::Utf8String
     name: ConnectingToDatacenterString
     offset: 3168
+  - type: Client::System::String::Utf8String
+    name: UnkStringCC8
+    offset: 3272
   - type: StdVector<Client::System::String::Utf8String>
     name: VersionStrings
-    offset: 3272
+    offset: 3376
   - type: Client::System::String::Utf8String
     name: DisplayedVersionString
-    offset: 3296
+    offset: 3400
   - type: Client::System::String::Utf8String
     name: GameSession
-    offset: 3424
+    offset: 3528
   - type: Client::System::String::Utf8String
     name: UnkUtf8Strings
-    offset: 3528
+    offset: 3632
     size: 7
     is_string: False
   - type: __int8
     name: ServiceAccountIndex
-    offset: 4568
+    offset: 4672
   - type: byte
     name: SelectedCharacterIndex
-    offset: 4569
+    offset: 4673
   - type: unsigned __int64
     name: HoveredCharacterContentId
-    offset: 4576
+    offset: 4680
   - type: byte
     name: DataCenter
-    offset: 4584
+    offset: 4688
   - type: __int16
     name: WorldIndex
-    offset: 4586
+    offset: 4690
   - type: unsigned __int16
     name: WorldId
-    offset: 4588
+    offset: 4692
   - type: unsigned int
     name: DialogAddonId
-    offset: 4592
+    offset: 4696
   - type: unsigned int
     name: DialogAddonId2
-    offset: 4596
+    offset: 4700
   - type: unsigned int
     name: LobbyScreenTextAddonId
-    offset: 4600
+    offset: 4704
   - type: unsigned int
     name: LogoAddonId
-    offset: 4604
+    offset: 4708
   - type: unsigned int
     name: TitleDCWorldMapAddonId
-    offset: 4608
+    offset: 4712
   - type: unsigned int
     name: TitleMovieSelectorAddonId
-    offset: 4612
+    offset: 4716
   - type: unsigned int
     name: TitleGameVersionAddonId
-    offset: 4616
+    offset: 4720
   - type: unsigned int
     name: TitleConnectAddonId
-    offset: 4620
+    offset: 4724
   - type: unsigned int
     name: CharaSelectAddonId
-    offset: 4624
+    offset: 4728
   - type: unsigned int
     name: CharaMakeDataImportAddonId
-    offset: 4628
+    offset: 4732
   - type: unsigned int
     name: LoadPreviouslySavedAppearanceDataDialogAddonId
-    offset: 4632
+    offset: 4736
   - type: unsigned int
     name: LoadSavedCharacterCreationDataDialogAddonId
-    offset: 4636
+    offset: 4740
   - type: unsigned int
     name: CreateNewCharacterDialogAddonId
-    offset: 4640
+    offset: 4744
   - type: unsigned int
     name: LobbyWKTAddonId
-    offset: 4644
+    offset: 4748
   - type: byte
     name: LobbyUpdateStage
-    offset: 4660
+    offset: 4764
   - type: byte
     name: LobbyUIStage
-    offset: 4663
+    offset: 4767
   - type: __int64
     name: IdleTime
-    offset: 4672
+    offset: 4776
   - type: __int64
     name: QueueTimeSinceLastUpdate
-    offset: 4688
+    offset: 4792
   - type: int
     name: QueuePosition
-    offset: 4704
+    offset: 4808
   - type: __int8
     name: HoveredCharacterIndex
-    offset: 4709
+    offset: 4813
   - type: unsigned __int64
     name: SelectedCharacterContentId
-    offset: 4712
+    offset: 4816
   - type: char
     name: IsLoggedIn
-    offset: 4720
+    offset: 4824
   - type: char
     name: IsLoggedIntoZone
-    offset: 4721
+    offset: 4825
   - type: char
     name: LogoutShouldCloseGame
-    offset: 4723
+    offset: 4827
   - type: char
     name: TemporaryLocked
-    offset: 4976
+    offset: 5080
   - type: unsigned __int64
     name: RequestContentId
-    offset: 5000
+    offset: 5104
   - type: Application::Network::LogoutCallbackInterface::LogoutParams
     name: LogoutParams
-    offset: 5032
+    offset: 5136
   - type: char
     name: HasShownCharacterNotFound
-    offset: 8980
+    offset: 9084
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -246279,7 +246282,7 @@ structs:
   name: AtkModule
   namespace: Component.GUI
   union: False
-  size: 33504
+  size: 33520
   fields:
   - type: Component::GUI::AtkModuleInterface
     name: AtkModuleInterface
@@ -246355,44 +246358,44 @@ structs:
     offset: 29440
   - type: Client::System::String::Utf8String
     name: Unk7FE8
-    offset: 32744
+    offset: 32752
   - type: Client::System::String::Utf8String
     name: Unk8050
-    offset: 32848
+    offset: 32856
   - type: Client::System::String::Utf8String
     name: Unk80B8
-    offset: 32952
+    offset: 32960
   - type: Client::System::String::Utf8String
     name: Unk8120
-    offset: 33056
+    offset: 33064
   - type: Client::System::Input::SoftKeyboards::SteamGamepadSoftKeyboard
     name: SoftKeyboardDevice
-    offset: 33168
+    offset: 33176
   - type: char
     name: CurrentUIScene
-    offset: 33448
+    offset: 33456
     size: 16
     is_string: True
   - type: char
     name: LoadingUIScene
-    offset: 33464
+    offset: 33472
     size: 16
     is_string: True
   - type: unsigned __int16
     name: ScreenWidth
-    offset: 33488
+    offset: 33496
   - type: unsigned __int16
     name: ScreenHeight
-    offset: 33490
+    offset: 33498
   - type: char
     name: EnableUiDraw
-    offset: 33492
+    offset: 33500
   - type: char
     name: EnableUiInput
-    offset: 33496
+    offset: 33504
   - type: char
     name: IsHudInitialized
-    offset: 33497
+    offset: 33505
   virtual_functions:
   - name: GetAddonStatus
     offset: 352
@@ -249093,7 +249096,7 @@ structs:
   name: RaptureAtkModule
   namespace: Client.UI
   union: False
-  size: 174400
+  size: 174416
   fields:
   - type: Component::GUI::AtkModule
     name: AtkModule
@@ -249101,138 +249104,138 @@ structs:
     base: true
   - type: Common::Configuration::ConfigBase::ChangeEventInterface
     name: ChangeEventInterface
-    offset: 33504
+    offset: 33520
     base: true
   - type: Client::UI::GameUIScene
     name: UIScene
-    offset: 33536
+    offset: 33552
   - type: Client::UI::GameUIMode
     name: UIMode
-    offset: 33538
+    offset: 33554
   - type: Client::System::String::Utf8String
     name: Unk8358
-    offset: 33712
+    offset: 33728
   - type: Client::System::String::Utf8String
     name: UnkArray
-    offset: 33816
+    offset: 33832
     size: 6
     is_string: False
   - type: Client::System::String::Utf8String
     name: ItalicOn
-    offset: 34440
+    offset: 34456
   - type: Client::System::String::Utf8String
     name: ItalicOff
-    offset: 34544
+    offset: 34560
   - type: Client::System::String::Utf8String
     name: BoldOn
-    offset: 34648
+    offset: 34664
   - type: Client::System::String::Utf8String
     name: BoldOff
-    offset: 34752
+    offset: 34768
   - type: Client::UI::RaptureAtkModule::AgentUpdateFlags
     name: AgentUpdateFlag
-    offset: 34927
+    offset: 34943
   - type: Client::UI::RaptureAtkModule::AddonFactoryInfo
     name: AddonFactories
-    offset: 34928
+    offset: 34944
     size: 990
     is_string: False
   - type: StdVector<Client::System::String::Utf8String>
     name: AddonNames
-    offset: 74528
+    offset: 74544
   - type: Client::UI::Misc::AddonConfig*
     name: AddonConfigPtr
-    offset: 74552
+    offset: 74568
   - type: Component::GUI::AtkCursor::CursorType
     name: CursorType
-    offset: 74562
+    offset: 74578
   - type: int
     name: AudioClientRpcTagSize
-    offset: 74720
+    offset: 74736
   - type: wchar_t*
     name: AudioClientRpcTag
-    offset: 74728
+    offset: 74744
   - type: Client::UI::UIModule*
     name: UIModulePtr
-    offset: 74736
+    offset: 74752
   - type: Client::UI::Misc::RaptureLogModule*
     name: RaptureLogModulePtr
-    offset: 74744
+    offset: 74760
   - type: Client::UI::Agent::AgentModule
     name: AgentModule
-    offset: 74752
+    offset: 74768
   - type: Client::UI::Misc::RaptureHotbarModule*
     name: RaptureHotbarModulePtr
-    offset: 78872
+    offset: 78888
   - type: Client::UI::RaptureAtkUnitManager
     name: RaptureAtkUnitManager
-    offset: 78880
+    offset: 78896
   - type: Client::UI::RaptureAtkColorDataManager
     name: RaptureAtkColorDataManager
-    offset: 119120
+    offset: 119136
   - type: int
     name: NameplateInfoCount
-    offset: 119760
+    offset: 119776
   - type: Client::UI::RaptureAtkModule::NamePlateInfo
     name: NamePlateInfoEntries
-    offset: 119768
+    offset: 119784
     size: 50
     is_string: False
   - type: Client::UI::RaptureAtkModule::CrystalCache
     name: CrystalItemCache
-    offset: 149584
+    offset: 149600
     size: 18
     is_string: False
   - type: Client::UI::RaptureAtkModule::ItemCache*
     name: KeyItemCache
-    offset: 152320
+    offset: 152336
   - type: Client::UI::RaptureAtkModule::ItemCache*
     name: EquippedItemCache
-    offset: 152328
+    offset: 152344
   - type: Client::UI::RaptureAtkModule::ItemCache
     name: InventoryItemCache
-    offset: 152336
+    offset: 152352
     size: 160
     is_string: False
   - type: unsigned int
     name: InventoryItemCacheSlotCount
-    offset: 174096
+    offset: 174112
   - type: unsigned int
     name: GilCap
-    offset: 174100
+    offset: 174116
   - type: unsigned int
     name: LocalPlayerClassJobId
-    offset: 174200
+    offset: 174216
   - type: unsigned int
     name: LocalPlayerLevel
-    offset: 174204
+    offset: 174220
   - type: char
     name: QuickGatheringEnabled
-    offset: 174213
+    offset: 174229
   - type: char
     name: QTEActive
-    offset: 174219
+    offset: 174235
   - type: Common::Component::Excel::ExcelSheet*
     name: AddonParamSheet
-    offset: 174320
+    offset: 174336
   - type: Component::GUI::AtkTexture
     name: CharaViewDefaultBackgroundTexture
-    offset: 174328
+    offset: 174344
   - type: unsigned int
     name: LoginSummonCompanionId
-    offset: 174356
+    offset: 174372
   - type: float
     name: LoginSummonCompanionCountdown
-    offset: 174360
+    offset: 174376
   - type: float
     name: HourTimer
-    offset: 174364
+    offset: 174380
   - type: int
     name: HoursPlayed
-    offset: 174368
+    offset: 174384
   - type: __int64
     name: ShellCommands
-    offset: 174392
+    offset: 174408
   virtual_functions:
   - name: dtor
     offset: 0
@@ -249991,7 +249994,7 @@ structs:
   name: UIModule
   namespace: Client.UI
   union: False
-  size: 1047360
+  size: 1047376
   fields:
   - type: Client::UI::UIModuleInterface
     name: UIModuleInterface
@@ -250249,40 +250252,40 @@ structs:
     offset: 861808
   - type: Client::UI::Info::InfoModule
     name: InfoModule
-    offset: 1036208
+    offset: 1036224
   - type: Client::UI::Misc::UIModuleHelpers
     name: UIModuleHelpers
-    offset: 1043496
+    offset: 1043512
   - type: Client::System::String::Utf8String
     name: AddonSheetName
-    offset: 1043576
+    offset: 1043592
   - type: Client::System::String::Utf8String
     name: UIColorSheetName
-    offset: 1043688
+    offset: 1043704
   - type: Client::System::String::Utf8String
     name: CompletionSheetName
-    offset: 1043808
+    offset: 1043824
   - type: Client::System::String::Utf8String
     name: CompletionOpenIconMacro
-    offset: 1043912
+    offset: 1043928
   - type: Client::System::String::Utf8String
     name: CompletionCloseIconMacro
-    offset: 1044016
+    offset: 1044032
   - type: Client::System::String::Utf8String
     name: NewLineMacro
-    offset: 1044120
+    offset: 1044136
   - type: Client::System::String::Utf8String
     name: LastTalkName
-    offset: 1044224
+    offset: 1044240
   - type: Client::System::String::Utf8String
     name: LastTalkText
-    offset: 1044328
+    offset: 1044344
   - type: Client::UI::UIInputData
     name: UIInputData
-    offset: 1044432
+    offset: 1044448
   - type: Client::UI::UIInputModule
     name: UIInputModule
-    offset: 1047040
+    offset: 1047056
   vtable_size: 1984
   virtual_functions:
   - name: ExitGame
