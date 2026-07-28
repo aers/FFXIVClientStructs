@@ -13,17 +13,17 @@ public unsafe partial struct AddonSalvageDialog {
     [FieldOffset(0x240)] public AtkComponentIcon* ItemIconNode;
 
     [FieldOffset(0x248)] private byte Unk248;
-    [FieldOffset(0x250)] public AtkComponentCheckBox* GuaranteeNQResultsCheckbox;
-    [FieldOffset(0x258)] private byte GuaranteeNQResultsChecked; // this is cached and has no bearing on the checkbox itself
+    [FieldOffset(0x250)] public AtkComponentCheckBox* GuaranteeNQResultsCheckboxNode;
+    [FieldOffset(0x258)] private byte GuaranteeNQResultsEnabled; // this is cached and has no bearing on the checkbox itself
 
     [FieldOffset(0x260)] private byte Unk260;
-    [FieldOffset(0x268)] public AtkComponentCheckBox* DesynthEntireStackCheckbox;
-    [FieldOffset(0x270)] private byte DesynthEntireStackChecked;
+    [FieldOffset(0x268)] public AtkComponentCheckBox* BulkDesynthCheckboxNode;
+    [FieldOffset(0x270)] private byte BulkDesynthEnabled;
 
     [FieldOffset(0x278)] private byte Unk278;
     [FieldOffset(0x280)] private AtkComponentCheckBox* Unk280; // Unused
     [FieldOffset(0x288)] private byte Unk288Checked;
 
     [FieldOffset(0x290)] public AtkComponentButton* DesynthesizeButton;
-    [FieldOffset(0x298)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x298)] public AtkComponentButton* CancelButtonNode;
 }
