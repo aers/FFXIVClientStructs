@@ -4877,6 +4877,25 @@ enums:
     "Unk3": 3
     "TreasureHunt": 4
     "PersonalLoot": 5
+- type: Client::Game::Network::FateRewardFlag
+  name: FateRewardFlag
+  underlying: byte
+  namespace: Client.Game.Network
+  flags: True
+  values:
+    "Success": 1
+    "SuppressPopup": 8
+    "Bonus": 16
+- type: Client::Game::Network::FateRewardMedal
+  name: FateRewardMedal
+  underlying: byte
+  namespace: Client.Game.Network
+  flags: False
+  values:
+    "Gold": 0
+    "Silver": 1
+    "Bronze": 2
+    "CriticalEngagement": 3
 - type: Client::Game::Network::QueueUpdatePacket::Language
   name: Language
   underlying: byte
@@ -7057,8 +7076,8 @@ enums:
   flags: False
   values:
     "FateReward": 0
-    "Unk1": 1
-    "Unk2": 2
+    "DynamicEventReward": 1
+    "TreasureHuntReward": 2
     "GoldSaucerReward": 3
     "MJIReward": 4
     "WKSReward": 5
@@ -21657,6 +21676,22 @@ structs:
     name: IsStainUnlocked
     offset: 24
   member_functions: []
+- type: Client::UI::Agent::AgentFateReward::Reward::AdditionalItemReward
+  name: AdditionalItemReward
+  namespace: Client.UI.Agent
+  union: False
+  size: 16
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: Amount
+    offset: 4
+  - type: Component::Exd::Sheets::Item*
+    name: ItemRow
+    offset: 8
+  member_functions: []
 - type: Client::UI::Agent::AgentFateReward::Reward::ItemReward
   name: ItemReward
   namespace: Client.UI.Agent
@@ -21672,12 +21707,9 @@ structs:
   - type: Component::Exd::Sheets::Item*
     name: ItemRow
     offset: 8
-  - type: unsigned int
+  - type: byte
     name: Flags
     offset: 16
-  - type: unsigned int
-    name: Unk14
-    offset: 20
   member_functions: []
 - type: Client::UI::Agent::AgentFreeCompany::FreeCompanyActionTimer
   name: FreeCompanyActionTimer
@@ -39333,7 +39365,7 @@ structs:
     name: GCSealsAmount
     offset: 12
   - type: unsigned int
-    name: Unk10
+    name: ItemId
     offset: 16
   - type: unsigned int
     name: FateTokenTypeAmount
@@ -39342,16 +39374,16 @@ structs:
     name: FateId
     offset: 24
   - type: unsigned __int16
-    name: Unk1A
+    name: ItemAmount
     offset: 26
   - type: byte
     name: FateTokenTypeId
     offset: 28
-  - type: byte
-    name: Unk1D
+  - type: Client::Game::Network::FateRewardFlag
+    name: Flags
     offset: 29
-  - type: byte
-    name: Unk1E
+  - type: Client::Game::Network::FateRewardMedal
+    name: Medal
     offset: 30
   - type: Client::Game::Network::FateRewardPacket::ItemReward
     name: ItemRewards
@@ -71304,108 +71336,6 @@ structs:
     - type: byte
       name: classJobId
   member_functions: []
-- type: Client::UI::Agent::AgentFateReward::Reward
-  name: Reward
-  namespace: Client.UI.Agent
-  union: False
-  size: 360
-  fields:
-  - type: Client::UI::Agent::AgentFateReward::RewardType
-    name: Type
-    offset: 0
-  - type: char
-    name: Unk01
-    offset: 1
-  - type: Client::System::String::Utf8String
-    name: Name
-    offset: 8
-  - type: unsigned int
-    name: Icon
-    offset: 112
-  - type: unsigned int
-    name: Unk74
-    offset: 116
-  - type: unsigned int
-    name: Id
-    offset: 120
-  - type: byte
-    name: EurekaFate
-    offset: 124
-  - type: byte
-    name: Unk7D
-    offset: 125
-  - type: byte
-    name: Unk7E
-    offset: 126
-  - type: byte
-    name: Unk7F
-    offset: 127
-  - type: unsigned int
-    name: Experience
-    offset: 128
-  - type: byte
-    name: Unk84
-    offset: 132
-  - type: byte
-    name: Unk85
-    offset: 133
-  - type: byte
-    name: Unk86
-    offset: 134
-  - type: byte
-    name: Unk87
-    offset: 135
-  - type: unsigned int
-    name: CurrencyAmount
-    offset: 136
-  - type: unsigned int
-    name: Unk8C
-    offset: 140
-  - type: Client::UI::Agent::AgentFateReward::Reward::ItemReward
-    name: Items
-    offset: 144
-    size: 5
-    is_string: False
-  - type: byte
-    name: FateTokenTypeId
-    offset: 264
-  - type: byte
-    name: Unk109
-    offset: 265
-  - type: byte
-    name: Unk10A
-    offset: 266
-  - type: byte
-    name: Unk10B
-    offset: 267
-  - type: unsigned int
-    name: FateTokenTypeItemId
-    offset: 268
-  - type: unsigned int
-    name: FateTokenTypeAmount
-    offset: 272
-  - type: unsigned int
-    name: Unk114
-    offset: 276
-  - type: Component::Exd::Sheets::Item*
-    name: FateTokenTypeItemRow
-    offset: 280
-  - type: byte
-    name: Unk120
-    offset: 288
-  - type: byte
-    name: Unk121
-    offset: 289
-  - type: byte
-    name: Unk122
-    offset: 290
-  - type: byte
-    name: GrandCompany
-    offset: 296
-  - type: byte
-    name: GCSealsAmount
-    offset: 300
-  member_functions: []
 - type: Client::UI::Agent::AgentFishGuide
   name: AgentFishGuide
   namespace: Client.UI.Agent
@@ -86162,6 +86092,12 @@ structs:
     parameters:
     - type: Client::Graphics::Kernel::ImmediateContext*
       name: this
+    - type: unsigned int
+      name: renderCommandCount
+    - type: unsigned int*
+      name: a3
+    - type: Client::Graphics::Kernel::RenderCommandBufferGroup*
+      name: renderCommands
 - type: Client::Graphics::Kernel::PixelShader
   name: PixelShader
   namespace: Client.Graphics.Kernel
@@ -88923,6 +88859,83 @@ structs:
       name: this
     - type: Client::UI::Agent::AgentFateReward::Reward*
       name: reward
+- type: Client::UI::Agent::AgentFateReward::Reward
+  name: Reward
+  namespace: Client.UI.Agent
+  union: False
+  size: 360
+  fields:
+  - type: Client::UI::Agent::AgentFateReward::RewardType
+    name: Type
+    offset: 0
+  - type: char
+    name: IsSuccess
+    offset: 1
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 8
+  - type: unsigned int
+    name: Icon
+    offset: 112
+  - type: unsigned int
+    name: Medal
+    offset: 116
+  - type: unsigned int
+    name: Id
+    offset: 120
+  - type: byte
+    name: EurekaFate
+    offset: 124
+  - type: unsigned int
+    name: Experience
+    offset: 128
+  - type: byte
+    name: ExperienceFlags
+    offset: 132
+  - type: unsigned int
+    name: CurrencyAmount
+    offset: 136
+  - type: byte
+    name: CurrencyFlags
+    offset: 140
+  - type: Client::UI::Agent::AgentFateReward::Reward::ItemReward
+    name: Items
+    offset: 144
+    size: 5
+    is_string: False
+  - type: byte
+    name: FateTokenTypeId
+    offset: 264
+  - type: unsigned int
+    name: FateTokenTypeItemId
+    offset: 268
+  - type: unsigned int
+    name: FateTokenTypeAmount
+    offset: 272
+  - type: Component::Exd::Sheets::Item*
+    name: FateTokenTypeItemRow
+    offset: 280
+  - type: byte
+    name: FateTokenTypeFlags
+    offset: 288
+  - type: byte
+    name: GrandCompany
+    offset: 296
+  - type: unsigned int
+    name: GCSealsAmount
+    offset: 300
+  - type: Client::UI::Agent::AgentFateReward::Reward::AdditionalItemReward
+    name: AdditionalItems
+    offset: 304
+    size: 3
+    is_string: False
+  - type: byte
+    name: ItemProcessedBits
+    offset: 352
+  - type: byte
+    name: ItemProcessedCount
+    offset: 353
+  member_functions: []
 - type: Client::UI::Agent::AgentFieldMarker
   name: AgentFieldMarker
   namespace: Client.UI.Agent
