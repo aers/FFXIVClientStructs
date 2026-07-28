@@ -62,6 +62,9 @@ public unsafe partial struct AtkModule {
     public partial AddonStatus GetAddonStatus(uint addonId);
 
     [VirtualFunction(45)]
+    public partial bool IsAddonFocused(uint addonId);
+
+    [VirtualFunction(47)]
     public partial bool SetAddonDepthLayer(uint addonId, uint depthLayerIndex);
 
     [VirtualFunction(60)]
@@ -69,6 +72,9 @@ public unsafe partial struct AtkModule {
 
     [VirtualFunction(65), GenerateStringOverloads]
     public partial bool OpenMapWithMapLink(CStringPointer mapLink);
+
+    [VirtualFunction(67)]
+    public partial void OnCursorTypeChange(AtkCursor.CursorType cursorType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3")]
     public partial bool IsTextInputActive();

@@ -9428,13 +9428,15 @@ classes:
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
       44: GetAddonStatus
-      45: SetAddonDepthLayer
-      58: InitializeHud
-      60: Update
-      62: IsUISceneGameMain
-      63: GetColorThemeTypeForUIScene
-      65: OpenMapWithMapLink
-      74: SetScreenSizeScale
+      45: IsAddonFocused
+      47: SetAddonDepthLayer
+      59: InitializeHud
+      61: Update
+      63: IsUISceneGameMain
+      64: GetColorThemeTypeForUIScene
+      66: OpenMapWithMapLink
+      67: OnCursorTypeChange
+      75: SetScreenSizeScale
     funcs:
       0x1406A8D20: GetAddonIdByName
       0x1406AACA0: ctor
