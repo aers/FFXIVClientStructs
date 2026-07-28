@@ -34,9 +34,9 @@ public unsafe partial struct SqPackManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 44 38 69")]
     public partial void ResolveSqPackPath(FileAccessPath* path, int fileId, ResourceCategory category, uint expansionId, byte* platform, byte* a7);
 
-    [MemberFunction("48 8D 05 ?? ?? ?? ?? 44 88 6B")]
+    [MemberFunction("40 55 41 54 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 80 79 ?? 00")]
     public partial bool TryGetOffsetFromIndex(CStringPointer path, uint* outOffset, uint* outFileId);
 
-    [MemberFunction("48 8D 3D ?? ?? ?? ?? 75 ?? 48 89 BB"), GenerateStringOverloads]
+    [MemberFunction("40 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B EA"), GenerateStringOverloads]
     public partial bool TryGetOffsetFromIndex2(CStringPointer path, uint* outOffset, uint* outFileId);
 }
