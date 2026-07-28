@@ -67,10 +67,10 @@ public unsafe partial struct AtkModule {
     [VirtualFunction(47)]
     public partial bool SetAddonDepthLayer(uint addonId, uint depthLayerIndex);
 
-    [VirtualFunction(60)]
+    [VirtualFunction(61)]
     public partial void Update(float delta);
 
-    [VirtualFunction(65), GenerateStringOverloads]
+    [VirtualFunction(66), GenerateStringOverloads]
     public partial bool OpenMapWithMapLink(CStringPointer mapLink);
 
     [VirtualFunction(67)]
