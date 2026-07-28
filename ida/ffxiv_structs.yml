@@ -17110,7 +17110,7 @@ structs:
       name: targetId
     - type: char
       name: isRecorded
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0
     return_type: void
     name: HandlePrepareZoningPacket
     parameters:
@@ -31752,14 +31752,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkModuleInterface*
       name: this
-  - name: OnCursorTypeChange
-    offset: 528
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkModuleInterface*
-      name: this
-    - type: Component::GUI::AtkCursor::CursorType
-      name: cursorType
   - name: EnsureNumberArray
     offset: 48
   - name: EnsureStringArray
@@ -31772,6 +31764,8 @@ structs:
     offset: 144
   - name: SetAtkHistory
     offset: 288
+  - name: OnCursorTypeChange
+    offset: 528
   member_functions: []
 - type: Component::GUI::AtkModuleInterface::AtkEventInterface
   name: AtkEventInterface
@@ -56172,7 +56166,7 @@ structs:
     - type: Client::UI::Misc::TofuHelper*
       name: this
   member_functions:
-  - signature: E8 ?? ?? ?? ?? EB ?? ?? ?? ?? 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? ?? ?? ?? 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB
     return_type: void
     name: HandleStartSharingPacket
     parameters:
@@ -86763,7 +86757,7 @@ structs:
       name: platform
     - type: byte*
       name: a7
-  - signature: 48 8D 05 ?? ?? ?? ?? 44 88 6B
+  - signature: 40 55 41 54 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 80 79 ?? 00
     return_type: char
     name: TryGetOffsetFromIndex
     parameters:
@@ -86775,7 +86769,7 @@ structs:
       name: outOffset
     - type: unsigned int*
       name: outFileId
-  - signature: 48 8D 3D ?? ?? ?? ?? 75 ?? 48 89 BB
+  - signature: 40 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B EA
     return_type: char
     name: TryGetOffsetFromIndex2
     parameters:
@@ -246405,8 +246399,16 @@ structs:
       name: this
     - type: unsigned int
       name: addonId
-  - name: SetAddonDepthLayer
+  - name: IsAddonFocused
     offset: 360
+    return_type: char
+    parameters:
+    - type: Component::GUI::AtkModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+  - name: SetAddonDepthLayer
+    offset: 376
     return_type: char
     parameters:
     - type: Component::GUI::AtkModule*
@@ -246431,6 +246433,14 @@ structs:
       name: this
     - type: char*
       name: mapLink
+  - name: OnCursorTypeChange
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkModule*
+      name: this
+    - type: Component::GUI::AtkCursor::CursorType
+      name: cursorType
   - name: dtor
     offset: 0
     return_type: Component::GUI::AtkModuleInterface*
@@ -246585,22 +246595,18 @@ structs:
     parameters:
     - type: Component::GUI::AtkModule*
       name: this
-  - name: OnCursorTypeChange
-    offset: 528
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkModule*
-      name: this
-    - type: Component::GUI::AtkCursor::CursorType
-      name: cursorType
   - name: InitializeHud
-    offset: 464
+    offset: 472
+  - name: Update
+    offset: 488
   - name: IsUISceneGameMain
-    offset: 496
-  - name: GetColorThemeTypeForUIScene
     offset: 504
+  - name: GetColorThemeTypeForUIScene
+    offset: 512
+  - name: OpenMapWithMapLink
+    offset: 528
   - name: SetScreenSizeScale
-    offset: 592
+    offset: 600
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3
     return_type: char
@@ -249391,14 +249397,6 @@ structs:
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
-  - name: OnCursorTypeChange
-    offset: 528
-    return_type: void
-    parameters:
-    - type: Client::UI::RaptureAtkModule*
-      name: this
-    - type: Component::GUI::AtkCursor::CursorType
-      name: cursorType
   - name: GetAddonStatus
     offset: 352
     return_type: Component::GUI::AddonStatus
@@ -249407,8 +249405,16 @@ structs:
       name: this
     - type: unsigned int
       name: addonId
-  - name: SetAddonDepthLayer
+  - name: IsAddonFocused
     offset: 360
+    return_type: char
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+  - name: SetAddonDepthLayer
+    offset: 376
     return_type: char
     parameters:
     - type: Client::UI::RaptureAtkModule*
@@ -249433,6 +249439,14 @@ structs:
       name: this
     - type: char*
       name: mapLink
+  - name: OnCursorTypeChange
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: Component::GUI::AtkCursor::CursorType
+      name: cursorType
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA
     return_type: char
