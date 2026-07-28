@@ -914,7 +914,9 @@ classes:
     funcs:
       0x1411073E0: Initialize
       0x141107540: Update
-      0x1411075C0: RequestVenturesTimers
+      0x1411075C0: RequestVenturesTimers # client Lua name is RequestRetainerList; fetches full roster plus venture fields
+      0x1411076F0: RequestRetainerSingleData # (this, callbackInterface, retainerId); submits request kind 3
+      0x141107760: ProcessRequestPackets # commits grouped 0x339 retainer records and 0xDD roster metadata before kind 2 completion
       0x141107C90: GetRetainerBySortedIndex
       0x141107CC0: GetRetainerByHiredIndex
       0x141107D20: GetActiveRetainer
@@ -922,6 +924,7 @@ classes:
       0x141107D80: SetRetainerObjectId
       0x141107D90: IsRetainerSummoned
       0x141107DB0: GetRetainerCount
+      0x1411083B0: CreateBindRetainerPixie # materializes a local retainer actor for event scenes; no server request
   Client::Game::SatisfactionSupplyManager:
     instances:
       - ea: 0x142AB4BC0
@@ -1912,6 +1915,9 @@ classes:
       0x140843950: ctor
       0x1408439F0: dtor
       0x140843A60: Request # (this, callbackInterface, commandId, arg1, arg2)
+      0x140843DE0: RegisterCallback # stores raw callback in first free vector slot; no refcount
+      0x140843F80: Dispatch # clears slot before invoking callback vfunc 1
+      0x140843FC0: DispatchEmpty # clears slot before invoking callback vfunc 1 with no response
   Client::Game::ContentsReplayManager:
     instances:
       - ea: 0x142A80808
@@ -17981,6 +17987,28 @@ classes:
     vtbls:
       - ea: 0x142408220
         base: Client::Game::Event::CustomTalkResidentEventHandler
+  Client::Game::Event::RetainerEventHandler: # working name; no RTTI name recovered. 0x5F8 bytes: 0x468 CustomTalkResidentEventHandler base plus 0x190 tail with two ServerRequestCallbackInterface instances at +0x468/+0x470 and six 0x30 agent result bridges at +0x478..+0x590
+    vtbls:
+      - ea: 0x142453DD0
+        base: Client::Game::Event::CustomTalkResidentEventHandler
+    funcs:
+      0x141C3EDF0: Create # allocates 0x5F8 and invokes ctor
+      0x141C91F70: ctor
+      0x141C92220: dtor
+      0x141C92530: RegisterRetainerRequests # installs the retainer Lua bindings and menu constants
+      0x141C92EF0: OnDepopRetainer
+      0x141C92FA0: RequestRetainerList # Lua binding; submits request kind 2
+      0x141C93030: RequestRetainerSingleData # Lua binding; submits request kind 3 with retainer ID
+      0x141C930E0: UpdateRetainerTaskAccept # Lua binding; request kind 5
+      0x141C93190: UpdateRetainerTaskCancel # Lua binding; request kind 6
+      0x141C93230: UpdateRetainerClassJob # Lua binding; request kind 7
+      0x141C932E0: UpdateVentureTutorialFlagOn # Lua binding; request kind 8
+      0x141C93390: UpdateRetainerFlagOn # Lua binding; request kind 9
+      0x141C93440: CreateBindRetainerPixie # Lua binding
+      0x141C94520: SetCurrentRetainerId # Lua binding; writes RetainerManager.LastSelectedRetainerId
+      0x141C945F0: SetCurrentRetainerEntityId # Lua binding; writes RetainerManager.RetainerObjectId
+      0x141C95120: OnReceivePacket # primary callback at handler +0x468; dispatches request kinds 2-9
+      0x141C95360: OnBindingComplete # callback at handler +0x470; receives GameObject.ObjectIndex
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x1421C2560
