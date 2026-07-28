@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonRaceChocoboResult
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("RaceChocoboResult")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 83 ?? ?? ?? ?? ?? ?? ?? 48 8D 8B", 3)]
