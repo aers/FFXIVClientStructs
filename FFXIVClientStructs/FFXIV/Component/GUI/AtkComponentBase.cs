@@ -48,7 +48,7 @@ public unsafe partial struct AtkComponentBase : ICreatable<AtkComponentBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? 48 8B CE 48 8B D8")]
     public partial void CopyCursorNavigationInfoFrom(AtkComponentBase* component);
 
-    [MemberFunction("E8 ?? ?? ?? ?? B3 05")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 69 EE")]
     public partial void SetCursorNavigationInfo(AtkCursorNavigationInfo* cursorNavigationInfo, AtkCursorNavigationStopFlag stopFlags = AtkCursorNavigationStopFlag.None);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4A 8B 0C 26")]

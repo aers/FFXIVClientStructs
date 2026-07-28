@@ -19,7 +19,7 @@ public unsafe partial struct EventObject {
     /// <param name="sharedTimelineState">Only sets SharedTimelineState, does not have any other effect in this function.</param>
     /// <param name="bitmask">Each bit represents a timeline index in the SharedGroup. Setting a bit means play, an unset bit means stop.</param>
     /// <param name="unknown">Unused, can be left as zero.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 8B 44 24 70 BE ?? ?? ?? ??")]
+    [MemberFunction("4C 8B DC 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 49 89 6B ?? 48 8B D9 49 89 7B")]
     public partial void PlayAnimation(uint sharedTimelineState, uint bitmask, ulong unknown);
 
     /// <summary>Changes the currently playing timelines based on a bitmask.</summary>
@@ -30,7 +30,7 @@ public unsafe partial struct EventObject {
 
     /// <param name="outHandlers">Should point to array that can fit up to 32 pointers.</param>
     /// <returns>Num elements filled.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 8B 44 24 70 BE ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B F8 85 C0 74 ?? 66 90 48 8B 4C")]
     public partial int GetEventHandlers(EventHandler** outHandlers);
 
     /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
