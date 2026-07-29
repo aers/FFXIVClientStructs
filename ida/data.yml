@@ -10369,6 +10369,8 @@ classes:
       167: HideHowTo
       169: ShowFateReward
       170: HideFateReward
+      173: ShowGoldSaucerReward
+      174: HideGoldSaucerReward
       176: ShowHousingHarvest
       178: OpenMiniGame
       179: HideHousingHarvest
