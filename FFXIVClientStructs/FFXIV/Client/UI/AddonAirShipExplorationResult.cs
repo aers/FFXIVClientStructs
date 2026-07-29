@@ -10,14 +10,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x5D68)]
 public unsafe partial struct AddonAirShipExplorationResult {
-    [FieldOffset(0x238)] public AtkResNode* RatingTimelineNode;
+    [FieldOffset(0x238)] private AtkResNode* RatingTimelineNode;
     [FieldOffset(0x240)] public AtkTextNode* RatingText;
-    [FieldOffset(0x248)] public AtkResNode* ResultTimelineNode;
+    [FieldOffset(0x248)] private AtkResNode* ResultTimelineNode;
     [FieldOffset(0x250)] private AtkComponentBase* Unk250;
     [FieldOffset(0x258)] private AtkComponentBase* Unk258;
     [FieldOffset(0x260)] private AtkComponentTextNineGrid* Unk260;
     [FieldOffset(0x268)] private AtkComponentTextNineGrid* Unk268;
-    [FieldOffset(0x270)] public AtkResNode* RewardsTimelineNode;
+    [FieldOffset(0x270)] private AtkResNode* RewardsTimelineNode;
 
     [FieldOffset(0x278), FixedSizeArray] internal FixedSizeArray30<Pointer<AtkComponentBase>> _rewardSlots;
     [FieldOffset(0x368), FixedSizeArray] internal FixedSizeArray30<Pointer<AtkComponentIcon>> _rewardIcons;

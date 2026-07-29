@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonMiragePrismPrismSetConvertC
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-// No button is not cached; looked up by id in OnSetup for AddEvent only.
 [Addon("MiragePrismPrismSetConvertC")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
