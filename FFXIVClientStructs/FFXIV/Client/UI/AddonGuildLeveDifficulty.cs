@@ -11,5 +11,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonGuildLeveDifficulty {
     [FieldOffset(0x238)] public AtkComponentSlider* DifficultySlider;
-    [FieldOffset(0x240)] private nint Unk240;
+    [FieldOffset(0x240)] public AtkTextNode* DifficultyText;
 }
