@@ -9931,6 +9931,12 @@ classes:
     vtbls:
       - ea: 0x1421777D0
         base: Client::LayoutEngine::ILayoutInstance
+    vfuncs:
+      78: GetCompactTransform
+      79: GetBaseId
+      80: GetNameId
+      81: GetObjectIndex
+      82: GetCharacter
   Client::LayoutEngine::Layer::GameObjectLayoutInstance:
     vtbls:
       - ea: 0x142177FC8
