@@ -3,6 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 // Client::LayoutEngine::Layer::MapRangeLayoutInstance
 //   Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
 //     Client::LayoutEngine::ILayoutInstance
+//       Client::System::Common::NonCopyable
 [GenerateInterop]
 [Inherits<TriggerBoxLayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]

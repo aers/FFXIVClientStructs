@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 // Client::LayoutEngine::Layer::GameObjectLayoutInstance
 //   Client::LayoutEngine::ILayoutInstance
+//     Client::System::Common::NonCopyable
 [GenerateInterop(isInherited: true)]
 [Inherits<ILayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]

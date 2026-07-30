@@ -3,6 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 // Client::LayoutEngine::Layer::ChairMarkerLayoutInstance
 //   Client::LayoutEngine::Layer::MarkerLayoutInstance
 //     Client::LayoutEngine::ILayoutInstance
+//       Client::System::Common::NonCopyable
 [GenerateInterop(isInherited: true)]
 [Inherits<MarkerLayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
