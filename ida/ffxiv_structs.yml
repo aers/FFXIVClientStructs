@@ -27658,6 +27658,26 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
+  - name: ShowGoldSaucerReward
+    offset: 1384
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: byte
+      name: type
+    - type: unsigned int
+      name: mgp
+    - type: unsigned int
+      name: rewardItemId
+    - type: unsigned int
+      name: rewardItemCount
+  - name: HideGoldSaucerReward
+    offset: 1392
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
   - name: ShowHousingHarvest
     offset: 1408
     return_type: void
@@ -100146,7 +100166,7 @@ structs:
   name: PlayerState
   namespace: Client.Game.UI
   union: False
-  size: 2336
+  size: 2344
   fields:
   - type: char
     name: IsLoaded
@@ -100613,25 +100633,28 @@ structs:
     name: UnlockedMcGuffins
     offset: 2176
   - type: byte
-    name: UnlockedFramersKitsBitmask
+    name: UnlockedFramersKits
     offset: 2192
-    size: 33
+    size: 44
     is_string: False
-  - type: StdMap<unsigned int, char>
-    name: TrackedStatuses
+  - type: int
+    name: UnkTofuTimestamp
     offset: 2264
   - type: StdMap<unsigned int, char>
+    name: TrackedStatuses
+    offset: 2272
+  - type: StdMap<unsigned int, char>
     name: TrackedActionUnlocks
-    offset: 2280
+    offset: 2288
   - type: StdMap<unsigned int, char>
     name: TrackedTraitUnlocks
-    offset: 2296
+    offset: 2304
   - type: char
     name: TrackedTraitUnlocksDirty
-    offset: 2312
+    offset: 2320
   - type: char
     name: TrackedActionUnlocksDirty
-    offset: 2313
+    offset: 2321
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 8B C8 44 0F B7 C3
     return_type: int
@@ -117636,7 +117659,7 @@ structs:
   name: CharaCardPacket
   namespace: Client.Game.Network
   union: False
-  size: 486
+  size: 490
   fields:
   - type: Client::UI::Agent::CrestData
     name: FreeCompanyCrestData
@@ -117674,19 +117697,22 @@ structs:
   - type: Client::Game::UI::CharaCardData
     name: CharaCardData
     offset: 40
+  - type: int
+    name: Timestamp
+    offset: 228
   - type: byte
     name: SearchComment
-    offset: 228
+    offset: 232
     size: 193
     is_string: False
   - type: char
     name: Name
-    offset: 421
+    offset: 425
     size: 32
     is_string: True
   - type: char
     name: FreeCompany
-    offset: 453
+    offset: 457
     size: 22
     is_string: True
   member_functions: []
@@ -118444,7 +118470,7 @@ structs:
   name: CharaCard
   namespace: Client.Game.UI
   union: False
-  size: 488
+  size: 496
   fields:
   - type: Client::Game::UI::BannerData
     name: TempBannerData
@@ -118454,13 +118480,16 @@ structs:
     offset: 52
   - type: Client::Game::UI::CharaCardData
     name: TempCharaCardData
-    offset: 104
+    offset: 108
   - type: Client::Game::UI::CharaCardData
     name: CurrentCharaCardData
-    offset: 292
+    offset: 296
+  - type: int
+    name: Timestamp
+    offset: 484
   - type: Client::Game::UI::CharaCardFlags
     name: Flags
-    offset: 480
+    offset: 488
   member_functions:
   - signature: 40 53 48 81 EC 80 0F 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 45 33 C9 C7 44 24 20 ?? ?? ?? ?? 45 33 C0 48 C7 44 24 28 20 00 00 00 48 8D 54 24 20 48 89 5C 24 40 48 8B C8 C7 44 24 48 01 00 00 00
     return_type: void
@@ -251577,6 +251606,26 @@ structs:
       name: itemCount
   - name: HideFateReward
     offset: 1360
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+  - name: ShowGoldSaucerReward
+    offset: 1384
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: byte
+      name: type
+    - type: unsigned int
+      name: mgp
+    - type: unsigned int
+      name: rewardItemId
+    - type: unsigned int
+      name: rewardItemCount
+  - name: HideGoldSaucerReward
+    offset: 1392
     return_type: void
     parameters:
     - type: Client::UI::UIModule*
