@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E6)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1EA)]
 public partial struct CharaCardPacket {
     [FieldOffset(0x000)] public CrestData FreeCompanyCrestData; // guessed
     [FieldOffset(0x008)] public ulong AccountId;
@@ -18,7 +18,8 @@ public partial struct CharaCardPacket {
     [FieldOffset(0x026)] public byte GrandCompany;
     [FieldOffset(0x027)] public byte GcRank;
     [FieldOffset(0x028)] public CharaCardData CharaCardData;
-    [FieldOffset(0x0E4), FixedSizeArray] internal FixedSizeArray193<byte> _searchComment;
-    [FieldOffset(0x1A5), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
-    [FieldOffset(0x1C5), FixedSizeArray(isString: true)] internal FixedSizeArray22<byte> _freeCompany; // length unknown; copied from InfoProxyFreeCompany
+    [FieldOffset(0x0E4)] public int Timestamp;
+    [FieldOffset(0x0E8), FixedSizeArray] internal FixedSizeArray193<byte> _searchComment;
+    [FieldOffset(0x1A9), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+    [FieldOffset(0x1C9), FixedSizeArray(isString: true)] internal FixedSizeArray22<byte> _freeCompany; // length unknown; copied from InfoProxyFreeCompany
 }
