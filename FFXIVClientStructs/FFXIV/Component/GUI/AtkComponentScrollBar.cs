@@ -30,18 +30,18 @@ public unsafe partial struct AtkComponentScrollBar : ICreatable<AtkComponentScro
     [FieldOffset(0x124)] public short ThumbPositionStartOffset;
     [FieldOffset(0x126)] public short MouseDownScreenPos;
     [FieldOffset(0x128)] public short ScrollbarLength;
-    [FieldOffset(0x12A)] private short Unk12A; // ThumbNode->Height?
+    [FieldOffset(0x12A)] public short MinThumbLength;
     [FieldOffset(0x12C)] public short Margin;
     [FieldOffset(0x12E)] public short MouseWheelSpeed;
     [FieldOffset(0x130)] public short ContentNodeOffset;
     [FieldOffset(0x132)] public short ContentNodeOffScreenLength;
     [FieldOffset(0x134)] public bool IsVertical;
     [FieldOffset(0x135)] public bool IsInputVertical;
-    [FieldOffset(0x136)] private bool UnkIsVertical;
+    [FieldOffset(0x136)] public bool IsThumbLengthVertical;
     [FieldOffset(0x137)] public bool IsBeingDragged;
-    [FieldOffset(0x138)] private bool Unk138;
-    [FieldOffset(0x139)] private bool Unk139;
-    [FieldOffset(0x13A)] private bool Unk13A;
+    [FieldOffset(0x138)] public bool IsThumbLengthFixed;
+    [FieldOffset(0x139)] public bool IsScrollDecrementPending;
+    [FieldOffset(0x13A)] public bool IsScrollIncrementPending;
     [FieldOffset(0x13B)] public bool IsAcceptingMouseWheelEvents;
     [FieldOffset(0x13C)] public bool IsContentNodeTextNode; // ContentNode->Type == NodeType.Text
 
