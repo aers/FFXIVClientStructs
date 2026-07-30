@@ -7544,8 +7544,13 @@ classes:
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
     funcs:
       0x14045A5D0: ctor
-      0x140799410: Create
       0x14045C970: Update
+      0x14045CBB0: SetColor
+      0x14045CBF0: SetFadeFarEnd
+      0x14045CC00: SetFadeRange
+      0x14045CC40: SetZCorrect
+      0x14045CC50: SetSoftParticleFadeRange
+      0x140799410: Create
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x1421632A8
@@ -9774,6 +9779,8 @@ classes:
       36: IsColliderActive
       37: SetColliderActive
       38: UpdateCollider
+      45: GetColor
+      46: SetColor
       55: WantToBeActive
       58: ApplyStain
       63: SetActive

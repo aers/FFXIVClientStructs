@@ -29,6 +29,14 @@ public unsafe partial struct VfxObject {
 
     [FieldOffset(0x260)] public Vector4 Color;
 
+    [FieldOffset(0x280)] public float FadeNearEnd;
+    [FieldOffset(0x284)] public float FadeNearStart;
+    [FieldOffset(0x288)] public float FadeFarStart;
+    [FieldOffset(0x28C)] private float Unk28C; // VfxLayoutInstance.Unk80
+    [FieldOffset(0x290)] public float FadeFarEnd;
+    [FieldOffset(0x294)] public float ZCorrect;
+    [FieldOffset(0x298)] public float SoftParticleFadeRange;
+
     [FieldOffset(0x2A0)] public VfxResourceInstance* VfxResourceInstance;
 
     [GenerateStringOverloads]

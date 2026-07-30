@@ -18,6 +18,9 @@ public unsafe partial struct BgObject {
     [FieldOffset(0xB0)] internal Transform* CachedTransform;
     [FieldOffset(0xB8)] public BgObjectAnimationData* LoadedAnimationData; // Not null even if no skeleton or animation were found
 
+    [FieldOffset(0xCE)] public byte ColorIntensity;
+    [FieldOffset(0xD0)] public ByteColor Color;
+
     /// <summary>
     /// Loads the skeleton and animation for this BgObject, if any.
     /// </summary>

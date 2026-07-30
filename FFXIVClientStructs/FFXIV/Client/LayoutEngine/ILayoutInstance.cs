@@ -119,6 +119,12 @@ public unsafe partial struct ILayoutInstance {
     [VirtualFunction(38)]
     public partial void UpdateCollider();
 
+    [VirtualFunction(45)]
+    public partial void GetColor(Vector4* color);
+
+    [VirtualFunction(46)]
+    public partial void SetColor(Vector4* color);
+
     [VirtualFunction(55)]
     public partial bool WantToBeActive();
 
