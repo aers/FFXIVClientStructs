@@ -18,6 +18,7 @@ public unsafe partial struct Loot {
     [FieldOffset(0x6B8)] private uint UnkObjectId2;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x44)]
 public struct LootItem {
     [FieldOffset(0x00)] public uint ChestObjectId;
