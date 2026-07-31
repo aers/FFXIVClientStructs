@@ -7544,8 +7544,13 @@ classes:
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
     funcs:
       0x14045A5D0: ctor
-      0x140799410: Create
       0x14045C970: Update
+      0x14045CBB0: SetColor
+      0x14045CBF0: SetFadeFarEnd
+      0x14045CC00: SetFadeRange
+      0x14045CC40: SetZCorrect
+      0x14045CC50: SetSoftParticleFadeRange
+      0x140799410: Create
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x1421632A8
@@ -9774,6 +9779,8 @@ classes:
       36: IsColliderActive
       37: SetColliderActive
       38: UpdateCollider
+      45: GetColor
+      46: SetColor
       55: WantToBeActive
       58: ApplyStain
       63: SetActive
@@ -9931,6 +9938,12 @@ classes:
     vtbls:
       - ea: 0x1421777D0
         base: Client::LayoutEngine::ILayoutInstance
+    vfuncs:
+      78: GetCompactTransform
+      79: GetBaseId
+      80: GetNameId
+      81: GetObjectIndex
+      82: GetCharacter
   Client::LayoutEngine::Layer::GameObjectLayoutInstance:
     vtbls:
       - ea: 0x142177FC8
@@ -10369,6 +10382,8 @@ classes:
       167: HideHowTo
       169: ShowFateReward
       170: HideFateReward
+      173: ShowGoldSaucerReward
+      174: HideGoldSaucerReward
       176: ShowHousingHarvest
       178: OpenMiniGame
       179: HideHousingHarvest

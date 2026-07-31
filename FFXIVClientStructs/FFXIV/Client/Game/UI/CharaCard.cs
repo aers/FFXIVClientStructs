@@ -6,16 +6,17 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::CharaCard
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
 public unsafe partial struct CharaCard {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? C6 40 ?? ?? E8 ?? ?? ?? ?? C6 43", 3)]
     public static partial CharaCard* Instance();
 
     [FieldOffset(0x000)] public BannerData TempBannerData; // used temporarily when sending the packet
     [FieldOffset(0x034)] public BannerData CurrentBannerData;
-    [FieldOffset(0x068)] public CharaCardData TempCharaCardData;
-    [FieldOffset(0x124)] public CharaCardData CurrentCharaCardData;
-    [FieldOffset(0x1E0)] public CharaCardFlags Flags;
+    [FieldOffset(0x06C)] public CharaCardData TempCharaCardData;
+    [FieldOffset(0x128)] public CharaCardData CurrentCharaCardData;
+    [FieldOffset(0x1E4)] public int Timestamp;
+    [FieldOffset(0x1E8)] public CharaCardFlags Flags;
 
     [MemberFunction("40 53 48 81 EC 80 0F 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 45 33 C9 C7 44 24 20 ?? ?? ?? ?? 45 33 C0 48 C7 44 24 28 20 00 00 00 48 8D 54 24 20 48 89 5C 24 40 48 8B C8 C7 44 24 48 01 00 00 00")]
     public partial void RequestCharaCardForContentId(ulong contentId);
@@ -144,7 +145,7 @@ public partial struct CharaCardData {
 }
 
 [Flags]
-public enum CharaCardFlags {
+public enum CharaCardFlags { // TODO: byte
     None = 0,
     HasCurrentBannerData = 1,
     HasCurrentCharaCardData = 2,

@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 // Client::LayoutEngine::Layer::SoundLayoutInstance
 //   Client::LayoutEngine::ILayoutInstance
+//     Client::System::Common::NonCopyable
 //   Client::System::Resource::ResourceEventListener
 [GenerateInterop(isInherited: true)]
 [Inherits<ILayoutInstance>]

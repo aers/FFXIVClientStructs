@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 // Client::LayoutEngine::Layer::BgPartsLayoutInstance
 //   Client::LayoutEngine::ILayoutInstance
+//     Client::System::Common::NonCopyable
 /// <summary>
 /// A simple static model with an optional collider.
 /// </summary>

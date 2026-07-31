@@ -1,5 +1,7 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
 
@@ -11,7 +13,9 @@ public unsafe partial struct FateContext {
     [FieldOffset(0x14)] public uint ObjectiveNpc; // interact with this object to hand in items
 
     [FieldOffset(0x18)] public ushort FateId;
-    [FieldOffset(0x1A)] public byte EurekaFate;
+    [FieldOffset(0x1A), Obsolete("Renamed to FateMode")] public byte EurekaFate;
+    [FieldOffset(0x1A)] public byte FateMode;
+    [FieldOffset(0x1C)] public uint Flags;
     [FieldOffset(0x20)] public int StartTimeEpoch;
     [FieldOffset(0x28)] public short Duration;
 
@@ -20,6 +24,7 @@ public unsafe partial struct FateContext {
     [FieldOffset(0x190)] public Utf8String Objective;
 
     [FieldOffset(0x3AC)] public FateState State;
+    [FieldOffset(0x3AD)] public byte StateFlags;
     [FieldOffset(0x3AE)] public byte HandInCount;
     [FieldOffset(0x3B7)] public byte Progress;
     /// <summary>
@@ -32,19 +37,21 @@ public unsafe partial struct FateContext {
     [FieldOffset(0x7D8)] public uint MapIconId;
     [FieldOffset(0x7DC)] public uint InactiveMapIcon;
     [FieldOffset(0x7E0)] public uint EventItem;
+    [FieldOffset(0x7E4)] public uint EventRange; // EventRangeLayoutInstance id
     [FieldOffset(0x7E8)] public ushort Music;
     [FieldOffset(0x7EA)] public ushort GivenStatus;
     [FieldOffset(0x7EC)] internal ushort Unknown4;
     [FieldOffset(0x7EE)] public byte Rule;
     [FieldOffset(0x7F0)] public ushort FateRuleEx;
+    [FieldOffset(0x7F2)] internal byte FateRuleExUnknown0;
     [FieldOffset(0x7F3)] public byte Level;
     [FieldOffset(0x7F4)] public byte MaxLevel;
-    [FieldOffset(0x7F5)] internal byte Unknown7;
-    [FieldOffset(0x7F6)] internal ushort Unknown13;
+    [FieldOffset(0x7F5)] public byte RequiredClassJobCategory;
+    [FieldOffset(0x7F6)] public ushort RequiredQuest2;
     [FieldOffset(0x7F8)] public ushort ScreenImageAccept;
     [FieldOffset(0x7FA)] public ushort ScreenImageComplete;
     [FieldOffset(0x7FC)] public ushort ScreenImageFailed;
-    [FieldOffset(0x800)] internal uint Unknown0;
+    [FieldOffset(0x800)] public EventId ArrayEventHandler;
     [FieldOffset(0x806)] public ushort FATEChain;
     [FieldOffset(0x80C)] internal uint Unknown1;
     [FieldOffset(0x810)] public uint ReqEventItem;
@@ -55,16 +62,17 @@ public unsafe partial struct FateContext {
     [FieldOffset(0x824)] internal uint Unknown10;
     [FieldOffset(0x828)] internal uint Unknown11;
     [FieldOffset(0x82C)] internal uint Unknown12;
-    [FieldOffset(0x830)] internal ushort Unknown5;
+    [FieldOffset(0x830)] internal uint OccupiedPermission;
     [FieldOffset(0x834)] internal byte Unknown6;
     [FieldOffset(0x838)] public uint RequiredQuest;
-    [FieldOffset(0x83C), CExporterExcelBegin("FateMode")] internal uint FateModeUnknown0;
+    [FieldOffset(0x83C), CExporterExcelBegin("FateMode")] public uint FateModeLogMessage;
     [FieldOffset(0x840)] public uint FateModeMotivationIcon;
     [FieldOffset(0x844)] public uint FateModeMotivationMapMarker;
     [FieldOffset(0x848)] public uint FateModeObjectiveIcon;
     [FieldOffset(0x84C), CExporterExcelEnd] public uint FateModeObjectiveMapMarker;
     [FieldOffset(0x850)] public Vector3 Location;
     [FieldOffset(0x864)] public float Radius;
+    [FieldOffset(0xB88)] internal ExcelSheet* Sheet; // Fate or FateRulEx sheet, depending on what needs to be loaded
     [FieldOffset(0xBB0), FixedSizeArray] internal FixedSizeArray37<FateMapMarker> _mapMarkers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 3D ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 74 24")]
@@ -86,10 +94,15 @@ public unsafe partial struct FateContext {
 }
 
 public enum FateState : byte {
+    Unk0 = 0,
+    Unk1 = 1,
+    Unk2 = 2, // Transitioning?
+    Preparing = 3,
     Running = 4,
+    Ending = 5,
+    Unk6 = 6,
     Ended = 7,
     Failed = 8,
-    Preparing = 3,
-    Ending = 5,
-    // missing one was 9, now 6
+    Unk9 = 9,
+    Unk10 = 10,
 }
