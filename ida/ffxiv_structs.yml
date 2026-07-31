@@ -3884,6 +3884,24 @@ enums:
     "Small": 0
     "Medium": 1
     "Large": 2
+- type: Client::LayoutEngine::Layer::ChairMarkerEnableFlags
+  name: ChairMarkerEnableFlags
+  underlying: byte
+  namespace: Client.LayoutEngine.Layer
+  flags: True
+  values:
+    "Front": 1
+    "Right": 2
+    "Back": 4
+    "Left": 8
+- type: Client::LayoutEngine::Layer::ChairMarkerObjectType
+  name: ChairMarkerObjectType
+  underlying: byte
+  namespace: Client.LayoutEngine.Layer
+  flags: False
+  values:
+    "Chair": 0
+    "Bed": 1
 - type: Client::LayoutEngine::Layer::ExitRangeType
   name: ExitRangeType
   underlying: int
@@ -3892,6 +3910,19 @@ enums:
   values:
     "ZoneLine": 1
     "Invisible": 2
+- type: Client::LayoutEngine::Layer::LightType
+  name: LightType
+  underlying: int
+  namespace: Client.LayoutEngine.Layer
+  flags: False
+  values:
+    "None": 0
+    "Directional": 1
+    "Point": 2
+    "Spot": 3
+    "Plane": 4
+    "Line": 5
+    "Specular": 6
 - type: Client::LayoutEngine::Layer::LineVfxStyle
   name: LineVfxStyle
   underlying: int
@@ -4026,6 +4057,7 @@ enums:
     "DynamicShadows": 2
     "CharacterShadows": 4
     "ObjectShadows": 8
+    "SSAO_Omnishadows": 32
 - type: Client::Graphics::Render::LightShape
   name: LightShape
   underlying: unsigned int
@@ -5286,11 +5318,17 @@ enums:
   namespace: Client.Game.Fate
   flags: False
   values:
+    "Unk0": 0
+    "Unk1": 1
+    "Unk2": 2
+    "Preparing": 3
     "Running": 4
+    "Ending": 5
+    "Unk6": 6
     "Ended": 7
     "Failed": 8
-    "Preparing": 3
-    "Ending": 5
+    "Unk9": 9
+    "Unk10": 10
 - type: Client::Game::Event::CraftStateFlags
   name: CraftStateFlags
   underlying: unsigned int
@@ -16944,6 +16982,25 @@ structs:
   - type: int
     name: Part4
     offset: 16
+  member_functions: []
+- type: Client::LayoutEngine::Layer::CharacterLayoutInstance::Transform16
+  name: Transform16
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 8
+  fields:
+  - type: unsigned __int16
+    name: X
+    offset: 0
+  - type: unsigned __int16
+    name: Y
+    offset: 2
+  - type: unsigned __int16
+    name: Z
+    offset: 4
+  - type: unsigned __int16
+    name: Rotation
+    offset: 6
   member_functions: []
 - type: Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey
   name: AnalyticShapeDataKey
@@ -44406,6 +44463,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::ILayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::ILayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::ILayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -65211,6 +65284,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -65540,6 +65629,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -65854,6 +65959,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -65941,25 +66062,28 @@ structs:
     - type: System::Numerics::Vector4*
       name: result
   member_functions: []
-- type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
-  name: GameObjectLayoutInstance
+- type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance
+  name: EnvSpaceLayoutInstance
   namespace: Client.LayoutEngine.Layer
   union: False
-  size: 160
+  size: 64
   fields:
   - type: Client::LayoutEngine::ILayoutInstance
     name: ILayoutInstance
     offset: 0
     base: true
-  - type: unsigned int
-    name: BaseId
+  - type: Client::Graphics::Scene::EnvSpace*
+    name: SceneObject
     offset: 48
+  - type: unsigned int
+    name: BoundInstanceId
+    offset: 56
   virtual_functions:
   - name: dtor
     offset: 0
     return_type: Client::LayoutEngine::ILayoutInstance*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: byte
       name: freeFlags
@@ -65967,7 +66091,7 @@ structs:
     offset: 8
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: __int64
       name: creator
@@ -65977,13 +66101,13 @@ structs:
     offset: 16
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetProperties
     offset: 32
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::LayoutEngine::FileLayerGroupInstance*
       name: data
@@ -65991,7 +66115,7 @@ structs:
     offset: 40
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Layer::LayerManager*
       name: layer
@@ -65999,19 +66123,19 @@ structs:
     offset: 48
     return_type: int
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetPrimaryPath
     offset: 56
     return_type: char*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: result
@@ -66019,7 +66143,7 @@ structs:
     offset: 120
     return_type: System::Numerics::Quaternion*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Quaternion*
       name: result
@@ -66027,7 +66151,7 @@ structs:
     offset: 128
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: result
@@ -66035,7 +66159,7 @@ structs:
     offset: 136
     return_type: Client::LayoutEngine::Transform*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: result
@@ -66043,7 +66167,7 @@ structs:
     offset: 144
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: transform
@@ -66051,31 +66175,31 @@ structs:
     offset: 168
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: IsPrimaryLoaded
     offset: 176
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetGraphics
     offset: 184
     return_type: Client::Graphics::Scene::Object*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetGraphics2
     offset: 192
     return_type: Client::Graphics::Scene::Object*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetGraphics
     offset: 200
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::Graphics::Scene::Object*
       name: obj
@@ -66085,7 +66209,7 @@ structs:
     offset: 216
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: transform
@@ -66095,61 +66219,61 @@ structs:
     offset: 224
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: HaveSecondary
     offset: 232
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: IsColliderLoaded
     offset: 240
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetSecondaryPath
     offset: 248
     return_type: char*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: CreateSecondary
     offset: 256
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: DestroySecondary
     offset: 264
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetCollider
     offset: 272
     return_type: Common::Component::BGCollision::Collider*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: GetCollider2
     offset: 280
     return_type: Common::Component::BGCollision::Collider*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: IsColliderActive
     offset: 288
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetColliderActive
     offset: 296
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: char
       name: active
@@ -66157,19 +66281,35 @@ structs:
     offset: 304
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: ApplyStain
     offset: 464
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::Graphics::ByteColor*
       name: stainColorSrgb
@@ -66177,7 +66317,7 @@ structs:
     offset: 504
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: char
       name: active
@@ -66185,13 +66325,13 @@ structs:
     offset: 512
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetTranslationImpl
     offset: 520
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: value
@@ -66199,13 +66339,13 @@ structs:
     offset: 528
     return_type: System::Numerics::Quaternion*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetRotationImpl
     offset: 536
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Quaternion*
       name: value
@@ -66213,13 +66353,13 @@ structs:
     offset: 544
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetScaleImpl
     offset: 552
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: value
@@ -66227,13 +66367,13 @@ structs:
     offset: 560
     return_type: Client::LayoutEngine::Transform*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
   - name: SetTransformImpl
     offset: 568
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: value
@@ -66241,7 +66381,7 @@ structs:
     offset: 576
     return_type: System::Numerics::Vector4*
     parameters:
-    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
     - type: System::Numerics::Vector4*
       name: result
@@ -66321,6 +66461,327 @@ structs:
       name: fileData
     - type: Client::System::Scheduler::Instance::LayoutSharedGroupObject*
       name: timelineObj
+- type: Client::LayoutEngine::Layer::WeaponLayoutInstance
+  name: WeaponLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 56
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: Client::Graphics::Scene::Weapon*
+    name: SceneObject
+    offset: 48
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::LayoutWorld
   name: LayoutWorld
   namespace: Client.LayoutEngine
@@ -86897,22 +87358,31 @@ structs:
     name: ActiveByDefault
     offset: 54
   member_functions: []
-- type: Client::LayoutEngine::Layer::TreasureLayoutInstance
-  name: TreasureLayoutInstance
+- type: Client::LayoutEngine::Layer::LightLayoutInstance
+  name: LightLayoutInstance
   namespace: Client.LayoutEngine.Layer
   union: False
-  size: 160
+  size: 80
   fields:
-  - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
-    name: GameObjectLayoutInstance
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
     offset: 0
     base: true
+  - type: Client::Graphics::Scene::Light*
+    name: SceneObject
+    offset: 48
+  - type: Client::LayoutEngine::Layer::LightType
+    name: LightType
+    offset: 56
+  - type: Common::Math::Vector4
+    name: Color
+    offset: 60
   virtual_functions:
   - name: dtor
     offset: 0
     return_type: Client::LayoutEngine::ILayoutInstance*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: byte
       name: freeFlags
@@ -86920,7 +87390,7 @@ structs:
     offset: 8
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: __int64
       name: creator
@@ -86930,13 +87400,13 @@ structs:
     offset: 16
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetProperties
     offset: 32
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::LayoutEngine::FileLayerGroupInstance*
       name: data
@@ -86944,7 +87414,7 @@ structs:
     offset: 40
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Layer::LayerManager*
       name: layer
@@ -86952,19 +87422,19 @@ structs:
     offset: 48
     return_type: int
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetPrimaryPath
     offset: 56
     return_type: char*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: result
@@ -86972,7 +87442,7 @@ structs:
     offset: 120
     return_type: System::Numerics::Quaternion*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Quaternion*
       name: result
@@ -86980,7 +87450,7 @@ structs:
     offset: 128
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: result
@@ -86988,7 +87458,7 @@ structs:
     offset: 136
     return_type: Client::LayoutEngine::Transform*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: result
@@ -86996,7 +87466,7 @@ structs:
     offset: 144
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: transform
@@ -87004,31 +87474,31 @@ structs:
     offset: 168
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: IsPrimaryLoaded
     offset: 176
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetGraphics
     offset: 184
     return_type: Client::Graphics::Scene::Object*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetGraphics2
     offset: 192
     return_type: Client::Graphics::Scene::Object*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetGraphics
     offset: 200
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::Graphics::Scene::Object*
       name: obj
@@ -87038,7 +87508,7 @@ structs:
     offset: 216
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: transform
@@ -87048,61 +87518,61 @@ structs:
     offset: 224
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: HaveSecondary
     offset: 232
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: IsColliderLoaded
     offset: 240
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetSecondaryPath
     offset: 248
     return_type: char*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: CreateSecondary
     offset: 256
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: DestroySecondary
     offset: 264
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetCollider
     offset: 272
     return_type: Common::Component::BGCollision::Collider*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: GetCollider2
     offset: 280
     return_type: Common::Component::BGCollision::Collider*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: IsColliderActive
     offset: 288
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetColliderActive
     offset: 296
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: char
       name: active
@@ -87110,19 +87580,35 @@ structs:
     offset: 304
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: ApplyStain
     offset: 464
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::Graphics::ByteColor*
       name: stainColorSrgb
@@ -87130,7 +87616,7 @@ structs:
     offset: 504
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: char
       name: active
@@ -87138,13 +87624,13 @@ structs:
     offset: 512
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetTranslationImpl
     offset: 520
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: value
@@ -87152,13 +87638,13 @@ structs:
     offset: 528
     return_type: System::Numerics::Quaternion*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetRotationImpl
     offset: 536
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Quaternion*
       name: value
@@ -87166,13 +87652,13 @@ structs:
     offset: 544
     return_type: System::Numerics::Vector3*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetScaleImpl
     offset: 552
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Vector3*
       name: value
@@ -87180,13 +87666,13 @@ structs:
     offset: 560
     return_type: Client::LayoutEngine::Transform*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
   - name: SetTransformImpl
     offset: 568
     return_type: void
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: Client::LayoutEngine::Transform*
       name: value
@@ -87194,7 +87680,7 @@ structs:
     offset: 576
     return_type: System::Numerics::Vector4*
     parameters:
-    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
     - type: System::Numerics::Vector4*
       name: result
@@ -101122,220 +101608,6 @@ structs:
     name: ChildTransform
     offset: 16
   member_functions: []
-- type: Client::Graphics::Scene::BgObject
-  name: BgObject
-  namespace: Client.Graphics.Scene
-  union: False
-  size: 224
-  fields:
-  - type: Client::Graphics::Scene::DrawObject
-    name: DrawObject
-    offset: 0
-    base: true
-  - type: Client::System::Resource::Handle::ModelResourceHandle*
-    name: ModelResourceHandle
-    offset: 144
-  - type: Common::Math::Matrix4x4*
-    name: CachedTransformMatrices
-    offset: 160
-  - type: Client::Graphics::Scene::BgObjectStainBuffer*
-    name: StainBuffer
-    offset: 168
-  - type: Client::Graphics::Transform*
-    name: CachedTransform
-    offset: 176
-  - type: Client::Graphics::Scene::BgObjectAnimationData*
-    name: LoadedAnimationData
-    offset: 184
-  virtual_functions:
-  - name: dtor
-    offset: 0
-    return_type: Client::Graphics::Scene::Object*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: CleanupRender
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - name: GetObjectType
-    offset: 16
-    return_type: Client::Graphics::Scene::ObjectType
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - name: UpdateRender
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - name: UpdateCulling
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - name: UpdateTransforms
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: char
-      name: a2_unk
-  - name: UpdateMaterials
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - name: ComputeSphereBounds
-    offset: 96
-    return_type: Common::Math::SphereBounds*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Common::Math::SphereBounds*
-      name: outSphereBounds
-  - name: ComputeAxisAlignedBounds
-    offset: 104
-    return_type: Common::Math::AxisAlignedBounds*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Common::Math::AxisAlignedBounds*
-      name: outAlignedBounds
-  - name: ComputeOrientedBounds
-    offset: 112
-    return_type: Common::Math::OrientedBounds*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Common::Math::OrientedBounds*
-      name: outOrientedBounds
-  - name: HitTestBounds
-    offset: 120
-    return_type: char
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Client::Graphics::Ray*
-      name: ray
-    - type: Common::Math::Vector3*
-      name: outIntersectionPoint
-  - name: HitTestBoundsNoOutput
-    offset: 128
-    return_type: char
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Client::Graphics::Ray*
-      name: ray
-  - name: GetAttachBoneWorldTransform
-    offset: 136
-    return_type: Common::Math::Matrix4x4*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Common::Math::Matrix4x4*
-      name: outTransform
-    - type: int
-      name: attachBoneIndex
-  - name: GetAttachBoneWorldLocation
-    offset: 144
-    return_type: Common::Math::Vector3*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: int
-      name: attachBoneIndex
-  - name: GetAttachBoneLocalLocation
-    offset: 152
-    return_type: Common::Math::Vector3*
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Common::Math::Vector3*
-      name: outLocation
-    - type: int
-      name: attachBoneIndex
-  - name: HasAttachBone
-    offset: 168
-    return_type: char
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: int
-      name: attachBoneIndex
-  - name: SetTransparency
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: float
-      name: transparency
-  - name: GetTransparency
-    offset: 216
-    return_type: float
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - name: SetTargetStatus
-    offset: 224
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: int
-      name: targetStatus
-  - name: GetTargetStatus
-    offset: 232
-    return_type: int
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 0F B6 8B ?? ?? ?? ?? 84 C0 74 21
-    return_type: char
-    name: LoadAnimationData
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: char*
-      name: modelResourcePath
-  - signature: E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B D3 E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 48 8D 4C 24
-    return_type: void
-    name: ResetFlags
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 48 8B C2 C7 44 24
-    return_type: char
-    name: SetModel
-    parameters:
-    - type: Client::Graphics::Scene::BgObject*
-      name: this
-    - type: Client::System::Resource::ResourceCategory*
-      name: modelResourceCategory
-    - type: char*
-      name: modelResourcePath
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 89 43 30 48 8B D7
-    return_type: Client::Graphics::Scene::BgObject*
-    name: Create
-    parameters:
-    - type: char*
-      name: modelGamePath
-    - type: char*
-      name: poolName
-    - type: Client::Graphics::Scene::BgObject*
-      name: existingAllocation
 - type: Client::Graphics::Scene::Camera
   name: Camera
   namespace: Client.Graphics.Scene
@@ -107863,174 +108135,6 @@ structs:
     return_type: Client::Game::FashionCheckManager*
     name: Instance
     parameters: []
-- type: Client::Game::Fate::FateContext
-  name: FateContext
-  namespace: Client.Game.Fate
-  union: False
-  size: 10704
-  fields:
-  - type: unsigned int
-    name: MotivationNpc
-    offset: 16
-  - type: unsigned int
-    name: ObjectiveNpc
-    offset: 20
-  - type: unsigned __int16
-    name: FateId
-    offset: 24
-  - type: byte
-    name: EurekaFate
-    offset: 26
-  - type: int
-    name: StartTimeEpoch
-    offset: 32
-  - type: __int16
-    name: Duration
-    offset: 40
-  - type: Client::System::String::Utf8String
-    name: Name
-    offset: 192
-  - type: Client::System::String::Utf8String
-    name: Description
-    offset: 296
-  - type: Client::System::String::Utf8String
-    name: Objective
-    offset: 400
-  - type: Client::Game::Fate::FateState
-    name: State
-    offset: 940
-  - type: byte
-    name: HandInCount
-    offset: 942
-  - type: byte
-    name: Progress
-    offset: 951
-  - type: char
-    name: IsBonus
-    offset: 961
-  - type: Client::Game::Fate::FateContext::FateObjective
-    name: Objectives
-    offset: 976
-    size: 32
-    is_string: False
-  - type: unsigned int
-    name: IconId
-    offset: 2004
-  - type: unsigned int
-    name: MapIconId
-    offset: 2008
-  - type: unsigned int
-    name: InactiveMapIcon
-    offset: 2012
-  - type: unsigned int
-    name: EventItem
-    offset: 2016
-  - type: unsigned __int16
-    name: Music
-    offset: 2024
-  - type: unsigned __int16
-    name: GivenStatus
-    offset: 2026
-  - type: unsigned __int16
-    name: Unknown4
-    offset: 2028
-  - type: byte
-    name: Rule
-    offset: 2030
-  - type: unsigned __int16
-    name: FateRuleEx
-    offset: 2032
-  - type: byte
-    name: Level
-    offset: 2035
-  - type: byte
-    name: MaxLevel
-    offset: 2036
-  - type: byte
-    name: Unknown7
-    offset: 2037
-  - type: unsigned __int16
-    name: Unknown13
-    offset: 2038
-  - type: unsigned __int16
-    name: ScreenImageAccept
-    offset: 2040
-  - type: unsigned __int16
-    name: ScreenImageComplete
-    offset: 2042
-  - type: unsigned __int16
-    name: ScreenImageFailed
-    offset: 2044
-  - type: unsigned int
-    name: Unknown0
-    offset: 2048
-  - type: unsigned __int16
-    name: FATEChain
-    offset: 2054
-  - type: unsigned int
-    name: Unknown1
-    offset: 2060
-  - type: unsigned int
-    name: ReqEventItem
-    offset: 2064
-  - type: unsigned int
-    name: TurnInEventItem
-    offset: 2068
-  - type: unsigned int
-    name: Unknown20
-    offset: 2072
-  - type: unsigned __int16
-    name: Unknown21
-    offset: 2076
-  - type: unsigned int
-    name: Unknown22
-    offset: 2080
-  - type: unsigned int
-    name: Unknown10
-    offset: 2084
-  - type: unsigned int
-    name: Unknown11
-    offset: 2088
-  - type: unsigned int
-    name: Unknown12
-    offset: 2092
-  - type: unsigned __int16
-    name: Unknown5
-    offset: 2096
-  - type: byte
-    name: Unknown6
-    offset: 2100
-  - type: unsigned int
-    name: RequiredQuest
-    offset: 2104
-  - type: Component::Exd::Sheets::FateMode
-    name: FateModeSheet
-    offset: 2108
-  - type: System::Numerics::Vector3
-    name: Location
-    offset: 2128
-  - type: float
-    name: Radius
-    offset: 2148
-  - type: Client::Game::Fate::FateContext::FateMapMarker
-    name: MapMarkers
-    offset: 2992
-    size: 37
-    is_string: False
-  virtual_functions:
-  - name: dtor
-    offset: 0
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 3D ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 74 24
-    return_type: char
-    name: TryGetPositionAndRadius
-    parameters:
-    - type: Client::Game::Fate::FateContext*
-      name: this
-    - type: System::Numerics::Vector3*
-      name: position
-    - type: System::Numerics::Vector3*
-      name: radius
 - type: Client::Game::Group::PartyMember
   name: PartyMember
   namespace: Client.Game.Group
@@ -108861,6 +108965,33 @@ structs:
   - type: Common::Math::AxisAlignedBounds
     name: RangeBounds
     offset: 192
+  - type: char
+    name: EnableSSAOMaybe
+    offset: 224
+  - type: float
+    name: ShadowBiasMaybe
+    offset: 232
+  - type: float
+    name: ShadowDepthNear
+    offset: 236
+  - type: float
+    name: ShadowDepthFar
+    offset: 240
+  - type: float
+    name: ShadowStartDist
+    offset: 244
+  - type: float
+    name: ShadowEndDist
+    offset: 248
+  - type: float
+    name: LightFade
+    offset: 256
+  - type: float
+    name: LightFadeLength
+    offset: 260
+  - type: float
+    name: LightSelect
+    offset: 272
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::PartialSkeleton
@@ -108900,6 +109031,226 @@ structs:
     name: SkeletonResourceHandle
     offset: 400
   member_functions: []
+- type: Client::Graphics::Scene::BgObject
+  name: BgObject
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 224
+  fields:
+  - type: Client::Graphics::Scene::DrawObject
+    name: DrawObject
+    offset: 0
+    base: true
+  - type: Client::System::Resource::Handle::ModelResourceHandle*
+    name: ModelResourceHandle
+    offset: 144
+  - type: Common::Math::Matrix4x4*
+    name: CachedTransformMatrices
+    offset: 160
+  - type: Client::Graphics::Scene::BgObjectStainBuffer*
+    name: StainBuffer
+    offset: 168
+  - type: Client::Graphics::Transform*
+    name: CachedTransform
+    offset: 176
+  - type: Client::Graphics::Scene::BgObjectAnimationData*
+    name: LoadedAnimationData
+    offset: 184
+  - type: byte
+    name: ColorIntensity
+    offset: 206
+  - type: Client::Graphics::ByteColor
+    name: Color
+    offset: 208
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: CleanupRender
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - name: UpdateRender
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - name: UpdateCulling
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - name: UpdateTransforms
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: char
+      name: a2_unk
+  - name: UpdateMaterials
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - name: ComputeSphereBounds
+    offset: 96
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
+  - name: ComputeAxisAlignedBounds
+    offset: 104
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: ComputeOrientedBounds
+    offset: 112
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
+  - name: HitTestBounds
+    offset: 120
+    return_type: char
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: ray
+    - type: Common::Math::Vector3*
+      name: outIntersectionPoint
+  - name: HitTestBoundsNoOutput
+    offset: 128
+    return_type: char
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: ray
+  - name: GetAttachBoneWorldTransform
+    offset: 136
+    return_type: Common::Math::Matrix4x4*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Common::Math::Matrix4x4*
+      name: outTransform
+    - type: int
+      name: attachBoneIndex
+  - name: GetAttachBoneWorldLocation
+    offset: 144
+    return_type: Common::Math::Vector3*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: int
+      name: attachBoneIndex
+  - name: GetAttachBoneLocalLocation
+    offset: 152
+    return_type: Common::Math::Vector3*
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: outLocation
+    - type: int
+      name: attachBoneIndex
+  - name: HasAttachBone
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: int
+      name: attachBoneIndex
+  - name: SetTransparency
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: float
+      name: transparency
+  - name: GetTransparency
+    offset: 216
+    return_type: float
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - name: SetTargetStatus
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: int
+      name: targetStatus
+  - name: GetTargetStatus
+    offset: 232
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F B6 8B ?? ?? ?? ?? 84 C0 74 21
+    return_type: char
+    name: LoadAnimationData
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: char*
+      name: modelResourcePath
+  - signature: E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B D3 E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 48 8D 4C 24
+    return_type: void
+    name: ResetFlags
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 48 8B C2 C7 44 24
+    return_type: char
+    name: SetModel
+    parameters:
+    - type: Client::Graphics::Scene::BgObject*
+      name: this
+    - type: Client::System::Resource::ResourceCategory*
+      name: modelResourceCategory
+    - type: char*
+      name: modelResourcePath
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 89 43 30 48 8B D7
+    return_type: Client::Graphics::Scene::BgObject*
+    name: Create
+    parameters:
+    - type: char*
+      name: modelGamePath
+    - type: char*
+      name: poolName
+    - type: Client::Graphics::Scene::BgObject*
+      name: existingAllocation
 - type: Client::Graphics::Scene::EnvLocation
   name: EnvLocation
   namespace: Client.Graphics.Scene
@@ -109220,6 +109571,27 @@ structs:
   - type: Common::Math::Vector4
     name: Color
     offset: 608
+  - type: float
+    name: FadeNearEnd
+    offset: 640
+  - type: float
+    name: FadeNearStart
+    offset: 644
+  - type: float
+    name: FadeFarStart
+    offset: 648
+  - type: float
+    name: Unk28C
+    offset: 652
+  - type: float
+    name: FadeFarEnd
+    offset: 656
+  - type: float
+    name: ZCorrect
+    offset: 660
+  - type: float
+    name: SoftParticleFadeRange
+    offset: 664
   - type: Client::Graphics::Vfx::VfxResourceInstance*
     name: VfxResourceInstance
     offset: 672
@@ -109463,6 +109835,327 @@ structs:
     - type: float
       name: dt
   member_functions: []
+- type: Client::LayoutEngine::Layer::MarkerLayoutInstance
+  name: MarkerLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 112
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: Client::LayoutEngine::Transform
+    name: Transform
+    offset: 48
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::RangeLayoutInstance
   name: RangeLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -109684,6 +110377,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -110017,6 +110726,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -115652,7 +116377,7 @@ structs:
     name: ScrollbarLength
     offset: 296
   - type: __int16
-    name: Unk12A
+    name: MinThumbLength
     offset: 298
   - type: __int16
     name: Margin
@@ -115673,19 +116398,19 @@ structs:
     name: IsInputVertical
     offset: 309
   - type: char
-    name: UnkIsVertical
+    name: IsThumbLengthVertical
     offset: 310
   - type: char
     name: IsBeingDragged
     offset: 311
   - type: char
-    name: Unk138
+    name: IsThumbLengthFixed
     offset: 312
   - type: char
-    name: Unk139
+    name: IsScrollDecrementPending
     offset: 313
   - type: char
-    name: Unk13A
+    name: IsScrollIncrementPending
     offset: 314
   - type: char
     name: IsAcceptingMouseWheelEvents
@@ -117081,6 +117806,189 @@ structs:
     offset: 64
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Fate::FateContext
+  name: FateContext
+  namespace: Client.Game.Fate
+  union: False
+  size: 10704
+  fields:
+  - type: unsigned int
+    name: MotivationNpc
+    offset: 16
+  - type: unsigned int
+    name: ObjectiveNpc
+    offset: 20
+  - type: unsigned __int16
+    name: FateId
+    offset: 24
+  - type: byte
+    name: FateMode
+    offset: 26
+  - type: unsigned int
+    name: Flags
+    offset: 28
+  - type: int
+    name: StartTimeEpoch
+    offset: 32
+  - type: __int16
+    name: Duration
+    offset: 40
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 192
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 296
+  - type: Client::System::String::Utf8String
+    name: Objective
+    offset: 400
+  - type: Client::Game::Fate::FateState
+    name: State
+    offset: 940
+  - type: byte
+    name: StateFlags
+    offset: 941
+  - type: byte
+    name: HandInCount
+    offset: 942
+  - type: byte
+    name: Progress
+    offset: 951
+  - type: char
+    name: IsBonus
+    offset: 961
+  - type: Client::Game::Fate::FateContext::FateObjective
+    name: Objectives
+    offset: 976
+    size: 32
+    is_string: False
+  - type: unsigned int
+    name: IconId
+    offset: 2004
+  - type: unsigned int
+    name: MapIconId
+    offset: 2008
+  - type: unsigned int
+    name: InactiveMapIcon
+    offset: 2012
+  - type: unsigned int
+    name: EventItem
+    offset: 2016
+  - type: unsigned int
+    name: EventRange
+    offset: 2020
+  - type: unsigned __int16
+    name: Music
+    offset: 2024
+  - type: unsigned __int16
+    name: GivenStatus
+    offset: 2026
+  - type: unsigned __int16
+    name: Unknown4
+    offset: 2028
+  - type: byte
+    name: Rule
+    offset: 2030
+  - type: unsigned __int16
+    name: FateRuleEx
+    offset: 2032
+  - type: byte
+    name: FateRuleExUnknown0
+    offset: 2034
+  - type: byte
+    name: Level
+    offset: 2035
+  - type: byte
+    name: MaxLevel
+    offset: 2036
+  - type: byte
+    name: RequiredClassJobCategory
+    offset: 2037
+  - type: unsigned __int16
+    name: RequiredQuest2
+    offset: 2038
+  - type: unsigned __int16
+    name: ScreenImageAccept
+    offset: 2040
+  - type: unsigned __int16
+    name: ScreenImageComplete
+    offset: 2042
+  - type: unsigned __int16
+    name: ScreenImageFailed
+    offset: 2044
+  - type: Client::Game::Event::EventId
+    name: ArrayEventHandler
+    offset: 2048
+  - type: unsigned __int16
+    name: FATEChain
+    offset: 2054
+  - type: unsigned int
+    name: Unknown1
+    offset: 2060
+  - type: unsigned int
+    name: ReqEventItem
+    offset: 2064
+  - type: unsigned int
+    name: TurnInEventItem
+    offset: 2068
+  - type: unsigned int
+    name: Unknown20
+    offset: 2072
+  - type: unsigned __int16
+    name: Unknown21
+    offset: 2076
+  - type: unsigned int
+    name: Unknown22
+    offset: 2080
+  - type: unsigned int
+    name: Unknown10
+    offset: 2084
+  - type: unsigned int
+    name: Unknown11
+    offset: 2088
+  - type: unsigned int
+    name: Unknown12
+    offset: 2092
+  - type: unsigned int
+    name: OccupiedPermission
+    offset: 2096
+  - type: byte
+    name: Unknown6
+    offset: 2100
+  - type: unsigned int
+    name: RequiredQuest
+    offset: 2104
+  - type: Component::Exd::Sheets::FateMode
+    name: FateModeSheet
+    offset: 2108
+  - type: System::Numerics::Vector3
+    name: Location
+    offset: 2128
+  - type: float
+    name: Radius
+    offset: 2148
+  - type: Common::Component::Excel::ExcelSheet*
+    name: Sheet
+    offset: 2952
+  - type: Client::Game::Fate::FateContext::FateMapMarker
+    name: MapMarkers
+    offset: 2992
+    size: 37
+    is_string: False
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 3D ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 74 24
+    return_type: char
+    name: TryGetPositionAndRadius
+    parameters:
+    - type: Client::Game::Fate::FateContext*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: position
+    - type: System::Numerics::Vector3*
+      name: radius
 - type: Client::Game::Group::GroupManager::Group
   name: Group
   namespace: Client.Game.Group
@@ -118770,6 +119678,1014 @@ structs:
     offset: 272
   virtual_functions: []
   member_functions: []
+- type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance
+  name: ChairMarkerLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 128
+  fields:
+  - type: Client::LayoutEngine::Layer::MarkerLayoutInstance
+    name: MarkerLayoutInstance
+    offset: 0
+    base: true
+  - type: Client::LayoutEngine::Layer::ChairMarkerEnableFlags
+    name: EnableFlags
+    offset: 112
+  - type: Client::LayoutEngine::Layer::ChairMarkerObjectType
+    name: ObjectType
+    offset: 116
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::CharacterLayoutInstance
+  name: CharacterLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 128
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: Client::Game::Character::Character*
+    name: Character
+    offset: 48
+  - type: Client::LayoutEngine::Layer::CharacterLayoutInstance::Transform16
+    name: CompactTransform
+    offset: 56
+  - type: Client::LayoutEngine::Transform
+    name: Transform
+    offset: 64
+  - type: unsigned int
+    name: BaseId
+    offset: 112
+  - type: unsigned int
+    name: NameId
+    offset: 116
+  - type: unsigned int
+    name: Unk78
+    offset: 120
+  virtual_functions:
+  - name: GetCompactTransform
+    offset: 624
+    return_type: Client::LayoutEngine::Layer::CharacterLayoutInstance::Transform16*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetBaseId
+    offset: 632
+    return_type: unsigned int
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetNameId
+    offset: 640
+    return_type: unsigned int
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetObjectIndex
+    offset: 648
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetCharacter
+    offset: 656
+    return_type: Client::Game::Character::Character*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance
+  name: ClickableRangeLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 112
+  fields:
+  - type: Client::LayoutEngine::Layer::RangeLayoutInstance
+    name: RangeLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance
   name: CollisionBoxLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -119006,6 +120922,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -119314,6 +121246,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -119643,6 +121591,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -119735,6 +121699,327 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
       name: this
+  member_functions: []
+- type: Client::LayoutEngine::Layer::FateRangeLayoutInstance
+  name: FateRangeLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 128
+  fields:
+  - type: Client::LayoutEngine::Layer::RangeLayoutInstance
+    name: RangeLayoutInstance
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: FateLayoutLabelId
+    offset: 112
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
   member_functions: []
 - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance
   name: LineVfxLayoutInstance
@@ -119954,6 +122239,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -120286,6 +122587,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -120597,6 +122914,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -120689,6 +123022,366 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
       name: this
+  member_functions: []
+- type: Client::LayoutEngine::Layer::VfxLayoutInstance
+  name: VfxLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 176
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: Client::Graphics::Scene::VfxObject*
+    name: SceneObject
+    offset: 48
+  - type: Client::LayoutEngine::Transform
+    name: Transform
+    offset: 64
+  - type: unsigned int
+    name: PathCrc
+    offset: 112
+  - type: float
+    name: FadeNearStart
+    offset: 116
+  - type: float
+    name: FadeNearEnd
+    offset: 120
+  - type: float
+    name: FadeFarStart
+    offset: 124
+  - type: float
+    name: Unk80
+    offset: 128
+  - type: float
+    name: FadeFarEnd
+    offset: 132
+  - type: float
+    name: ZCorrect
+    offset: 136
+  - type: float
+    name: SoftParticleFadeRange
+    offset: 140
+  - type: Client::Graphics::ByteColor
+    name: Color
+    offset: 144
+  - type: float
+    name: Unk94
+    offset: 148
+  - type: float
+    name: Unk98
+    offset: 152
+  - type: byte
+    name: Flags
+    offset: 156
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
   member_functions: []
 - type: Client::System::Resource::Handle::DefaultResourceHandle
   name: DefaultResourceHandle
@@ -125223,6 +127916,1041 @@ structs:
       name: this
     - type: byte*
       name: data
+- type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance
+  name: BattleNpcLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 128
+  fields:
+  - type: Client::LayoutEngine::Layer::CharacterLayoutInstance
+    name: CharacterLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  - name: GetCompactTransform
+    offset: 624
+    return_type: Client::LayoutEngine::Layer::CharacterLayoutInstance::Transform16*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetBaseId
+    offset: 632
+    return_type: unsigned int
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetNameId
+    offset: 640
+    return_type: unsigned int
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetObjectIndex
+    offset: 648
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  - name: GetCharacter
+    offset: 656
+    return_type: Client::Game::Character::Character*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+  member_functions: []
+- type: Client::LayoutEngine::Layer::EventNpcLayoutInstance
+  name: EventNpcLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 144
+  fields:
+  - type: Client::LayoutEngine::Layer::CharacterLayoutInstance
+    name: CharacterLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  - name: GetCompactTransform
+    offset: 624
+    return_type: Client::LayoutEngine::Layer::CharacterLayoutInstance::Transform16*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetBaseId
+    offset: 632
+    return_type: unsigned int
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetNameId
+    offset: 640
+    return_type: unsigned int
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetObjectIndex
+    offset: 648
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  - name: GetCharacter
+    offset: 656
+    return_type: Client::Game::Character::Character*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+  member_functions: []
+- type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+  name: GameObjectLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 160
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: BaseId
+    offset: 48
+  - type: unsigned int
+    name: BoundInstanceId
+    offset: 52
+  - type: int
+    name: ObjectIndex
+    offset: 56
+  - type: Client::LayoutEngine::Transform
+    name: Transform
+    offset: 64
+  - type: Common::Math::Vector3
+    name: Translation
+    offset: 112
+  - type: Common::Math::Quaternion
+    name: Rotation
+    offset: 128
+  - type: Common::Math::Vector3
+    name: Scale
+    offset: 144
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance
   name: PopRangeLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -125450,6 +129178,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -125774,6 +129518,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
@@ -137029,6 +140789,1278 @@ structs:
     - 6
     is_pointer: True
     return_type: Client::Graphics::Environment::EnvManager
+- type: Client::LayoutEngine::Layer::AetheryteLayoutInstance
+  name: AetheryteLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 160
+  fields:
+  - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+    name: GameObjectLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::EventObjectLayoutInstance
+  name: EventObjectLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 176
+  fields:
+  - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+    name: GameObjectLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::GatheringLayoutInstance
+  name: GatheringLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 160
+  fields:
+  - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+    name: GameObjectLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::TreasureLayoutInstance
+  name: TreasureLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 160
+  fields:
+  - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+    name: GameObjectLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::UI::Agent::AgentInventoryContext
   name: AgentInventoryContext
   namespace: Client.UI.Agent
@@ -142909,6 +147941,22 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
       name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
   - name: WantToBeActive
     offset: 440
     return_type: char
