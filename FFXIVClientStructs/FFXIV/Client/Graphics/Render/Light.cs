@@ -38,14 +38,14 @@ public unsafe partial struct Light {
     [FieldOffset(0xC0)] public AxisAlignedBounds RangeBounds;
 
     [FieldOffset(0xE0)] public bool EnableSSAOMaybe; // unsure. someone find out what it is
+    [FieldOffset(0xE8)] public float ShadowBiasMaybe; // unsure. someone find out what it is
     [FieldOffset(0xEC)] public float ShadowDepthNear;
     [FieldOffset(0xF0)] public float ShadowDepthFar;
     [FieldOffset(0xF4)] public float ShadowStartDist;
     [FieldOffset(0xF8)] public float ShadowEndDist;
-    [FieldOffset(0xE8)] public float ShadowBiasMaybe; // unsure. someone find out what it is
-    [FieldOffset(0x110)] public float LightSelect;
     [FieldOffset(0x100)] public float LightFade;
     [FieldOffset(0x104)] public float LightFadeLength;
+    [FieldOffset(0x110)] public float LightSelect;
 
     public Vector3 Color {
         readonly get => new(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z);
