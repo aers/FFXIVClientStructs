@@ -25,9 +25,12 @@ public unsafe partial struct PartyListNumberArray {
     [FieldOffset(8 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberNumberArray> _partyMembers;
     [FieldOffset(352 * 4)] public int TrustCount;
     [FieldOffset(353 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberNumberArray> _trustMembers;
+    /// <summary>
+    /// Pet/chocobo display data blocks.
+    /// <br/>When <see cref="ChocoboCount"/> is non-zero, <c>Pets[0]</c> contains the Chocobo data and <c>Pets[1]</c> contains the Pet data.
+    /// <br/>When <see cref="ChocoboCount"/> is zero, <c>Pets[0]</c> contains the Pet data.
+    /// </summary>
     [FieldOffset(654 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberNumberArray> _pets;
-    [FieldOffset(654 * 4)] public PartyListMemberNumberArray Chocobo;
-    [FieldOffset(697 * 4)] public PartyListMemberNumberArray Pet;
 
     [FieldOffset(740 * 4)] public int ChocoboCount;
     [FieldOffset(741 * 4)] public int PetCount;

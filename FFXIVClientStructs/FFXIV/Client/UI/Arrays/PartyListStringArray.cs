@@ -3,20 +3,20 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 443 * 8)]
+[StructLayout(LayoutKind.Explicit, Size = 397 * 8)]
 public unsafe partial struct PartyListStringArray {
     public static PartyListStringArray* Instance() {
         var stringArray = AtkStage.Instance()->GetStringArrayData(StringArrayType.PartyList);
         return stringArray == null ? null : (PartyListStringArray*)stringArray->StringArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray443<CStringPointer> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray397<CStringPointer> _data;
 
     [FieldOffset(0 * 8)] public CStringPointer EnmityLeaderText;
     [FieldOffset(1 * 8)] public CStringPointer EnmityDisabledText;
     [FieldOffset(2 * 8)] public CStringPointer InvalidValueText;
     [FieldOffset(4 * 8)] public CStringPointer PartyTypeText;
-    [FieldOffset(6 * 8), FixedSizeArray] internal FixedSizeArray19<PartyListMemberStringArray> _members;
+    [FieldOffset(6 * 8), FixedSizeArray] internal FixedSizeArray17<PartyListMemberStringArray> _members;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 23 * 8)]
