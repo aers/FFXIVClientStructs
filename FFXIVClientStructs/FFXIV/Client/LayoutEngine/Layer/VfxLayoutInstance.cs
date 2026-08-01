@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [Inherits<ILayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct VfxLayoutInstance {
-    [FieldOffset(0x30)] public VfxObject* SceneObject;
+    [FieldOffset(0x30)] public VfxObject* GraphicsObject;
     [FieldOffset(0x40)] public Transform Transform;
     [FieldOffset(0x70)] public uint PathCrc;
     [FieldOffset(0x74)] public float FadeNearStart;

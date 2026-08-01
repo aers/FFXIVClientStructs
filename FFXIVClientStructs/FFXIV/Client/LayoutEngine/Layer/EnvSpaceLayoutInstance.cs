@@ -9,6 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [Inherits<ILayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct EnvSpaceLayoutInstance {
-    [FieldOffset(0x30)] public EnvSpace* SceneObject;
+    [FieldOffset(0x30)] public EnvSpace* GraphicsObject;
     [FieldOffset(0x38)] public uint BoundInstanceId;
 }

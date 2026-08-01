@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [Inherits<ILayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct LightLayoutInstance {
-    [FieldOffset(0x30)] public Light* SceneObject;
+    [FieldOffset(0x30)] public Light* GraphicsObject;
     [FieldOffset(0x38)] public LightType LightType;
     [FieldOffset(0x3C)] public Vector4 Color;
 }

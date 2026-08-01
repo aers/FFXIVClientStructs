@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [Inherits<ILayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct WeaponLayoutInstance {
-    [FieldOffset(0x30)] public Weapon* SceneObject;
+    [FieldOffset(0x30)] public Weapon* GraphicsObject;
 }
