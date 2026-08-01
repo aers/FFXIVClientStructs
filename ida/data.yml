@@ -16260,6 +16260,7 @@ classes:
       59: ProcessFormatStringCallback
       60: ProcessActionTimelineCallback
       61: ProcessDirectorUpdate
+      62: ProcessEventSpecificDirectorUpdate
       70: CancelByPlayerMovement
       76: ProcessListenItemCallback
       159: CancelInteraction
@@ -18224,6 +18225,7 @@ classes:
     vfuncs:
       303: GetCurrentLevel
       304: GetMaxLevel
+      325: ProcessDirectorSpecificDirectorUpdate
       329: GetContentTimeMax
       330: GetContentTypeIconId
       335: SetExperience
@@ -18232,6 +18234,7 @@ classes:
       0x140B702C0: ApplyMapEffect
       0x140B70130: PlayMapEffectTimeline
       0x140B71240: IsPlayCutscene
+      0x140B6EF90: ProcessCommonDirectorUpdate
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x142313930
@@ -18239,6 +18242,8 @@ classes:
       - ea: 0x1423145E0
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
+      380: DispatchContentSpecificDirectorUpdate
+      381: ProcessContentSpecificDirectorUpdate
       403: HandleGMCommand
     funcs:
       0x1419A8DD0: ctor
@@ -19479,9 +19484,11 @@ classes:
       312: SetAdditionalTodoLargeBlueText
       313: SetAdditionalTodoLargeGrayText
       314: SetAdditionalTodoJoinButton
+      325: ProcessDirectorSpecificDirectorUpdate
       334: ClearAdditionalTodo
     funcs:
       0x141A1E7F0: ctor
+      0x141A20360: ProcessCommonDirectorUpdate
       0x141A24240: IsPlayCutscene
       0x141A24310: OnEndCutscene
       0x141A243E0: OnFinishCutscene

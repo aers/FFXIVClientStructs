@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<ContentDirector>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? B9 ?? ?? ?? ?? ?? ?? ?? 33 ED 48 8D 05", 3, 406)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1F98)]
-public partial struct InstanceContentDirector {
+public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0x00), CExporterExcelBegin("InstanceContent")] public uint NewPlayerBonusGil;
     [FieldOffset(0xD30 + 0x04)] public uint NewPlayerBonusExp;
     [FieldOffset(0xD30 + 0x08)] public uint FinalBossExp;
@@ -82,6 +82,14 @@ public partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0xA7), CExporterExcelEnd] private byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
 
     [FieldOffset(0xDE0)] public ContentDirector.MapEffectList ManagedSharedGroups;
+
+    /// <summary>Dispatches updates specific to the content. This ends up calling ProcessContentSpecificDirectorUpdate and unrolls the parameters array.</summary>
+    [VirtualFunction(380)]
+    public partial void DispatchContentSpecificDirectorUpdate(uint category, uint* parameters);
+
+    /// <summary>Processes updates specific to the content. This handles the categories between 0 and 0x40000000.</summary>
+    [VirtualFunction(381)]
+    public partial void ProcessContentSpecificDirectorUpdate(uint category, uint arg1, uint arg2, uint arg3, uint arg4);
 }
 
 public enum InstanceContentType : byte {
