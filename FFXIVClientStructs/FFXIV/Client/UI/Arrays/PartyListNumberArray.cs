@@ -3,15 +3,16 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 745 * 4)]
+[StructLayout(LayoutKind.Explicit, Size = 746 * 4)]
 public unsafe partial struct PartyListNumberArray {
     public static PartyListNumberArray* Instance() {
         var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList);
         return numberArray == null ? null : (PartyListNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray745<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray746<int> _data;
 
+    [FieldOffset(0 * 4)] public bool IsVisible;
     [FieldOffset(1 * 4)] public bool IsCrossRealmParty;
     [FieldOffset(2 * 4)] public int PartyLeaderIndex;
     [FieldOffset(3 * 4)] public bool PartyHasMembers;
@@ -20,9 +21,20 @@ public unsafe partial struct PartyListNumberArray {
     /// Amount of players in the party.
     /// </summary>
     [FieldOffset(6 * 4)] public int PartyListCount;
-    [FieldOffset(7 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberNumberArray> _partyMembers;
-    [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberNumberArray> _trustMembers;
-    [FieldOffset(653 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberNumberArray> _pets;
+    [FieldOffset(7 * 4)] public int EnmityLeaderIndex;
+    [FieldOffset(8 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberNumberArray> _partyMembers;
+    [FieldOffset(352 * 4)] public int TrustCount;
+    [FieldOffset(353 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberNumberArray> _trustMembers;
+    [FieldOffset(654 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberNumberArray> _pets;
+    [FieldOffset(654 * 4)] public PartyListMemberNumberArray Chocobo;
+    [FieldOffset(697 * 4)] public PartyListMemberNumberArray Pet;
+
+    [FieldOffset(740 * 4)] public int ChocoboCount;
+    [FieldOffset(741 * 4)] public int PetCount;
+    [FieldOffset(742 * 4)] public bool UsePetSlot;
+    [FieldOffset(743 * 4)] public bool HideEnmityLeader;
+    [FieldOffset(744 * 4)] public uint HoveredEntityId;
+    [FieldOffset(745 * 4)] public uint TargetedEntityId;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]

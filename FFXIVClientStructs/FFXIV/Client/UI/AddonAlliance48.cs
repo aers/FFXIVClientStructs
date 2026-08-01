@@ -24,6 +24,7 @@ public unsafe partial struct AddonAlliance48 {
     public unsafe partial struct Alliance48MemberStruct {
         [FieldOffset(0x00)] public AtkComponentBase* AtkComponentBase;
         [FieldOffset(0x08)] public AtkImageNode* ClassJobImageNode;
+        [FieldOffset(0x10)] public AtkUldAsset* ClassJobIconUldAsset;
         [FieldOffset(0x18)] public AtkResNode* AtkResNode;
     }
 }
