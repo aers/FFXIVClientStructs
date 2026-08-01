@@ -26,4 +26,16 @@ public unsafe partial struct AddonSelectYesno {
     [FieldOffset(0x2A8)] public AtkComponentCheckBox* ConfirmCheckBox;
     [FieldOffset(0x2B0)] public AtkTextNode* AtkTextNode298;
     [FieldOffset(0x2B8)] public AtkComponentBase* AtkComponentBase2A0;
+
+    public CollectibleAtkValues* TypedAtkValues => (CollectibleAtkValues*)AtkValues;
+
+    [StructLayout(LayoutKind.Explicit, Size = AtkValue.StructSize * 16)]
+    public struct CollectibleAtkValues {
+        /// <remarks><see cref="AtkValueType.Int"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 13)] public AtkValue IconId;
+        /// <remarks><see cref="AtkValueType.UInt"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 14)] public AtkValue ItemId; // collectable so it's +500k
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 15)] public AtkValue ItemName; // has the collectible symbol in it
+    }
 }
