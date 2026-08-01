@@ -172,7 +172,7 @@ public unsafe partial struct ILayoutInstance {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct Transform {
+public partial struct Transform {
     [FieldOffset(0x00)] public Vector3 Translation;
     [FieldOffset(0x0C)] public int Type; // This is a padding field that in some contexts is used to store collider type
     [FieldOffset(0x10)] public Quaternion Rotation;
@@ -186,22 +186,8 @@ public unsafe partial struct Transform {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x12)]
-public struct CompactTransform {
-    [FieldOffset(0x00)] public CompactVector3 Translation;
-    [FieldOffset(0x06)] public CompactVector3 Rotation;
-    [FieldOffset(0x0C)] public CompactVector3 Scale;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x06)]
-public struct CompactVector3 {
-    [FieldOffset(0x00)] public ushort X;
-    [FieldOffset(0x02)] public ushort Y;
-    [FieldOffset(0x04)] public ushort Z;
-}
-
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct AnalyticShapeData {
+public partial struct AnalyticShapeData {
     [FieldOffset(0x00)] public int NumRefs;
     [FieldOffset(0x04)] public uint Crc;
     //[FieldOffset(0x08)] public uint u8;

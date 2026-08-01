@@ -9944,7 +9944,7 @@ classes:
       - ea: 0x1421777D0
         base: Client::LayoutEngine::ILayoutInstance
     vfuncs:
-      78: GetCompactTransform
+      78: GetQuantizedPosition
       79: GetBaseId
       80: GetNameId
       81: GetObjectIndex
@@ -12662,7 +12662,6 @@ classes:
       0x140900D20: ShowLogMessage # static
       0x140901710: ApplyAll # static
       0x140901840: Receive # static
-      0x1409022F0: ConvertQuantizedPosToFloat # static
   Client::Game::Character::MJILivelyActor:
     vtbls:
       - ea: 0x1423F4AA0
@@ -27469,6 +27468,20 @@ classes:
     vtbls:
       - ea: 0x142115A68
         base: Client::System::Memory::IMemorySpace
+  Common::Math::QuantizedPositionValue:
+    funcs:
+      0x140B4FF10: Dequantize
+  Common::Math::QuantizedAngleValue:
+    funcs:
+      0x140B4FF40: Dequantize
+  Common::Math::QuantizedVector3:
+    funcs:
+      0x1409022F0: Dequantize
+  Common::Math::QuantizedTransform:
+    funcs:
+      0x14076A0F0: Dequantize
+      0x140769DD0: DequantizeRotation
+      0x14076C000: Quantize
   Common::Math::Half:
     funcs:
       0x1402404B0: FromFloat
