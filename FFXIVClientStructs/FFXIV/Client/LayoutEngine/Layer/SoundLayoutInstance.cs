@@ -23,7 +23,7 @@ public unsafe partial struct SoundLayoutInstance {
     [FieldOffset(0x50), Obsolete("Use Transform.Translation")] public Vector3 Translation;
     [FieldOffset(0x60), Obsolete("Use Transform.Rotation")] public Quaternion Rotation;
     [FieldOffset(0x70), Obsolete("Use Transform.Scale")] public Vector3 Scale;
-    [FieldOffset(0x38)] public CompactTransform CompactTransform;
+    [FieldOffset(0x80)] public CompactTransform CompactTransform;
 
     [FieldOffset(0x98)] public SoundLayoutOptions* SoundLayoutOptions;
     [FieldOffset(0xA0)] public ushort SoundDataSize;
