@@ -27,7 +27,10 @@ public unsafe partial struct AddonSelectYesno {
     [FieldOffset(0x2B0)] public AtkTextNode* AtkTextNode298;
     [FieldOffset(0x2B8)] public AtkComponentBase* AtkComponentBase2A0;
 
-    public CollectibleAtkValues* TypedAtkValues => (CollectibleAtkValues*)AtkValues;
+    public bool CollectibleAtkValuesAvailable => AtkValuesCount > 15 && AtkValues[12].Int > 0;
+
+    /// <remarks>Check <see cref="CollectibleAtkValuesAvailable"/> before using. Non-collectible SelectYesno only has 12 atkvalues</remarks>
+    public CollectibleAtkValues* CollectibleTypedAtkValues => (CollectibleAtkValues*)AtkValues;
 
     [StructLayout(LayoutKind.Explicit, Size = AtkValue.StructSize * 16)]
     public struct CollectibleAtkValues {
