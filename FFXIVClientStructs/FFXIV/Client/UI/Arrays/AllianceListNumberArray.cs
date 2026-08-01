@@ -15,8 +15,8 @@ public unsafe partial struct AllianceListNumberArray {
     [FieldOffset(0 * 4)] public int MemberCount;
     [FieldOffset(3 * 4)] public int PartyCount;
     [FieldOffset(4 * 4), FixedSizeArray] internal FixedSizeArray5<AllianceListGroupNumberArray> _groups;
-    [FieldOffset(0x126 * 4)] public uint HoveredEntityId;
-    [FieldOffset(0x127 * 4)] public uint TargetedEntityId;
+    [FieldOffset(0x126 * 4)] public uint TargetedEntityId;
+    [FieldOffset(0x127 * 4)] public uint SoftTargetEntityId;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 58 * 4)]

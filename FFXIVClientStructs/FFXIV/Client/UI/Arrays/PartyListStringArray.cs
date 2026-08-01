@@ -23,9 +23,9 @@ public unsafe partial struct PartyListStringArray {
     public partial struct PartyListMemberStringArray {
         [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray23<CStringPointer> _data;
 
-        [FieldOffset(0 * 8)] public CStringPointer Name;
-        [FieldOffset(1 * 8)] public CStringPointer CastingActionName;
-        [FieldOffset(2 * 8)] public CStringPointer CastingProgressText;
+        [FieldOffset(0 * 8)] public CStringPointer GroupSlotIndicator;
+        [FieldOffset(1 * 8)] public CStringPointer Name;
+        [FieldOffset(2 * 8)] public CStringPointer CastingActionName;
         [FieldOffset(3 * 8), FixedSizeArray] internal FixedSizeArray10<CStringPointer> _statusTexts;
     }
 }

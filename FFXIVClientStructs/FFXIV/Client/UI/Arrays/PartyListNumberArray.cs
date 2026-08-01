@@ -36,8 +36,8 @@ public unsafe partial struct PartyListNumberArray {
     [FieldOffset(741 * 4)] public int PetCount;
     [FieldOffset(742 * 4)] public bool UsePetSlot;
     [FieldOffset(743 * 4)] public bool HideEnmityLeader;
-    [FieldOffset(744 * 4)] public uint HoveredEntityId;
-    [FieldOffset(745 * 4)] public uint TargetedEntityId;
+    [FieldOffset(744 * 4)] public uint TargetedEntityId;
+    [FieldOffset(745 * 4)] public uint SoftTargetEntityId;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
