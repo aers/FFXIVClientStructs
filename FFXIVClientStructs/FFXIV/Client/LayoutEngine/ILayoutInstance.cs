@@ -190,7 +190,7 @@ public unsafe partial struct Transform {
 public struct CompactTransform {
     [FieldOffset(0x00)] public CompactVector3 Translation;
     [FieldOffset(0x06)] public CompactVector3 Rotation;
-    [FieldOffset(0x0A)] public CompactVector3 Scale;
+    [FieldOffset(0x0C)] public CompactVector3 Scale;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x06)]
