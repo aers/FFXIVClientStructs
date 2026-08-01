@@ -33,9 +33,7 @@ public unsafe partial struct CharacterLayoutInstance {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct Transform16 {
-        [FieldOffset(0x00)] public ushort X;
-        [FieldOffset(0x02)] public ushort Y;
-        [FieldOffset(0x04)] public ushort Z;
+        [FieldOffset(0x00)] public CompactVector3 Translation;
         [FieldOffset(0x06)] public ushort Rotation;
     }
 }
