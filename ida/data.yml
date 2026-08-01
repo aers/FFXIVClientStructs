@@ -19360,6 +19360,9 @@ classes:
     vtbls:
       - ea: 0x1421A93E0
         base: Client::Game::InstanceContent::ContentDirector
+    vfuncs:
+      373: DispatchContentSpecificDirectorUpdate
+      374: ProcessContentSpecificDirectorUpdate
     funcs:
       0x140BB0EE0: ctor
       0x140BB1690: OnEndCutscene
