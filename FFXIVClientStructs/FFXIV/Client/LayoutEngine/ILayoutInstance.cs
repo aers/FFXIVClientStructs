@@ -186,6 +186,20 @@ public unsafe partial struct Transform {
     }
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x12)]
+public struct CompactTransform {
+    [FieldOffset(0x00)] public CompactVector3 Translation;
+    [FieldOffset(0x06)] public CompactVector3 Rotation;
+    [FieldOffset(0x0A)] public CompactVector3 Scale;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x06)]
+public struct CompactVector3 {
+    [FieldOffset(0x00)] public ushort X;
+    [FieldOffset(0x02)] public ushort Y;
+    [FieldOffset(0x04)] public ushort Z;
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct AnalyticShapeData {
     [FieldOffset(0x00)] public int NumRefs;
