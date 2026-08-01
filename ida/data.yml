@@ -9795,6 +9795,11 @@ classes:
       72: GetBoundingSphereImpl
     funcs:
       0x1406FA1B0: IsPrimaryReady
+  Client::LayoutEngine::CompactTransform:
+    funcs:
+      0x14076C000: SetTransform # (Client::LayoutEngine::CompactTransform* this, Client::LayoutEngine::Transform* a2) -> void 
+      0x14076A0F0: GetTransform # (Client::LayoutEngine::CompactTransform* this, Client::LayoutEngine::Transform* a2) -> void 
+      0x140769DD0: GetRotation # (Client::LayoutEngine::CompactTransform* this, Common::Math::Quaternion* a2) -> void
   Client::LayoutEngine::LayoutWorld:
     instances:
       - ea: 0x142A82AD0
