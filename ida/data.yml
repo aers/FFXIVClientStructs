@@ -3632,6 +3632,7 @@ classes:
       - ea: 0x1421BA2B8
     funcs:
       0x140C27C10: GetPenaltyRemainingInMinutes
+      0x140C28280: ProcessSpectatorListPacket
       0x140C29720: GetContentInterface
       0x140C2A5A0: IsRouletteIncomplete
   Client::Game::UI::GuildOrderReward:
@@ -6587,6 +6588,7 @@ classes:
       0x140B485E0: HandleDeepDungeonPartyInfoPacket
       0x140B48620: HandleDeepDungeonChestInfoPacket
       0x140B48660: HandleDeepDungeonBlacklistPacket
+      0x140B48840: HandleSpectatorListPacket
       0x140B497B0: HandlePrepareZoningPacket
       0x140B49CB0: HandleMapEffectPacket
       0x140B4A290: HandleQuestManagerUnkArray2SecondHalfPacket
