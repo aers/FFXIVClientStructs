@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
@@ -207,6 +208,17 @@ public unsafe partial struct RaptureGearsetModule {
     /// <param name="gearsetName">The name of the gearset.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? B3"), GenerateStringOverloads]
     public partial void ShowLogMessage(uint logMessageId, int gearsetId, CStringPointer gearsetName);
+
+    /// <summary>
+    /// Check whether an inventory item instance is registered to a gearset slot.
+    /// </summary>
+    /// <param name="item">Inventory item to check.</param>
+    /// <param name="itemRow">Optional Item sheet row. Looked up from <paramref name="item"/> when null and <paramref name="equipSlotIndex"/> is 14.</param>
+    /// <param name="equipSlotIndex">Gearset item slot index (<see cref="GearsetItemIndex"/>), or <c>14</c> to resolve from the item's EquipSlotCategory.</param>
+    /// <remarks>Used for the gearset mark on inventory item icons.</remarks>
+    // in lua this is IsRegistEquipItem
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 4C 24 ?? 84 C0 4C 8B 5E 28")]
+    public partial bool IsItemRegisteredToGearset(InventoryItem* item, [CExporterExcel("Item")] void* itemRow = null, int equipSlotIndex = 14);
 
     [Flags]
     public enum GearsetFlag : byte {

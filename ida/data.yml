@@ -11463,6 +11463,7 @@ classes:
       0x1407F25F0: TryGetIdFromIndex
       0x1407F27B0: RenameGearset
       0x1407F2920: FindGearsetIdByName
+      0x1407F3270: IsItemRegisteredToGearset
       0x1407F3770: FirstEmptyGearsetSlot
       0x1407F5A90: ShowLogMessage
   Client::UI::Misc::ItemFinderModule:
