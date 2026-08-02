@@ -136,8 +136,8 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(160)] public partial ??? ToggleUi_2(???);
     [VirtualFunction(162)] public partial void LoadScreenHideUi(WarpType warpType);
     [VirtualFunction(163)] public partial void LoadScreenShowUi(WarpType warpType, bool a3, bool a4);
-    // [VirtualFunction(165)] public partial ??? AnnounceHowTo(???);
-    // [VirtualFunction(167)] public partial ??? HideHowTo(???);
+    [VirtualFunction(165)] public partial void AnnounceHowTo(uint howToId, HowToOpenType openType = HowToOpenType.HowTo);
+    [VirtualFunction(167)] public partial void HideHowTo();
     [VirtualFunction(169)] public partial void ShowFateReward(FateRewardPacket* packet, FateRewardPacket.ItemReward* items, uint itemCount);
     [VirtualFunction(170)] public partial void HideFateReward();
     /// <summary> Opens a Gold Saucer reward popup. </summary>

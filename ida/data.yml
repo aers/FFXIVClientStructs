@@ -12937,6 +12937,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1410154C0: ctor
+      0x141015570: ShowNotice
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
       - ea: 0x1421EE568
