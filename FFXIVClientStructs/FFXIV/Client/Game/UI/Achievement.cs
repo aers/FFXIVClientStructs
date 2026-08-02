@@ -1,7 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Achievement
+//   Client::Game::ServerRequestCallbackInterface
 [GenerateInterop]
+[Inherits<ServerRequestCallbackInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x848)]
 public unsafe partial struct Achievement {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30 FF C3", 3)]

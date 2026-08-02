@@ -1,8 +1,10 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::CSBonusManager
+//   Client::Game::ServerRequestCallbackInterface
 // Manager for Moogle Tresure Trove / MogMog Collection / Mogpendium
 [GenerateInterop]
+[Inherits<ServerRequestCallbackInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct CSBonusManager {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0", 3, isPointer: true)]

@@ -1911,7 +1911,10 @@ classes:
       0x140843B30: GetInstance
       0x140843B40: ctor
       0x140843BE0: dtor
-      0x140843C50: Request # (this, callbackInterface, commandId, arg1, arg2)
+      0x140843C50: RequestSimple
+      0x140843C90: Request
+      0x140843FD0: RegisterCallback
+      0x140844170: ProcessPacket
   Client::Game::ContentsReplayManager:
     instances:
       - ea: 0x142A77778
@@ -17340,6 +17343,8 @@ classes:
     vtbls:
       - ea: 0x1421C2B38
         base: Client::Game::Event::LuaEventHandler
+      - ea: 0x1421C3448
+        base: Client::Game::ServerRequestCallbackInterface
     funcs:
       0x140DEED00: ctor
       0x140DEEF80: Finalizer
