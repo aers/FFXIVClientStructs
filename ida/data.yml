@@ -2369,7 +2369,7 @@ classes:
       0x140B18F60: GetIsCustomTalkActive
       0x140B18F70: SetCustomTalkActive
       0x140B18F80: UnsetCustomTalkActive
-  Client::Game::CustomTodoManager: # Studium Deliveries
+  Client::Game::QuestCustomTodoManager: # Studium Delivery, MKDRelicGrowth
     vtbls:
       - ea: 0x14230EAF0
         base: Client::Game::ServerRequestCallbackInterface
@@ -2381,6 +2381,12 @@ classes:
       0x1419729D0: HasInstance
       0x1419729F0: Initialize
       0x141972A70: Destroy
+      0x141972AB0: ClearAllQuests
+      0x141972BF0: ReceiveQuestValues8
+      0x141972CA0: ReceiveQuestValues16
+      0x141972B50: RequestValues
+      0x141973480: IsComplete
+      0x141973900: GetProgress
   Client::Game::QuestRecompleteManager: # Seasonal Event Replay
     instances:
       - ea: 0x142ADD688
@@ -17348,6 +17354,8 @@ classes:
     funcs:
       0x140DEED00: ctor
       0x140DEEF80: Finalizer
+      0x140DF52E0: LoadCustomTodoValues
+      0x140DF53A0: ClearCustomTodoValues
       0x140DFBFD0: IsTodoChecked
       0x140DFC090: GetTodoArgs
       0x140DFEF10: OnQuestRowRead

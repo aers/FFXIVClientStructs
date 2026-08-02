@@ -42,6 +42,10 @@ public unsafe partial struct QuestEventHandler {
     [FieldOffset(0x494)] public uint IconSpecial;
     [FieldOffset(0x498)] public byte DailyQuestPool;
 
+    [FieldOffset(0x5B2), FixedSizeArray] internal FixedSizeArray7<ushort> _customTodoValues;
+    [FieldOffset(0x5C0)] public byte CustomTodoMaxedValueCount;
+    [FieldOffset(0x5C1)] public bool CustomTodoValuesLoaded;
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6C 24 ?? 44 3B FD")]
     public partial void GetTodoArgs(BattleChara* localPlayer, byte idx, uint* arg0, uint* arg1, uint* arg2);
 
