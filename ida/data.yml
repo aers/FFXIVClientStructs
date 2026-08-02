@@ -4293,6 +4293,7 @@ classes:
       0x142084B50: Finalizer
     vfuncs:
       0: dtor
+      1: Finish
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x14211ED90
