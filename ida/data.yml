@@ -14215,6 +14215,8 @@ classes:
     vtbls:
       - ea: 0x1421BFF58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D62EC0: UpdateAddonVisibility
   Client::UI::Agent::AgentAquarium:
     vtbls:
       - ea: 0x1421ED3B0
