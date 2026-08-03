@@ -96,6 +96,9 @@ public unsafe partial struct PacketDispatcher {
     [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B 4B")]
     public static partial void HandleMapEffectPacket(MapEffectPacket* packet);
 
+    [MemberFunction("4C 8D 89 ?? ?? ?? ?? 48 8B D1")]
+    public static partial void HandleAchievementsPacket(AchievementsPacket* packet);
+
     [VirtualFunction(1)]
     public partial void OnReceivePacket(uint targetId, nint packet);
 }
