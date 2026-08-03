@@ -27,6 +27,11 @@ public unsafe partial struct Achievement {
 
     // [FieldOffset(0x616), FixedSizeArray] internal FixedSizeArray479<byte> _completedItemBarterWarningAchievements; // unsure, currently only for Phantom weapons?!
 
+    /// <summary> Requests <see cref="CompletedAchievementsBitArray"/> </summary>
+    /// <remarks> The reply comes from <see cref="Client.Network.PacketDispatcher.HandleAchievementsPacket(Network.AchievementsPacket*)"/> </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C3 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 20 5F C3 83 F8 02")]
+    public partial void RequestCompletedAchievements();
+
     /// <summary> Requests Achievement Progress from the server. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43")]
     public partial void RequestAchievementProgress(uint id);
