@@ -14679,13 +14679,33 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::UI::PvPProfile
-- type: Client::Game::UI::QuestTodoList
-  name: QuestTodoList
+- type: Client::Game::UI::QuestTodoList::TrackedQuest::LevelEntry
+  name: LevelEntry
   namespace: Client.Game.UI
   union: False
-  size: 1088
-  fields: []
-  virtual_functions: []
+  size: 28
+  fields:
+  - type: unsigned int
+    name: PlaceNameId
+    offset: 0
+  - type: unsigned int
+    name: LevelId
+    offset: 4
+  - type: float
+    name: X
+    offset: 8
+  - type: float
+    name: Y
+    offset: 12
+  - type: float
+    name: Z
+    offset: 16
+  - type: float
+    name: Radius
+    offset: 20
+  - type: unsigned int
+    name: Icon
+    offset: 24
   member_functions: []
 - type: Client::Game::UI::QuestUI
   name: QuestUI
@@ -34923,6 +34943,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::Game::UI::QuestTodoList::TrackedQuest>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::UI::QuestTodoList::TrackedQuest*
+    name: First
+    offset: 0
+  - type: Client::Game::UI::QuestTodoList::TrackedQuest*
+    name: Last
+    offset: 8
+  - type: Client::Game::UI::QuestTodoList::TrackedQuest*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::Game::UI::TeleportInfo>
   name: StdVector`1
   namespace: ''
@@ -42234,6 +42269,19 @@ structs:
       name: valueCount
     - type: unsigned __int64
       name: eventKind
+  member_functions: []
+- type: Client::Game::UI::QuestTodoList::TodoStruct
+  name: TodoStruct
+  namespace: Client.Game.UI
+  union: False
+  size: 552
+  fields:
+  - type: byte
+    name: Unk20C
+    offset: 524
+  - type: StdVector<Client::Game::UI::QuestTodoList::TrackedQuest>
+    name: TrackedQuests
+    offset: 528
   member_functions: []
 - type: Client::Game::UI::RecipeNote
   name: RecipeNote
@@ -64506,6 +64554,114 @@ structs:
     name: InstanceId
     offset: 32
   member_functions: []
+- type: Client::Game::UI::QuestTodoList
+  name: QuestTodoList
+  namespace: Client.Game.UI
+  union: False
+  size: 1088
+  fields:
+  - type: Client::Game::UI::QuestTodoList::TodoStruct
+    name: Todo
+    offset: 168
+  - type: int
+    name: PendingGatheringLeveRowIdIndex
+    offset: 828
+  - type: Common::Component::Excel::ExcelSheet*
+    name: QuestSheet
+    offset: 832
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: QuestSheetWaiter
+    offset: 840
+  - type: Common::Component::Excel::ExcelSheet*
+    name: LeveSheet
+    offset: 848
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: LeveSheetWaiter
+    offset: 856
+  - type: Common::Component::Excel::ExcelSheet*
+    name: CraftLeveSheet
+    offset: 864
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: CraftLeveSheetWaiter
+    offset: 872
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ItemSheet
+    offset: 880
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: ItemSheetWaiter
+    offset: 888
+  - type: Common::Component::Excel::ExcelSheet*
+    name: GatheringLeveSheet
+    offset: 896
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: GatheringLeveSheetWaiter
+    offset: 904
+  - type: Common::Component::Excel::ExcelSheet*
+    name: FishingSpotSheet
+    offset: 912
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: FishingSpotSheetWaiters
+    offset: 920
+    size: 10
+    is_string: False
+  - type: Common::Component::Excel::ExcelSheet*
+    name: SpearfishingNotebookSheet
+    offset: 1000
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: SpearfishingNotebookSheetWaiters
+    offset: 1008
+    size: 10
+    is_string: False
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::UI::QuestTodoList::TrackedQuest::QuestObjective
+  name: QuestObjective
+  namespace: Client.Game.UI
+  union: False
+  size: 496
+  fields:
+  - type: char
+    name: IsTodoChecked
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Objective
+    offset: 8
+  - type: unsigned int
+    name: Sequence
+    offset: 112
+  - type: Client::System::String::Utf8String
+    name: ProgressText
+    offset: 120
+  - type: int
+    name: TodoArg0
+    offset: 224
+  - type: int
+    name: TodoArg1
+    offset: 228
+  - type: unsigned int
+    name: TerritoryTypeId
+    offset: 232
+  - type: unsigned int
+    name: MapId
+    offset: 236
+  - type: unsigned int
+    name: PlaceNameZoneId
+    offset: 240
+  - type: Client::Game::UI::QuestTodoList::TrackedQuest::LevelEntry
+    name: LevelEntries
+    offset: 244
+    size: 8
+    is_string: False
+  - type: unsigned int
+    name: QuestClassJob
+    offset: 480
+  - type: int
+    name: TodoArg2
+    offset: 484
+  - type: byte
+    name: ToDoParamCountableNum
+    offset: 488
+  member_functions: []
 - type: Client::Game::UI::TeleportInfo
   name: TeleportInfo
   namespace: Client.Game.UI
@@ -86598,6 +86754,74 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  member_functions: []
+- type: Client::Game::UI::QuestTodoList::TrackedQuest
+  name: TrackedQuest
+  namespace: Client.Game.UI
+  union: False
+  size: 12232
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Id
+    offset: 104
+  - type: byte
+    name: Sequence
+    offset: 208
+  - type: unsigned __int16
+    name: QuestId
+    offset: 210
+  - type: int
+    name: UnkD4
+    offset: 212
+  - type: unsigned int
+    name: IconId
+    offset: 216
+  - type: int
+    name: ObjectivesCount
+    offset: 224
+  - type: Client::Game::UI::QuestTodoList::TrackedQuest::QuestObjective
+    name: Objectives
+    offset: 232
+    size: 24
+    is_string: False
+  - type: int
+    name: CurrentObjective
+    offset: 12152
+  - type: int
+    name: Unk2F7C
+    offset: 12156
+  - type: int
+    name: LeveDataId
+    offset: 12160
+  - type: int
+    name: LeveAssignmentType
+    offset: 12164
+  - type: int
+    name: LeveFishingSpot
+    offset: 12168
+  - type: int
+    name: LeveSpearfishingNotebook
+    offset: 12172
+  - type: unsigned int
+    name: ItemIds
+    offset: 12176
+    size: 8
+    is_string: False
+  - type: int
+    name: ItemCount
+    offset: 12212
+  - type: unsigned int
+    name: LeveLevemeteLevel
+    offset: 12216
+  - type: int
+    name: LevelPlaceNameStartZone
+    offset: 12220
+  - type: unsigned __int16
+    name: ClassJobLevel
+    offset: 12224
   member_functions: []
 - type: Client::Game::UI::RecipeNote::RecipeEntry
   name: RecipeEntry
