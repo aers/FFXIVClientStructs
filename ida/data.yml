@@ -12842,6 +12842,7 @@ classes:
     funcs:
       0x140F35140: ctor
       0x140F35250: OpenForItemId
+      0x140F35C90: UpdateFishList
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x1421EED68
