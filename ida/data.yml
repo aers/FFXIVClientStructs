@@ -20,6 +20,8 @@ globals:
   0x1428860B0: g_LanguageCharArr # byte[] no pointer
   0x1428884E8: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x1428885E0: g_GlobalUIScale
+  0x1428A40D0: g_BoneSimulatorFrameRate # 60FPS, used as a divisor in BoneSimulator calculations
+  0x1428A40D4: g_ForceOverrideSimulationTime # BonePhysicsModule.GetForceOverrideSimulationTime
   0x1428B5C78: g_StackCookie
   0x1428B5C70: g_InverseStackCookie
   0x1428D1CF8: g_stdout
