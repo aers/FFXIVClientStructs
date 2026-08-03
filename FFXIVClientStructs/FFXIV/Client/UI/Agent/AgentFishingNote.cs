@@ -18,7 +18,7 @@ public unsafe partial struct AgentFishingNote {
     [FieldOffset(0x150)] private int Unk150;
     [FieldOffset(0x154)] public ushort ViewingPlaceNameRegionId;
     [FieldOffset(0x156)] public ushort ViewingPlaceNameId;
-    [FieldOffset(0x158)] private ushort UnkOpenParam2;
+    [FieldOffset(0x158)] private ushort Unk158;
 
     [FieldOffset(0x15A)] public ushort CurrentTerritoryPlaceNameRegionId;
     [FieldOffset(0x15C)] public ushort CurrentTerritoryPlaceNameId;
@@ -38,9 +38,9 @@ public unsafe partial struct AgentFishingNote {
         [FieldOffset(0x04)] public bool IsUpdated;
         [FieldOffset(0x05)] public bool IsCaught;
         [FieldOffset(0x06)] public ushort GatheringSubCategoryId;
-        [FieldOffset(0x08)] private byte Unk8;
-        [FieldOffset(0x09)] private byte Unk9;
-        [FieldOffset(0x0A)] private byte UnkA;
+        [FieldOffset(0x08)] private byte Unk08;
+        [FieldOffset(0x09)] private byte Unk09;
+        [FieldOffset(0x0A)] private byte Unk0A;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x06)]
