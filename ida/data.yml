@@ -11869,6 +11869,7 @@ classes:
       0x140908960: IsWanderer # World Visit
       0x1409089B0: IsTraveler # Data Center Travel
       0x140908A00: IsVoyager  # Cross-region Data Center Travel
+      0x140908A90: SetTransformationNameId
       0x14090D960: GetSoundVolumeCategory
       0x140909080: DetermineSoundVolumeCategory
       0x14090D450: SetTargetId
