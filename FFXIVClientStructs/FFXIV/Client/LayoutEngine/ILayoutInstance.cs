@@ -299,7 +299,7 @@ public enum InstanceType : byte {
     CullingBox = 90,
     Unk91 = 91,
     Unk92 = 92,
-    Unk93 = 93,
+    VolumetricCloud = 93,
 
     [Obsolete("Renamed to CullingBox")]
     Culling = 90,
