@@ -14,13 +14,30 @@ public unsafe partial struct AgentTelepotTown {
     public partial void TeleportToAetheryte(byte index);
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xDFB0)]
-public struct AgentTelepotTownData {
-    [FieldOffset(0x4)] public byte CurrentAetheryte; // the one you're standing at
+public unsafe partial struct AgentTelepotTownData {
+    [FieldOffset(0x08)] public byte CurrentAetheryte; // index of the aetheryte currently stood at
+    [FieldOffset(0x09)] public byte AetheryteCount;   // number of aethernet entries
 
-    [FieldOffset(0x8)] public byte AetheryteCount;
+    [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray64<AetheryteEntry> _entries;
 
-    [FieldOffset(0x70E)] public byte SelectedAetheryte;
+    [FieldOffset(0x70E)] public byte SelectedAetheryte; // index selected in the aethernet list
+    [FieldOffset(0x710)] public uint Flags;
+}
 
-    [FieldOffset(0x710)] public byte Flags;
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public struct AetheryteEntry {
+    [FieldOffset(0x00)] public uint AetheryteID;
+    [FieldOffset(0x04)] private uint Unk04;
+    [FieldOffset(0x08)] public ushort PlaceNameID;
+    [FieldOffset(0x0A)] private ushort Unk0A;
+    [FieldOffset(0x0C)] private uint Unk0C;
+    [FieldOffset(0x10)] public ushort TerritoryTypeID;
+    [FieldOffset(0x12)] private ushort Unk12;
+    [FieldOffset(0x13)] public bool IsLocked;
+    [FieldOffset(0x14)] private byte Unk14;
+    [FieldOffset(0x15)] public bool IsAetheryte;
+    [FieldOffset(0x16)] public bool IsCurrent;
+    [FieldOffset(0x17)] private byte Unk17;
 }
