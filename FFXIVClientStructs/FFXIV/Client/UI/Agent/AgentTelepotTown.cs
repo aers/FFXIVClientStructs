@@ -34,7 +34,7 @@ public struct AetheryteEntry {
     [FieldOffset(0x0A)] private ushort Unk0A;
     [FieldOffset(0x0C)] private uint Unk0C;
     [FieldOffset(0x10)] public ushort TerritoryTypeID;
-    [FieldOffset(0x12)] private ushort Unk12;
+    [FieldOffset(0x12)] private byte Unk12;
     [FieldOffset(0x13)] public bool IsLocked;
     [FieldOffset(0x14)] private byte Unk14;
     [FieldOffset(0x15)] public bool IsAetheryte;
