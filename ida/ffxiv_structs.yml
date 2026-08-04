@@ -3841,7 +3841,7 @@ enums:
     "CullingBox": 90
     "Unk91": 91
     "Unk92": 92
-    "Unk93": 93
+    "VolumetricCloud": 93
 - type: Client::LayoutEngine::FileLayerGroupInstanceBgPart::Collider
   name: Collider
   underlying: int
@@ -12044,6 +12044,34 @@ structs:
     name: HomeWorldId
     offset: 72
   member_functions: []
+- type: Client::Game::Network::AchievementsPacket
+  name: AchievementsPacket
+  namespace: Client.Game.Network
+  union: False
+  size: 546
+  fields:
+  - type: byte
+    name: CompletedAchievements
+    offset: 0
+    size: 510
+    is_string: False
+  - type: unsigned __int16
+    name: History
+    offset: 510
+    size: 5
+    is_string: False
+  - type: byte
+    name: Unk208
+    offset: 520
+    size: 16
+    is_string: False
+  - type: unsigned __int64
+    name: Unk218
+    offset: 536
+  - type: unsigned __int16
+    name: Unk220
+    offset: 544
+  member_functions: []
 - type: Client::Game::Network::ActorCastPacket
   name: ActorCastPacket
   namespace: Client.Game.Network
@@ -17295,6 +17323,12 @@ structs:
     name: HandleMapEffectPacket
     parameters:
     - type: Client::Game::Network::MapEffectPacket*
+      name: packet
+  - signature: 4C 8D 89 ?? ?? ?? ?? 48 8B D1
+    return_type: void
+    name: HandleAchievementsPacket
+    parameters:
+    - type: Client::Game::Network::AchievementsPacket*
       name: packet
 - type: Client::Sound::ClipSoundManager
   name: ClipSoundManager
@@ -40476,6 +40510,12 @@ structs:
     - type: unsigned __int64
       name: payloadSize
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B C3 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 20 5F C3 83 F8 02
+    return_type: void
+    name: RequestCompletedAchievements
+    parameters:
+    - type: Client::Game::UI::Achievement*
+      name: this
   - signature: E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43
     return_type: void
     name: RequestAchievementProgress
@@ -109479,6 +109519,20 @@ structs:
       name: handle
     - type: unsigned int
       name: resourceIndex
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F 29 74 24 ?? 48 8B FA 48 8B D9
+    return_type: char
+    name: Initialize
+    parameters:
+    - type: Client::Graphics::Physics::BonePhysicsModule*
+      name: this
+    - type: Client::Graphics::Render::Skeleton*
+      name: skeleton
+  static_members:
+  - signature: 38 1D ?? ?? ?? ?? F3 0F 10 3D
+    relative_follow_offsets:
+    - 2
+    is_pointer: False
+    return_type: char
 - type: Client::Graphics::Render::Light
   name: Light
   namespace: Client.Graphics.Render
