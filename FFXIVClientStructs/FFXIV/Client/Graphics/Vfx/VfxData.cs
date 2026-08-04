@@ -5,4 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 //     Apricot::IInstanceListenner
 //   Client::Graphics::Vfx::VfxResourceInstanceListenner
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
-public struct VfxData;
+public unsafe struct VfxData {
+    [FieldOffset(0x1C0)] public VfxDataListenner* DataListenner;
+}

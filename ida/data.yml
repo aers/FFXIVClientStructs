@@ -7538,6 +7538,7 @@ classes:
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
     funcs:
       0x140390A20: Finalizer
+      0x140390AE0: SetVfxDataListenner
   Apricot::Engine::Instance::InstanceBase:
     vtbls:
       - ea: 0x142156388
@@ -11893,6 +11894,8 @@ classes:
       0x14090C8F0: StartOmenDirectional
       0x140898370: GetScale
       0x1408A8DC0: HasStatus
+      0x1408D9360: EnableReaperEyes
+      0x1408D9390: DisableReaperEyes
       0x1408DAED0: IsJumping
       0x140B28ED0: IsInPvP
       0x140615AE0: ResolveTargetedEmoteId # static?
@@ -12083,12 +12086,14 @@ classes:
       0x1408C89A0: CalculateFloatHeight
       0x1408C9820: LoadMountTiltData
       0x1408C9B40: LoadPlayerTiltData
-  Client::Game::Character::ReaperShroudContainer:
+  Client::Game::Character::TransformationContainer:
     vtbls:
       - ea: 0x14218D3D0
         base: Client::Game::Character::ContainerInterface
       - ea: 0x14218D3F8
         base: Client::Graphics::Vfx::VfxDataListenner
+    funcs:
+      0x1408B78B0: SetTransformation
   Client::Game::Character::CharacterData:
     vtbls:
       - ea: 0x14218D2F0
