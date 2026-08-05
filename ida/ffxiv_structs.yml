@@ -253550,6 +253550,12 @@ structs:
     name: NameId
     offset: 9016
   - type: unsigned int
+    name: EventHandlerNameId
+    offset: 9020
+  - type: unsigned int
+    name: TransformationNameId
+    offset: 9024
+  - type: unsigned int
     name: CompanionOwnerId
     offset: 9028
   - type: Client::Game::Object::ObjectType
