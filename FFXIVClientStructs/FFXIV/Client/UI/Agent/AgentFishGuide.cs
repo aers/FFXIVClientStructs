@@ -11,14 +11,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct AgentFishGuide {
     [FieldOffset(0x28)] public uint SelectedItemId;
-    [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray2<TabSelection> _tabSelections; // indexed with TabIndex
+    [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray2<TabSelection> _tabSelections; // indexed with Mode
     [FieldOffset(0x30)] public bool IsSearchTab;
-    [FieldOffset(0x31)] public byte TabIndex; // 0 = Fishing, 1 = Spearfishing
+    [FieldOffset(0x31)] public AgentFishGuideMode Mode;
     [FieldOffset(0x32)] public bool IsSpearfishingUnlocked; // checks quest 2922
 
     [FieldOffset(0x40)] public uint FilterSettingAddonId; // FishGuideFilterSetting
     [FieldOffset(0x44)] public ushort SelectedIndex;
-    /// <remarks> Depending on TabIndex either <see cref="FishGuideData"/>* or <see cref="SpearfishGuideData"/>* </remarks>
+    /// <remarks> Depending on Mode either <see cref="FishGuideData"/>* or <see cref="SpearfishGuideData"/>* </remarks>
     [FieldOffset(0x48)] public FishGuideDataBase* Data;
     [FieldOffset(0x50)] public ushort FilterPlaceNameRegion;
     [FieldOffset(0x52)] public ushort FilterGatheringSubCategory;
@@ -31,11 +31,11 @@ public unsafe partial struct AgentFishGuide {
     [FieldOffset(0x60)] public FishGuideSearchData* SearchData;
 
     [FieldOffset(0x70)] public Utf8String SearchTerm;
-    [FieldOffset(0xD8)] public Utf8String DetailsCategoryTitle1; // Addon#3823, lnum1 is TabIndex
-    [FieldOffset(0x140)] public Utf8String DetailsCategoryTitle2; // Addon#14367, lnum1 is TabIndex
+    [FieldOffset(0xD8)] public Utf8String DetailsCategoryTitle1; // Addon#3823, lnum1 is Mode
+    [FieldOffset(0x140)] public Utf8String DetailsCategoryTitle2; // Addon#14367, lnum1 is Mode
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 C3 33 D2")]
-    public partial void OpenForItemId(uint itemId, bool isSpearfishing); // TODO: isSpearfishing is saved into TabIndex. change to byte?!
+    public partial void OpenForItemId(uint itemId, bool isSpearfishing); // TODO: use AgentFishGuideMode instead of bool
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 48")]
     public partial void UpdateFishList(); // sets entries to NumberArray #67 and then refreshes the icons
@@ -186,4 +186,9 @@ public unsafe partial struct AgentFishGuide {
             [FieldOffset(0x10)] public Utf8String Name;
         }
     }
+}
+
+public enum AgentFishGuideMode : byte {
+    Fishing = 0,
+    Spearfishing = 1,
 }
