@@ -19,6 +19,7 @@ public unsafe partial struct Achievement {
 
     /// <remarks> Last Five Achievement Ids </remarks>
     [FieldOffset(0x20A), FixedSizeArray] internal FixedSizeArray5<ushort> _history;
+    // [FieldOffset(0x214), FixedSizeArray] internal FixedSizeArray32<byte> _unk1FC; // BitArray, index is Achievement.Unknown1 or Unknown2
 
     [FieldOffset(0x230)] public AchievementState ProgressRequestState;
     [FieldOffset(0x234)] public uint ProgressAchievementId;
@@ -35,23 +36,19 @@ public unsafe partial struct Achievement {
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray2<byte> _nearCompletionAchievementRequestFlags;
 
     /// <summary> Set after a near-completion slot has been received, suppressing subsequent first-receipt notifications. </summary>
-    [FieldOffset(0x242), FixedSizeArray] internal FixedSizeArray2<byte> _nearCompletionAchievementReceivedFlags;
+    [FieldOffset(0x242), FixedSizeArray] internal FixedSizeArray2<bool> _nearCompletionAchievementReceivedFlags;
 
     /// <summary> Load state for near-completion slots 0 and 1. </summary>
     [FieldOffset(0x244), FixedSizeArray] internal FixedSizeArray2<AchievementState> _nearCompletionAchievementStates;
 
     /// <summary>
-    /// Near-completion achievement bitmap for the login notification.
+    /// Near-completion achievement bitmaps for the login notification and the Achievement addon's Near Completion page.
     /// </summary>
     /// <remarks>
+    /// Index 0 is the login notification, index 1 is the Achievement addon's Near Completion page.
     /// Controlled by AchievementAppealLoginDisp config.
     /// </remarks>
-    [FieldOffset(0x24C), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _loginNotificationNearCompletionAchievements;
-
-    /// <summary>
-    /// Near-completion achievement bitmap for the Achievement addon's Near Completion page.
-    /// </summary>
-    [FieldOffset(0x44A), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _achievementAddonNearCompletionAchievements;
+    [FieldOffset(0x24C), FixedSizeArray] internal FixedSizeArray2<AchievementBitmap> _nearCompletionAchievementBitmaps;
 
     /// <summary> Used only by ItemBarterWarning rows. </summary>
     /// <remarks>
@@ -118,7 +115,7 @@ public unsafe partial struct Achievement {
 
     /// <summary> Receives near-completion result for a UI slot. </summary>
     [MemberFunction("83 FA ?? 0F 83 ?? ?? ?? ?? 48 89 5C 24 ?? 56 48 83 EC ?? 48 8B D9")]
-    public partial void ReceiveNearCompletionAchievements(NearCompletionAchievementSlot slot, byte* achievementBitmap);
+    public partial void ReceiveNearCompletionAchievements(NearCompletionAchievementSlot slot, AchievementBitmap* achievementBitmap);
 
     /// <summary>
     /// Requests both near-completion result slots.
@@ -131,12 +128,6 @@ public unsafe partial struct Achievement {
     [MemberFunction("48 8B C1 83 FA ?? 73 ?? 8B CA BA")]
     public partial void RequestNearCompletionAchievementSlot(NearCompletionAchievementSlot slot);
 
-    /// <summary>
-    /// Requests selected near-completion result slots
-    /// </summary>
-    [MemberFunction("48 83 EC ?? F6 C2 ?? 74")]
-    public partial void RequestNearCompletionAchievementSlots(NearCompletionAchievementSlotFlags slots);
-
     /// <summary> Check if the achievement data has been "loaded" from the server. </summary>
     /// <remarks>
     /// The achievement data will only load when requested (so, when a player goes into the achievements menu).
@@ -147,6 +138,13 @@ public unsafe partial struct Achievement {
     public bool IsLoaded()
         => State is AchievementState.Loaded;
 
+    /// <summary> A 4078-bit achievement completion bitmap. </summary>
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1FE)]
+    public partial struct AchievementBitmap {
+        [FieldOffset(0x00), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _bits;
+    }
+
     /// <summary> Identifies a near-completion result slot. </summary>
     public enum NearCompletionAchievementSlot : uint {
         /// <summary> Data used by the login notification. </summary>
@@ -154,14 +152,6 @@ public unsafe partial struct Achievement {
 
         /// <summary> Data used by the Achievement addon's Near Completion page. </summary>
         AchievementAddon = 1,
-    }
-
-    /// <summary> Selects one or both near-completion result slots. </summary>
-    [Flags]
-    public enum NearCompletionAchievementSlotFlags : uint {
-        None = 0,
-        LoginNotification = 1 << 0,
-        AchievementAddon = 1 << 1,
     }
 
     /// <summary> Represents the loaded state of Achievement </summary>

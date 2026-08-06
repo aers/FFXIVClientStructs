@@ -3291,7 +3291,7 @@ classes:
       0x140C1A0B0: RequestAchievementProgress
       0x140C1A130: RequestFateProgressTab
       0x140C1A160: HandleFateProgressTabPacket
-      0x140C1A1C0: SetAchievementComplete
+      0x140C1A1C0: SetAchievementCompleted
       0x140C1A340: SetAgentState
       0x140C1A470: GetState
       0x140C1A480: IsComplete
@@ -3310,7 +3310,6 @@ classes:
       0x140C1A8A0: ReceiveNearCompletionAchievements
       0x140C1AA10: RequestAllNearCompletionAchievements
       0x140C1AAE0: RequestNearCompletionAchievementSlot
-      0x140C1AB00: RequestNearCompletionAchievementSlots
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x142AAFDF0
