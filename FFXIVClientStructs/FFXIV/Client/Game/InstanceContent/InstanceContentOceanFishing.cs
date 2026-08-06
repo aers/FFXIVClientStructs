@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
@@ -16,6 +17,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 public unsafe partial struct InstanceContentOceanFishing {
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
+
+    // opcode 10, set in vf173 when WaitingForPlayers
+    [FieldOffset(0x1FA8)] private uint Unk1FA8;
+    [FieldOffset(0x1FAC)] private byte Unk1FAC;
+    // opcode 11,set in vf173 when Finished
+    [FieldOffset(0x1FB0)] private uint Unk1FB0;
+    [FieldOffset(0x1FB4)] private byte Unk1FB4;
 
     // Row ID for IKDRoute sheet
     // Each zone (and their time of day) can be extracted from sheet
@@ -35,6 +43,8 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x1FCC)] public uint WeatherId;
 
     [FieldOffset(0x1FD0)] public bool SpectralCurrentActive;
+
+    [FieldOffset(0x1FD4)] private uint FestivalId; // opcode case 2, something with weather/time. It applies this via ActiveFestivals
 
     // Offset, struct size, and array length can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
     [FieldOffset(0x2024), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;

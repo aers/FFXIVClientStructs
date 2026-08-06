@@ -11480,6 +11480,7 @@ classes:
       0x1407F25F0: TryGetIdFromIndex
       0x1407F27B0: RenameGearset
       0x1407F2920: FindGearsetIdByName
+      0x1407F3270: IsItemRegisteredToGearset
       0x1407F3770: FirstEmptyGearsetSlot
       0x1407F5A90: ShowLogMessage
   Client::UI::Misc::ItemFinderModule:
@@ -11881,8 +11882,8 @@ classes:
 #oldfail       0x140871200: ClearOmenVfx
       0x1409083D0: SetMode
       0x1409051B0: Finalizer
-#oldfail       0x1408B3290: ForceMovementTo
-#oldfail       0x1408B1FA0: ForceMovement
+      0x14090A6A0: ForceMovementTo
+      0x14090A8B0: ForceMovement
       0x14090AB70: UpdateMovement
       0x14090B110: CompleteCast
       0x140908320: IsCastingSpell
@@ -12996,6 +12997,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1410154C0: ctor
+      0x141015570: ShowNotice
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
       - ea: 0x1421EE568

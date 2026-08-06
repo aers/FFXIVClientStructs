@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonRequest
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("Request")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
@@ -20,8 +21,7 @@ public unsafe partial struct AddonRequest {
     [FieldOffset(0x278)] public AtkComponentDragDrop* AtkComponentDragDrop260;
     [FieldOffset(0x280)] public AtkComponentDragDrop* AtkComponentDragDrop268;
     [FieldOffset(0x288)] public AtkComponentDragDrop* AtkComponentDragDrop270;
-    [FieldOffset(0x290)] public AtkComponentButton* HandOverButton;
-
+    [FieldOffset(0x290)] public AtkComponentButton* HandOverButton; // enabled once all request slots are filled
     [FieldOffset(0x298)] public AtkComponentButton* CancelButton;
 
     // These point to the same icon/dragdrop nodes as before
