@@ -13,7 +13,7 @@ public unsafe partial struct AgentFishGuide {
     [FieldOffset(0x28)] public uint SelectedItemId;
     [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray2<TabSelection> _tabSelections; // indexed with TabIndex
     [FieldOffset(0x30)] public bool IsSearchTab;
-    [FieldOffset(0x31)] public bool TabIndex; // 0 = Fishing, 1 = Spearfishing
+    [FieldOffset(0x31)] public byte TabIndex; // 0 = Fishing, 1 = Spearfishing
     [FieldOffset(0x32)] public bool IsSpearfishingUnlocked; // checks quest 2922
 
     [FieldOffset(0x40)] public uint FilterSettingAddonId; // FishGuideFilterSetting
