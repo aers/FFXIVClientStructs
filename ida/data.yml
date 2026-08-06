@@ -12836,6 +12836,43 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F711E0: ctor
+  Client::UI::Agent::AgentFishGuide::FishGuideDataBase:
+    vtbls:
+      - ea: 0x1421EEE08
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140F75C30: ctor
+      0x140FA2940: GetPlaceNameEntry
+  Client::UI::Agent::AgentFishGuide::FishGuideSheetWaiter:
+    vtbls:
+      - ea: 0x1421EEE48
+        base: Common::Component::Excel::ExcelSheetWaiter
+    funcs:
+      0x140F99C00: ctor
+  Client::UI::Agent::AgentFishGuide::FishGuideData:
+    vtbls:
+      - ea: 0x1421EEE58
+        base: Client::UI::Agent::AgentFishGuide::FishGuideDataBase
+    funcs:
+      0x140F770B0: ctor
+  Client::UI::Agent::AgentFishGuide::SpearfishGuideSheetWaiter:
+    vtbls:
+      - ea: 0x1421EEE98
+        base: Common::Component::Excel::ExcelSheetWaiter
+    funcs:
+      0x140F99D40: ctor
+  Client::UI::Agent::AgentFishGuide::SpearfishGuideData:
+    vtbls:
+      - ea: 0x1421EEEA8
+        base: Client::UI::Agent::AgentFishGuide::FishGuideDataBase
+    funcs:
+      0x140F77FC0: ctor
+  Client::UI::Agent::AgentFishGuide::FishGuideSearchData:
+    funcs:
+      0x140F78C20: ctor
+      0x140F78D50: Search
+      0x140FA0690: dtor
   Client::UI::Agent::AgentFishGuide:
     vtbls:
       - ea: 0x1421EDD48
@@ -12843,6 +12880,7 @@ classes:
     funcs:
       0x140F35140: ctor
       0x140F35250: OpenForItemId
+      0x140F35C90: UpdateFishList
   Client::UI::Agent::AgentFishRecord:
     vtbls:
       - ea: 0x1421EED68
