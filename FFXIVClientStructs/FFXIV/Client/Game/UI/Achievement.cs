@@ -15,7 +15,7 @@ public unsafe partial struct Achievement {
     /// Main completion bitmap
     /// This is distinct from the two near-completion result bitmaps and the ItemBarterWarning bitmap.
     /// </summary>
-    [FieldOffset(0x0C), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _completedAchievements;
+    [FieldOffset(0x0C), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _completedAchievements; // TODO: change this to use AchievementBitmap as it is always the same size
 
     /// <remarks> Last Five Achievement Ids </remarks>
     [FieldOffset(0x20A), FixedSizeArray] internal FixedSizeArray5<ushort> _history;
@@ -33,10 +33,10 @@ public unsafe partial struct Achievement {
     /// These slots do not cache or partition <see cref="CompletedAchievements"/>. Each is a separate server-provided
     /// achievement-Id membership bitmap for a different UI lifecycle.
     /// </remarks>
-    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray2<byte> _nearCompletionAchievementRequestFlags;
+    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray2<byte> _nearCompletionAchievementRequests;
 
     /// <summary> Set after a near-completion slot has been received, suppressing subsequent first-receipt notifications. </summary>
-    [FieldOffset(0x242), FixedSizeArray] internal FixedSizeArray2<bool> _nearCompletionAchievementReceivedFlags;
+    [FieldOffset(0x242), FixedSizeArray] internal FixedSizeArray2<bool> _nearCompletionAchievementReceived;
 
     /// <summary> Load state for near-completion slots 0 and 1. </summary>
     [FieldOffset(0x244), FixedSizeArray] internal FixedSizeArray2<AchievementState> _nearCompletionAchievementStates;
@@ -48,7 +48,7 @@ public unsafe partial struct Achievement {
     /// Index 0 is the login notification, index 1 is the Achievement addon's Near Completion page.
     /// Controlled by AchievementAppealLoginDisp config.
     /// </remarks>
-    [FieldOffset(0x24C), FixedSizeArray] internal FixedSizeArray2<AchievementBitmap> _nearCompletionAchievementBitmaps;
+    [FieldOffset(0x24C), FixedSizeArray] internal FixedSizeArray2<AchievementBitmap> _nearCompletionAchievements;
 
     /// <summary> Used only by ItemBarterWarning rows. </summary>
     /// <remarks>
