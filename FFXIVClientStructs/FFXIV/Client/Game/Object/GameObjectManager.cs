@@ -9,6 +9,7 @@ public unsafe partial struct GameObjectManager {
 
     [FieldOffset(0x00)] public uint NextUpdateIndex; // rate limiting for updates per frame
     [FieldOffset(0x04)] public byte Active;
+    [FieldOffset(0x0C)] public int DrawLimitOverride;
     [FieldOffset(0x20)] public ObjectArrays Objects;
     // new in 7.3, used for draw distance
     // [FieldOffset(0x4CF0)] internal float Unk4CF0; // default "819"
