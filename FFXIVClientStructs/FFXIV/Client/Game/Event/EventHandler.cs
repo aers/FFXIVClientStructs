@@ -59,7 +59,7 @@ public unsafe partial struct EventHandler {
     /// </summary>
     /// <param name="parameters">Pointer to seven uints (category, arg1, arg2, arg3, arg4, arg5, arg6).</param>    [VirtualFunction(61)]
     [VirtualFunction(61)]
-    public partial void ProcessDirectorUpdate(uint *parameters);
+    public partial void ProcessDirectorUpdate(uint* parameters);
 
     /// <summary>
     /// Implemented by certain EventHandlers (e.g. GoldSaucerArcadeMachineEventHandler) so they can handle the director update instead.
