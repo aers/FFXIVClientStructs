@@ -427,9 +427,12 @@ public unsafe partial struct CharacterBase {
 
     [Flags]
     public enum StateFlag : ulong {
+        Stealth = 1UL << 4,
         VisorToggled = 1UL << 6,
         VisorChanging = 1UL << 7,
+        ShadowsDisabled = 1UL << 12,
         HasUmbrella = 1UL << 16,
+        ReaperEyes = 1UL << 24,
         VieraEarsHidden = 1UL << 31,
         VieraEarsChanging = 1UL << 32
     }
