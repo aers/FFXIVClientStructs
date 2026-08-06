@@ -19576,13 +19576,19 @@ classes:
       0x140BBBDC0: GetMKDData # static
       0x140BBBE10: IsChainTarget # static
       0x140BBBF30: ChangeSupportJob # static
-#fail       0x141661790: ctor
+      0x140BBD450: ctor
   Client::Game::InstanceContent::PublicContentSouthHorn:
     vtbls:
       - ea: 0x1421B66D8
         base: Client::Game::InstanceContent::PublicContentOccultCrescent
     funcs:
-#fail       0x141662FC0: ctor
+      0x140BBED40: ctor
+  Client::Game::InstanceContent::PublicContentNorthHorn:
+    vtbls:
+      - ea: 0x1421B7348
+        base: Client::Game::InstanceContent::PublicContentOccultCrescent
+    funcs:
+      0x140BBEF00: ctor
   Client::Game::MassivePcContent::MassivePcContentDirector:
     vtbls:
       - ea: 0x1423BB208
