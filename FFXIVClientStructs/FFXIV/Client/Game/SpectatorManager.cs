@@ -37,7 +37,7 @@ public unsafe partial struct SpectatorManager {
 
     /// <summary> Changes an internal flag to tell the spectator UI to show itself. </summary>
     [MemberFunction("40 53 48 83 EC ?? 80 A1 ?? ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 80 8B")]
-    public partial void ShowSpectatorUI();
+    public partial void ShowSpectatorUI(float a2);
 
     /// <summary> Used by AgentPvPSpectator to check if the regular PvP spectator UI should be visible. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 83 ?? ?? ?? ?? 41 B0")]
