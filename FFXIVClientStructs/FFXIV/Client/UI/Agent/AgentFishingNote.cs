@@ -29,7 +29,7 @@ public unsafe partial struct AgentFishingNote {
 
     [FieldOffset(0x164)] public byte FishSlotCount;
     [FieldOffset(0x165)] public bool FishSlotsDirty; // rebuilds NumberArray/StringArray rows based on _fishSlots
-    [FieldOffset(0x166)] public bool IsSpearfishing;
+    [FieldOffset(0x166)] public byte TabIndex; // 0 = Fishing, 1 = Spearfishing
     [FieldOffset(0x167)] public bool HasCurrentTerritoryInfo;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
