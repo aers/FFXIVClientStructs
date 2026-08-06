@@ -39,7 +39,7 @@ public unsafe partial struct Achievement {
     [FieldOffset(0x244), FixedSizeArray] internal FixedSizeArray2<AchievementState> _nearCompletionAchievementStates;
 
     /// <summary>
-    /// Near-completion achievement membership bitmap for the login notification.
+    /// Near-completion achievement bitmap for the login notification.
     /// </summary>
     /// <remarks>
     /// Controlled by AchievementAppealLoginDisp config.
@@ -47,7 +47,7 @@ public unsafe partial struct Achievement {
     [FieldOffset(0x24C), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _loginNotificationNearCompletionAchievements;
 
     /// <summary>
-    /// Near-completion achievement membership bitmap for the Achievement addon's Near Completion page.
+    /// Near-completion achievement bitmap for the Achievement addon's Near Completion page.
     /// </summary>
     [FieldOffset(0x44A), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _achievementAddonNearCompletionAchievements;
 
@@ -63,16 +63,13 @@ public unsafe partial struct Achievement {
     [MemberFunction("E8 ?? ?? ?? ?? 8B C3 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 83 F8")]
     public partial bool RequestCompletedAchievements();
 
-    /// <summary> Requests Achievement Progress from the server. </summary>
+    /// <summary> Requests Achievement Progress from the server </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43")]
     public partial void RequestAchievementProgress(uint achievementID);
 
-    /// <summary> Requests data for a FATE progress tab.</summary>
+    /// <summary> Requests data for a FATE progress tab </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 54 24 ?? C6 86")]
     public partial bool RequestFateProgressTab(byte tabIndex);
-
-    [MemberFunction("E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 80 39")]
-    public partial void HandleFateProgressTabPacket(void* packet);
 
     /// <summary> Receives Achievement Progress requested with <see cref="RequestAchievementProgress"/>. </summary>
     [MemberFunction("C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 44 89 81")]
