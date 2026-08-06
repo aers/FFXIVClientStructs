@@ -69,7 +69,7 @@ public unsafe partial struct Achievement {
 
     /// <summary> Requests Achievement Progress from the server </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43")]
-    public partial void RequestAchievementProgress(uint achievementID);
+    public partial void RequestAchievementProgress(uint id);
 
     /// <summary> Requests data for a FATE progress tab </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 54 24 ?? C6 86")]
