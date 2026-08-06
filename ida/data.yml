@@ -20,6 +20,8 @@ globals:
   0x1428860B0: g_LanguageCharArr # byte[] no pointer
   0x1428884E8: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x1428885E0: g_GlobalUIScale
+  0x1428A40D0: g_BoneSimulatorFrameRate # 60FPS, used as a divisor in BoneSimulator calculations
+  0x1428A40D4: g_ForceOverrideSimulationTime # BonePhysicsModule.GetForceOverrideSimulationTime
   0x1428B5C78: g_StackCookie
   0x1428B5C70: g_InverseStackCookie
   0x1428D1CF8: g_stdout
@@ -1911,7 +1913,10 @@ classes:
       0x140843B30: GetInstance
       0x140843B40: ctor
       0x140843BE0: dtor
-      0x140843C50: Request # (this, callbackInterface, commandId, arg1, arg2)
+      0x140843C50: RequestSimple
+      0x140843C90: Request
+      0x140843FD0: RegisterCallback
+      0x140844170: ProcessPacket
   Client::Game::ContentsReplayManager:
     instances:
       - ea: 0x142A77778
@@ -2366,7 +2371,7 @@ classes:
       0x140B18F60: GetIsCustomTalkActive
       0x140B18F70: SetCustomTalkActive
       0x140B18F80: UnsetCustomTalkActive
-  Client::Game::CustomTodoManager: # Studium Deliveries
+  Client::Game::QuestCustomTodoManager: # Studium Delivery, MKDRelicGrowth
     vtbls:
       - ea: 0x14230EAF0
         base: Client::Game::ServerRequestCallbackInterface
@@ -2378,6 +2383,12 @@ classes:
       0x1419729D0: HasInstance
       0x1419729F0: Initialize
       0x141972A70: Destroy
+      0x141972AB0: ClearAllQuests
+      0x141972BF0: ReceiveQuestValues8
+      0x141972CA0: ReceiveQuestValues16
+      0x141972B50: RequestValues
+      0x141973480: IsComplete
+      0x141973900: GetProgress
   Client::Game::QuestRecompleteManager: # Seasonal Event Replay
     instances:
       - ea: 0x142ADD688
@@ -7561,8 +7572,13 @@ classes:
         base: Client::Graphics::Vfx::VfxResourceInstanceListenner
     funcs:
       0x14045A5D0: ctor
-      0x140799410: Create
       0x14045C970: Update
+      0x14045CBB0: SetColor
+      0x14045CBF0: SetFadeFarEnd
+      0x14045CC00: SetFadeRange
+      0x14045CC40: SetZCorrect
+      0x14045CC50: SetSoftParticleFadeRange
+      0x140799410: Create
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x1421632A8
@@ -9445,13 +9461,15 @@ classes:
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
       44: GetAddonStatus
-      45: SetAddonDepthLayer
-      58: InitializeHud
-      60: Update
-      62: IsUISceneGameMain
-      63: GetColorThemeTypeForUIScene
-      65: OpenMapWithMapLink
-      74: SetScreenSizeScale
+      45: IsAddonFocused
+      47: SetAddonDepthLayer
+      59: InitializeHud
+      61: Update
+      63: IsUISceneGameMain
+      64: GetColorThemeTypeForUIScene
+      66: OpenMapWithMapLink
+      67: OnCursorTypeChange
+      75: SetScreenSizeScale
     funcs:
       0x1406A8D20: GetAddonIdByName
       0x1406AACA0: ctor
@@ -9789,6 +9807,8 @@ classes:
       36: IsColliderActive
       37: SetColliderActive
       38: UpdateCollider
+      45: GetColor
+      46: SetColor
       55: WantToBeActive
       58: ApplyStain
       63: SetActive
@@ -9803,6 +9823,11 @@ classes:
       72: GetBoundingSphereImpl
     funcs:
       0x1406FA1B0: IsPrimaryReady
+  Client::LayoutEngine::CompactTransform:
+    funcs:
+      0x14076C000: SetTransform # (Client::LayoutEngine::CompactTransform* this, Client::LayoutEngine::Transform* a2) -> void 
+      0x14076A0F0: GetTransform # (Client::LayoutEngine::CompactTransform* this, Client::LayoutEngine::Transform* a2) -> void 
+      0x140769DD0: GetRotation # (Client::LayoutEngine::CompactTransform* this, Common::Math::Quaternion* a2) -> void
   Client::LayoutEngine::LayoutWorld:
     instances:
       - ea: 0x142A82AD0
@@ -9946,6 +9971,12 @@ classes:
     vtbls:
       - ea: 0x1421777D0
         base: Client::LayoutEngine::ILayoutInstance
+    vfuncs:
+      78: GetQuantizedPosition
+      79: GetBaseId
+      80: GetNameId
+      81: GetObjectIndex
+      82: GetCharacter
   Client::LayoutEngine::Layer::GameObjectLayoutInstance:
     vtbls:
       - ea: 0x142177FC8
@@ -10384,6 +10415,8 @@ classes:
       167: HideHowTo
       169: ShowFateReward
       170: HideFateReward
+      173: ShowGoldSaucerReward
+      174: HideGoldSaucerReward
       176: ShowHousingHarvest
       178: OpenMiniGame
       179: HideHousingHarvest
@@ -11853,6 +11886,7 @@ classes:
       0x140908960: IsWanderer # World Visit
       0x1409089B0: IsTraveler # Data Center Travel
       0x140908A00: IsVoyager  # Cross-region Data Center Travel
+      0x140908A90: SetTransformationNameId
       0x14090D960: GetSoundVolumeCategory
       0x140909080: DetermineSoundVolumeCategory
       0x14090D450: SetTargetId
@@ -12657,7 +12691,6 @@ classes:
       0x140900D20: ShowLogMessage # static
       0x140901710: ApplyAll # static
       0x140901840: Receive # static
-      0x1409022F0: ConvertQuantizedPosToFloat # static
   Client::Game::Character::MJILivelyActor:
     vtbls:
       - ea: 0x1423F4AA0
@@ -16256,6 +16289,7 @@ classes:
       59: ProcessFormatStringCallback
       60: ProcessActionTimelineCallback
       61: ProcessDirectorUpdate
+      62: ProcessEventSpecificDirectorUpdate
       70: CancelByPlayerMovement
       76: ProcessListenItemCallback
       159: CancelInteraction
@@ -17336,9 +17370,13 @@ classes:
     vtbls:
       - ea: 0x1421C2B38
         base: Client::Game::Event::LuaEventHandler
+      - ea: 0x1421C3448
+        base: Client::Game::ServerRequestCallbackInterface
     funcs:
       0x140DEED00: ctor
       0x140DEEF80: Finalizer
+      0x140DF52E0: LoadCustomTodoValues
+      0x140DF53A0: ClearCustomTodoValues
       0x140DFBFD0: IsTodoChecked
       0x140DFC090: GetTodoArgs
       0x140DFEF10: OnQuestRowRead
@@ -18220,6 +18258,7 @@ classes:
     vfuncs:
       303: GetCurrentLevel
       304: GetMaxLevel
+      325: ProcessDirectorSpecificDirectorUpdate
       329: GetContentTimeMax
       330: GetContentTypeIconId
       335: SetExperience
@@ -18228,6 +18267,7 @@ classes:
       0x140B702C0: ApplyMapEffect
       0x140B70130: PlayMapEffectTimeline
       0x140B71240: IsPlayCutscene
+      0x140B6EF90: ProcessCommonDirectorUpdate
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x142313930
@@ -18235,6 +18275,8 @@ classes:
       - ea: 0x1423145E0
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
+      380: DispatchContentSpecificDirectorUpdate
+      381: ProcessContentSpecificDirectorUpdate
       403: HandleGMCommand
     funcs:
       0x1419A8DD0: ctor
@@ -19351,6 +19393,9 @@ classes:
     vtbls:
       - ea: 0x1421A93E0
         base: Client::Game::InstanceContent::ContentDirector
+    vfuncs:
+      373: DispatchContentSpecificDirectorUpdate
+      374: ProcessContentSpecificDirectorUpdate
     funcs:
       0x140BB0EE0: ctor
       0x140BB1690: OnEndCutscene
@@ -19475,9 +19520,11 @@ classes:
       312: SetAdditionalTodoLargeBlueText
       313: SetAdditionalTodoLargeGrayText
       314: SetAdditionalTodoJoinButton
+      325: ProcessDirectorSpecificDirectorUpdate
       334: ClearAdditionalTodo
     funcs:
       0x141A1E7F0: ctor
+      0x141A20360: ProcessCommonDirectorUpdate
       0x141A24240: IsPlayCutscene
       0x141A24310: OnEndCutscene
       0x141A243E0: OnFinishCutscene
@@ -27464,6 +27511,20 @@ classes:
     vtbls:
       - ea: 0x142115A68
         base: Client::System::Memory::IMemorySpace
+  Common::Math::QuantizedPositionValue:
+    funcs:
+      0x140B4FF10: Dequantize
+  Common::Math::QuantizedAngleValue:
+    funcs:
+      0x140B4FF40: Dequantize
+  Common::Math::QuantizedVector3:
+    funcs:
+      0x1409022F0: Dequantize
+  Common::Math::QuantizedTransform:
+    funcs:
+      0x14076A0F0: Dequantize
+      0x140769DD0: DequantizeRotation
+      0x14076C000: Quantize
   Common::Math::Half:
     funcs:
       0x1402404B0: FromFloat

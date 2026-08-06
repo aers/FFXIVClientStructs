@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct QuestEffectManager {
-    [StaticAddress("4C 8B 35 ?? ?? ?? ?? 0F B7 C8", 3)]
+    [StaticAddress("4C 8B 35 ?? ?? ?? ?? 0F B7 C8", 3, isPointer: true)]
     public static partial QuestEffectManager* Instance();
 
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray47<Pointer<QuestEffectBase>> _effectHandlers;

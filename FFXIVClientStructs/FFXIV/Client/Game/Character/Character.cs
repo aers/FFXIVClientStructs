@@ -73,7 +73,8 @@ public unsafe partial struct Character {
     [FieldOffset(0x231C)] public float CastRotation;
 
     [FieldOffset(0x2338)] public uint NameId;
-
+    [FieldOffset(0x233C)] public uint EventHandlerNameId; // coming from (Quest)EventHandler.vf242 (lua function "GetBattleNpcNameId"), set in the Character.Update function
+    [FieldOffset(0x2340)] public uint TransformationNameId; // set/unset via statuses
     [FieldOffset(0x2344)] public uint CompanionOwnerId; // TODO: Find a better name as it is used to index into FurnitureMemory for IndoorHousing
     [FieldOffset(0x2348)] public ObjectType ObjectType;
 

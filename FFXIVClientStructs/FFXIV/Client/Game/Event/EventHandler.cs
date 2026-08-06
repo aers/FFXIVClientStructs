@@ -54,6 +54,19 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(60)]
     public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
 
+    /// <summary>
+    /// Called to dispatch a director update (see EventFramework.ProcessDirectorUpdate).
+    /// </summary>
+    /// <param name="parameters">Pointer to seven uints (category, arg1, arg2, arg3, arg4, arg5, arg6).</param>    [VirtualFunction(61)]
+    [VirtualFunction(61)]
+    public partial void ProcessDirectorUpdate(uint* parameters);
+
+    /// <summary>
+    /// Implemented by certain EventHandlers (e.g. GoldSaucerArcadeMachineEventHandler) so they can handle the director update instead.
+    /// </summary>
+    [VirtualFunction(62)]
+    public partial void ProcessEventSpecificDirectorUpdate(uint category, uint arg1, uint arg2, uint arg3, uint arg4);
+
     [VirtualFunction(70)]
     public partial void CancelByPlayerMovement(bool a2, bool a3);
 

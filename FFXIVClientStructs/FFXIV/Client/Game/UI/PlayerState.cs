@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PlayerState
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x920)]
+[StructLayout(LayoutKind.Explicit, Size = 0x928)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
@@ -103,7 +103,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x3F4), FixedSizeArray(isBitArray: true, bitCount: 329)] internal FixedSizeArray42<byte> _unlockedFishingSpots;
     // BitCount: FishParameterSheet.Last(row => row.IsInLog).RowId
     /// <remarks> Use <see cref="IsFishCaught"/>. </remarks>
-    [FieldOffset(0x41F), FixedSizeArray(isBitArray: true, bitCount: 1516)] internal FixedSizeArray190<byte> _caughtFish;
+    [FieldOffset(0x41F), FixedSizeArray(isBitArray: true, bitCount: 1522)] internal FixedSizeArray191<byte> _caughtFish;
     [FieldOffset(0x4E0)] public uint NumFishCaught;
     [FieldOffset(0x4E4)] public uint FishingBait;
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 48 8B F2"
@@ -240,13 +240,18 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x860)] public int FauxHollowsState;
     [FieldOffset(0x868)] public StdVector<ushort> CompletedCrystariumDeliveryQuests;
     [FieldOffset(0x880)] public StdSet<byte> UnlockedMcGuffins;
-    [FieldOffset(0x890), FixedSizeArray] internal FixedSizeArray33<byte> _unlockedFramersKitsBitmask;
+    [FieldOffset(0x890), Obsolete("Use UnlockedFramersKitsBitArray"), FixedSizeArray] internal FixedSizeArray33<byte> _unlockedFramersKitsBitmask;
+    // the field actually has space for slightly more bits, but this number is taken from the highest FramerKit item
+    // BitCount: See IsFramersKitUnlocked
+    [FieldOffset(0x890), FixedSizeArray(isBitArray: true, bitCount: 352)] internal FixedSizeArray44<byte> _unlockedFramersKits;
 
-    [FieldOffset(0x8D8)] public StdMap<uint, bool> TrackedStatuses;
-    [FieldOffset(0x8E8)] public StdMap<uint, bool> TrackedActionUnlocks;
-    [FieldOffset(0x8F8)] public StdMap<uint, bool> TrackedTraitUnlocks;
-    [FieldOffset(0x908)] public bool TrackedTraitUnlocksDirty;
-    [FieldOffset(0x909)] public bool TrackedActionUnlocksDirty;
+    [FieldOffset(0x8D8)] private int UnkTofuTimestamp;
+    [FieldOffset(0x8E0)] public StdMap<uint, bool> TrackedStatuses;
+    [FieldOffset(0x8F0)] public StdMap<uint, bool> TrackedActionUnlocks;
+    [FieldOffset(0x900)] public StdMap<uint, bool> TrackedTraitUnlocks;
+    [FieldOffset(0x910)] public bool TrackedTraitUnlocksDirty;
+    [FieldOffset(0x911)] public bool TrackedActionUnlocksDirty;
+    // [FieldOffset(0x910)] private StdMap/StdSet<?> ReplaceActions;
 
     public float GetDesynthesisLevel(uint classJobId)
         => classJobId is < 8 or > 15 ? 0 : DesynthesisLevels[(int)classJobId - 8] / 100f;

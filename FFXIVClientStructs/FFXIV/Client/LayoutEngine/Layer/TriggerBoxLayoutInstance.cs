@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 // Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
 //   Client::LayoutEngine::ILayoutInstance
+//     Client::System::Common::NonCopyable
 /// <summary>
 /// Base class for various collision-only instances.
 /// </summary>

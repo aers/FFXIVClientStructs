@@ -39,6 +39,13 @@ public unsafe partial struct BonePhysicsModule {
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 48 8B CB FF C6")]
     public partial void Load(BonePhysicsResourceHandle* handle, uint resourceIndex);
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F 29 74 24 ?? 48 8B FA 48 8B D9")]
+    public partial bool Initialize(Skeleton* skeleton);
+
+    /// <summary> When set, Characters set OverrideSimulationTime to true for their BonePhysicsModules. Currently this is set to false by default. </summary>
+    [StaticAddress("38 1D ?? ?? ?? ?? F3 0F 10 3D", 2)]
+    public static partial bool* GetForceOverrideSimulationTime();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]

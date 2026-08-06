@@ -3,8 +3,10 @@ using FFXIVClientStructs.FFXIV.Client.Game.Event;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::HWDManager
+//   Client::Game::ServerRequestCallbackInterface
 // Manager for Firmament (Ishgardian Restoration)
 [GenerateInterop]
+[Inherits<ServerRequestCallbackInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct HWDManager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 4C 24 ?? 0F B6 50 11", 3, isPointer: true)]

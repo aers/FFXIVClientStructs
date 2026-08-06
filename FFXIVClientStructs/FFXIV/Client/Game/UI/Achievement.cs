@@ -1,7 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Achievement
+//   Client::Game::ServerRequestCallbackInterface
 [GenerateInterop]
+[Inherits<ServerRequestCallbackInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x848)]
 public unsafe partial struct Achievement {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30 FF C3", 3)]
@@ -59,9 +61,11 @@ public unsafe partial struct Achievement {
     /// </remarks>
     [FieldOffset(0x648), FixedSizeArray(isBitArray: true, bitCount: 4080)] internal FixedSizeArray510<byte> _itemBarterWarningCompletedAchievements;
 
-    /// <summary> Requests the main completed achievement bitmap </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B C3 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 83 F8")]
-    public partial bool RequestCompletedAchievements();
+    /// <summary> Requests Achievement Progress from the server </summary>
+    /// <summary> Requests <see cref="CompletedAchievementsBitArray"/> </summary>
+    /// <remarks> The reply comes from <see cref="Client.Network.PacketDispatcher.HandleAchievementsPacket(Network.AchievementsPacket*)"/> </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C3 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 20 5F C3 83 F8 02")]
+    public partial void RequestCompletedAchievements();
 
     /// <summary> Requests Achievement Progress from the server </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43")]

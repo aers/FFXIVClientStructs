@@ -139,10 +139,14 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(165)] public partial ??? AnnounceHowTo(???);
     // [VirtualFunction(167)] public partial ??? HideHowTo(???);
     [VirtualFunction(169)] public partial void ShowFateReward(FateRewardPacket* packet, FateRewardPacket.ItemReward* items, uint itemCount);
-    [VirtualFunction(169), Obsolete("Wrong parameters. Use ShowFateReward", true)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
     [VirtualFunction(170)] public partial void HideFateReward();
-    [VirtualFunction(170), Obsolete("Renamed to HideFateReward")] public partial void HideGoldSaucerReward();
-    // [VirtualFunction(171)] public partial ??? HideGoldSaucerReward_2(???);
+    /// <summary> Opens a Gold Saucer reward popup. </summary>
+    /// <param name="type">Index in this array of AddonIds for the title: 9980, 9981, 9982, 9984, 9983, 9986, 9985, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996</param>
+    /// <param name="mgp">The MGP rewarded.</param>
+    /// <param name="rewardItemId">Optional additional item reward (Id).</param>
+    /// <param name="rewardItemCount">Optional additional item reward (Amount).</param>
+    [VirtualFunction(173)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
+    [VirtualFunction(174)] public partial void HideGoldSaucerReward(); // same as HideFateReward
     [VirtualFunction(176)] public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
     // [VirtualFunction(178)] public partial ??? OpenMiniGame(???);
     // [VirtualFunction(179)] public partial ??? HideHousingHarvest(???);
