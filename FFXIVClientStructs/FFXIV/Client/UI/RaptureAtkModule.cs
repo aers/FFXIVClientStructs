@@ -70,7 +70,7 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x2A900)] internal ExcelSheet* AddonParamSheet;
     [FieldOffset(0x2A908)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
-
+    [FieldOffset(0x2A920)] public CreditMode CreditMode;
     [FieldOffset(0x2A924)] public uint LoginSummonCompanionId;
     [FieldOffset(0x2A928)] public float LoginSummonCompanionCountdown;
     /// <remarks> Only for Region 5 </remarks>
@@ -265,4 +265,14 @@ public enum GameUIMode : ushort {
     EmjSolo = 6,
     RideShooting = 7,
     TripleTriad = 8,
+}
+
+public enum CreditMode {
+    None = 0,
+    CreditCast = 1,
+    CreditScroll = 2,
+    CreditPlayer = 3,
+    CreditScroll2 = 4,
+    CreditEnd = 5,
+    Credit = 6
 }
