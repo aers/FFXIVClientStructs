@@ -18,15 +18,6 @@ public unsafe partial struct Achievement {
     /// <remarks> Last Five Achievement IDs </remarks>
     [FieldOffset(0x20A), FixedSizeArray] internal FixedSizeArray5<ushort> _history;
 
-    /// <summary>
-    /// Server-maintained 208-bit condition map used while the AgentAchievement builds presentation state.
-    /// </summary>
-    /// <remarks>
-    /// The full achievement packet replaces all 26 bytes, while ActorControl category 941 replaces a single byte.
-    /// The agent then tests an individual bit against the expected set or clear state recorded by an achievement entry.
-    /// </remarks>
-    [FieldOffset(0x214), FixedSizeArray(isBitArray: true, bitCount: 26 * 8)] internal FixedSizeArray26<byte> _agentStateFlags;
-
     [FieldOffset(0x230)] public AchievementState ProgressRequestState;
     [FieldOffset(0x234)] public uint ProgressAchievementId;
     [FieldOffset(0x238)] public uint ProgressCurrent;
@@ -98,15 +89,6 @@ public unsafe partial struct Achievement {
     /// <remarks> Any near-completion result slot containing this achievement is cleared and reset to Invalid. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C8 ?? ?? ?? FF 52 ?? 8B 54 24 ?? 48 8B C8")]
     public partial void SetAchievementCompleted(uint achievementID);
-
-    /// <summary> Replaces one byte of the shared achievement agent state map. </summary>
-    [MemberFunction("8B C2 44 88 84 08 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 4C 8B D9")]
-    public partial void SetAgentState(uint agentStateIndex, byte value);
-
-    /// <summary> Checks whether a condition-map bit matches the expected state. </summary>
-    /// <remarks> When <paramref name="expectedSet"/> is false, this returns true only when the bit is clear. </remarks>
-    [MemberFunction("4C 8B C9 8B C2 48 C1 E8 ?? 8B CA 83 E1 ?? 41 BA ?? ?? ?? ?? 41 D3 E2 42 0F B6 8C 08")]
-    public partial bool MatchesAgentState(uint agentStateIndex, bool expectedSet);
 
     [MemberFunction("83 FA ?? 77 ?? 48 63 C2 0F B7 84 41 ?? ?? ?? ?? C3 33 C0 C3 CC CC CC CC CC CC CC CC CC CC CC CC C7 81")]
     public partial ushort GetHistoryEntry(uint index);
