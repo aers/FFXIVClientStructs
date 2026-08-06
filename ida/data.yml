@@ -47,6 +47,7 @@ globals:
   0x142A71554: g_animationFactorRemainder
   0x142A71AB0: g_animationFactor #percentage of a 30fps frame rendered this frame
   0x142A76110: g_PerformanceFrequency
+  0x142A823E8: g_Client::Game::Control::Control_SpectatorSystem
   0x142A823F8: g_Client::Game::Control::Control_LocalPlayerEntityId
   0x142A82400: g_Client::Game::Control::Control_LocalPlayer
   0x142A91500: g_NounPlaceholder_n
@@ -629,6 +630,14 @@ classes:
       0x141962EC0: ExecuteEmote # (emoteId, targetInfo)
       0x141963780: CanExecuteEmote # (emoteId)
       0x141964030: Update
+  Client::Game::Control::SpectatorSystem:
+    vtbls:
+      - ea: 0x142170A70
+    vfuncs:
+      0: dtor
+    funcs:
+      0x14062D2F0: FocusOnObject
+      0x14062D390: FocusOnSpot
   Application::Network::NetworkModule:
     funcs:
       0x141CF2680: ctor
@@ -956,6 +965,26 @@ classes:
       0x141A7C840: GetAdjustedTimestamp # static
       0x141A7C860: GetBonusGuaranteeForTimestamp # static
       0x141A7C8A0: GetSatisfactionBonusesForNpc # static
+  Client::Game::SpectatorManager:
+    vtbls:
+      - ea: 0x1422CB8F8
+    vfuncs:
+      0: dtor
+    instances:
+      - ea: 0x142ACAC58
+        pointer: true
+    funcs:
+      0x141783290: Initialize
+      0x141783490: GetInstance
+      0x141785260: GetInstance2
+      0x141782A10: Update
+      0x141782D60: ShowSpectatorUI
+      0x1417834F0: ReadSpectatorRow
+      0x141782C80: ShouldShowSpectatorUI
+  Client::Game::SpectatorManagerWaiter:
+    vtbls:
+      - ea: 0x1422CB988
+        base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
     vtbls:
       - ea: 0x14218BBC8
@@ -3620,6 +3649,7 @@ classes:
       - ea: 0x1421BA2B8
     funcs:
       0x140C27C10: GetPenaltyRemainingInMinutes
+      0x140C28280: ProcessSpectatorListPacket
       0x140C29720: GetContentInterface
       0x140C2A5A0: IsRouletteIncomplete
   Client::Game::UI::GuildOrderReward:
@@ -4310,6 +4340,7 @@ classes:
       0x142084B50: Finalizer
     vfuncs:
       0: dtor
+      1: Finish
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x14211ED90
@@ -6574,6 +6605,7 @@ classes:
       0x140B485E0: HandleDeepDungeonPartyInfoPacket
       0x140B48620: HandleDeepDungeonChestInfoPacket
       0x140B48660: HandleDeepDungeonBlacklistPacket
+      0x140B48840: HandleSpectatorListPacket
       0x140B497B0: HandlePrepareZoningPacket
       0x140B49CB0: HandleMapEffectPacket
       0x140B4A290: HandleQuestManagerUnkArray2SecondHalfPacket
@@ -8511,6 +8543,8 @@ classes:
       0x14062C630: Initialize
       0x14062C6C0: Terminate
       0x14062C900: Update
+      0x14062CEF0: CreateSpectatorControl
+      0x14062CF70: FreeSpectatorControl
       0x141832940: GetFlightAllowedStatus # static
   Client::Game::Control::CameraManager:
     funcs:
@@ -14244,6 +14278,8 @@ classes:
     vtbls:
       - ea: 0x1421BFF58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D62EC0: UpdateAddonVisibility
   Client::UI::Agent::AgentAquarium:
     vtbls:
       - ea: 0x1421ED3B0

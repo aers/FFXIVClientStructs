@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -10,6 +11,7 @@ public unsafe partial struct InstanceContent {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 0F 94 C3", 3)]
     public static partial InstanceContent* Instance();
 
+    [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray8<uint> _spectatorIds;
     [FieldOffset(0x6C)] public byte RankedCrystallineConflictHostingDataCenterId; // saved as uint, used as byte? checks against 0xFF too
     [FieldOffset(0x70)] public bool IsLimitedTimeBonusActive;
 
@@ -26,6 +28,9 @@ public unsafe partial struct InstanceContent {
 
     [MemberFunction("48 83 EC 28 84 D2 74 33")]
     public partial bool IsRouletteIncomplete(byte roulette);
+
+    [MemberFunction("8B 02 4C 8B C9 89 41")]
+    public partial void ProcessSpectatorListPacket(SpectatorListPacket* packet);
 
     public bool IsRouletteComplete(byte roulette) => !IsRouletteIncomplete(roulette);
 

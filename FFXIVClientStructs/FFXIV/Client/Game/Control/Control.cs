@@ -15,6 +15,7 @@ public unsafe partial struct Control {
 
     [FieldOffset(0x7518)] public bool IsWalkingDuringAutorun;
     [FieldOffset(0x7637)] public bool IsWalking;
+    [FieldOffset(0x7688)] public SpectatorSystem* SpectatorSystem;
     [FieldOffset(0x7698)] public uint LocalPlayerEntityId;
     [FieldOffset(0x76A0)] public BattleChara* LocalPlayer;
     [FieldOffset(0x76B0)] public Matrix4x4 ViewProjectionMatrix;
@@ -40,4 +41,12 @@ public unsafe partial struct Control {
         DefaultCase = 7,
         PlayerOrMountNull = 8
     }
+
+    /// <summary> Creates a new SpectatorSystem. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 48 8B FD 66 90")]
+    public partial void CreateSpectatorControl();
+
+    /// <summary> Calls the destructor for SpectatorSystem and sets it back to null. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0")]
+    public partial void FreeSpectatorControl();
 }
