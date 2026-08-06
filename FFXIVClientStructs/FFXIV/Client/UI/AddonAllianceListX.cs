@@ -18,13 +18,15 @@ public unsafe partial struct AddonAllianceListX {
     [FieldOffset(0x471)] public sbyte TargetedSlot;
     [FieldOffset(0x472)] public byte Slots;
     [FieldOffset(0x473)] public byte SlotsFilled;
-
+    [FieldOffset(0x474)] public byte AllianceListIndex;
+    [FieldOffset(0x475)] private byte IsPositionInitialized;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public unsafe partial struct AllianceMemberStruct {
         [FieldOffset(0x00)] public AtkComponentBase* ComponentBase;
         [FieldOffset(0x08)] public AtkResNode* DebuffContainer;
         [FieldOffset(0x10)] public AtkImageNode* ClassJobImageNode;
+        [FieldOffset(0x18)] public AtkUldAsset* ClassJobIconUldAsset;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* HealthBar;
         [FieldOffset(0x28)] public AtkResNode* AggroContainer;
         [FieldOffset(0x30)] public AtkResNode* TargetGlowContainer;
