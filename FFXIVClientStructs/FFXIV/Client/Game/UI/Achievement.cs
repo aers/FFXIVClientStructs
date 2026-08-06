@@ -89,7 +89,7 @@ public unsafe partial struct Achievement {
     /// <summary> Marks an achievement complete and adds it to the recent completion history. </summary>
     /// <remarks> Any near-completion result slot containing this achievement is cleared and reset to Invalid. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C8 ?? ?? ?? FF 52 ?? 8B 54 24 ?? 48 8B C8")]
-    public partial void SetAchievementCompleted(uint achievementID);
+    public partial void SetAchievementCompleted(uint achievementId);
 
     [MemberFunction("83 FA ?? 77 ?? 48 63 C2 0F B7 84 41 ?? ?? ?? ?? C3 33 C0 C3 CC CC CC CC CC CC CC CC CC CC CC CC C7 81")]
     public partial ushort GetHistoryEntry(uint index);
