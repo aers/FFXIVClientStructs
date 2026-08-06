@@ -19,7 +19,7 @@ public unsafe partial struct AgentFishingNote {
     [FieldOffset(0x11C)] public uint RegionCount;
     [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray19<ushort> _regionPlaceNameIds;
 
-    [FieldOffset(0x148)] public byte* UndiscoveredText; // Addon#3811
+    [FieldOffset(0x148)] public CStringPointer UndiscoveredText; // Addon#3811
     [FieldOffset(0x150)] private int Unk150;
     [FieldOffset(0x154)] public ushort ViewingPlaceNameRegionId;
     [FieldOffset(0x156)] public ushort ViewingPlaceNameId;
