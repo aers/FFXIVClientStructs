@@ -17,7 +17,7 @@ public unsafe partial struct Achievement {
     /// </summary>
     [FieldOffset(0x0C), FixedSizeArray(isBitArray: true, bitCount: 4078)] internal FixedSizeArray510<byte> _completedAchievements;
 
-    /// <remarks> Last Five Achievement IDs </remarks>
+    /// <remarks> Last Five Achievement Ids </remarks>
     [FieldOffset(0x20A), FixedSizeArray] internal FixedSizeArray5<ushort> _history;
 
     [FieldOffset(0x230)] public AchievementState ProgressRequestState;
@@ -30,7 +30,7 @@ public unsafe partial struct Achievement {
     /// </summary>
     /// <remarks>
     /// These slots do not cache or partition <see cref="CompletedAchievements"/>. Each is a separate server-provided
-    /// achievement-ID membership bitmap for a different UI lifecycle.
+    /// achievement-Id membership bitmap for a different UI lifecycle.
     /// </remarks>
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray2<byte> _nearCompletionAchievementRequestFlags;
 
@@ -80,27 +80,27 @@ public unsafe partial struct Achievement {
     public partial void ReceiveAchievementProgress(uint id, uint current, uint max);
 
     /// <summary> Checks whether an achievement is present in the main completion bitmap. </summary>
-    /// <param name="achievementID">Achievement ID to check against</param>
+    /// <param name="achievementId">Achievement to check against</param>
     /// <returns> Returns true if the achievement is complete. </returns>
     /// <remarks> This does not inspect ItemBarterWarning data. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 04 30 FF C3")]
-    public partial bool IsComplete(int achievementID);
+    public partial bool IsComplete(int achievementId);
 
-    /// <summary> Marks an achievement complete and adds it to the recent completion history. </summary>
-    /// <remarks> Any near-completion result slot containing this achievement is cleared and reset to Invalid. </remarks>
+    /// <summary> Marks an achievement complete and adds it to the recent completion history </summary>
+    /// <remarks> Any near-completion result slot containing this achievement is cleared and reset to Invalid </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C8 ?? ?? ?? FF 52 ?? 8B 54 24 ?? 48 8B C8")]
     public partial void SetAchievementCompleted(uint achievementId);
 
     [MemberFunction("83 FA ?? 77 ?? 48 63 C2 0F B7 84 41 ?? ?? ?? ?? C3 33 C0 C3 CC CC CC CC CC CC CC CC CC CC CC CC C7 81")]
     public partial ushort GetHistoryEntry(uint index);
 
-    /// <summary> ORs a ItemBarterWarning packet into the bitmap. </summary>
+    /// <summary> ORs a ItemBarterWarning packet into the bitmap </summary>
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 48 2B D1 48 8D 81")]
     public partial void MergeItemBarterWarningCompletedAchievements(byte* achievementBitmap);
 
-    /// <summary> Checks the ItemBarterWarning completion bitmap for an achievement ID</summary>
+    /// <summary> Checks the ItemBarterWarning completion bitmap for an achievement id </summary>
     [MemberFunction("44 8B C2 4C 8B C9 81 FA ?? ?? ?? ?? 72")]
-    public partial bool IsItemBarterWarningAchievementComplete(uint achievementID);
+    public partial bool IsItemBarterWarningAchievementComplete(uint achievementId);
 
     /// <summary>
     /// Clears the login notification near-completion bitmap and resets only its state to <see cref="AchievementState.Invalid"/>.
@@ -114,7 +114,7 @@ public unsafe partial struct Achievement {
 
     /// <summary> Checks whether an achievement belongs to a loaded near-completion result slot. </summary>
     [MemberFunction("45 8B C8 83 FA ?? 73 ?? 44 8B C2")]
-    public partial bool IsNearCompletionAchievement(NearCompletionAchievementSlot slot, uint achievementID);
+    public partial bool IsNearCompletionAchievement(NearCompletionAchievementSlot slot, uint achievementId);
 
     /// <summary> Receives near-completion result for a UI slot. </summary>
     [MemberFunction("83 FA ?? 0F 83 ?? ?? ?? ?? 48 89 5C 24 ?? 56 48 83 EC ?? 48 8B D9")]
