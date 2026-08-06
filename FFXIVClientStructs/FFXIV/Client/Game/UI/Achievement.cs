@@ -77,7 +77,7 @@ public unsafe partial struct Achievement {
 
     /// <summary> Receives Achievement Progress requested with <see cref="RequestAchievementProgress"/>. </summary>
     [MemberFunction("C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 44 89 81")]
-    public partial void ReceiveAchievementProgress(uint achievementID, uint current, uint max);
+    public partial void ReceiveAchievementProgress(uint id, uint current, uint max);
 
     /// <summary> Checks whether an achievement is present in the main completion bitmap. </summary>
     /// <param name="achievementID">Achievement ID to check against</param>
