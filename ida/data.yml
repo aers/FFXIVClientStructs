@@ -3285,16 +3285,32 @@ classes:
       - ea: 0x1421B9100
         base: Client::Game::ServerRequestCallbackInterface
     funcs:
+      0x140C19EA0: ctor
+      0x140C19EF0: OnReceivePacket
       0x140C19F50: Initialize
       0x140C1A080: RequestCompletedAchievements
       0x140C1A0B0: RequestAchievementProgress
       0x140C1A130: RequestFateProgressTab
       0x140C1A160: HandleFateProgressTabPacket
       0x140C1A1C0: SetAchievementCompleted
+      0x140C1A340: SetAgentState
       0x140C1A470: GetState
       0x140C1A480: IsComplete
+      0x140C1A4C0: MatchesAgentState
       0x140C1A500: GetHistoryEntry
       0x140C1A520: ReceiveAchievementProgress
+      0x140C1A550: GetProgressRequestState
+      0x140C1A560: GetProgressAchievementID
+      0x140C1A570: GetProgressCurrent
+      0x140C1A580: GetProgressMax
+      0x140C1A620: MergeItemBarterWarningCompletedAchievements
+      0x140C1A6C0: IsItemBarterWarningAchievementComplete
+      0x140C1A7B0: ResetLoginNearCompletionAchievements
+      0x140C1A830: GetNearCompletionAchievementState
+      0x140C1A850: IsNearCompletionAchievement
+      0x140C1A8A0: ReceiveNearCompletionAchievements
+      0x140C1AA10: RequestAllNearCompletionAchievements
+      0x140C1AAE0: RequestNearCompletionAchievementSlot
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x142AAFDF0
