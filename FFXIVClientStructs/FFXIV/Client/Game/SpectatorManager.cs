@@ -32,7 +32,7 @@ public unsafe partial struct SpectatorManager {
     public partial void Update();
 
     /// <summary> Reads spectator data from Excel, puts most of it into Control.SpectatorSystem. </summary>
-    [MemberFunction("48 8D 05 ?? ?? ?? ?? 48 89 47 ?? 48 89 5F ?? 48 89 77 ?? EB ?? 48 8B FE 44 8B 83")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? ?? ?? ?? 48 8B F1 48 8D 0D")]
     public partial void ReadSpectatorRow([CExporterExcel("Spectator")] void* spectatorRow);
 
     /// <summary> Changes an internal flag to tell the spectator UI to show itself. </summary>

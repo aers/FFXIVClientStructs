@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct ServerRequestCallbackManager {
-    [StaticAddress("48 83 3D ?? ?? ?? ?? 00 0F 85 ?? ?? ?? ?? 48 89 5C 24 ?? B9", 3, isPointer: true)]
+    [StaticAddress("48 8B 1D ?? ?? ?? ?? 33 FF 48 85 DB", 3, isPointer: true)]
     public static partial ServerRequestCallbackManager* Instance();
 
     [FieldOffset(0x00)] public StdVector<Pointer<ServerRequestCallbackInterface>> Callbacks;
