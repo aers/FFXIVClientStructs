@@ -192,7 +192,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 41 C1 EF")]
     public partial AtkTextNode* GetTextNodeById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 77")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F 28 FB")]
     public partial AtkImageNode* GetImageNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36")]
