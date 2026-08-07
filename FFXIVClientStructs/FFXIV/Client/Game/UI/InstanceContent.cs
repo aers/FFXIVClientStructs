@@ -1,6 +1,6 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
-using FFXIVClientStructs.FFXIV.Client.Game.Network;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
