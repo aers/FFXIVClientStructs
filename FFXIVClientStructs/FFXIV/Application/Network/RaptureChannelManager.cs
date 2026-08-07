@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Application.Network;
 public unsafe partial struct RaptureChannelManager {
     [FieldOffset(0x08)] private uint Unk08;
     [FieldOffset(0x10)] public ServiceConsumerConnectionManager* ConnectionManager;
-    [FieldOffset(0x18)] public StdVector<uint> PendingPacketIDs;
+    [FieldOffset(0x18)] public StdVector<uint> PendingPacketIds;
     [FieldOffset(0x30)] public StdMap<uint, nint> PrimaryEntityMap;
     [FieldOffset(0x40)] private StdMap<uint, nint> UnkMap40;
     [FieldOffset(0x50)] public nint PrimaryEntity;
