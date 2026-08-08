@@ -10171,6 +10171,26 @@ classes:
     vtbls:
       - ea: 0x14217C6F0
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance:
+    vtbls:
+      - ea: 0x14217CBD0
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217E220
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217DFA8
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217DD30
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::WaterRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217DAB8
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
       - ea: 0x1421815C8
