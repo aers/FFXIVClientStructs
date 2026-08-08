@@ -18337,8 +18337,11 @@ classes:
       329: GetContentTimeMax
       330: GetContentTypeIconId
       335: SetExperience
+      354: GetInstanceContentText
     funcs:
       0x140B6E290: ctor
+      0x140B6B760: LoadInstanceContentTexts
+      0x140B6B850: SetInstanceContentText
       0x140B6FE60: ApplyMapEffect
       0x140B6FCD0: PlayMapEffectTimeline
       0x140B70DE0: IsPlayCutscene
@@ -27177,6 +27180,18 @@ classes:
         base: Client::System::Scheduler::Clip::BaseClip
     funcs:
       0x141906170: ctor
+  Client::System::Scheduler::Clip::InstanceContentTextClip:
+    vtbls:
+      - ea: 0x14232A288
+        base: Client::System::Scheduler::Clip::BaseClip
+    vfuncs:
+      7: IsFinished
+      16: ResolveText
+      31: Publish
+    funcs:
+      0x1419101F0: ctor
+      0x141910AA0: UpdateTalkSubtitleLayout
+      0x141910CC0: OpenOrUpdateTalkSubtitle
   Client::System::Scheduler::Base::SceneConnectionBlock:
     vtbls:
       - ea: 0x142453BA0

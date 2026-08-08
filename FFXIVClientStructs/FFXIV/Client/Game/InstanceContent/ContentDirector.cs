@@ -15,11 +15,14 @@ public unsafe partial struct ContentDirector {
 
     [FieldOffset(0x528)] public DutyActionManager DutyActionManager;
 
+    [FieldOffset(0xC88)] public Utf8String* InstanceContentTexts;
     [FieldOffset(0xC90)] public MapEffectList* MapEffects;
     [FieldOffset(0xC98)] private DynamicEventContainer* DynamicEvents;
 
     /// <remarks> This might also be a countdown until the content starts (e.g. Frontlines), then the actual time left of the content. </remarks>
     [FieldOffset(0xCF0)] public float ContentTimeLeft;
+    [FieldOffset(0xCFC)] public uint InstanceContentTextStartRowId;
+    [FieldOffset(0xD00)] public uint InstanceContentTextRowCount;
 
     [VirtualFunction(303)]
     public partial uint GetCurrentLevel();
@@ -37,6 +40,15 @@ public unsafe partial struct ContentDirector {
     /// <returns>Time in seconds</returns>
     [VirtualFunction(329)]
     public partial uint GetContentTimeMax();
+
+    [VirtualFunction(354)]
+    public partial Utf8String* GetInstanceContentText(uint rowId);
+
+    [MemberFunction("40 55 56 41 57 48 83 EC ?? 44 8B FA 4C 89 74 24")]
+    public partial void* LoadInstanceContentTexts(uint startRowId, uint rowCount);
+
+    [MemberFunction("2B 91 FC 0C 00 00 4C 8B C9 8B C2 49 8B D0 48 6B C8 68 49 03 89 88 0C 00 00 E9 ?? ?? ?? ??")]
+    public partial void SetInstanceContentText(uint rowId, CStringPointer text);
 
     /// <summary>Changes the state of a map effect.</summary>
     /// <param name="index">Index into MapEffects.</param>
