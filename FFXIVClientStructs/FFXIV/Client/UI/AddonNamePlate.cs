@@ -19,12 +19,12 @@ public unsafe partial struct AddonNamePlate {
     // Client::UI::AddonNamePlate::BakePlateRenderer
     //   Component::GUI::AtkTextNodeRenderer
     //     Component::GUI::AtkResourceRendererBase
-    // might be 238 not 240 but not super relevant here
     [StructLayout(LayoutKind.Explicit, Size = 0x240)]
     public struct BakePlateRenderer {
         [FieldOffset(0xB0)] public Texture* Texture;
-        [FieldOffset(0x230)] public byte DisableFixedFontResolution; // added in 5.5
         [FieldOffset(0x1E0)] public AtkRenderTexture RenderTexture;
+        [FieldOffset(0x228)] public BakeData* CurrentBakeData;
+        [FieldOffset(0x230)] public byte DisableFixedFontResolution; // added in 5.5
     }
 
     // this is the pre-rendered texture data for a nameplate
@@ -35,6 +35,7 @@ public unsafe partial struct AddonNamePlate {
         [FieldOffset(0x2)] public short V;
         [FieldOffset(0x4)] public short Width;
         [FieldOffset(0x6)] public short Height;
+        [FieldOffset(0x8)] public short TextYOffset;
         [FieldOffset(0xA)] public byte Alpha;
         [FieldOffset(0xB)] public bool IsBaked;
     }
@@ -63,9 +64,9 @@ public unsafe partial struct AddonNamePlate {
         [FieldOffset(0x6D)] public byte HPLabelState;
         [FieldOffset(0x6E)] public bool ClickThrough;
         [FieldOffset(0x6F)] public bool IsPvpEnemy;
-        // [FieldOffset(0x70)] private bool UnkBool;
+        [FieldOffset(0x70)] public bool UseAttackCursor;
         [FieldOffset(0x71)] public bool NeedsToBeBaked;
-        // [FieldOffset(0x72)] private int UnkBakeState;
+        [FieldOffset(0x72)] public bool DrawOriginalText;
         public bool IsVisible => RootComponentNode->IsVisible();
 
         public bool IsPlayerCharacter => NamePlateKind == UIObjectKind.PlayerCharacter;
