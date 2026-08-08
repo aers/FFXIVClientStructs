@@ -21,7 +21,7 @@ public unsafe partial struct BgPartsLayoutInstance {
     [FieldOffset(0x4C)] public uint CollisionMaterialMaskLow;
     [FieldOffset(0x50)] public uint CollisionMaterialIdHigh;
     [FieldOffset(0x54)] public uint CollisionMaterialMaskHigh;
-    //[FieldOffset(0x58)] public float u58;
+    [FieldOffset(0x58)] public float BoundingSphereSize;
     //[FieldOffset(0x5C)] public int u5C;
     [FieldOffset(0x60)] public void* CollisionUpdateListener;
 }
