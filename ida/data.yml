@@ -16358,15 +16358,21 @@ classes:
       0: dtor
       6: Terminate
       7: IsUnlocked
+      8: ResetState
       20: ProcessEnterTerritory
       26: ProcessUIEvent # CustomTalkEventHandler calls lua function "OnUI"
+      28: EnterEvent
       40: ProcessYield
+      52: ProcessEventSceneTask
+      58: EndEvent
       59: ProcessFormatStringCallback
       60: ProcessActionTimelineCallback
       61: ProcessDirectorUpdate
       62: ProcessEventSpecificDirectorUpdate
       70: CancelByPlayerMovement
       76: ProcessListenItemCallback
+      89: HandleStartOrEndCommand
+      90: HandleMenuResult
       159: CancelInteraction
       205: GetTitle # lua function "GetEventHandlerTitle"
       207: GetEventId
@@ -16375,6 +16381,7 @@ classes:
       231: IsOccupied33
       232: GetOccupiedConditionId
       233: GetOccupiedPermissionId
+      250: ShouldDismissOrnament
       251: GetScriptVersion
       253: UpdateSharedTimelineState
       254: UpdateTimelinesByBitmask
@@ -17975,6 +17982,34 @@ classes:
     vtbls:
       - ea: 0x1421D3A20
         base: Client::Game::Event::GoldSaucerEventHandler
+      - ea: 0x1421D42C0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140E78E70: ctor
+      0x140E79010: Finalizer
+      0x140E791C0: GetLocalPlayer #static
+      0x140E791D0: SetProgress
+      0x140E79370: PauseTimer
+      0x140E793B0: ResumeTimer
+      0x140E793C0: GetOrCreateDirectorTodo
+      0x140E7A080: OnExcelSheetLoaded
+      0x140E7A3E0: ReceiveEvent
+      0x140E7A5F0: OpenGameUI
+      0x140E7A6C0: CloseGameUI
+      0x140E7A760: BeginAgentGame #static
+      0x140E7A7B0: ResetAgentAndSharedTimelines
+      0x140E7A840: PrepareNextRound #static
+      0x140E7A890: ShowRoundResult #static
+      0x140E7A8E0: Create #static
+      0x140E7AAB0: StartGame
+      0x140E7AD20: FinalizeGame
+      0x140E7AE00: SendMachineAction
+      0x140E7AE40: ClearEventSceneTasks
+      0x140E7AEA0: ShowBalloonMessage
+      0x140E7B020: ResetAgentStatesExcept
+      0x140E7B0E0: UpdateAgentAndDirectorTodo
+      0x140E7B250: SendAgentResultUpdate
+      0x140E7B2F0: SendAgentPhaseMessage
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x1421CCEC0
