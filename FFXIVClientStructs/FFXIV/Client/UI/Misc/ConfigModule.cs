@@ -1,5 +1,5 @@
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Common.Configuration;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -22,27 +22,23 @@ public unsafe partial struct ConfigModule {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct Option {
-        [FieldOffset(0x00)] private void* Unk00;
-        [FieldOffset(0x08)] private ulong Unk08;
+        [FieldOffset(0x00)] public ConfigOption ConfigOptionId;
+        [FieldOffset(0x04)] public uint CategoryMask;
+        [FieldOffset(0x08)] public uint MaxValueIndex;
+        [FieldOffset(0x0C)] public byte BitIndex;
+        [FieldOffset(0x0D)] public bool InvertValue;
+        [FieldOffset(0x0E)] private ushort Padding0E;
+        [FieldOffset(0x10)] private void* ValueChangeCallback;
+        [Obsolete("Incorrect offset. Use ConfigOptionId.")]
         [FieldOffset(0x10)] public ConfigOption OptionId;
-        [FieldOffset(0x14)] private uint Unk14;
-        [FieldOffset(0x18)] private uint Unk18;
-        [FieldOffset(0x1C)] private ushort Unk1C;
+        [FieldOffset(0x18)] private uint ValueChangeCallbackParamOffset;
 
         public string GetName() {
-            if ((short)OptionId < 0) return string.Empty;
+            if ((short)ConfigOptionId < 0) return string.Empty;
             var framework = Framework.Instance();
             if (framework == null) return string.Empty;
-            var sysConfig = framework->SystemConfig;
-            var id = (uint)OptionId;
-            byte* namePtr = null;
-            if (sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
-            if (namePtr == null && sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
-            if (namePtr == null && sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
-            if (namePtr == null) return string.Empty;
-            var l = 0;
-            while (namePtr[l] != 0) l++;
-            return l == 0 ? string.Empty : $"{Encoding.UTF8.GetString(namePtr, l)}";
+            var entry = ((ConfigBase*)&framework->SystemConfig)->GetConfigOption((uint)ConfigOptionId);
+            return entry == null || entry->Type == 0 || !entry->Name.HasValue ? string.Empty : entry->Name.ToString();
         }
     }
 
