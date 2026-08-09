@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.Text;
 using AtkEventInterface = FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface.AtkEventInterface;
 using ChangeEventInterface = FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase.ChangeEventInterface;
 
@@ -23,9 +24,18 @@ public unsafe partial struct ConfigModule {
 
     public const int ConfigOptionCount = 746;
     [FieldOffset(0x28)] public UIModule* UIModule;
+
+    [FieldOffset(0x88)] public Utf8String CharacterName;
+    [FieldOffset(0xF0)] public Utf8String WorldName;
+    [FieldOffset(0x158)] public uint CurrentClassJobLevel;
+    [FieldOffset(0x15C)] public uint CurrentClassJobId;
+    [FieldOffset(0x160)] public uint PlaceName;
+    [FieldOffset(0x168)] public StdDeque<TextParameter> CharacterInfoParameters;
+    [FieldOffset(0x190)] public Utf8String CharacterInfo;
+
     [FieldOffset(0x2F0)] public ConfigEventInterface* ConfigEventListeners;
     [FieldOffset(0x2F8)] public bool IsApplyingConfigChange;
-    [FieldOffset(0x2F9)] private bool Unk2F9;
+    [FieldOffset(0x2F9)] public bool HasClientSelectDataConfigFlags;
     [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray746<Option> _options;
 
     [Obsolete("Use ValueSets")]
@@ -84,6 +94,7 @@ public unsafe partial struct ConfigModule {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray746<AtkValue> _values;
     }
 
+    // Client::UI::Misc::ConfigModule::ConfigEventInterface
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public unsafe partial struct ConfigEventInterface {
@@ -91,7 +102,7 @@ public unsafe partial struct ConfigModule {
         [FieldOffset(0x10)] public ConfigModule* Owner;
 
         [VirtualFunction(0)]
-        public partial void OnConfigChange(int valueSetIndex, bool unk);
+        public partial void OnConfigChange(int valueSetIndex, bool hasClientSelectDataConfigFlags);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10), Obsolete("Use AtkValue")]
