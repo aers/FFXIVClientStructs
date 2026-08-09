@@ -429,6 +429,11 @@ if api is None:
                 if self.srclang_importer:
                     # rename C++ -> C or create new C struct
                     cname = self.generate_hashed_type_name(fullname)
+                    print(
+                        "Creating struct: yaml={!r}, ida={!r}, importer=SrcLang".format(
+                            struct.type, cname
+                        )
+                    )
                     self.srclang_types[fullname] = cname
                     
                     sid = self.get_struct_id(fullname)
@@ -450,6 +455,11 @@ if api is None:
 
                     return
 
+                print(
+                    "Creating struct: yaml={!r}, ida={!r}, importer=Legacy".format(
+                        struct.type, fullname
+                    )
+                )
                 if self.get_struct_id(fullname) == idaapi.BADADDR:
                     self.create_struct_type(fullname, struct.union)
 
@@ -961,7 +971,17 @@ if api is None:
                 func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
                 for param in member_func.parameters:
                     arg = ida_typeinf.funcarg_t()
-                    arg.type = self.get_tinfo_from_type(param.type)
+                    try:
+                        arg.type = self.get_tinfo_from_type(param.type)
+                    except ValueError as exc:
+                        print(
+                            "Error: update_member_func: function={!r}, ea={:#x}, "
+                            "parameter={!r}, type={!r}, error={}".format(
+                                func_name, ea,
+                                param.name, param.type, exc
+                            )
+                        )
+                        raise
                     arg.name = param.name
                     func_data.push_back(arg)
                 tif.create_func(func_data)
@@ -974,6 +994,8 @@ if api is None:
                 )
                 ea = self.get_func_ea_by_name(func_name)
                 if ea == idc.BADADDR:
+                    if getattr(virt_func, "inherited_from_preprocess", False):
+                        return
                     print("Error: {0} not found using base?".format(func_name))
                     return
                 tif = ida_typeinf.tinfo_t()
@@ -985,7 +1007,16 @@ if api is None:
                 func_data.rettype = self.get_tinfo_from_type(virt_func.return_type)
                 for param in virt_func.parameters:
                     arg = ida_typeinf.funcarg_t()
-                    arg.type = self.get_tinfo_from_type(param.type)
+                    try:
+                        arg.type = self.get_tinfo_from_type(param.type)
+                    except ValueError as exc:
+                        print(
+                            "Error: update_virt_func: function={!r}, ea={:#x}, "
+                            "parameter={!r}, type={!r}, error={}".format(
+                                func_name, ea, param.name, param.type, exc
+                            )
+                        )
+                        raise
                     arg.name = param.name
                     func_data.push_back(arg)
                 tif.create_func(func_data)
@@ -1157,6 +1188,7 @@ if api is None:
                                 continue
 
                             new_vf = copy.deepcopy(vf)
+                            new_vf.inherited_from_preprocess = True
                             if hasattr(new_vf, 'parameters') and new_vf.parameters:
                                 new_vf.parameters[0].type = child.struct.type + "*"
 
@@ -1192,6 +1224,7 @@ if api is None:
                                 continue
 
                             new_vf = copy.deepcopy(vf)
+                            new_vf.inherited_from_preprocess = True
                             if hasattr(new_vf, 'parameters') and new_vf.parameters:
                                 new_vf.parameters[0].type = node.struct.type + "*"
 
