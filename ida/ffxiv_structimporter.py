@@ -298,11 +298,60 @@ if api is None:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi, IdaInterface):
             def __init__(self, full_padding, srclang_importer):
-                # type: (bool) -> None
+                # type: (bool, bool) -> None
                 self.full_padding = full_padding
                 self.srclang_importer = srclang_importer
                 if self.srclang_importer:
                     self.srclang_types = {}
+
+            def validate_name_cfg(self):
+                """Verifies that the user's IDA config allows template characters for type names"""
+                temporary_name = "sruc_name_test"
+                template_name = "OuterStructTest<InnerStructTest<int>*>"
+
+                def delete_test_type(name):
+                    sid = self.get_struct_id(name)
+                    if sid == idaapi.BADADDR:
+                        return
+                    if idaapi.IDA_SDK_VERSION >= 900:
+                        ida_typeinf.del_named_type(idaapi.get_idati(), name, ida_typeinf.NTF_TYPE)
+                    else:
+                        idc.del_struc(sid)
+
+                created_name = None
+                try:
+                    template_sid = self.get_struct_id(template_name)
+                    temporary_sid = self.get_struct_id(temporary_name)
+
+                    if template_sid != idaapi.BADADDR:
+                        if temporary_sid != idaapi.BADADDR:
+                            return True
+                        
+                        self.rename_struct(template_sid, temporary_name)
+                        if self.get_struct_id(template_name) != idaapi.BADADDR:
+                            raise RuntimeError("could not rename existing template test type")
+                        temporary_sid = self.get_struct_id(temporary_name)
+
+                    if temporary_sid == idaapi.BADADDR:
+                        temporary_sid = self.create_struct_type(temporary_name)
+                    if temporary_sid == idaapi.BADADDR:
+                        raise RuntimeError("could not create temporary struct")
+                    created_name = temporary_name
+
+                    self.rename_struct(temporary_sid, template_name)
+                    if self.get_struct_id(template_name) == idaapi.BADADDR:
+                        raise RuntimeError("could not rename temporary struct to template type name")
+                    
+                    created_name = template_name
+                except Exception as exc:
+                    return False # dropping exception, but will prompt the user to fix their cfg and exit
+                
+                finally:
+                    if created_name is not None:
+                        delete_test_type(created_name)
+                    delete_test_type(temporary_name)
+
+                return True
 
             def get_fallback_vfunc_name(self, class_name, index, visited=None):
                 # type: (str, int, set) -> str
@@ -1270,6 +1319,14 @@ if api is None:
             )
 
         api = IdaApi(full_padding, srclang_importer)
+        if not api.validate_name_cfg():
+            ida_kernwin.warning(
+                "Type name validation failed.\n"
+                "\n"
+                "Your IDA.cfg is missing necessary NameChars and TypeNameChars.\n"
+                "\n"
+                "Please see https://github.com/aers/FFXIVClientStructs/blob/main/ida/idauser.cfg to update your config accordingly.")
+            exit()
 
 if api is None:
     try:
