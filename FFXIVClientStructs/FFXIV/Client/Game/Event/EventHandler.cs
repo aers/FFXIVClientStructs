@@ -1,11 +1,14 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Common.Lua;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 8B DA 48 8B F9", 3, 275)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1B8)]
 public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
@@ -13,16 +16,62 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
+    [FieldOffset(0x64)] public EventType EventType;
+    [FieldOffset(0x68)] public uint EventParam;
+    [FieldOffset(0x6C)] private byte EventUnk20; // EventState.Unk20
+    [FieldOffset(0x70)] public GameObject* EventGameObject;
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
     [FieldOffset(0x88)] public SceneFlag SceneFlags;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
+    [FieldOffset(0x98)] private ExcelSheetWaiter* UnkExcelSheetWaiter1;
+    [FieldOffset(0xA0)] private ExcelSheet* UnkExcelSheet1;
+    [FieldOffset(0xA8)] private ExcelSheetWaiter* UnkExcelSheetWaiter2;
+    [FieldOffset(0xB0)] private ExcelSheet* UnkExcelSheet2;
+    [FieldOffset(0xB8)] private ExcelSheetWaiter* UnkExcelSheetWaiter3;
+    [FieldOffset(0xC0)] private ExcelSheet* UnkExcelSheet3;
+    [FieldOffset(0xC8)] private Utf8String UnkSheetName; // sheet set to UnkExcelSheet3, for FormatStringCallback?
 
-    [FieldOffset(0xC8)] private Utf8String UnkString0;
+    [FieldOffset(0x158)] private ExcelSheetWaiter* UnkExcelSheetWaiter4;
+    [FieldOffset(0x160)] private ExcelSheet* UnkExcelSheet4; // TripleTriadCard, XBMBattleDetailAction
+
+    [VirtualFunction(0)]
+    public partial EventHandler* Dtor(byte freeFlags);
+
+    [VirtualFunction(20)]
+    public partial void ProcessEnterTerritory(ushort territoryTypeId);
+
+    [VirtualFunction(25)]
+    public partial void ProcessUIEvent(UIEventType type);
 
     [VirtualFunction(40)]
     public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
+
+    [VirtualFunction(59)]
+    public partial void ProcessFormatStringCallback(bool success, Utf8String* str, ulong callbackParam);
+
+    [VirtualFunction(60)]
+    public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
+
+    /// <summary>
+    /// Called to dispatch a director update (see EventFramework.ProcessDirectorUpdate).
+    /// </summary>
+    /// <param name="parameters">Pointer to seven uints (category, arg1, arg2, arg3, arg4, arg5, arg6).</param>    [VirtualFunction(61)]
+    [VirtualFunction(61)]
+    public partial void ProcessDirectorUpdate(uint* parameters);
+
+    /// <summary>
+    /// Implemented by certain EventHandlers (e.g. GoldSaucerArcadeMachineEventHandler) so they can handle the director update instead.
+    /// </summary>
+    [VirtualFunction(62)]
+    public partial void ProcessEventSpecificDirectorUpdate(uint category, uint arg1, uint arg2, uint arg3, uint arg4);
+
+    [VirtualFunction(70)]
+    public partial void CancelByPlayerMovement(bool a2, bool a3);
+
+    // [VirtualFunction(76)]
+    // public partial void ProcessListenItemCallback(?);
 
     [VirtualFunction(159)]
     public partial void CancelInteraction();
@@ -35,6 +84,22 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
+
+    /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
+    /// <param name="gameObject">The game object to update.</param>
+    /// <param name="oldSharedTimelineState">The new SharedTimelineState value.</param>
+    /// <param name="newSharedTimelineState">The old SharedTimelineState value.</param>
+    /// <param name="timelineIndices">Seems to modify newSharedTimelineState in in some EventHandlers.</param>
+    [VirtualFunction(253)]
+    public partial void UpdateSharedTimelineState(GameObject* gameObject, ushort oldSharedTimelineState, ushort newSharedTimelineState, ulong timelineIndices);
+
+    /// <summary>Changes the currently playing timelines based on a bitmask.</summary>
+    /// <param name="gameObject">The game object to update.</param>
+    /// <param name="sharedTimelineState">The new SharedTimelineState value.</param>
+    /// <param name="bitmask">The new timeline bitmask.</param>
+    /// <param name="unused">Unused and can be left empty.</param>
+    [VirtualFunction(254)]
+    public partial void UpdateTimelinesByBitmask(GameObject* gameObject, uint sharedTimelineState, uint bitmask, ulong unused);
 
     [VirtualFunction(258)]
     public partial void GetDescription(Utf8String* outDescription);
@@ -59,12 +124,24 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(270)]
     public partial int GetRecommendedLevel();
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 41 0F B6 C0 41 8B F9")]
+    public partial void DispatchEvent(GameObject* gameObject, EventType eventType, uint eventParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 FF 87")]
+    public partial bool QueueFormatStringCallback(Utf8String* str, StdDeque<TextParameter>* parameters, ulong callbackParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4D ?? 8B C1")]
+    public partial bool QueueActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public struct EventHandlerInfo {
     [FieldOffset(0x00)] public EventId EventId;
     [FieldOffset(0x04)] public byte Flags;
+    [FieldOffset(0x08)] public FormatStringCallback FormatStringCallback; // FormatStringCallback<EventHandler>
+    [FieldOffset(0x18)] public ActionTimelineCallback ActionTimelineCallback; // ActionTimelineCallback<EventHandler>
+    [FieldOffset(0x28)] public ListenItemCallback ListenItemCallback; // ListenItemCallback<EventHandler>
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
@@ -531,4 +608,15 @@ public enum SceneFlag : ulong {
 
     SetEObjBase = SetBase & ~InvisEObj,
     SetInvisBase = SetBase | InvisAll,
+}
+
+public enum EventType : byte {
+    EnterTerritory = 15, // EventParam: TerritoryType Id
+    UIEvent = 21, // EventParam: UIEventType
+}
+
+public enum UIEventType {
+    TitleDeedHouseShop = 1, // UI_EVENT_TITLE_DEED_HOUSE_SHOP
+    GroupPose = 2, // UI_EVENT_GROUP_POSE
+    IdleCamera = 3, // UI_EVENT_IDLE_CAMERA
 }

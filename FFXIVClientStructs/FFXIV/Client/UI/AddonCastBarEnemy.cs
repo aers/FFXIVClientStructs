@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+
+namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::AddonCastBarEnemy
 //   Component::GUI::AtkUnitBase
@@ -8,7 +9,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 [Addon("CastBarEnemy")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x530)]
+[StructLayout(LayoutKind.Explicit, Size = 0x538)]
 public unsafe partial struct AddonCastBarEnemy {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray10<CastBarPositionStruct> _castBarPositions;
     [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray10<CastBarInfoStruct> _castBarInfo;
@@ -16,7 +17,8 @@ public unsafe partial struct AddonCastBarEnemy {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public unsafe partial struct CastBarPositionStruct {
-        [FieldOffset(0x00)] public GameObjectId ObjectId;
+        [FieldOffset(0x00)] public uint EntityId;
+        [FieldOffset(0x00), Obsolete("Use EntitiyId", true)] public GameObjectId ObjectId;
         [FieldOffset(0x04)] public UIObjectKind NamePlateObjectKind;
         [FieldOffset(0x08)] public uint Size;  // 0 - 100, size of nameplate depending on distance to object
         [FieldOffset(0x0C)] public uint ScreenPosX;
@@ -25,7 +27,8 @@ public unsafe partial struct AddonCastBarEnemy {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public unsafe partial struct CastBarInfoStruct {
-        [FieldOffset(0x00)] public GameObjectId ObjectId;
+        [FieldOffset(0x00)] public uint EntityId;
+        [FieldOffset(0x00), Obsolete("Use EntitiyId", true)] public GameObjectId ObjectId;
         [FieldOffset(0x04)] public byte Progress;  // 0 - 100, 0xFF if not active
         [FieldOffset(0x08)] public CStringPointer CastName;
         [FieldOffset(0x10)] public bool Interruptible;

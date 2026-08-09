@@ -17,9 +17,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          allow-unsafe-pr-checkout: true
       - uses: ./.github/composites/update-dotnet
       - name: Install dependencies
         run: dotnet restore ./FFXIVClientStructs.slnx
@@ -115,10 +116,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.base.ref == 'main'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
+          allow-unsafe-pr-checkout: true
       - name: Perform Rebase
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -143,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.base.ref == 'main'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.base.ref }}
       - uses: ./.github/composites/update-dotnet

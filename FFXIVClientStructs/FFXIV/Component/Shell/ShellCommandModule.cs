@@ -19,4 +19,18 @@ public unsafe partial struct ShellCommandModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 89 6E")]
     public partial void ExecuteCommandInner(Utf8String* command, UIModule* uiModule);
+
+    /// <summary>
+    /// Evaluates a <see cref="Utf8String"/> into a <see cref="ShellCommandInterface.CommandContext"/>.
+    /// </summary>
+    /// <param name="command">String to evaluate</param>
+    /// <param name="resultContext">Results of evaluation</param>
+    /// <param name="expectedCommandId">-1 or expected TextCommandId</param>
+    /// <returns>
+    ///     0 for success<br/>
+    ///     -1 for non-existing TextCommand<br/>
+    ///     -2 for non-matching expectedCommandId
+    /// </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 66 39 4C 24")]
+    public partial int EvaluateTextCommand(Utf8String* command, ShellCommandInterface.CommandContext* resultContext, short expectedCommandId = -1);
 }

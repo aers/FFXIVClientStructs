@@ -83,7 +83,9 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x358)] internal Texture* Unk358; // Equivalent of Unk110 for CharaView
     [FieldOffset(0x360)] internal Texture* Unk360; // Depth/Stencil for CharaView?
     [FieldOffset(0x368)] internal Texture* Unk368; // Looks the same as Unk360
-    [FieldOffset(0x370)] internal Texture* Unk370; // temp target for ui when changing graphic settings
+    // Only used when gamma != default or color filtering is enabled.
+    // Game draws here instead of SwapChainBackBuffer, and this is the source for ToneAdjust which draws to SCBB.
+    [FieldOffset(0x370)] public Texture* ToneAdjustSource;
     // CharaView semitransparent targets:
     [FieldOffset(0x378), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _charaViewSemitransparentGBuffers;
     [FieldOffset(0x3A0)] internal Texture* Unk3A0; // null?
@@ -128,8 +130,8 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x558)] internal Texture* Unk558;
     [FieldOffset(0x560)] internal Texture* Unk560;
     [FieldOffset(0x568)] internal Texture* Unk568;
-    [FieldOffset(0x570)] internal Texture* Unk570;
-    [FieldOffset(0x578)] internal Texture* Unk578; // apparently BackBuffer, see 48 89 87 ?? ?? ?? ?? 48 8B 47 ?? 48 89 87 ?? ?? ?? ?? 8B 06
+    [FieldOffset(0x570)] public Texture* SwapChainBackBuffer;
+    [FieldOffset(0x578)] public Texture* SwapChainDepthStencil;
     [FieldOffset(0x580)] internal Texture* Unk580;
     [FieldOffset(0x588)] internal Texture* Unk588;
     [FieldOffset(0x590)] internal Texture* Unk590;

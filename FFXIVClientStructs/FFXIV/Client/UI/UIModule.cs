@@ -17,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<UIModuleInterface>, Inherits<AtkModuleEvent>, Inherits<ExcelLanguageEvent>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xFFB40)]
+[StructLayout(LayoutKind.Explicit, Size = 0xFFB50)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 4C 24 ?? 48 89 01", 3, 248)]
 public unsafe partial struct UIModule {
     public static UIModule* Instance() {
@@ -106,24 +106,27 @@ public unsafe partial struct UIModule {
 
     [FieldOffset(0xBB130)] internal UI3DModule UI3DModule;
     [FieldOffset(0xD2670)] internal RaptureAtkModule RaptureAtkModule;
-    [FieldOffset(0xFCFB0)] internal InfoModule InfoModule;
-    [FieldOffset(0xFEC28)] internal UIModuleHelpers UIModuleHelpers;
-    [FieldOffset(0xFEC78)] public Utf8String AddonSheetName;
+    [FieldOffset(0xFCFC0)] internal InfoModule InfoModule;
+    [FieldOffset(0xFEC38)] internal UIModuleHelpers UIModuleHelpers;
+    [FieldOffset(0xFEC88)] public Utf8String AddonSheetName;
 
-    [FieldOffset(0xFECE8)] public Utf8String UIColorSheetName;
+    [FieldOffset(0xFECF8)] public Utf8String UIColorSheetName;
 
-    [FieldOffset(0xFED60)] public Utf8String CompletionSheetName;
-    [FieldOffset(0xFEDC8)] public Utf8String CompletionOpenIconMacro;
-    [FieldOffset(0xFEE30)] public Utf8String CompletionCloseIconMacro;
-    [FieldOffset(0xFEE98)] public Utf8String NewLineMacro;
-    [FieldOffset(0xFEF00)] public Utf8String LastTalkName;
-    [FieldOffset(0xFEF68)] public Utf8String LastTalkText;
-    [FieldOffset(0xFEFD0)] internal UIInputData UIInputData;
-    [FieldOffset(0xFFA00)] internal UIInputModule UIInputModule;
-    // [FieldOffset(0xF7AF8)] public Vf79Struct;
+    [FieldOffset(0xFED70)] public Utf8String CompletionSheetName;
+    [FieldOffset(0xFEDD8)] public Utf8String CompletionOpenIconMacro;
+    [FieldOffset(0xFEE40)] public Utf8String CompletionCloseIconMacro;
+    [FieldOffset(0xFEEA8)] public Utf8String NewLineMacro;
+    [FieldOffset(0xFEF10)] public Utf8String LastTalkName;
+    [FieldOffset(0xFEF78)] public Utf8String LastTalkText;
+    [FieldOffset(0xFEFE0)] internal UIInputData UIInputData;
+    [FieldOffset(0xFFA10)] internal UIInputModule UIInputModule;
+    // [FieldOffset(0xF7B08)] public Vf79Struct;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
+
+    [MemberFunction("48 83 EC ?? ?? ?? ?? FF 50 ?? 48 8B C8 48 83 C4 ?? E9 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 40 53 48 83 EC ?? ?? ?? ?? 48 8B D9")]
+    public partial void Draw2D();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct UIModuleHandler {

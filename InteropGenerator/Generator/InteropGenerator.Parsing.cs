@@ -336,6 +336,7 @@ public sealed partial class InteropGenerator {
                 bool isPartial = false;
                 bool hasGetter = true;
                 bool hasSetter = true;
+                bool isReadonlyGetter = true;
 
                 // check partial property definition
                 foreach (IPropertySymbol propertySymbol in structSymbol.GetMembers().OfType<IPropertySymbol>()) {
@@ -346,6 +347,7 @@ public sealed partial class InteropGenerator {
                     isPartial = propertySymbol.IsPartialDefinition;
                     hasGetter = propertySymbol.GetMethod != null;
                     hasSetter = !propertySymbol.IsReadOnly && propertySymbol.SetMethod != null;
+                    isReadonlyGetter = propertySymbol.GetMethod?.IsReadOnly ?? false;
 
                     break;
                 }
@@ -365,6 +367,7 @@ public sealed partial class InteropGenerator {
                     isPartial,
                     hasGetter,
                     hasSetter,
+                    isReadonlyGetter,
                     inheritableAttributes
                 );
 

@@ -9,13 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Excel;
 public unsafe partial struct ExcelModuleInterface {
     [FieldOffset(0x08)] public ExdModule* ExdModule;
 
-    [VirtualFunction(1)]
-    public partial ExcelSheet* GetSheetByIndex([CExporterTypeForce("Component::Exd::SheetsEnum")] uint sheetIndex);
-
-    [VirtualFunction(2), GenerateStringOverloads]
-    public partial ExcelSheet* GetSheetByName(CStringPointer sheetName);
-
-    [VirtualFunction(3)]
+    [MemberFunction("E8 ?? ?? ?? ?? ?? ?? 41 39 8E")]
     public partial ExcelLanguage* GetLanguage(); // returns a pointer to ExcelModule->GetLanguage() - 1
 
     public enum ExcelLanguage {

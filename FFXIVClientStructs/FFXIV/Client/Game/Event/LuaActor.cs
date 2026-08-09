@@ -4,8 +4,9 @@ using FFXIVClientStructs.FFXIV.Common.Lua;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::LuaActor
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-public unsafe struct LuaActor {
+public unsafe partial struct LuaActor {
     [FieldOffset(0x08)] public GameObject* Object;
     [FieldOffset(0x10)] public Utf8String LuaString;
     [FieldOffset(0x78)] public LuaState* LuaState;

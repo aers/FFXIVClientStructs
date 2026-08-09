@@ -90,6 +90,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x17D4)] public float NextFrameDeltaTimeOverride;
     [FieldOffset(0x17D8)] public bool WindowInactive;
 
+    [FieldOffset(0x17E4)] public int UseSqPack;
     [FieldOffset(0x17E8)] public int DataPathType;
 
     [FieldOffset(0x19F4), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _gamePath;

@@ -19,6 +19,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F", 3, 20)]
 public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentTextInput> {
     [FieldOffset(0x1F0)] public AtkUldComponentDataTextInput ComponentTextData;
+
+    /// <summary>Input categories accepted by this text input after text evaluation.</summary>
     [FieldOffset(0x26C)] public AllowedEntities InputSanitizationFlags;
 
     /// <summary> The index in the <see cref="AtkTextInput.AtkHistory"/> array. </summary>
@@ -53,6 +55,7 @@ public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentText
 
     [FieldOffset(0x530)] public TextInputHandlerValues HandlerValues;
 
+    /// <remarks>This maps to <see cref="AllowedEntities.Payloads"/> in <see cref="InputSanitizationFlags"/>.</remarks>
     public bool EnableCompletion {
         get => InputSanitizationFlags.HasFlag(AllowedEntities.Payloads);
         set => InputSanitizationFlags = value
@@ -64,6 +67,7 @@ public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentText
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83")]
     public partial AtkComponentTextInput* Ctor();
 
+    /// <remarks>Temporarily targets this component in <see cref="AtkInputManager.TextInput"/> while applying text input limits and formatting.</remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 33 D2"), GenerateStringOverloads]
     public partial void SetText(CStringPointer text);
 
@@ -74,6 +78,58 @@ public unsafe partial struct AtkComponentTextInput : ICreatable<AtkComponentText
     /// <param name="unique">If true, only insert if the text is not already in the input.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 83 ?? ?? ?? ?? 33 F6 45 33 C9"), GenerateStringOverloads]
     public partial void InsertText(CStringPointer text, bool unique = false);
+
+    /// <summary>Returns whether <see cref="AtkComponentInputBase.EvaluatedString"/> is non-empty.</summary>
+    [MemberFunction("48 8B 81 E0 00 00 00 80 38 00 0F 95 C0 C3")]
+    public partial bool HasEvaluatedText();
+
+    /// <summary>Allows or disallows uppercase letter input.</summary>
+    [MemberFunction("44 0F B7 81 6C 02 00 00 0F B6 C2 80 A1 5A 02 00 00 BF")]
+    public partial void ToggleUpperCase(bool enabled);
+
+    /// <summary>Allows or disallows lowercase letter input.</summary>
+    [MemberFunction("44 0F B7 81 6C 02 00 00 0F B6 C2 80 A1 5A 02 00 00 7F")]
+    public partial void ToggleLowerCase(bool enabled);
+
+    /// <summary>Allows or disallows numeric input.</summary>
+    [MemberFunction("44 0F B7 81 6C 02 00 00 41 B9 FB FF 00 00 80 A1 5B 02 00 00 FE")]
+    public partial void ToggleNumberInput(bool enabled);
+
+    /// <summary>Allows or disallows symbol and special-character input.</summary>
+    [MemberFunction("44 0F B7 81 6C 02 00 00 0F B6 C2 80 A1 5B 02 00 00 FD")]
+    public partial void ToggleSymbolInput(bool enabled);
+
+    [MemberFunction("44 0F B7 81 6C 02 00 00 0F B6 C2 80 A1 5A 02 00 00 EF")]
+    public partial void ToggleIME(bool enabled);
+
+    /// <summary>Enables or disables dictionary support for this text input.</summary>
+    /// <remarks>Visible behavior depends on the active text service, IME, and completion state.</remarks>
+    [MemberFunction("44 0F B7 81 6C 02 00 00 0F B6 C2 80 A1 5A 02 00 00 FB")]
+    public partial void ToggleDictionary(bool enabled);
+
+    [MemberFunction("44 0F B7 81 6C 02 00 00 41 B9 7F FF 00 00 80 A1 5A 02 00 00 FE")]
+    public partial void ToggleCapitalize(bool enabled);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 8D 53 ?? E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 33 D2")]
+    public partial void ToggleEscapeClears(bool enabled);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E ?? B8 ?? ?? ?? ?? F7 E3")]
+    public partial void SetMaxByte(int maxByte);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9F ?? ?? ?? ?? 48 8D 6E")]
+    public partial void SetMaxChar(int maxChar);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 56 ?? 45 33 C9")]
+    public partial void SetMaxLine(uint maxLine);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 57 ?? 49 8B CF")]
+    public partial void SetAtkHistoryIndex(short index);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 8D ?? ?? ?? ?? 33 D2")]
+    public partial void SetFontSize(byte fontSize);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 38 BE ?? ?? ?? ?? 0F 84")]
+    public partial void UpdateCharacterCount(int currentCharCount, int currentByteCount);
 
     /// <summary>
     /// AtkValues for AtkModule handlers 7, 8, (9?), 10

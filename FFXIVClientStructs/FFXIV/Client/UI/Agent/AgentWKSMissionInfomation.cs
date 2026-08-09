@@ -14,6 +14,7 @@ public unsafe partial struct AgentWKSMissionInfomation {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MissionInfo {
         [FieldOffset(0x00)] public long ServerTime;
+        [FieldOffset(0x08)] public uint AddonId; // AbandonAddon
         [FieldOffset(0x0C)] public uint CurrentMissionUnitId;
         [FieldOffset(0x10)] public byte State;
         [FieldOffset(0x14)] public byte Flags;

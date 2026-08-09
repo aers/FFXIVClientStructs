@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
@@ -12,9 +13,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x268)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
+    [FieldOffset(0x160), FixedSizeArray] internal FixedSizeArray1<DrawObjectData> _unkWeaponData;
     [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
     [FieldOffset(0x220)] public CustomizeData CustomizeData;
-
+    [FieldOffset(0x23A)] public short ArrowAttributeId; // atr_arrow (Bard's Quiver)
+    [FieldOffset(0x23C)] public short AttachAttributeId; // atr_attach (Machinist's Aetherotransformer)
     [BitField<bool>(nameof(IsHatHidden), 0)]
     [FieldOffset(0x23E)] public byte Flags1;
     [BitField<bool>(nameof(IsWeaponHidden), 0)]
@@ -91,25 +94,41 @@ public unsafe partial struct DrawDataContainer {
         LFinger = 9,
     }
 
+    // TODO: do we rename MainHand to Main and OffHand to Sub?
     public enum WeaponSlot : uint {
-        MainHand = 0,
-        OffHand = 1,
-        Unk = 2, // TODO: CraftTool?
+        MainHand = 0, // WEAPON_SLOT_MAIN
+        OffHand = 1, // WEAPON_SLOT_SUB
+        System = 2, // WEAPON_SLOT_SYSTEM - used for crafter's tool
     }
 }
 
-// ctor E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct DrawObjectData {
     public const int Size = 0x70;
 
     [FieldOffset(0x00)] public WeaponModelId ModelId;
-    [FieldOffset(0x18)] public DrawObject* DrawObject;
+    [FieldOffset(0x08)] public Weapon* Weapon;
+    [FieldOffset(0x10)] public DrawData DrawData;
+    [FieldOffset(0x18), Obsolete("Use DrawData.DrawObject")] public DrawObject* DrawObject;
+
     [BitField<bool>(nameof(IsHidden), 1)]
-    [FieldOffset(0x60)] public byte State;
+    [FieldOffset(0x60)] public byte State; // TODO: ushort
     [FieldOffset(0x62)] public ushort Flags1;
     [FieldOffset(0x64)] public byte Flags2;
+    [FieldOffset(0x66)] private ushort UnkWeaponTimelineId;
+    [FieldOffset(0x68)] private ushort UnkTimelineId;
+}
+
+// Client::Game::Character::DrawData
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
+public unsafe partial struct DrawData {
+    [FieldOffset(0x08)] public DrawObject* DrawObject;
+    [FieldOffset(0x10)] public CharacterBase* CharacterBase;
+    [FieldOffset(0x18)] public AttachOffsetResourceHandle* AttachOffsetResourceHandle;
+
+    [FieldOffset(0x2C)] public uint Slot;
 }
 
 [GenerateInterop]

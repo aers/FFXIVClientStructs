@@ -38,6 +38,7 @@ public unsafe partial struct AgentDawnStory {
 
         [FieldOffset(0x66838)] public uint ModalAddonId;
         [FieldOffset(0x6683C)] public uint Flags;
+        [FieldOffset(0x66840)] public AgentContentsFinderInterface InterfaceSub;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]

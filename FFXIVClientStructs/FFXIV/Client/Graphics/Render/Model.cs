@@ -33,7 +33,12 @@ public unsafe partial struct Model {
     public ReadOnlySpan<Pointer<Material>> MaterialsSpan
         => new(Materials, MaterialCount);
 
-
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 29 48 8B 13")]
     public partial bool ModelDrawInit(ModelResourceHandle* mdlHandle, ModelRenderer.Callback* renderModelCallback, ModelRenderer.Callback* renderMaterialCallback);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 3B C7 74 ?? 41 83 FE"), GenerateStringOverloads]
+    public partial short GetAttributeIndex(CStringPointer attributeName);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 3B C4 74 ?? 0F B6 C8 8B D7"), GenerateStringOverloads]
+    public partial short GetShapeIndex(CStringPointer shapeName);
 }

@@ -59,7 +59,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x34)] public uint NameId;
     [FieldOffset(0x38)] public uint LayoutId;
     [FieldOffset(0x3C)] public uint ObjectType; // depends on ObjectKind? can be CompanionOwnerId, can also be FurnitureMemory index
-    [FieldOffset(0x40)] public uint EventId;
+    [FieldOffset(0x40)] public uint EventId; // TODO: Change to EventId
     [FieldOffset(0x44)] public uint OwnerId;
     [FieldOffset(0x48)] public uint TetherTargetId;
     [FieldOffset(0x4C)] public uint MaxHealthPoints;
@@ -68,7 +68,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x58)] public ushort FateId;
     [FieldOffset(0x5A)] public ushort MaxResourcePoints; // MP/GP/CP
     [FieldOffset(0x5C)] public ushort ResourcePoints;
-    [FieldOffset(0x5E)] private ushort Unk5E;
+    [FieldOffset(0x5E)] public ushort Behavior;
     [FieldOffset(0x60)] public ushort ModelChara;
     [FieldOffset(0x62)] public ushort Rotation;
     [FieldOffset(0x64)] public ushort MountId;
@@ -76,7 +76,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x68)] public ushort FollowMountId;
     [FieldOffset(0x6A)] public ushort OrnamentId;
     [FieldOffset(0x6C)] public ushort TetherId;
-    [FieldOffset(0x6E)] public byte SpawnIndex; // unused
+    [FieldOffset(0x6E)] public byte SpawnIndex;
     [FieldOffset(0x6F)] public CharacterModes CharacterMode;
     [FieldOffset(0x70)] public byte ModeParam;
     [FieldOffset(0x71)] public ObjectKind ObjectKind;
@@ -87,7 +87,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x76)] public byte Level;
     [FieldOffset(0x77)] public byte ClassJobId;
     [FieldOffset(0x78)] public byte EventState;
-    [FieldOffset(0x79)] private byte Unk79; // GameObject+0x97
+    [FieldOffset(0x79)] public bool IsHidden;
     [FieldOffset(0x7A)] public byte CombatTagType;
     [FieldOffset(0x7B)] public byte BuddyEquipHead;
     [FieldOffset(0x7C)] public byte BuddyEquipChest;
@@ -110,9 +110,6 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x252)] public CustomizeData CustomizeData;
     [FieldOffset(0x26C), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
 
-    [FieldOffset(0x30), Obsolete("Renamed to BaseId", true)] public uint BNpcBaseId;
-    [FieldOffset(0x34), Obsolete("Renamed to NameId", true)] public uint BNpcNameId;
-
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct StatusEffect {
         [FieldOffset(0x0)] public ushort StatusId;
@@ -125,9 +122,11 @@ public partial struct CommonSpawnData {
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public struct SpawnObjectPacket {
     [FieldOffset(0x00)] public byte ObjectIndex;
-    [FieldOffset(0x01)] public byte ObjectKind;
-    [FieldOffset(0x02)] public byte TargetableStatus;
-    [FieldOffset(0x03)] public byte Visibility;
+    [FieldOffset(0x01)] public byte ObjectKind; // TODO: Use ObjectKind enum
+    [FieldOffset(0x02), Obsolete("Use IsTargetable")] public byte TargetableStatus;
+    [FieldOffset(0x02)] public bool IsTargetable;
+    [FieldOffset(0x03), Obsolete("Use IsHidden")] public byte Visibility;
+    [FieldOffset(0x03)] public bool IsHidden;
     /// <remarks> <see cref="HousingObjectId"/> when <see cref="ObjectKind.HousingEventObject"/>. </remarks>
     [FieldOffset(0x04)] public uint BaseId;
     [FieldOffset(0x08)] public uint EntityId;
@@ -139,16 +138,15 @@ public struct SpawnObjectPacket {
     /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
     [FieldOffset(0x18)] public uint GimmickId;
     [FieldOffset(0x1C)] public float Radius;
-    [FieldOffset(0x20)] private ushort Unk20; // SharedGroupTimelineState?
     [FieldOffset(0x22)] public ushort Rotation;
     /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
     [FieldOffset(0x24)] public ushort FateId;
     /// <remarks> Used for <see cref="ObjectKind.EventObj"/>. </remarks>
     [FieldOffset(0x26)] public byte EventState;
-    [FieldOffset(0x27)] private byte Unk27;
-    [FieldOffset(0x28)] private uint Unk28;
-    [FieldOffset(0x2C)] private uint Unk2C;
-    [FieldOffset(0x30)] private uint Unk30;
+    /// <remarks> Used by <see cref="ObjectKind.GatheringPoint"/>, <see cref="ObjectKind.EventObj"/>, <see cref="ObjectKind.AreaObject"/>. </remarks>
+    [FieldOffset(0x2C)] public uint Arg1;
+    /// <remarks> Used by <see cref="ObjectKind.GatheringPoint"/>, <see cref="ObjectKind.EventObj"/>, <see cref="ObjectKind.HousingEventObject"/>. </remarks>
+    [FieldOffset(0x30)] public uint Arg2;
     [FieldOffset(0x34)] public float PositionX;
     [FieldOffset(0x38)] public float PositionY;
     [FieldOffset(0x3C)] public float PositionZ;
@@ -164,15 +162,17 @@ public partial struct SpawnTreasurePacket {
     [FieldOffset(0x0E)] public byte ObjectIndex;
     [FieldOffset(0x0F)] public byte ItemCount;
     [FieldOffset(0x10)] public byte EventState;
-    [FieldOffset(0x11)] public byte CofferKind;
-    [FieldOffset(0x12)] public byte Visibility;
+    [FieldOffset(0x11)] public byte CofferKind; // TODO: Change to Treasure.TreasureKind
+    [FieldOffset(0x12), Obsolete("Use IsHidden")] public byte Visibility;
+    [FieldOffset(0x12)] public bool IsHidden;
 
     [FieldOffset(0x14)] public float CountdownTime;
     [FieldOffset(0x18)] public float CountdownStartTime;
     [FieldOffset(0x1C)] public float ClaimTime;
     [FieldOffset(0x20)] public EventId EventId;
     [FieldOffset(0x24)] public uint ExportedSGRowId;
-    [FieldOffset(0x28)] public byte TargetableStatus;
+    [FieldOffset(0x28), Obsolete("Use NotTargetable")] public byte TargetableStatus;
+    [FieldOffset(0x28)] public bool NotTargetable;
 
     [FieldOffset(0x2A)] public ushort PositionX;
     [FieldOffset(0x2C)] public ushort PositionY;

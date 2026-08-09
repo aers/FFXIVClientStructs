@@ -30,10 +30,21 @@ public unsafe partial struct GameObject {
     /// <remarks> Use only when <see cref="ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/>. </remarks>
     [FieldOffset(0x91), CExporterUnion("SubKind")] public BattleNpcSubKind BattleNpcSubKind;
     [FieldOffset(0x92)] public byte Sex;
-    [FieldOffset(0x94)] public byte YalmDistanceFromPlayerX;
-    [FieldOffset(0x95)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
-    [FieldOffset(0x96)] public byte YalmDistanceFromPlayerZ;
+    /// <remarks> Is set to the value of <see cref="NextTargetStatus"/> via <see cref="SetTargetStatus"/> called in <c>GameObjectManager.Update</c>. </remarks>
+    [FieldOffset(0x93)] public byte CurrentTargetStatus;
+    /// <summary> Distance to the LocalPlayer. </summary>
+    /// <remarks> Is set to the value of <see cref="NextDistance"/> via <see cref="SetDistance"/> called in <c>GameObjectManager.Update</c>. </remarks>
+    [FieldOffset(0x94)] public byte CurrentDistance;
+    [FieldOffset(0x94), Obsolete("Renamed to CurrentDistance")] public byte YalmDistanceFromPlayerX;
+    /// <remarks> Calculated in <see cref="UpdateNextDistanceAndTargetStatus"/> right before <c>GameObjectManager.Update</c> sets it to <see cref="CurrentTargetStatus"/> via <see cref="SetTargetStatus"/>. </remarks>
+    [FieldOffset(0x95)] public byte NextTargetStatus;
+    [FieldOffset(0x95), Obsolete("Renamed to NextTargetStatus")] public byte TargetStatus;
+    /// <remarks> Calculated in <see cref="UpdateNextDistanceAndTargetStatus"/> right before <c>GameObjectManager.Update</c> sets it to <see cref="CurrentDistance"/> via <see cref="SetDistance"/>. </remarks>
+    [FieldOffset(0x96)] public byte NextDistance;
+    [FieldOffset(0x96), Obsolete("Renamed to NextDistance")] public byte YalmDistanceFromPlayerZ;
+    [FieldOffset(0x97)] public byte Visibility;
     [FieldOffset(0x9A)] public ObjectTargetableFlags TargetableStatus; // Determines whether the game object can be targeted by the user
+    [FieldOffset(0x9B)] public ObjectUpdateFlags UpdateFlags;
     [FieldOffset(0xB0)] public Vector3 Position;
     [FieldOffset(0xC0)] public float Rotation;
     [FieldOffset(0xC4)] public float Scale;
@@ -77,6 +88,9 @@ public unsafe partial struct GameObject {
     [VirtualFunction(2)]
     public partial ObjectKind GetObjectKind();
 
+    [VirtualFunction(3)]
+    public partial ObjectType GetObjectType();
+
     [VirtualFunction(4)]
     public partial bool GetIsTargetable();
 
@@ -98,8 +112,31 @@ public unsafe partial struct GameObject {
     [VirtualFunction(13)]
     public partial void DisableDraw();
 
+    [VirtualFunction(14)]
+    public partial void UpdateNextDistanceAndTargetStatus();
+
+    /// <remarks> Also propagates it to the mount and ornament objects, if available.</remarks>
+    [VirtualFunction(15)]
+    public partial void SetTargetStatus(byte targetStatus);
+
+    /// <remarks> Also propagates it to the mount and ornament objects, if available.</remarks>
+    [VirtualFunction(16)]
+    public partial void SetDistance(byte distance);
+
     [VirtualFunction(17)]
     public partial void SetDrawObject(DrawObject* drawObject);
+
+    /// <summary> Start playing this timeline. </summary>
+    [VirtualFunction(20)]
+    public partial bool PlayTimeline(uint index, uint a2);
+
+    /// <summary> Stops this timeline's playback. </summary>
+    [VirtualFunction(21)]
+    public partial bool StopTimeline(uint index);
+
+    /// <summary> Checks if this timeline is currently playing. </summary>
+    [VirtualFunction(22)]
+    public partial bool IsTimelinePlaying(uint index);
 
     [VirtualFunction(23)]
     public partial DrawObject* GetDrawObject();
@@ -118,11 +155,20 @@ public unsafe partial struct GameObject {
     [VirtualFunction(34)]
     public partial void SetReadyToDraw();
 
+    [VirtualFunction(36)]
+    public partial void Update();
+
     [VirtualFunction(47)]
     public partial void GetCenterPosition(Vector3* outCenter);
 
     [VirtualFunction(48)]
     public partial uint GetNameId();
+
+    /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
+    /// <param name="oldSharedTimelineState">The old SharedTimelineState value.</param>
+    /// <param name="newSharedTimelineState">The new SharedTimelineState value.</param>
+    [VirtualFunction(49)]
+    public partial void UpdateSharedTimelineState(ushort oldSharedTimelineState, ushort newSharedTimelineState);
 
     [VirtualFunction(54)]
     public partial TargetType GetTargetType();
@@ -230,6 +276,26 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
     public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
 
+    /// <summary>If we have a SharedGroupLayoutInstance and it's loaded.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 33 FF 48 89 B4 24")]
+    public partial bool IsSharedGroupLoaded();
+
+    /// <summary>Sets EventState to a new value.</summary>
+    [MemberFunction("80 89 ?? ?? ?? ?? ?? 88 51")]
+    public partial void SetEventState(byte eventState);
+
+    /// <summary>Sets Visibility to a new value.</summary>
+    /// <param name="visibility">0 shows the object, 1 hides it.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4F ?? 89 8E")]
+    public partial void SetVisibility(byte visibility);
+
+    /// <summary>Sets EventId to a new value.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 56 ?? 48 8B 4F")]
+    public partial void SetEventId(EventId eventId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 16 48 8B 4F"), GenerateStringOverloads]
+    public partial void SetName(CStringPointer name);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct NamePlateColors {
         [FieldOffset(0x00), CExporterIgnore] public ulong Data;
@@ -281,7 +347,27 @@ public enum ObjectKind : byte {
     Cutscene = 13,
     ReactionEventObject = 14,
     Ornament = 15,
-    CardStand = 16
+    CardStand = 16,
+    FollowMount = 17,
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x04)]
+public partial struct ObjectType : IEquatable<ObjectType>, IComparable<ObjectType> {
+    [BitField<byte>(nameof(PetMirageId), 8, 8)]
+    [FieldOffset(0x00)] public uint Value;
+
+    /// <remarks> Only valid if <see cref="GameObject.ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/> and <see cref="GameObject.BattleNpcSubKind"/> is <see cref="BattleNpcSubKind.Pet"/>. </remarks>
+    public partial byte PetMirageId { readonly get; set; }
+
+    public static implicit operator uint(ObjectType ot) => ot.Value;
+    public static unsafe implicit operator ObjectType(uint ot) => *(ObjectType*)&ot;
+    public bool Equals(ObjectType other) => Value == other.Value;
+    public override bool Equals(object? obj) => obj is ObjectType other && Equals(other);
+    public override int GetHashCode() => Value.GetHashCode();
+    public static bool operator ==(ObjectType left, ObjectType right) => left.Value == right.Value;
+    public static bool operator !=(ObjectType left, ObjectType right) => left.Value != right.Value;
+    public int CompareTo(ObjectType other) => Value.CompareTo(other);
 }
 
 /// <summary>
@@ -295,7 +381,8 @@ public enum BattleNpcSubKind : byte {
     Pet = 2,
     /// <summary> Chocobo Companion </summary>
     Buddy = 3,
-
+    /// <summary> Player </summary>
+    Player = 4,
     /// <summary> Enemies, Guards </summary>
     Combatant = 5,
     /// <summary> Chocobos in Chocobo Racing </summary>
@@ -319,6 +406,7 @@ public enum TargetType {
 
 [Flags]
 public enum ObjectTargetableFlags : byte {
+    Unk0 = 1 << 0, // Seen in SpawnObject/SpawnTreasure packets
     IsTargetable = 1 << 1,
     Unk1 = 1 << 2, // This flag is used but purpose is unclear
     ReadyToDraw = 1 << 6
@@ -340,4 +428,17 @@ public enum VisibilityFlags : ulong {
     None = 0,
     Model = 1ul << 1,
     Nameplate = 1ul << 11
+}
+
+[Flags]
+public enum ObjectUpdateFlags : byte {
+    /// <summary>Seen when Name is modified.</summary>
+    Name = 1,
+    Unk2 = 2,
+    /// <summary>Seen when EventId is modified.</summary>
+    EventId = 4,
+    /// <summary>Seen when TargetableStatus is modified.</summary>
+    TargetableStatus = 8,
+    Unk16 = 16,
+    Unk32 = 32,
 }

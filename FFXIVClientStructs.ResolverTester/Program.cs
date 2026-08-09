@@ -1,9 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
-using System.Net;
 using System.Reflection.PortableExecutable;
 using System.Text;
-using FFXIVClientStructs.Havok.Common.Base.System.IO.Reader;
 using FFXIVClientStructs.ResolverTester;
 using InteropGenerator.Runtime;
 using YamlDotNet.Serialization.NamingConventions;
@@ -47,8 +45,8 @@ unsafe {
             Console.WriteLine($"{address.Name} {address.Value:X}");
     }
 }
-/*
-using StreamReader dataReader = new StreamReader(@".\ida\data.yml");
+
+using StreamReader dataReader = new StreamReader("ida/data.yml");
 
 var deserializer = new YamlDotNet.Serialization.DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
 var data = deserializer.Deserialize<Data>(dataReader);
@@ -58,8 +56,8 @@ int notFoundSigs = 0;
 int matchedSigs = 0;
 int failedSigs = 0;
 
-List<string> failedOutputs = new();
-List<string> notfoundOutputs = new();
+List<string> failedOutputs = [];
+List<string> notfoundOutputs = [];
 
 foreach (Address addr in Resolver.GetInstance.Addresses) {
     // havok names in data.yml mangled
@@ -79,7 +77,7 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
     }
 
     if (functionName == "Instance") {
-        if (!theClass.Instances.Any()) {
+        if (theClass.Instances.Count == 0) {
             notfoundOutputs.Add($"No instance found in data.yml for class {className} / signature {functionName} @ {addr.String}");
             notFoundSigs += 1;
             continue;
@@ -107,18 +105,18 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
     }
 
     if (functionName == "StaticVirtualTable") {
-        if (!theClass.Vtbls.Any()) {
+        if (theClass.Vtbls.Count == 0) {
             notfoundOutputs.Add($"No vtbl found in data.yml for class {className} / signature {functionName} @ {addr.String}");
             notFoundSigs += 1;
             continue;
         }
-        
+
         if (!nint.TryParse(theClass.Vtbls[0].Ea.AsSpan(4), NumberStyles.HexNumber, null, out nint address)) {
             notfoundOutputs.Add($"Unable to parse data.yml offset {theClass.Instances[0].Ea} for class {className} StaticVirtualTable");
             notFoundSigs += 1;
             continue;
         }
-        
+
         if (addr.Value == 0) {
             failedOutputs.Add($"{addr.Name} - {addr.String} failed to resolve, data.yml has {address:X}");
             failedSigs += 1;
@@ -134,30 +132,27 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
         matchedSigs += 1;
         continue;
     }
-    
-    if (functionName == "Ctor")
-        functionName = "ctor";
 
-    if (functionName == "Dtor")
-        functionName = "dtor";
+    if (functionName.StartsWith("Ctor") || functionName.StartsWith("Dtor"))
+        functionName = char.ToLowerInvariant(functionName[0]) + functionName[1..]; // lowercase ctor/dtor
 
     if (theClass.Funcs == null)
         continue;
-    
-    if (!theClass.Funcs.Any() || !theClass.Funcs.ContainsValue(functionName)) {
+
+    if (theClass.Funcs.Count == 0 || !theClass.Funcs.ContainsValue(functionName)) {
         notfoundOutputs.Add($"Function {functionName} of class {className} not found in data.yml for signature {addr.String}");
         notFoundSigs += 1;
         continue;
     }
 
     var key = theClass.Funcs.FirstOrDefault(x => x.Value == functionName).Key!;
-    
+
     if (!nint.TryParse(key.AsSpan(4), NumberStyles.HexNumber, null, out nint dataAddress)) {
         notfoundOutputs.Add($"Unable to parse data.yml offset {key} for class {className} function {functionName}");
         notFoundSigs += 1;
         continue;
     }
-    
+
     if (addr.Value == 0) {
         failedOutputs.Add($"{addr.Name} - {addr.String} failed to resolve, data.yml has {dataAddress:X}");
         failedSigs += 1;
@@ -195,5 +190,4 @@ foreach (string line in notfoundOutputs)
     sb.AppendLine(line);
 
 Console.WriteLine(sb.ToString());
-File.WriteAllText(@".\ida\data-missmatch2.txt", sb.ToString());
-*/
+File.WriteAllText("ida/data-missmatch2.txt", sb.ToString());

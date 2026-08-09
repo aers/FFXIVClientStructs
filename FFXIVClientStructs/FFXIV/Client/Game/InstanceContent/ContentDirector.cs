@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 48 8D 05", 3, 373)]
 [StructLayout(LayoutKind.Explicit, Size = 0xD30)]
 public unsafe partial struct ContentDirector {
     [FieldOffset(0x4E6)] public byte ContentTypeRowId;
@@ -26,12 +27,33 @@ public unsafe partial struct ContentDirector {
     [VirtualFunction(304)]
     public partial uint GetMaxLevel();
 
+    /// <summary>Processes updates specific for this director. This handles the categories between 0 and 0x80000000.</summary>
+    [VirtualFunction(325)]
+    public partial void ProcessDirectorSpecificDirectorUpdate(uint category, uint* parameters);
+
     /// <summary>
     /// Gets the max time for the content in seconds
     /// </summary>
     /// <returns>Time in seconds</returns>
     [VirtualFunction(329)]
     public partial uint GetContentTimeMax();
+
+    /// <summary>Changes the state of a map effect.</summary>
+    /// <param name="index">Index into MapEffects.</param>
+    /// <param name="state">The new state for this MapEffect.</param>
+    /// <param name="timelineIndex">Which timeline to play.</param>
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B FA 41 0F B7 E8")]
+    public partial void ApplyMapEffect(uint index, ushort state, ushort timelineIndex);
+
+    /// <summary>Handles changes the timeline for a map effect</summary>
+    /// <param name="index">Index into MapEffects.</param>
+    /// <param name="timelineIndex">Which timeline to play.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 3A C3 74 ?? 44 0F B7 C5")]
+    public partial bool PlayMapEffectTimeline(uint index, ushort timelineIndex);
+
+    /// <summary>Processes updates shared between all content (e.g. setting the background music). This handles categories above 0x80000000.</summary>
+    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 81 C2 ?? ?? ?? ?? 41 8B E9")]
+    public partial void ProcessCommonDirectorUpdate(uint category, uint arg1, uint arg2, uint arg3, uint arg4);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x608)]
@@ -44,7 +66,7 @@ public unsafe partial struct ContentDirector {
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
     public struct MapEffectItem {
-        [FieldOffset(0x00)] public uint LayoutId; // ContentDirectorManagedSG.Unknown0
+        [FieldOffset(0x00)] public uint LayoutId;
         [FieldOffset(0x05)] public byte Unknown1; // ContentDirectorManagedSG.Unknown1
         [FieldOffset(0x08)] public ushort State;
         [FieldOffset(0x0A)] public byte Flags;

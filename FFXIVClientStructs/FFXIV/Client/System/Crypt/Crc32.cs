@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Crypt;
 
+// Client::System::Crypt::Crc32
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct Crc32 {

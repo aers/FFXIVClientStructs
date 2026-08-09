@@ -7,4 +7,10 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 [GenerateInterop]
 [Inherits<MouseDeviceInterface>, Inherits<InputDevice>, Inherits<RepeatCounter>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public partial struct MouseDevice;
+public partial struct MouseDevice {
+    /// <remarks>
+    /// Schedules the cursor to move to the specified coordinates on the next mouse device update.
+    /// </remarks>
+    [MemberFunction("89 0D ?? ?? ?? ?? 89 15 ?? ?? ?? ?? C6 05 ?? ?? ?? ?? 01 C3")]
+    public static partial void ScheduleCursorMove(int x, int y);
+}

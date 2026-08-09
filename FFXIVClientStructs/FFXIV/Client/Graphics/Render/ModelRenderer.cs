@@ -39,7 +39,7 @@ public unsafe partial struct ModelRenderer {
 
     // This function, among other things, constructs an OnRenderMaterialParams struct with its params and calls CharacterBase.OnRenderMaterial with it (through some indirections - see Model.RenderMaterialCallback).
     [MemberFunction("E8 ?? ?? ?? ?? 40 38 75 ?? 74 ?? 8B 45")]
-    public partial ushort* OnRenderMaterial(ushort* outFlags, OnRenderModelParams* param, Material* material, uint materialIndex);
+    public partial ushort* OnRenderMaterial(OnRenderMaterialParams2* param, Material* material, uint materialIndex);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct Callback {
@@ -51,13 +51,23 @@ public unsafe partial struct ModelRenderer {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct OnRenderModelParams {
         [FieldOffset(0x0)] public Model* Model;
+        [FieldOffset(0x10)] private ConstantBuffer* _unk10;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    // This is stack-allocated. Size is >= 0x48 (per the use in the function) and <= 0xD0 (per the stack frame's size).
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
+    public partial struct OnRenderMaterialParams2 {
+        [FieldOffset(0x0)] public OnRenderModelParams* Inner;
+        [FieldOffset(0x8)] private ModelResourceHandle* _unk8;
+        [FieldOffset(0x10)] public uint OutFlags;
+    }
+
+    // This is stack-allocated. Size is >= 0x34 (per the use in the function).
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct OnRenderMaterialParams {
         [FieldOffset(0x0)] public Model* Model;
-        [FieldOffset(0x8)] public uint MaterialIndex;
-        [FieldOffset(0x10)] public ushort* OutFlags;
+        [FieldOffset(0x28)] public uint* OutFlags; // Points to OnRenderMaterialParams2.OutFlags.
+        [FieldOffset(0x30)] public uint MaterialIndex;
     }
 
     /// <summary> Indices of <see cref="ConstantSamplerIds"/> for well-known constant buffers. </summary>

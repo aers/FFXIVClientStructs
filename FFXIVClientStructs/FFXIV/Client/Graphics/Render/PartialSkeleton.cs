@@ -14,7 +14,8 @@ public unsafe partial struct PartialSkeleton {
     [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray2<ulong> _havokAnimatedSkeletons;
     [FieldOffset(0x148), FixedSizeArray] internal FixedSizeArray4<ulong> _havokPoses;
     [FieldOffset(0x168)] public Skeleton* Skeleton;
-    [FieldOffset(0x188)] public void* SkeletonParameterResourceHandle;
+    [FieldOffset(0x188)] public SkeletonParamResourceHandle* SkeletonParamResourceHandle;
+    [FieldOffset(0x188), Obsolete("Use SkeletonParamResourceHandle")] public void* SkeletonParameterResourceHandle;
     [FieldOffset(0x190)] public SkeletonResourceHandle* SkeletonResourceHandle;
     // 190, 1A0, 1B0 are std set i think, dont know what of
 

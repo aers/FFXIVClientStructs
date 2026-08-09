@@ -1,6 +1,6 @@
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_structimport
-# @runtime Jython
+# @runtime PyGhidra
 
 from yaml import load
 
@@ -123,9 +123,8 @@ class BaseApi:
 
     def get_yaml(self):
         # type: () -> DefinedStructExport
-        dic = load(
-            open(self.get_file_path), Loader=Loader
-        )  # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
+        with open(self.get_file_path, "r") as fd:
+            dic = load(fd, Loader=Loader)  # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
         enums = []
         structs = []
         for enum in dic["enums"]:
@@ -274,7 +273,8 @@ class BaseApi:
         path = os.path.join(os.path.dirname(self.get_file_path), "data.yml")
         if not os.path.exists(path):
             return None
-        return load(open(path), Loader=Loader)
+        with open(path, "r") as fd:
+            return load(fd, Loader=Loader)
 
 api = None
 
@@ -1248,10 +1248,13 @@ if api is None:
         except ImportError:
             pass
 
+        from yaml import SafeLoader as Loader
+
         from ghidra.program.model.data import *
         from ghidra.program.model.listing import *
         from ghidra.program.model.symbol import SourceType
         from ghidra.app.util import SymbolPathParser
+        from java.util import ArrayList
 
     except ImportError:
         print("Warning: Unable to load Ghidra")
@@ -1361,13 +1364,13 @@ if api is None:
                 return funcs.first if not funcs.size() == 0 else None
 
             def create_memberfunc_args(self, member_func):
-                # type: (DefinedStructMemFunc) -> list[ParameterImpl]
-                arg_vars = []
+                # type: (DefinedStructMemFunc) -> ArrayList
+                arg_vars = ArrayList()
                 for param in member_func.parameters:
                     dt = self.get_datatype(param.type)
                     if not dt:
-                        return []
-                    arg_vars.append(ParameterImpl(param.name, dt, currentProgram))
+                        return ArrayList()
+                    arg_vars.add(ParameterImpl(param.name, dt, currentProgram))
                 return arg_vars
 
             @property

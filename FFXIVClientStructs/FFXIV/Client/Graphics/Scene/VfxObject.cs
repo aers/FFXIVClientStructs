@@ -21,9 +21,21 @@ public unsafe partial struct VfxObject {
 
     [FieldOffset(0x1C0)] public int StaticTarget;
 
-    [FieldOffset(0x248)] public byte SomeFlags;
+    [FieldOffset(0x248)] public byte SomeFlags; // bit 0x40 is set to 1 when fadeout
+
+    [FieldOffset(0x250)] public float Speed;
+
+    [FieldOffset(0x258)] public float FadeOutFrames; // 1.0f = 1/60 s, not actually related with frame rate
 
     [FieldOffset(0x260)] public Vector4 Color;
+
+    [FieldOffset(0x280)] public float FadeNearEnd;
+    [FieldOffset(0x284)] public float FadeNearStart;
+    [FieldOffset(0x288)] public float FadeFarStart;
+    [FieldOffset(0x28C)] private float Unk28C; // VfxLayoutInstance.Unk80
+    [FieldOffset(0x290)] public float FadeFarEnd;
+    [FieldOffset(0x294)] public float ZCorrect;
+    [FieldOffset(0x298)] public float SoftParticleFadeRange;
 
     [FieldOffset(0x2A0)] public VfxResourceInstance* VfxResourceInstance;
 

@@ -39,6 +39,6 @@ public unsafe partial struct EnemyListNumberArray {
         [FieldOffset(2 * 4)] public int CastPercent;
         [FieldOffset(3 * 4)] public int EntityId;
         [FieldOffset(4 * 4)] public bool ActiveInList;
-        [FieldOffset(5 * 4)] private int Unk5;
+        [FieldOffset(5 * 4)] public bool LockedInList;
     }
 }

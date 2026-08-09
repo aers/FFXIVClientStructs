@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<EventHandler>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B F1 ?? ?? ?? 48 8D 99 ?? ?? ?? ?? BF ?? ?? ?? ?? 33 ED 90 ?? ?? ?? 48 85 C9 74 ?? 48 8B 43", 3, 276)]
 [StructLayout(LayoutKind.Explicit, Size = 0x640)]
 public unsafe partial struct CraftEventHandler {
     [FieldOffset(0x1B8 + 0x00), CExporterExcelBegin("Recipe")] public uint RequiredQuality;

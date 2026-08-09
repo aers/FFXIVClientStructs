@@ -42,7 +42,7 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x12828)] public IndoorTerritoryAquariumData AquariumData;
     [FieldOffset(0x12880)] public InventoryType StoreroomItemInventoryType;
     [FieldOffset(0x12884)] public short StoreroomItemInventorySlot;
-    [FieldOffset(0x12886)] private bool StoreroomItemInventoryUnk;
+    [FieldOffset(0x12886)] public bool StoreroomItemInventoryIsPadModeEnabled;
 
     [FieldOffset(0x12890)] public Vector3 StoreroomItemPlacePosition;
     [FieldOffset(0x128A0)] public float StoreroomItemPlaceRotation;
@@ -61,7 +61,7 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x128E4)] public bool SSAOEnable;
     [FieldOffset(0x128E5)] public byte SavedInvertedBrightness;
     [FieldOffset(0x128E6)] public bool SavedSSAOEnable;
-    [FieldOffset(0x128E7)] private byte Unk99B7;
+    [FieldOffset(0x128E7)] public bool FurniturePlacedWithPadModeEnabled;
     [FieldOffset(0x128E8)] private byte Unk99B8;
     [FieldOffset(0x128E9)] private byte Unk99B9;
     [FieldOffset(0x128EA)] public bool ShowStoreroomTab; // in the "Indoor Furnishings" window

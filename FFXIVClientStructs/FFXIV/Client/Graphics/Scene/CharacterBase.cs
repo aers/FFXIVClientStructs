@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
@@ -25,6 +26,7 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
 
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
+    [FieldOffset(0xB0)] public VfxResourceInstance** VfxResourceInstances; // size = SlotCount
 
     [FieldOffset(0xD8)] public Attach Attach;
     [FieldOffset(0x150)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
@@ -43,6 +45,10 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x288)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * MaterialsPerSlot
 
     [FieldOffset(0x290)] public Vector4 Tint;
+    [FieldOffset(0x2A0)] private float GlobalScale; // maybe? see vf98
+    [FieldOffset(0x2A4)] private float ModelScale; // maybe? see vf98
+    [FieldOffset(0x2A8)] private float TransparencyDelta; // only set when changed?
+    [FieldOffset(0x2AC)] public int TargetStatus;
 
     [FieldOffset(0x2E0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
     [FieldOffset(0x2E4)] public float SwimmingWetness; // Set to 1.0f when in water
@@ -58,7 +64,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x308)] public SlotStagingArea* PerSlotStagingArea;
 
-    [FieldOffset(0x350)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
+    [FieldOffset(0x350)] public MaterialResourceHandle** Materials; // size = SlotCount * MaterialsPerSlot
 
     [FieldOffset(0x358)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
@@ -98,14 +104,23 @@ public unsafe partial struct CharacterBase {
     }
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
+    public Span<Pointer<VfxResourceInstance>> VfxResourceInstancesSpan => new(VfxResourceInstances, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
-    public Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
+    public Span<Pointer<MaterialResourceHandle>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 80 byte */, byte unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();
+
+    /// <summary>
+    /// Sets up the given's slot <see cref="Models"/> and/or <see cref="Materials"/> from the resources newly loaded in <see cref="PerSlotStagingArea"/>.
+    /// Can also perform other setup tasks on the slot, such as <see cref="ColorTableTextures"/>.
+    /// </summary>
+    /// <param name="slot">The slot to set up.</param>
+    [MemberFunction("89 54 24 ?? 55 56 41 56 48 81 EC")]
+    public partial nint SetupSlotModel(uint slot); // TODO: change return type to void
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
@@ -121,9 +136,6 @@ public unsafe partial struct CharacterBase {
 
     [VirtualFunction(69)]
     public partial bool SetEquipmentSlotModel(uint slot, EquipmentModelId* slotData);
-
-    [VirtualFunction(69), Obsolete("Use SetEquipmentSlotModel", true)]
-    public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotData);
 
     [VirtualFunction(70)]
     public partial bool SetGlassesSlotModel(uint glassesSlot, EquipmentModelId* slotData);
@@ -374,6 +386,16 @@ public unsafe partial struct CharacterBase {
     }
     #endregion
 
+    [VirtualFunction(95)]
+    public partial byte GetDyeForSlot(uint slotIndex, uint dyeIndex);
+
+    // Returns a deformer pointer. The deformer struct hasn't been mapped yet.
+    [VirtualFunction(101)]
+    public partial nint CreateDeformer(uint slotIndex);
+
+    [VirtualFunction(102)]
+    public partial Model* CreateRenderModel(ModelResourceHandle* modelResourceHandle, nint deformer /* return value of CreateDeformer */);
+
     [VirtualFunction(108)]
     public partial bool IsFreeCompanyCrestVisibleOnSlot(byte slot);
 
@@ -394,17 +416,23 @@ public unsafe partial struct CharacterBase {
         [FieldOffset(0xF8)] public ResourceHandle* AnimationExchangeTable;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-    public struct SlotStagingArea {
+    public partial struct SlotStagingArea {
         [FieldOffset(0x08)] public ModelResourceHandle* ModelResourceHandle;
+        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray10<Pointer<MaterialResourceHandle>> _materialResourceHandles;
         [FieldOffset(0x68)] public MaterialResourceHandle* SkinMaterialResourceHandle;
+        [FieldOffset(0xD0)] public StagingAreaFlags Flags;
     }
 
     [Flags]
     public enum StateFlag : ulong {
+        Stealth = 1UL << 4,
         VisorToggled = 1UL << 6,
         VisorChanging = 1UL << 7,
+        ShadowsDisabled = 1UL << 12,
         HasUmbrella = 1UL << 16,
+        ReaperEyes = 1UL << 24,
         VieraEarsHidden = 1UL << 31,
         VieraEarsChanging = 1UL << 32
     }
@@ -414,5 +442,11 @@ public unsafe partial struct CharacterBase {
         DemiHuman = 2,
         Monster = 3,
         Weapon = 4,
+    }
+
+    [Flags]
+    public enum StagingAreaFlags : uint {
+        HasModel = 1u << 1,
+        HasMaterials = 1u << 3,
     }
 }

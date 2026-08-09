@@ -1,0 +1,9 @@
+namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
+
+// Client::Game::Event::LuaNpc
+//   Client::Game::Event::LuaCharacter
+//     Client::Game::Event::LuaActor
+[GenerateInterop(isInherited: true)]
+[Inherits<LuaCharacter>]
+[StructLayout(LayoutKind.Explicit, Size = 0x88)]
+public partial struct LuaNpc;

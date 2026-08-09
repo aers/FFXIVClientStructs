@@ -25,7 +25,7 @@ public unsafe partial struct TeleportHistoryModule {
     /// <param name="subIndex">The SubIndex</param>
     /// <returns>LogMessage RowId</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 ?? 5F C3 FF 50")]
-    public partial uint AddToHistory(ushort aetheryteId, bool a2, byte ward, byte plot, byte subIndex);
+    public partial uint AddToHistory(ushort aetheryteId, bool a2, byte ward, byte plot, byte subIndex); // TODO: a2 is `byte flags`
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 C6 44 24 ?? 00 84 C0")]
     public partial bool IsInHistory(ushort aetheryteId, byte ward, byte plot, byte subIndex);

@@ -48,7 +48,7 @@ public unsafe partial struct AtkComponentBase : ICreatable<AtkComponentBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? 48 8B CE 48 8B D8")]
     public partial void CopyCursorNavigationInfoFrom(AtkComponentBase* component);
 
-    [MemberFunction("E8 ?? ?? ?? ?? B3 05")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 69 EE")]
     public partial void SetCursorNavigationInfo(AtkCursorNavigationInfo* cursorNavigationInfo, AtkCursorNavigationStopFlag stopFlags = AtkCursorNavigationStopFlag.None);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4A 8B 0C 26")]
@@ -93,6 +93,10 @@ public unsafe partial struct AtkComponentBase : ICreatable<AtkComponentBase> {
 
     [VirtualFunction(17)]
     public partial void InitializeFromComponentData(void* data); // AtkUldComponentDataBase* ?
+
+    /// <summary> Gets the collision node at the given screen coordinates. </summary>
+    [VirtualFunction(18)]
+    public partial AtkResNode* GetCollisionNodeAtCoords(short x, short y);
 
     public AtkResNode* GetResNodeById(uint id) {
         var node = GetNodeById(id);

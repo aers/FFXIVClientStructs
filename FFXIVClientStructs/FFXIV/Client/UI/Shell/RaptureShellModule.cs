@@ -62,7 +62,7 @@ public unsafe partial struct RaptureShellModule {
     public partial bool TryGetMacroIconCommand(RaptureMacroModule.Macro* macro, void* resultsOut);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 44 37 ??")]
-    public partial void ChangeChatChannel(int channel, uint linkshellIndex, Utf8String* target, bool setChatType);
+    public partial bool ChangeChatChannel(int channel, uint linkshellIndex, Utf8String* target, bool setChatType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? EB 34")]
     public partial bool SetContextTellTarget(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason, bool setChatType);

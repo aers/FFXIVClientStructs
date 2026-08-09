@@ -1,4 +1,4 @@
-using System.Numerics;
+using System.Numerics; // TODO: using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
@@ -69,6 +69,10 @@ public unsafe partial struct ILayoutInstance {
     [VirtualFunction(21)]
     public partial bool HavePrimary();
 
+    /// <summary>If the primary object has been loaded.</summary>
+    [VirtualFunction(22)]
+    public partial bool IsPrimaryLoaded();
+
     [VirtualFunction(23)]
     public partial Graphics.Scene.Object* GetGraphics();
 
@@ -115,6 +119,12 @@ public unsafe partial struct ILayoutInstance {
     [VirtualFunction(38)]
     public partial void UpdateCollider();
 
+    [VirtualFunction(45)]
+    public partial void GetColor(Vector4* color);
+
+    [VirtualFunction(46)]
+    public partial void SetColor(Vector4* color);
+
     [VirtualFunction(55)]
     public partial bool WantToBeActive();
 
@@ -151,6 +161,10 @@ public unsafe partial struct ILayoutInstance {
     [VirtualFunction(72)]
     public partial Vector4* GetBoundingSphereImpl(Vector4* result);
 
+    /// <summary>If we have a primary object and its been loaded. Basically HavePrimary() and IsPrimaryLoaded() in one call.</summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 75 ?? 8B D5")]
+    public partial bool IsPrimaryReady();
+
     // vf73: getWorldBB, uses AABB with padded vec3's
     // vf74: get transform split into RT matrix + scale
 
@@ -158,7 +172,7 @@ public unsafe partial struct ILayoutInstance {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct Transform {
+public partial struct Transform {
     [FieldOffset(0x00)] public Vector3 Translation;
     [FieldOffset(0x0C)] public int Type; // This is a padding field that in some contexts is used to store collider type
     [FieldOffset(0x10)] public Quaternion Rotation;
@@ -173,7 +187,7 @@ public unsafe partial struct Transform {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct AnalyticShapeData {
+public partial struct AnalyticShapeData {
     [FieldOffset(0x00)] public int NumRefs;
     [FieldOffset(0x04)] public uint Crc;
     //[FieldOffset(0x08)] public uint u8;
@@ -192,7 +206,9 @@ public unsafe partial struct AnalyticShapeData {
 }
 
 public enum InstanceType : byte {
+    None = 0,
     BgPart = 1,
+    Attribute = 2,
     Light = 3,
     Vfx = 4,
     PositionMarker = 5,
@@ -200,24 +216,61 @@ public enum InstanceType : byte {
     Sound = 7,
     EventNpc = 8,
     BattleNpc = 9,
+    RoutePath = 10,
+    Character = 11,
     Aetheryte = 12,
     EnvSpace = 13,
     Gathering = 14,
     HelperObject = 15,
     Treasure = 16,
+    Clip = 17,
+    ClipCtrlPoint = 18,
+    ClipCamera = 19,
+    ClipLight = 20,
+    ClipReserve00 = 21,
+    ClipReserve01 = 22,
+    ClipReserve02 = 23,
+    ClipReserve03 = 24,
+    ClipReserve04 = 25,
+    ClipReserve05 = 26,
+    ClipReserve06 = 27,
+    ClipReserve07 = 28,
+    ClipReserve08 = 29,
+    ClipReserve09 = 30,
+    ClipReserve10 = 31,
+    ClipReserve11 = 32,
+    ClipReserve12 = 33,
+    ClipReserve13 = 34,
+    ClipReserve14 = 35,
+    CutAssetOnlySelectable = 36,
+    Player = 37,
+    Monster = 38,
     Weapon = 39,
     PopRange = 40,
     ExitRange = 41, // collider in layer 2
+    Lvb = 42,
     MapRange = 43, // collider in layer 3
     NaviMeshRange = 44,
     EventObject = 45,
+    DemiHuman = 46,
     EnvLocation = 47,
+    ControlPoint = 48,
     EventRange = 49, // collider in layer 4
+    RestBonusRange = 50,
     QuestMarker = 51,
     Timeline = 52,
+    ObjectBehaviorSet = 53,
+    Movie = 54,
+    ScenarioExd = 55,
+    ScenarioText = 56,
     CollisionBox = 57, // generic collider
     DoorRange = 58,
     LineVfx = 59,
+    SoundEnvSet = 60,
+    CutActionTimeline = 61,
+    CharaScene = 62,
+    CutAction = 63,
+    EquipPreset = 64,
     ClientPath = 65,
     ServerPath = 66,
     GimmickRange = 67,
@@ -226,12 +279,28 @@ public enum InstanceType : byte {
     ClickableRange = 70,
     PrefetchRange = 71, // collider in layer 5
     FateRange = 72,
+    PartyMember = 73,
+    KeepRange = 74,
     SphereCastRange = 75,
     IndoorObject = 76,
     OutdoorObject = 77,
+    EditGroup = 78,
+    StableChocobo = 79,
+    Unk80 = 80,
+    Unk81 = 81,
+    Unk82 = 82,
     Decal = 83,
+    Unk84 = 84,
+    Unk85 = 85,
     ColliderLayer7 = 86,
     ColliderLayer8 = 87,
     ColliderLayer9 = 88,
     ColliderLayer10 = 89,
+    CullingBox = 90,
+    Unk91 = 91,
+    Unk92 = 92,
+    VolumetricCloud = 93,
+
+    [Obsolete("Renamed to CullingBox")]
+    Culling = 90,
 }

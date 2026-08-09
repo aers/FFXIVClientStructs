@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<AtkMessageBoxManager.AtkMessageBoxEvent>, Inherits<LogoutCallbackInterface>, Inherits<ZoneLoginCallbackInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2370)]
+[StructLayout(LayoutKind.Explicit, Size = 0x23D8)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? C6 41 ?? ?? 48 89 01 33 ED", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
@@ -27,60 +27,62 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA98)] public StdDeque<TextParameter> LobbyTextParameters;
     [FieldOffset(0xAC0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tempUtf8Strings;
     [FieldOffset(0xC60)] public Utf8String ConnectingToDatacenterString;
-    [FieldOffset(0xCC8)] public StdVector<Utf8String> VersionStrings;
-    [FieldOffset(0xCE0)] public Utf8String DisplayedVersionString;
+    [FieldOffset(0xCC8)] internal Utf8String UnkStringCC8; // 7.55
+    [FieldOffset(0xD30)] public StdVector<Utf8String> VersionStrings;
+    [FieldOffset(0xD48)] public Utf8String DisplayedVersionString;
 
-    [FieldOffset(0xD60), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
+    [FieldOffset(0xDC8)] public Utf8String GameSession;
+    [FieldOffset(0xE30), FixedSizeArray] internal FixedSizeArray7<Utf8String> _unkUtf8Strings;
 
-    [FieldOffset(0x11D8)] public sbyte ServiceAccountIndex;
-    [FieldOffset(0x11D9)] public byte SelectedCharacterIndex;
+    [FieldOffset(0x1240)] public sbyte ServiceAccountIndex;
+    [FieldOffset(0x1241)] public byte SelectedCharacterIndex;
 
-    [FieldOffset(0x11E0)] public ulong HoveredCharacterContentId;
-    [FieldOffset(0x11E8)] public byte DataCenter;
+    [FieldOffset(0x1248)] public ulong HoveredCharacterContentId;
+    [FieldOffset(0x1250)] public byte DataCenter;
 
-    [FieldOffset(0x11EA)] public short WorldIndex; // index in CurrentDataCenterWorlds
-    [FieldOffset(0x11EC)] public ushort WorldId;
+    [FieldOffset(0x1252)] public short WorldIndex; // index in CurrentDataCenterWorlds
+    [FieldOffset(0x1254)] public ushort WorldId;
 
-    [FieldOffset(0x11F0)] public uint DialogAddonId;
-    [FieldOffset(0x11F4)] public uint DialogAddonId2;
-    [FieldOffset(0x11F8)] public uint LobbyScreenTextAddonId;
-    [FieldOffset(0x11FC)] public uint LogoAddonId;
-    [FieldOffset(0x1200)] public uint TitleDCWorldMapAddonId;
-    [FieldOffset(0x1204)] public uint TitleMovieSelectorAddonId;
-    [FieldOffset(0x1208)] public uint TitleGameVersionAddonId;
-    [FieldOffset(0x120C)] public uint TitleConnectAddonId;
-    [FieldOffset(0x1210)] public uint CharaSelectAddonId;
-    [FieldOffset(0x1214)] public uint CharaMakeDataImportAddonId;
-    [FieldOffset(0x1218)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
-    [FieldOffset(0x121C)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
-    [FieldOffset(0x1220)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
-    [FieldOffset(0x1224)] public uint LobbyWKTAddonId;
+    [FieldOffset(0x1258)] public uint DialogAddonId;
+    [FieldOffset(0x125C)] public uint DialogAddonId2;
+    [FieldOffset(0x1260)] public uint LobbyScreenTextAddonId;
+    [FieldOffset(0x1264)] public uint LogoAddonId;
+    [FieldOffset(0x1268)] public uint TitleDCWorldMapAddonId;
+    [FieldOffset(0x126C)] public uint TitleMovieSelectorAddonId;
+    [FieldOffset(0x1270)] public uint TitleGameVersionAddonId;
+    [FieldOffset(0x1274)] public uint TitleConnectAddonId;
+    [FieldOffset(0x1278)] public uint CharaSelectAddonId;
+    [FieldOffset(0x127C)] public uint CharaMakeDataImportAddonId;
+    [FieldOffset(0x1280)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x1284)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x1288)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
+    [FieldOffset(0x128C)] public uint LobbyWKTAddonId;
 
-    [FieldOffset(0x1234)] public byte LobbyUpdateStage;
+    [FieldOffset(0x129C)] public byte LobbyUpdateStage;
 
-    [FieldOffset(0x1237)] public byte LobbyUIStage;
+    [FieldOffset(0x129F)] public byte LobbyUIStage;
 
-    [FieldOffset(0x1240)] public long IdleTime;
+    [FieldOffset(0x12A8)] public long IdleTime;
 
-    [FieldOffset(0x1250)] public long QueueTimeSinceLastUpdate;
-    [FieldOffset(0x1260)] public int QueuePosition;
+    [FieldOffset(0x12B8)] public long QueueTimeSinceLastUpdate;
+    [FieldOffset(0x12C8)] public int QueuePosition;
 
-    [FieldOffset(0x1265)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x12CD)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
-    [FieldOffset(0x1268)] public ulong SelectedCharacterContentId;
+    [FieldOffset(0x12D0)] public ulong SelectedCharacterContentId;
 
-    [FieldOffset(0x1270)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
-    [FieldOffset(0x1271)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
+    [FieldOffset(0x12D8)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
+    [FieldOffset(0x12D9)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
 
-    [FieldOffset(0x1273)] public bool LogoutShouldCloseGame;
+    [FieldOffset(0x12DB)] public bool LogoutShouldCloseGame;
 
-    [FieldOffset(0x1370)] public bool TemporaryLocked; // "Please wait and try logging in later."
+    [FieldOffset(0x13D8)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
-    [FieldOffset(0x1388)] public ulong RequestContentId;
+    [FieldOffset(0x13F0)] public ulong RequestContentId;
 
-    [FieldOffset(0x13A8)] public LogoutCallbackInterface.LogoutParams LogoutParams;
+    [FieldOffset(0x1410)] public LogoutCallbackInterface.LogoutParams LogoutParams;
 
-    [FieldOffset(0x2314)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
+    [FieldOffset(0x237C)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5")]
     public partial void UpdateLobbyUIStage();
@@ -90,6 +92,12 @@ public unsafe partial struct AgentLobby {
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87")]
     public partial void OpenLoginWaitDialog(int position);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 40 4C 8B BC 24")]
+    public partial bool SendLoginRequestPacket(int characterEntryIdx);
+
+    [MemberFunction("40 53 56 57 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 8B 99")]
+    public partial void UpdateLoginPosition(int newPosition);
 
     [MemberFunction("40 56 41 56 41 57 48 83 EC 40 80 B9")]
     public partial void HandleLogout(bool isExiting, byte a3); // a3 is some kind of frame-based countdown for the lobby
@@ -103,6 +111,7 @@ public unsafe partial struct LobbyData {
 
     [FieldOffset(0x8D8)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
 
+    [FieldOffset(0x8F4)] public uint SessionId;
     [FieldOffset(0x8F8)] public ulong ContentId;
     [FieldOffset(0x900)] public Utf8String HomeWorldName;
     [FieldOffset(0x968)] public Utf8String HomeWorldName2;

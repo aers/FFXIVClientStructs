@@ -37,6 +37,8 @@ public unsafe partial struct OutdoorTerritory {
     [FieldOffset(0x12AB0)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener2;
     [FieldOffset(0x12AD8)] public OutdoorPlotExteriorData EditingPlotExteriorDataBackup;
 
+    [FieldOffset(0x12B1C)] public bool FurniturePlacedWithPadModeEnabled;
+
     [FieldOffset(0x12B20)] public HouseBuddy HouseBuddy;
 
     [FieldOffset(0x130D4), FixedSizeArray] internal FixedSizeArray62<HousingMapMarkerInfo> _housingMapMarkerInfos;

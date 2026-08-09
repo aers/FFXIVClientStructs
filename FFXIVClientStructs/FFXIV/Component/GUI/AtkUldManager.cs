@@ -21,6 +21,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x22)] public ushort PartsListCount;
     [FieldOffset(0x24)] public ushort ObjectCount;
     [FieldOffset(0x26)] public ushort DuplicateObjectCount; // duplicated components created by AtkUldManager::DuplicateNode post-load
+    // TODO: use UldResourceHandle*
     [FieldOffset(0x28)] public ResourceHandle* UldResourceHandle; // addons release this reference, components do not
     [FieldOffset(0x30)] public DuplicateNodeInfo* DuplicateNodeInfoList; // these are nodes duplicated by the loader during load
     [FieldOffset(0x38)] public AtkTimelineManager* TimelineManager;
@@ -49,6 +50,12 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA 74 42")]
     public partial AtkResNode* SearchNodeById(uint id);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 45 8B DD")]
+    public partial AtkResNode* GetDuplicatedNode(uint nodeId, uint idx, uint nodeIdOffset);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 38 7D 2C")]
+    public partial AtkResNode* DuplicateComponentNode(uint componentNodeId, uint duplicateCount, uint nodeIdOffset);
+
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08")]
     public partial AtkComponentBase* CreateAtkComponent(uint type);
 
@@ -70,7 +77,7 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("E8 ?? ?? ?? ?? 81 7F ?? ?? ?? ?? ?? 4C 8B CB")]
     public partial void SetupComponentTimelineFromULDResourceHandle(byte* uldResourceOffset, uint componetId, AtkTimelineManager* atkTimeLineManager, AtkResNode* node);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 0E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 45 ?? FF C6")]
     public partial void BindTimeline(byte* uldResourceOffset, AtkUldObjectInfo* objects, byte* nodeData, AtkTimelineManager* atkTimeLineManager);
 
     /// <summary>
@@ -211,6 +218,6 @@ public enum ComponentType : byte {
     Preview = 23,
     HoldButton = 24,
     Portrait = 25,
-    Unk26 = 26, // related to the XBMItem sheet
-    Unk27 = 27, // related to the XBMContentStageEventMap sheet
+    XBMItem = 26,
+    XBMContentStageEventMap = 27,
 }

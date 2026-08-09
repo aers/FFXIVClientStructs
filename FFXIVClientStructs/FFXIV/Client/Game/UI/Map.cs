@@ -27,15 +27,6 @@ public unsafe partial struct Map {
 
     [MemberFunction("83 FA 3E 0F 83")]
     public partial void AddHousingMarker(uint index, uint levelId, OutdoorTerritory.HousingMapMarkerInfo* housingMapMarkerInfo, ushort territoryTypeId, int iconId);
-
-    [Obsolete("Can cause issues with MapMarkerData due to MapId not being set correctly", true)]
-    public void AddHousingMarker(uint index, uint levelId, Vector3* pos, ushort territoryTypeId, int iconId) {
-        var housingMapMarkerInfo = stackalloc OutdoorTerritory.HousingMapMarkerInfo[1];
-        housingMapMarkerInfo->X = pos->X;
-        housingMapMarkerInfo->Y = pos->Y;
-        housingMapMarkerInfo->Z = pos->Z;
-        AddHousingMarker(index, levelId, housingMapMarkerInfo, territoryTypeId, iconId);
-    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]

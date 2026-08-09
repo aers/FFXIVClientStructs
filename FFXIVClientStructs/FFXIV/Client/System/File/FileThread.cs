@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.File;
 [StructLayout(LayoutKind.Explicit, Size = 0x2518)]
 public unsafe partial struct FileThread {
     [FieldOffset(0x0008)] public void* SecurityAttributes; // https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-createeventa
+    [FieldOffset(0x0028), FixedSizeArray] internal FixedSizeArray20<Pointer<SqPackManager>> _sqPackManagers;
 
     [MemberFunction("44 88 4C 24 ?? 44 89 44 24 ?? 53 56")]
     public partial byte ReadSqPack(FileDescriptor* fileDescriptor, int priority, bool isSync);

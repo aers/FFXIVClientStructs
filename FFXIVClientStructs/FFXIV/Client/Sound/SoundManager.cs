@@ -21,12 +21,13 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x31)] public bool Disabled;
     [FieldOffset(0x34)] public float MasterVolume;
     [FieldOffset(0x38)] public float ActiveVolume;
-    [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray19<float> _volume;
-    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume2; // All are 1.0f
-    [FieldOffset(0xD4), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume3; // All are 1.0f
-    [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume4; // All are 1.0f
-    [FieldOffset(0x16C), FixedSizeArray] internal FixedSizeArray19<bool> _busMuted;
-    [FieldOffset(0x17F), FixedSizeArray] internal FixedSizeArray19<bool> _busAlwaysOn;
+    [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray21<float> _volume;
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume2; // All are 1.0f
+    [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f
+    [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume4; // All are 1.0f
+    [FieldOffset(0x18C), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume5;
+    [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray21<bool> _busMuted;
+    [FieldOffset(0x1F5), FixedSizeArray] internal FixedSizeArray21<bool> _busAlwaysOn;
 
     [FieldOffset(0x220)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
     [FieldOffset(0x228)] public SoundData* InactiveSoundDataListHead;
@@ -172,6 +173,18 @@ public unsafe partial struct SoundManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 5F ?? BE ?? ?? ?? ?? ?? ?? ?? 48 85 C9 74 ?? 4C 39 77"), GenerateStringOverloads]
     public partial void PlayWeatherSound(CStringPointer path, uint fadeDuration);
 
+    /// <summary>
+    /// Takes a <see cref="SoundData"/> instance from this manager's free list and moves it to the playing list.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 0F 84 ?? ?? ?? ?? 44 0F B6 74 24")]
+    public partial SoundData* AcquireSoundData();
+
+    /// <summary>
+    /// Returns a <see cref="SoundData"/> instance to this manager's free list from the playing list.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 77")]
+    public partial void ReleaseSoundData(SoundData* soundData);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 256 * 0xD0)]
     public partial struct SoundDataMemory {
@@ -227,18 +240,6 @@ public enum SoundBus {
     Housing = 19,
     /// <remarks>  2 Tracks, 3D </remarks>
     RandomWind = 20,
-
-    [Obsolete("Renamed to Music", true)] Bgm1 = 1,
-    [Obsolete("Renamed to SE", true)] Se1 = 2,
-    [Obsolete("Renamed to BG", true)] Env1 = 5,
-    [Obsolete("Renamed to Foot", true)] Se2 = 6,
-    [Obsolete("Renamed to PlacedNPC", true)] Se3 = 7,
-    [Obsolete("Renamed to TimeStretchBGM", true)] Bgm2 = 8,
-    [Obsolete("Renamed to Zingle", true)] Bgm3 = 9,
-    [Obsolete("Renamed to BGEnv", true)] Env2 = 11,
-    [Obsolete("Renamed to Walla", true)] Env3 = 12,
-    [Obsolete("Renamed to Orchestrion", true)] Bgm4 = 16,
-    [Obsolete("Renamed to Instruments", true)] Perform = 17,
 }
 
 public enum SoundVolumeCategory {

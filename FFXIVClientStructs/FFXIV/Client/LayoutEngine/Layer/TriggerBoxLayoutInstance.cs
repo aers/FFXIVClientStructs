@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 // Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
 //   Client::LayoutEngine::ILayoutInstance
+//     Client::System::Common::NonCopyable
 /// <summary>
 /// Base class for various collision-only instances.
 /// </summary>
@@ -13,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 public unsafe partial struct TriggerBoxLayoutInstance {
     [FieldOffset(0x30)] public Collider* Collider;
     [FieldOffset(0x40)] public Transform Transform;
-    //[FieldOffset(0x70)] public ushort u70;
+    [FieldOffset(0x70)] public short Priority;
     [BitField<ColliderType>(nameof(Type), 0, 4)]
     [FieldOffset(0x74)] public uint FlagsType; // low 4 bits = type, rest uninitialized
     [BitField<bool>(nameof(ActiveByDefault), 0)]

@@ -26,12 +26,12 @@ public unsafe partial struct AgentEmjVoiceCharacter {
     [FieldOffset(0x48)] public uint HighlightedEmjVoiceNpc;
     [FieldOffset(0x4C)] public uint SelectedEmjVoiceNpc;
     /// <summary>
-    /// Id mappes to subrow id of EmjCostume
+    /// Id maps to subrow id of EmjCostume
     /// </summary>
     [FieldOffset(0x50)] public uint SelectedAttire;
     [FieldOffset(0x54)] private uint Unk54;
     /// <summary>
-    /// Ids mappes to subrow id of EmjCostume
+    /// Ids maps to subrow id of EmjCostume
     /// </summary>
     [FieldOffset(0x58)] public StdVector<uint> SelectedAttires;
     [FieldOffset(0x70)] public StdVector<EmjCostume> SelectedCostumeRows;

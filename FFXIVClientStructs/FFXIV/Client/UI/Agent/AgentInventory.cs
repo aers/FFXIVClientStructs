@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public partial struct AgentInventory {
+public unsafe partial struct AgentInventory {
+    [FieldOffset(0x28)] public AgentInventoryContext.InventoryContextEvent* CurrentInventoryContextEvent;
     [FieldOffset(0x30)] public uint OpenTitleId;
     [FieldOffset(0x34)] public uint OpenAddonId;
     [FieldOffset(0x38)] public uint OpenType;

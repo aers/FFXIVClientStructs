@@ -2,13 +2,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::GameObjectManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4D1C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4D20)]
 public unsafe partial struct GameObjectManager {
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
     public static partial GameObjectManager* Instance();
 
     [FieldOffset(0x00)] public uint NextUpdateIndex; // rate limiting for updates per frame
     [FieldOffset(0x04)] public byte Active;
+    [FieldOffset(0x0C)] public int DrawLimitOverride;
     [FieldOffset(0x20)] public ObjectArrays Objects;
     // new in 7.3, used for draw distance
     // [FieldOffset(0x4CF0)] internal float Unk4CF0; // default "819"
@@ -21,6 +22,13 @@ public unsafe partial struct GameObjectManager {
     // [FieldOffset(0x4D10)] internal float Unk4D10; // default "1.1"
     // [FieldOffset(0x4D14)] internal float Unk4D14; // default "0.9"
     // [FieldOffset(0x4D18)] internal float Unk4D18; // default "0.8"
+
+    /// <summary>
+    /// Returns the limit of drawable candidate objects for this frame.
+    /// </summary>
+    /// <remarks>Others will call DisableDraw() in Update</remarks>
+    [MemberFunction("40 56 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 8B 41")]
+    public partial uint GetDrawLimit();
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4CD0)]

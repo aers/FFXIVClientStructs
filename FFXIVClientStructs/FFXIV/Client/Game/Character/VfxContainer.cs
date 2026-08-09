@@ -8,17 +8,21 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-public unsafe partial struct VfxContainer {
-    /// <remarks>
-    /// [6] = Omen
-    /// </remarks>
+public partial struct VfxContainer {
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray14<Pointer<VfxData>> _vfxData;
 
     [FieldOffset(0xA0), FixedSizeArray] internal FixedSizeArray2<Tether> _tethers;
     [FieldOffset(0xD0)] public ushort VoiceId;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 6A 0F BE 83 ?? ?? ?? ??")]
-    public partial nint LoadCharacterSound(int unk1, int unk2, nint unk3, ulong unk4, int unk5, int unk6, ulong unk7);
+    public partial nint LoadCharacterSound(
+        int soundNumber,
+        int unk2,
+        nint unkGameObject, // TODO: change type to GameObject*
+        ulong autoRelease, // TODO: change type to bool
+        int weaponDataIndex,
+        int unk6, // TODO: change type to SoundVolumeCategory
+        ulong unk7); // TODO: change type to bool
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct Tether {

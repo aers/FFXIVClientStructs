@@ -61,5 +61,8 @@ public enum DataSegment : byte {
     MKDSJOB = 0x26, // MKDSupportJob
     MKDLORE = 0x27, // MKDLore
     MKDSJN = 0x28, // MKDSupportJobNote
-    QPNL = 0x29,
+    QPNL = 0x29, // QuickPanel
+    GLASSES = 0x2A, // Glasses
+    XBMNOTE = 0x2B, // XBMNote
+    XBM = 0x2C, // XBM
 }

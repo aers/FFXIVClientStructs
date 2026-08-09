@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AgentInventoryContext.InventoryContextEvent>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 86", 3, 275)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3298)]
 public unsafe partial struct ShopEventHandler {
     // 0x1B0: second base class, related to context menu integration for selling items
@@ -74,7 +75,7 @@ public unsafe partial struct ShopEventHandler {
         [FieldOffset(0x98)] public uint SubRowId; // in GilShopItem sheet, corresponding to this item; note that items could be sorted after loading
         [FieldOffset(0x9C)] public byte CategoryOrderMajor;
         [FieldOffset(0x9D)] public byte CategoryOrderMinor;
-        // 0xA0: int, col 19 in Item row
+        [FieldOffset(0xA0)] public int SubcategorySort;
         [FieldOffset(0xA4)] public ushort StateRequired; // column in GilShopItem row
         [FieldOffset(0xA6)] public ushort PatchAdded;
     }

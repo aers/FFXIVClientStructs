@@ -7,7 +7,7 @@ public unsafe partial struct TextModuleInterface {
     public partial StdDeque<TextParameter>* GetGlobalParameters();
 
     [VirtualFunction(3)]
-    public partial Utf8String* FormatUtf8String(Utf8String* input, StdDeque<TextParameter>* localParameters, Utf8String* output);
+    public partial bool FormatUtf8String(Utf8String* input, StdDeque<TextParameter>* localParameters, Utf8String* output);
 
     [VirtualFunction(7)]
     public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);

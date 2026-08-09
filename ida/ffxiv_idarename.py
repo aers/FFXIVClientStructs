@@ -1,7 +1,7 @@
 # current exe version: 2020.12.29.0000.0000
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_idarename
-# @runtime Jython
+# @runtime PyGhidra
 
 from __future__ import print_function
 import os
@@ -330,6 +330,10 @@ if api is None:
     except ImportError:
         print("Warning: Unable to load Ghidra")
     else:
+        def toAddr(offset): # noqa
+            # type: (int) -> Address
+            return currentProgram.getAddressFactory().getDefaultAddressSpace().getAddress(offset) # noqa
+
         # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
             @property

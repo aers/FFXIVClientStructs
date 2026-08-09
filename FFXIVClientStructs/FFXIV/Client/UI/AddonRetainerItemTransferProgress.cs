@@ -11,8 +11,24 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 0F 57 C0 48 89 03 33 C0 0F 11 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ??", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x258)]
 public unsafe partial struct AddonRetainerItemTransferProgress {
-    [FieldOffset(0x238)] public AtkTextNode* EntrustAllItemsButton; // Node 2
+    [FieldOffset(0x238)] public AtkTextNode* StatusText;
+    [Obsolete("Renamed to StatusText")]
+    [FieldOffset(0x238)] public AtkTextNode* EntrustAllItemsButton;
     [FieldOffset(0x240)] public AtkComponentButton* CloseWindowButton; // Node 9
     [FieldOffset(0x248)] public AtkResNode* ProgressBar; // Node 7
-    [FieldOffset(0x250)] public ushort Progress; // Node 7
+    [FieldOffset(0x250)] public ushort ProgressBarWidth; // this * AtkValues[2]
+    [Obsolete("Renamed to ProgressBarWidth")]
+    [FieldOffset(0x250)] public ushort Progress;
+
+    public RetainerItemTransferProgressAtkValues* TypedAtkValues => (RetainerItemTransferProgressAtkValues*)AtkValues;
+
+    [StructLayout(LayoutKind.Explicit, Size = AtkValue.StructSize * 3)]
+    public struct RetainerItemTransferProgressAtkValues {
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 0)] public AtkValue StatusText;
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 1)] public AtkValue CloseButtonText;
+        /// <remarks><see cref="AtkValueType.Float"/>. 0 to 1</remarks>
+        [FieldOffset(AtkValue.StructSize * 2)] public AtkValue Progress;
+    }
 }

@@ -4,6 +4,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct InputManager {
+    [FieldOffset(0x28)] public int MouseButtonHoldStateRaw; // MouseButtonHoldState stored as a dword
+    [FieldOffset(0x2C)] public float MouseDragDistance; // accumulated cursor travel; < 10.0f is treated as a click on release.
+    [FieldOffset(0x30)] public int MouseDragDeltaX;
+    [FieldOffset(0x34)] public int MouseDragDeltaY;
+    [FieldOffset(0x38)] public int MouseDragStartX;
+    [FieldOffset(0x3C)] public int MouseDragStartY;
+    [FieldOffset(0x40)] public bool MouseDragActive;
+    [FieldOffset(0x48)] public bool CursorRectActive;
+
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F 28 F0 45 0F 57 C0", 3)]
     public static partial InputManager* Instance();
 
@@ -15,6 +24,11 @@ public unsafe partial struct InputManager {
 
     [StaticAddress("8B 05 ?? ?? ?? ?? 41 8B DF", 2)]
     public static partial MouseButtonHoldState* GetMouseButtonHoldState();
+
+    public MouseButtonHoldState HeldMouseButtons {
+        readonly get => (MouseButtonHoldState)MouseButtonHoldStateRaw;
+        set => MouseButtonHoldStateRaw = (int)value;
+    }
 
     public static bool IsLeftMouseDown() => GetMouseButtonHoldState()->HasFlag(MouseButtonHoldState.Left);
     public static bool IsRightMouseDown() => GetMouseButtonHoldState()->HasFlag(MouseButtonHoldState.Right);

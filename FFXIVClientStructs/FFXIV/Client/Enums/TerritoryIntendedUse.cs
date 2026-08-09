@@ -4,7 +4,7 @@ public enum TerritoryIntendedUse : byte {
     Town = 0,
     Overworld = 1,
     Inn = 2,
-    Dungeon = 3, // Dungeons, Guildhests, Mahjong, Air Force One
+    Dungeon = 3, // Dungeons, Guildhests, Mahjong
     VariantDungeon = 4,
     MordionGaol = 5,
     OpeningArea = 6,
@@ -66,4 +66,5 @@ public enum TerritoryIntendedUse : byte {
     Unknown62 = 62,
     Seasonal3 = 63, // Lilyswim (Hatching-tide 2026)
     AirForceOne = 64,
+    KeyboundBrawler = 65,
 }

@@ -22,7 +22,7 @@ public unsafe partial struct DrawObject {
     /// Used to highlight potential targets and housing object outlines.<br/>
     /// To set the color it is recommended to use <see cref="GameObject.Highlight" />, as it makes sure that it also highlights a characters weapon(s), mount and ornament, if available.
     /// </summary>
-    public partial ObjectHighlightColor OutlineColor { get; set; }
+    public partial ObjectHighlightColor OutlineColor { readonly get; set; }
 
     public bool IsVisible {
         get => (Flags & 0x09) == 0x09; // Unsure why two bits and what exactly they mean.
@@ -112,6 +112,12 @@ public unsafe partial struct DrawObject {
     /// <returns>How transparent this draw object is, from 0.0 being fully opaque to 1.0 being fully transparent.</returns>
     [VirtualFunction(27)]
     public partial float GetTransparency();
+
+    [VirtualFunction(28)]
+    public partial void SetTargetStatus(int targetStatus);
+
+    [VirtualFunction(29)]
+    public partial int GetTargetStatus();
 
     /// <summary>
     /// This is the inlined routine that is called after modifying the transform of a DrawObject.

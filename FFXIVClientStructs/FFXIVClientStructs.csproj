@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -35,7 +35,7 @@
 
   <Target Name="PopulateInfo" DependsOnTargets="GitVersion" BeforeTargets="GetAssemblyVersion">
     <PropertyGroup>
-      <AssemblyVersion>7.50.0.$(GitCommits)</AssemblyVersion>
+      <AssemblyVersion>7.55.1.$(GitCommits)</AssemblyVersion>
     </PropertyGroup>
   </Target>
 

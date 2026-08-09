@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<AtkModule>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A940)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A950)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() {
@@ -23,63 +23,65 @@ public unsafe partial struct RaptureAtkModule {
         return uiModule == null ? null : uiModule->GetRaptureAtkModule();
     }
 
-    [FieldOffset(0x8300)] public GameUIScene UIScene;
-    [FieldOffset(0x8302)] public GameUIMode UIMode;
+    [FieldOffset(0x8310)] public GameUIScene UIScene;
+    [FieldOffset(0x8312)] public GameUIMode UIMode;
 
-    [FieldOffset(0x83B0)] internal Utf8String Unk8358;
-    [FieldOffset(0x8418), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
-    [FieldOffset(0x8688)] public Utf8String ItalicOn; // <italic(1)>
-    [FieldOffset(0x86F0)] public Utf8String ItalicOff; // <italic(0)>
-    [FieldOffset(0x8758)] public Utf8String BoldOn; // <bold(1)>
-    [FieldOffset(0x87C0)] public Utf8String BoldOff; // <bold(0)>
+    [FieldOffset(0x83C0)] internal Utf8String Unk8358;
+    [FieldOffset(0x8428), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
+    [FieldOffset(0x8698)] public Utf8String ItalicOn; // <italic(1)>
+    [FieldOffset(0x8700)] public Utf8String ItalicOff; // <italic(0)>
+    [FieldOffset(0x8768)] public Utf8String BoldOn; // <bold(1)>
+    [FieldOffset(0x87D0)] public Utf8String BoldOff; // <bold(0)>
 
-    [FieldOffset(0x886F)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
-    [FieldOffset(0x8870), FixedSizeArray] internal FixedSizeArray990<AddonFactoryInfo> _addonFactories;
-    [FieldOffset(0x12320)] public StdVector<Utf8String> AddonNames;
-    [FieldOffset(0x12338)] public AddonConfig* AddonConfigPtr;
+    [FieldOffset(0x887F)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
+    [FieldOffset(0x8880), FixedSizeArray] internal FixedSizeArray990<AddonFactoryInfo> _addonFactories;
+    [FieldOffset(0x12330)] public StdVector<Utf8String> AddonNames;
+    [FieldOffset(0x12348)] public AddonConfig* AddonConfigPtr;
 
-    [FieldOffset(0x12342)] public AtkCursor.CursorType CursorType;
+    [FieldOffset(0x12352)] public AtkCursor.CursorType CursorType;
 
-    // [FieldOffset(0x12348)] public ProhibitModule ProhibitModule;
-    [FieldOffset(0x123E0)] public int AudioClientRpcTagSize;
+    // [FieldOffset(0x12358)] public ProhibitModule ProhibitModule;
+    [FieldOffset(0x123F0)] public int AudioClientRpcTagSize;
 
-    [FieldOffset(0x123E8)] public char* AudioClientRpcTag;
-    [FieldOffset(0x123F0)] public UIModule* UIModulePtr;
-    [FieldOffset(0x123F8)] public RaptureLogModule* RaptureLogModulePtr;
-    [FieldOffset(0x12400)] public AgentModule AgentModule;
-    [FieldOffset(0x13418)] public RaptureHotbarModule* RaptureHotbarModulePtr;
-    [FieldOffset(0x13420)] public RaptureAtkUnitManager RaptureAtkUnitManager;
-    [FieldOffset(0x1D150)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
+    [FieldOffset(0x123F8)] public char* AudioClientRpcTag;
+    [FieldOffset(0x12400)] public UIModule* UIModulePtr;
+    [FieldOffset(0x12408)] public RaptureLogModule* RaptureLogModulePtr;
+    [FieldOffset(0x12410)] public AgentModule AgentModule;
+    [FieldOffset(0x13428)] public RaptureHotbarModule* RaptureHotbarModulePtr;
+    [FieldOffset(0x13430)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+    [FieldOffset(0x1D160)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 
-    [FieldOffset(0x1D3D0)] public int NameplateInfoCount;
-    [FieldOffset(0x1D3D8), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
+    [FieldOffset(0x1D3E0)] public int NameplateInfoCount;
+    [FieldOffset(0x1D3E8), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
 
-    [FieldOffset(0x24850), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
-    [FieldOffset(0x25300)] public ItemCache* KeyItemCache; // ptr to 120 entries
-    [FieldOffset(0x25308)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FieldOffset(0x25310), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // only 140 slots are processed, unused?
-    [FieldOffset(0x2A810)] public uint InventoryItemCacheSlotCount;
-    [FieldOffset(0x2A814)] public uint GilCap;
+    [FieldOffset(0x24860), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
+    [FieldOffset(0x25310)] public ItemCache* KeyItemCache; // ptr to 120 entries
+    [FieldOffset(0x25318)] public ItemCache* EquippedItemCache; // ptr to 14 entries
+    [FieldOffset(0x25320), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // only 140 slots are processed, unused?
+    [FieldOffset(0x2A820)] public uint InventoryItemCacheSlotCount;
+    [FieldOffset(0x2A824)] public uint GilCap;
 
-    [FieldOffset(0x2A858)] public uint LocalPlayerClassJobId;
-    [FieldOffset(0x2A85C)] public uint LocalPlayerLevel;
+    [FieldOffset(0x2A888)] public uint LocalPlayerClassJobId;
+    [FieldOffset(0x2A88C)] public uint LocalPlayerLevel;
 
-    [FieldOffset(0x2A865)] public bool QuickGatheringEnabled;
+    [FieldOffset(0x2A895)] public bool QuickGatheringEnabled;
 
-    [FieldOffset(0x2A8D0)] internal ExcelSheet* AddonParamSheet;
-    [FieldOffset(0x2A8D8)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+    [FieldOffset(0x2A89B)] public bool QTEActive;
 
-    [FieldOffset(0x2A8F4)] public uint LoginSummonCompanionId;
-    [FieldOffset(0x2A8F8)] public float LoginSummonCompanionCountdown;
+    [FieldOffset(0x2A900)] internal ExcelSheet* AddonParamSheet;
+    [FieldOffset(0x2A908)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+    [FieldOffset(0x2A920)] public CreditMode CreditMode;
+    [FieldOffset(0x2A924)] public uint LoginSummonCompanionId;
+    [FieldOffset(0x2A928)] public float LoginSummonCompanionCountdown;
     /// <remarks> Only for Region 5 </remarks>
-    [FieldOffset(0x2A8FC)] public float HourTimer;
+    [FieldOffset(0x2A92C)] public float HourTimer;
     /// <remarks> Only for Region 5 </remarks>
-    [FieldOffset(0x2A900)] public int HoursPlayed;
+    [FieldOffset(0x2A930)] public int HoursPlayed;
 
-    [FieldOffset(0x2A918)] internal nint ShellCommands; // only 1 function to open links?
+    [FieldOffset(0x2A948)] internal nint ShellCommands; // only 1 function to open links?
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA")]
-    public partial bool ChangeUiMode(uint uiMode);
+    public partial bool ChangeUiMode(uint uiMode); // TODO: fix capitalization -> ChangeUIMode
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4E 30")]
     public partial bool IncRefNumberArrayData(int index);
@@ -149,6 +151,7 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x24)] public uint ClassJobId;
         [FieldOffset(0x2C)] public uint Icon;
         [FieldOffset(0x30)] public Utf8String Name;
+        [FieldOffset(0x98)] public byte* NameOverride;
         [FieldOffset(0xA0)] public Utf8String FcName;
         [FieldOffset(0x108)] public Utf8String Title;
         [FieldOffset(0x170)] public Utf8String DisplayTitle;
@@ -262,4 +265,14 @@ public enum GameUIMode : ushort {
     EmjSolo = 6,
     RideShooting = 7,
     TripleTriad = 8,
+}
+
+public enum CreditMode {
+    None = 0,
+    CreditCast = 1,
+    CreditScroll = 2,
+    CreditPlayer = 3,
+    CreditScroll2 = 4,
+    CreditEnd = 5,
+    Credit = 6
 }

@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
@@ -102,7 +103,7 @@ public unsafe partial struct UIState {
 
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x1A0EB), FixedSizeArray(isBitArray: true, bitCount: 1432)] internal FixedSizeArray179<byte> _seenCutscenes;
+    [FieldOffset(0x1A0EB), FixedSizeArray(isBitArray: true, bitCount: 1458)] internal FixedSizeArray183<byte> _seenCutscenes;
 
     // BitCount: TripleTriadCardSheet.RowCount
     /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
@@ -111,7 +112,7 @@ public unsafe partial struct UIState {
 
     // BitCount: TripleTriadResident.RowCount
     /// <remarks> Use <see cref="IsTripleTriadNpcBeaten"/>. </remarks>
-    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 131)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
+    [FieldOffset(0x1A1E8), FixedSizeArray(isBitArray: true, bitCount: 132)] internal FixedSizeArray17<byte> _beatenTripleTriadResidents;
 
     // unk byte
 
@@ -209,6 +210,16 @@ public unsafe partial struct UIState {
     /// <returns>Returns true if the specified HowTo is unlocked.</returns>
     public bool IsHowToUnlocked(uint howtoId)
         => UnlockedHowTosBitArray.Get((int)howtoId);
+
+    /// <summary>
+    /// Announce a HowTo entry
+    /// </summary>
+    /// <param name="howToId">HowTo sheet row id</param>
+    /// <param name="openType">Passed through to <see cref="AgentHowTo.OpenHowTo"/> when opening the full addon.</param>
+    /// <param name="force">If true, announce even when already unlocked.</param>
+    /// <remarks>Marks the HowTo unlocked when it was not already, unless already unlocked and <paramref name="force"/> is false.</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 93 D8 19 00 00 48 8B CB")]
+    public partial void AnnounceHowTo(uint howToId, HowToOpenType openType = HowToOpenType.HowTo, bool force = false);
 
     /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.

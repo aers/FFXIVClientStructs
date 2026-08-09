@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkEventTarget
 [GenerateInterop]
 [Inherits<AtkEventTarget>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? C6 41 ?? ?? ?? ?? ?? 33 C0 48 89 41 ?? 89 41 ?? 48 89 41", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AtkTimer : ICreatable<AtkTimer> {
     [FieldOffset(0x08)] public AtkEventManager EventManager;
@@ -20,9 +21,13 @@ public unsafe partial struct AtkTimer : ICreatable<AtkTimer> {
     /// <returns> <c>false</c> when EntTime is reached, <c>true</c> otherwise. </returns>
     [FieldOffset(0x28)] public bool IsActive;
 
+    // [VirtualFunction(1)]
+    // public partial AtkTimer* Dtor(byte freeFlags);
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 46 78")]
     public partial AtkTimer* Ctor();
 
+    // TODO: replace with vfunc above
     [MemberFunction("40 55 56 48 83 EC 28 8B EA 48 8B F1 F6 C2 02 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 7C 24 ?? 48 8B 79 F8 4C 89 74 24")]
     public partial AtkTimer* Dtor(byte freeFlags);
 

@@ -12,6 +12,23 @@ public unsafe partial struct ISoundData {
 
     [FieldOffset(0x24)] public bool IsActive;
 
+    [VirtualFunction(1)]
+    public partial void Update(float deltaSeconds);
+
+    /// <summary>
+    /// Removes the references to sound resource handles and frees any extra allocated memory, so that this
+    /// can be reused for a new sound.
+    /// </summary>
+    /// <remarks>
+    /// Resetting can fail if the sound is still in use (e.g. is currently fading out).
+    /// </remarks>
+    /// <returns>
+    /// True if this data has been reset and is ready to be reused, or false if resetting failed
+    /// and this data still references a handle or memory that needs to be reset.
+    /// </returns>
+    [VirtualFunction(2)]
+    public partial bool TryReset();
+
     [VirtualFunction(3)]
     public partial SoundDataSoundController* GetSoundController();
 

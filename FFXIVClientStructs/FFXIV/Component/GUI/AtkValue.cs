@@ -9,9 +9,9 @@ public enum AtkValueType {
     UInt = 0x5,
     UInt64 = 0x6,
     Float = 0x7,
-    String = 0x8, // 1 byte per character (ASCII/UTF-8)
-    WideString = 0x9, // 2 bytes per character (UTF-16)
-    String8 = 0xA, // assumed to be a const char*
+    String = 0x8, // char*
+    WideString = 0x9, // wchar_t* or char16_t*
+    ConstString = 0xA, // const char*
     Vector = 0xB,
     Pointer = 0xC,
     AtkValues = 0xD,
@@ -21,6 +21,8 @@ public enum AtkValueType {
     Managed = 0x20,
     ManagedString = Managed | String,
     ManagedVector = Managed | Vector,
+
+    [Obsolete("Renamed to ConstString")] String8 = 0xA,
 }
 
 /// <summary>
@@ -54,7 +56,7 @@ public unsafe partial struct AtkValue {
     public AtkValue(AtkValue* other) => CtorCopy(other);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45")]
-    public partial AtkValue* CtorCopy(AtkValue* other);
+    public partial AtkValue* CtorCopy(AtkValue* other); // TODO: rename to Ctor_Copy
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF FE")]
     public partial void Dtor();
@@ -105,7 +107,7 @@ public unsafe partial struct AtkValue {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 8B 8E")]
     public partial bool CopyVectorValue(uint index, AtkValue* outValue);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 75 F7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 B7")]
     private partial void ReleaseManagedMemoryInternal();
 
     // The game probably uses a macro for this, because it always
@@ -152,7 +154,7 @@ public unsafe partial struct AtkValue {
             AtkValueType.Float => Float.ToString(),
             AtkValueType.String or AtkValueType.ManagedString => String.ToString(),
             AtkValueType.WideString => Marshal.PtrToStringUni((nint)WideString) ?? string.Empty,
-            AtkValueType.String8 => String.ToString(),
+            AtkValueType.ConstString => String.ToString(),
             AtkValueType.Vector or AtkValueType.ManagedVector => Vector != null ? Vector->ToString() : "null",
             AtkValueType.Pointer => $"0x{(nint)Pointer:X}",
             AtkValueType.AtkValues => $"0x{(nint)AtkValues:X}",

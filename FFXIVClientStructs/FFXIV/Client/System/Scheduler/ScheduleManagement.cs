@@ -13,4 +13,7 @@ public unsafe partial struct ScheduleManagement {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 8B 03 48 8B CB")]
     public partial CutSceneController* CreateCutSceneController(byte* path, uint id, byte a4);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 75 ?? 84 C0")]
+    public partial bool IsCutScenePlaying();
 }

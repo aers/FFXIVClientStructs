@@ -22,6 +22,8 @@ public unsafe partial struct ContentsReplayManager {
     [FieldOffset(0x4C8)] public Utf8String ReplayTitle;
     [FieldOffset(0x530)] private Utf8String Unk530;
 
+    [FieldOffset(0x5AC)] public ushort FateId;
+
     [FieldOffset(0x5D0)] public ZoneInitPacket ZoneInitPacket;
 
     [FieldOffset(0x724)] public float PositionMs;

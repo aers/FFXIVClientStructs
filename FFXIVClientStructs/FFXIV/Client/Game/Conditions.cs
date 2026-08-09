@@ -39,9 +39,9 @@ public unsafe partial struct Conditions {
     [FieldOffset(28)] public bool SufferingStatusAffliction;
     [FieldOffset(29)] public bool SufferingStatusAffliction2;
     [FieldOffset(30)] public bool Occupied30;
-    [FieldOffset(31)] public bool OccupiedInEvent;
-    [FieldOffset(32)] public bool OccupiedInQuestEvent;
-    [FieldOffset(33)] public bool Occupied33;
+    [FieldOffset(31)] public bool OccupiedInEvent; // EVENT_STATE_LIGHT
+    [FieldOffset(32)] public bool OccupiedInQuestEvent; // EVENT_STATE_NORMAL
+    [FieldOffset(33)] public bool Occupied33; // EVENT_STATE_PRIORITY
     [FieldOffset(34)] public bool BoundByDuty;
     [FieldOffset(35)] public bool OccupiedInCutSceneEvent;
     [FieldOffset(36)] public bool InDuelingArea;
@@ -57,9 +57,9 @@ public unsafe partial struct Conditions {
     [FieldOffset(45)] public bool BetweenAreas;
     [FieldOffset(46)] public bool Stealthed;
     [FieldOffset(47)] private bool Unknown47;
-    [FieldOffset(48)] public bool Jumping;
+    [FieldOffset(48)] public bool Jumping; // CONDITION_JUMP
     [FieldOffset(49)] public bool UsingChocoboTaxi;
-    [FieldOffset(50)] public bool OccupiedSummoningBell;
+    [FieldOffset(50)] public bool OccupiedSummoningBell; // EVENT_STATE_STORAGE
     [FieldOffset(51)] public bool BetweenAreas51;
     [FieldOffset(52)] public bool SystemError;
     [FieldOffset(53)] public bool LoggingOut;
@@ -67,28 +67,28 @@ public unsafe partial struct Conditions {
     [FieldOffset(55)] public bool WaitingForDuty;
     [FieldOffset(56)] public bool BoundByDuty56;
     [FieldOffset(57)] public bool MountOrOrnamentTransition;
-    [FieldOffset(58)] public bool WatchingCutscene;
+    [FieldOffset(58)] public bool WatchingCutscene; // EVENT_STATE_MOUNT_NORMAL ???
     [FieldOffset(59)] public bool WaitingForDutyFinder;
     [FieldOffset(60)] public bool CreatingCharacter;
-    [FieldOffset(61)] public bool Jumping61;
+    [FieldOffset(61)] public bool Jumping61; // CONDITION_GIMMICK_JUMP
     [FieldOffset(62)] public bool PvPDisplayActive;
     [FieldOffset(63)] public bool SufferingStatusAffliction63;
-    [FieldOffset(64)] public bool Mounting;
-    [FieldOffset(65)] public bool CarryingItem;
+    [FieldOffset(64)] public bool Mounting; // EVENT_STATE_MOUNT_LIGHT
+    [FieldOffset(65)] public bool CarryingItem; // EVENT_STATE_CARRY
     [FieldOffset(66)] public bool UsingPartyFinder;
     [FieldOffset(67)] public bool UsingHousingFunctions;
     [FieldOffset(68)] public bool Transformed;
     [FieldOffset(69)] public bool OnFreeTrial;
     [FieldOffset(70)] public bool BeingMoved;
     /// <remarks> Observed in Cosmic Exploration while using the actions Astrodrill (only briefly) and Solar Flarethrower. </remarks>
-    [FieldOffset(71)] public bool Mounting71;
+    [FieldOffset(71)] public bool Mounting71; // EVENT_STATE_SHAPESHIFT ???
     [FieldOffset(72)] public bool SufferingStatusAffliction72;
     [FieldOffset(73)] public bool SufferingStatusAffliction73;
-    [FieldOffset(74)] public bool RegisteringForRaceOrMatch;
+    [FieldOffset(74)] public bool RegisteringForRaceOrMatch; // EVENT_STATE_SHAPESHIFT_LIGHT ???
     [FieldOffset(75)] public bool WaitingForRaceOrMatch;
     [FieldOffset(76)] public bool WaitingForTripleTriadMatch;
     [FieldOffset(77)] public bool InFlight;
-    [FieldOffset(78)] public bool WatchingCutscene78;
+    [FieldOffset(78)] public bool WatchingCutscene78; // EVENT_STATE_BATTLE
     [FieldOffset(79)] public bool InDeepDungeon;
     [FieldOffset(80)] public bool Swimming;
     [FieldOffset(81)] public bool Diving;

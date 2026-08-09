@@ -5,6 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonShopCardDialog
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
+[Addon("ShopCardDialog")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]

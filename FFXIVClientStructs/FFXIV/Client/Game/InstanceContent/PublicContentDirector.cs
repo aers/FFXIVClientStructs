@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // ctor "E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C9"
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? BA ?? ?? ?? ?? ?? ?? ?? 33 C9 48 8D 05 ?? ?? ?? ?? 48 89 83", 3, 389)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1380)]
 public unsafe partial struct PublicContentDirector {
     [FieldOffset(0xD30 + 0x00), CExporterExcelBegin("PublicContent")] public uint NameOffset;
@@ -30,6 +31,14 @@ public unsafe partial struct PublicContentDirector {
     [FieldOffset(0xD30 + 0x31), CExporterExcelEnd] private byte Unknown4;
 
     [FieldOffset(0xD64)] public ContentDirector.MapEffectList ManagedSharedGroups;
+
+    /// <summary>Dispatches updates specific to the content. This ends up calling ProcessContentSpecificDirectorUpdate and unrolls the parameters array.</summary>
+    [VirtualFunction(373)]
+    public partial void DispatchContentSpecificDirectorUpdate(uint category, uint* parameters);
+
+    /// <summary>Processes updates specific to the content. This handles the categories between 0 and 0x40000000.</summary>
+    [VirtualFunction(374)]
+    public partial void ProcessContentSpecificDirectorUpdate(uint category, uint arg1, uint arg2, uint arg3, uint arg4);
 }
 
 public enum PublicContentDirectorType : byte {

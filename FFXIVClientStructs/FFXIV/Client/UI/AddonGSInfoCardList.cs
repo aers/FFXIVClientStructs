@@ -39,17 +39,4 @@ public unsafe partial struct AddonGSInfoCardList {
     /// <remarks> 0-indexed </remarks>
     [FieldOffset(0x530)] public int SelectedPage;
     [FieldOffset(0x538)] public int SelectedCardIndex; // writable
-
-    [FieldOffset(0x360), Obsolete("Use TabControllerNodes.ContainerNode", true)] public AtkResNode* PageSelection;
-    [FieldOffset(0x368), FixedSizeArray, Obsolete("Use TabControllerNodes.TabButtons", true)] internal FixedSizeArray9<Pointer<AtkComponentButton>> _pageButtons;
-    [FieldOffset(0x3B0), Obsolete("Use TabControllerNodes.BackButton", true)] public AtkComponentButton* GotoFirstPageButton;
-    [FieldOffset(0x3B8), Obsolete("Use TabControllerNodes.ForwardButton", true)] public AtkComponentButton* GotoLastPageButton;
-    [FieldOffset(0x528), Obsolete("Invalid field. Use AgentGoldSaucer.CardListFilterMode", true)] public GSInfoCardListFilterMode FilterMode;
-}
-
-[Obsolete("Invalid enum. This reflected someones TotalPages.", true)]
-public enum GSInfoCardListFilterMode {
-    DisplayAllCards = 0xE,
-    DisplayOwnedCards = 0x6,
-    DisplayUnownedCards = 0x9,
 }

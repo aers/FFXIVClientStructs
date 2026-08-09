@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Common.Lua;
+using FFXIVClientStructs.FFXIV.Component.Text;
 using static FFXIVClientStructs.FFXIV.Client.Game.GameMain;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -38,7 +39,13 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x4020)] public ushort SceneFlags;
     [FieldOffset(0x4028)] public SceneData SceneData;
 
+    [FieldOffset(0x4468)] public StdList<QueuedFormatStringCallback> QueuedFormatStringCallbacks;
+    [FieldOffset(0x4478)] public StdList<QueuedActionTimelineCallback> QueuedActionTimelineCallbacks;
+
     [FieldOffset(0x45D8)] public DailyQuestMap DailyQuests;
+    [FieldOffset(0x45E8)] public Utf8String DailySelectTitle; // Addon#102442 for SelectIconString
+    [FieldOffset(0x4650)] public Utf8String DailySelectSubTitle; // Addon#102443 for SelectIconString
+    [FieldOffset(0x46B8)] public Utf8String DailySelectAllowance; // formatted Addon#102444 for SelectIconString
 
     [FieldOffset(0x476A), FixedSizeArray] internal FixedSizeArray8<Festival> _festivals; // copied from PlayerState, used by GPose (maybe more) to check if Fan Festival frames/stamps should be displayed
 
@@ -111,6 +118,22 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8D B7 ?? ?? ?? ?? 80 A7")]
     public partial void ProcessInitializeScene(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 
+    [MemberFunction("40 53 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 41 8B F9")]
+    public partial void ProcessDirectorUpdate(EventId eventId, uint category, uint arg1, uint arg2, uint arg3, uint arg4, uint arg5, uint arg6);
+
+    /// <summary>
+    /// Finds one or more <see cref="Director"/>(s) in <see cref="DirectorModule.DirectorList"/>
+    /// with a matching <paramref name="eventId"/>, and sets the data to the values provided
+    /// before calling <see cref="Director"/>.SetSequence and <see cref="Director"/>.Synchronize.
+    /// </summary>
+    /// <param name="eventId"><see cref="EventId"/> to look for in <see cref="DirectorModule.DirectorList"/>.</param>
+    /// <param name="sequence">Value to set in <see cref="Director.Sequence"/>.</param>
+    /// <param name="unknown">Value to set in <see cref="Director.Unk2E9"/></param>
+    /// <param name="unionDataBuffer">Buffer that will be copied to <see cref="Director.UnionData"/>.</param>
+    /// <param name="length">The number of bytes that will be copied from <paramref name="unionDataBuffer"/>. The game always provides a value of 12, but it supports other values.</param>
+    [MemberFunction("89 54 24 10 48 89 4C 24 ?? 53 56 57 41 55 41 57 48 83 EC 30 48 8B 99")]
+    public partial void SetDirectorData(EventId eventId, byte sequence, byte unknown, byte* unionDataBuffer, ulong length);
+
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
         if (instanceDirector == null || instanceDirector->InstanceContentType != instanceContentType)
@@ -126,6 +149,43 @@ public unsafe partial struct EventFramework {
 
     public CraftEventHandler* GetCraftEventHandler()
         => (CraftEventHandler*)GetEventHandlerById(0xA0001);
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
+    public partial struct QueuedFormatStringCallback {
+        [FieldOffset(0x00)] public Utf8String String;
+        [FieldOffset(0x68)] public StdDeque<TextParameter> Parameters;
+        [FieldOffset(0x90)] public FormatStringCallbackInterface* Callback;
+        [FieldOffset(0x98)] public ulong CallbackParam;
+        [BitField<bool>(nameof(IsCallbackCalled), 0)]
+        [BitField<bool>(nameof(IsComplete), 1)] // unsure. most likely like how QueuedActionTimelineCallback does it. it checks for & 3, so both flags
+        [FieldOffset(0xA0)] private byte Flags;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public struct QueuedActionTimelineCallback {
+        [FieldOffset(0x00)] public AnimationData Animation;
+        [FieldOffset(0x10)] public HandlerData Handler;
+        [FieldOffset(0x20)] public CallbackData Callback;
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public struct AnimationData {
+            [FieldOffset(0x00)] public Character.Character* Character;
+            [FieldOffset(0x08)] public ushort ActionTimelineId;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public struct HandlerData {
+            [FieldOffset(0x00)] public ActionTimelineCallbackInterface* Callback;
+            [FieldOffset(0x08)] public ulong CallbackParam;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public struct CallbackData {
+            [FieldOffset(0x00)] public bool IsCallbackCalled; // if this is true, the handler was called
+            [FieldOffset(0x02)] public bool IsComplete; // if this is true, it will remove it from the list and free its memory
+        }
+    }
 }
 
 [GenerateInterop]

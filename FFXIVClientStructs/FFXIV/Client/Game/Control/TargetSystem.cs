@@ -24,9 +24,6 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0x140)] public GameObjectId TargetObjectId;
     [FieldOffset(0x148)] public GameObjectArray TargetableObjectsOnScreen;
 
-    [Obsolete("Renamed to TargetableObjectsOnScreen", true)]
-    [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
-
     [FieldOffset(0x2178)] public GameObjectArray ObjectFilterArray1;
     [FieldOffset(0x3B18)] public GameObjectArray ObjectFilterArray2;
     [FieldOffset(0x54B8)] public GameObjectArray ObjectFilterArray3;

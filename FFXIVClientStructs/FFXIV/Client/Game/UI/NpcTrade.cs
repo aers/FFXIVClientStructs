@@ -29,6 +29,9 @@ public unsafe partial struct NpcTrade {
         [FieldOffset(8), FixedSizeArray] internal FixedSizeArray5<Item> _items;
     }
 
+    [MemberFunction("0F B6 91 ?? ?? ?? ?? C6 81 ?? ?? ?? ?? ?? 48 83 C1 08")]
+    public partial bool CanSatisfyRequests();
+
     [VirtualFunction(0)]
     public partial NpcTrade* Dtor(byte freeFlags);
 }

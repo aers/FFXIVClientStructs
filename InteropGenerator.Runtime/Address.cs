@@ -9,6 +9,7 @@ public sealed class Address {
     public readonly ushort[] RelativeFollowOffsets;
     public readonly string String;
     public nint Value;
+
     public Address(string name, string @string, ushort[] relativeFollowOffsets, ulong[] bytes, ulong[] mask, nint value) {
         Name = name;
         String = @string;

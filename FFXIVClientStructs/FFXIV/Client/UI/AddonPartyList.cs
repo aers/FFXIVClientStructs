@@ -14,7 +14,7 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0xA38), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _trustMembers;
     [FieldOffset(0x1238)] public PartyListMemberStruct Chocobo;
     [FieldOffset(0x1338)] public PartyListMemberStruct Pet;
-    //[FieldOffset(0x1438)] private PartyListMemberStruct ??; // new in 7.5
+    [FieldOffset(0x1438)] public PartyListMemberStruct SpecialPet; // Used instead of Pet when PartyListNumberArray.UsePetSlot is false.
 
     [FieldOffset(0x1538), FixedSizeArray] internal FixedSizeArray8<uint> _partyClassJobIconId;
     [FieldOffset(0x1558), FixedSizeArray] internal FixedSizeArray7<uint> _trustClassJobIconId;
@@ -40,12 +40,15 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0x1688)] public int HoveredIndex;
     [FieldOffset(0x168C)] public int TargetedIndex;
 
-    [FieldOffset(0x1690)] private int Unknown1690;
+    [FieldOffset(0x1690)] public int MpBarSpecialResNodeOriginalY;
     [FieldOffset(0x1694)] private int Unknown1694;
-    [FieldOffset(0x1698)] private byte Unknown1698;
+    [FieldOffset(0x1698)] private byte CachedParamIsSet;
+    [FieldOffset(0x1699)] private byte Unknown1699;
 
     [FieldOffset(0x169A)] public byte PetCount; // or PetSummoned?
     [FieldOffset(0x169B)] public byte ChocoboCount; // or ChocoboSummoned?
+    [FieldOffset(0x169C)] public short RowHeight;
+    [FieldOffset(0x169E)] private short Unknown169E;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x100)]
@@ -73,5 +76,8 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
         [FieldOffset(0xF0)] public AtkCollisionNode* Collision;
         [FieldOffset(0xF8)] public byte EmnityByte; //01 or 02 or FF
+        [FieldOffset(0xF9)] public byte DisplayRow;
+        [FieldOffset(0xFA)] private short UnknownFA;
+        [FieldOffset(0xFC)] private int UnknownFC;
     }
 }

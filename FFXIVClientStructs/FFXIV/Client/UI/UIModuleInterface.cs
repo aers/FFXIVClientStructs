@@ -1,4 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -132,13 +134,19 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(155)] public partial ??? ShowEventFadeOut(???);
     [VirtualFunction(159)] public partial void ToggleUi(UiFlags flags, bool enable, bool disableTransition = true);
     // [VirtualFunction(160)] public partial ??? ToggleUi_2(???);
-    // [VirtualFunction(162)] public partial ??? LoadScreenHideUi(???);
-    // [VirtualFunction(163)] public partial ??? LoadScreenShowUi(???);
-    // [VirtualFunction(165)] public partial ??? AnnounceHowTo(???);
-    // [VirtualFunction(167)] public partial ??? HideHowTo(???);
-    [VirtualFunction(169)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
-    [VirtualFunction(170)] public partial void HideGoldSaucerReward();
-    // [VirtualFunction(171)] public partial ??? HideGoldSaucerReward_2(???);
+    [VirtualFunction(162)] public partial void LoadScreenHideUi(WarpType warpType);
+    [VirtualFunction(163)] public partial void LoadScreenShowUi(WarpType warpType, bool a3, bool a4);
+    [VirtualFunction(165)] public partial void AnnounceHowTo(uint howToId, HowToOpenType openType = HowToOpenType.HowTo);
+    [VirtualFunction(167)] public partial void HideHowTo();
+    [VirtualFunction(169)] public partial void ShowFateReward(FateRewardPacket* packet, FateRewardPacket.ItemReward* items, uint itemCount);
+    [VirtualFunction(170)] public partial void HideFateReward();
+    /// <summary> Opens a Gold Saucer reward popup. </summary>
+    /// <param name="type">Index in this array of AddonIds for the title: 9980, 9981, 9982, 9984, 9983, 9986, 9985, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996</param>
+    /// <param name="mgp">The MGP rewarded.</param>
+    /// <param name="rewardItemId">Optional additional item reward (Id).</param>
+    /// <param name="rewardItemCount">Optional additional item reward (Amount).</param>
+    [VirtualFunction(173)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
+    [VirtualFunction(174)] public partial void HideGoldSaucerReward(); // same as HideFateReward
     [VirtualFunction(176)] public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
     // [VirtualFunction(178)] public partial ??? OpenMiniGame(???);
     // [VirtualFunction(179)] public partial ??? HideHousingHarvest(???);
@@ -172,14 +180,14 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(216)] public partial void ShowTalkSubtitle(Utf8String* text, float duration);
     [VirtualFunction(217)] public partial void HideTalkSubtitle();
     [VirtualFunction(220)] public partial void ShowAdventureNotice(int index);
+    [VirtualFunction(222)] public partial int RotateLinkshellHistory(int offset);
     [VirtualFunction(223)] public partial void SetLinkshellCycle(int linkshellCycle);
-    [VirtualFunction(224)] public partial int RotateLinkshellHistory(int offset);
+    [VirtualFunction(224)] public partial int RotateCrossLinkshellHistory(int offset);
     [VirtualFunction(225)] public partial void SetCrossWorldLinkshellCycle(int crossWorldLinkshellCycle);
-    [VirtualFunction(226)] public partial int RotateCrossLinkshellHistory(int offset);
     // [VirtualFunction(242)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(243)] public partial ??? ShowRaceCountdownEnd_2(???);
 
-    [VirtualFunction(247)] public partial bool ShouldLimitFps();
+    [VirtualFunction(248)] public partial bool ShouldLimitFps();
 }
 
 public enum UIModulePacketType {
@@ -224,7 +232,4 @@ public enum UIModulePacketType {
     TofuRealTimeUpdate = 38,
     TofuStopShare = 39,
     TofuConfirmation = 40,
-
-    [Obsolete("Renamed to ZoneInit", true)]
-    InitZone = 5,
 }

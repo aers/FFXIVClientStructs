@@ -2,10 +2,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-// Client::UI::AddonSelectYesNo
+// Client::UI::AddonSelectYesno
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[Addon("SelectYesNo")]
+[Addon("SelectYesno")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
@@ -26,4 +26,39 @@ public unsafe partial struct AddonSelectYesno {
     [FieldOffset(0x2A8)] public AtkComponentCheckBox* ConfirmCheckBox;
     [FieldOffset(0x2B0)] public AtkTextNode* AtkTextNode298;
     [FieldOffset(0x2B8)] public AtkComponentBase* AtkComponentBase2A0;
+
+    public StandardAtkValues* StandardTypedAtkValues => (StandardAtkValues*)AtkValues;
+
+    [StructLayout(LayoutKind.Explicit, Size = AtkValue.StructSize * 13)]
+    public struct StandardAtkValues {
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 0)] public AtkValue PromptText;
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 1)] public AtkValue Button1Text;
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 2)] public AtkValue Button2Text;
+        /// <remarks><see cref="AtkValueType.String"/>. Will be null if no third button</remarks>
+        [FieldOffset(AtkValue.StructSize * 3)] public AtkValue Button3Text;
+    }
+
+    public bool CollectibleAtkValuesAvailable => AtkValuesCount > 15 && AtkValues[12].Int > 0;
+
+    /// <remarks>Check <see cref="CollectibleAtkValuesAvailable"/> before using. Non-collectible SelectYesno only has 12 atkvalues</remarks>
+    public CollectibleAtkValues* CollectibleTypedAtkValues => (CollectibleAtkValues*)AtkValues;
+
+    [StructLayout(LayoutKind.Explicit, Size = AtkValue.StructSize * 16)]
+    public struct CollectibleAtkValues {
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 0)] public AtkValue PromptText;
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 1)] public AtkValue Button1Text;
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 2)] public AtkValue Button2Text;
+        /// <remarks><see cref="AtkValueType.Int"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 13)] public AtkValue IconId;
+        /// <remarks><see cref="AtkValueType.UInt"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 14)] public AtkValue ItemId; // collectable so it's +500k
+        /// <remarks><see cref="AtkValueType.String"/></remarks>
+        [FieldOffset(AtkValue.StructSize * 15)] public AtkValue ItemName; // has the collectible symbol in it
+    }
 }

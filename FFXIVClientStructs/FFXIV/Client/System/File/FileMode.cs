@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 public enum FileMode : byte {
-
     /// <summary>
     /// Reads a file on disk into a ResourceHandle.
     /// </summary>
@@ -15,9 +14,9 @@ public enum FileMode : byte {
     Seek = 4,
     GetSize = 5,
 
-    LoadIndexResource = 0xA,
+    LoadIndexResource = 10,
     /// <summary>
     /// Reads an entry in a .sqpack archive into a ResourceHandle.
     /// </summary>
-    LoadSqPackResource = 0xB,
+    LoadSqPackResource = 11,
 }

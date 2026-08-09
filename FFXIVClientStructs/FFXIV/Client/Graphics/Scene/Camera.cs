@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 // Client::Graphics::Scene::Camera
 //   Client::Graphics::Scene::Object
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [Inherits<Object>]
 [StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public unsafe partial struct Camera {

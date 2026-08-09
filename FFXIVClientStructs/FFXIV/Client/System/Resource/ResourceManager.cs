@@ -12,14 +12,14 @@ public unsafe partial struct ResourceManager {
 
     [FieldOffset(0x8)] public ResourceGraph* ResourceGraph;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 0F 85 ?? ?? ?? ?? 48 8B 84 24")]
-    public partial ResourceHandle* FindResourceHandle(ResourceCategory* category, uint* type, uint* hash);
+    [Obsolete("Use ResourceGraph->FindResourceHandle() instead")]
+    public ResourceHandle* FindResourceHandle(ResourceCategory* category, uint* type, uint* hash) => ResourceGraph->FindResourceHandle(category, type, hash);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 8B C3 F0 0F C0 81"), GenerateStringOverloads]
-    public partial ResourceHandle* GetResourceSync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown, void* unkDebugPtr, uint unkDebugInt);
+    public partial ResourceHandle* GetResourceSync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown, void* unkDebugPtr, uint unkDebugInt); // TODO: first arg is `ResourceHandleType*` sent to ResourceHandle.ctor a2 and renamed to `resourceHandleType`
 
     [MemberFunction("E8 ?? ?? ?? 00 48 8B D8 EB ?? F0 FF 83 ?? ?? 00 00"), GenerateStringOverloads]
-    public partial ResourceHandle* GetResourceAsync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown, bool isUnknown, void* unkDebugPtr, uint unkDebugInt);
+    public partial ResourceHandle* GetResourceAsync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown, bool isUnknown, void* unkDebugPtr, uint unkDebugInt);// TODO: first arg is `ResourceHandleType*` sent to ResourceHandle.ctor a2 and renamed to `resourceHandleType`
 }
 
 public enum ResourceCategory {

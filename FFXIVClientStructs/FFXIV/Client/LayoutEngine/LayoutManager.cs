@@ -27,7 +27,7 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x080)] public float FestivalLayersAddTimer; // dt * 30
     [FieldOffset(0x084)] public float FestivalLayersRemoveTimer; // dt * 30
     [FieldOffset(0x088)] public void* StreamingManager;
-    [FieldOffset(0x090)] public void* Environment;
+    [FieldOffset(0x090)] public void* Environment; // TODO: Change to LayoutEnvironment*
     [FieldOffset(0x098)] public void* OBSetManager;
     [FieldOffset(0x0A0)] public OutdoorAreaLayoutData* OutdoorAreaData;
     [FieldOffset(0x0A8)] public OutdoorExteriorLayoutData* OutdoorExteriorData;
@@ -48,7 +48,7 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x1A4)] public float LastUpdateDT; // set to dt on update
     [FieldOffset(0x1A8)] public int LastUpdateOdd; // flips between 0 and 1 on update, presumably for some double buffering somewhere
     [FieldOffset(0x1C0)] public StringTable ResourcePaths;
-    [FieldOffset(0x1E0)] public ResourceHandle* LvbResourceHandle;
+    [FieldOffset(0x1E0)] public ResourceHandle* LvbResourceHandle; // TODO: use LevelSceneResourceHandle*
     [FieldOffset(0x1E8)] public StdVector<Pointer<ResourceHandle>> LayerGroupResourceHandles;
     [FieldOffset(0x218)] public StdMap<uint, Pointer<Terrain.TerrainManager>> Terrains;
     [FieldOffset(0x228)] public StdMap<ushort, Pointer<Layer.LayerManager>> Layers;
@@ -60,9 +60,9 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x298)] public StdMap<uint, Pointer<Filter>> Filters;
     // 0x2C0: some map
     // 0x2D0: vector<LayoutU3*> streamingoriginupdatelisteners
-    [FieldOffset(0x308)] public ResourceHandle* SvbResourceHandle;
-    [FieldOffset(0x310)] public ResourceHandle* LcbResourceHandle;
-    [FieldOffset(0x318)] public ResourceHandle* UwbResourceHandle;
+    [FieldOffset(0x308)] public ResourceHandle* SvbResourceHandle; // TODO: use SkyVisibilityResourceHandle*
+    [FieldOffset(0x310)] public ResourceHandle* LcbResourceHandle; // TODO: use ClipAABBResourceHandle*
+    [FieldOffset(0x318)] public ResourceHandle* UwbResourceHandle; // TODO: use UdwResourceHandle*
     // 0x320: instance pools
     // 0xB90: gfx bg object pool ptr
 
@@ -133,11 +133,15 @@ public struct OutdoorPlotFixtureData {
     [FieldOffset(0x02)] public byte StainId;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x84)]
-public unsafe struct IndoorAreaLayoutData {
+public partial struct IndoorAreaLayoutData {
+    // [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray20<short> _unk0; // 4x 5 shorts like IndoorFloorLayoutData below, but all -1
     [FieldOffset(0x28)] public IndoorFloorLayoutData Floor0;
     [FieldOffset(0x3C)] public IndoorFloorLayoutData Floor1;
     [FieldOffset(0x50)] public IndoorFloorLayoutData Floor2;
+    [FieldOffset(0x64)] public IndoorFloorLayoutData Exterior; // 1: Windows, 2: Door
+    [FieldOffset(0x78), FixedSizeArray] internal FixedSizeArray5<byte> _exteriorStains;
     [FieldOffset(0x80)] public float LightLevel;
 }
 
