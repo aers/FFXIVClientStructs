@@ -11146,10 +11146,20 @@ classes:
       - ea: 0x14218C508
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
+      0x1407B8C40: RegisterOption
+      0x1407B8CA0: InitializeOptions
+      0x1407C4BE0: ReadConfigEntryValue
+      0x1407C4D50: ApplyConfigEntryValue
       0x1407C5F40: ctor
       0x1407C62D0: SetValueByIndex
       0x1407C6490: GetValueByIndex
+      0x1407C6520: ResetOptionsByCategoryMask
+      0x1407C69F0: IsValueChanged
       0x1407C7C00: Update
+      0x1407C8160: RegisterConfigEvent
+      0x1407C81D0: UnregisterConfigEvent
+      0x1407C8230: ReceiveEvent
+      0x1407C8300: OnConfigChange
   Client::UI::Misc::FieldMarkerModule:
     vtbls:
       - ea: 0x14218D2A0
@@ -12859,6 +12869,8 @@ classes:
     vtbls:
       - ea: 0x1421695D0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142169650
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
     funcs:
       0x140503740: ctor
       0x140503810: Finalizer
@@ -13354,6 +13366,8 @@ classes:
     vtbls:
       - ea: 0x1421F4B98
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1421F4C18
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
     funcs:
       0x140FF7170: ctor
       0x140FF7430: Finalizer
