@@ -478,11 +478,6 @@ if api is None:
                 if self.srclang_importer:
                     # rename C++ -> C or create new C struct
                     cname = self.generate_hashed_type_name(fullname)
-                    print(
-                        "Creating struct: yaml={!r}, ida={!r}, importer=SrcLang".format(
-                            struct.type, cname
-                        )
-                    )
                     self.srclang_types[fullname] = cname
                     
                     sid = self.get_struct_id(fullname)
@@ -504,11 +499,6 @@ if api is None:
 
                     return
 
-                print(
-                    "Creating struct: yaml={!r}, ida={!r}, importer=Legacy".format(
-                        struct.type, fullname
-                    )
-                )
                 if self.get_struct_id(fullname) == idaapi.BADADDR:
                     self.create_struct_type(fullname, struct.union)
 
