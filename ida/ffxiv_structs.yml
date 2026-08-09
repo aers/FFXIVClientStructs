@@ -1342,8 +1342,10 @@ enums:
     "WordWrap": 64
     "MultiLine": 128
     "OverflowHidden": 256
-    "FixedFontResolution": 512
+    "LinkData": 512
     "Ellipsis": 1024
+    "UseFixedFontResolution": 4096
+    "FontCache": 16384
 - type: Component::GUI::TextureType
   name: TextureType
   underlying: byte
@@ -21212,6 +21214,9 @@ structs:
   - type: __int16
     name: Height
     offset: 6
+  - type: __int16
+    name: TextYOffset
+    offset: 8
   - type: byte
     name: Alpha
     offset: 10
@@ -25881,30 +25886,56 @@ structs:
     name: ModelSub
     offset: 24
   member_functions: []
-- type: Client::UI::Misc::ConfigModule::Option
-  name: Option
+- type: Client::UI::Misc::ConfigModule::ConfigEventInterface
+  name: ConfigEventInterface
   namespace: Client.UI.Misc
   union: False
-  size: 32
+  size: 24
   fields:
-  - type: __int64
-    name: Unk00
-    offset: 0
-  - type: unsigned __int64
-    name: Unk08
+  - type: Client::UI::Misc::ConfigModule::ConfigEventInterface*
+    name: NextInterface
     offset: 8
-  - type: Client::UI::Misc::ConfigOption
-    name: OptionId
+  - type: Client::UI::Misc::ConfigModule*
+    name: Owner
     offset: 16
+  virtual_functions:
+  - name: OnConfigChange
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::ConfigModule::ConfigEventInterface*
+      name: this
+    - type: int
+      name: valueSetIndex
+    - type: char
+      name: hasClientSelectDataConfigFlags
+  member_functions: []
+- type: Client::UI::Misc::ConfigModule::Option::OptionHandler
+  name: OptionHandler
+  namespace: Client.UI.Misc
+  union: False
+  size: 16
+  fields:
+  - type: __fastcall
+    name: FunctionPtr
+    offset: 0
+    return_type: int
+    parameters:
+    - type: __int64
+      name: a1
+    - type: int
+      name: a2
+    - type: Client::UI::Misc::ConfigModule::Option*
+      name: a3
+    - type: int
+      name: a4
+    - type: int
+      name: a5
+    - type: int
+      name: a6
   - type: unsigned int
-    name: Unk14
-    offset: 20
-  - type: unsigned int
-    name: Unk18
-    offset: 24
-  - type: unsigned __int16
-    name: Unk1C
-    offset: 28
+    name: ConfigModuleOffset
+    offset: 8
   member_functions: []
 - type: Client::UI::Misc::ConfigModule::OptionValue
   name: OptionValue
@@ -49817,6 +49848,9 @@ structs:
   - type: Component::GUI::AtkRenderTexture
     name: RenderTexture
     offset: 480
+  - type: Client::UI::AddonNamePlate::BakeData*
+    name: CurrentBakeData
+    offset: 552
   - type: byte
     name: DisableFixedFontResolution
     offset: 560
@@ -49889,8 +49923,14 @@ structs:
     name: IsPvpEnemy
     offset: 111
   - type: char
+    name: UseAttackCursor
+    offset: 112
+  - type: char
     name: NeedsToBeBaked
     offset: 113
+  - type: char
+    name: DrawOriginalText
+    offset: 114
   member_functions: []
 - type: Client::UI::AddonPointMenu::Entry
   name: Entry
@@ -54418,6 +54458,31 @@ structs:
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
+- type: Client::UI::Misc::ConfigModule::Option
+  name: Option
+  namespace: Client.UI.Misc
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::Misc::ConfigOption
+    name: OptionId
+    offset: 0
+  - type: unsigned int
+    name: CategoryMask
+    offset: 4
+  - type: unsigned int
+    name: MaxValueIndex
+    offset: 8
+  - type: byte
+    name: BitIndex
+    offset: 12
+  - type: char
+    name: InvertValue
+    offset: 13
+  - type: Client::UI::Misc::ConfigModule::Option::OptionHandler
+    name: Handler
+    offset: 16
+  member_functions: []
 - type: Client::UI::Misc::CrossWorldLinkShellModule
   name: CrossWorldLinkShellModule
   namespace: Client.UI.Misc
@@ -81936,26 +82001,17 @@ structs:
       name: glassesIds
     - type: Client::UI::Misc::BannerGearVisibilityFlag
       name: gearVisibilityFlag
-- type: Client::UI::Misc::ConfigModule
-  name: ConfigModule
+- type: Client::UI::Misc::ConfigModule::ValueSet
+  name: ValueSet
   namespace: Client.UI.Misc
   union: False
-  size: 60688
+  size: 11936
   fields:
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 40
-  - type: Client::UI::Misc::ConfigModule::Option
-    name: Options
-    offset: 768
+  - type: Component::GUI::AtkValue
+    name: Values
+    offset: 0
     size: 746
     is_string: False
-  - type: Client::UI::Misc::ConfigModule::OptionValue
-    name: Values
-    offset: 24640
-    size: 2238
-    is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::CraftModule
   name: CraftModule
@@ -100301,13 +100357,13 @@ structs:
     name: LinkType
     offset: 27
   - type: unsigned __int16
-    name: Unk1C
+    name: LinkId
     offset: 28
   - type: unsigned __int16
-    name: Unk1E
+    name: LinkIndex
     offset: 30
   - type: unsigned int
-    name: Unk20
+    name: LinkGroupId
     offset: 32
   - type: Component::GUI::LinkData::Value1
     name: Value1
@@ -128358,6 +128414,9 @@ structs:
     name: SelectEnd
     offset: 332
   - type: byte
+    name: NumberFormat
+    offset: 352
+  - type: byte
     name: LineSpacing
     offset: 354
   - type: byte
@@ -146058,6 +146117,156 @@ structs:
     name: Flags2
     offset: 2909
   member_functions: []
+- type: Client::UI::Misc::ConfigModule
+  name: ConfigModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 60688
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  - type: Common::Configuration::ConfigBase::ChangeEventInterface
+    name: ChangeEventInterface
+    offset: 16
+    base: true
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 40
+  - type: Client::System::String::Utf8String
+    name: CharacterName
+    offset: 136
+  - type: Client::System::String::Utf8String
+    name: WorldName
+    offset: 240
+  - type: unsigned int
+    name: CurrentClassJobLevel
+    offset: 344
+  - type: unsigned int
+    name: CurrentClassJobId
+    offset: 348
+  - type: unsigned int
+    name: PlaceName
+    offset: 352
+  - type: StdDeque<Component::Text::TextParameter>
+    name: CharacterInfoParameters
+    offset: 360
+  - type: Client::System::String::Utf8String
+    name: CharacterInfo
+    offset: 400
+  - type: Client::UI::Misc::ConfigModule::ConfigEventInterface*
+    name: ConfigEventListeners
+    offset: 752
+  - type: char
+    name: IsApplyingConfigChange
+    offset: 760
+  - type: char
+    name: HasClientSelectDataConfigFlags
+    offset: 761
+  - type: Client::UI::Misc::ConfigModule::Option
+    name: Options
+    offset: 768
+    size: 746
+    is_string: False
+  - type: Client::UI::Misc::ConfigModule::ValueSet
+    name: ValueSets
+    offset: 24640
+    size: 3
+    is_string: False
+  vtable_size: 24
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  member_functions:
+  - signature: 48 8B 81 ?? ?? ?? ?? 4C 8B C1 48 3B C2
+    return_type: void
+    name: RegisterConfigEvent
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: Client::UI::Misc::ConfigModule::ConfigEventInterface*
+      name: configEventInterface
+  - signature: 48 8B 81 ?? ?? ?? ?? 48 3B C2 75 ?? 48 8B 42
+    return_type: void
+    name: UnregisterConfigEvent
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: Client::UI::Misc::ConfigModule::ConfigEventInterface*
+      name: configEventInterface
+  - signature: E8 ?? ?? ?? ?? 4C 69 C7
+    return_type: char
+    name: SetValueByIndex
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: int
+      name: optionIndex
+    - type: int
+      name: value
+    - type: int
+      name: valueSetIndex
+    - type: char
+      name: apply
+    - type: char
+      name: notifyListeners
+  - signature: E8 ?? ?? ?? ?? 33 DB 83 E7
+    return_type: int
+    name: GetValueByIndex
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: int
+      name: optionIndex
+    - type: int
+      name: valueSetIndex
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 41 54 41 56 41 57 48 83 EC ?? 45 33 E4
+    return_type: void
+    name: ResetOptionsByCategoryMask
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: unsigned int
+      name: categoryMask
+    - type: int
+      name: valueSetIndex
+  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 45 32 F6
+    return_type: char
+    name: IsValueChanged
+    parameters:
+    - type: Client::UI::Misc::ConfigModule*
+      name: this
+    - type: int
+      name: optionIndex
+    - type: int
+      name: valueSetIndex
 - type: Client::UI::Misc::RaptureHotbarModule
   name: RaptureHotbarModule
   namespace: Client.UI.Misc
@@ -238230,268 +238439,6 @@ structs:
     size: 8
     is_string: False
   member_functions: []
-- type: Client::UI::Agent::AgentGearSet
-  name: AgentGearSet
-  namespace: Client.UI.Agent
-  union: False
-  size: 3024
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentGearSet::ContextMenuParam
-    name: ContextMenuParams
-    offset: 72
-    size: 14
-    is_string: False
-  - type: unsigned int
-    name: ChildAddonId
-    offset: 276
-  - type: int
-    name: GearsetIdOfDisplayAddon
-    offset: 280
-  - type: int
-    name: GearsetIdOfPreviewAddon
-    offset: 284
-  - type: Client::UI::RaptureAtkModule::ItemCache
-    name: ItemCaches
-    offset: 288
-    size: 13
-    is_string: False
-  - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
-    name: CharaView
-    offset: 2176
-  - type: Client::Graphics::Kernel::Texture*
-    name: GearsetPreviewTexture
-    offset: 2992
-  - type: StdVector<int>
-    name: GearSetIds
-    offset: 3000
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: returnValue
-    - type: Component::GUI::AtkValue*
-      name: values
-    - type: unsigned int
-      name: valueCount
-    - type: unsigned __int64
-      name: eventKind
-  - name: ReceiveEventWithResult
-    offset: 8
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: returnValue
-    - type: Component::GUI::AtkValue*
-      name: values
-    - type: unsigned int
-      name: valueCount
-    - type: unsigned __int64
-      name: eventKind
-  - name: dtor
-    offset: 16
-    return_type: Client::UI::Agent::AgentInterface*
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: ShowFromLua
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: id
-    - type: int*
-      name: args
-    - type: __int64
-      name: argCount
-  - name: Hide
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: IsAgentActive
-    offset: 48
-    return_type: char
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: Update
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: unsigned int
-      name: frameCount
-  - name: IsActivatable
-    offset: 64
-    return_type: char
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: GetAddonId
-    offset: 72
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: OnGameEvent
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Client::UI::Agent::AgentGameEvent
-      name: gameEvent
-  - name: OnLevelChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: classJobId
-    - type: unsigned __int16
-      name: level
-  - name: OnClassJobChange
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: classJobId
-  member_functions:
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
-    return_type: void
-    name: OpenBannerEditorForGearset
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: E9 ?? ?? ?? ?? 48 FF C9 48 3B D1
-    return_type: char
-    name: ReassignGearsetId
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-    - type: int
-      name: newGearsetId
-  - signature: 4C 8B D1 44 8B CA
-    return_type: char
-    name: MoveGearsetUpOrDown
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-    - type: char
-      name: direction
-  - signature: 48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 49 8B F8
-    return_type: char
-    name: RenameGearset
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-    - type: char*
-      name: newGearsetName
-  - signature: E9 ?? ?? ?? ?? 8B D7 48 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24
-    return_type: char
-    name: UpdateGearset
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 48 8B 13
-    return_type: void
-    name: OpenDeleteDialog
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0
-    return_type: void
-    name: ReassignGear
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0 ?? 8B D6 48 8B CB
-    return_type: char
-    name: ReassignSetNumber
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 84 C0
-    return_type: void
-    name: UpdateGearsetIfExistsOrCreateNew
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: 48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8
-    return_type: char
-    name: CreateGearsetInternal
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7
-    return_type: int
-    name: CreateGearset
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-    - type: char
-      name: createAtFirstEmpty
-  - signature: 40 56 41 54 41 56 48 83 EC ?? 48 8B 05
-    return_type: char
-    name: DeleteGearset
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
-  - signature: E8 ?? ?? ?? ?? 33 C0 EB ?? 83 F8
-    return_type: void
-    name: OpenGearsetViewer
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
 - type: Client::UI::Agent::AgentInspect
   name: AgentInspect
   namespace: Client.UI.Agent
@@ -243146,6 +243093,272 @@ structs:
     - type: char
       name: a3
   member_functions: []
+- type: Client::UI::Agent::AgentGearSet
+  name: AgentGearSet
+  namespace: Client.UI.Agent
+  union: False
+  size: 3024
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Misc::ConfigModule::ConfigEventInterface
+    name: ConfigEventInterface
+    offset: 40
+    base: true
+  - type: Client::UI::Agent::AgentGearSet::ContextMenuParam
+    name: ContextMenuParams
+    offset: 72
+    size: 14
+    is_string: False
+  - type: unsigned int
+    name: ChildAddonId
+    offset: 276
+  - type: int
+    name: GearsetIdOfDisplayAddon
+    offset: 280
+  - type: int
+    name: GearsetIdOfPreviewAddon
+    offset: 284
+  - type: Client::UI::RaptureAtkModule::ItemCache
+    name: ItemCaches
+    offset: 288
+    size: 13
+    is_string: False
+  - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
+    name: CharaView
+    offset: 2176
+  - type: Client::Graphics::Kernel::Texture*
+    name: GearsetPreviewTexture
+    offset: 2992
+  - type: StdVector<int>
+    name: GearSetIds
+    offset: 3000
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
+    return_type: void
+    name: OpenBannerEditorForGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: E9 ?? ?? ?? ?? 48 FF C9 48 3B D1
+    return_type: char
+    name: ReassignGearsetId
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+    - type: int
+      name: newGearsetId
+  - signature: 4C 8B D1 44 8B CA
+    return_type: char
+    name: MoveGearsetUpOrDown
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+    - type: char
+      name: direction
+  - signature: 48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 49 8B F8
+    return_type: char
+    name: RenameGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+    - type: char*
+      name: newGearsetName
+  - signature: E9 ?? ?? ?? ?? 8B D7 48 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24
+    return_type: char
+    name: UpdateGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 48 8B 13
+    return_type: void
+    name: OpenDeleteDialog
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B D6 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0
+    return_type: void
+    name: ReassignGear
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 B0 ?? 8B D6 48 8B CB
+    return_type: char
+    name: ReassignSetNumber
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 48 8B C8 8B D7 E8 ?? ?? ?? ?? 84 C0
+    return_type: void
+    name: UpdateGearsetIfExistsOrCreateNew
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: 48 83 EC ?? 41 B0 ?? BA ?? ?? ?? ?? E8
+    return_type: char
+    name: CreateGearsetInternal
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 8B D7
+    return_type: int
+    name: CreateGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+    - type: char
+      name: createAtFirstEmpty
+  - signature: 40 56 41 54 41 56 48 83 EC ?? 48 8B 05
+    return_type: char
+    name: DeleteGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
+  - signature: E8 ?? ?? ?? ?? 33 C0 EB ?? 83 F8
+    return_type: void
+    name: OpenGearsetViewer
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
 - type: Client::UI::Agent::AgentLobby
   name: AgentLobby
   namespace: Client.UI.Agent
