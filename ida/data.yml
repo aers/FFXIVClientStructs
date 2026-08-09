@@ -7204,7 +7204,7 @@ classes:
   Client::Graphics::Render::Light:
     vtbls:
       - ea: 0x1421446C8
-        base: Client::Graphics::Render::RenderObject      
+        base: Client::Graphics::Render::RenderObject
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x1421445A0
@@ -11287,7 +11287,7 @@ classes:
       0x1409B3FE0: ShowLogMessageSourceObjectTargetObjectTextParameters
       0x1409B42A0: ShowLogMessageSourceObjectTargetObject
       0x1409B4670: ShowLogMessageSourceTarget
-      0x1409B4B60: ShowLogMessageSourceTargetTextParameters 
+      0x1409B4B60: ShowLogMessageSourceTargetTextParameters
       0x1409B55E0: GetChatTab
       0x1409B5600: SetTabName
       0x1409B57B0: GetTabName
@@ -13623,6 +13623,7 @@ classes:
       0x14055A8A0: RequestListingsUpdate
       0x14055AC00: RequestCategoryListings
       0x14055CE80: PopulateListingData
+      0x1405564D0: PopulateRecruitmentCriteriaPopup
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x1421F1FD8
@@ -15924,7 +15925,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A4A770: ctor
-      0x140A4C520: RenameBoard 
+      0x140A4C520: RenameBoard
       0x140A4C700: ContextMenuOptions
   Client::UI::Agent::TofuListData:
     funcs:
