@@ -41,14 +41,14 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x5A)] public bool DatFileLoadedSuccessfully;
 
     // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
-    [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated; // TODO: Verify (7.3)
+    [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray15<bool> _expacJobHotbarsCreated;
 
     // PvP hotbars for all jobs, appears to track if it's been initialized. 
     // named this way so the actual field becomes PvPHotbarsCreated.
-    [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated; // TODO: Verify (7.3)
+    [FieldOffset(0x6B), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated;
 
     // ????? maybe AllowResets?
-    [FieldOffset(0x7E)] internal bool ClearCallbackPresent; // TODO: Verify (7.3), possibly 0x83
+    [FieldOffset(0x83)] internal bool ClearCallbackPresent;
 
     /// <summary>
     /// A state field to track the current materia melding state (locked - 1 / standard - 2 / advanced - 3), and whether
@@ -141,6 +141,10 @@ public unsafe partial struct RaptureHotbarModule {
     /// to rewrite the special DutyAction General Actions.
     /// </summary>
     [FieldOffset(0x2AF38)] public bool DutyActionsPresent;
+
+    [FieldOffset(0x2AF40), FixedSizeArray] internal FixedSizeArray5<DutyActionSlot> _phantomActionSlots;
+
+    [FieldOffset(0x2B3F0)] public bool PhantomActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 73 25")]
     public partial byte ExecuteSlot(HotbarSlot* hotbarSlot);

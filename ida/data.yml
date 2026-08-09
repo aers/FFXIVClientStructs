@@ -11336,7 +11336,6 @@ classes:
     funcs:
       0x1407D0A70: ctor
       0x1407D0F90: Finalizer
-#oldfail       0x1407C5450: IsHotbarEmpty
       0x1407D17A0: SetAndSaveSlot
       0x1407D13E0: SetAndSaveFirstAvailableNormalSlot
       0x1407D1490: SetAndSaveFirstAvailableCrossSlot
@@ -11364,22 +11363,20 @@ classes:
       0x1407D1BE0: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407D1C00: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
       0x1407D2250: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*)
-#oldfail       0x1407FC590: IsSavedSlotEmpty  # (this, classJobId, hotbarId, slotId) -> bool
       0x1407D5F30: SetHotbarLocked
       0x1407D5F70: IsHotbarLocked
       0x1407D5FB0: SetCrossHotbarLocked
       0x1407D5FF0: IsCrossHotbarLocked
-#oldfail       0x1407C89D0: IsDutyAction1Usable
+      0x1407D68B0: IsDutyAction1Usable
       0x1407D68D0: SetDutyActionsPresent             # (this, isPresent) -> void
-#oldfail       0x1407C8A00: IsAnyDutyActionActive
-#oldfail       0x1407FF8C0: SetDutyActionActive
-#oldfail       0x1407C8A90: GetDutyActionCount
-#oldfail       0x1407FF920: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
-#oldfail       0x1407C8AE0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
+      0x1407D68F0: IsAnyDutyActionActive
+      0x1407D6950: SetDutyActionActive
+      0x1407D6980: GetDutyActionCount
+      0x1407D69B0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
+      0x1407D69D0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
       0x1407D6E20: SetDutyActionSlot                 # (this, slotId, actionId)
       0x1407D6B30: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x1407D6B90: ExecuteDutyActionSlot             # (this, slotId)
-#oldfail       0x140800CF0: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function?
       0x1407D2BA0: GrandCompanyUpdateTask            # (this) -> void
       0x1407D2E20: PvPStateUpdateTask                # (this) -> void
       0x1407D2F30: ToggleWXHBRightFocusFlag
@@ -11387,9 +11384,21 @@ classes:
       0x1407D2FF0: ToggleWXHBFocusFlags
       0x1407D6130: SetStandardHotbarShareState
       0x1407D61A0: SetCrossHotbarShareState
+      0x1407D8A90: IsHotbarShared
+      0x1407D61F0: IsCrossHotbarShared
       0x1407D8340: DeleteAllHotbars                 # (this, performReset) -> void?
       0x1407D2900: PerformMateriaActionMigration
       0x1407D8920: LoadSavedHotbar                   # (this, groupId, hotbarId)
+      0x1407D6F00: GetPhantomActionSlot
+      0x1407D6F30: GetPhantomActionSlot2
+      0x1407D6F60: ExecutePhantomActionSlot
+      0x1407D6C50: GetPhantomActionsPresent
+      0x1407D6C80: SetPhantomActionsPresent
+      0x1407D6D30: GetPhantomActionCount
+      0x1407D6DB0: GetPhantomActionId
+      0x1407D5E80: PerformSavedHotbarMigrations
+      0x1407D9430: CreateExpacSavedHotbar
+      0x1407D9510: CreatePvPSavedHotbar
       0x1407D9790: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
     funcs:
@@ -11419,14 +11428,15 @@ classes:
 #oldfail       0x1407F9C50: LoadUnkDEForSlot          # different from all the other loads - this one still needs slotType/ID for things
       0x1407D0830: LoadCostDataForSlot
       0x1407D01C0: GetKeybindHintForSlot
-#oldfail       0x1407C22A0: LoadKeybindHintForSlot
+      0x1407D01A0: SetKeybindHintForSlot
+      0x1407D01D0: LoadKeybindHintForSlot
       0x1407D0570: SetPopUpHelpForSlot
       0x1407CDA20: IsSlotUsable              # (this, HotbarSlotType, uint) -> bool
       0x140825AD0: IsSlotActionTargetInRange # (this) -> bool
       0x1407CEA70: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool
       0x1407CE9E0: IsActionHighlighted               # (this, commandType, commandId) -> bool
       0x1407CED90: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
-#oldfail       0x140772320: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)  - used for array population?
+      0x1407CF450: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)
       0x1407CF2F0: GetAdjustedCommandId  # ???
       0x1407D0380: LoadMacroSlot
       0x1407CF5F0: GetSlotActionCooldownPercentage  # (this, out int, int) -> int
