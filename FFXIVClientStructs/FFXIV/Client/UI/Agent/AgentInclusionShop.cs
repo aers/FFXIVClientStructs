@@ -14,7 +14,7 @@ public unsafe partial struct AgentInclusionShop {
     [FieldOffset(0x38)] public AgentData* Data;
 
     [MemberFunction("48 8B 41 38 4C 8B D1 80 88 ?? ?? ?? ?? ??")]
-    public partial byte SelectCategory(byte categoryIndex);
+    public partial void SelectCategory(byte categoryIndex);
 
     [GenerateInterop]
     [Inherits<ExcelSheetWaiter>]
