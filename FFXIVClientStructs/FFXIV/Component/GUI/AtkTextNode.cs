@@ -26,6 +26,7 @@ public unsafe partial struct AtkTextNode : ICreatable<AtkTextNode> {
     [FieldOffset(0x148)] public uint SelectStart;
     [FieldOffset(0x14C)] public uint SelectEnd;
 
+    [FieldOffset(0x160)] public byte NumberFormat;
     [FieldOffset(0x162)] public byte LineSpacing;
     [FieldOffset(0x163)] public byte CharSpacing;
     /// <remarks>Alignment bits 0-3, Font Type bits 4-7</remarks>
@@ -117,8 +118,14 @@ public enum TextFlags : ushort {
     WordWrap = 1 << 6,
     MultiLine = 1 << 7,
     OverflowHidden = 1 << 8,
-    FixedFontResolution = 1 << 9,
+    LinkData = 1 << 9,
+    [Obsolete("Use LinkData for this value or UseFixedFontResolution for fixed font resolution.")]
+    FixedFontResolution = LinkData,
     Ellipsis = 1 << 10,
+    // Unk11 = 1 << 11, // Copied to AtkTextNodeRenderer flags 0x20000000.
+    UseFixedFontResolution = 1 << 12, // TODO: Rename to FixedFontResolution
+    // Unk13 = 1 << 13, // Copied to AtkTextNodeRenderer +0x167 used by glyph/font fallback checks.
+    FontCache = 1 << 14,
 }
 
 public enum FontType : byte {
@@ -143,9 +150,9 @@ public unsafe struct LinkData {
 
     /// <remarks> The type of the Link payload. See LinkMacroPayloadType in Lumina. </remarks>
     [FieldOffset(0x1B)] public byte LinkType;
-    [FieldOffset(0x1C)] private ushort Unk1C;
-    [FieldOffset(0x1E)] private ushort Unk1E;
-    [FieldOffset(0x20)] private uint Unk20;
+    [FieldOffset(0x1C)] public ushort LinkId;
+    [FieldOffset(0x1E)] public ushort LinkIndex;
+    [FieldOffset(0x20)] public uint LinkGroupId;
     // These are the 3 link payload parameters. Usually SeStrings have int expressions.
     [FieldOffset(0x24), CExporterUnion("Value1")] public int IntValue1;
     [FieldOffset(0x24), CExporterUnion("Value1")] public uint UIntValue1;

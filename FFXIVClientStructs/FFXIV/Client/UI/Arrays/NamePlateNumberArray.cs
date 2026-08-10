@@ -45,7 +45,10 @@ public unsafe partial struct NamePlateNumberArray {
         // [FieldOffset(16 * 4)] private int Unk;
         /// <summary>
         /// &amp; 0x1 - Is prefix title<br/>
+        /// &amp; 0x4 - PvP enemy<br/>
         /// &amp; 0x8 - Use Depth-based Priority (terrain obstruction)<br/>
+        /// &amp; 0x20 - Enable gauge<br/>
+        /// &amp; 0x40 - Use attack cursor<br/>
         /// &amp; 0x80 - Hide title<br/>
         /// &amp; 0x100 - Disable Alternate Part Id<br/>
         /// </summary>

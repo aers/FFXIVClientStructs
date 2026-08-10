@@ -89,12 +89,14 @@ public unsafe partial struct ConfigBase {
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B C3 39 58")]
     public partial ConfigEntry* GetConfigOption(uint index);
 
+    public ConfigEntry* GetConfigOption(ConfigOption configOption) => GetConfigOption((uint)configOption);
+
     // Common::Configuration::ConfigBase::ChangeEventInterface
     // implemented by objects that want to listen for config changes - rapture atk module, etc
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public unsafe partial struct ChangeEventInterface {
-        [FieldOffset(0x8)] public ChangeEventInterface* NextInterface;
+        [FieldOffset(0x08)] public ChangeEventInterface* NextInterface;
         [FieldOffset(0x10)] public ConfigBase* Owner;
 
         [VirtualFunction(1)]

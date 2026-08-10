@@ -342,8 +342,8 @@ public partial struct RaptureHotbarModule {
         /// <summary>
         /// The PrimaryCostType from the Action EXD (+0x29).
         /// </summary>
-        [FieldOffset(0xE0)] public byte PrimaryCostType;
+        [FieldOffset(0xE8)] public byte PrimaryCostType;
 
-        [FieldOffset(0xE1)] public bool IsActive;
+        [FieldOffset(0xE9)] public bool IsActive;
     }
 }
