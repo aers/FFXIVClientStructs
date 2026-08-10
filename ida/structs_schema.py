@@ -34,6 +34,7 @@ class DefinedStructVFunc:
         self.return_type = return_type
         self.offset = offset
         self.parameters = parameters
+        self.inherited_from_preprocess = False
 
 
 class DefinedStructMemFunc:
@@ -51,6 +52,8 @@ class DefinedStructField(DefinedStructFuncParam, object):
         super(DefinedStructField, self).__init__(name, type)
         self.offset = offset
         self.base = base
+        self.srclang_field_name = name
+        self.srclang_is_baseclass = False
 
 
 class DefinedStructFuncField(DefinedStructField, object):
@@ -102,6 +105,7 @@ class DefinedStruct(DefinedStructBase, object):
         self.union = bool(union)
         self.static_member_functions = static_member_functions
         self.static_members = static_members
+        self.srclang_needs_vfptr = len(fields) == 0 or fields[0].offset != 0
 
 
 class DefinedStructExport:

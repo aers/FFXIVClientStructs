@@ -387,6 +387,29 @@ if api is None:
 
                 return None
 
+            def get_vft_from_data(self, class_name):
+                # type: (str) -> dict | None
+                if not self.data_yaml or "classes" not in self.data_yaml:
+                    return None
+
+                class_data = self.data_yaml["classes"].get(class_name) or {}
+                vtables = class_data.get("vtbls", [])
+                if not isinstance(vtables, list) or not vtables:
+                    return None
+
+                vtable = vtables[0]
+                return vtable if isinstance(vtable, dict) else None
+
+            def get_vfunc_ea_from_data(self, class_name, offset):
+                # type: (str, int) -> int
+                vtable = self.get_vft_from_data(class_name)
+                if vtable is None or "ea" not in vtable:
+                    return idc.BADADDR
+
+                # assuming data.yml will continue using default windows base
+                vtable_ea = vtable["ea"] + idaapi.get_imagebase() - 0x140000000
+                return idc.get_qword(vtable_ea + offset)
+
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
                 self.remove_struct_members(self.get_struct_id(fullname))
@@ -517,7 +540,37 @@ if api is None:
                 
                 ti = self.get_struct(sid)
 
-                seen_fields = {}
+                expected_base_offsets = {}
+                for field in struct.fields:
+                    if not field.srclang_is_baseclass:
+                        continue
+                    expected_base_offsets[field.offset] = (
+                        expected_base_offsets.get(field.offset, 0) + 1
+                    )
+
+                if expected_base_offsets:
+                    udt = ida_typeinf.udt_type_data_t()
+                    if not ti.get_udt_details(udt):
+                        ida_kernwin.warning(
+                            f"Could not find baseclass for {cname} ({struct.type}) during validation"
+                        )
+                        exit()
+
+                    actual_base_offsets = {}
+                    for udm in udt:
+                        if not udm.is_baseclass():
+                            continue
+                        offset = int(udm.offset / 8)
+                        actual_base_offsets[offset] = actual_base_offsets.get(offset, 0) + 1
+
+                    for offset, expected_count in expected_base_offsets.items():
+                        actual_count = actual_base_offsets.get(offset, 0)
+                        if actual_count < expected_count:
+                            ida_kernwin.warning(
+                                f"Baseclass offset mismatch in struct {cname} ({struct.type}).\n"
+                                f"Expected {expected_count} member(s) for baseclass at {offset}, got {actual_count}"
+                            )
+                            exit()
                 
                 last_offset = -1
                 for field in struct.fields:
@@ -526,21 +579,14 @@ if api is None:
 
                     last_offset = field.offset
 
-                    if field.offset is None or field.base:
+                    if field.offset is None or field.srclang_is_baseclass:
                         continue
 
                     if field.offset == 0 and field.name == "_vtable":
                         continue
 
                     # ugly hack to workaround duplicate field names in structs
-                    field_name = field.name
-                    if field_name in seen_fields:
-                        next = seen_fields[field_name] + 1
-                        seen_fields["field_name"] = next
-
-                        field_name += f"_{next}"
-                    else:
-                        seen_fields[field_name] = 1
+                    field_name = field.srclang_field_name
 
                     (idx, udm) = ti.get_udm(field_name)
                     if idx == -1:
@@ -560,6 +606,21 @@ if api is None:
                     return ("__int16", 2)
                 else:
                     return ("char", 1)
+
+            def append_srclang_padding(self, decl: list[str], current_size: int, target_size: int) -> int:
+                while current_size < target_size:
+                    if self.full_padding:
+                        (fill_type, fill_size) = self.get_srclang_fill_type(
+                            target_size - current_size, current_size
+                        )
+                        decl.append(f"{fill_type} field_{current_size:X};")
+                        current_size += fill_size
+                    else:
+                        arr_size = target_size - current_size
+                        decl.append(f"char field_{current_size:X}[{arr_size}];")
+                        current_size += arr_size
+
+                return current_size
 
             def create_srclang_decl(self, struct: DefinedStruct) -> str:
                 fullname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
@@ -581,22 +642,8 @@ if api is None:
                     # and attach it to this struct
                     decl.append("virtual void _placeholder();")
 
-                    # TODO(caitlyn): we are assuming that parent classes are always virtual
-                    # doing this properly will require checking the parent.
-                    # Eventually we'll probably want to build an inheritance hierarchy
-                    # so that we can propagate vfunc names and determine the need to
-                    # offset data members here.
-                    #
-                    # Some types also have a base class which is not correctly flagged as such
-                    # so we're not checking the baseclass flag here.
-                    #
-                    # We may want to check up-front if this struct has a struct type at offset 0 and a VFT
-                    # and automatically mark that as the baseclass.
-                    needs_alloc = \
-                        len(struct.fields) == 0 or \
-                        struct.fields[0].offset != 0
-                    
-                    if needs_alloc or has_explicit_vtable:
+                    # offset for vfptr if needed
+                    if struct.srclang_needs_vfptr or has_explicit_vtable:
                         cur_size += 8
 
                 last_field_offset = -1
@@ -619,18 +666,9 @@ if api is None:
 
                     last_field_offset = offset
 
-                    while offset > cur_size:
+                    if offset > cur_size:
                         contiguous_fields = False
-
-                        # TODO(caitlyn): move this into a separate function
-                        if self.full_padding:
-                            (fill_type, fill_size) = self.get_srclang_fill_type(offset - cur_size, cur_size)
-                            decl.append(f"{fill_type} field_{cur_size:X};")
-                            cur_size += fill_size
-                        else:
-                            arr_size = offset - cur_size
-                            decl.append(f"char field_{cur_size:X}[{arr_size}];")
-                            cur_size += arr_size
+                        cur_size = self.append_srclang_padding(decl, cur_size, offset)
 
                     field_is_base = field.base and contiguous_fields
                     field_name = (
@@ -638,15 +676,18 @@ if api is None:
                         if not field_is_base
                         else f"baseclass_{offset:X}"
                     )
+                    field.srclang_is_baseclass = field_is_base
 
                     # ugly hack to workaround duplicate field names in structs
                     if field_name in seen_fields:
-                        next = seen_fields[field_name] + 1
-                        seen_fields["field_name"] = next
+                        next_index = seen_fields[field_name] + 1
+                        seen_fields[field_name] = next_index
 
-                        field_name += f"_{next}"
+                        field_name += f"_{next_index}"
                     else:
                         seen_fields[field_name] = 1
+
+                    field.srclang_field_name = field_name
                     
                     array_size = field.size if hasattr(field, "size") else 0
 
@@ -704,16 +745,7 @@ if api is None:
                     cur_size += field_size
                 
                 if struct.size is not None and struct.size != 0:
-                    # TODO(caitlyn): move this into a separate function
-                    while cur_size < struct.size:
-                        if self.full_padding:
-                            (fill_type, fill_size) = self.get_srclang_fill_type(struct.size - cur_size, cur_size)
-                            decl.append(f"{fill_type} field_{cur_size:X};")
-                            cur_size += fill_size
-                        else:
-                            arr_size = struct.size - cur_size
-                            decl.append(f"char field_{cur_size:X}[{arr_size}];")
-                            cur_size += arr_size
+                    cur_size = self.append_srclang_padding(decl, cur_size, struct.size)
 
                 decl.append("};")
 
@@ -776,7 +808,7 @@ if api is None:
                         ida_kernwin.warning(f"Error parsing srclang decl for {struct.type}, please see errors in Output window.")
                         exit()
 
-                    if struct.virtual_functions:
+                    if struct.virtual_functions is not None:
                         # delete the _placeholder function from the VFT
                         cname = self.srclang_types[self.clean_struct_name(struct.type)]
                         sid = self.get_struct_id(f"{cname}_vtbl")
@@ -1038,19 +1070,53 @@ if api is None:
                 func_name = "{0}.{1}".format(
                     self.clean_name(struct.type), virt_func.name
                 )
+
                 ea = self.get_func_ea_by_name(func_name)
                 if ea == idc.BADADDR:
-                    if getattr(virt_func, "inherited_from_preprocess", False):
+                    # ignore if added during preprocess
+                    if virt_func.inherited_from_preprocess:
                         return
-                    print("Error: {0} not found using base?".format(func_name))
-                    return
+
+                    ea = self.get_vfunc_ea_from_data(struct.type, virt_func.offset)
+                    if ea in (0, idc.BADADDR):
+                        print(f"Error: {func_name} not found and its VFT slot could not be resolved")
+                        return
+
+                    actual_name = ida_funcs.get_func_name(ea) or ""
+                    normalized_name = actual_name
+                    for prefix in ("j_", "thunk_"):
+                        if normalized_name.startswith(prefix):
+                            normalized_name = normalized_name[len(prefix):]
+
+                    # pure virtual, nothing to do
+                    if normalized_name == "_purecall":
+                        return
+
+                    primary_vtable = self.get_vft_from_data(struct.type)
+                    primary_base = primary_vtable.get("base") if primary_vtable else None
+                    if primary_base:
+                        base_ea = self.get_vfunc_ea_from_data(primary_base, virt_func.offset)
+                        # if the derived vft slot points to the same as the baseclass, leave baseclass type
+                        if base_ea == ea:
+                            return
+
+                    # does it look inherited based on name? leave it alone
+                    if (
+                        normalized_name.endswith("." + virt_func.name)
+                        and not normalized_name.startswith(self.clean_name(struct.type) + ".")
+                    ):
+                        return
+
                 tif = ida_typeinf.tinfo_t()
                 ida_typeinf.guess_tinfo(tif, ea)
+
                 func_data = ida_typeinf.func_type_data_t()
                 tif.get_func_details(func_data)
+
                 func_data.clear()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
                 func_data.rettype = self.get_tinfo_from_type(virt_func.return_type)
+
                 for param in virt_func.parameters:
                     arg = ida_typeinf.funcarg_t()
                     try:
@@ -1063,8 +1129,10 @@ if api is None:
                             )
                         )
                         raise
+
                     arg.name = param.name
                     func_data.push_back(arg)
+
                 tif.create_func(func_data)
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
@@ -1120,86 +1188,312 @@ if api is None:
                 )
 
             def preprocess_yaml(self, yaml: DefinedStructExport) -> None:
+                # Attempts to identify and fix missing baseclass flags and VFT inconsistencies, checks
+                # for issues that were previously 'hidden' by the IDA API, then builds an inheritance
+                # graph to propagate virtual functions and validate layouts & inheritance chains
+
                 if not self.srclang_importer:
                     return
-                
+
+                data_classes = {}
+                if hasattr(self, "data_yaml") and self.data_yaml:
+                    data_classes = self.data_yaml.get("classes", {}) or {}
+
+                def get_data_vtables(class_name: str) -> list[dict]:
+                    class_data = data_classes.get(class_name) or {}
+                    vtables = class_data.get("vtbls", [])
+                    return vtables if isinstance(vtables, list) else []
+
+                class BaseEdge:
+                    def __init__(self, derived: 'Node', base: 'Node', field: DefinedStructField):
+                        self.derived = derived
+                        self.base = base
+                        self.field = field
+                        self.offset = field.offset
+
                 class Node:
                     def __init__(self, struct: DefinedStruct):
-                        self.base: 'Node' | None = None
-                        self.children: list['Node'] = []
                         self.struct: DefinedStruct = struct
+                        self.declared_vtable_size = struct.vtable_size
+                        self.bases: list['BaseEdge'] = []
+                        self.children: list['BaseEdge'] = []
 
                     def is_virtual(self) -> bool:
                         return self.struct.virtual_functions is not None
 
-                nodes: dict[str, Node] = {struct.type: Node(struct) for struct in yaml.structs}
+                    def primary_base(self) -> 'BaseEdge' | None:
+                        primary_bases = [edge for edge in self.bases if edge.offset == 0]
+                        if len(primary_bases) > 1:
+                            base_names = ", ".join(edge.base.struct.type for edge in primary_bases)
+                            raise RuntimeError(
+                                f"Multiple baseclasses defined at offset 0 for '{self.struct.type}': {base_names}"
+                            )
 
-                def make_virtual(node: Node) -> None:
-                    if node.struct.virtual_functions is None:
-                        node.struct.virtual_functions = []
-                        node.struct.vtable_size = 0
+                        return primary_bases[0] if primary_bases else None
 
-                    if node.base:
-                        make_virtual(node.base)
+                nodes: dict[str, Node] = {}
+                for struct in yaml.structs:
+                    if struct.type in nodes:
+                        raise RuntimeError(f"Duplicate type '{struct.type}'")
 
-                # discover hierarchical relationships and fix missing base flags
+                    nodes[struct.type] = Node(struct)
+
                 for node in nodes.values():
-                    if not node.struct.fields:
-                        continue
-                    
-                    # remove explicit/placeholder _vtable field
+                    declared_vtable_size = node.declared_vtable_size
+                    if declared_vtable_size is not None:
+                        if type(declared_vtable_size) is not int or declared_vtable_size < 0:
+                            raise RuntimeError(
+                                f"Invalid VFT size {declared_vtable_size} "
+                                f"for '{node.struct.type}'"
+                            )
+
+                        if declared_vtable_size % 8 != 0:
+                            raise RuntimeError(
+                                f"Invalid VFT size {declared_vtable_size:#x} "
+                                f"for '{node.struct.type}'"
+                            )
+
+                    vfuncs_by_offset = {}
+                    for vfunc in node.struct.virtual_functions or []:
+                        if vfunc is None:
+                            continue
+
+                        if type(vfunc.offset) is not int or vfunc.offset < 0:
+                            raise RuntimeError(
+                                f"Invalid VFT offset {vfunc.offset} for "
+                                f"'{node.struct.type}.{vfunc.name}'"
+                            )
+
+                        if vfunc.offset % 8 != 0:
+                            raise RuntimeError(
+                                f"Unaligned VFT offset {vfunc.offset:#x} for "
+                                f"'{node.struct.type}.{vfunc.name}'"
+                            )
+
+                        previous_vfunc = vfuncs_by_offset.get(vfunc.offset)
+                        if previous_vfunc is not None:
+                            raise RuntimeError(
+                                f"Duplicate VFT slot {vfunc.offset // 8} "
+                                f"for '{node.struct.type}': "
+                                f"'{previous_vfunc.name}' and '{vfunc.name}'"
+                            )
+
+                        vfuncs_by_offset[vfunc.offset] = vfunc
+
+                # normalize
+                for node in nodes.values():
                     if node.struct.fields and node.struct.fields[0].name == "_vtable":
                         node.struct.fields.pop(0)
-                        
                         if not node.is_virtual():
                             node.struct.virtual_functions = []
                             node.struct.vtable_size = 0
 
+                    if not node.is_virtual() and get_data_vtables(node.struct.type):
+                        node.struct.virtual_functions = []
+                        node.struct.vtable_size = 0
+
+                def add_base_edge(derived: Node, field: DefinedStructField) -> BaseEdge:
+                    parent = nodes.get(field.type)
+                    if parent is None:
+                        raise RuntimeError(
+                            f"Could not resolve baseclass '{field.type}' "
+                            f"for '{derived.struct.type}'"
+                        )
+
+                    edge = BaseEdge(derived, parent, field)
+                    derived.bases.append(edge)
+                    parent.children.append(edge)
+                    return edge
+
+                # add every explicit baseclass
+                for node in nodes.values():
                     for field in node.struct.fields:
-                        # if a struct has a VFT but the field at offset 0 wasn't marked base,
-                        # we assume it's the baseclass and fix the flag
-                        if node.is_virtual() and field.offset == 0 and not field.base:
-                            print("Warning: Fixing missing baseclass '{0}' for '{1}'".format(field.type, node.struct.type))
-                            field.base = True
+                        if field.base:
+                            add_base_edge(node, field)
 
-                        if field.offset != 0 or not field.base:
-                            continue
-                        
-                        parent = nodes.get(field.type)
-                        if parent is None:
-                            print("Warning: Could not find baseclass '{0}' for '{1}'".format(field.type, node.struct.type))
-                            field.base = False
-                            node.struct.virtual_functions = None
-                            node.struct.vtable_size = 0
-                            break
+                def is_or_has_primary(node: Node, class_name: str, visited=None) -> bool:
+                    if node.struct.type == class_name:
+                        return True
 
-                        parent.children.append(node)
-                        node.base = parent
+                    if visited is None:
+                        visited = set()
 
-                        if node.is_virtual() and not parent.is_virtual():
-                            #log.write(f"Warning: Adding missing VFT for virtual baseclass '{parent.struct.type}'\n")
-                            make_virtual(parent)
-                        elif parent.is_virtual() and not node.is_virtual():
-                            #log.write(f"Warning: Fixing missing VFT for virtual subclass '{node.struct.type}'\n")
+                    if node.struct.type in visited:
+                        return False
+
+                    visited.add(node.struct.type)
+
+                    edge = node.primary_base()
+                    return (
+                        edge is not None
+                        and is_or_has_primary(edge.base, class_name, visited)
+                    )
+
+                for node in nodes.values():
+                    if node.primary_base() is not None:
+                        continue
+
+                    vtables = get_data_vtables(node.struct.type)
+                    primary_vtable = vtables[0] if vtables else None
+                    primary_vtable_base = (
+                        primary_vtable.get("base")
+                        if isinstance(primary_vtable, dict)
+                        else None
+                    )
+
+                    if not primary_vtable_base:
+                        continue
+
+                    candidates = []
+                    for field in node.struct.fields:
+                        candidate = nodes.get(field.type)
+                        if (
+                            field.offset == 0
+                            and not field.base
+                            and candidate is not None
+                            and is_or_has_primary(candidate, primary_vtable_base)
+                        ):
+                            candidates.append((field, candidate))
+
+                    if len(candidates) != 1:
+                        continue
+
+                    field, _ = candidates[0]
+
+                    print(
+                        f"Warning: Fixing missing baseclass '{field.type}' "
+                        f"for '{node.struct.type}'"
+                    )
+
+                    field.base = True
+                    add_base_edge(node, field)
+
+                # validate inheritance graph to make sure we don't have any circular dependants
+                visit_state: dict[str, int] = {}
+                visit_stack: list[str] = []
+
+                def validate_acyclic(node: Node) -> None:
+                    state = visit_state.get(node.struct.type, 0)
+                    if state == 2:
+                        return
+
+                    if state == 1:
+                        cycle_start = visit_stack.index(node.struct.type)
+                        cycle = visit_stack[cycle_start:] + [node.struct.type]
+                        cycle_path = " -> ".join(cycle)
+                        raise RuntimeError(f"Circular inheritance detected: {cycle_path}")
+
+                    visit_state[node.struct.type] = 1
+
+                    visit_stack.append(node.struct.type)
+                    for edge in node.bases:
+                        validate_acyclic(edge.base)
+                    visit_stack.pop()
+
+                    visit_state[node.struct.type] = 2
+
+                for node in nodes.values():
+                    validate_acyclic(node)
+
+
+                inherited_vfts_visited: set[str] = set()
+
+                def inherit_vft(node: Node) -> None:
+                    if node.struct.type in inherited_vfts_visited:
+                        return
+
+                    edge = node.primary_base()
+                    if edge is not None:
+                        inherit_vft(edge.base)
+                        if edge.base.is_virtual() and not node.is_virtual():
                             node.struct.virtual_functions = []
                             node.struct.vtable_size = 0
 
-                # normalize VFTs into indexable lists
+                    inherited_vfts_visited.add(node.struct.type)
+
                 for node in nodes.values():
+                    inherit_vft(node)
+
+                for node in nodes.values():
+                    primary_base = node.primary_base()
+                    primary_base_has_vft = (
+                        primary_base is not None and primary_base.base.is_virtual()
+                    )
+
+                    node.struct.srclang_needs_vfptr = (
+                        node.is_virtual() and not primary_base_has_vft
+                    )
+
+                    if (
+                        node.struct.srclang_needs_vfptr
+                        and primary_base is not None
+                    ):
+                        # TODO(Caitlyn): maybe this should be a hard error here
+                        print(
+                            f"Warning: Class '{node.struct.type}' is polymorphic, "
+                            f"but its non-polymorphic base class "
+                            f"'{primary_base.base.struct.type}' is placed at offset zero"
+                        )
+
+                # normalize VFTs into indexable lists
+                normalized_vfts: set[str] = set()
+
+                def normalize_vft(node: Node) -> None:
+                    if node.struct.type in normalized_vfts:
+                        return
+
+                    primary_base = node.primary_base()
+                    if primary_base is not None:
+                        normalize_vft(primary_base.base)
+
                     if not node.is_virtual():
-                        continue
+                        normalized_vfts.add(node.struct.type)
+                        return
 
                     vfuncs = node.struct.virtual_functions or []
 
-                    max_offset = max((vf.offset for vf in vfuncs if vf is not None), default=-1)
-                    vft_size = max_offset + 8 if max_offset >= 0 else 0
+                    last_vfunc = max(
+                        (vf for vf in vfuncs if vf is not None),
+                        key=lambda vf: vf.offset,
+                        default=None,
+                    )
+
+                    needed_size = (
+                        last_vfunc.offset + 8
+                        if last_vfunc is not None
+                        else 0
+                    )
+                    vft_size = needed_size
 
                     if node.struct.vtable_size and node.struct.vtable_size > vft_size:
                         vft_size = node.struct.vtable_size
 
-                    # take baseclass VFT size if larger
-                    if node.base and (node.base.struct.vtable_size or 0) > vft_size:
-                        vft_size = node.base.struct.vtable_size
+                    needed_base_size = 0
+                    if (
+                        primary_base is not None
+                        and primary_base.base.is_virtual()
+                        and (primary_base.base.struct.vtable_size or 0) > vft_size
+                    ):
+                        needed_base_size = primary_base.base.struct.vtable_size
+                        vft_size = needed_base_size
+
+                    defined_size = node.declared_vtable_size
+                    if (
+                        defined_size is not None
+                        and vft_size > defined_size
+                    ):
+                        if needed_base_size > needed_size:
+                            reason = f"baseclass '{primary_base.base.struct.type}'"
+                        else:
+                            reason = (
+                                f"virtual function '{last_vfunc.name}' "
+                                f"at offset {last_vfunc.offset:#x}"
+                            )
+
+                        print(
+                            f"Warning: Expanding VFT for '{node.struct.type}' from "
+                            f"{defined_size:#x} to {vft_size:#x} to fit {reason}"
+                        )
 
                     new_vft = [None] * (vft_size // 8)
                     for vf in vfuncs:
@@ -1208,40 +1502,55 @@ if api is None:
 
                     node.struct.virtual_functions = new_vft
                     node.struct.vtable_size = vft_size
+                    normalized_vfts.add(node.struct.type)
+
+                for node in nodes.values():
+                    normalize_vft(node)
+
+                def primary_children(node: Node):
+                    for edge in node.children:
+                        if edge.derived.primary_base() is edge:
+                            yield edge.derived
+
+                def copy_vfunc_for_type(vf: DefinedStructVFunc, struct_type: str):
+                    new_vf = copy.deepcopy(vf)
+                    new_vf.inherited_from_preprocess = True
+                    if hasattr(new_vf, 'parameters') and new_vf.parameters:
+                        new_vf.parameters[0].type = struct_type + "*"
+                    return new_vf
 
                 # propagate known VFs down into subclasses
-                def propagate_vft_down(node: Node) -> None:
+                def propagate_vft_down(node: Node, visited=None) -> None:
+                    if visited is None:
+                        visited = set()
+
+                    if node.struct.type in visited:
+                        return
+
+                    visited.add(node.struct.type)
+
                     if not node.is_virtual():
                         return
                     
-                    parent_vfs = node.struct.virtual_functions
-                    if not parent_vfs:
-                        return
+                    parent_vfs = node.struct.virtual_functions or []
 
-                    for child in node.children:
-                        if not child.is_virtual():
-                            #log.write(f"Warning: Fixing non-virtual child '{child.struct.type}' of virtual parent '{node.struct.type}'\n")
-                            child.struct.virtual_functions = [None] * len(parent_vfs)
-                            child.struct.vtable_size = node.struct.vtable_size
-                        elif len(child.struct.virtual_functions) < len(parent_vfs):
-                            #log.write(f"Warning: Fixing VFT size mismatch: parent '{node.struct.type}' has {len(parent_vfs)} slots, child '{child.struct.type}' has {len(child.struct.virtual_functions)} slots\n")
-                            extra_slots = len(parent_vfs) - len(child.struct.virtual_functions)
-                            child.struct.virtual_functions += [None] * extra_slots
-                            child.struct.vtable_size = max(child.struct.vtable_size or 0, node.struct.vtable_size)
-                    
-                        for i, vf in enumerate(parent_vfs):
-                            if vf is None or child.struct.virtual_functions[i] is not None:
-                                continue
+                    for child in primary_children(node):
+                        if parent_vfs:
+                            if not child.is_virtual():
+                                child.struct.virtual_functions = [None] * len(parent_vfs)
+                                child.struct.vtable_size = node.struct.vtable_size
+                            elif len(child.struct.virtual_functions) < len(parent_vfs):
+                                extra_slots = len(parent_vfs) - len(child.struct.virtual_functions)
+                                child.struct.virtual_functions += [None] * extra_slots
+                                child.struct.vtable_size = max(child.struct.vtable_size or 0, node.struct.vtable_size)
 
-                            new_vf = copy.deepcopy(vf)
-                            new_vf.inherited_from_preprocess = True
-                            if hasattr(new_vf, 'parameters') and new_vf.parameters:
-                                new_vf.parameters[0].type = child.struct.type + "*"
+                            for i, vf in enumerate(parent_vfs):
+                                if vf is None or child.struct.virtual_functions[i] is not None:
+                                    continue
 
-                            #log.write(f"Propagating virtual function '{new_vf.name}' from '{node.struct.type}' down to subclass '{child.struct.type}'\n")
-                            child.struct.virtual_functions[i] = new_vf
+                                child.struct.virtual_functions[i] = copy_vfunc_for_type(vf, child.struct.type)
 
-                        propagate_vft_down(child)
+                        propagate_vft_down(child, visited)
 
                 visited_nodes: set[str] = set()
                 def propagate_vft_up(node: Node) -> None:
@@ -1253,7 +1562,7 @@ if api is None:
                     if not node.is_virtual():
                         return
 
-                    for child in node.children:
+                    for child in primary_children(node):
                         # propagate from bottom up
                         propagate_vft_up(child)
                         
@@ -1269,22 +1578,26 @@ if api is None:
                             if (vf is None or parent_vfs[i] is not None):
                                 continue
 
-                            new_vf = copy.deepcopy(vf)
-                            new_vf.inherited_from_preprocess = True
-                            if hasattr(new_vf, 'parameters') and new_vf.parameters:
-                                new_vf.parameters[0].type = node.struct.type + "*"
+                            parent_vfs[i] = copy_vfunc_for_type(vf, node.struct.type)
 
-                            #log.write(f"Propagating virtual function '{new_vf.name}' from '{child.struct.type}' up to baseclass '{node.struct.type}'\n")
-                            parent_vfs[i] = new_vf
-                    
-                for node in nodes.values():
-                    propagate_vft_down(node)
+                roots = [
+                    node
+                    for node in nodes.values()
+                    if node.is_virtual()
+                    and (
+                        node.primary_base() is None
+                        or not node.primary_base().base.is_virtual()
+                    )
+                ]
 
-                    if not node.is_virtual() or node.base is not None:
-                        continue
+                for root in roots:
+                    propagate_vft_down(root)
 
-                    propagate_vft_up(node)
-                    propagate_vft_down(node)
+                for root in roots:
+                    propagate_vft_up(root)
+
+                for root in roots:
+                    propagate_vft_down(root)
 
         full_padding = False
         srclang_importer = False
