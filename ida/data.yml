@@ -15076,6 +15076,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14102D2F0: ctor
+      0x1410318F0: SelectCategory
   Client::UI::Agent::AgentCollectablesShop:
     vtbls:
       - ea: 0x1421F1BC8
