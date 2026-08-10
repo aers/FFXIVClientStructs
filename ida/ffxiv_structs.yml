@@ -26491,10 +26491,10 @@ structs:
   fields:
   - type: byte
     name: PrimaryCostType
-    offset: 224
+    offset: 232
   - type: char
     name: IsActive
-    offset: 225
+    offset: 233
   member_functions: []
 - type: Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate
   name: HotbarUiIntermediate
@@ -146296,16 +146296,16 @@ structs:
   - type: char
     name: ExpacJobHotbarsCreated
     offset: 92
-    size: 12
+    size: 15
     is_string: False
   - type: char
     name: PvPHotbarsCreated
-    offset: 104
+    offset: 107
     size: 22
     is_string: False
   - type: char
     name: ClearCallbackPresent
-    offset: 126
+    offset: 131
   - type: unsigned int
     name: MateriaMeldState
     offset: 132
@@ -146364,6 +146364,14 @@ structs:
   - type: char
     name: DutyActionsPresent
     offset: 175928
+  - type: Client::UI::Misc::RaptureHotbarModule::DutyActionSlot
+    name: PhantomActionSlots
+    offset: 175936
+    size: 5
+    is_string: False
+  - type: char
+    name: PhantomActionsPresent
+    offset: 177136
   virtual_functions:
   - name: ReadFile
     offset: 8
@@ -262635,6 +262643,16 @@ structs:
       name: this
     - type: Client::UI::Agent::AgentLookingForGroup::Detailed*
       name: listingData
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 55 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 8B 99
+    return_type: void
+    name: PopulateRecruitmentCriteriaPopup
+    parameters:
+    - type: Client::UI::Agent::AgentLookingForGroup*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
 - type: Client::Game::Event::GoldSaucerDirector
   name: GoldSaucerDirector
   namespace: Client.Game.Event
