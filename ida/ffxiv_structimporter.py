@@ -306,7 +306,7 @@ if api is None:
 
             def validate_name_cfg(self):
                 """Verifies that the user's IDA config allows template characters for type names"""
-                temporary_name = "sruc_name_test"
+                temporary_name = "struc_name_test"
                 template_name = "OuterStructTest<InnerStructTest<int>*>"
 
                 def delete_test_type(name):
@@ -330,12 +330,15 @@ if api is None:
                         self.rename_struct(template_sid, temporary_name)
                         if self.get_struct_id(template_name) != idaapi.BADADDR:
                             raise RuntimeError("could not rename existing template test type")
+                        
                         temporary_sid = self.get_struct_id(temporary_name)
 
                     if temporary_sid == idaapi.BADADDR:
                         temporary_sid = self.create_struct_type(temporary_name)
+
                     if temporary_sid == idaapi.BADADDR:
                         raise RuntimeError("could not create temporary struct")
+                    
                     created_name = temporary_name
 
                     self.rename_struct(temporary_sid, template_name)
@@ -579,16 +582,16 @@ if api is None:
                     decl.append("virtual void _placeholder();")
 
                     # TODO(caitlyn): we are assuming that parent classes are always virtual
-                    # doing this properly will require checking the parent
-                    # eventually we'll probably want to build an inheritance hierarchy
+                    # doing this properly will require checking the parent.
+                    # Eventually we'll probably want to build an inheritance hierarchy
                     # so that we can propagate vfunc names and determine the need to
-                    # offset data members here
+                    # offset data members here.
                     #
-                    # some types also have a base class which is not correctly flagged as such
-                    # so we're not checking the baseclass flag here
+                    # Some types also have a base class which is not correctly flagged as such
+                    # so we're not checking the baseclass flag here.
                     #
-                    # we may want to check up-front if this struct has a struct type at offset 0 and a VFT
-                    # and automatically mark that as the baseclass
+                    # We may want to check up-front if this struct has a struct type at offset 0 and a VFT
+                    # and automatically mark that as the baseclass.
                     needs_alloc = \
                         len(struct.fields) == 0 or \
                         struct.fields[0].offset != 0
@@ -605,7 +608,12 @@ if api is None:
                         continue
 
                     if offset == last_field_offset and not struct.union:
-                        # TODO(caitlyn): Ghidra creates unions for this, but it's currently silently skipped for IDA
+                        # NOTE In IDA versions < 9.0 you could have overlapping fields or an automatically created union.
+                        # We're not able to support this for srclang, so overlapping fields should ideally be
+                        # treated as a layout error which requires a union to resolve.
+                        # 
+                        # I've made the decision here to drop these with a warning, but it is probably worth evaluating
+                        # whether it's worthwhile to make this an error later.
                         print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset.")
                         continue
 
@@ -697,7 +705,6 @@ if api is None:
                 
                 if struct.size is not None and struct.size != 0:
                     # TODO(caitlyn): move this into a separate function
-
                     while cur_size < struct.size:
                         if self.full_padding:
                             (fill_type, fill_size) = self.get_srclang_fill_type(struct.size - cur_size, cur_size)
@@ -1281,7 +1288,7 @@ if api is None:
 
         full_padding = False
         srclang_importer = False
-        if idaapi.IDA_SDK_VERSION >= 900: # TODO(caitlyn): check for support on older versions
+        if idaapi.IDA_SDK_VERSION >= 900:
             srclang_importer = (
                 ida_kernwin.ask_buttons(
                     "SrcLang Importer",
