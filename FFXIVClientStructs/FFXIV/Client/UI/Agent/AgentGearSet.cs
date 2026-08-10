@@ -9,9 +9,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentGearSet
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Client::UI::Misc::ConfigModule::ConfigEventInterface
 [Agent(AgentId.GearSet)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[Inherits<ConfigModule.ConfigEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xBD0)]
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
