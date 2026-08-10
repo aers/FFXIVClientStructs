@@ -88,10 +88,10 @@ class BaseIdaInterface(object):
             return ida_bytes.float_flag()
         elif type == "double":
             return ida_bytes.double_flag()
-        elif self.get_struct_id(type) != idaapi.BADADDR:
-            return ida_bytes.stru_flag()
         elif self.get_enum_id(type) != idaapi.BADADDR:
             return ida_bytes.enum_flag()
+        elif self.get_struct_id(type) != idaapi.BADADDR:
+            return ida_bytes.stru_flag()
         else:
             return ida_bytes.stru_flag()
 
@@ -238,6 +238,16 @@ class BaseIdaInterface(object):
             ptr_tinfo = array_tinfo
 
         return ptr_tinfo
+
+    def rename_struct(self, sid: int, new_name: str):
+        """Rename a struct in IDA.
+
+        Args:
+            sid (int): The struct ID.
+            new_name (str): The new struct name.
+        """
+        idc.set_struc_name(sid, new_name)
+        
 
 if idaapi.IDA_SDK_VERSION < 900:
     import ida_struct # pyright: ignore[reportMissingImports]

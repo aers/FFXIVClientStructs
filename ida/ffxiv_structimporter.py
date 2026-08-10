@@ -66,6 +66,13 @@ class BaseApi:
         """
 
     @abstractmethod
+    def finalise_struct(self, struct):
+        # type: (DefinedStruct) -> None
+        """
+        Finalise a struct in the database.
+        """
+
+    @abstractmethod
     def create_union(self, struct):
         # type: (DefinedStruct) -> None
         """
@@ -253,6 +260,14 @@ class BaseApi:
             )
         return DefinedStructExport(enums, structs)
 
+    @abstractmethod
+    def preprocess_yaml(self, yml: DefinedStructExport):
+        """
+        Preprocesses the YAML data before importing.
+
+        For the IDA srclang importer, this fixes issues with generic base classes.
+        """
+
     def load_data_yaml(self):
         # type: () -> dict
         path = os.path.join(os.path.dirname(self.get_file_path), "data.yml")
@@ -260,7 +275,6 @@ class BaseApi:
             return None
         with open(path, "r") as fd:
             return load(fd, Loader=Loader)
-
 
 api = None
 
@@ -274,15 +288,73 @@ if api is None:
         import ida_funcs
         import ida_name
         import ida_kernwin
+        import ida_srclang
+        import hashlib
+        import copy
         from ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi, IdaInterface):
-            def __init__(self, full_padding):
-                # type: (bool) -> None
+            def __init__(self, full_padding, srclang_importer):
+                # type: (bool, bool) -> None
                 self.full_padding = full_padding
+                self.srclang_importer = srclang_importer
+                if self.srclang_importer:
+                    self.srclang_types = {}
+
+            def validate_name_cfg(self):
+                """Verifies that the user's IDA config allows template characters for type names"""
+                temporary_name = "struc_name_test"
+                template_name = "OuterStructTest<InnerStructTest<int>*>"
+
+                def delete_test_type(name):
+                    sid = self.get_struct_id(name)
+                    if sid == idaapi.BADADDR:
+                        return
+                    if idaapi.IDA_SDK_VERSION >= 900:
+                        ida_typeinf.del_named_type(idaapi.get_idati(), name, ida_typeinf.NTF_TYPE)
+                    else:
+                        idc.del_struc(sid)
+
+                created_name = None
+                try:
+                    template_sid = self.get_struct_id(template_name)
+                    temporary_sid = self.get_struct_id(temporary_name)
+
+                    if template_sid != idaapi.BADADDR:
+                        if temporary_sid != idaapi.BADADDR:
+                            return True
+                        
+                        self.rename_struct(template_sid, temporary_name)
+                        if self.get_struct_id(template_name) != idaapi.BADADDR:
+                            raise RuntimeError("could not rename existing template test type")
+                        
+                        temporary_sid = self.get_struct_id(temporary_name)
+
+                    if temporary_sid == idaapi.BADADDR:
+                        temporary_sid = self.create_struct_type(temporary_name)
+
+                    if temporary_sid == idaapi.BADADDR:
+                        raise RuntimeError("could not create temporary struct")
+                    
+                    created_name = temporary_name
+
+                    self.rename_struct(temporary_sid, template_name)
+                    if self.get_struct_id(template_name) == idaapi.BADADDR:
+                        raise RuntimeError("could not rename temporary struct to template type name")
+                    
+                    created_name = template_name
+                except Exception as exc:
+                    return False # dropping exception, but will prompt the user to fix their cfg and exit
+                
+                finally:
+                    if created_name is not None:
+                        delete_test_type(created_name)
+                    delete_test_type(temporary_name)
+
+                return True
 
             def get_fallback_vfunc_name(self, class_name, index, visited=None):
                 # type: (str, int, set) -> str
@@ -315,6 +387,29 @@ if api is None:
 
                 return None
 
+            def get_vft_from_data(self, class_name):
+                # type: (str) -> dict | None
+                if not self.data_yaml or "classes" not in self.data_yaml:
+                    return None
+
+                class_data = self.data_yaml["classes"].get(class_name) or {}
+                vtables = class_data.get("vtbls", [])
+                if not isinstance(vtables, list) or not vtables:
+                    return None
+
+                vtable = vtables[0]
+                return vtable if isinstance(vtable, dict) else None
+
+            def get_vfunc_ea_from_data(self, class_name, offset):
+                # type: (str, int) -> int
+                vtable = self.get_vft_from_data(class_name)
+                if vtable is None or "ea" not in vtable:
+                    return idc.BADADDR
+
+                # assuming data.yml will continue using default windows base
+                vtable_ea = vtable["ea"] + idaapi.get_imagebase() - 0x140000000
+                return idc.get_qword(vtable_ea + offset)
+
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
                 self.remove_struct_members(self.get_struct_id(fullname))
@@ -325,6 +420,36 @@ if api is None:
                     os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml"
                 )
             
+            def generate_hashed_type_name(self, name: str) -> str:                
+                name = self.clean_struct_name(name)
+
+                name = hashlib.sha1(name.encode()).hexdigest()
+
+                return "struc_" + name
+
+            def get_srclang_type_name(self, name: str) -> str:
+                if not self.srclang_importer:
+                    return name
+                
+                ptr_count = 0
+                i = len(name) - 1
+                while i >= 0 and name[i] == '*':
+                    ptr_count += 1
+                    i -= 1
+
+                full_name = name
+                if ptr_count > 0:
+                    name = name.strip("*")
+
+                cname = self.srclang_types.get(name)
+                if cname is None:
+                    cname = self.srclang_types.get(self.clean_struct_name(name))
+                    
+                if cname is not None:
+                    return cname + "*" * ptr_count
+                
+                return full_name
+
             def can_run(self):
                 return self.enum_exists("Component::Exd::SheetsEnum")
 
@@ -363,15 +488,278 @@ if api is None:
                 fullname = self.clean_struct_name(struct.type)
                 self.delete_struct_members(fullname)
                 self.delete_struct_members(fullname + "_vtbl")
+
+                # also check C types in case of an incomplete C run
+                if self.srclang_importer:
+                    cname = self.get_srclang_type_name(fullname)
+                    self.delete_struct_members(cname)
+                    self.delete_struct_members(cname + "_vtbl")
+
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
+
+                if self.srclang_importer:
+                    # rename C++ -> C or create new C struct
+                    cname = self.generate_hashed_type_name(fullname)
+                    self.srclang_types[fullname] = cname
+                    
+                    sid = self.get_struct_id(fullname)
+                    if sid == idaapi.BADADDR:
+                        if self.get_struct_id(cname) == idaapi.BADADDR:
+                            self.create_struct_type(cname, struct.union)
+                    else:
+                        self.rename_struct(sid, cname)
+                    
+                    if not struct.virtual_functions:
+                        return
+                    
+                    sid = self.get_struct_id(fullname + "_vtbl")
+                    if sid == idaapi.BADADDR:
+                        if self.get_struct_id(cname + "_vtbl") == idaapi.BADADDR:
+                            self.create_struct_type(cname + "_vtbl")
+                    else:
+                        self.rename_struct(sid, cname + "_vtbl")
+
+                    return
+
                 if self.get_struct_id(fullname) == idaapi.BADADDR:
                     self.create_struct_type(fullname, struct.union)
+
                 if struct.virtual_functions:
                     self.create_struct_type(fullname + "_vtbl")
+
+            def validate_srclang_struct(self, struct: DefinedStruct):
+                cname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
+                sid = self.get_struct_id(cname)
+                if sid == idaapi.BADADDR:
+                    ida_kernwin.warning(f"Struct {cname} ({struct.type}) not found during validation")
+                    exit()
+                
+                ti = self.get_struct(sid)
+
+                expected_base_offsets = {}
+                for field in struct.fields:
+                    if not field.srclang_is_baseclass:
+                        continue
+                    expected_base_offsets[field.offset] = (
+                        expected_base_offsets.get(field.offset, 0) + 1
+                    )
+
+                if expected_base_offsets:
+                    udt = ida_typeinf.udt_type_data_t()
+                    if not ti.get_udt_details(udt):
+                        ida_kernwin.warning(
+                            f"Could not find baseclass for {cname} ({struct.type}) during validation"
+                        )
+                        exit()
+
+                    actual_base_offsets = {}
+                    for udm in udt:
+                        if not udm.is_baseclass():
+                            continue
+                        offset = int(udm.offset / 8)
+                        actual_base_offsets[offset] = actual_base_offsets.get(offset, 0) + 1
+
+                    for offset, expected_count in expected_base_offsets.items():
+                        actual_count = actual_base_offsets.get(offset, 0)
+                        if actual_count < expected_count:
+                            ida_kernwin.warning(
+                                f"Baseclass offset mismatch in struct {cname} ({struct.type}).\n"
+                                f"Expected {expected_count} member(s) for baseclass at {offset}, got {actual_count}"
+                            )
+                            exit()
+                
+                last_offset = -1
+                for field in struct.fields:
+                    if field.offset == last_offset:
+                        continue
+
+                    last_offset = field.offset
+
+                    if field.offset is None or field.srclang_is_baseclass:
+                        continue
+
+                    if field.offset == 0 and field.name == "_vtable":
+                        continue
+
+                    # ugly hack to workaround duplicate field names in structs
+                    field_name = field.srclang_field_name
+
+                    (idx, udm) = ti.get_udm(field_name)
+                    if idx == -1:
+                        ida_kernwin.warning(f"Field {field_name} not found in struct {cname} ({struct.type}) during validation")
+                        exit()
+
+                    if (udm.offset / 8) != field.offset:
+                        ida_kernwin.warning(f"Field \"{field_name}\" offset mismatch in struct {cname} ({struct.type}) during validation.\nExpected {field.offset}, got {(udm.offset/8)}")
+                        exit()
+
+            def get_srclang_fill_type(self, available_bytes: int, current_offset: int) -> tuple[str, int]:
+                if available_bytes >= 8 and (current_offset % 8) == 0:
+                    return ("__int64", 8)
+                elif available_bytes >= 4 and (current_offset % 4) == 0:
+                    return ("__int32", 4)
+                elif available_bytes >= 2 and (current_offset % 2) == 0:
+                    return ("__int16", 2)
+                else:
+                    return ("char", 1)
+
+            def append_srclang_padding(self, decl: list[str], current_size: int, target_size: int) -> int:
+                while current_size < target_size:
+                    if self.full_padding:
+                        (fill_type, fill_size) = self.get_srclang_fill_type(
+                            target_size - current_size, current_size
+                        )
+                        decl.append(f"{fill_type} field_{current_size:X};")
+                        current_size += fill_size
+                    else:
+                        arr_size = target_size - current_size
+                        decl.append(f"char field_{current_size:X}[{arr_size}];")
+                        current_size += arr_size
+
+                return current_size
+
+            def create_srclang_decl(self, struct: DefinedStruct) -> str:
+                fullname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
+
+                decl = [ "_" ] # placeholder, filled after we determine base classes
+
+                cur_size = 0
+
+                contiguous_fields = True
+                
+                seen_fields = {}
+
+                inherits_from = []
+
+                has_explicit_vtable = (len(struct.fields) != 0 and struct.fields[0].name == "_vtable")
+                
+                if struct.virtual_functions != None or has_explicit_vtable:
+                    # the placeholder will force IDA to mark the _vtbl struct as a VFT
+                    # and attach it to this struct
+                    decl.append("virtual void _placeholder();")
+
+                    # offset for vfptr if needed
+                    if struct.srclang_needs_vfptr or has_explicit_vtable:
+                        cur_size += 8
+
+                last_field_offset = -1
+                for field in struct.fields:
+                    offset = field.offset
+
+                    # skip explicit vtable fields
+                    if offset == 0 and field.name == "_vtable":
+                        continue
+
+                    if offset == last_field_offset and not struct.union:
+                        # NOTE In IDA versions < 9.0 you could have overlapping fields or an automatically created union.
+                        # We're not able to support this for srclang, so overlapping fields should ideally be
+                        # treated as a layout error which requires a union to resolve.
+                        # 
+                        # I've made the decision here to drop these with a warning, but it is probably worth evaluating
+                        # whether it's worthwhile to make this an error later.
+                        print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset.")
+                        continue
+
+                    last_field_offset = offset
+
+                    if offset > cur_size:
+                        contiguous_fields = False
+                        cur_size = self.append_srclang_padding(decl, cur_size, offset)
+
+                    field_is_base = field.base and contiguous_fields
+                    field_name = (
+                        field.name
+                        if not field_is_base
+                        else f"baseclass_{offset:X}"
+                    )
+                    field.srclang_is_baseclass = field_is_base
+
+                    # ugly hack to workaround duplicate field names in structs
+                    if field_name in seen_fields:
+                        next_index = seen_fields[field_name] + 1
+                        seen_fields[field_name] = next_index
+
+                        field_name += f"_{next_index}"
+                    else:
+                        seen_fields[field_name] = 1
+
+                    field.srclang_field_name = field_name
+                    
+                    array_size = field.size if hasattr(field, "size") else 0
+
+                    field_type = self.clean_name(field.type)
+                    if field_type == "__fastcall":
+                        field_decl = self.get_srclang_type_name(self.clean_name(field.return_type))
+                        field_decl = field_decl + "(__fastcall* " + field_name + ")("
+                        for param in field.parameters:
+                            field_decl = field_decl + self.get_srclang_type_name(self.clean_name(param.type)) + ""
+                            field_decl = field_decl + param.name + ","
+                        field_decl = field_decl[:-2] + ")"
+
+                        decl.append(field_decl)
+                        cur_size += 8
+
+                        continue
+
+                    field_size = 0
+                    
+                    # struct type
+                    if self.get_idc_type_from_ida_type(
+                        self.get_srclang_type_name(self.clean_struct_name(field_type))
+                    ) == self.get_struct_flag():
+                        field_type = self.get_srclang_type_name(self.clean_struct_name(field_type))
+
+                        tinfo = self.get_tinfo_from_type(field_type)
+                        field_size = tinfo.get_size()
+
+                    # enum type
+                    elif (
+                        self.get_idc_type_from_ida_type(field_type)
+                        == self.get_enum_flag()
+                    ):
+                        field_size = idc.get_enum_width(self.get_enum_id(field_type))
+
+                    # primitive type
+                    else:
+                        field_size = self.get_size_from_ida_type(field_type)
+
+                        if field_type.endswith("*"):
+                            field_type = self.get_srclang_type_name(field_type)
+
+                    field_decl = f"{field_type} {field_name}"
+                    if array_size > 0:
+                        field_size *= array_size
+                        field_decl += f"[{array_size}];"
+                    else:
+                        field_decl += ";"
+
+                    if field_is_base:
+                        inherits_from.append(field_type)
+                    else:
+                        decl.append(field_decl)
+
+                    cur_size += field_size
+                
+                if struct.size is not None and struct.size != 0:
+                    cur_size = self.append_srclang_padding(decl, cur_size, struct.size)
+
+                decl.append("};")
+
+                # set struct type
+                if struct.union:
+                    decl[0] = f"union {fullname} "
+                else:
+                    decl[0] = f"struct __attribute__((packed)) {fullname} "
+                if len(inherits_from) > 0:
+                    decl[0] += f": {", ".join(inherits_from)}"
+                
+                decl[0] += " {"
+                
+                return "\n".join(decl)
 
             def create_struct_member_fill(self, struct_name, offset):
                 # type: (str, int) -> None
@@ -398,12 +786,48 @@ if api is None:
                         None,
                         offset - prev_size,
                     )
-
+                
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+
+                if self.srclang_importer:
+                    idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+
+                    decl = self.create_srclang_decl(struct)
+                    num_errors = ida_srclang.parse_decls_for_srclang(
+                        ida_srclang.SRCLANG_C,
+                        None,
+                        decl,
+                        False
+                    )
+
+                    if num_errors != 0:
+                        # show messagebox
+                        print(f"above errors occurred while parsing the following:\n---\n{decl}\n---")
+                        ida_kernwin.warning(f"Error parsing srclang decl for {struct.type}, please see errors in Output window.")
+                        exit()
+
+                    if struct.virtual_functions is not None:
+                        # delete the _placeholder function from the VFT
+                        cname = self.srclang_types[self.clean_struct_name(struct.type)]
+                        sid = self.get_struct_id(f"{cname}_vtbl")
+                        tinfo = self.get_struct(sid)
+                        tinfo.del_udm(0)
+
+                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
+
+                    self.validate_srclang_struct(struct)
+                    return
+
                 fullname = self.clean_struct_name(struct.type)
-                s = self.get_struct(self.get_struct_id(fullname))
+
+                tid = self.get_struct_id(fullname)
+                if tid == idaapi.BADADDR:
+                    print("Error: Struct {0} not found when trying to create members".format(fullname))
+                    return
+
+                s = self.get_struct(tid)
 
                 if struct.virtual_functions != None and (
                     struct.fields == [] or struct.fields[0].offset > 0
@@ -517,6 +941,9 @@ if api is None:
                 fullname = self.clean_name(struct.type)
                 s = self.get_struct(self.get_struct_id(fullname + "_vtbl"))
                 for virt_func in struct.virtual_functions:
+                    if virt_func is None:
+                        continue
+
                     offset = virt_func.offset
                     field_name = virt_func.name
                     self.create_struct_member(
@@ -569,6 +996,29 @@ if api is None:
                             s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0, False
                         )
 
+            def finalise_struct(self, struct: DefinedStruct):
+                if not self.srclang_importer:
+                    return
+                
+                fullname = self.clean_struct_name(struct.type)
+                cname = self.get_srclang_type_name(fullname)
+
+                sid = self.get_struct_id(cname)
+                if sid == idaapi.BADADDR:
+                    ida_kernwin.warning(f"Failed to find and finalise struct {cname}")
+                
+                self.rename_struct(sid, fullname)
+
+                if not struct.virtual_functions:
+                    return
+                
+                sid = self.get_struct_id(cname + "_vtbl")
+                if sid == idaapi.BADADDR:
+                    ida_kernwin.warning(f"Failed to find and finalise vtable for struct {cname}")
+                    return
+                
+                self.rename_struct(sid, fullname + "_vtbl")
+
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
                 pass
@@ -599,7 +1049,17 @@ if api is None:
                 func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
                 for param in member_func.parameters:
                     arg = ida_typeinf.funcarg_t()
-                    arg.type = self.get_tinfo_from_type(param.type)
+                    try:
+                        arg.type = self.get_tinfo_from_type(param.type)
+                    except ValueError as exc:
+                        print(
+                            "Error: update_member_func: function={!r}, ea={:#x}, "
+                            "parameter={!r}, type={!r}, error={}".format(
+                                func_name, ea,
+                                param.name, param.type, exc
+                            )
+                        )
+                        raise
                     arg.name = param.name
                     func_data.push_back(arg)
                 tif.create_func(func_data)
@@ -610,22 +1070,69 @@ if api is None:
                 func_name = "{0}.{1}".format(
                     self.clean_name(struct.type), virt_func.name
                 )
+
                 ea = self.get_func_ea_by_name(func_name)
                 if ea == idc.BADADDR:
-                    print("Error: {0} not found using base?".format(func_name))
-                    return
+                    # ignore if added during preprocess
+                    if virt_func.inherited_from_preprocess:
+                        return
+
+                    ea = self.get_vfunc_ea_from_data(struct.type, virt_func.offset)
+                    if ea in (0, idc.BADADDR):
+                        print(f"Error: {func_name} not found and its VFT slot could not be resolved")
+                        return
+
+                    actual_name = ida_funcs.get_func_name(ea) or ""
+                    normalized_name = actual_name
+                    for prefix in ("j_", "thunk_"):
+                        if normalized_name.startswith(prefix):
+                            normalized_name = normalized_name[len(prefix):]
+
+                    # pure virtual, nothing to do
+                    if normalized_name == "_purecall":
+                        return
+
+                    primary_vtable = self.get_vft_from_data(struct.type)
+                    primary_base = primary_vtable.get("base") if primary_vtable else None
+                    if primary_base:
+                        base_ea = self.get_vfunc_ea_from_data(primary_base, virt_func.offset)
+                        # if the derived vft slot points to the same as the baseclass, leave baseclass type
+                        if base_ea == ea:
+                            return
+
+                    # does it look inherited based on name? leave it alone
+                    if (
+                        normalized_name.endswith("." + virt_func.name)
+                        and not normalized_name.startswith(self.clean_name(struct.type) + ".")
+                    ):
+                        return
+
                 tif = ida_typeinf.tinfo_t()
                 ida_typeinf.guess_tinfo(tif, ea)
+
                 func_data = ida_typeinf.func_type_data_t()
                 tif.get_func_details(func_data)
+
                 func_data.clear()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
                 func_data.rettype = self.get_tinfo_from_type(virt_func.return_type)
+
                 for param in virt_func.parameters:
                     arg = ida_typeinf.funcarg_t()
-                    arg.type = self.get_tinfo_from_type(param.type)
+                    try:
+                        arg.type = self.get_tinfo_from_type(param.type)
+                    except ValueError as exc:
+                        print(
+                            "Error: update_virt_func: function={!r}, ea={:#x}, "
+                            "parameter={!r}, type={!r}, error={}".format(
+                                func_name, ea, param.name, param.type, exc
+                            )
+                        )
+                        raise
+
                     arg.name = param.name
                     func_data.push_back(arg)
+
                 tif.create_func(func_data)
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
@@ -679,19 +1186,457 @@ if api is None:
                     )
                     == ida_kernwin.ASKBTN_YES
                 )
-            
-        full_padding = (
-            ida_kernwin.ask_buttons(
-                "Full Padding",
-                "Array Padding",
-                "",
-                ida_kernwin.ASKBTN_YES,
-                "HIDECANCEL\nWhat padding style to use?\n\nFull Padding: Adds padding based on allignment of 1,2,4,8\nArray Padding: Adds padding based on the size between fields with byte arrays\n\nFull Padding will take longer to add padding between fields but is recommended for quick struct modifications.",
-            )
-            == ida_kernwin.ASKBTN_YES
-        )
-        api = IdaApi(full_padding)
 
+            def preprocess_yaml(self, yaml: DefinedStructExport) -> None:
+                # Attempts to identify and fix missing baseclass flags and VFT inconsistencies, checks
+                # for issues that were previously 'hidden' by the IDA API, then builds an inheritance
+                # graph to propagate virtual functions and validate layouts & inheritance chains
+
+                if not self.srclang_importer:
+                    return
+
+                data_classes = {}
+                if hasattr(self, "data_yaml") and self.data_yaml:
+                    data_classes = self.data_yaml.get("classes", {}) or {}
+
+                def get_data_vtables(class_name: str) -> list[dict]:
+                    class_data = data_classes.get(class_name) or {}
+                    vtables = class_data.get("vtbls", [])
+                    return vtables if isinstance(vtables, list) else []
+
+                class BaseEdge:
+                    def __init__(self, derived: 'Node', base: 'Node', field: DefinedStructField):
+                        self.derived = derived
+                        self.base = base
+                        self.field = field
+                        self.offset = field.offset
+
+                class Node:
+                    def __init__(self, struct: DefinedStruct):
+                        self.struct: DefinedStruct = struct
+                        self.declared_vtable_size = struct.vtable_size
+                        self.bases: list['BaseEdge'] = []
+                        self.children: list['BaseEdge'] = []
+
+                    def is_virtual(self) -> bool:
+                        return self.struct.virtual_functions is not None
+
+                    def primary_base(self) -> 'BaseEdge' | None:
+                        primary_bases = [edge for edge in self.bases if edge.offset == 0]
+                        if len(primary_bases) > 1:
+                            base_names = ", ".join(edge.base.struct.type for edge in primary_bases)
+                            raise RuntimeError(
+                                f"Multiple baseclasses defined at offset 0 for '{self.struct.type}': {base_names}"
+                            )
+
+                        return primary_bases[0] if primary_bases else None
+
+                nodes: dict[str, Node] = {}
+                for struct in yaml.structs:
+                    if struct.type in nodes:
+                        raise RuntimeError(f"Duplicate type '{struct.type}'")
+
+                    nodes[struct.type] = Node(struct)
+
+                for node in nodes.values():
+                    declared_vtable_size = node.declared_vtable_size
+                    if declared_vtable_size is not None:
+                        if type(declared_vtable_size) is not int or declared_vtable_size < 0:
+                            raise RuntimeError(
+                                f"Invalid VFT size {declared_vtable_size} "
+                                f"for '{node.struct.type}'"
+                            )
+
+                        if declared_vtable_size % 8 != 0:
+                            raise RuntimeError(
+                                f"Invalid VFT size {declared_vtable_size:#x} "
+                                f"for '{node.struct.type}'"
+                            )
+
+                    vfuncs_by_offset = {}
+                    for vfunc in node.struct.virtual_functions or []:
+                        if vfunc is None:
+                            continue
+
+                        if type(vfunc.offset) is not int or vfunc.offset < 0:
+                            raise RuntimeError(
+                                f"Invalid VFT offset {vfunc.offset} for "
+                                f"'{node.struct.type}.{vfunc.name}'"
+                            )
+
+                        if vfunc.offset % 8 != 0:
+                            raise RuntimeError(
+                                f"Unaligned VFT offset {vfunc.offset:#x} for "
+                                f"'{node.struct.type}.{vfunc.name}'"
+                            )
+
+                        previous_vfunc = vfuncs_by_offset.get(vfunc.offset)
+                        if previous_vfunc is not None:
+                            raise RuntimeError(
+                                f"Duplicate VFT slot {vfunc.offset // 8} "
+                                f"for '{node.struct.type}': "
+                                f"'{previous_vfunc.name}' and '{vfunc.name}'"
+                            )
+
+                        vfuncs_by_offset[vfunc.offset] = vfunc
+
+                # normalize
+                for node in nodes.values():
+                    if node.struct.fields and node.struct.fields[0].name == "_vtable":
+                        node.struct.fields.pop(0)
+                        if not node.is_virtual():
+                            node.struct.virtual_functions = []
+                            node.struct.vtable_size = 0
+
+                    if not node.is_virtual() and get_data_vtables(node.struct.type):
+                        node.struct.virtual_functions = []
+                        node.struct.vtable_size = 0
+
+                def add_base_edge(derived: Node, field: DefinedStructField) -> BaseEdge:
+                    parent = nodes.get(field.type)
+                    if parent is None:
+                        raise RuntimeError(
+                            f"Could not resolve baseclass '{field.type}' "
+                            f"for '{derived.struct.type}'"
+                        )
+
+                    edge = BaseEdge(derived, parent, field)
+                    derived.bases.append(edge)
+                    parent.children.append(edge)
+                    return edge
+
+                # add every explicit baseclass
+                for node in nodes.values():
+                    for field in node.struct.fields:
+                        if field.base:
+                            add_base_edge(node, field)
+
+                def is_or_has_primary(node: Node, class_name: str, visited=None) -> bool:
+                    if node.struct.type == class_name:
+                        return True
+
+                    if visited is None:
+                        visited = set()
+
+                    if node.struct.type in visited:
+                        return False
+
+                    visited.add(node.struct.type)
+
+                    edge = node.primary_base()
+                    return (
+                        edge is not None
+                        and is_or_has_primary(edge.base, class_name, visited)
+                    )
+
+                for node in nodes.values():
+                    if node.primary_base() is not None:
+                        continue
+
+                    vtables = get_data_vtables(node.struct.type)
+                    primary_vtable = vtables[0] if vtables else None
+                    primary_vtable_base = (
+                        primary_vtable.get("base")
+                        if isinstance(primary_vtable, dict)
+                        else None
+                    )
+
+                    if not primary_vtable_base:
+                        continue
+
+                    candidates = []
+                    for field in node.struct.fields:
+                        candidate = nodes.get(field.type)
+                        if (
+                            field.offset == 0
+                            and not field.base
+                            and candidate is not None
+                            and is_or_has_primary(candidate, primary_vtable_base)
+                        ):
+                            candidates.append((field, candidate))
+
+                    if len(candidates) != 1:
+                        continue
+
+                    field, _ = candidates[0]
+
+                    print(
+                        f"Warning: Fixing missing baseclass '{field.type}' "
+                        f"for '{node.struct.type}'"
+                    )
+
+                    field.base = True
+                    add_base_edge(node, field)
+
+                # validate inheritance graph to make sure we don't have any circular dependants
+                visit_state: dict[str, int] = {}
+                visit_stack: list[str] = []
+
+                def validate_acyclic(node: Node) -> None:
+                    state = visit_state.get(node.struct.type, 0)
+                    if state == 2:
+                        return
+
+                    if state == 1:
+                        cycle_start = visit_stack.index(node.struct.type)
+                        cycle = visit_stack[cycle_start:] + [node.struct.type]
+                        cycle_path = " -> ".join(cycle)
+                        raise RuntimeError(f"Circular inheritance detected: {cycle_path}")
+
+                    visit_state[node.struct.type] = 1
+
+                    visit_stack.append(node.struct.type)
+                    for edge in node.bases:
+                        validate_acyclic(edge.base)
+                    visit_stack.pop()
+
+                    visit_state[node.struct.type] = 2
+
+                for node in nodes.values():
+                    validate_acyclic(node)
+
+
+                inherited_vfts_visited: set[str] = set()
+
+                def inherit_vft(node: Node) -> None:
+                    if node.struct.type in inherited_vfts_visited:
+                        return
+
+                    edge = node.primary_base()
+                    if edge is not None:
+                        inherit_vft(edge.base)
+                        if edge.base.is_virtual() and not node.is_virtual():
+                            node.struct.virtual_functions = []
+                            node.struct.vtable_size = 0
+
+                    inherited_vfts_visited.add(node.struct.type)
+
+                for node in nodes.values():
+                    inherit_vft(node)
+
+                for node in nodes.values():
+                    primary_base = node.primary_base()
+                    primary_base_has_vft = (
+                        primary_base is not None and primary_base.base.is_virtual()
+                    )
+
+                    node.struct.srclang_needs_vfptr = (
+                        node.is_virtual() and not primary_base_has_vft
+                    )
+
+                    if (
+                        node.struct.srclang_needs_vfptr
+                        and primary_base is not None
+                    ):
+                        # TODO(Caitlyn): maybe this should be a hard error here
+                        print(
+                            f"Warning: Class '{node.struct.type}' is polymorphic, "
+                            f"but its non-polymorphic base class "
+                            f"'{primary_base.base.struct.type}' is placed at offset zero"
+                        )
+
+                # normalize VFTs into indexable lists
+                normalized_vfts: set[str] = set()
+
+                def normalize_vft(node: Node) -> None:
+                    if node.struct.type in normalized_vfts:
+                        return
+
+                    primary_base = node.primary_base()
+                    if primary_base is not None:
+                        normalize_vft(primary_base.base)
+
+                    if not node.is_virtual():
+                        normalized_vfts.add(node.struct.type)
+                        return
+
+                    vfuncs = node.struct.virtual_functions or []
+
+                    last_vfunc = max(
+                        (vf for vf in vfuncs if vf is not None),
+                        key=lambda vf: vf.offset,
+                        default=None,
+                    )
+
+                    needed_size = (
+                        last_vfunc.offset + 8
+                        if last_vfunc is not None
+                        else 0
+                    )
+                    vft_size = needed_size
+
+                    if node.struct.vtable_size and node.struct.vtable_size > vft_size:
+                        vft_size = node.struct.vtable_size
+
+                    needed_base_size = 0
+                    if (
+                        primary_base is not None
+                        and primary_base.base.is_virtual()
+                        and (primary_base.base.struct.vtable_size or 0) > vft_size
+                    ):
+                        needed_base_size = primary_base.base.struct.vtable_size
+                        vft_size = needed_base_size
+
+                    defined_size = node.declared_vtable_size
+                    if (
+                        defined_size is not None
+                        and vft_size > defined_size
+                    ):
+                        if needed_base_size > needed_size:
+                            reason = f"baseclass '{primary_base.base.struct.type}'"
+                        else:
+                            reason = (
+                                f"virtual function '{last_vfunc.name}' "
+                                f"at offset {last_vfunc.offset:#x}"
+                            )
+
+                        print(
+                            f"Warning: Expanding VFT for '{node.struct.type}' from "
+                            f"{defined_size:#x} to {vft_size:#x} to fit {reason}"
+                        )
+
+                    new_vft = [None] * (vft_size // 8)
+                    for vf in vfuncs:
+                        if vf is not None:
+                            new_vft[vf.offset // 8] = vf
+
+                    node.struct.virtual_functions = new_vft
+                    node.struct.vtable_size = vft_size
+                    normalized_vfts.add(node.struct.type)
+
+                for node in nodes.values():
+                    normalize_vft(node)
+
+                def primary_children(node: Node):
+                    for edge in node.children:
+                        if edge.derived.primary_base() is edge:
+                            yield edge.derived
+
+                def copy_vfunc_for_type(vf: DefinedStructVFunc, struct_type: str):
+                    new_vf = copy.deepcopy(vf)
+                    new_vf.inherited_from_preprocess = True
+                    if hasattr(new_vf, 'parameters') and new_vf.parameters:
+                        new_vf.parameters[0].type = struct_type + "*"
+                    return new_vf
+
+                # propagate known VFs down into subclasses
+                def propagate_vft_down(node: Node, visited=None) -> None:
+                    if visited is None:
+                        visited = set()
+
+                    if node.struct.type in visited:
+                        return
+
+                    visited.add(node.struct.type)
+
+                    if not node.is_virtual():
+                        return
+                    
+                    parent_vfs = node.struct.virtual_functions or []
+
+                    for child in primary_children(node):
+                        if parent_vfs:
+                            if not child.is_virtual():
+                                child.struct.virtual_functions = [None] * len(parent_vfs)
+                                child.struct.vtable_size = node.struct.vtable_size
+                            elif len(child.struct.virtual_functions) < len(parent_vfs):
+                                extra_slots = len(parent_vfs) - len(child.struct.virtual_functions)
+                                child.struct.virtual_functions += [None] * extra_slots
+                                child.struct.vtable_size = max(child.struct.vtable_size or 0, node.struct.vtable_size)
+
+                            for i, vf in enumerate(parent_vfs):
+                                if vf is None or child.struct.virtual_functions[i] is not None:
+                                    continue
+
+                                child.struct.virtual_functions[i] = copy_vfunc_for_type(vf, child.struct.type)
+
+                        propagate_vft_down(child, visited)
+
+                visited_nodes: set[str] = set()
+                def propagate_vft_up(node: Node) -> None:
+                    if node.struct.type in visited_nodes:
+                        return
+                    
+                    visited_nodes.add(node.struct.type)
+
+                    if not node.is_virtual():
+                        return
+
+                    for child in primary_children(node):
+                        # propagate from bottom up
+                        propagate_vft_up(child)
+                        
+                        child_vfs = child.struct.virtual_functions
+                        parent_vfs = node.struct.virtual_functions
+                        if not child_vfs or not parent_vfs:
+                            continue
+
+                        for i, vf in enumerate(child_vfs):
+                            if i >= len(parent_vfs):
+                                break
+
+                            if (vf is None or parent_vfs[i] is not None):
+                                continue
+
+                            parent_vfs[i] = copy_vfunc_for_type(vf, node.struct.type)
+
+                roots = [
+                    node
+                    for node in nodes.values()
+                    if node.is_virtual()
+                    and (
+                        node.primary_base() is None
+                        or not node.primary_base().base.is_virtual()
+                    )
+                ]
+
+                for root in roots:
+                    propagate_vft_down(root)
+
+                for root in roots:
+                    propagate_vft_up(root)
+
+                for root in roots:
+                    propagate_vft_down(root)
+
+        full_padding = False
+        srclang_importer = False
+        if idaapi.IDA_SDK_VERSION >= 900:
+            srclang_importer = (
+                ida_kernwin.ask_buttons(
+                    "SrcLang Importer",
+                    "Legacy Importer",
+                    "",
+                    ida_kernwin.ASKBTN_YES,
+                    "HIDECANCEL\nWhich importer should be used?\n\nSrcLang Importer: Experimental - faster importer with full padding, and improved support for inheritance and virtual function calls.\n\nLegacy Importer: The original, battle-tested importer. Full Padding on the Legacy Importer on IDA 9+ can take 8 hours or longer.",
+                )
+                == ida_kernwin.ASKBTN_YES
+            )
+
+            if srclang_importer:
+                full_padding = True
+
+        if not srclang_importer:
+            full_padding = (
+                ida_kernwin.ask_buttons(
+                    "Full Padding",
+                    "Array Padding",
+                    "",
+                    ida_kernwin.ASKBTN_YES,
+                    "HIDECANCEL\nWhat padding style to use?\n\nFull Padding: Adds padding based on allignment of 1,2,4,8\nArray Padding: Adds padding based on the size between fields with byte arrays\n\nFull Padding will take longer to add padding between fields but is recommended for quick struct modifications.",
+                )
+                == ida_kernwin.ASKBTN_YES
+            )
+
+        api = IdaApi(full_padding, srclang_importer)
+        if not api.validate_name_cfg():
+            ida_kernwin.warning(
+                "Type name validation failed.\n"
+                "\n"
+                "Your IDA.cfg is missing necessary NameChars and TypeNameChars.\n"
+                "\n"
+                "Please see https://github.com/aers/FFXIVClientStructs/blob/main/ida/idauser.cfg to update your config accordingly.")
+            exit()
 
 if api is None:
     try:
@@ -995,6 +1940,9 @@ if api is None:
                             offset, void_ptr, -1, "vf{0}".format(offset / 8), None
                         )
 
+            def finalise_struct(self, struct):
+                return
+
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
                 if monitor.isCancelled() or not struct.virtual_functions:
@@ -1106,6 +2054,9 @@ if api is None:
                     "ffxiv_structimporter", "Update virtual function types?"
                 )
 
+            def preprocess_yaml(self, yaml: DefinedStructExport):
+                return
+            
         api = GhidraApi()
 
 if api is None:
@@ -1324,6 +2275,9 @@ if api is None:
                     )
                     == 0
                 )
+            
+            def preprocess_yaml(self, yaml: DefinedStructExport):
+                return
 
         api = BinjaApi()
 
@@ -1340,7 +2294,6 @@ def get_time():
         val += "0"
     return val
 
-
 def run():
     if not api.can_run():
         raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
@@ -1353,6 +2306,9 @@ def run():
     
     print("{0} Loading data yaml".format(get_time()))
     api.data_yaml = api.load_data_yaml()
+
+    print("{0} Preprocessing yaml".format(get_time()))
+    api.preprocess_yaml(yaml)
 
     print("{0} Deleting old structs".format(get_time()))
     for struct in yaml.structs[::-1]:
@@ -1373,6 +2329,10 @@ def run():
     for struct in yaml.structs:
         api.create_struct_members(struct)
 
+    print("{0} Finalising structs".format(get_time()))
+    for struct in yaml.structs:
+        api.finalise_struct(struct)
+
     print("{0} Creating vtables for structs".format(get_time()))
     for struct in yaml.structs:
         if struct.virtual_functions:
@@ -1391,6 +2351,9 @@ def run():
                     )
                 )
                 for virt_func in struct.virtual_functions:
+                    if virt_func is None:
+                        continue
+
                     if virt_func.return_type != None and virt_func.parameters != None:
                         api.update_virt_func(virt_func, struct)
 
@@ -1422,6 +2385,5 @@ def run():
                 )
                 for member in struct.static_members:
                     api.update_static_member(member, struct)
-
 
 run()
