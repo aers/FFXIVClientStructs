@@ -12912,6 +12912,7 @@ classes:
       0x140F386A0: ctor
       0x140F38E00: CanUseEmote
       0x140F38CF0: ExecuteEmote
+      0x140F389C0: SearchForEmote
   Client::UI::Agent::AgentMacro:
     vtbls:
       - ea: 0x1421F5328
