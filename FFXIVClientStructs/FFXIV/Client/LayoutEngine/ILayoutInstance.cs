@@ -292,15 +292,23 @@ public enum InstanceType : byte {
     Decal = 83,
     Unk84 = 84,
     Unk85 = 85,
-    ColliderLayer7 = 86,
-    ColliderLayer8 = 87,
-    ColliderLayer9 = 88,
-    ColliderLayer10 = 89,
+    WaterRange = 86,
+    ShowHideRange = 87,
+    GameContentsRange = 88,
+    EventEffectRange = 89,
     CullingBox = 90,
     Unk91 = 91,
     Unk92 = 92,
     VolumetricCloud = 93,
 
+    [Obsolete("Renamed to WaterRange")]
+    ColliderLayer7 = 86,
+    [Obsolete("Renamed to ShowHideRange")]
+    ColliderLayer8 = 87,
+    [Obsolete("Renamed to GameContentsRange")]
+    ColliderLayer9 = 88,
+    [Obsolete("Renamed to EventEffectRange")]
+    ColliderLayer10 = 89,
     [Obsolete("Renamed to CullingBox")]
     Culling = 90,
 }
