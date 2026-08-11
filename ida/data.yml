@@ -16403,6 +16403,7 @@ classes:
       0x140B54880: QueueFormatStringCallback
       0x140B54930: QueueActionTimelineCallback
       0x140B55B80: DispatchEvent
+      0x140B54470: LoadCustomDefineSheet
     vfuncs:
       0: dtor
       6: Terminate

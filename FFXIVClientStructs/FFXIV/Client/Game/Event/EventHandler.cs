@@ -29,9 +29,11 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0xA0)] private ExcelSheet* UnkExcelSheet1;
     [FieldOffset(0xA8)] private ExcelSheetWaiter* UnkExcelSheetWaiter2;
     [FieldOffset(0xB0)] private ExcelSheet* UnkExcelSheet2;
-    [FieldOffset(0xB8)] private ExcelSheetWaiter* UnkExcelSheetWaiter3;
-    [FieldOffset(0xC0)] private ExcelSheet* UnkExcelSheet3;
-    [FieldOffset(0xC8)] private Utf8String UnkSheetName; // sheet set to UnkExcelSheet3, for FormatStringCallback?
+    [FieldOffset(0xB8)] public ExcelSheetWaiter* CustomDefineSheetWaiter;
+    [FieldOffset(0xC0)] public ExcelSheet* CustomDefineSheet;
+    [FieldOffset(0xC8)] public Utf8String CustomDefineSheetName; // for example: warp/WarpInnGridania
+
+    [FieldOffset(0x148)] public uint CustomDefineSheetRowCount;
 
     [FieldOffset(0x158)] private ExcelSheetWaiter* UnkExcelSheetWaiter4;
     [FieldOffset(0x160)] private ExcelSheet* UnkExcelSheet4; // TripleTriadCard, XBMBattleDetailAction

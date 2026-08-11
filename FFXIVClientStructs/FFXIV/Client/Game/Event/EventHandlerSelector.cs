@@ -16,6 +16,7 @@ public unsafe partial struct EventHandlerSelector {
     [FieldOffset(0x010)] public GameObject* Target; // object corresponding to the active selection, null if selection is not active
     [FieldOffset(0x018), FixedSizeArray] internal FixedSizeArray32<Option> _options;
     [FieldOffset(0x418)] public int OptionsCount; // num valid elements in Options array
+    [FieldOffset(0x41C)] public uint AddonId;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe partial struct Option {

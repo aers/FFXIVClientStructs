@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -44,9 +45,9 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0x93C), FixedSizeArray(isBitArray: true, bitCount: 72 * 8)] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRanges; // BitCount: unknown, but we know the array is 72 bytes long
     [FieldOffset(0x98C), FixedSizeArray(isBitArray: true, bitCount: 6407)] internal FixedSizeArray801<byte> _completedRecipes; // BitCount: RecipeSheet.Where(row => row.RowId < 30000).Max(row => row.RowId)
 
-    [FieldOffset(0xCB0)] private uint UnkCB0;
-    [FieldOffset(0xCB4)] private uint UnkCB4;
-    [FieldOffset(0xCB8)] private uint UnkCB8;
+    [FieldOffset(0xCB0)] private EventId UnkWarpEventId;
+    [FieldOffset(0xCB4)] private uint UnkStatusId;
+    [FieldOffset(0xCB8)] private uint UnkCB8; // Status Param?
 
     [FieldOffset(0xCE8), FixedSizeArray] internal FixedSizeArray20<BeastReputationWork> _beastReputation;
     [FieldOffset(0xE28), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
