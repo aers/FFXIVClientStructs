@@ -755,7 +755,8 @@ if api is None:
                 else:
                     decl[0] = f"struct __attribute__((packed)) {fullname} "
                 if len(inherits_from) > 0:
-                    decl[0] += f": {", ".join(inherits_from)}"
+                    inheritances = ", ".join(inherits_from)
+                    decl[0] += f": {inheritances}"
                 
                 decl[0] += " {"
                 
