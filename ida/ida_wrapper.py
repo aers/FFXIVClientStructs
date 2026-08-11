@@ -1084,10 +1084,10 @@ class IdaInterface(BaseIdaInterface):
                 offset (int): The offset of the member in the struct
 
             Returns:
-                int: The member id inside of the struct or -1 if not found
+                int: The member id inside of the struct or idc.BADADDR if not found
             """
-            idx, _ = sid.get_udm_by_offset(offset)
-            return idx
+            idx, _ = sid.get_udm_by_offset(offset * 8)
+            return idc.BADADDR if idx == -1 else idx
 
         def get_enum_id(self, name: str):
             """Get the id of an enum by its name
