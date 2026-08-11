@@ -9996,6 +9996,8 @@ classes:
     vtbls:
       - ea: 0x14217FF70
         base: Client::LayoutEngine::ILayoutInstance
+    vfuncs:
+      78: GetMarkerSize
   Client::LayoutEngine::Layer::CharacterLayoutInstance:
     vtbls:
       - ea: 0x14217A120
