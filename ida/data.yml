@@ -10022,6 +10022,14 @@ classes:
     vtbls:
       - ea: 0x142180E60
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData:
+    vtbls:
+      - ea: 0x14233CF60
+    vfuncs:
+      0: dtor
+      1: GetPointPosition
+      4: GetCount
+      6: GetPointId
   Client::LayoutEngine::Layer::BgPartsLayoutInstance:
     vtbls:
       - ea: 0x14217B5E0
