@@ -45,6 +45,9 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 D0 48 8D 15")]
     public partial double lua_tonumber(int idx);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 83 CA ?? 48 8B CB 2B D7")]
+    public partial void lua_pushboolean(int b);
+
     [MemberFunction("E8 ?? ?? ?? ?? FF CD BA")]
     public partial void lua_pushvalue(int idx);
 
@@ -101,6 +104,12 @@ public unsafe partial struct lua_State {
 
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 3B FE 7E")]
     public partial void lua_call(int nargs, int nresults);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 40 32 ED"), GenerateStringOverloads]
+    public partial void* lua_checkudata(int index, CStringPointer name);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F B7 41 ?? 48 8B D9")]
+    public partial int lua_yield(int nresults);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB FF D0 48 8B 5C 24")]
     public partial delegate* unmanaged<lua_State*, int> lua_tocfunction(int index);

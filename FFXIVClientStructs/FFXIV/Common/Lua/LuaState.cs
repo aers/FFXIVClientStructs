@@ -10,6 +10,9 @@ public unsafe partial struct LuaState {
     [FieldOffset(0x18)] public long LastGCRestart;
     [FieldOffset(0x20)] public delegate* unmanaged<lua_State*, int> db_errorfb;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D ?? 4C 8B C0 8B D6")]
+    public partial CStringPointer ClassNameOf(int index);
+
     public string?[] DoString(string code, string? name = null) {
         var top = State->lua_gettop();
         try {
