@@ -64,6 +64,7 @@ public enum LightFlags {
     DynamicShadows = 1 << 1,
     CharacterShadows = 1 << 2,
     ObjectShadows = 1 << 3,
+    TimeAdjusted = 1 << 4,
     SSAO_Omnishadows = 1 << 5,
 }
 
