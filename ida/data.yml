@@ -9865,7 +9865,7 @@ classes:
       - ea: 0x142179C40
         base: Client::LayoutEngine::IManagerBase
     funcs:
-      # 0x14060DD90: ctor # inlined in CreateSingleton
+      0x14070C370: ctor # inlined in CreateSingleton
       0x14070C550: CreateSingleton
       0x14070D5E0: LoadPrefetchLayout
       0x14070D990: UnloadManagerLayout
@@ -9876,6 +9876,8 @@ classes:
       0x1407114F0: ResolveRsvString
       0x1407115F0: AddRsfEntry
       0x140711920: ResolveRsfEntry
+      0x14070D7F0: UnloadLayouts
+      0x14070D1A0: LoadLayout
       0x140754AE0: UnloadPrefetchLayout
       0x140754B50: ActiveLayoutReady # static
       0x140754B80: ActiveLayoutStreamed # static
