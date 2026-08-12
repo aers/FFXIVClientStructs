@@ -3992,6 +3992,17 @@ enums:
     "Unk5": 32
     "Unk7": 64
     "Unk8": 128
+- type: Client::LayoutEngine::Layer::RangeType
+  name: RangeType
+  underlying: int
+  namespace: Client.LayoutEngine.Layer
+  flags: False
+  values:
+    "None": 0
+    "Box": 1
+    "Sphere": 2
+    "Cylinder": 3
+    "Plane": 4
 - type: Client::LayoutEngine::Group::SGDoorActionController::DoorState
   name: DoorState
   underlying: int
@@ -30183,7 +30194,15 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 4D ?? 4C 8B C0 8B D6
+    return_type: char*
+    name: ClassNameOf
+    parameters:
+    - type: Common::Lua::LuaState*
+      name: this
+    - type: int
+      name: index
 - type: Common::Lua::Mbuffer
   name: Mbuffer
   namespace: Common.Lua
@@ -34515,6 +34534,18 @@ structs:
   union: False
   fields:
   - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: StdMap<Client::System::String::Utf8String, unsigned int>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, unsigned int>>*
     name: Head
     offset: 0
   - type: __int64
@@ -59093,7 +59124,15 @@ structs:
     offset: 0
     base: true
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 8B D8 83 F8 ?? 74
+    return_type: int
+    name: ResumeWithBool
+    parameters:
+    - type: Common::Lua::LuaThread*
+      name: this
+    - type: char
+      name: value
 - type: Common::Lua::Proto
   name: Proto
   namespace: Common.Lua
@@ -62013,6 +62052,18 @@ structs:
     name: Item2
     offset: 104
   member_functions: []
+- type: StdPair<Client::System::String::Utf8String, unsigned int>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Item1
+    offset: 0
+  - type: unsigned int
+    name: Item2
+    offset: 104
+  member_functions: []
 - type: StdPair<byte, Client::UI::Misc::CraftModule::FavoriteActionsSet>
   name: StdPair`2
   namespace: ''
@@ -62716,6 +62767,9 @@ structs:
   - type: int
     name: OptionsCount
     offset: 1048
+  - type: unsigned int
+    name: AddonId
+    offset: 1052
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -68530,327 +68584,6 @@ structs:
       name: fileData
     - type: Client::System::Scheduler::Instance::LayoutSharedGroupObject*
       name: timelineObj
-- type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance
-  name: PositionMarkerLayoutInstance
-  namespace: Client.LayoutEngine.Layer
-  union: False
-  size: 128
-  fields:
-  - type: Client::LayoutEngine::ILayoutInstance
-    name: ILayoutInstance
-    offset: 0
-    base: true
-  - type: unsigned int
-    name: Unk70
-    offset: 112
-  virtual_functions:
-  - name: dtor
-    offset: 0
-    return_type: Client::LayoutEngine::ILayoutInstance*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: Init
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: __int64
-      name: creator
-    - type: byte*
-      name: primaryPath
-  - name: Deinit
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetProperties
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::LayoutEngine::FileLayerGroupInstance*
-      name: data
-  - name: SetLayer
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::LayoutEngine::Layer::LayerManager*
-      name: layer
-  - name: GetSizeOf
-    offset: 48
-    return_type: int
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetPrimaryPath
-    offset: 56
-    return_type: char*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetTranslation
-    offset: 112
-    return_type: System::Numerics::Vector3*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector3*
-      name: result
-  - name: GetRotation
-    offset: 120
-    return_type: System::Numerics::Quaternion*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Quaternion*
-      name: result
-  - name: GetScale
-    offset: 128
-    return_type: System::Numerics::Vector3*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector3*
-      name: result
-  - name: GetTransform
-    offset: 136
-    return_type: Client::LayoutEngine::Transform*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::LayoutEngine::Transform*
-      name: result
-  - name: SetTransform
-    offset: 144
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::LayoutEngine::Transform*
-      name: transform
-  - name: HavePrimary
-    offset: 168
-    return_type: char
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: IsPrimaryLoaded
-    offset: 176
-    return_type: char
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetGraphics
-    offset: 184
-    return_type: Client::Graphics::Scene::Object*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetGraphics2
-    offset: 192
-    return_type: Client::Graphics::Scene::Object*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetGraphics
-    offset: 200
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::Graphics::Scene::Object*
-      name: obj
-    - type: Client::LayoutEngine::Transform*
-      name: transform
-  - name: CreatePrimary
-    offset: 216
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::LayoutEngine::Transform*
-      name: transform
-    - type: __int64
-      name: pathOrType
-  - name: DestroyPrimary
-    offset: 224
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: HaveSecondary
-    offset: 232
-    return_type: char
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: IsColliderLoaded
-    offset: 240
-    return_type: char
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetSecondaryPath
-    offset: 248
-    return_type: char*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: CreateSecondary
-    offset: 256
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: DestroySecondary
-    offset: 264
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetCollider
-    offset: 272
-    return_type: Common::Component::BGCollision::Collider*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetCollider2
-    offset: 280
-    return_type: Common::Component::BGCollision::Collider*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: IsColliderActive
-    offset: 288
-    return_type: char
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetColliderActive
-    offset: 296
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: char
-      name: active
-  - name: UpdateCollider
-    offset: 304
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: GetColor
-    offset: 360
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector4*
-      name: color
-  - name: SetColor
-    offset: 368
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector4*
-      name: color
-  - name: WantToBeActive
-    offset: 440
-    return_type: char
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: ApplyStain
-    offset: 464
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::Graphics::ByteColor*
-      name: stainColorSrgb
-  - name: SetActive
-    offset: 504
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: char
-      name: active
-  - name: GetTranslationImpl
-    offset: 512
-    return_type: System::Numerics::Vector3*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetTranslationImpl
-    offset: 520
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector3*
-      name: value
-  - name: GetRotationImpl
-    offset: 528
-    return_type: System::Numerics::Quaternion*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetRotationImpl
-    offset: 536
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Quaternion*
-      name: value
-  - name: GetScaleImpl
-    offset: 544
-    return_type: System::Numerics::Vector3*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetScaleImpl
-    offset: 552
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector3*
-      name: value
-  - name: GetTransformImpl
-    offset: 560
-    return_type: Client::LayoutEngine::Transform*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-  - name: SetTransformImpl
-    offset: 568
-    return_type: void
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: Client::LayoutEngine::Transform*
-      name: value
-  - name: GetBoundingSphereImpl
-    offset: 576
-    return_type: System::Numerics::Vector4*
-    parameters:
-    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
-      name: this
-    - type: System::Numerics::Vector4*
-      name: result
-  member_functions: []
 - type: Client::LayoutEngine::Layer::QuantizedCharacterPosition
   name: QuantizedCharacterPosition
   namespace: Client.LayoutEngine.Layer
@@ -86642,6 +86375,30 @@ structs:
     name: _Myval
     offset: 32
   member_functions: []
+- type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, unsigned int>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, unsigned int>>*
+    name: _Left
+    offset: 0
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, unsigned int>>*
+    name: _Parent
+    offset: 8
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, unsigned int>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: char
+    name: _Isnil
+    offset: 25
+  - type: StdPair<Client::System::String::Utf8String, unsigned int>
+    name: _Myval
+    offset: 32
+  member_functions: []
 - type: RedBlackTree::Node<StdPair<byte, Client::UI::Misc::CraftModule::FavoriteActionsSet>>
   name: Node
   namespace: Helper
@@ -100348,6 +100105,14 @@ structs:
       name: this
     - type: int
       name: idx
+  - signature: E8 ?? ?? ?? ?? 83 CA ?? 48 8B CB 2B D7
+    return_type: void
+    name: lua_pushboolean
+    parameters:
+    - type: Common::Lua::lua_State*
+      name: this
+    - type: int
+      name: b
   - signature: E8 ?? ?? ?? ?? FF CD BA
     return_type: void
     name: lua_pushvalue
@@ -100512,6 +100277,24 @@ structs:
       name: this
     - type: int
       name: nargs
+    - type: int
+      name: nresults
+  - signature: E8 ?? ?? ?? ?? 33 DB 40 32 ED
+    return_type: __int64
+    name: lua_checkudata
+    parameters:
+    - type: Common::Lua::lua_State*
+      name: this
+    - type: int
+      name: index
+    - type: char*
+      name: name
+  - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 0F B7 41 ?? 48 8B D9
+    return_type: int
+    name: lua_yield
+    parameters:
+    - type: Common::Lua::lua_State*
+      name: this
     - type: int
       name: nresults
   - signature: E8 ?? ?? ?? ?? 48 8B CB FF D0 48 8B 5C 24
@@ -113593,6 +113376,8 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetMarkerSize
+    offset: 624
   member_functions: []
 - type: Client::LayoutEngine::Layer::RangeLayoutInstance
   name: RangeLayoutInstance
@@ -113607,8 +113392,8 @@ structs:
   - type: Client::LayoutEngine::Transform
     name: Transform
     offset: 48
-  - type: unsigned int
-    name: Unk60
+  - type: Client::LayoutEngine::Layer::RangeType
+    name: Type
     offset: 96
   virtual_functions:
   - name: dtor
@@ -122808,203 +122593,6 @@ structs:
     - type: char*
       name: outModelChecked
   member_functions: []
-- type: Client::Game::QuestManager
-  name: QuestManager
-  namespace: Client.Game
-  union: False
-  size: 4242
-  fields:
-  - type: unsigned __int16
-    name: Unk0
-    offset: 0
-  - type: unsigned __int16
-    name: Unk2
-    offset: 2
-  - type: unsigned __int16
-    name: Unk4
-    offset: 4
-  - type: unsigned __int16
-    name: Unk6
-    offset: 6
-  - type: unsigned __int16
-    name: Unk8
-    offset: 8
-  - type: Application::Network::WorkDefinitions::QuestWork
-    name: NormalQuests
-    offset: 16
-    size: 30
-    is_string: False
-  - type: byte
-    name: CompletedQuests
-    offset: 736
-    size: 751
-    is_string: False
-  - type: byte
-    name: UnlockedMapMarkers
-    offset: 1487
-    size: 64
-    is_string: False
-  - type: byte
-    name: QuestRepeatFlags
-    offset: 1551
-    size: 2
-    is_string: False
-  - type: Application::Network::WorkDefinitions::DailyQuestWork
-    name: DailyQuests
-    offset: 1560
-    size: 12
-    is_string: False
-  - type: byte
-    name: DailyQuestSeed
-    offset: 1752
-  - type: byte
-    name: CompletedLegacyQuests
-    offset: 1756
-    size: 40
-    is_string: False
-  - type: Application::Network::WorkDefinitions::TrackingWork
-    name: TrackedQuests
-    offset: 1800
-    size: 10
-    is_string: False
-  - type: byte
-    name: UnkJournalByte
-    offset: 1960
-  - type: byte
-    name: UnkJournalWord
-    offset: 1961
-  - type: byte
-    name: UnkArray2
-    offset: 1964
-    size: 158
-    is_string: False
-  - type: byte
-    name: UnkArray3
-    offset: 2124
-    size: 94
-    is_string: False
-  - type: byte
-    name: SeenGatheringNotebookDivisionLevelRanges
-    offset: 2220
-    size: 40
-    is_string: False
-  - type: byte
-    name: GatheredGatheringItems
-    offset: 2260
-    size: 102
-    is_string: False
-  - type: byte
-    name: SuccessfulGatheringChainCount
-    offset: 2362
-  - type: byte
-    name: SeenCraftingNotebookDivisionLevelRanges
-    offset: 2364
-    size: 72
-    is_string: False
-  - type: byte
-    name: CompletedRecipes
-    offset: 2444
-    size: 801
-    is_string: False
-  - type: unsigned int
-    name: UnkCB0
-    offset: 3248
-  - type: unsigned int
-    name: UnkCB4
-    offset: 3252
-  - type: unsigned int
-    name: UnkCB8
-    offset: 3256
-  - type: Application::Network::WorkDefinitions::BeastReputationWork
-    name: BeastReputation
-    offset: 3304
-    size: 20
-    is_string: False
-  - type: Application::Network::WorkDefinitions::LeveWork
-    name: LeveQuests
-    offset: 3624
-    size: 16
-    is_string: False
-  - type: byte
-    name: NumLeveAllowances
-    offset: 4008
-  - type: unsigned __int16
-    name: UnkFA9
-    offset: 4009
-  - type: unsigned int
-    name: UnkFAB
-    offset: 4011
-  - type: byte
-    name: CompletedLeveQuests
-    offset: 4016
-    size: 226
-    is_string: False
-  member_functions:
-  - signature: 45 33 C0 48 8D 41 18 66 39 10
-    return_type: char
-    name: IsQuestAccepted
-    parameters:
-    - type: Client::Game::QuestManager*
-      name: this
-    - type: unsigned __int16
-      name: questId
-  - signature: 0F B6 C2 4C 8B C9 44 8B C0
-    return_type: char
-    name: IsQuestRepeatFlagSet
-    parameters:
-    - type: Client::Game::QuestManager*
-      name: this
-    - type: byte
-      name: questRepeatFlag
-  - signature: 44 0F B7 C2 4C 8B C9 49 C1 E8 03
-    return_type: char
-    name: IsLevequestComplete
-    parameters:
-    - type: Client::Game::QuestManager*
-      name: this
-    - type: unsigned __int16
-      name: levequestId
-  - signature: 33 C0 4C 8B C1 66 39 81 ?? ?? ?? ?? 0F 94 C0
-    return_type: unsigned int
-    name: GetBeastTribeAllowance
-    parameters:
-    - type: Client::Game::QuestManager*
-      name: this
-  static_members:
-  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 84 24
-    relative_follow_offsets:
-    - 3
-    is_pointer: False
-    return_type: Client::Game::QuestManager
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 41 88 84 2E
-    return_type: char
-    name: IsQuestComplete
-    parameters:
-    - type: unsigned __int16
-      name: questId
-  - signature: E8 ?? ?? ?? ?? 3A 43 06
-    return_type: byte
-    name: GetQuestSequence
-    parameters:
-    - type: unsigned __int16
-      name: questId
-  - signature: 40 53 48 83 EC 20 8B D9 81 F9
-    return_type: char
-    name: IsRecipeComplete
-    parameters:
-    - type: unsigned int
-      name: recipeId
-  - signature: E8 ?? ?? ?? ?? 88 85 ?? ?? ?? ?? 41 BC ?? ?? ?? ?? B8
-    return_type: char
-    name: IsGatheringItemGathered
-    parameters:
-    - type: unsigned __int16
-      name: gatheringItemId
-  - signature: E8 ?? ?? ?? ?? 8B D8 41 8D 44 24
-    return_type: int
-    name: GetNextLeveAllowancesTimestamp
-    parameters: []
 - type: Client::Game::UI::CharaCard
   name: CharaCard
   namespace: Client.Game.UI
@@ -126609,6 +126197,327 @@ structs:
     - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
       name: this
   member_functions: []
+- type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance
+  name: PositionMarkerLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 128
+  fields:
+  - type: Client::LayoutEngine::Layer::MarkerLayoutInstance
+    name: MarkerLayoutInstance
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: Unk70
+    offset: 112
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance
   name: PrefetchRangeLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -128920,6 +128829,9 @@ structs:
     name: TriggerBoxLayoutInstance
     offset: 0
     base: true
+  - type: unsigned int
+    name: Unk80
+    offset: 128
   virtual_functions:
   - name: dtor
     offset: 0
@@ -133562,6 +133474,203 @@ structs:
     - type: char*
       name: outModelChecked
   member_functions: []
+- type: Client::Game::QuestManager
+  name: QuestManager
+  namespace: Client.Game
+  union: False
+  size: 4242
+  fields:
+  - type: unsigned __int16
+    name: Unk0
+    offset: 0
+  - type: unsigned __int16
+    name: Unk2
+    offset: 2
+  - type: unsigned __int16
+    name: Unk4
+    offset: 4
+  - type: unsigned __int16
+    name: Unk6
+    offset: 6
+  - type: unsigned __int16
+    name: Unk8
+    offset: 8
+  - type: Application::Network::WorkDefinitions::QuestWork
+    name: NormalQuests
+    offset: 16
+    size: 30
+    is_string: False
+  - type: byte
+    name: CompletedQuests
+    offset: 736
+    size: 751
+    is_string: False
+  - type: byte
+    name: UnlockedMapMarkers
+    offset: 1487
+    size: 64
+    is_string: False
+  - type: byte
+    name: QuestRepeatFlags
+    offset: 1551
+    size: 2
+    is_string: False
+  - type: Application::Network::WorkDefinitions::DailyQuestWork
+    name: DailyQuests
+    offset: 1560
+    size: 12
+    is_string: False
+  - type: byte
+    name: DailyQuestSeed
+    offset: 1752
+  - type: byte
+    name: CompletedLegacyQuests
+    offset: 1756
+    size: 40
+    is_string: False
+  - type: Application::Network::WorkDefinitions::TrackingWork
+    name: TrackedQuests
+    offset: 1800
+    size: 10
+    is_string: False
+  - type: byte
+    name: UnkJournalByte
+    offset: 1960
+  - type: byte
+    name: UnkJournalWord
+    offset: 1961
+  - type: byte
+    name: UnkArray2
+    offset: 1964
+    size: 158
+    is_string: False
+  - type: byte
+    name: UnkArray3
+    offset: 2124
+    size: 94
+    is_string: False
+  - type: byte
+    name: SeenGatheringNotebookDivisionLevelRanges
+    offset: 2220
+    size: 40
+    is_string: False
+  - type: byte
+    name: GatheredGatheringItems
+    offset: 2260
+    size: 102
+    is_string: False
+  - type: byte
+    name: SuccessfulGatheringChainCount
+    offset: 2362
+  - type: byte
+    name: SeenCraftingNotebookDivisionLevelRanges
+    offset: 2364
+    size: 72
+    is_string: False
+  - type: byte
+    name: CompletedRecipes
+    offset: 2444
+    size: 801
+    is_string: False
+  - type: Client::Game::Event::EventId
+    name: UnkWarpEventId
+    offset: 3248
+  - type: unsigned int
+    name: UnkStatusId
+    offset: 3252
+  - type: unsigned int
+    name: UnkCB8
+    offset: 3256
+  - type: Application::Network::WorkDefinitions::BeastReputationWork
+    name: BeastReputation
+    offset: 3304
+    size: 20
+    is_string: False
+  - type: Application::Network::WorkDefinitions::LeveWork
+    name: LeveQuests
+    offset: 3624
+    size: 16
+    is_string: False
+  - type: byte
+    name: NumLeveAllowances
+    offset: 4008
+  - type: unsigned __int16
+    name: UnkFA9
+    offset: 4009
+  - type: unsigned int
+    name: UnkFAB
+    offset: 4011
+  - type: byte
+    name: CompletedLeveQuests
+    offset: 4016
+    size: 226
+    is_string: False
+  member_functions:
+  - signature: 45 33 C0 48 8D 41 18 66 39 10
+    return_type: char
+    name: IsQuestAccepted
+    parameters:
+    - type: Client::Game::QuestManager*
+      name: this
+    - type: unsigned __int16
+      name: questId
+  - signature: 0F B6 C2 4C 8B C9 44 8B C0
+    return_type: char
+    name: IsQuestRepeatFlagSet
+    parameters:
+    - type: Client::Game::QuestManager*
+      name: this
+    - type: byte
+      name: questRepeatFlag
+  - signature: 44 0F B7 C2 4C 8B C9 49 C1 E8 03
+    return_type: char
+    name: IsLevequestComplete
+    parameters:
+    - type: Client::Game::QuestManager*
+      name: this
+    - type: unsigned __int16
+      name: levequestId
+  - signature: 33 C0 4C 8B C1 66 39 81 ?? ?? ?? ?? 0F 94 C0
+    return_type: unsigned int
+    name: GetBeastTribeAllowance
+    parameters:
+    - type: Client::Game::QuestManager*
+      name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 84 24
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::QuestManager
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 88 84 2E
+    return_type: char
+    name: IsQuestComplete
+    parameters:
+    - type: unsigned __int16
+      name: questId
+  - signature: E8 ?? ?? ?? ?? 3A 43 06
+    return_type: byte
+    name: GetQuestSequence
+    parameters:
+    - type: unsigned __int16
+      name: questId
+  - signature: 40 53 48 83 EC 20 8B D9 81 F9
+    return_type: char
+    name: IsRecipeComplete
+    parameters:
+    - type: unsigned int
+      name: recipeId
+  - signature: E8 ?? ?? ?? ?? 88 85 ?? ?? ?? ?? 41 BC ?? ?? ?? ?? B8
+    return_type: char
+    name: IsGatheringItemGathered
+    parameters:
+    - type: unsigned __int16
+      name: gatheringItemId
+  - signature: E8 ?? ?? ?? ?? 8B D8 41 8D 44 24
+    return_type: int
+    name: GetNextLeveAllowancesTimestamp
+    parameters: []
 - type: Client::Game::SpectatorCamera
   name: SpectatorCamera
   namespace: Client.Game
@@ -152855,14 +152964,17 @@ structs:
     name: UnkExcelSheet2
     offset: 176
   - type: Common::Component::Excel::ExcelSheetWaiter*
-    name: UnkExcelSheetWaiter3
+    name: CustomDefineSheetWaiter
     offset: 184
   - type: Common::Component::Excel::ExcelSheet*
-    name: UnkExcelSheet3
+    name: CustomDefineSheet
     offset: 192
   - type: Client::System::String::Utf8String
-    name: UnkSheetName
+    name: CustomDefineSheetName
     offset: 200
+  - type: unsigned int
+    name: CustomDefineSheetRowCount
+    offset: 328
   - type: Common::Component::Excel::ExcelSheetWaiter*
     name: UnkExcelSheetWaiter4
     offset: 344
@@ -263395,6 +263507,313 @@ structs:
       name: localPlayer
     - type: byte
       name: idx
+- type: Client::Game::Event::WarpEventHandler
+  name: WarpEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1256
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+    base: true
+  - type: Client::Game::Event::EventHandlerInfo*
+    name: WarpId
+    offset: 728
+  - type: unsigned int
+    name: PopRange
+    offset: 736
+  - type: unsigned __int16
+    name: TerritoryType
+    offset: 740
+  - type: unsigned __int16
+    name: WarpLogic
+    offset: 742
+  - type: unsigned __int16
+    name: WarpCondition
+    offset: 744
+  - type: Client::System::String::Utf8String
+    name: Title
+    offset: 752
+  - type: Common::Component::Excel::ExcelSheet*
+    name: Sheet
+    offset: 856
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: SheetWaiter
+    offset: 864
+  - type: StdMap<Client::System::String::Utf8String, unsigned int>
+    name: WarpParams
+    offset: 872
+  - type: char
+    name: HasCustomWarpName
+    offset: 888
+  - type: int
+    name: ConditionSuccessEvent
+    offset: 892
+  - type: int
+    name: ConditionFailEvent
+    offset: 896
+  - type: int
+    name: ConfirmEvent
+    offset: 900
+  - type: unsigned __int16
+    name: StartCutscene
+    offset: 904
+  - type: unsigned __int16
+    name: EndCutscene
+    offset: 906
+  - type: char
+    name: WarpCanSkipCutscene
+    offset: 908
+  - type: unsigned int
+    name: WarpLogicIconId
+    offset: 912
+  - type: Client::System::String::Utf8String
+    name: Question
+    offset: 920
+  - type: Client::System::String::Utf8String
+    name: ResponseYes
+    offset: 1024
+  - type: Client::System::String::Utf8String
+    name: ResponseNo
+    offset: 1128
+  - type: unsigned __int16
+    name: Gil
+    offset: 1232
+  - type: unsigned __int16
+    name: ClassLevel
+    offset: 1234
+  - type: byte
+    name: CompleteParam
+    offset: 1236
+  - type: unsigned __int16
+    name: RequiredQuest1
+    offset: 1238
+  - type: unsigned __int16
+    name: RequiredQuest2
+    offset: 1240
+  - type: unsigned __int16
+    name: RequiredQuest3
+    offset: 1242
+  - type: unsigned __int16
+    name: RequiredQuest4
+    offset: 1244
+  - type: unsigned int
+    name: QuestReward
+    offset: 1248
+  - type: char
+    name: WarpLogicCanSkipCutscene
+    offset: 1252
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  member_functions: []
 - type: Client::UI::AddonJobHudACN0
   name: AddonJobHudACN0
   namespace: Client.UI
