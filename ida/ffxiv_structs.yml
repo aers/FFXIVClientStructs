@@ -4086,6 +4086,7 @@ enums:
     "DynamicShadows": 2
     "CharacterShadows": 4
     "ObjectShadows": 8
+    "TimeAdjusted": 16
     "SSAO_Omnishadows": 32
 - type: Client::Graphics::Render::LightShape
   name: LightShape
@@ -45680,6 +45681,22 @@ structs:
   - type: float
     name: LightLevel
     offset: 128
+  member_functions: []
+- type: Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData::ControlPoint
+  name: ControlPoint
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 16
+  fields:
+  - type: System::Numerics::Vector3
+    name: Position
+    offset: 0
+  - type: unsigned __int16
+    name: Id
+    offset: 12
+  - type: char
+    name: Select
+    offset: 14
   member_functions: []
 - type: Client::LayoutEngine::Node::ChildNodeContainer
   name: ChildNodeContainer
@@ -90324,6 +90341,40 @@ structs:
     - type: System::Numerics::Vector4*
       name: result
   member_functions: []
+- type: Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData
+  name: ControlPointData
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 112
+  fields:
+  - type: unsigned __int16
+    name: Unk16
+    offset: 22
+  - type: Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData::ControlPoint*
+    name: ControlPoints
+    offset: 24
+  - type: __int16
+    name: Count
+    offset: 32
+  - type: char
+    name: Unk22
+    offset: 34
+  - type: Client::LayoutEngine::Transform
+    name: Transform
+    offset: 48
+  - type: float
+    name: Unk6C
+    offset: 108
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  - name: GetPointPosition
+    offset: 8
+  - name: GetCount
+    offset: 32
+  - name: GetPointId
+    offset: 48
+  member_functions: []
 - type: Client::LayoutEngine::Node::ChildNodeInstance
   name: ChildNodeInstance
   namespace: Client.LayoutEngine.Node
@@ -113379,6 +113430,333 @@ structs:
   - name: GetMarkerSize
     offset: 624
   member_functions: []
+- type: Client::LayoutEngine::Layer::PathLayoutInstance
+  name: PathLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 112
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: Client::LayoutEngine::Transform
+    name: Transform
+    offset: 48
+  - type: Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData*
+    name: Data
+    offset: 96
+  - type: char
+    name: Unk68
+    offset: 104
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::RangeLayoutInstance
   name: RangeLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -123539,6 +123917,330 @@ structs:
     - type: System::Numerics::Vector4*
       name: result
   member_functions: []
+- type: Client::LayoutEngine::Layer::ClientPathLayoutInstance
+  name: ClientPathLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 2608
+  fields:
+  - type: Client::LayoutEngine::Layer::PathLayoutInstance
+    name: PathLayoutInstance
+    offset: 0
+    base: true
+  - type: char
+    name: UnkA00
+    offset: 2560
+  - type: System::Numerics::Vector3
+    name: UnkA20
+    offset: 2592
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
 - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance
   name: CollisionBoxLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -127165,6 +127867,324 @@ structs:
     return_type: System::Numerics::Vector4*
     parameters:
     - type: Client::LayoutEngine::Layer::QuestMarkerLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::ServerPathLayoutInstance
+  name: ServerPathLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 112
+  fields:
+  - type: Client::LayoutEngine::Layer::PathLayoutInstance
+    name: PathLayoutInstance
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
       name: this
     - type: System::Numerics::Vector4*
       name: result
