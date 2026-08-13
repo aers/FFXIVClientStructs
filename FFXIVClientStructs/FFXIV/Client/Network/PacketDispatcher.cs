@@ -88,7 +88,7 @@ public unsafe partial struct PacketDispatcher {
     public static partial void HandleContentsFinderNotificationPacket(ContentsFinderNotificationPacket* packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 10 48 8B 0D")]
-    public static partial void SendEventCompletePacket(EventId eventId, short scene, byte a3, uint* payload, byte payloadSize, void* a6);
+    public static partial void SendEventCompletePacket(EventId eventId, short scene, byte luaStatus, uint* payload, byte payloadSize, void* a6);
 
     [MemberFunction("40 53 57 48 81 EC ?? ?? ?? ?? 48 8B FA 8B")]
     public static partial void HandleActorCastPacket(uint entityId, ActorCastPacket* packet);
