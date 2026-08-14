@@ -17541,7 +17541,7 @@ structs:
     - type: __int16
       name: scene
     - type: byte
-      name: a3
+      name: luaStatus
     - type: unsigned int*
       name: payload
     - type: byte
