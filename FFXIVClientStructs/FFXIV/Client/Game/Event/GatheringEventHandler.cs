@@ -14,9 +14,9 @@ public unsafe partial struct GatheringEventHandler {
     [FieldOffset(0x2F0)] public ushort GatheringPointBonus0;
     [FieldOffset(0x2F2)] public ushort GatheringPointBonus1;
     [FieldOffset(0x306)] public GatheringType GatheringType;
+    /// <remarks> From the Type column in the GatheringPoint Excel sheet. </remarks>
     [FieldOffset(0x307)] public byte Type;
     [FieldOffset(0x308)] private byte Unknown0; // GatheringPoint.Unknown0
-    /// <remarks> From the Type column in the GatheringPoint Excel sheet. </remarks>
     [FieldOffset(0x309)] public byte GatheringLevel;
     /// <remarks> Flags are currently unknown, they are set in Setup. </remarks>
     [FieldOffset(0x310)] public byte Flags;
