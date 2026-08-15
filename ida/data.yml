@@ -5269,6 +5269,7 @@ classes:
   Client::UI::RaptureAtkModule::InventoryCache:
     vtbls:
       - ea: 0x14212CDE8
+        base: Client::UI::RaptureAtkModule::ItemCache
   Client::UI::RaptureAtkModule::CrystalCache:
     vtbls:
       - ea: 0x14212CE08
