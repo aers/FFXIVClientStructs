@@ -4182,11 +4182,12 @@ classes:
       55: SetSoundResourceHandle
       56: LoadSoundResourceHandle
       57: GetElapsedTime
-      61: GetMidiNote
   Client::Sound::SoundData:
     vtbls:
       - ea: 0x14215C278
         base: Client::Sound::ISoundData
+    vfuncs:
+      61: GetMidiNote
   Client::System::Framework::GameWindow:
     instances:
       - ea: 0x1428F1880
@@ -5031,8 +5032,6 @@ classes:
     vfuncs:
       0: dtor
       1: DecRef  # (ExcelRowWrapper* this)
-      2: GetRow  # (ExcelRowWrapper* this) -> ExcelRow*
-      3: SetRow  # (ExcelRowWrapper* this, ExcelRow* pNew)
   Common::Component::Excel::LinkList<Component::Excel::RingBufferExcelPageRowResolver::RowWrapper>:
     vtbls:
       - ea: 0x142582AB8
@@ -5270,7 +5269,6 @@ classes:
   Client::UI::RaptureAtkModule::InventoryCache:
     vtbls:
       - ea: 0x14212CDE8
-        base: Client::UI::RaptureAtkModule::ItemCache
   Client::UI::RaptureAtkModule::CrystalCache:
     vtbls:
       - ea: 0x14212CE08
@@ -7673,8 +7671,6 @@ classes:
     vtbls:
       - ea: 0x142163DC8
         base: Client::Graphics::Scene::Object
-    vfuncs:
-      10: PrepareRenderCamera
     funcs:
       0x14041F490: ctor
       0x1404205D0: ViewportPointToRay
@@ -26796,6 +26792,7 @@ classes:
       7: CalculateSceneCameraPitch
       8: CalculateSceneCameraYaw
       9: ResetAngles2
+      10: PrepareRenderCamera
     funcs:
       0x141899AE0: ctor
       0x14189A370: ShouldDrawGameObject
