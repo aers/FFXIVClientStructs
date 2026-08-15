@@ -108,5 +108,5 @@ public unsafe partial struct ISoundData {
     public partial float GetElapsedTime(); // keeps going even through loops
 
     [VirtualFunction(61)]
-    public partial int GetMidiNote();
+    public partial int GetMidiNote(); // TODO: move to SoundData (not part of this interface)
 }
