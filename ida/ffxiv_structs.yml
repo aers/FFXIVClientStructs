@@ -38238,6 +38238,40 @@ structs:
   - type: unsigned __int16
     name: OrnamentId
     offset: 24
+  - type: unsigned __int16
+    name: AutoUmbrellaOrnamentId
+    offset: 52
+  - type: float
+    name: AutoUmbrellaCooldown
+    offset: 56
+  - type: unsigned int
+    name: UnkWeatherCheckResult
+    offset: 60
+  - type: float
+    name: UnkAutoUmbrellaSpeed
+    offset: 64
+  - type: char
+    name: Unk44
+    offset: 68
+  - type: int
+    name: CurrentWeatherCheckIndex
+    offset: 72
+  - type: __int64*
+    name: UnkWeatherCheckClasses
+    offset: 80
+    size: 2
+    is_string: False
+  - type: byte
+    name: WeatherCoverFlags
+    offset: 96
+  - type: byte
+    name: RaycastCoverFlags
+    offset: 97
+  - type: unsigned int
+    name: Unk64
+    offset: 100
+    size: 4
+    is_string: False
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 7B ?? 48 8B 74 24
