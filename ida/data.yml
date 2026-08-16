@@ -9500,7 +9500,7 @@ classes:
       64: GetColorThemeTypeForUIScene
       66: OpenMapWithMapLink
       67: OnCursorTypeChange
-      75: SetScreenSizeScale
+      76: SetScreenSizeScale
     funcs:
       0x1406A9BA0: GetAddonIdByName
       0x1406ABB20: ctor

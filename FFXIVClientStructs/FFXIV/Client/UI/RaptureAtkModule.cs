@@ -80,8 +80,11 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x2A948)] internal nint ShellCommands; // only 1 function to open links?
 
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 9E ?? ?? ?? ?? 49 89 5E")]
+    public partial bool ChangeUIScene(GameUIScene scene);
+
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA")]
-    public partial bool ChangeUiMode(uint uiMode); // TODO: fix capitalization -> ChangeUIMode
+    public partial bool ChangeUiMode(uint uiMode); // TODO: fix capitalization -> ChangeUIMode, use GameUIMode enum
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4E 30")]
     public partial bool IncRefNumberArrayData(int index);
