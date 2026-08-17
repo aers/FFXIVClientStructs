@@ -1737,14 +1737,6 @@ enums:
     "None": 0
     "LeftClick": 1
     "RightClick": 2
-- type: Client::UI::RaptureAtkModule::TextGimmickHintStyle
-  name: TextGimmickHintStyle
-  underlying: byte
-  namespace: Client.UI
-  flags: False
-  values:
-    "Warning": 0
-    "Info": 1
 - type: Client::UI::GameUIScene
   name: GameUIScene
   underlying: unsigned __int16
@@ -1753,6 +1745,14 @@ enums:
   values:
     "LobbyMain": 0
     "GameMain": 1
+- type: Client::UI::RaptureAtkModule::TextGimmickHintStyle
+  name: TextGimmickHintStyle
+  underlying: byte
+  namespace: Client.UI
+  flags: False
+  values:
+    "Warning": 0
+    "Info": 1
 - type: Client::UI::GameUIMode
   name: GameUIMode
   underlying: unsigned __int16
@@ -273433,7 +273433,7 @@ structs:
   - name: GetColorThemeTypeForUIScene
     offset: 512
   - name: SetScreenSizeScale
-    offset: 600
+    offset: 608
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3
     return_type: char
@@ -276344,6 +276344,14 @@ structs:
     - type: Component::GUI::AtkCursor::CursorType
       name: cursorType
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 49 89 9E ?? ?? ?? ?? 49 89 5E
+    return_type: char
+    name: ChangeUIScene
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: Client::UI::GameUIScene
+      name: scene
   - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA
     return_type: char
     name: ChangeUiMode
