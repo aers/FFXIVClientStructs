@@ -403,15 +403,10 @@ public struct ComboDetail {
 public struct HotbarCooldownInfo {
     [FieldOffset(0x00)] public float PrimaryElapsedTime;
     [FieldOffset(0x04)] public float PrimaryTotalTime;
-
     [FieldOffset(0x08)] public float AdditionalElapsedTime;
     [FieldOffset(0x0C)] public float AdditionalTotalTime;
-
-    // control UI display type; passed directly to intermediates and then arrays
-    [FieldOffset(0x10)] public CooldownDisplayType DisplayType;
-
+    [FieldOffset(0x10)] public CooldownDisplayType DisplayType; // control UI display type; passed directly to intermediates and then arrays
     [FieldOffset(0x14)] public int CurrentMaxCharges;
-
     [FieldOffset(0x18)] public bool CooldownActive;
     [FieldOffset(0x19)] public bool IsGcd;
 }
