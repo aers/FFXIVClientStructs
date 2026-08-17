@@ -3873,6 +3873,7 @@ classes:
       0x1408F2930: GetGroundPositionForCursor
       0x1408F2B70: GetCurrentCharges          # (this, actionId) -> uint
       0x1408F2CA0: GetMaxCharges2             # not static - calls static
+      0x1408F2DB0: GetHotbarCooldownInfo
       0x1408F2FF0: ResolveTarget
       0x1408F3230: StartAnimationLock
       0x1408F3250: IsActionUnlocked
