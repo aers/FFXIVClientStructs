@@ -4274,6 +4274,16 @@ enums:
     "Queue": 1
     "Macro": 2
     "Combo": 3
+- type: Client::Game::CooldownDisplayType
+  name: CooldownDisplayType
+  underlying: int
+  namespace: Client.Game
+  flags: False
+  values:
+    "NonGcd": 0
+    "GcdMultiCharge": 1
+    "GcdSingleCharge": 2
+    "SpecialCharge": 3
 - type: Client::Game::BalloonType
   name: BalloonType
   underlying: unsigned int
@@ -10848,6 +10858,37 @@ structs:
     - 6
     is_pointer: True
     return_type: Client::Game::GoldSaucer::GoldSaucerManager
+- type: Client::Game::HotbarCooldownInfo
+  name: HotbarCooldownInfo
+  namespace: Client.Game
+  union: False
+  size: 26
+  fields:
+  - type: float
+    name: PrimaryElapsedTime
+    offset: 0
+  - type: float
+    name: PrimaryTotalTime
+    offset: 4
+  - type: float
+    name: AdditionalElapsedTime
+    offset: 8
+  - type: float
+    name: AdditionalTotalTime
+    offset: 12
+  - type: Client::Game::CooldownDisplayType
+    name: DisplayType
+    offset: 16
+  - type: int
+    name: CurrentMaxCharges
+    offset: 20
+  - type: char
+    name: CooldownActive
+    offset: 24
+  - type: char
+    name: IsGcd
+    offset: 25
+  member_functions: []
 - type: Client::Game::HouseBuddy::BuddyDataEntry
   name: BuddyDataEntry
   namespace: Client.Game
@@ -102013,6 +102054,20 @@ structs:
       name: actionType
     - type: unsigned int
       name: actionId
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 8B F2 0F 29 74 24 ?? 0F B6 D2
+    return_type: void
+    name: SetCooldown
+    parameters:
+    - type: Client::Game::ActionManager*
+      name: this
+    - type: Client::Game::ActionType
+      name: actionType
+    - type: unsigned int
+      name: actionId
+    - type: float
+      name: newElapsed
+    - type: float
+      name: newTotal
   - signature: E8 ?? ?? ?? ?? 3C ?? 75 ?? 88 45
     return_type: char
     name: IsActionOffCooldown
@@ -102029,6 +102084,18 @@ structs:
     parameters:
     - type: Client::Game::ActionManager*
       name: this
+    - type: Client::Game::ActionType
+      name: actionType
+    - type: unsigned int
+      name: actionId
+  - signature: 48 89 5C 24 ?? 55 56 57 41 55 41 57 48 83 EC 30 45 8B E8
+    return_type: void
+    name: GetHotbarCooldownInfo
+    parameters:
+    - type: Client::Game::ActionManager*
+      name: this
+    - type: Client::Game::HotbarCooldownInfo*
+      name: outCooldownInfo
     - type: Client::Game::ActionType
       name: actionType
     - type: unsigned int
