@@ -11,12 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [Inherits<EventHandler>]
 [Inherits<AgentContextUpdateChecker>]
-[Inherits<RetainerBuybackEventHandler.UIListener>]
+[Inherits<RetainerBuybackEventHandlerUIListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1D8)]
-public partial struct RetainerBuybackEventHandler {
-    [GenerateInterop(isInherited: true)]
-    [Inherits<AtkModuleInterface.AtkEventInterface>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public partial struct UIListener;
-}
+public partial struct RetainerBuybackEventHandler;
 
+[GenerateInterop(isInherited: true)]
+[Inherits<AtkModuleInterface.AtkEventInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public partial struct RetainerBuybackEventHandlerUIListener;
