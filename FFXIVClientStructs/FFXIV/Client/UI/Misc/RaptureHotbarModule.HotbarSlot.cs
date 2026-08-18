@@ -92,8 +92,7 @@ public partial struct RaptureHotbarModule {
         /// - 6: Blue (Job Gauge?)
         /// - 7: Bright Yellow (Rival Wings - CE)
         /// - All others: Grey
-        [FieldOffset(0xCB)] public byte CostType; // TODO: Remove in 8.0
-        [FieldOffset(0xCB)] public SlotCostType CostTypeEnum;
+        [FieldOffset(0xCB)] public byte CostType; // TODO: Change type to SlotCostType
 
         /// Appears to control display of the primary cost of the action (0xCA).
         ///
@@ -266,7 +265,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="slotType">The slot type to look up and return information for.</param>
         /// <param name="actionId">The action ID to look up and return information for.</param>
         /// <returns>Returns the cost type for the specified slot.</returns>
-        [MemberFunction("74 ?? 83 F9 08 75 ?? 41 8B C8")]
+        [MemberFunction("48 83 EC 28 0F B6 CA 83 E9 01")]
         public partial SlotCostType GetCostTypeForSlot(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
