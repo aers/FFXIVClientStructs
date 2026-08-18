@@ -92,7 +92,8 @@ public partial struct RaptureHotbarModule {
         /// - 6: Blue (Job Gauge?)
         /// - 7: Bright Yellow (Rival Wings - CE)
         /// - All others: Grey
-        [FieldOffset(0xCB)] public byte CostType;
+        [FieldOffset(0xCB)] public byte CostType; // TODO: Remove in 8.0
+        [FieldOffset(0xCB)] public SlotCostType CostTypeEnum;
 
         /// Appears to control display of the primary cost of the action (0xCA).
         ///
@@ -246,8 +247,7 @@ public partial struct RaptureHotbarModule {
 
         /// <summary>
         /// Gets the <see cref="CostText"/> for a specific hotbar slot, taking account the specified appearance slot type
-        /// and action ID. This will normally match the result from <see cref="GetCostValueForSlot"/> but may differ for
-        /// Items and certain actions (e.g. Black Mage's Flare).
+        /// and action ID. May be empty if unused.
         ///
         /// This method is always called using the parameters from <see cref="ApparentSlotType"/> and <see cref="ApparentActionId"/>.
         /// </summary>
@@ -255,7 +255,19 @@ public partial struct RaptureHotbarModule {
         /// <param name="actionId">The action ID to look up and return information for.</param>
         /// <returns>Returns the cost text for this HotbarSlot.</returns>
         [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 29 80 38 00")]
-        public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
+        public partial CStringPointer GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
+
+        /// <summary>
+        /// Gets the <see cref="SlotCostType"/> for a hotbar slot, taking account the specified appearance slot type
+        /// and action ID. Note that the `this` is not used in the call, so... yeah.
+        ///
+        /// This method is no longer called, but may still be usable.
+        /// </summary>
+        /// <param name="slotType">The slot type to look up and return information for.</param>
+        /// <param name="actionId">The action ID to look up and return information for.</param>
+        /// <returns>Returns the cost type for the specified slot.</returns>
+        [MemberFunction("74 ?? 83 F9 08 75 ?? 41 8B C8")]
+        public partial SlotCostType GetCostTypeForSlot(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
         /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
@@ -346,4 +358,29 @@ public partial struct RaptureHotbarModule {
 
         [FieldOffset(0xE9)] public bool IsActive;
     }
+}
+
+public enum SlotCostType : byte {
+    Default = 0,
+    
+    /// Indicates that this slot costs HP.  Shows as a green color.
+    Health = 1,
+    
+    /// Indicates that this slot costs MP. Shows as a light pink color.
+    Magic = 2,
+    
+    /// Indicates that this slot costs TP. Unused but still renders! Shows an orange color.
+    Tactical = 3,
+    
+    /// Indicates that this slot costs CP. Shows a deeper pink color.
+    Crafting = 4,
+    
+    /// Indicates that this slot costs GP. Shows a yellow color.
+    Gathering = 5,
+    
+    /// Indicates that this slot costs whatever your job gauge is (job points?). Shows a blue color.
+    JobGauge = 6,
+    
+    /// Indicates that this slot costs Ceruleum. Used exclusively for Rival Wings? Shows a bright yellow color.
+    Ceruleum = 7
 }
