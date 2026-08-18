@@ -18079,14 +18079,16 @@ classes:
     vtbls:
       - ea: 0x142389238
         base: Client::Game::InstanceContent::ContentNpcEventHandler
+  Client::Game::Event::RetainerBuybackEventHandler::UIListener:
+    vtbls:
+      - ea: 0x1422CA3A8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::RetainerBuybackEventHandler: # 0x31
     vtbls:
       - ea: 0x1422CA3C0
         base: Client::Game::Event::EventHandler
       - ea: 0x1422CAC58
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
-      - ea: 0x1422CA3A8
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::TopicSelectEventHandler: # 0x32
     vtbls:
       - ea: 0x142395F80
