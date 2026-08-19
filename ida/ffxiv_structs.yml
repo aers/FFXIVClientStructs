@@ -21850,6 +21850,14 @@ structs:
     size: 5
     is_string: False
   member_functions: []
+- type: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+  name: AgentContextUpdateChecker
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation
   name: EfficiencyCalculation
   namespace: Client.UI.Agent
@@ -39502,6 +39510,46 @@ structs:
     name: StartWaitTime
     offset: 28
   virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::RetainerBuybackEventHandlerUIListener
+  name: RetainerBuybackEventHandlerUIListener
+  namespace: Client.Game.Event
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandlerUIListener*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandlerUIListener*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
   member_functions: []
 - type: Client::Game::Event::ShopEventHandler::AgentProxy
   name: AgentProxy
@@ -238801,6 +238849,234 @@ structs:
       name: this
     - type: byte
       name: classJobId
+  member_functions: []
+- type: Client::Game::Event::RetainerBuybackEventHandler
+  name: RetainerBuybackEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 472
+  fields:
+  - type: Client::Game::Event::EventHandler
+    name: EventHandler
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+    name: AgentContextUpdateChecker
+    offset: 440
+    base: true
+  - type: Client::Game::Event::RetainerBuybackEventHandlerUIListener
+    name: RetainerBuybackEventHandlerUIListener
+    offset: 448
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
   member_functions: []
 - type: Client::UI::AddonActionBar
   name: AddonActionBar
