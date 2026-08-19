@@ -288,6 +288,13 @@ public unsafe partial struct ActionManager {
     public partial void Update();
 
     /// <summary>
+    /// Called whenever a cast is canceled, generally in response to player move or interruption.
+    /// Resets cooldowns and clears temporary state.
+    /// </summary>
+    [MemberFunction("48 8B C4 48 83 EC 48 48 89 58")]
+    public partial void OnCastCancelled();
+
+    /// <summary>
     /// Determine character's category for action targeting purposes; this is used by the game to determine whether a spell can be used on that target.
     /// </summary>
     [MemberFunction("40 53 48 83 EC 20 48 8B 01 48 8B D9 FF 50 08 8B 15")]
