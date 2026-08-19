@@ -1752,6 +1752,9 @@ if api is None:
 
                 dtm = currentProgram.getDataTypeManager()
                 dt = dtm.getDataType("/" + "/".join(syms))
+                # HACK: In Ghidra 12.1.3 getDataType("/float") fails, but it works if using BuiltInDataTypeManager
+                if dt is None:
+                    dt = BuiltInDataTypeManager.getDataTypeManager().getDataType("/" + "/".join(syms))
                 for i in range(pointer_count):
                     dt = dtm.getPointer(dt)
                 return dt
