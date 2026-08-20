@@ -361,25 +361,25 @@ public partial struct RaptureHotbarModule {
 
 public enum SlotCostType : byte {
     Default = 0,
-    
+
     /// Indicates that this slot costs HP.  Shows as a green color.
     Health = 1,
-    
+
     /// Indicates that this slot costs MP. Shows as a light pink color.
     Magic = 2,
-    
+
     /// Indicates that this slot costs TP. Unused but still renders! Shows an orange color.
     Tactical = 3,
-    
+
     /// Indicates that this slot costs CP. Shows a deeper pink color.
     Crafting = 4,
-    
+
     /// Indicates that this slot costs GP. Shows a yellow color.
     Gathering = 5,
-    
+
     /// Indicates that this slot costs whatever your job gauge is (job points?). Shows a blue color.
     JobGauge = 6,
-    
+
     /// Indicates that this slot costs Ceruleum. Used exclusively for Rival Wings? Shows a bright yellow color.
     Ceruleum = 7
 }
