@@ -11393,6 +11393,7 @@ classes:
       0x1407D2E10: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407D2E30: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
       0x1407D3480: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*)
+      0x1407D3280: PrepareSlotForRender  # (this, HotbarSlot*, HotbarUiIntermediate*)
       0x1407D7160: SetHotbarLocked
       0x1407D71A0: IsHotbarLocked
       0x1407D71E0: SetCrossHotbarLocked
