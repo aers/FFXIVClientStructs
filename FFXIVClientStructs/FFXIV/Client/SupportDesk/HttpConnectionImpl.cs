@@ -6,5 +6,5 @@ namespace FFXIVClientStructs.FFXIV.Client.SupportDesk;
 [Inherits<HttpConnection>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct HttpConnectionImpl {
-    [FieldOffset(0x008)] void* SessionHandle; // HINTERNET
+    [FieldOffset(0x008)] public void* SessionHandle; // HINTERNET
 }
