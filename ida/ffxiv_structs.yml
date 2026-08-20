@@ -7096,6 +7096,20 @@ enums:
     "VisorEnabled": 32
     "Unknown40": 64
     "Unknown80": 128
+- type: Client::UI::Misc::SlotCostType
+  name: SlotCostType
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "Default": 0
+    "Health": 1
+    "Magic": 2
+    "Tactical": 3
+    "Crafting": 4
+    "Gathering": 5
+    "JobGauge": 6
+    "Ceruleum": 7
 - type: Client::UI::Misc::TermFilterModule::TermFilterChannelFlag
   name: TermFilterChannelFlag
   underlying: byte
@@ -57301,8 +57315,18 @@ structs:
     - type: unsigned int
       name: actionId
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 29 80 38 00
-    return_type: unsigned int
+    return_type: char*
     name: GetCostTextForSlot
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+      name: this
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
+      name: slotType
+    - type: unsigned int
+      name: actionId
+  - signature: 48 83 EC 28 0F B6 CA 83 E9 01
+    return_type: Client::UI::Misc::SlotCostType
+    name: GetCostTypeForSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
       name: this
@@ -102223,6 +102247,12 @@ structs:
   - signature: 48 8B C4 48 89 58 ?? 56 48 81 EC ?? ?? ?? ?? 48 8B 35
     return_type: void
     name: Update
+    parameters:
+    - type: Client::Game::ActionManager*
+      name: this
+  - signature: 48 8B C4 48 83 EC 48 48 89 58
+    return_type: void
+    name: OnCastCancelled
     parameters:
     - type: Client::Game::ActionManager*
       name: this
