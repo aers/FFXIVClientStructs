@@ -26678,6 +26678,7 @@ classes:
         base: Client::Game::Object::GameObject
     funcs:
       0x141C3DBB0: ctor
+      0x141C3DC60: SetBaseAndGimmickId
   #  Client::Game::Object::BKJObject:
   #    vtbls:
   #      - ea: 0x142442F18
