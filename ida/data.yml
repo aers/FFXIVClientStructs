@@ -115,6 +115,11 @@ globals:
   0x142A961A8: g_MacroTime
   0x142ACADC0: g_LogoutCountdownAddonId
   0x142ACADC6: g_LogoutShouldCloseGame
+  0x142AEAE10: g_nvapi_Library
+  0x142AEAE28: g_nvapi_pepQueryInterface
+  0x142AEAE20: g_nvapi_QueryInterface
+  0x142AEAE30: g_NvAPI_Diag_ReportCallStart
+  0x142AEAE38: g_NvAPI_Diag_ReportCallReturn
   0x142F566C0: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x142F56930: ?hkaAnimationContainerClass@@3VhkClass@@B
   0x142F571A0: ?hkReferencedObjectClass@@3VhkClass@@B
@@ -127,6 +132,7 @@ globals:
   0x142F7E520: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
+  0x140001370: GetOrInitNvAPI
   0x14005B120: VectorConstructorIterator
   0x14005B170: VectorDestructorIterator
   0x14005DC90: WinMain
