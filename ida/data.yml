@@ -15176,6 +15176,30 @@ classes:
         base: Client::UI::Agent::AgentInterface
       - ea: 0x14219AAA0
         base: Common::Component::Excel::ExcelSheetWaiter
+  Client::UI::Agent::AgentCuttingGrass:
+    vtbls:
+      - ea: 0x14219AB30
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A69E50: ctor
+  Client::UI::Agent::AgentKTGHud:
+    vtbls:
+      - ea: 0x1421F6F80
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410ED780: ctor
+  Client::UI::Agent::AgentKTGEnterDialogue:
+    vtbls:
+      - ea: 0x1421F70D8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410F7620: ctor
+  Client::UI::Agent::AgentKTGResult:
+    vtbls:
+      - ea: 0x1421F6F00
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410EBDF0: ctor
   Client::UI::Agent::AgentSpearFishing:
     vtbls:
       - ea: 0x1421BDD70
@@ -15240,10 +15264,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409E5780: ctor
+  Client::UI::Agent::AgentBannerGearsetLink:
+    vtbls:
+      - ea: 0x142199320
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409E51B0: ctor
   Client::UI::Agent::AgentBannerPreview:
     vtbls:
       - ea: 0x142199448
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409E65C0: ctor
   Client::UI::Agent::AgentPvPMap:
     vtbls:
       - ea: 0x1421C1730
@@ -15717,10 +15749,10 @@ classes:
       0x140A03EB0: GetHoursSinceCycleStart
   Client::UI::Agent::AgentMJINekomimiRequest:
     vtbls:
-      - ea: 0x142199958
+      - ea: 0x142199B68
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1409F79E0: ctor
+      0x140A07FB0: ctor
       0x140A08180: OpenUI
       0x140A08200: OpenUIFromCraftSchedule
       0x140A08280: ForceRequestFavorData
@@ -18269,7 +18301,7 @@ classes:
       0x140B82580: GetTripleTriadDirector
       0x140B82660: GetSkyIslandDirector
       0x140B825B0: GetInstanceContentDirectorType22 # related to XBM
-      0x140B825E0: GetInstanceContentDirectorType23
+      0x140B825E0: GetKeyboundBrawlerDirector
       0x140B82610: GetPvPInstanceContentDirector # either of: CrystallineConflict, Frontlines or RivalWing
       0x140B82690: GetPublicContentDirector
       0x140B826C0: GetPublicContentEureka

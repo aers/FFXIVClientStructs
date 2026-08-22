@@ -432,12 +432,12 @@ public enum AgentId : uint {
     GatheringMasterpiece = 393,
     StarlightGiftBox = 394,
     HalloweenNpcSelect = 395,
-    Unk396 = 396, // new in 7.4 - EasterMowingResult? (Hatching-tide 2026)
-    Unk397 = 397,
-    Unk398 = 398,
-    Unk399 = 399, // KTGEnterDialogue?
+    CuttingGrass = 396, // new in 7.4 (Hatching-tide 2026, Sprig Cleaning minigame)
+    KTGHud = 397, // Keybound Brawler
+    Unk398 = 398, // deals with input for KTG
+    KTGEnterDialogue = 399,
     Unk400 = 400,
-    Unk401 = 401,
+    KTGResult = 401,
     SpearFishing = 402,
     Omikuji = 403,
     FittingShop = 404,
@@ -446,7 +446,7 @@ public enum AgentId : uint {
     BannerList = 407, // Portraits
     BannerEditor = 408, // Portrait Editor
     BannerUpdateView = 409,
-    Unk410 = 410,
+    BannerGearsetLink = 410, // not implemented
     BannerPreview = 411,
     PvPMap = 412,
     CharaCard = 413, // Adventurer Plate
@@ -471,8 +471,8 @@ public enum AgentId : uint {
     MJIEntrance = 432,
     MJISettings = 433,
     MJIHousingMenu = 434,
-    MJINekomimiRequest = 435, // favors
-    Unk436 = 436,
+    Unk435 = 435,
+    MJINekomimiRequest = 436, // favors
     ArchiveItem = 437,
     Class2JobHotbar = 438,
     VVDNotebook = 439,
