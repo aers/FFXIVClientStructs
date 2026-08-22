@@ -4,13 +4,9 @@ public partial struct RaptureHotbarModule {
     /// <summary>
     /// An intermediate struct used to translate from a <see cref="HotbarSlot"/> to the UI String/NumberArrays. 
     /// </summary>
-    /// <remarks>
-    /// <b>Do not consider this struct stable (yet).</b>
-    /// </remarks>
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x43)]
-    internal unsafe struct HotbarUiIntermediate {
-        // Converts to array in E8 ?? ?? ?? ?? EB 34 E8
-
+    public unsafe partial struct HotbarUiIntermediate {
         [FieldOffset(0x00)] public Utf8String* PopUpHelpText; // to StringArray idx slotBase + 14
         [FieldOffset(0x08)] public nint CostTextPtr; // to StringArray idx slotBase + 1
         [FieldOffset(0x10)] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
@@ -31,5 +27,8 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0x40)] public bool ActionTargetSatisfied; // to NumberArray idx slotBase + 15
         [FieldOffset(0x41)] public bool DrawAnts; // to NumberArray idx slotBase + 14
         [FieldOffset(0x42)] private byte Unk0x42;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 ?? 4C 8D 44 24")]
+        public partial HotbarUiIntermediate* Ctor();
     }
 }
