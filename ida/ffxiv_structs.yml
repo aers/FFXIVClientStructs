@@ -12969,7 +12969,21 @@ structs:
     offset: 8
     size: 100
     is_string: False
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F 28 74 24 ?? 83 F8 ?? 74
+    return_type: int
+    name: CreateObject
+    parameters:
+    - type: Client::Game::Object::ReactionEventObjectManager*
+      name: this
+    - type: unsigned int
+      name: baseId
+    - type: unsigned int
+      name: layoutId
+    - type: Common::Math::Vector3*
+      name: position
+    - type: float
+      name: rotation
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C9
     relative_follow_offsets:
@@ -111678,276 +111692,6 @@ structs:
     return_type: Client::Game::InstanceContent::DynamicEventContainer*
     name: GetInstance
     parameters: []
-- type: Client::Game::Object::ReactionEventObject
-  name: ReactionEventObject
-  namespace: Client.Game.Object
-  union: False
-  size: 576
-  fields:
-  - type: Client::Game::Object::GameObject
-    name: GameObject
-    offset: 0
-    base: true
-  - type: Client::System::String::Utf8String
-    name: SgbPath
-    offset: 440
-  - type: unsigned int
-    name: EObjNameId
-    offset: 572
-  virtual_functions:
-  - name: GetGameObjectId
-    offset: 8
-    return_type: Client::Game::Object::GameObjectId
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetObjectKind
-    offset: 16
-    return_type: Client::Game::Object::ObjectKind
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetObjectType
-    offset: 24
-    return_type: Client::Game::Object::ObjectType
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetIsTargetable
-    offset: 32
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetName
-    offset: 48
-    return_type: char*
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetRadius
-    offset: 56
-    return_type: float
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: char
-      name: adjustByTransformation
-  - name: GetHeight
-    offset: 64
-    return_type: float
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetSex
-    offset: 88
-    return_type: byte
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: EnableDraw
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: DisableDraw
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: UpdateNextDistanceAndTargetStatus
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: SetTargetStatus
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: byte
-      name: targetStatus
-  - name: SetDistance
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: byte
-      name: distance
-  - name: SetDrawObject
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: Client::Graphics::Scene::DrawObject*
-      name: drawObject
-  - name: PlayTimeline
-    offset: 160
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: unsigned int
-      name: index
-    - type: unsigned int
-      name: a2
-  - name: StopTimeline
-    offset: 168
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: unsigned int
-      name: index
-  - name: IsTimelinePlaying
-    offset: 176
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: unsigned int
-      name: index
-  - name: GetDrawObject
-    offset: 184
-    return_type: Client::Graphics::Scene::DrawObject*
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetCharacterBase
-    offset: 192
-    return_type: Client::Graphics::Scene::CharacterBase*
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: Highlight
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: Client::Game::Object::ObjectHighlightColor
-      name: color
-    - type: char
-      name: includeMount
-  - name: GetEventHandlersImpl
-    offset: 240
-    return_type: int
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: Client::Game::Event::EventHandler**
-      name: outHandlers
-  - name: SetReadyToDraw
-    offset: 272
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: Update
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: GetCenterPosition
-    offset: 376
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: Common::Math::Vector3*
-      name: outCenter
-  - name: GetNameId
-    offset: 384
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: UpdateSharedTimelineState
-    offset: 392
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: unsigned __int16
-      name: oldSharedTimelineState
-    - type: unsigned __int16
-      name: newSharedTimelineState
-  - name: GetTargetType
-    offset: 432
-    return_type: Client::Game::Object::TargetType
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: PositionModified
-    offset: 440
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: RotationModified
-    offset: 448
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: IsDead
-    offset: 464
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: IsNotMounted
-    offset: 472
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: Terminate
-    offset: 480
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: dtor
-    offset: 488
-    return_type: Client::Game::Object::GameObject*
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: IsCharacter
-    offset: 496
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: OnInitialize
-    offset: 552
-    return_type: void
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-  - name: IntersectsRay
-    offset: 560
-    return_type: char
-    parameters:
-    - type: Client::Game::Object::ReactionEventObject*
-      name: this
-    - type: Client::Graphics::Ray*
-      name: ray
-    - type: Common::Math::Vector3*
-      name: outHitPosition
-    - type: char*
-      name: outModelChecked
-  member_functions: []
 - type: Client::Game::UI::Inspect
   name: Inspect
   namespace: Client.Game.UI
@@ -123138,6 +122882,297 @@ structs:
     return_type: char
     parameters:
     - type: Client::Game::Object::HousingObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: ray
+    - type: Common::Math::Vector3*
+      name: outHitPosition
+    - type: char*
+      name: outModelChecked
+  member_functions: []
+- type: Client::Game::Object::ReactionEventObject
+  name: ReactionEventObject
+  namespace: Client.Game.Object
+  union: False
+  size: 576
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+    base: true
+  - type: Component::Exd::Sheets::EObj*
+    name: EObjRowPtr
+    offset: 416
+  - type: Component::Exd::Sheets::ExportedSG*
+    name: ExportedSGRowPtr
+    offset: 424
+  - type: byte
+    name: Unk1B4
+    offset: 436
+  - type: Client::System::String::Utf8String
+    name: SgbPath
+    offset: 440
+  - type: Common::Math::Quaternion
+    name: RotationQuaternion
+    offset: 544
+  - type: byte
+    name: Unk230
+    offset: 560
+  - type: float
+    name: Unk234
+    offset: 564
+  - type: float
+    name: Unk238
+    offset: 568
+  - type: unsigned int
+    name: EObjNameId
+    offset: 572
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetObjectType
+    offset: 24
+    return_type: Client::Game::Object::ObjectType
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: char*
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: char
+      name: adjustByTransformation
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: UpdateNextDistanceAndTargetStatus
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: SetTargetStatus
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: byte
+      name: targetStatus
+  - name: SetDistance
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: byte
+      name: distance
+  - name: SetDrawObject
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: Client::Graphics::Scene::DrawObject*
+      name: drawObject
+  - name: PlayTimeline
+    offset: 160
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: unsigned int
+      name: index
+    - type: unsigned int
+      name: a2
+  - name: StopTimeline
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: unsigned int
+      name: index
+  - name: IsTimelinePlaying
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: unsigned int
+      name: index
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetCharacterBase
+    offset: 192
+    return_type: Client::Graphics::Scene::CharacterBase*
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: color
+    - type: char
+      name: includeMount
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: outHandlers
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: Update
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: GetCenterPosition
+    offset: 376
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: outCenter
+  - name: GetNameId
+    offset: 384
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+  - name: GetTargetType
+    offset: 432
+    return_type: Client::Game::Object::TargetType
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: PositionModified
+    offset: 440
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: RotationModified
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: IsDead
+    offset: 464
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: IsNotMounted
+    offset: 472
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: Terminate
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: dtor
+    offset: 488
+    return_type: Client::Game::Object::GameObject*
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: IsCharacter
+    offset: 496
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: OnInitialize
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
+      name: this
+  - name: IntersectsRay
+    offset: 560
+    return_type: char
+    parameters:
+    - type: Client::Game::Object::ReactionEventObject*
       name: this
     - type: Client::Graphics::Ray*
       name: ray
