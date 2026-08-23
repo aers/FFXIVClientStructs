@@ -153,6 +153,26 @@ public unsafe partial struct RaptureHotbarModule {
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
+    /// Load (most) intermediate data from a hotbar slot.
+    /// </summary>
+    /// <seealso cref="PrepareSlotForRender">Generally called via PrepareSlotForRender, consider using that instead.</seealso>
+    /// <param name="slot">The hotbar slot to resolve. <i>Will be mutated!</i></param>
+    /// <param name="intermediate">The intermediate to write to.</param>
+    /// <returns>A bool indicating successful load (?)</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 83 ?? ?? ?? ?? 48 83 C4 40")]
+    public partial bool PopulateIntermediateFromSlot(HotbarSlot* slot, HotbarUIIntermediate* intermediate);
+
+    /// <summary>
+    /// Prepares a hotbar slot for UI render.
+    /// *Requires* that the slot's <see cref="HotbarSlot.ApparentSlotType"/> and <see cref="HotbarSlot.ApparentActionId"/>
+    /// be set prior to calling (generally via <see cref="GetSlotAppearance"/>).
+    /// </summary>
+    /// <param name="slot">The hotbar slot to resolve. <i>Will be mutated!</i></param>
+    /// <param name="intermediate">The intermediate to write to.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C6 83 C5 11")]
+    public partial void PrepareSlotForRender(HotbarSlot* slot, HotbarUIIntermediate* intermediate);
+
+    /// <summary>
     /// Search through the hotbar module and delete all hotbar slots associated with the specified macro. Used when a user
     /// deletes a specific macro from their list, and should affect saved (but unloaded) hotbars as well.
     /// </summary>
