@@ -326,7 +326,6 @@ functions:
   0x141C17880: lua_gethookmask
   0x141C17A70: lua_sethook
   0x141C17AA0: lua_setlocal
-  0x141CF2790: SupportDeskHttpCallback
   0x141C59F10: SupportDeskCreateConnection
   0x1418F20E0: luaL_openlibs
   0x1418F22D0: luaL_addlstring
@@ -1019,11 +1018,14 @@ classes:
         base: Client::SupportDesk::HttpConnection
     funcs:
       0x141CB27A0: Initialize
+      0x141CF2790: StatusCallback # static
   Client::SupportDesk::HttpRequest:
     vtbls:
       - ea: 0x142493A60
     vfuncs:
       0: dtor
+      1: Update
+      2: CloseHandle
   Client::SupportDesk::HttpRequestImpl:
     vtbls:
       - ea: 0x1424938C8
@@ -11790,6 +11792,8 @@ classes:
       - ea: 0x142410618
     funcs:
       0x141A42DD0: ctor
+    vfuncs:
+      0: dtor
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x142198BA8
