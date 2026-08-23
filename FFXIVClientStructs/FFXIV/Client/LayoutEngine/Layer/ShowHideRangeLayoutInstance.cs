@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 public unsafe partial struct ShowHideRangeLayoutInstance {
     [FieldOffset(0x80)] public uint LayerSetReferenceCount;
     /// <remarks> List of layer set IDs. </remarks>
-    [FieldOffset(0x88)] public uint *LayerSetReferences;
+    [FieldOffset(0x88)] public uint* LayerSetReferences;
     [FieldOffset(0x90)] public bool Active;
 }
