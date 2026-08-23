@@ -11392,8 +11392,8 @@ classes:
       0x1407D2DF0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
       0x1407D2E10: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407D2E30: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
-      0x1407D3480: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*)
-      0x1407D3280: PrepareSlotForRender  # (this, HotbarSlot*, HotbarUiIntermediate*)
+      0x1407D3480: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUIIntermediate*)
+      0x1407D3280: PrepareSlotForRender  # (this, HotbarSlot*, HotbarUIIntermediate*)
       0x1407D7160: SetHotbarLocked
       0x1407D71A0: IsHotbarLocked
       0x1407D71E0: SetCrossHotbarLocked
@@ -11467,14 +11467,14 @@ classes:
       0x1407CFCA0: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool
       0x1407CFC10: IsActionHighlighted               # (this, commandType, commandId) -> bool
       0x1407CFFC0: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
-      0x1407D0680: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)
+      0x1407D0680: PopulateIntermediateCooldownInfo # (this, HotbarUIIntermediate*)
       0x1407D0520: GetAdjustedCommandId  # ???
       0x1407D15B0: LoadMacroSlot
       0x1407D0820: GetSlotActionCooldownPercentage  # (this, out int, int) -> int
   Client::UI::Misc::RaptureHotbarModule::DutyActionSlot:
     funcs:
       0x1407D7D10: Initialize
-  Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
+  Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate:
     funcs:
       0x1407CE530: ctor
   Client::UI::Misc::HudLayoutAddon: # just a bunch of static functions

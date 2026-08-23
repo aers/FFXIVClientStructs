@@ -6,7 +6,7 @@ public partial struct RaptureHotbarModule {
     /// </summary>
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x43)]
-    public unsafe partial struct HotbarUiIntermediate {
+    public unsafe partial struct HotbarUIIntermediate {
         [FieldOffset(0x00)] public Utf8String* PopUpHelpText; // to StringArray idx slotBase + 14
         [FieldOffset(0x08)] public nint CostTextPtr; // to StringArray idx slotBase + 1
         [FieldOffset(0x10)] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
@@ -29,6 +29,6 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0x42)] private byte Unk0x42;
 
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 ?? 4C 8D 44 24")]
-        public partial HotbarUiIntermediate* Ctor();
+        public partial HotbarUIIntermediate* Ctor();
     }
 }
