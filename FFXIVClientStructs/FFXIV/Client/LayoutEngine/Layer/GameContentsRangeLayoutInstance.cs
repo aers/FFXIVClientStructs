@@ -7,4 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [GenerateInterop]
 [Inherits<TriggerBoxLayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public unsafe partial struct GameContentsRangeLayoutInstance;
+public unsafe partial struct GameContentsRangeLayoutInstance {
+    [FieldOffset(0x90)] public bool Active;
+}
