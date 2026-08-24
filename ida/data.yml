@@ -13766,6 +13766,13 @@ classes:
         base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140CF2EC0: ctor
+      0x140CF3780: Open
+      0x140CF3A30: RefreshAddon
+      0x140CF4270: Confirm
+      0x140CF4530: AddItem
+      0x140CF4750: AddItemQuantity
+      0x140CF48D0: RemoveSlot
+      0x140CF4AC0: GetSlotsRemaining
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
       - ea: 0x1421BCDE8
