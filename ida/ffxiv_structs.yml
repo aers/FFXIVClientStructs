@@ -3688,6 +3688,27 @@ enums:
     "PS4": 2
     "PS5": 3
     "Lys": 4
+- type: Client::SupportDesk::HttpRequestStage
+  name: HttpRequestStage
+  underlying: int
+  namespace: Client.SupportDesk
+  flags: False
+  values:
+    "Unk0": 0
+    "Began": 1
+    "ReadingHeaders": 2
+    "ReadingData": 3
+    "ReadAllData": 4
+    "Unk5": 5
+    "Unk6": 6
+    "Closing": 7
+    "NotOk": 8
+    "Unk9": 9
+    "Unk10": 10
+    "Unk11": 11
+    "Unk12": 12
+    "Unk13": 13
+    "SecureFailure": 14
 - type: Client::Sound::SoundVolumeCategory
   name: SoundVolumeCategory
   underlying: int
@@ -17920,6 +17941,18 @@ structs:
       name: this
   - name: MakeRequest
     offset: 32
+    return_type: Client::SupportDesk::HttpRequest*
+    parameters:
+    - type: Client::SupportDesk::HttpConnection*
+      name: this
+    - type: char*
+      name: url
+    - type: char*
+      name: verb
+    - type: byte*
+      name: data
+    - type: unsigned __int64
+      name: dataLength
   member_functions: []
 - type: Client::SupportDesk::HttpRequest
   name: HttpRequest
@@ -17936,6 +17969,18 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: Update
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::SupportDesk::HttpRequest*
+      name: this
+  - name: CloseHandle
+    offset: 16
+    return_type: char
+    parameters:
+    - type: Client::SupportDesk::HttpRequest*
+      name: this
   member_functions: []
 - type: Client::System::Crypt::Crc32
   name: Crc32
@@ -26648,17 +26693,17 @@ structs:
     name: IsActive
     offset: 233
   member_functions: []
-- type: Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate
-  name: HotbarUiIntermediate
+- type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate
+  name: HotbarUIIntermediate
   namespace: Client.UI.Misc
   union: False
   size: 67
   fields:
-  - type: Client::System::String::Utf8String*
+  - type: char*
     name: PopUpHelpText
     offset: 0
-  - type: __int64
-    name: CostTextPtr
+  - type: char*
+    name: CostText
     offset: 8
   - type: unsigned int
     name: IntermediateActionType
@@ -26714,7 +26759,13 @@ structs:
   - type: byte
     name: Unk0x42
     offset: 66
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 45 ?? 4C 8D 44 24
+    return_type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate*
+    name: ctor
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate*
+      name: this
 - type: Client::UI::Misc::RaptureHotbarModule::SavedHotbarSlot
   name: SavedHotbarSlot
   namespace: Client.UI.Misc
@@ -46004,6 +46055,20 @@ structs:
     parameters:
     - type: Client::SupportDesk::HttpConnectionImpl*
       name: this
+  - name: MakeRequest
+    offset: 32
+    return_type: Client::SupportDesk::HttpRequest*
+    parameters:
+    - type: Client::SupportDesk::HttpConnectionImpl*
+      name: this
+    - type: char*
+      name: url
+    - type: char*
+      name: verb
+    - type: byte*
+      name: data
+    - type: unsigned __int64
+      name: dataLength
   member_functions: []
 - type: Client::SupportDesk::HttpRequestImpl
   name: HttpRequestImpl
@@ -46018,21 +46083,27 @@ structs:
   - type: __int64
     name: RequestHandle
     offset: 16
-  - type: __int64
+  - type: byte*
     name: ResponseData
     offset: 24
   - type: __int64
     name: ResponseDataOffset
     offset: 32
-  - type: __int64
+  - type: unsigned __int64
     name: ResponseDataSize
     offset: 40
-  - type: __int64
+  - type: byte*
     name: OptionalData
     offset: 1136
-  - type: int
+  - type: Client::SupportDesk::HttpRequestStage
     name: Stage
     offset: 1152
+  - type: int
+    name: StatusCode
+    offset: 1164
+  - type: float
+    name: FrameDeltaTimeCounter
+    offset: 2240
   virtual_functions:
   - name: dtor
     offset: 0
@@ -46042,7 +46113,50 @@ structs:
       name: this
     - type: byte
       name: freeFlags
-  member_functions: []
+  - name: Update
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::SupportDesk::HttpRequestImpl*
+      name: this
+  - name: CloseHandle
+    offset: 16
+    return_type: char
+    parameters:
+    - type: Client::SupportDesk::HttpRequestImpl*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 03 BA ?? ?? ?? ?? 48 8B CB FF 10 33 DB
+    return_type: char
+    name: BeginRequest
+    parameters:
+    - type: Client::SupportDesk::HttpRequestImpl*
+      name: this
+    - type: __int64
+      name: sessionHandle
+    - type: char*
+      name: url
+    - type: char*
+      name: verb
+    - type: byte*
+      name: data
+    - type: unsigned __int64
+      name: dataLength
+  static_member_functions:
+  - signature: 48 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 56 57
+    return_type: void
+    name: StatusCallback
+    parameters:
+    - type: __int64
+      name: requestHandle
+    - type: Client::SupportDesk::HttpRequestImpl*
+      name: context
+    - type: unsigned int
+      name: internetStatus
+    - type: __int64
+      name: statusInformation
+    - type: unsigned int
+      name: statusInformationLength
 - type: Client::System::File::FileDescriptor
   name: FileDescriptor
   namespace: Client.System.File
@@ -68025,6 +68139,327 @@ structs:
     return_type: System::Numerics::Vector4*
     parameters:
     - type: Client::LayoutEngine::Layer::CullingBoxLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: result
+  member_functions: []
+- type: Client::LayoutEngine::Layer::DecalLayoutInstance
+  name: DecalLayoutInstance
+  namespace: Client.LayoutEngine.Layer
+  union: False
+  size: 56
+  fields:
+  - type: Client::LayoutEngine::ILayoutInstance
+    name: ILayoutInstance
+    offset: 0
+    base: true
+  - type: Client::Graphics::Scene::Decal*
+    name: GraphicsObject
+    offset: 48
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Init
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: __int64
+      name: creator
+    - type: byte*
+      name: primaryPath
+  - name: Deinit
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetProperties
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::FileLayerGroupInstance*
+      name: data
+  - name: SetLayer
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Layer::LayerManager*
+      name: layer
+  - name: GetSizeOf
+    offset: 48
+    return_type: int
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetPrimaryPath
+    offset: 56
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetTranslation
+    offset: 112
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetRotation
+    offset: 120
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: result
+  - name: GetScale
+    offset: 128
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: result
+  - name: GetTransform
+    offset: 136
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: result
+  - name: SetTransform
+    offset: 144
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: HavePrimary
+    offset: 168
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: IsPrimaryLoaded
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetGraphics
+    offset: 184
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetGraphics2
+    offset: 192
+    return_type: Client::Graphics::Scene::Object*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetGraphics
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::Graphics::Scene::Object*
+      name: obj
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+  - name: CreatePrimary
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: transform
+    - type: __int64
+      name: pathOrType
+  - name: DestroyPrimary
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: HaveSecondary
+    offset: 232
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: IsColliderLoaded
+    offset: 240
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetSecondaryPath
+    offset: 248
+    return_type: char*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: CreateSecondary
+    offset: 256
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: DestroySecondary
+    offset: 264
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetCollider
+    offset: 272
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetCollider2
+    offset: 280
+    return_type: Common::Component::BGCollision::Collider*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: IsColliderActive
+    offset: 288
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetColliderActive
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: UpdateCollider
+    offset: 304
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: GetColor
+    offset: 360
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: SetColor
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector4*
+      name: color
+  - name: WantToBeActive
+    offset: 440
+    return_type: char
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: ApplyStain
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::Graphics::ByteColor*
+      name: stainColorSrgb
+  - name: SetActive
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: char
+      name: active
+  - name: GetTranslationImpl
+    offset: 512
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetTranslationImpl
+    offset: 520
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetRotationImpl
+    offset: 528
+    return_type: System::Numerics::Quaternion*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetRotationImpl
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Quaternion*
+      name: value
+  - name: GetScaleImpl
+    offset: 544
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetScaleImpl
+    offset: 552
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: value
+  - name: GetTransformImpl
+    offset: 560
+    return_type: Client::LayoutEngine::Transform*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+  - name: SetTransformImpl
+    offset: 568
+    return_type: void
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Client::LayoutEngine::Transform*
+      name: value
+  - name: GetBoundingSphereImpl
+    offset: 576
+    return_type: System::Numerics::Vector4*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
       name: this
     - type: System::Numerics::Vector4*
       name: result
@@ -125124,6 +125559,27 @@ structs:
     name: TriggerBoxLayoutInstance
     offset: 0
     base: true
+  - type: char
+    name: Active
+    offset: 144
+  - type: float
+    name: EffectPointSpacing
+    offset: 148
+  - type: float
+    name: EffectFarClipBegin
+    offset: 152
+  - type: float
+    name: EffectFarClipEnd
+    offset: 156
+  - type: System::Numerics::Vector3
+    name: EffectBoundsCenter
+    offset: 160
+  - type: float
+    name: EffectBoundsRadius
+    offset: 172
+  - type: char
+    name: EffectsEnabled
+    offset: 176
   virtual_functions:
   - name: dtor
     offset: 0
@@ -126120,6 +126576,9 @@ structs:
     name: TriggerBoxLayoutInstance
     offset: 0
     base: true
+  - type: char
+    name: Active
+    offset: 144
   virtual_functions:
   - name: dtor
     offset: 0
@@ -128410,8 +128869,14 @@ structs:
     offset: 0
     base: true
   - type: unsigned int
-    name: Unk80
+    name: LayerSetReferenceCount
     offset: 128
+  - type: unsigned int*
+    name: LayerSetReferences
+    offset: 136
+  - type: char
+    name: Active
+    offset: 144
   virtual_functions:
   - name: dtor
     offset: 0
@@ -151408,6 +151873,26 @@ structs:
       name: hotbarId
     - type: unsigned int
       name: slotId
+  - signature: E8 ?? ?? ?? ?? 88 83 ?? ?? ?? ?? 48 83 C4 40
+    return_type: char
+    name: PopulateIntermediateFromSlot
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule*
+      name: this
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+      name: slot
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate*
+      name: intermediate
+  - signature: E8 ?? ?? ?? ?? FF C6 83 C5 11
+    return_type: void
+    name: PrepareSlotForRender
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule*
+      name: this
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+      name: slot
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate*
+      name: intermediate
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 44 0F B6 E2 4C 8D A9
     return_type: void
     name: DeleteMacroSlots
