@@ -11,5 +11,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonSalvageAutoDialog {
     [FieldOffset(0x238)] public AtkComponentButton* EndDesynthesisButton;
-    [FieldOffset(0x240)] private byte Unk240;
+    [FieldOffset(0x240)] public bool IsDesynthesizing; // AtkValues[27]
 }

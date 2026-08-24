@@ -13,4 +13,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonRetainerTaskResult {
     [FieldOffset(0x258)] public AtkComponentButton* ReassignButton;
     [FieldOffset(0x260)] public AtkComponentButton* ConfirmButton;
+    [FieldOffset(0x268)] public int ResultMode; // AtkValues[0]. 2 = recall, otherwise reassign
 }

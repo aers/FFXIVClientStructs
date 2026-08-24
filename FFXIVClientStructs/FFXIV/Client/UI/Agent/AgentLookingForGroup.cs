@@ -39,6 +39,8 @@ public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0x3628), Obsolete("Use ListingAccountIdUInt64", true)] public uint ListingAccountId;
     [FieldOffset(0x3628)] public ulong ListingAccountIdUInt64; // Only populated while a Detailed listing is opened // TODO: rename back to ListingAccountId...
 
+    [FieldOffset(0x3638)] public uint JoinConfirmAddonId; // SelectYesno
+
     [FieldOffset(0x36B2)] public byte NumberOfListingsDisplayed;
 
     [FieldOffset(0x36B9)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
