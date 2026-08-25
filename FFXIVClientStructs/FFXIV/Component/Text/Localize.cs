@@ -12,7 +12,4 @@ public unsafe partial struct Localize {
     [FieldOffset(0x08)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x10)] public ExcelSheet* ExcelSheet;
     [FieldOffset(0x18)] private StdMap<Utf8String, nint> UnkMap;
-    
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? ?? ?? ?? 4C 8D 4D")]
-    public partial bool ProcessNoun(Utf8String* sheetName, Utf8String* outString);
 }
