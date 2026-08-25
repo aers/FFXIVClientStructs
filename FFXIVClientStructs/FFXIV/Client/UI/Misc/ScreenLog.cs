@@ -8,5 +8,5 @@ public unsafe partial struct ScreenLog {
     public static partial int ConvertLogMessageIdToScreenLogKind(int logMessageId, int* unkOption);
     
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? B9 9E 64 00 00")]
-    public static partial void AddToScreenLogWithLogMessageId(BattleChara* target, BattleChara* caster, int logMessageId, char unk, int castId, int statusId, int stackCount, int damageType);
+    public static partial void AddToScreenLogWithLogMessageId(BattleChara* target, BattleChara* caster, int logMessageId, byte unk, int castId, int statusId, int stackCount, int damageType);
 }
