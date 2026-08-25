@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Loot)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x388)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct AgentLoot {
     [FieldOffset(0x34)] public byte HoveredSlotIndex;
     [FieldOffset(0x38)] public uint HoveredItemId;

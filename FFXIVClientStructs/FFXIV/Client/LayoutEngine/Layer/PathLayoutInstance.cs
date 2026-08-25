@@ -15,7 +15,7 @@ public unsafe partial struct PathLayoutInstance {
     [FieldOffset(0x68)] private bool Unk68;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 4C 8B EE", 3, 88)]
+    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 4C 8B EE", 3, 11)]
     public partial struct ControlPointData {
         [FieldOffset(0x16)] private ushort Unk16;
         [FieldOffset(0x18)] public ControlPoint* ControlPoints;
