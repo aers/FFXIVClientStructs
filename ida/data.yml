@@ -1245,9 +1245,13 @@ classes:
     funcs:
       0x1407A8920: ProcessNoun
   Component::Text::Localize::Noun:
+    vtbls:
+      - ea: 0x142186128
     vfuncs:
       0: dtor
       1: Resolve
+    funcs:
+      0x1407A7730: GetColumnOffset
   Component::Text::Localize::NounEn:
     vtbls:
       - ea: 0x1421879D0
