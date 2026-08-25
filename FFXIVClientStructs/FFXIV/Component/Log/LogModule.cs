@@ -22,7 +22,7 @@ public unsafe partial struct LogModule {
     public partial uint GetCurrentLogIndex();
     
     [VirtualFunction(4)]
-    public partial ulong GetLogMessageOverflow();
+    public partial int GetLogMessageOverflow();
     
     [VirtualFunction(5)]
     public partial uint GetLogMessageCount();
