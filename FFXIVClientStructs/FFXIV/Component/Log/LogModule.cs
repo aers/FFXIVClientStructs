@@ -34,7 +34,7 @@ public unsafe partial struct LogModule {
     public partial uint AddLogMessageRaw(CStringPointer stringPointer, int size);
     
     [VirtualFunction(8)]
-    public partial byte* GetLogMessageRawString(Utf8String* rawString, uint index);
+    public partial Utf8String* GetLogMessageRawString(Utf8String* rawString, uint index);
     
     [VirtualFunction(9)]
     public partial byte* GetLogMessageRaw(int index, int* outLogMessageIndex);
