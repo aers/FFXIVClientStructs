@@ -14,5 +14,5 @@ public unsafe partial struct Localize {
     [FieldOffset(0x18)] private StdMap<Utf8String, nint> UnkMap;
     
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? ?? ?? ?? 4C 8D 4D")]
-    public partial char ProcessNoun(Utf8String* sheetName, Utf8String* outString);
+    public partial bool ProcessNoun(Utf8String* sheetName, Utf8String* outString);
 }

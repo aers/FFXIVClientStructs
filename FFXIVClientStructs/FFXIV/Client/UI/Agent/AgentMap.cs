@@ -112,7 +112,7 @@ public unsafe partial struct AgentMap {
     
     // For tooltip context the lowest 3 bytes are the index and the highest 1 byte is the tooltip type.
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 41 56 41 57 48 83 EC ?? 41 8B D8")]
-    public partial char CreateTooltip(Utf8String* tooltipString, uint tooltipContext);
+    public partial bool CreateTooltip(Utf8String* tooltipString, uint tooltipContext);
     
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
         if (MiniMapMarkerCount >= MiniMapMarkers.Length) return false;
