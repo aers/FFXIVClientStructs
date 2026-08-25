@@ -128,7 +128,13 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 08 44 38 21")]
     public partial Utf8String* GetTabName(int tabIndex);
-
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 9E")]
+    public partial byte* GetLogMessageDataRaw(int index, int* outLogMessageIndex);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD E8 ?? ?? ?? ?? 45 84 E4")]
+    public partial bool ClearLog();
+    
     public bool GetLogMessage(int index, out byte[] message) {
         using var pMsg = new Utf8String();
         var result = GetLogMessage(index, &pMsg);

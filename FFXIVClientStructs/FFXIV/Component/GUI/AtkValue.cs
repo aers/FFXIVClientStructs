@@ -109,7 +109,10 @@ public unsafe partial struct AtkValue {
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 B7")]
     private partial void ReleaseManagedMemoryInternal();
-
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 C0 ?? 83 F8 ?? 77 ?? 48 63 C8")]
+    public partial uint GetAsUint();
+    
     // The game probably uses a macro for this, because it always
     // checks if the type is managed before calling it.
     public void ReleaseManagedMemory() {
