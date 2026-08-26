@@ -12,7 +12,7 @@ public unsafe partial struct ScreenLogManager {
         [FieldOffset(1 * 4 + 0)] private byte Unk1;
         [FieldOffset(1 * 4 + 1)] private byte Unk2;
         [FieldOffset(1 * 4 + 2)] private byte Unk3;
-        [FieldOffset(1 * 4 + 3)] public ActionType ActionType;
+        [FieldOffset(1 * 4 + 3)] public byte ActionType;
         [FieldOffset(2 * 4)] public int TextParam1;
         [FieldOffset(3 * 4)] public int TextParam2;
         [FieldOffset(4 * 4)] public int TextParam3;
