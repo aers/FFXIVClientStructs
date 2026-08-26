@@ -191,6 +191,9 @@ public unsafe partial struct Character {
     [VirtualFunction(82)]
     public partial ActionEffectHandler* GetActionEffectHandler();
 
+    [VirtualFunction(83)]
+    public partial ScreenLogManager* GetScreenLogManager();
+    
     [VirtualFunction(84)]
     public partial ForayInfo* GetForayInfo();
 
