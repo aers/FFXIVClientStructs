@@ -11778,7 +11778,7 @@ structs:
     name: ItemId
     offset: 8
   - type: int
-    name: UnkC
+    name: Quantity
     offset: 12
   member_functions: []
 - type: Client::Game::InventoryManager::InventoryOperation
@@ -33824,6 +33824,131 @@ structs:
     name: AppId
     offset: 8
   member_functions: []
+- type: Component::Text::Localize::Noun
+  name: Noun
+  namespace: Component.Text
+  union: False
+  size: 24
+  fields:
+  - type: Common::Component::Excel::ExcelSheet*
+    name: RowSheet
+    offset: 8
+  - type: Common::Component::Excel::ExcelSheet*
+    name: AttributiveSheet
+    offset: 16
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::Text::Localize::Noun*
+    parameters:
+    - type: Component::Text::Localize::Noun*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Resolve
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Component::Text::Localize::Noun*
+      name: this
+    - type: Component::Text::Localize::NounParams*
+      name: nounParams
+    - type: Client::System::String::Utf8String*
+      name: outString
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 8B 63 ?? 8B F0
+    return_type: int
+    name: GetColumnOffset
+    parameters:
+    - type: Component::Text::Localize::Noun*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: sheetName
+- type: Component::Text::Localize::NounDe::NounDeOffsets
+  name: NounDeOffsets
+  namespace: Component.Text
+  union: False
+  size: 28
+  fields:
+  - type: int
+    name: SingularColumnIdx
+    offset: 0
+  - type: int
+    name: PluralColumnIdx
+    offset: 4
+  - type: int
+    name: PronounColumnIdx
+    offset: 8
+  - type: int
+    name: AdjectiveColumnIdx
+    offset: 12
+  - type: int
+    name: PossessivePronounColumnIdx
+    offset: 16
+  - type: int
+    name: CountabilityColumnIdx
+    offset: 20
+  - type: int
+    name: ArticleColumnIdx
+    offset: 24
+  member_functions: []
+- type: Component::Text::Localize::NounEn::NounEnOffsets
+  name: NounEnOffsets
+  namespace: Component.Text
+  union: False
+  size: 20
+  fields:
+  - type: int
+    name: SingularColumnIdx
+    offset: 0
+  - type: int
+    name: PluralColumnIdx
+    offset: 4
+  - type: int
+    name: StartsWithVowelColumnIdx
+    offset: 8
+  - type: int
+    name: PossessivePronounColumnIdx
+    offset: 12
+  - type: int
+    name: ArticleColumnIdx
+    offset: 16
+  member_functions: []
+- type: Component::Text::Localize::NounFr::NounFrOffsets
+  name: NounFrOffsets
+  namespace: Component.Text
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: SingularColumnIdx
+    offset: 0
+  - type: int
+    name: PluralColumnIdx
+    offset: 4
+  - type: int
+    name: StartsWithVowelColumnIdx
+    offset: 8
+  - type: int
+    name: PronounColumnIdx
+    offset: 12
+  - type: int
+    name: CountabilityColumnIdx
+    offset: 16
+  - type: int
+    name: ArticleColumnIdx
+    offset: 20
+  member_functions: []
+- type: Component::Text::Localize::NounJa::NounJaOffsets
+  name: NounJaOffsets
+  namespace: Component.Text
+  union: False
+  size: 4
+  fields:
+  - type: int
+    name: SingularColumnIdx
+    offset: 0
+  member_functions: []
 - type: Component::Text::MacroEncoder::MacroCodeDescription
   name: MacroCodeDescription
   namespace: Component.Text
@@ -34629,24 +34754,24 @@ structs:
     name: LongCount
     offset: 8
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
+- type: StdMap<Client::System::String::Utf8String, Component::Text::Localize::Noun*>
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>>*
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>>*
     name: Head
     offset: 0
   - type: __int64
     name: LongCount
     offset: 8
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, __int64>
+- type: StdMap<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>>*
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>>*
     name: Head
     offset: 0
   - type: __int64
@@ -42961,36 +43086,21 @@ structs:
     name: AtkEventInterface
     offset: 0
     base: true
+  - type: Client::Game::InventoryType
+    name: Containers
+    offset: 16
+    size: 5
+    is_string: False
   - type: unsigned __int16
-    name: MateriaId1
+    name: Slots
     offset: 36
-  - type: unsigned __int16
-    name: MateriaId2
-    offset: 38
-  - type: unsigned __int16
-    name: MateriaId3
-    offset: 40
-  - type: unsigned __int16
-    name: MateriaId4
-    offset: 42
-  - type: unsigned __int16
-    name: MateriaId5
-    offset: 44
-  - type: unsigned __int16
-    name: Quantity1
+    size: 5
+    is_string: False
+  - type: unsigned int
+    name: Quantities
     offset: 48
-  - type: unsigned __int16
-    name: Quantity2
-    offset: 52
-  - type: unsigned __int16
-    name: Quantity3
-    offset: 56
-  - type: unsigned __int16
-    name: Quantity4
-    offset: 60
-  - type: unsigned __int16
-    name: Quantity5
-    offset: 64
+    size: 5
+    is_string: False
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -61521,6 +61631,184 @@ structs:
     - 3
     is_pointer: False
     return_type: Component::SteamApi::Interface::ISteamUtils
+- type: Component::Text::Localize::NounDe
+  name: NounDe
+  namespace: Component.Text
+  union: False
+  size: 88
+  fields:
+  - type: Component::Text::Localize::Noun
+    name: Noun
+    offset: 0
+    base: true
+  - type: Component::Text::Localize::NounDe::NounDeOffsets*
+    name: Offsets
+    offset: 32
+  - type: Component::Excel::IExcelRowWrapper*
+    name: AttributiveRow24
+    offset: 40
+  - type: Component::Excel::IExcelRowWrapper*
+    name: AttributiveRow25
+    offset: 48
+  - type: Component::Excel::IExcelRowWrapper*
+    name: AttributiveRow26
+    offset: 56
+  - type: Component::Excel::IExcelRowWrapper*
+    name: AttributiveRow37
+    offset: 64
+  - type: Component::Excel::IExcelRowWrapper*
+    name: AttributiveRow38
+    offset: 72
+  - type: Component::Excel::IExcelRowWrapper*
+    name: AttributiveRow39
+    offset: 80
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::Text::Localize::Noun*
+    parameters:
+    - type: Component::Text::Localize::NounDe*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Resolve
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Component::Text::Localize::NounDe*
+      name: this
+    - type: Component::Text::Localize::NounParams*
+      name: nounParams
+    - type: Client::System::String::Utf8String*
+      name: outString
+  member_functions: []
+- type: Component::Text::Localize::NounEn
+  name: NounEn
+  namespace: Component.Text
+  union: False
+  size: 40
+  fields:
+  - type: Component::Text::Localize::Noun
+    name: Noun
+    offset: 0
+    base: true
+  - type: Component::Text::Localize::NounEn::NounEnOffsets*
+    name: Offsets
+    offset: 32
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::Text::Localize::Noun*
+    parameters:
+    - type: Component::Text::Localize::NounEn*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Resolve
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Component::Text::Localize::NounEn*
+      name: this
+    - type: Component::Text::Localize::NounParams*
+      name: nounParams
+    - type: Client::System::String::Utf8String*
+      name: outString
+  member_functions: []
+- type: Component::Text::Localize::NounFr
+  name: NounFr
+  namespace: Component.Text
+  union: False
+  size: 40
+  fields:
+  - type: Component::Text::Localize::Noun
+    name: Noun
+    offset: 0
+    base: true
+  - type: Component::Text::Localize::NounFr::NounFrOffsets*
+    name: Offsets
+    offset: 32
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::Text::Localize::Noun*
+    parameters:
+    - type: Component::Text::Localize::NounFr*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Resolve
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Component::Text::Localize::NounFr*
+      name: this
+    - type: Component::Text::Localize::NounParams*
+      name: nounParams
+    - type: Client::System::String::Utf8String*
+      name: outString
+  member_functions: []
+- type: Component::Text::Localize::NounJa
+  name: NounJa
+  namespace: Component.Text
+  union: False
+  size: 40
+  fields:
+  - type: Component::Text::Localize::Noun
+    name: Noun
+    offset: 0
+    base: true
+  - type: Component::Text::Localize::NounJa::NounJaOffsets*
+    name: Offsets
+    offset: 32
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::Text::Localize::Noun*
+    parameters:
+    - type: Component::Text::Localize::NounJa*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Resolve
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Component::Text::Localize::NounJa*
+      name: this
+    - type: Component::Text::Localize::NounParams*
+      name: nounParams
+    - type: Client::System::String::Utf8String*
+      name: outString
+  member_functions: []
+- type: Component::Text::Localize::NounParams
+  name: NounParams
+  namespace: Component.Text
+  union: False
+  size: 128
+  fields:
+  - type: Client::System::String::Utf8String
+    name: SheetName
+    offset: 0
+  - type: int
+    name: OffsetIndex
+    offset: 104
+  - type: int
+    name: RowId
+    offset: 108
+  - type: int
+    name: Quantity
+    offset: 112
+  - type: int
+    name: ArticleType
+    offset: 116
+  - type: int
+    name: GrammaticalCase
+    offset: 120
+  - type: __int8
+    name: LinkMarker
+    offset: 124
+  member_functions: []
 - type: Component::Text::ReferencedUtf8String
   name: ReferencedUtf8String
   namespace: Component.Text
@@ -62316,7 +62604,7 @@ structs:
     name: Item2
     offset: 104
   member_functions: []
-- type: StdPair<Client::System::String::Utf8String, __int64>
+- type: StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>
   name: StdPair`2
   namespace: ''
   union: False
@@ -62324,7 +62612,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: Item1
     offset: 0
-  - type: __int64
+  - type: Component::Text::Localize::Noun*
     name: Item2
     offset: 104
   member_functions: []
@@ -70648,6 +70936,31 @@ structs:
     offset: 128
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonGuildLeveDifficulty::GuildLeveDifficultyAtkValues
+  name: GuildLeveDifficultyAtkValues
+  namespace: Client.UI
+  union: False
+  size: 96
+  fields:
+  - type: Component::GUI::AtkValue
+    name: Title
+    offset: 0
+  - type: Component::GUI::AtkValue
+    name: InitialValue
+    offset: 16
+  - type: Component::GUI::AtkValue
+    name: MinDifficulty
+    offset: 32
+  - type: Component::GUI::AtkValue
+    name: MaxDifficulty
+    offset: 48
+  - type: Component::GUI::AtkValue
+    name: DifficultyLabel
+    offset: 64
+  - type: Component::GUI::AtkValue
+    name: BodyText
+    offset: 80
+  member_functions: []
 - type: Client::UI::AddonInclusionShop::InclusionShopAtkValues::InclusionShopItem
   name: InclusionShopItem
   namespace: Client.UI
@@ -70696,6 +71009,34 @@ structs:
   - type: Component::GUI::AtkValue
     name: Index
     offset: 272
+  member_functions: []
+- type: Client::UI::AddonInputNumeric::InputNumericAtkValues
+  name: InputNumericAtkValues
+  namespace: Client.UI
+  union: False
+  size: 112
+  fields:
+  - type: Component::GUI::AtkValue
+    name: OkButtonText
+    offset: 0
+  - type: Component::GUI::AtkValue
+    name: CancelButtonText
+    offset: 16
+  - type: Component::GUI::AtkValue
+    name: MinValue
+    offset: 32
+  - type: Component::GUI::AtkValue
+    name: MaxValue
+    offset: 48
+  - type: Component::GUI::AtkValue
+    name: Value
+    offset: 64
+  - type: Component::GUI::AtkValue
+    name: NumericSuffix
+    offset: 80
+  - type: Component::GUI::AtkValue
+    name: PromptText
+    offset: 96
   member_functions: []
 - type: Client::UI::AddonItemDetailCompare::AtkValuesArray::ComparedItem
   name: ComparedItem
@@ -70870,6 +71211,22 @@ structs:
   - type: Component::GUI::AtkValue
     name: RequiredJob
     offset: 1360
+  member_functions: []
+- type: Client::UI::AddonItemInspectionResult::ItemInspectionResultAtkValues
+  name: ItemInspectionResultAtkValues
+  namespace: Client.UI
+  union: False
+  size: 1296
+  fields:
+  - type: Component::GUI::AtkValue
+    name: HasNext
+    offset: 0
+  - type: Component::GUI::AtkValue
+    name: Rarity
+    offset: 16
+  - type: Component::GUI::AtkValue
+    name: Description
+    offset: 1280
   member_functions: []
 - type: Client::UI::AddonJobHudACN0::AetherflowACNGauge
   name: AetherflowACNGauge
@@ -71592,6 +71949,22 @@ structs:
   - type: Component::GUI::AtkValue
     name: Button3Text
     offset: 48
+  member_functions: []
+- type: Client::UI::AddonTradeMultiple::TradeMultipleSlotAtkValues
+  name: TradeMultipleSlotAtkValues
+  namespace: Client.UI
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkValue
+    name: ItemName
+    offset: 0
+  - type: Component::GUI::AtkValue
+    name: Quantity
+    offset: 16
+  - type: Component::GUI::AtkValue
+    name: InventorySlot
+    offset: 32
   member_functions: []
 - type: Client::UI::AddonWeeklyPuzzle::GameTileBoard
   name: GameTileBoard
@@ -77233,7 +77606,7 @@ structs:
   name: AgentLoot
   namespace: Client.UI.Agent
   union: False
-  size: 904
+  size: 160
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -86792,10 +87165,20 @@ structs:
   - type: Common::Component::Excel::ExcelSheet*
     name: ExcelSheet
     offset: 16
-  - type: StdMap<Client::System::String::Utf8String, __int64>
-    name: UnkMap
+  - type: StdMap<Client::System::String::Utf8String, Component::Text::Localize::Noun*>
+    name: NounCache
     offset: 24
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? ?? ?? ?? 4C 8D 4D
+    return_type: char
+    name: ProcessNoun
+    parameters:
+    - type: Component::Text::Localize*
+      name: this
+    - type: Component::Text::Localize::NounParams*
+      name: nounParams
+    - type: Client::System::String::Utf8String*
+      name: outString
 - type: Component::Text::MacroDecoder
   name: MacroDecoder
   namespace: Component.Text
@@ -86936,18 +87319,18 @@ structs:
     name: _Myval
     offset: 32
   member_functions: []
-- type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>>
+- type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>>
   name: Node
   namespace: Helper
   union: False
   fields:
-  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>>*
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>>*
     name: _Left
     offset: 0
-  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>>*
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>>*
     name: _Parent
     offset: 8
-  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>>*
+  - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>>*
     name: _Right
     offset: 16
   - type: Helper::RedBlackTreeNodeColor
@@ -86956,7 +87339,7 @@ structs:
   - type: char
     name: _Isnil
     offset: 25
-  - type: StdPair<Client::System::String::Utf8String, __int64>
+  - type: StdPair<Client::System::String::Utf8String, Component::Text::Localize::Noun*>
     name: _Myval
     offset: 32
   member_functions: []
@@ -88879,7 +89262,7 @@ structs:
   - type: Common::Math::Vector3
     name: CameraOffsetTarget
     offset: 384
-  vtable_size: 616
+  vtable_size: 624
   virtual_functions:
   - name: GetGameObjectId
     offset: 8
@@ -91657,6 +92040,27 @@ structs:
     name: Items
     offset: 336
     size: 9
+    is_string: False
+  member_functions: []
+- type: Client::UI::AddonTradeMultiple::TradeMultipleAtkValues
+  name: TradeMultipleAtkValues
+  namespace: Client.UI
+  union: False
+  size: 288
+  fields:
+  - type: Component::GUI::AtkValue
+    name: StatusText
+    offset: 0
+  - type: Component::GUI::AtkValue
+    name: ConfirmEnabled
+    offset: 16
+  - type: Component::GUI::AtkValue
+    name: SlotCount
+    offset: 32
+  - type: Client::UI::AddonTradeMultiple::TradeMultipleSlotAtkValues
+    name: Slots
+    offset: 48
+    size: 5
     is_string: False
   member_functions: []
 - type: Client::UI::Agent::AgentAchievement
@@ -109381,6 +109785,221 @@ structs:
     - type: byte
       name: classJobId
   member_functions: []
+- type: Client::UI::Agent::AgentTradeMultiple
+  name: AgentTradeMultiple
+  namespace: Client.UI.Agent
+  union: False
+  size: 176
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
+    name: InventoryContextEvent
+    offset: 40
+    base: true
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
+    name: Handler
+    offset: 48
+  - type: unsigned int
+    name: InputNumericAddonId
+    offset: 56
+  - type: unsigned int
+    name: SelectYesnoAddonId
+    offset: 60
+  - type: unsigned int
+    name: PendingAdd
+    offset: 64
+  - type: char
+    name: ShowErrorMessages
+    offset: 68
+  - type: unsigned int
+    name: MaxQuantity
+    offset: 72
+  - type: int
+    name: InventoryFilterIndex
+    offset: 76
+  - type: Client::Game::InventoryItemRef
+    name: Slots
+    offset: 80
+    size: 5
+    is_string: False
+  - type: Client::Game::InventoryItemRef
+    name: PendingItem
+    offset: 160
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? ?? ?? ?? 48 8B CB FF 50 ?? B1
+    return_type: char
+    name: Confirm
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B 01 49 8B E9 45 8B F0 0F B6 FA 48 8B D9
+    return_type: void
+    name: Open
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: char
+      name: showErrorMessages
+    - type: unsigned int
+      name: maxQuantity
+    - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
+      name: handler
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4E ?? E8 ?? ?? ?? ?? 8B E8
+    return_type: void
+    name: AddItem
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: Client::Game::InventoryType
+      name: inventoryType
+    - type: __int16
+      name: slot
+  - signature: E8 ?? ?? ?? ?? EB ?? 81 FA ?? ?? ?? ?? 74 ?? 44 0F B7 83 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 39 73
+    return_type: void
+    name: AddItemQuantity
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: item
+    - type: unsigned int
+      name: quantity
+  - signature: 40 53 55 48 83 EC ?? 48 89 74 24 ?? 48 8B E9 8B F2 83 FA 05 0F 83 ?? ?? ?? ?? 48 89 7C 24 ?? 48 8D 7E 05
+    return_type: void
+    name: RemoveSlot
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+    - type: unsigned int
+      name: slotIndex
+  - signature: E8 ?? ?? ?? ?? 8B D8 48 8D 54 24
+    return_type: unsigned int
+    name: GetSlotsRemaining
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 40 84 FF 74 ?? 39 73
+    return_type: void
+    name: RefreshAddon
+    parameters:
+    - type: Client::UI::Agent::AgentTradeMultiple*
+      name: this
 - type: Client::UI::Agent::CharaSelectCharacterEntry
   name: CharaSelectCharacterEntry
   namespace: Client.UI.Agent
@@ -192670,6 +193289,9 @@ structs:
   - type: Component::GUI::AtkComponentButton*
     name: ConfirmButton
     offset: 608
+  - type: int
+    name: ResultMode
+    offset: 616
   virtual_functions:
   - name: dtor
     offset: 0
@@ -193091,8 +193713,8 @@ structs:
   - type: Component::GUI::AtkComponentButton*
     name: EndDesynthesisButton
     offset: 568
-  - type: byte
-    name: Unk240
+  - type: char
+    name: IsDesynthesizing
     offset: 576
   virtual_functions:
   - name: dtor
@@ -197438,6 +198060,433 @@ structs:
     return_type: char
     parameters:
     - type: Client::UI::AddonTeleport*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions: []
+- type: Client::UI::AddonTradeMultiple
+  name: AddonTradeMultiple
+  namespace: Client.UI
+  union: False
+  size: 600
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkTextNode*
+    name: StatusText
+    offset: 568
+  - type: Component::GUI::AtkComponentList*
+    name: ItemList
+    offset: 576
+  - type: Component::GUI::AtkComponentButton*
+    name: ConfirmButton
+    offset: 584
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonTradeMultiple*
       name: this
     - type: int
       name: inputId
@@ -268442,6 +269491,9 @@ structs:
   - type: unsigned __int64
     name: ListingAccountIdUInt64
     offset: 13864
+  - type: unsigned int
+    name: JoinConfirmAddonId
+    offset: 13880
   - type: byte
     name: NumberOfListingsDisplayed
     offset: 14002
@@ -275044,7 +276096,7 @@ structs:
   - type: byte
     name: SoundFlags
     offset: 9067
-  vtable_size: 696
+  vtable_size: 704
   virtual_functions:
   - name: GetStatusManager
     offset: 624
@@ -278109,7 +279161,7 @@ structs:
   - type: Client::UI::UIInputModule
     name: UIInputModule
     offset: 1047056
-  vtable_size: 1984
+  vtable_size: 2000
   virtual_functions:
   - name: ExitGame
     offset: 32
