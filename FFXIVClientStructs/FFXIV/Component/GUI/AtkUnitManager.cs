@@ -36,6 +36,9 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9170)] public AddonFilter* AddonFilter;
     [FieldOffset(0x9178)] public AddonFilter* AddonFilterSystem;
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
+    /// <summary>
+    /// The <see cref="AtkManagedInterface"/> subobject of <see cref="AddonScreenFrame"/>.
+    /// </summary>
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
     [FieldOffset(0x9190)] private AtkResNode* ChatLogFocusNode; // set via a function called in AddonChatLog.OnRefresh, but not sure what for
     [FieldOffset(0x9198)] public AtkResNode* CursorFocusNode;
@@ -110,6 +113,28 @@ public unsafe partial struct AtkUnitManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? 48 83 C3")]
     public partial bool SetAddonDepthLayer(ushort id, uint depthLayerIndex);
+
+    /// <summary>
+    /// Moves an addon to a depth layer and restores its position using the IDs of its former neighbors.
+    /// </summary>
+    /// <param name="addon">Addon to move.</param>
+    /// <param name="depthLayerIndex">Destination depth layer.</param>
+    /// <param name="previousAddonId">ID of the addon before it.</param>
+    /// <param name="nextAddonId">ID of the addon after it.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 81 C1 ?? ?? ?? ?? 41 B9")]
+    public partial bool SetAddonDepthLayerAndOrder(AtkUnitBase* addon, uint depthLayerIndex, ushort previousAddonId, ushort nextAddonId);
+
+    /// <summary>
+    /// Moves an addon to the reference addon's depth layer and places it after the reference in draw order.
+    /// </summary>
+    /// <param name="referenceAddon">Addon whose depth layer and draw order are used.</param>
+    /// <param name="addon">Addon to move.</param>
+    /// <param name="insertImmediately">Place the addon directly after the reference instead of after the following entry.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? B0 ?? EB ?? 41 B0")]
+    public partial bool SetAddonOrderAfter(AtkUnitBase* referenceAddon, AtkUnitBase* addon, bool insertImmediately);
+
+    [MemberFunction("E8 ?? ?? ?? ?? F6 86 ?? ?? ?? ?? ?? 0F 28 B4 24")]
+    public partial void UpdateDrawOrderIndexes();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE")]
     public partial void UpdateCursor();
