@@ -54,12 +54,13 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         [FieldOffset(0xC0)] public uint ApparentActionId;
 
-        /// Mode-specific state used while resolving the current apparent action.
-        ///
+        /// <summary>
+        /// Mode-specific state used while resolving the current apparent action.<br/>
         /// For <see cref="HotbarSlotApparentActionMode.GeneralActionDutyOrPhantom"/>, this is the GeneralAction row ID minus 26.<br/>
         /// For <see cref="HotbarSlotApparentActionMode.GeneralActionPhantom"/>, this is the GeneralAction row ID minus 31.<br/>
         /// For <see cref="HotbarSlotApparentActionMode.PvPCombo"/>, this is the current combo step.<br/>
         /// For <see cref="HotbarSlotApparentActionMode.LostFindsItem"/>, this indicates that the action has been resolved.
+        /// </summary>
         [FieldOffset(0xC4)] public ushort ApparentActionModeParam;
 
         // 0xC6 (198) does not appear to be referenced *anywhere*. Nothing ever reads or writes to it, save for a zero-out
@@ -81,8 +82,10 @@ public partial struct RaptureHotbarModule {
         /// <seealso cref="ApparentActionId"/>
         [FieldOffset(0xC9)] public HotbarSlotType ApparentSlotType;
 
+        /// <summary>
         /// Selects the low-numbered mapping from <see cref="CommandType"/> to the UI intermediate action type.
-        [FieldOffset(0xCA)] private bool UseAlternateIntermediateActionType;
+        /// </summary>
+        [FieldOffset(0xCA)] public bool UseAlternateIntermediateActionType;
 
         /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 6, 7.
         ///
