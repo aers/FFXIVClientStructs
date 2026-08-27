@@ -23,9 +23,9 @@ internal sealed record SignatureInfo(string Signature, EquatableArray<ushort> Of
 
     public ImmutableArray<ushort> GetRelCallAndJumpAdjustedOffset() {
         // handle E8 and E9 jumps automatically
-        if ((Offsets.Length == 0 &&
-             Signature.StartsWith("E8")) ||
-            Signature.StartsWith("E9"))
+        if (Offsets.Length == 0 && 
+            (Signature.StartsWith("E8") || 
+             Signature.StartsWith("E9")))
             return [1];
         return Offsets;
     }
