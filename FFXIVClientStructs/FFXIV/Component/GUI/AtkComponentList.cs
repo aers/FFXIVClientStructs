@@ -89,7 +89,7 @@ public unsafe partial struct AtkComponentList : ICreatable<AtkComponentList> {
     [FieldOffset(0x1A7)] private byte Unk1A7; // select on cancel?
     [FieldOffset(0x1A8)] public bool IsCursorNavigationCrossList; // see AddonEmote where it continues the repeat on another list if enabled
     [FieldOffset(0x1A9)] private bool Unk1A9;
-    [FieldOffset(0x1AA)] private bool Unk1AA; // PlaySoundEffect(3) on InputId.CANCEL when CursorNavigationInfo.Unk08 == 1 and Unk140ItemIndex >= 0
+    [FieldOffset(0x1AA)] private bool Unk1AA; // PlaySoundEffect(3) on InputId.CANCEL when CursorNavigationInfo.NavigationMode == 1 and Unk140ItemIndex >= 0
     [FieldOffset(0x1AB)] private bool Unk1AB; // something with inputs
     [FieldOffset(0x1AC)] private bool Unk1AC; // something with inputs
     [FieldOffset(0x1AD)] private byte Unk1AD; // flags for dragdrop

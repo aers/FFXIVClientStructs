@@ -11,5 +11,7 @@ public partial struct AtkUldComponentDataBase {
     [FieldOffset(0x5)] public byte Cursor;
     [FieldOffset(0x6)] public byte OffsetX; // short in .uld file
     [FieldOffset(0x7)] public byte OffsetY; // short in .uld file
-    [FieldOffset(0x8)] private byte Unk;
+    /// List-navigation mode loaded from the component's ULD data.
+    /// Controls wrapping, cancel-to-deselect and navigation at list edges.
+    [FieldOffset(0x8)] public byte NavigationMode;
 }
