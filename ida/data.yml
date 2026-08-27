@@ -11417,7 +11417,7 @@ classes:
       0x1407D7BB0: GetDutyActionCount
       0x1407D7BE0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
       0x1407D7C00: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
-      0x1407D8050: SetDutyActionSlot                 # (this, slotId, actionId)
+      0x1407D7C30: SetDutyActionSlot                 # (this, slotId, actionId)
       0x1407D7D60: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x1407D7DC0: ExecuteDutyActionSlot             # (this, slotId)
       0x1407D3DD0: GrandCompanyUpdateTask            # (this) -> void
@@ -11439,6 +11439,7 @@ classes:
       0x1407D7EB0: SetPhantomActionsPresent
       0x1407D7F60: GetPhantomActionCount
       0x1407D7FE0: GetPhantomActionId
+      0x1407D8050: SetPhantomActionSlot
       0x1407D70B0: PerformSavedHotbarMigrations
       0x1407DA660: CreateExpacSavedHotbar
       0x1407DA740: CreatePvPSavedHotbar
