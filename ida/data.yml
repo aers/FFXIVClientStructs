@@ -5168,10 +5168,15 @@ classes:
       0x14067D8A0: ctor
       0x14067E770: Draw
       0x14067EEC0: SetAddonDepthLayer
+      0x14067F010: SetAddonDepthLayerAndOrder
       0x14067F6B0: GetAddonById
       0x14067F710: GetAddonByName
       0x14067F870: GetAddonByNode
+      0x140682300: GetAddonDrawOrderNeighborIds
       0x140683480: UpdateDrawOrderIndexes
+      0x140683A00: AddAddonToDrawOrder
+      0x140683C40: RemoveAddonFromDrawOrder
+      0x140683DD0: SetAddonOrderAfter
       0x1400E7380: UpdateCursor
   Client::UI::WindowContextMenuHandler:
     vtbls:
@@ -8870,6 +8875,17 @@ classes:
       0x140674BB0: GetSingleton2
       0x140682FD0: GetSingleton3
       0x1406EC850: Finalizer
+  Component::GUI::AtkStage::FilterStruct:
+    funcs:
+      0x140647700: AcquireFilter
+      0x140647750: ReleaseFilter
+      0x1406477B0: AcquireSystemFilter
+      0x140647800: ReleaseSystemFilter
+      0x140647850: AcquireScreenFrame
+      0x140647890: ReleaseScreenFrame
+      0x1406478E0: CanAddonReceiveInput
+      0x140647A00: SetAdditionalFilterAddon
+      0x140647A20: ClearAdditionalFilterAddon
   Component::GUI::AtkFontCodeModule:
     vtbls:
       - ea: 0x142174910

@@ -85,34 +85,109 @@ public unsafe partial struct AtkStage {
         [FieldOffset(0x8)] public AtkDialogue AtkDialogue;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct FilterStruct {
+    public unsafe partial struct FilterStruct {
         [FieldOffset(0x00)] public AtkStage* AtkStage;
+        /// <summary>
+        /// Number of active users of <see cref="AtkUnitManager.AddonFilterSystem"/>.
+        /// </summary>
         [FieldOffset(0x08)] public short NumActiveSystemFilters;
+        /// <summary>
+        /// Number of active users of <see cref="AtkUnitManager.AddonFilter"/>.
+        /// </summary>
         [FieldOffset(0x0A)] public short NumActiveFilters;
-        [FieldOffset(0x0C)] private short SomeOtherNum;
-        [FieldOffset(0x0E)] private short SomeAddonId;
+        /// <summary>
+        /// Number of active users of <see cref="AtkUnitManager.ManagedScreenFrame"/>.
+        /// </summary>
+        [FieldOffset(0x0C)] public short NumActiveScreenFrames;
+        /// <summary>
+        /// An additional addon included in modal-filter draw-order checks.
+        /// A non-zero ID also enables input-filter checks during addon collision testing.
+        /// </summary>
+        [FieldOffset(0x0E)] public ushort AdditionalFilterAddonId;
+
+        /// <summary>
+        /// Activates <see cref="AtkUnitManager.AddonFilter"/> for the specified addon.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? EB ?? E8 ?? ?? ?? ?? 48 8B D3 48 8D 88")]
+        public partial void AcquireFilter(AtkUnitBase* addon);
+
+        /// <summary>
+        /// Deactivates <see cref="AtkUnitManager.AddonFilter"/> for the specified addon.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 0F BA E5 ?? 48 8B 6C 24 ?? 73 ?? 48 8D 4F")]
+        public partial void ReleaseFilter(AtkUnitBase* addon);
+
+        /// <summary>
+        /// Activates <see cref="AtkUnitManager.AddonFilterSystem"/>.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 79 ?? 48 8B CF")]
+        public partial void AcquireSystemFilter();
+
+        /// <summary>
+        /// Deactivates <see cref="AtkUnitManager.AddonFilterSystem"/>.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 0F BA E5 ?? 73 ?? 48 8B 8F ?? ?? ?? ?? 33 D2")]
+        public partial void ReleaseSystemFilter();
+
+        /// <summary>
+        /// Activates <see cref="AtkUnitManager.ManagedScreenFrame"/>.
+        /// </summary>
+        [MemberFunction("48 8B 01 48 85 C0 74 ?? 48 8B 40 ?? 4C 8B 90 ?? ?? ?? ?? 4D 85 D2 74 ?? 66 FF 41 ?? 45 33 C9")]
+        public partial void AcquireScreenFrame();
+
+        /// <summary>
+        /// Deactivates <see cref="AtkUnitManager.ManagedScreenFrame"/>.
+        /// </summary>
+        [MemberFunction("48 8B 01 48 85 C0 74 ?? 48 8B 40 ?? 4C 8B 90 ?? ?? ?? ?? 4D 85 D2 74 ?? 66 FF 49 ?? 66 83 79 ?? 00")]
+        public partial void ReleaseScreenFrame();
+
+        /// <summary>
+        /// Returns whether the specified addon can receive input while filters are active.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 41 81 8E")]
+        public partial bool CanAddonReceiveInput(AtkUnitBase* addon);
+
+        /// <summary>
+        /// Sets the additional addon used in input-filter draw-order checks and enables filtering during addon collision testing.
+        /// </summary>
+        [MemberFunction("48 85 D2 74 ?? 0F B7 82 ?? ?? ?? ?? 66 89 41")]
+        public partial void SetAdditionalFilterAddon(AtkUnitBase* addon);
+
+        /// <summary>
+        /// Clears the additional addon if it matches the specified addon.
+        /// </summary>
+        [MemberFunction("48 85 D2 74 ?? 0F B7 82 ?? ?? ?? ?? 66 39 41")]
+        public partial void ClearAdditionalFilterAddon(AtkUnitBase* addon);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public unsafe struct OperationGuideStruct {
         [FieldOffset(0x00)] public AtkStage* AtkStage;
+        [FieldOffset(0x08), Obsolete("Renamed to FocusedAddon")] public AtkUnitBase* AttachedToAddon;
         /// <summary>
-        /// The addon the Operations Guide is currently attached to.
+        /// The currently focused addon from which operation-guide resolution begins.
         /// </summary>
-        [FieldOffset(0x08)] public AtkUnitBase* AttachedToAddon;
+        [FieldOffset(0x08)] public AtkUnitBase* FocusedAddon;
+        [FieldOffset(0x10), Obsolete("Renamed to GuideSourceAddon")] public AtkUnitBase* AttachedToAddon2;
         /// <summary>
-        /// The addon the Operations Guide is currently attached to.
-        /// <br/>Appears to be the same as AttachedToAddon.
+        /// The addon supplying the operation-guide entries.
         /// </summary>
-        [FieldOffset(0x10)] public AtkUnitBase* AttachedToAddon2;
-        [FieldOffset(0x18)] private byte Unk18;
+        [FieldOffset(0x10)] public AtkUnitBase* GuideSourceAddon;
+        /// <summary>
+        /// Whether operation-guide contents are currently displayed.
+        /// </summary>
+        [FieldOffset(0x18)] public bool IsActive;
         /// <summary>
         /// True if the OperationsGuide should refresh.
         /// </summary>
         [FieldOffset(0x19)] public bool RequestRefresh;
-        [FieldOffset(0x1A)] private byte Unk1A;
-        [FieldOffset(0x1B)] private byte Unk1B;
+        /// <summary>
+        /// Show the operation guide even when gamepad mode is disabled.
+        /// </summary>
+        [FieldOffset(0x1A)] public bool ShowInMouseMode;
+        // 0x1B is padding
         [FieldOffset(0x1C)] private short X;
         [FieldOffset(0x1E)] private short Y;
         [FieldOffset(0x20)] private short Width;
