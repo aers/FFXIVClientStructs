@@ -412,6 +412,13 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="actionId">The ID of the action to set in this slot.</param>
     [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 05 72 C2")]
     public partial void SetPhantomActionSlot(uint index, uint actionId);
+    
+    /// <summary>
+    /// Sets the value of <see cref="PhantomActionsPresent"/>.
+    /// </summary>
+    /// <param name="present">Whether to show/enable phantom actions or not.</param>
+    [MemberFunction("E9 ?? ?? ?? ?? FF D2 0F B6 D3 48 8B C8 E8 ?? ?? ?? ??", 14)]
+    public partial void SetPhantomActionsPresent(bool present);
 }
 
 [Flags]
