@@ -9,9 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct AddonJobHud {
-    [FieldOffset(0x238)] private byte Unk220;
+    // Set after the gauge has received its first update.
+    [FieldOffset(0x238)] public bool IsGaugeInitialized;
     [FieldOffset(0x239)] public bool UseSimpleGauge;
-    [FieldOffset(0x23A)] private byte Unk222;
+    [FieldOffset(0x23A)] public bool IsConfigLoaded;
 
     // these 4 pointers get set in vf72, and point to varying offsets for each type of gauge
     [FieldOffset(0x240)] public AddonJobHudGauge* GaugeStandardPointer;
@@ -23,6 +24,9 @@ public unsafe partial struct AddonJobHud {
 
     [FieldOffset(0x268)] public int TimelineLabelStandard; // always set to 19 by vf75
     [FieldOffset(0x26C)] public int TimelineLabelSimple; // always set to 101 by vf75
+
+    // Uses the secondary JobHud NumberArray update flag.
+    [FieldOffset(0x270)] public bool IsSecondaryGauge;
 
     /// <summary>
     /// Base struct containing the data that each particular gauge relies on.<br/>

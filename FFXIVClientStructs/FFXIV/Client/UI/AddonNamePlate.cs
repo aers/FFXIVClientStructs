@@ -13,8 +13,18 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonNamePlate {
     [FieldOffset(0x240)] public BakePlateRenderer BakePlate;
     [FieldOffset(0x480)] public NamePlateObject* NamePlateObjectArray; // 0 - 50
+    // Cached from NamePlateNumberArray.IsInPvPArea. A change causes all nameplates to be updated.
+    [FieldOffset(0x488)] public bool IsInPvPArea;
+    [Obsolete("This is cached PvP-area state. Use IsInPvPArea, or UpdateAllNamePlates to force an update.")]
     [FieldOffset(0x488)] public byte DoFullUpdate;
     [FieldOffset(0x48A)] public ushort AlternatePartId;
+
+    /// <summary>
+    /// Sets the update flags for every nameplate and immediately updates the addon.
+    /// </summary>
+    /// <remarks>Called by <c>OnSetup</c> and <c>Show</c>.</remarks>
+    [MemberFunction("40 56 48 83 EC ?? F6 81 ?? ?? ?? ?? ?? 48 8B F1 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 4C 89 74 24 ?? E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? BB")]
+    public partial void UpdateAllNamePlates();
 
     // Client::UI::AddonNamePlate::BakePlateRenderer
     //   Component::GUI::AtkTextNodeRenderer
