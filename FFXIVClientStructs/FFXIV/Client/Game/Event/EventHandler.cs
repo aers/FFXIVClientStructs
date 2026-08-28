@@ -87,6 +87,14 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
+    /// <summary> If the GameObject from the EventHandler's perspective should be active. For example, this can control whether GimmickRects are active. </summary>
+    [VirtualFunction(213)]
+    public partial bool IsActive(GameObject* gameObject);
+
+    /// <summary> Sets the TargetableStatus update flag for every GameObject this EventHandler owns. </summary>
+    [VirtualFunction(217)]
+    public partial uint UpdateTargetableStatus();
+
     /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
     /// <param name="gameObject">The game object to update.</param>
     /// <param name="oldSharedTimelineState">The new SharedTimelineState value.</param>
