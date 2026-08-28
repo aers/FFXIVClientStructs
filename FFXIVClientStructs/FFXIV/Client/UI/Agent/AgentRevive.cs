@@ -11,7 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct AgentRevive {
     [FieldOffset(0x28)] public Revive* Revive; //callback for SelectYesNo
-    [FieldOffset(0x38)] public byte ReviveState;
+    [FieldOffset(0x38)] public ReviveState State;
+    [FieldOffset(0x38), Obsolete("Use State")] public byte ReviveState;
     [FieldOffset(0x40)] public int ResurrectionTimeLeft;
     [FieldOffset(0x44)] public uint ResurrectingPlayerId;
     [FieldOffset(0x48)] public Utf8String ResurrectingPlayerName;
