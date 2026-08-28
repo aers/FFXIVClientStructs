@@ -1344,7 +1344,7 @@ enums:
     "OverflowHidden": 256
     "LinkData": 512
     "Ellipsis": 1024
-    "UseFixedFontResolution": 4096
+    "FixedFontResolution": 4096
     "FontCache": 16384
 - type: Component::GUI::TextureType
   name: TextureType
@@ -3512,6 +3512,16 @@ enums:
     "ArmouryNeckEars": 4
     "ArmouryWristsRing": 5
     "Inventory": 6
+- type: Client::Game::UI::ReviveState
+  name: ReviveState
+  underlying: int
+  namespace: Client.Game.UI
+  flags: False
+  values:
+    "Alive": 0
+    "Dying": 1
+    "Revivable": 2
+    "Reviving": 3
 - type: Client::System::Resource::ResourceCategory
   name: ResourceCategory
   underlying: int
@@ -4468,6 +4478,7 @@ enums:
     "Seasonal3": 63
     "AirForceOne": 64
     "KeyboundBrawler": 65
+    "Unknown66": 66
 - type: Client::Game::GcArmyMemberFlag
   name: GcArmyMemberFlag
   underlying: byte
@@ -7131,6 +7142,21 @@ enums:
     "Gathering": 5
     "JobGauge": 6
     "Ceruleum": 7
+- type: Client::UI::Misc::HotbarSlotApparentActionMode
+  name: HotbarSlotApparentActionMode
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "GeneralActionDutyOrPhantom": 0
+    "GeneralActionPhantom": 1
+    "GeneralActionAdjusted": 2
+    "AdjustedAction": 3
+    "PvPCombo": 4
+    "BgcArmyAction": 5
+    "LostFindsItem": 6
+    "SkipActionResolution": 128
+    "None": 255
 - type: Client::UI::Misc::TermFilterModule::TermFilterChannelFlag
   name: TermFilterChannelFlag
   underlying: byte
@@ -24945,6 +24971,9 @@ structs:
   - type: int
     name: NameIconId
     offset: 52
+  - type: char
+    name: UseLargeNameIcon
+    offset: 56
   - type: int
     name: NamePlateObjectIndex
     offset: 60
@@ -26756,8 +26785,8 @@ structs:
   - type: char
     name: DrawAnts
     offset: 65
-  - type: byte
-    name: Unk0x42
+  - type: char
+    name: IsTransformationActionUsable
     offset: 66
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 45 ?? 4C 8D 44 24
@@ -31711,7 +31740,7 @@ structs:
     name: OffsetY
     offset: 7
   - type: byte
-    name: Unk08
+    name: NavigationMode
     offset: 8
   member_functions: []
 - type: Component::GUI::AtkDragDropInterface
@@ -32835,12 +32864,76 @@ structs:
     name: NumActiveFilters
     offset: 10
   - type: __int16
-    name: SomeOtherNum
+    name: NumActiveScreenFrames
     offset: 12
-  - type: __int16
-    name: SomeAddonId
+  - type: unsigned __int16
+    name: AdditionalFilterAddonId
     offset: 14
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB ?? E8 ?? ?? ?? ?? 48 8B D3 48 8D 88
+    return_type: void
+    name: AcquireFilter
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+  - signature: E8 ?? ?? ?? ?? 0F BA E5 ?? 48 8B 6C 24 ?? 73 ?? 48 8D 4F
+    return_type: void
+    name: ReleaseFilter
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+  - signature: E8 ?? ?? ?? ?? 40 84 ED 79 ?? 48 8B CF
+    return_type: void
+    name: AcquireSystemFilter
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F BA E5 ?? 73 ?? 48 8B 8F ?? ?? ?? ?? 33 D2
+    return_type: void
+    name: ReleaseSystemFilter
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+  - signature: 48 8B 01 48 85 C0 74 ?? 48 8B 40 ?? 4C 8B 90 ?? ?? ?? ?? 4D 85 D2 74 ?? 66 FF 41 ?? 45 33 C9
+    return_type: void
+    name: AcquireScreenFrame
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+  - signature: 48 8B 01 48 85 C0 74 ?? 48 8B 40 ?? 4C 8B 90 ?? ?? ?? ?? 4D 85 D2 74 ?? 66 FF 49 ?? 66 83 79 ?? 00
+    return_type: void
+    name: ReleaseScreenFrame
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 41 81 8E
+    return_type: char
+    name: CanAddonReceiveInput
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+  - signature: 48 85 D2 74 ?? 0F B7 82 ?? ?? ?? ?? 66 89 41
+    return_type: void
+    name: SetAdditionalFilterAddon
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+  - signature: 48 85 D2 74 ?? 0F B7 82 ?? ?? ?? ?? 66 39 41
+    return_type: void
+    name: ClearAdditionalFilterAddon
+    parameters:
+    - type: Component::GUI::AtkStage::FilterStruct*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
 - type: Component::GUI::AtkStage::OperationGuideStruct
   name: OperationGuideStruct
   namespace: Component.GUI
@@ -32851,23 +32944,20 @@ structs:
     name: AtkStage
     offset: 0
   - type: Component::GUI::AtkUnitBase*
-    name: AttachedToAddon
+    name: FocusedAddon
     offset: 8
   - type: Component::GUI::AtkUnitBase*
-    name: AttachedToAddon2
+    name: GuideSourceAddon
     offset: 16
-  - type: byte
-    name: Unk18
+  - type: char
+    name: IsActive
     offset: 24
   - type: char
     name: RequestRefresh
     offset: 25
-  - type: byte
-    name: Unk1A
+  - type: char
+    name: ShowInMouseMode
     offset: 26
-  - type: byte
-    name: Unk1B
-    offset: 27
   - type: __int16
     name: X
     offset: 28
@@ -33358,7 +33448,7 @@ structs:
     name: OffsetY
     offset: 7
   - type: byte
-    name: Unk
+    name: NavigationMode
     offset: 8
   member_functions: []
 - type: Component::GUI::AtkUldManager::DuplicateNodeInfo
@@ -43618,11 +43708,23 @@ structs:
     name: AtkEventInterface
     offset: 0
     base: true
+  - type: Client::Game::UI::ReviveState
+    name: State
+    offset: 16
   - type: float
     name: Timer
     offset: 20
-  - type: byte
-    name: ReviveState
+  - type: float
+    name: Unk18
+    offset: 24
+  - type: float
+    name: Unk1C
+    offset: 28
+  - type: int
+    name: FeastMedalsPrevious
+    offset: 32
+  - type: int
+    name: FeastMedalsCurrent
     offset: 36
   virtual_functions:
   - name: ReceiveEvent
@@ -53128,8 +53230,11 @@ structs:
     name: DisableFixedFontResolution
     offset: 12
   - type: char
-    name: DoFullUpdate
+    name: IsInPvPArea
     offset: 16
+  - type: char
+    name: IsParticipatingInCustomMatchOrSpectating
+    offset: 20
   - type: Client::UI::Arrays::NamePlateNumberArray::NamePlateObjectIntArrayData
     name: ObjectData
     offset: 24
@@ -57454,7 +57559,7 @@ structs:
     name: ApparentActionId
     offset: 192
   - type: unsigned __int16
-    name: UNK_0xC4
+    name: ApparentActionModeParam
     offset: 196
   - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
     name: CommandType
@@ -57486,11 +57591,11 @@ structs:
   - type: byte
     name: RecipeValid
     offset: 224
-  - type: byte
-    name: UNK_0xE1
+  - type: char
+    name: RecipeDataLoaded
     offset: 225
-  - type: byte
-    name: UNK_0xE2
+  - type: Client::UI::Misc::HotbarSlotApparentActionMode
+    name: ApparentActionMode
     offset: 226
   - type: char
     name: IsLoaded
@@ -97481,8 +97586,8 @@ structs:
   - type: Client::Game::UI::Revive*
     name: Revive
     offset: 40
-  - type: byte
-    name: ReviveState
+  - type: Client::Game::UI::ReviveState
+    name: State
     offset: 56
   - type: int
     name: ResurrectionTimeLeft
@@ -152708,7 +152813,7 @@ structs:
       name: this
     - type: unsigned int
       name: index
-  - signature: E8 ?? ?? ?? ?? FF C3 83 FB 05 72 C2
+  - signature: E8 ?? ?? ?? ?? FF C3 83 FB 02 7C ?? 49 8B 8E
     return_type: void
     name: SetDutyActionSlot
     parameters:
@@ -152726,6 +152831,24 @@ structs:
       name: this
     - type: unsigned int
       name: index
+  - signature: E8 ?? ?? ?? ?? FF C3 83 FB 05 72 C2
+    return_type: void
+    name: SetPhantomActionSlot
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule*
+      name: this
+    - type: unsigned int
+      name: index
+    - type: unsigned int
+      name: actionId
+  - signature: E9 ?? ?? ?? ?? FF D2 0F B6 D3 48 8B C8 E8 ?? ?? ?? ??
+    return_type: void
+    name: SetPhantomActionsPresent
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule*
+      name: this
+    - type: char
+      name: present
   static_member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B DA 49 8B F0
     return_type: unsigned int
@@ -155193,6 +155316,38 @@ structs:
       name: id
     - type: unsigned int
       name: depthLayerIndex
+  - signature: E8 ?? ?? ?? ?? EB ?? 48 81 C1 ?? ?? ?? ?? 41 B9
+    return_type: char
+    name: SetAddonDepthLayerAndOrder
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: unsigned int
+      name: depthLayerIndex
+    - type: unsigned __int16
+      name: previousAddonId
+    - type: unsigned __int16
+      name: nextAddonId
+  - signature: E8 ?? ?? ?? ?? B0 ?? EB ?? 41 B0
+    return_type: char
+    name: SetAddonOrderAfter
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: referenceAddon
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: char
+      name: insertImmediately
+  - signature: E8 ?? ?? ?? ?? F6 86 ?? ?? ?? ?? ?? 0F 28 B4 24
+    return_type: void
+    name: UpdateDrawOrderIndexes
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
   - signature: E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE
     return_type: void
     name: UpdateCursor
@@ -178420,14 +178575,14 @@ structs:
     name: AtkUnitBase
     offset: 0
     base: true
-  - type: byte
-    name: Unk220
+  - type: char
+    name: IsGaugeInitialized
     offset: 568
   - type: char
     name: UseSimpleGauge
     offset: 569
-  - type: byte
-    name: Unk222
+  - type: char
+    name: IsConfigLoaded
     offset: 570
   - type: Client::UI::AddonJobHud::AddonJobHudGauge*
     name: GaugeStandardPointer
@@ -178450,6 +178605,9 @@ structs:
   - type: int
     name: TimelineLabelSimple
     offset: 620
+  - type: char
+    name: IsSecondaryGauge
+    offset: 624
   virtual_functions:
   - name: dtor
     offset: 0
@@ -206360,428 +206518,6 @@ structs:
     - type: char
       name: a3
   member_functions: []
-- type: Client::UI::AddonFilter
-  name: AddonFilter
-  namespace: Client.UI
-  union: False
-  size: 832
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkManagedInterface
-    name: AtkManagedInterface
-    offset: 568
-    base: true
-  virtual_functions:
-  - name: dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: eventType
-    - type: int
-      name: eventParam
-    - type: Component::GUI::AtkEvent*
-      name: atkEvent
-    - type: Component::GUI::AtkEventData*
-      name: atkEventData
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: eventType
-    - type: int
-      name: eventParam
-    - type: Component::GUI::AtkEvent*
-      name: atkEvent
-    - type: Component::GUI::AtkEventData*
-      name: atkEventData
-  - name: Open
-    offset: 24
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: unsigned int
-      name: depthLayer
-  - name: Close
-    offset: 32
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: char
-      name: fireCallback
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: char
-      name: disableShowTransition
-    - type: unsigned int
-      name: unsetShowHideFlags
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: char
-      name: disableHideTransition
-    - type: char
-      name: callCloseCallback
-    - type: unsigned int
-      name: setShowHideFlags
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: __int16
-      name: x
-    - type: __int16
-      name: y
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: __int16
-      name: value
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: __int16
-      name: value
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: __int16*
-      name: outX
-    - type: __int16*
-      name: outY
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: byte
-      name: alpha
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: float
-      name: scale
-    - type: char
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: unsigned __int16*
-      name: outWidth
-    - type: unsigned __int16*
-      name: outHeight
-    - type: char
-      name: scaled
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: collisionNode
-  - name: OnMove
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: HandleCursorTypeChange
-    offset: 176
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: ShouldIgnoreInputs
-    offset: 184
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: GetRootNode
-    offset: 192
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: GetWindowBounds
-    offset: 216
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Common::Math::Bounds*
-      name: outBounds
-  - name: GetRootBounds
-    offset: 240
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Common::Math::Bounds*
-      name: outBounds
-  - name: SetDepthLayer
-    offset: 248
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: unsigned int
-      name: depthLayerIndex
-  - name: ShouldAllowCursorFocus
-    offset: 256
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: GetUnitBaseForFocus
-    offset: 280
-    return_type: Component::GUI::AtkUnitBase*
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: Focus
-    offset: 296
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: Initialize
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: Finalizer
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: Update
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: float
-      name: delta
-  - name: Draw
-    offset: 352
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 368
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 376
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: __int16
-      name: x
-    - type: __int16
-      name: y
-  - name: OnSetup
-    offset: 392
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: unsigned int
-      name: valueCount
-    - type: Component::GUI::AtkValue*
-      name: values
-  - name: OnRefresh
-    offset: 408
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: unsigned int
-      name: valueCount
-    - type: Component::GUI::AtkValue*
-      name: values
-  - name: OnRequestedUpdate
-    offset: 416
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: numberArrayData
-    - type: Component::GUI::StringArrayData**
-      name: stringArrayData
-  - name: FireCloseCallback
-    offset: 432
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: SetSizeFromConfig
-    offset: 448
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: float
-      name: width
-    - type: float
-      name: height
-  - name: HandleCustomInput
-    offset: 456
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: Component::GUI::AtkEventData::AtkInputData*
-      name: inputData
-  - name: OnFocusChange
-    offset: 472
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: char
-      name: isFocused
-  - name: OnScreenSizeChange
-    offset: 480
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: int
-      name: width
-    - type: int
-      name: height
-  - name: OnConfigLoaded
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: char
-      name: isInitialLoad
-  - name: OnMouseOver
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: OnMouseOut
-    offset: 504
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: IsFullyLoaded
-    offset: 528
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-  - name: PlaySoundEffect
-    offset: 536
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: int
-      name: soundEffectId
-  - name: HandleDPadInput
-    offset: 552
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: int
-      name: inputId
-    - type: char
-      name: a3
-  - name: HandleBackButtonInput
-    offset: 568
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonFilter*
-      name: this
-    - type: int
-      name: inputId
-    - type: char
-      name: a3
-  member_functions: []
 - type: Client::UI::AddonGatheringMasterpiece
   name: AddonGatheringMasterpiece
   namespace: Client.UI
@@ -215861,6 +215597,27 @@ structs:
     name: AtkManagedInterface
     offset: 568
     base: true
+  - type: Component::GUI::AtkTextNode*
+    name: TextNode
+    offset: 576
+  - type: Component::GUI::AtkResNode*
+    name: TopBorderNode
+    offset: 584
+  - type: Component::GUI::AtkResNode*
+    name: BottomBorderNode
+    offset: 592
+  - type: Component::GUI::AtkResNode*
+    name: LeftBorderNode
+    offset: 600
+  - type: Component::GUI::AtkResNode*
+    name: RightBorderNode
+    offset: 608
+  - type: __int16
+    name: TextX
+    offset: 616
+  - type: __int16
+    name: TextY
+    offset: 618
   virtual_functions:
   - name: dtor
     offset: 0
@@ -224330,6 +224087,439 @@ structs:
     - type: char
       name: a3
   member_functions: []
+- type: Client::UI::AddonFilter
+  name: AddonFilter
+  namespace: Client.UI
+  union: False
+  size: 832
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkManagedInterface
+    name: AtkManagedInterface
+    offset: 568
+    base: true
+  - type: Common::Math::Vector2
+    name: ScreenSize
+    offset: 800
+  - type: float
+    name: QuadDepth
+    offset: 808
+  - type: unsigned int
+    name: RequestingAddonIds
+    offset: 812
+    size: 4
+    is_string: False
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions: []
 - type: Client::UI::AddonFishGuide2
   name: AddonFishGuide2
   namespace: Client.UI
@@ -229497,8 +229687,8 @@ structs:
   - type: Client::UI::AddonNamePlate::NamePlateObject*
     name: NamePlateObjectArray
     offset: 1152
-  - type: byte
-    name: DoFullUpdate
+  - type: char
+    name: IsInPvPArea
     offset: 1160
   - type: unsigned __int16
     name: AlternatePartId
@@ -229910,7 +230100,13 @@ structs:
       name: inputId
     - type: char
       name: a3
-  member_functions: []
+  member_functions:
+  - signature: 40 56 48 83 EC ?? F6 81 ?? ?? ?? ?? ?? 48 8B F1 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 4C 89 74 24 ?? E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? BB
+    return_type: void
+    name: UpdateAllNamePlates
+    parameters:
+    - type: Client::UI::AddonNamePlate*
+      name: this
 - type: Client::UI::AddonOrnamentNoteBook
   name: AddonOrnamentNoteBook
   namespace: Client.UI
