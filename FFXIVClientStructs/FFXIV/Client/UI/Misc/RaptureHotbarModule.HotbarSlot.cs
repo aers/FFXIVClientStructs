@@ -82,11 +82,6 @@ public partial struct RaptureHotbarModule {
         /// <seealso cref="ApparentActionId"/>
         [FieldOffset(0xC9)] public HotbarSlotType ApparentSlotType;
 
-        /// <summary>
-        /// Selects the low-numbered mapping from <see cref="CommandType"/> to the UI intermediate action type.
-        /// </summary>
-        [FieldOffset(0xCA)] public bool UseAlternateIntermediateActionType;
-
         /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 6, 7.
         ///
         /// Controls the color of the displayed cost when 0xCB is 1 or 2:
