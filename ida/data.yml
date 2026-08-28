@@ -184,6 +184,7 @@ functions:
   0x14041E5C0: GetActionTimelineKey
   0x14041E5F0: GetWeaponTimelineKey
   0x1405E72A0: StartSpursJobEntityWorkerThread
+  0x140606730: Client::Game::IsParticipatingInCustomMatchOrSpectating
   0x1406411E0: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140671870: GetScaleListEntryFromScale
   0x1406824D0: GetScaleForListOption
@@ -20586,6 +20587,7 @@ classes:
       0x141321520: ctor
       0x1413218F0: SetCommonNamePlate  # x, y, scale, etc INLINED IN 7.0 in AddonNamePlate OnRequestedUpdate 1411CBBD5
       0x141321B20: SetPlayerNamePlate # player specific nodes INLINED IN 7.0 ^ 1411CBEB6
+      0x141325260: UpdateAllNamePlates
       0x141325310: ToggleTextRenderMode
   Client::UI::AddonCastBarEnemy: # 96
     vtbls:

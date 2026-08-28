@@ -24,9 +24,9 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0x3D)] public byte CostDisplayMode; // to NumberArray idx slotBase + 2
         [FieldOffset(0x3E)] public bool ActionAvailable1; // to NumberArray idx slotBase + 5
         [FieldOffset(0x3F)] public bool ActionAvailable2; // to NumberArray idx slotBase + 6
-        [FieldOffset(0x40)] public bool ActionTargetSatisfied; // to NumberArray idx slotBase + 15
+        [FieldOffset(0x40)] public bool ActionTargetSatisfied; // to NumberArray idx slotBase + 16
         [FieldOffset(0x41)] public bool DrawAnts; // to NumberArray idx slotBase + 14
-        [FieldOffset(0x42)] private byte Unk0x42;
+        [FieldOffset(0x42)] public bool IsTransformationActionUsable; // to NumberArray idx slotBase + 15
 
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 ?? 4C 8D 44 24")]
         public partial HotbarUIIntermediate* Ctor();
