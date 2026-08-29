@@ -57,7 +57,7 @@ public unsafe partial struct InfoProxyItemSearch {
     public partial void ProcessItemHistory(nint packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? ?? ?? ?? 74 ?? ?? ?? ?? 48 8B CF FF 90 ?? ?? ?? ?? ?? ?? 48 8B C8")]
-    public partial void ProcessRequestResult(byte a2, int a3);
+    public partial void ProcessRequestResult(byte resultCount, int errorCode);
 
     /// <summary>
     /// Load player retainer information from a packet into the
