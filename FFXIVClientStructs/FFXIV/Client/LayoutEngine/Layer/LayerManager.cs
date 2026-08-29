@@ -13,6 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [Inherits<IManagerBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct LayerManager {
+    [FieldOffset(0x10)] public uint LayerId;
     [FieldOffset(0x18)] public ushort LayerGroupId;
     [FieldOffset(0x1A)] public ushort FestivalId;
     [FieldOffset(0x1C)] public ushort FestivalSubId;
