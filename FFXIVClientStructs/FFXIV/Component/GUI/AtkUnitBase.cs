@@ -280,6 +280,10 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8D B3")]
     public partial bool UnregisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener);
 
+    /// <returns> <see langword="true"/> when this AtkUnitBase is supposed to be removed from the AtkUnitList(s). </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 44 0F B6 97")]
+    public partial bool UpdateAppliedVisibilityState();
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 

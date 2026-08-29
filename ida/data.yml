@@ -9311,6 +9311,7 @@ classes:
       0x140675F60: GetImageNodeById
       0x140676060: FireCallback
       0x140676E70: MoveDelta
+      0x140677970: UpdateAppliedVisibilityState
       0x140679030: UpdateCollisionNodeList
       0x14067A150: PopulateCollisionNodeList
       0x14067A2B0: CountCollisionNodes
