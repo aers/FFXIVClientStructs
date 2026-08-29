@@ -100,7 +100,7 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x18)] public uint CurrentExp;
     [FieldOffset(0x1C)] public uint NextLevelExp;
 
-    [FieldOffset(0x22), FixedSizeArray] internal FixedSizeArray20<byte> _name;
+    [FieldOffset(0x22), FixedSizeArray(isString: true)] internal FixedSizeArray20<byte> _name;
 
     [FieldOffset(0x3A)] public ushort HullId; // SubmarinePart Key
     [FieldOffset(0x3C)] public ushort SternId; // SubmarinePart Key
