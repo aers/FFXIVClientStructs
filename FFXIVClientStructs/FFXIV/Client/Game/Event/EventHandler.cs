@@ -93,7 +93,7 @@ public unsafe partial struct EventHandler {
 
     /// <summary> Sets the TargetableStatus update flag for every GameObject this EventHandler owns. </summary>
     [VirtualFunction(217)]
-    public partial uint UpdateTargetableStatus();
+    public partial void UpdateTargetableStatus();
 
     /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
     /// <param name="gameObject">The game object to update.</param>
