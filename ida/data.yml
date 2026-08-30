@@ -16502,6 +16502,8 @@ classes:
       205: GetTitle # lua function "GetEventHandlerTitle"
       207: GetEventId
       209: GetNameplateIconForObject # (this, GameObject* gameObject)
+      213: IsActive
+      217: UpdateTargetableStatus
       227: GetIconId
       231: IsOccupied33
       232: GetOccupiedConditionId
