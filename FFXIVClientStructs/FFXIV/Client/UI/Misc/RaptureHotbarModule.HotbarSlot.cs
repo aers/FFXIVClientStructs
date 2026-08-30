@@ -337,9 +337,10 @@ public partial struct RaptureHotbarModule {
     /// <summary>
     /// A special extended <see cref="HotbarSlot"/> used for duty actions
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    [GenerateInterop]
     [Inherits<HotbarSlot>]
-    public struct DutyActionSlot {
+    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    public partial struct DutyActionSlot {
         public const int Size = HotbarSlot.Size + 8;
 
         /// <summary>
