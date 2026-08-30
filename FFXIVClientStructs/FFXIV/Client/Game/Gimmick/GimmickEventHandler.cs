@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Gimmick;
 [Inherits<LuaEventHandler>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 public unsafe partial struct GimmickEventHandler {
-    [FieldOffset(0x2E0)] private void* ExcelSheetWaiter;
+    [FieldOffset(0x2E0)] private void* ContentSheetWaiter;
 }
