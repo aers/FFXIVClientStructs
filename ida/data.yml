@@ -1255,7 +1255,7 @@ classes:
       0x1407A8750: GetColumnOffset
   Component::Text::Localize::NounEn:
     vtbls:
-      - ea: 0x1421879D0
+      - ea: 0x142187738
         base: Component::Text::Localize::Noun
     funcs:
       0x1407AC980: ctor
