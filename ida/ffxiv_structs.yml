@@ -1513,10 +1513,9 @@ enums:
   flags: True
   values:
     "None": 0
-    "Unk1": 1
-    "IsVisible": 2
-    "IsHiddenDueToModal": 4
-    "Unk4": 8
+    "TransitionComplete": 1
+    "Show": 2
+    "Hide": 4
 - type: Component::GUI::AtkUnitBaseLoadState
   name: AtkUnitBaseLoadState
   underlying: byte
@@ -2114,7 +2113,7 @@ enums:
     "PetAction": 16
     "Mount": 17
     "FieldMarker": 18
-    "Unknown19": 19
+    "ClassJob": 19
     "Recipe": 20
     "ChocoboRaceAbility": 21
     "ChocoboRaceItem": 22
@@ -16810,7 +16809,7 @@ structs:
   - type: Client::System::Resource::Handle::ResourceHandle*
     name: ResourceHandles
     offset: 8
-    size: 114
+    size: 115
     is_string: False
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: LegacyBodyDecalColorCBuffer
@@ -26708,19 +26707,6 @@ structs:
       name: raptureHotbarModule
     - type: unsigned int
       name: classJobId
-  member_functions: []
-- type: Client::UI::Misc::RaptureHotbarModule::DutyActionSlot
-  name: DutyActionSlot
-  namespace: Client.UI.Misc
-  union: False
-  size: 240
-  fields:
-  - type: byte
-    name: PrimaryCostType
-    offset: 232
-  - type: char
-    name: IsActive
-    offset: 233
   member_functions: []
 - type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate
   name: HotbarUIIntermediate
@@ -63732,11 +63718,11 @@ structs:
   - type: unsigned int
     name: NextLevelExp
     offset: 28
-  - type: byte
+  - type: char
     name: Name
     offset: 34
     size: 20
-    is_string: False
+    is_string: True
   - type: unsigned __int16
     name: HullId
     offset: 58
@@ -84897,6 +84883,23 @@ structs:
     offset: 2620
     size: 13
     is_string: False
+  member_functions: []
+- type: Client::UI::Misc::RaptureHotbarModule::DutyActionSlot
+  name: DutyActionSlot
+  namespace: Client.UI.Misc
+  union: False
+  size: 240
+  fields:
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot
+    name: HotbarSlot
+    offset: 0
+    base: true
+  - type: byte
+    name: PrimaryCostType
+    offset: 232
+  - type: char
+    name: IsActive
+    offset: 233
   member_functions: []
 - type: Client::UI::Misc::RaptureHotbarModule::Hotbar
   name: Hotbar
@@ -154998,6 +155001,12 @@ structs:
       name: param
     - type: Component::GUI::AtkEventListener*
       name: listener
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 44 0F B6 97
+    return_type: char
+    name: UpdateAppliedVisibilityState
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
   static_member_functions:
   - signature: E8 ?? ?? ?? ?? 66 45 2B E6
     return_type: float
@@ -155596,6 +155605,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -199750,6 +199773,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -200018,6 +200055,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -200250,6 +200301,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -220094,6 +220159,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -220317,6 +220396,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -220558,6 +220651,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -240788,6 +240895,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -246380,6 +246501,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -246629,6 +246764,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -251090,6 +251239,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -262775,6 +262938,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -262995,6 +263172,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -263216,6 +263407,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -263436,6 +263641,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -263656,6 +263875,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -263739,6 +263972,243 @@ structs:
     return_type: int
     parameters:
     - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+  member_functions: []
+- type: Client::Game::Gimmick::GimmickEventHandler
+  name: GimmickEventHandler
+  namespace: Client.Game.Gimmick
+  union: False
+  size: 744
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+    base: true
+  - type: __int64
+    name: ContentSheetWaiter
+    offset: 736
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
       name: this
   member_functions: []
 - type: Client::UI::AddonJobHudAST0
@@ -265811,6 +266281,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -266039,6 +266523,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -266259,6 +266757,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -266584,6 +267096,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -266917,6 +267443,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -267000,6 +267540,714 @@ structs:
     return_type: int
     parameters:
     - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  member_functions: []
+- type: Client::Game::Gimmick::GimmickAccessor
+  name: GimmickAccessor
+  namespace: Client.Game.Gimmick
+  union: False
+  size: 784
+  fields:
+  - type: Client::Game::Gimmick::GimmickEventHandler
+    name: GimmickEventHandler
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  member_functions: []
+- type: Client::Game::Gimmick::GimmickBill
+  name: GimmickBill
+  namespace: Client.Game.Gimmick
+  union: False
+  size: 744
+  fields:
+  - type: Client::Game::Gimmick::GimmickEventHandler
+    name: GimmickEventHandler
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  member_functions: []
+- type: Client::Game::Gimmick::GimmickRect
+  name: GimmickRect
+  namespace: Client.Game.Gimmick
+  union: False
+  size: 792
+  fields:
+  - type: Client::Game::Gimmick::GimmickEventHandler
+    name: GimmickEventHandler
+    offset: 0
+    base: true
+  - type: byte
+    name: Unk310
+    offset: 784
+  - type: char
+    name: Active
+    offset: 785
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
       name: this
   member_functions: []
 - type: Client::UI::AddonJobHudACN0
@@ -269999,6 +271247,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -270253,6 +271515,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -270493,6 +271769,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -270915,6 +272205,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -271183,6 +272487,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -271428,6 +272746,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -272239,6 +273571,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -273098,6 +274444,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -273391,6 +274751,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -273669,6 +275043,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -274110,6 +275498,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -274486,6 +275888,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -275076,6 +276492,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
@@ -275765,6 +277195,20 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
   - name: UpdateSharedTimelineState
     offset: 2024
     return_type: void
