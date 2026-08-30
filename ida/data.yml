@@ -1252,7 +1252,7 @@ classes:
       0: dtor
       1: Resolve
     funcs:
-      0x1407A7730: GetColumnOffset
+      0x1407A8750: GetColumnOffset
   Component::Text::Localize::NounEn:
     vtbls:
       - ea: 0x1421879D0
