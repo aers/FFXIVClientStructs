@@ -10003,6 +10003,10 @@ classes:
     vtbls:
       - ea: 0x142178678
         base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x140726A40: Load
+      0x140726C80: CreateGraphics
+      0x140726F70: CreateCollision
   Client::LayoutEngine::Environment::LayoutEnvironment:
     vtbls:
       - ea: 0x1421786C0
