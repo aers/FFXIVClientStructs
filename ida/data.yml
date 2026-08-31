@@ -7254,6 +7254,15 @@ classes:
       5: RegisterWithRenderer
     funcs:
       0x140296C00: ComputeAxisAlignedBounds
+  Client::Graphics::Render::TerrainVerticalFogPlate:
+    vtbls:
+      - ea: 0x142144F58
+        base: Client::Graphics::Render::RenderObject
+    vfuncs:
+      4: ReleaseResources
+      5: RegisterWithRenderer
+    funcs:
+      0x1402AC970: ComputeAxisAlignedBounds
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x142144950
