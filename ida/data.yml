@@ -7235,6 +7235,16 @@ classes:
     vtbls:
       - ea: 0x142144A78
         base: Client::Graphics::Render::RenderObject
+  Client::Graphics::Render::TerrainGroundPlate:
+    vtbls:
+      - ea: 0x142144D18
+        base: Client::Graphics::Render::RenderObject
+    vfuncs:
+      4: ReleaseResources
+      5: RegisterWithRenderer
+      6: HasAllocatedMemory
+    funcs:
+      0x14028EDE0: ComputeAxisAlignedBounds
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x142144950
