@@ -7,26 +7,26 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
-// Client::Graphics::Render::TerrainWaterPlate
+// Client::Graphics::Render::VerticalFogPlate
 //   Client::Graphics::Render::RenderObject
 //     Client::Graphics::ReferencedClassBase
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe partial struct TerrainWaterPlate {
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
+public unsafe partial struct VerticalFogPlate {
     [FieldOffset(0x10)] internal byte Unk10;
     [FieldOffset(0x18)] public ushort TileWidth;
     [FieldOffset(0x1A)] public TerrainGridCoordinates GridCoordinates;
-    [FieldOffset(0x20)] internal ulong Unk20;
-    [FieldOffset(0x28)] public ModelResourceHandle* ModelResourceHandle;
-    [FieldOffset(0x30)] public ConstantBufferPointer<TerrainWaterPlateConstants> ConstantBuffer;
-    [FieldOffset(0x38)] internal byte Unk38;
+    [FieldOffset(0x20)] public ModelResourceHandle* ModelResourceHandle;
+    [FieldOffset(0x28)] public ConstantBufferPointer<VerticalFogPlateConstants> ConstantBuffer;
 
-    [MemberFunction("48 83 EC 38 48 8B 41 28 4C 8B D2")]
+    [MemberFunction("48 83 EC 38 48 8B 41 20 0F 57 DB")]
     public partial AxisAlignedBounds* ComputeAxisAlignedBounds(AxisAlignedBounds* outBounds);
 
     public readonly Vector3 Translation => new(TileWidth * (GridCoordinates.TileX + 0.5f), 0.0f, TileWidth * (GridCoordinates.TileZ + 0.5f));
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public struct TerrainWaterPlateConstants;
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct VerticalFogPlateConstants {
+    [FieldOffset(0x0)] public Vector3 Translation;
+}

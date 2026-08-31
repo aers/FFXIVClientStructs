@@ -7235,7 +7235,7 @@ classes:
     vtbls:
       - ea: 0x142144A78
         base: Client::Graphics::Render::RenderObject
-  Client::Graphics::Render::TerrainGroundPlate:
+  Client::Graphics::Render::TerrainPlate:
     vtbls:
       - ea: 0x142144D18
         base: Client::Graphics::Render::RenderObject
@@ -7245,7 +7245,7 @@ classes:
       6: HasAllocatedMemory
     funcs:
       0x14028EDE0: ComputeAxisAlignedBounds
-  Client::Graphics::Render::TerrainWaterPlate:
+  Client::Graphics::Render::WaterPlate:
     vtbls:
       - ea: 0x142144DF8
         base: Client::Graphics::Render::RenderObject
@@ -7254,7 +7254,7 @@ classes:
       5: RegisterWithRenderer
     funcs:
       0x140296C00: ComputeAxisAlignedBounds
-  Client::Graphics::Render::TerrainVerticalFogPlate:
+  Client::Graphics::Render::VerticalFogPlate:
     vtbls:
       - ea: 0x142144F58
         base: Client::Graphics::Render::RenderObject
