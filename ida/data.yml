@@ -5850,10 +5850,14 @@ classes:
       23: GetData
       33: Load
     funcs:
+      0x1402FE810: GetExplicitAsync
+      0x1402FE8B0: GetExplicitSync
+      0x1402FE940: GetAsync
+      0x1402FEA00: GetSync
       0x1402FEAC0: DecRef
       0x1402FEAF0: IncRef
-      0x1402FFFB0: FinishLoad
       0x1402FECC0: ctor
+      0x1402FFFB0: FinishLoad
   Client::System::Resource::Handle::DefaultResourceHandle:
     vtbls:
       - ea: 0x142147440
