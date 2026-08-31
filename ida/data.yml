@@ -7895,6 +7895,12 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x14044EB30: ctor
+      0x14044EFE0: Load
+      0x140450AA0: LoadTileModels
+      0x140450D50: LoadGrass
+      0x14044F2F0: CreateTerrainPlates
+      0x14044F670: CreateWaterPlates
+      0x14044F930: CreateVerticalFogPlates
   Client::Graphics::Scene::Light:
     vtbls:
       - ea: 0x142163EB0
