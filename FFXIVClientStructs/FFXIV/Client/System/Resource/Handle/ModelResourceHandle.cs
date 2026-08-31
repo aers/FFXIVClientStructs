@@ -14,9 +14,9 @@ public unsafe partial struct ModelResourceHandle {
     [FieldOffset(0xC8)] public byte* ModelData; // StringTable, ModelHeader ...
 
     [FieldOffset(0x160)] public AxisAlignedBounds* AxisAlignedBounds;
-    [FieldOffset(0x168)] public AxisAlignedBounds* TerrainGroundBounds; // If null, AxisAlignedBounds is used instead
-    [FieldOffset(0x170)] public AxisAlignedBounds* TerrainWaterBounds; // If null, AxisAlignedBounds is used instead
-    [FieldOffset(0x178)] public AxisAlignedBounds* TerrainVerticalFogBounds;
+    [FieldOffset(0x168)] public AxisAlignedBounds* TerrainBounds; // If null, AxisAlignedBounds is used instead
+    [FieldOffset(0x170)] public AxisAlignedBounds* WaterBounds; // If null, AxisAlignedBounds is used instead
+    [FieldOffset(0x178)] public AxisAlignedBounds* VerticalFogBounds;
 
     [FieldOffset(0x228)] public MaterialResourceHandle** MaterialResourceHandles;
 
