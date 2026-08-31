@@ -7245,6 +7245,15 @@ classes:
       6: HasAllocatedMemory
     funcs:
       0x14028EDE0: ComputeAxisAlignedBounds
+  Client::Graphics::Render::TerrainWaterPlate:
+    vtbls:
+      - ea: 0x142144DF8
+        base: Client::Graphics::Render::RenderObject
+    vfuncs:
+      4: ReleaseResources
+      5: RegisterWithRenderer
+    funcs:
+      0x140296C00: ComputeAxisAlignedBounds
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x142144950
