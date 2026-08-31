@@ -6136,6 +6136,14 @@ classes:
     vtbls:
       - ea: 0x142149898
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x1403242C0: GetFileVersion
+      0x1403242E0: GetTileCount
+      0x140324310: GetTileWidth
+      0x1403243A0: GetClipDistance
+      0x1403243E0: GetUnk10
+      0x140324430: GetFlag
+      0x1403244C0: GetTileCoordinateArray
   Client::System::Resource::Handle::TerrainResourceHandleFactory:
     vtbls:
       - ea: 0x142149A00
