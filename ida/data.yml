@@ -20240,6 +20240,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14111D830: ctor
+      0x14111EC30: SetPage
   Client::UI::AddonTalk: # 40
     vtbls:
       - ea: 0x142235E98
