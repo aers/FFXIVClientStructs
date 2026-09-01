@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.Havok.Common.Base.Math.Quaternion;
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct hkQuaternionf {
+public unsafe partial struct hkQuaternionf : IEquatable<hkQuaternionf> {
     [FieldOffset(0x00)] public float X;
     [FieldOffset(0x04)] public float Y;
     [FieldOffset(0x08)] public float Z;
@@ -30,4 +30,17 @@ public unsafe partial struct hkQuaternionf {
 
     [MemberFunction("0F 28 11 F3 0F 11 4C 24")]
     public partial byte isOk(float epsilon);
+
+    public static bool operator ==(hkQuaternionf left, hkQuaternionf right) => left.Equals(right);
+    public static bool operator !=(hkQuaternionf left, hkQuaternionf right) => !left.Equals(right);
+
+    public bool Equals(hkQuaternionf other) {
+        return X.Equals(other.X)
+            && Y.Equals(other.Y)
+            && Z.Equals(other.Z)
+            && W.Equals(other.W);
+    }
+
+    public override bool Equals(object? obj) => obj is hkQuaternionf other && Equals(other);
+    public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
 }
