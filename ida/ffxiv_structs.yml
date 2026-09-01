@@ -115710,6 +115710,63 @@ structs:
       name: openFileResult
     - type: byte
       name: a4
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 38 35
+    return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: GetExplicitAsync
+    parameters:
+    - type: Client::System::Resource::ResourceCategory*
+      name: category
+    - type: unsigned int*
+      name: type
+    - type: char*
+      name: path
+    - type: __int64
+      name: unknown
+    - type: __int64
+      name: unkDebugPtr
+    - type: unsigned int
+      name: unkDebugInt
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 40 0F B6 CF
+    return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: GetExplicitSync
+    parameters:
+    - type: Client::System::Resource::ResourceCategory*
+      name: category
+    - type: unsigned int*
+      name: type
+    - type: char*
+      name: path
+    - type: __int64
+      name: unknown
+    - type: __int64
+      name: unkDebugPtr
+    - type: unsigned int
+      name: unkDebugInt
+  - signature: E8 ?? ?? ?? ?? 4D 8B B5
+    return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: GetAsync
+    parameters:
+    - type: char*
+      name: path
+    - type: __int64
+      name: unknown
+    - type: __int64
+      name: unkDebugPtr
+    - type: unsigned int
+      name: unkDebugInt
+  - signature: E8 ?? ?? ?? ?? 48 89 43 ?? 4D 85 F6
+    return_type: Client::System::Resource::Handle::ResourceHandle*
+    name: GetSync
+    parameters:
+    - type: char*
+      name: path
+    - type: __int64
+      name: unknown
+    - type: __int64
+      name: unkDebugPtr
+    - type: unsigned int
+      name: unkDebugInt
 - type: Client::UI::Agent::AgentActionMenu
   name: AgentActionMenu
   namespace: Client.UI.Agent
