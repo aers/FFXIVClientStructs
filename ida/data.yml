@@ -9851,7 +9851,7 @@ classes:
       5: SetLayer
       6: GetSizeOf
       7: GetPrimaryPath
-      73: GetSphereBounds
+      13: GetSphereBounds
       14: GetTranslation
       15: GetRotation
       16: GetScale
