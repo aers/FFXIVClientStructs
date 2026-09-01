@@ -9887,7 +9887,7 @@ classes:
       69: SetScaleImpl
       70: GetTransformImpl
       71: SetTransformImpl
-      72: GetSphereBoundsImpl
+      72: GetBoundingSphereImpl
       73: GetAxisAlignedBoundsImpl
       74: GetOrientedBoundsImpl
     funcs:
