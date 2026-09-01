@@ -69,7 +69,9 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5AFB)] public byte MapMarkerCount;
     [FieldOffset(0x5AFC)] public byte TempMapMarkerCount;
     [FieldOffset(0x5AFE)] public byte FlagMarkerCount;
+    [FieldOffset(0x5AFF)] public byte WarpMarkerCount;
     [FieldOffset(0x5B00)] public byte MiniMapMarkerCount;
+    [FieldOffset(0x5B01)] public byte WarpMarkerFlags;
     [FieldOffset(0x5B08)] public bool IsPlayerMoving;
     [FieldOffset(0x5B10)] public bool IsControlKeyPressed;
 
