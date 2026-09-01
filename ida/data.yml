@@ -9851,6 +9851,7 @@ classes:
       5: SetLayer
       6: GetSizeOf
       7: GetPrimaryPath
+      73: GetSphereBounds
       14: GetTranslation
       15: GetRotation
       16: GetScale
@@ -9886,7 +9887,9 @@ classes:
       69: SetScaleImpl
       70: GetTransformImpl
       71: SetTransformImpl
-      72: GetBoundingSphereImpl
+      72: GetSphereBoundsImpl
+      73: GetAxisAlignedBoundsImpl
+      74: GetOrientedBoundsImpl
     funcs:
       0x1406FB030: IsPrimaryReady
   Client::LayoutEngine::LayoutWorld:
