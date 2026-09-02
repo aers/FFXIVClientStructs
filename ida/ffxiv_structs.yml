@@ -45812,6 +45812,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::ILayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::ILayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -46066,6 +46074,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::ILayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::ILayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions:
   - signature: E8 ?? ?? ?? ?? 3C ?? 75 ?? 8B D5
     return_type: char
@@ -67620,6 +67644,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -67874,6 +67906,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance
   name: BgPartsLayoutInstance
@@ -67968,6 +68016,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -68222,6 +68278,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::CullingBoxLayoutInstance
   name: CullingBoxLayoutInstance
@@ -68289,6 +68361,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::CullingBoxLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CullingBoxLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -68543,6 +68623,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CullingBoxLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CullingBoxLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::DecalLayoutInstance
   name: DecalLayoutInstance
@@ -68610,6 +68706,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -68864,6 +68968,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DecalLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance
   name: EnvLocationLayoutInstance
@@ -68940,6 +69060,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -69194,6 +69322,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvLocationLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance
   name: EnvSpaceLayoutInstance
@@ -69264,6 +69408,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -69518,6 +69670,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EnvSpaceLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::LayerManager
   name: LayerManager
@@ -69673,6 +69841,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -69927,6 +70103,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WeaponLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::LayoutWorld
   name: LayoutWorld
@@ -91191,6 +91383,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::LightLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -91445,6 +91645,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::LightLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData
   name: ControlPointData
@@ -114276,6 +114492,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -114530,6 +114754,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MarkerLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetMarkerSize
     offset: 624
   member_functions: []
@@ -114605,6 +114845,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PathLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -114859,6 +115107,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PathLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::RangeLayoutInstance
   name: RangeLayoutInstance
@@ -114929,6 +115193,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -115183,6 +115455,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::RangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   name: TriggerBoxLayoutInstance
@@ -115278,6 +115566,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -115532,6 +115828,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::Sound::SoundManager::SoundDataMemory
   name: SoundDataMemory
@@ -124795,6 +125107,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -125049,6 +125369,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ChairMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance
   name: ClickableRangeLayoutInstance
@@ -125113,6 +125449,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -125367,6 +125711,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClickableRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance
   name: ClientPathLayoutInstance
@@ -125437,6 +125797,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -125691,6 +126059,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ClientPathLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance
   name: CollisionBoxLayoutInstance
@@ -125776,6 +126160,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -126030,6 +126422,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -126100,6 +126508,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -126354,6 +126770,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::DoorRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance
   name: EventEffectRangeLayoutInstance
@@ -126439,6 +126871,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -126693,6 +127133,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -126790,6 +127246,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -127044,6 +127508,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ExitRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -127117,6 +127597,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -127371,6 +127859,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::FateRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance
   name: GameContentsRangeLayoutInstance
@@ -127438,6 +127942,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -127692,6 +128204,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -127765,6 +128293,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -128019,6 +128555,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::LineVfxLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance
   name: MapRangeLayoutInstance
@@ -128113,6 +128665,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -128367,6 +128927,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::MapRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -128440,6 +129016,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -128694,6 +129278,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PositionMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance
   name: PrefetchRangeLayoutInstance
@@ -128761,6 +129361,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -129015,6 +129623,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PrefetchRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -129091,6 +129715,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::QuestMarkerLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::QuestMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -129345,6 +129977,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::QuestMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::QuestMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance
   name: ServerPathLayoutInstance
@@ -129409,6 +130057,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -129663,6 +130319,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ServerPathLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance
   name: ShowHideRangeLayoutInstance
@@ -129736,6 +130408,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -129990,6 +130670,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -130060,6 +130756,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::SphereCastRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::SphereCastRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -130314,6 +131018,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::SphereCastRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::SphereCastRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::TargetMarkerLayoutInstance
   name: TargetMarkerLayoutInstance
@@ -130381,6 +131101,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::TargetMarkerLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TargetMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -130635,6 +131363,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TargetMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TargetMarkerLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::VfxLayoutInstance
   name: VfxLayoutInstance
@@ -130741,6 +131485,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -130995,6 +131747,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VfxLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance
   name: VolumetricCloudLayoutInstance
@@ -131065,6 +131833,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -131319,6 +132095,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::WaterRangeLayoutInstance
   name: WaterRangeLayoutInstance
@@ -131386,6 +132178,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::WaterRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WaterRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -131640,6 +132440,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WaterRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::WaterRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetLayerMask
     offset: 624
     return_type: unsigned __int64
@@ -136464,6 +137280,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -136718,6 +137542,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GameObjectLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance
   name: PopRangeLayoutInstance
@@ -136794,6 +137634,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -137048,6 +137896,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::PopRangeLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::System::Resource::Handle::AmbientSetResourceHandle
   name: AmbientSetResourceHandle
@@ -148343,6 +149207,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -148597,6 +149469,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::CharacterLayoutInstance
   name: CharacterLayoutInstance
@@ -148709,6 +149597,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -148963,6 +149859,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::CharacterLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance
   name: EventObjectLayoutInstance
@@ -149027,6 +149939,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -149281,6 +150201,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventObjectLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::GatheringLayoutInstance
   name: GatheringLayoutInstance
@@ -149345,6 +150281,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -149599,6 +150543,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::GatheringLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::LayoutEngine::Layer::TreasureLayoutInstance
   name: TreasureLayoutInstance
@@ -149663,6 +150623,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -149917,6 +150885,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::TreasureLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::UI::Agent::AgentInventoryContext
   name: AgentInventoryContext
@@ -151218,6 +152202,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -151472,6 +152464,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::BattleNpcLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetQuantizedPosition
     offset: 624
     return_type: Client::LayoutEngine::Layer::QuantizedCharacterPosition*
@@ -151575,6 +152583,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -151829,6 +152845,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::EventNpcLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   - name: GetQuantizedPosition
     offset: 624
     return_type: Client::LayoutEngine::Layer::QuantizedCharacterPosition*
@@ -156624,6 +157656,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -156878,6 +157918,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 FF C7 4D 8D 76 ?? 44 3B 7B
     return_type: char
@@ -221393,6 +222449,14 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
       name: this
+  - name: GetSphereBounds
+    offset: 104
+    return_type: Common::Math::SphereBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
+      name: this
+    - type: Common::Math::SphereBounds*
+      name: outSphereBounds
   - name: GetTranslation
     offset: 112
     return_type: System::Numerics::Vector3*
@@ -221647,6 +222711,22 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: result
+  - name: GetAxisAlignedBoundsImpl
+    offset: 584
+    return_type: Common::Math::AxisAlignedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outAlignedBounds
+  - name: GetOrientedBoundsImpl
+    offset: 592
+    return_type: Common::Math::OrientedBounds*
+    parameters:
+    - type: Client::LayoutEngine::Layer::SoundLayoutInstance*
+      name: this
+    - type: Common::Math::OrientedBounds*
+      name: outOrientedBounds
   member_functions: []
 - type: Client::UI::AddonAOZNotebook
   name: AddonAOZNotebook
@@ -266418,8 +267498,14 @@ structs:
     name: FlagMarkerCount
     offset: 23294
   - type: byte
+    name: WarpMarkerCount
+    offset: 23295
+  - type: byte
     name: MiniMapMarkerCount
     offset: 23296
+  - type: byte
+    name: WarpMarkerFlags
+    offset: 23297
   - type: char
     name: IsPlayerMoving
     offset: 23304
