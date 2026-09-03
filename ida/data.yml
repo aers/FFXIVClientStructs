@@ -3582,6 +3582,7 @@ classes:
       0x140C0F810: SetData
   Client::Game::BattleLog:
     funcs:
+      0x140C4F5F0: AddLogMessage3Params
       0x140C4FA20: AddLogMessage
       0x140C503B0: AddActionLogMessage
       0x140C50970: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
@@ -3589,6 +3590,9 @@ classes:
   Client::UI::Misc::ScreenLog:
     funcs:
       0x1409AF630: ConvertLogMessageIdToScreenLogKind
+      0x1409AF970: AddScreenLogMessage
+      0x1409AF9D0: AddLootedItemScreenLogMessage
+      0x1409AFA80: AddScreenLogEntry
   Client::Game::UI::MarkingController:
     instances:
       - ea: 0x142ADE940 # note: it's actually a member of UIState instance
