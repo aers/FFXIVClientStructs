@@ -8,7 +8,14 @@ public unsafe partial struct ScreenLog {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 44 8B C0")]
     public static partial int ConvertLogMessageIdToScreenLogKind(int logMessageId, int* outOption); // TODO: use ScreenLogOption instead of int
 
-    public static int ConvertLogMessageIdToScreenLogKind(int logMessageId, ScreenLogOption* outOption) => ConvertLogMessageIdToScreenLogKind(logMessageId, (int*)outOption);
+    public static int ConvertLogMessageIdToScreenLogKind(int logMessageId, out ScreenLogOption outOption) {
+        var option = 0;
+#pragma warning disable CS0618
+        var ret = ConvertLogMessageIdToScreenLogKind(logMessageId, &option);
+#pragma warning restore CS0618
+        outOption = (ScreenLogOption)option;
+        return ret;
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 73 ?? 85 F6 74 ?? 8B C6")]
     public static partial void AddScreenLogMessage(Character* target, int screenLogKind, int value);
