@@ -15,16 +15,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 public unsafe partial struct GoldSaucerArcadeMachineEventHandler {
     [FieldOffset(0x1D0)] private bool Unk1D0;
     [FieldOffset(0x1D8)] public GoldSaucerEventHandler.EventContext EventContext;
-
     [FieldOffset(0x2E8), FixedSizeArray] internal FixedSizeArray4<uint> _eventSceneTaskIDs;
     [FieldOffset(0x2F8)] public StdVector<DirectorTodo> DirectorTodos;
-
     [FieldOffset(0x310)] public GoldSaucerArcadeMachineState State;
     [FieldOffset(0x314)] public GoldSaucerArcadeMachineUIState UIState;
     [FieldOffset(0x318)] public uint StartActionTimelineId;
     [FieldOffset(0x31C), FixedSizeArray] internal FixedSizeArray4<ResultPresentation> _resultPresentations;
     [FieldOffset(0x340)] private SheetWaiter ExcelSheetWaiter;
-
     /// <remarks>GoldSaucerArcadeMachine.Name</remarks>
     [FieldOffset(0x3A0)] public Utf8String Name;
     [FieldOffset(0x408)] public Utf8String* CurrentDescription;
@@ -34,7 +31,6 @@ public unsafe partial struct GoldSaucerArcadeMachineEventHandler {
     [FieldOffset(0x478)] public Utf8String Description;
     /// <remarks>GoldSaucerArcadeMachine.TotalPayoutText</remarks>
     [FieldOffset(0x4E0)] public Utf8String TotalPayoutText;
-
     [FieldOffset(0x548)] public int TimeoutSeconds;
     [FieldOffset(0x54C)] public int TimeLimit;
     [FieldOffset(0x550)] public uint EndTimestamp;
@@ -61,37 +57,32 @@ public unsafe partial struct GoldSaucerArcadeMachineEventHandler {
     [FieldOffset(0x57B)] public byte RoundsPlayed;
     [FieldOffset(0x57C)] public byte RoundCount;
     [FieldOffset(0x57D)] public byte CurrentRound;
+
     [FieldOffset(0x580)] private uint Flags;
-
-    [MemberFunction("48 8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 40 53 48 83 EC ?? 66 89 91")]
-    public static partial BattleChara* GetLocalPlayer();
-    
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 45 33 C0 33 D2 48 8B CE")]
-    public static partial void BeginAgentGame();
-    
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D7 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B CB 48 83 C4 ?? 5F 5B E9 ?? ?? ?? ?? 3B BB")]
-    public static partial void PrepareNextRound();
-
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 BC 24 ?? ?? ?? ?? ?? 0F 86")]
-    public static partial void ShowRoundResult();
 
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 0F B7 D9 45 33 C0 B9 ?? ?? ?? ?? 33 D2 E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 8B D3 48 89 6C 24")]
     public static partial GoldSaucerArcadeMachineEventHandler* Create(ushort eventId);
-    
+
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 E8 ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D B7")]
-    public partial GoldSaucerArcadeMachineEventHandler* Ctor();
+    public partial GoldSaucerArcadeMachineEventHandler* Ctor(ushort eventId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? B8")]
     public partial void Finalizer();
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 45 33 C0 33 D2 48 8B CE")]
+    public partial void BeginAgentGame();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D7 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B CB 48 83 C4 ?? 5F 5B E9 ?? ?? ?? ?? 3B BB")]
+    public partial void PrepareNextRound();
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 BC 24 ?? ?? ?? ?? ?? 0F 86")]
+    public partial void ShowRoundResult();
 
     [MemberFunction("40 53 48 83 EC ?? 66 89 91 ?? ?? ?? ?? 48 8B D9 33 D2")]
     public partial void SetProgress(ushort progress);
 
     [MemberFunction("40 53 48 83 EC ?? 83 A1 ?? ?? ?? ?? ?? 48 8B D9 48 8B 01")]
     public partial void PauseTimer();
-
-    [MemberFunction("83 A1 ?? ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 4C 8B DC")]
-    public partial void ResumeTimer();
 
     [MemberFunction("4C 8B DC 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 8B EA")]
     public partial DirectorTodo* GetOrCreateDirectorTodo(uint todoId);
