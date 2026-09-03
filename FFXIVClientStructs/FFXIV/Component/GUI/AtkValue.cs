@@ -107,6 +107,9 @@ public unsafe partial struct AtkValue {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 8B 8E")]
     public partial bool CopyVectorValue(uint index, AtkValue* outValue);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 C0 ?? 83 F8 ?? 77 ?? 48 63 C8")]
+    public partial int GetInt();
+
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 B7")]
     private partial void ReleaseManagedMemoryInternal();
 

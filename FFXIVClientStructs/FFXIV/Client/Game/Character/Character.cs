@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Control.MoveControl;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
@@ -190,6 +191,9 @@ public unsafe partial struct Character {
 
     [VirtualFunction(82)]
     public partial ActionEffectHandler* GetActionEffectHandler();
+
+    [VirtualFunction(83)]
+    public partial StdDeque<ScreenLogEntry>* GetScreenLogManager();
 
     [VirtualFunction(84)]
     public partial ForayInfo* GetForayInfo();
