@@ -44,10 +44,10 @@ public unsafe partial struct ContentDirector {
     [VirtualFunction(354)]
     public partial Utf8String* GetInstanceContentText(uint rowId);
 
-    [MemberFunction("40 55 56 41 57 48 83 EC ?? 44 8B FA 4C 89 74 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 80 AB ?? ?? ?? ?? ?? 75")]
     public partial void* LoadInstanceContentTexts(uint startRowId, uint rowCount);
 
-    [MemberFunction("2B 91 FC 0C 00 00 4C 8B C9 8B C2 49 8B D0 48 6B C8 68 49 03 89 88 0C 00 00 E9 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 48 8D 76 ?? 3B FD"), GenerateStringOverloads]
     public partial void SetInstanceContentText(uint rowId, CStringPointer text);
 
     /// <summary>Changes the state of a map effect.</summary>
