@@ -112,6 +112,10 @@ public unsafe partial struct AgentMap {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 48 8D B1")]
     public partial void UpdateEventMapMarkers(StdVector<Pointer<MapMarkerData>>* markerPtrs);
 
+    // For tooltip context the lowest 3 bytes are the index and the highest 1 byte is the tooltip type.
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 41 56 41 57 48 83 EC ?? 41 8B D8")]
+    public partial bool CreateTooltip(Utf8String* tooltipString, uint tooltipContext);
+
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
         if (MiniMapMarkerCount >= MiniMapMarkers.Length) return false;
         var marker = new MiniMapMarker();
@@ -254,7 +258,7 @@ public unsafe partial struct QuestLinkContainer {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public struct QuestLinkMarker {
-    [FieldOffset(0x00)] public byte Valid; // possibly a bool, used at sub_140BD40B0+A9 (6.48) 
+    [FieldOffset(0x00)] public byte Valid; // possibly a bool, used at sub_140BD40B0+A9 (6.48)
     [FieldOffset(0x02)] public ushort QuestId;
     [FieldOffset(0x08)] public Utf8String TooltipText;
     [FieldOffset(0x70)] public int RecommendedLevel;

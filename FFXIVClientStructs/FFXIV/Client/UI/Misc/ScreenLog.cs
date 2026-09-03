@@ -4,8 +4,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [GenerateInterop]
 public unsafe partial struct ScreenLog {
+    [Obsolete]
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 44 8B C0")]
     public static partial int ConvertLogMessageIdToScreenLogKind(int logMessageId, int* outOption); // TODO: use ScreenLogOption instead of int
+
+    public static int ConvertLogMessageIdToScreenLogKind(int logMessageId, ScreenLogOption* outOption) => ConvertLogMessageIdToScreenLogKind(logMessageId, (int*)outOption);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 73 ?? 85 F6 74 ?? 8B C6")]
     public static partial void AddScreenLogMessage(Character* target, int screenLogKind, int value);

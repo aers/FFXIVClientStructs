@@ -15428,6 +15428,7 @@ classes:
       0x140FB8990: OpenMap
       0x140FBA410: AddGatheringTempMarker
       0x140FBA730: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140FBDA20: CreateTooltip # (this, (Utf8String*) tooltipString, (uint) tooltipContext
       0x140FC0B20: ctor
       0x140FC17A0: Finalizer
       0x140FC37D0: ShowMap
