@@ -27352,7 +27352,10 @@ classes:
       - ea: 0x14231B0B8
         base: Client::System::Scheduler::Base::SchedulerState
     vfuncs:
+      7: IsFinished
       9: ProcessEvent
+      16: ResolveText
+      31: Publish
       47: Event10
       49: Event15
       51: Event16
@@ -27370,10 +27373,6 @@ classes:
     vtbls:
       - ea: 0x14231EC30
         base: Client::System::Scheduler::Clip::BaseClip
-    vfuncs:
-      7: IsFinished
-      16: ResolveText
-      31: Publish
     funcs:
       0x1419114F0: ctor
       0x141911DA0: UpdateTalkSubtitleLayout
