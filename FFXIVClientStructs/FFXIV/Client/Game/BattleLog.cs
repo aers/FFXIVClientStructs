@@ -10,8 +10,8 @@ public unsafe partial struct BattleLog {
     public static partial void AddLogMessage3Params(
         uint logMessageId,
         BattleChara* source,
-        uint value1,
-        uint value2,
+        int value1,
+        int value2,
         int value3,
         float maxDistance);
 
@@ -19,10 +19,10 @@ public unsafe partial struct BattleLog {
     public static partial void AddLogMessage(
         uint logMessageId,
         BattleChara* source,
-        uint value1,
-        uint value2,
+        int value1,
+        int value2,
         int value3,
-        uint value4,
+        int value4,
         float maxDistance);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B CC 83 E9")]
@@ -32,10 +32,10 @@ public unsafe partial struct BattleLog {
         GameObject* target,
         ActionType actionKind,
         uint actionId,
-        uint value1,
+        int value1,
         int value2,
         int value3,
-        uint value4,
+        int value4,
         float maxDistance);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 85 F6 0F 84")]
@@ -45,10 +45,9 @@ public unsafe partial struct BattleLog {
         int logMessageId,
         byte actionKind,
         uint actionId,
-        uint value1,
+        int value1,
         int value2,
-        int value3,
-        int value4);
+        int value3);
 
     [MemberFunction("E8 ?? ?? ?? ?? BF ?? ?? ?? ?? EB 39")]
     public static partial void AddToScreenLogWithScreenLogKind(
@@ -58,8 +57,7 @@ public unsafe partial struct BattleLog {
         byte option,
         byte actionKind,
         uint actionId,
-        uint value1,
+        int value1,
         int value2,
-        int value3,
-        int value4);
+        int value3);
 }

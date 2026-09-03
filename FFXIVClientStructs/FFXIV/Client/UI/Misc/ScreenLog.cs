@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [GenerateInterop]
 public unsafe partial struct ScreenLog {
-    [MemberFunction("C7 02 ?? ?? ?? ?? 81 F9 ?? ?? ?? ??")]
-    public static partial int ConvertLogMessageIdToScreenLogKind(int logMessageId, int* unkOption);
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 44 8B C0")]
+    public static partial int ConvertLogMessageIdToScreenLogKind(int logMessageId, int* outOption); // TODO: use ScreenLogOption instead of int
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 73 ?? 85 F6 74 ?? 8B C6")]
     public static partial void AddScreenLogMessage(Character* target, int screenLogKind, int value);
@@ -29,6 +29,15 @@ public struct ScreenLogEntry {
     [FieldOffset(0x10)] public int Value2;
     [FieldOffset(0x14)] public int Value3;
     [FieldOffset(0x18)] public ulong Timestamp;
+}
+
+public enum ScreenLogOption {
+    None = 0,
+    PercentageIncrease = 1,
+    Blocked = 2,
+    Parried = 3,
+    Resisted = 4,
+    Default = 5,
 }
 
 public enum ScreenLogRelationKind : byte {
