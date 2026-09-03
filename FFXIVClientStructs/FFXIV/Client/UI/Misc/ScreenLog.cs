@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [GenerateInterop]
 public unsafe partial struct ScreenLog {
-    [Obsolete]
+    [Obsolete("Use the overload with the ScreenLogOption enum")]
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 44 8B C0")]
     public static partial int ConvertLogMessageIdToScreenLogKind(int logMessageId, int* outOption); // TODO: use ScreenLogOption instead of int
 
