@@ -117,6 +117,6 @@ public enum InstanceContentType : byte {
     VariantDungeon = 19,
     CriterionDungeon = 20,
     AdvancedVariantDungeon = 21,
-    Unk22 = 22, // related to XBM
-    Unk23 = 23,
+    CrucibleOfTheUnbroken = 22,
+    KeyboundBrawler = 23,
 }

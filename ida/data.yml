@@ -115,6 +115,11 @@ globals:
   0x142A961A8: g_MacroTime
   0x142ACADC0: g_LogoutCountdownAddonId
   0x142ACADC6: g_LogoutShouldCloseGame
+  0x142AEAE10: g_nvapi_Library
+  0x142AEAE28: g_nvapi_pepQueryInterface
+  0x142AEAE20: g_nvapi_QueryInterface
+  0x142AEAE30: g_NvAPI_Diag_ReportCallStart
+  0x142AEAE38: g_NvAPI_Diag_ReportCallReturn
   0x142F566C0: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x142F56930: ?hkaAnimationContainerClass@@3VhkClass@@B
   0x142F571A0: ?hkReferencedObjectClass@@3VhkClass@@B
@@ -127,6 +132,7 @@ globals:
   0x142F7E520: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
+  0x140001370: GetOrInitNvAPI
   0x14005B120: VectorConstructorIterator
   0x14005B170: VectorDestructorIterator
   0x14005DC90: WinMain
@@ -178,6 +184,7 @@ functions:
   0x14041E5C0: GetActionTimelineKey
   0x14041E5F0: GetWeaponTimelineKey
   0x1405E72A0: StartSpursJobEntityWorkerThread
+  0x140606730: Client::Game::IsParticipatingInCustomMatchOrSpectating
   0x1406411E0: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x140671870: GetScaleListEntryFromScale
   0x1406824D0: GetScaleForListOption
@@ -320,7 +327,6 @@ functions:
   0x141C17880: lua_gethookmask
   0x141C17A70: lua_sethook
   0x141C17AA0: lua_setlocal
-  0x141CF2790: SupportDeskHttpCallback
   0x141C59F10: SupportDeskCreateConnection
   0x1418F20E0: luaL_openlibs
   0x1418F22D0: luaL_addlstring
@@ -1013,11 +1019,14 @@ classes:
         base: Client::SupportDesk::HttpConnection
     funcs:
       0x141CB27A0: Initialize
+      0x141CF2790: StatusCallback # static
   Client::SupportDesk::HttpRequest:
     vtbls:
       - ea: 0x142493A60
     vfuncs:
       0: dtor
+      1: Update
+      2: CloseHandle
   Client::SupportDesk::HttpRequestImpl:
     vtbls:
       - ea: 0x1424938C8
@@ -1237,9 +1246,13 @@ classes:
     funcs:
       0x1407A8920: ProcessNoun
   Component::Text::Localize::Noun:
+    vtbls:
+      - ea: 0x142187738
     vfuncs:
       0: dtor
       1: Resolve
+    funcs:
+      0x1407A8750: GetColumnOffset
   Component::Text::Localize::NounEn:
     vtbls:
       - ea: 0x1421879D0
@@ -3569,6 +3582,7 @@ classes:
       0x140C0F810: SetData
   Client::Game::BattleLog:
     funcs:
+      0x140C4F5F0: AddLogMessage3Params
       0x140C4FA20: AddLogMessage
       0x140C503B0: AddActionLogMessage
       0x140C50970: AddToScreenLogWithLogMessageId  # this converts log message id to screen log kind and calls below function
@@ -3576,6 +3590,9 @@ classes:
   Client::UI::Misc::ScreenLog:
     funcs:
       0x1409AF630: ConvertLogMessageIdToScreenLogKind
+      0x1409AF970: AddScreenLogMessage
+      0x1409AF9D0: AddLootedItemScreenLogMessage
+      0x1409AFA80: AddScreenLogEntry
   Client::Game::UI::MarkingController:
     instances:
       - ea: 0x142ADE940 # note: it's actually a member of UIState instance
@@ -3873,6 +3890,7 @@ classes:
       0x1408F2930: GetGroundPositionForCursor
       0x1408F2B70: GetCurrentCharges          # (this, actionId) -> uint
       0x1408F2CA0: GetMaxCharges2             # not static - calls static
+      0x1408F2DB0: GetHotbarCooldownInfo
       0x1408F2FF0: ResolveTarget
       0x1408F3230: StartAnimationLock
       0x1408F3250: IsActionUnlocked
@@ -4182,11 +4200,12 @@ classes:
       55: SetSoundResourceHandle
       56: LoadSoundResourceHandle
       57: GetElapsedTime
-      61: GetMidiNote
   Client::Sound::SoundData:
     vtbls:
       - ea: 0x14215C278
         base: Client::Sound::ISoundData
+    vfuncs:
+      61: GetMidiNote
   Client::System::Framework::GameWindow:
     instances:
       - ea: 0x1428F1880
@@ -5031,8 +5050,6 @@ classes:
     vfuncs:
       0: dtor
       1: DecRef  # (ExcelRowWrapper* this)
-      2: GetRow  # (ExcelRowWrapper* this) -> ExcelRow*
-      3: SetRow  # (ExcelRowWrapper* this, ExcelRow* pNew)
   Common::Component::Excel::LinkList<Component::Excel::RingBufferExcelPageRowResolver::RowWrapper>:
     vtbls:
       - ea: 0x142582AB8
@@ -5156,10 +5173,15 @@ classes:
       0x14067D8A0: ctor
       0x14067E770: Draw
       0x14067EEC0: SetAddonDepthLayer
+      0x14067F010: SetAddonDepthLayerAndOrder
       0x14067F6B0: GetAddonById
       0x14067F710: GetAddonByName
       0x14067F870: GetAddonByNode
+      0x140682300: GetAddonDrawOrderNeighborIds
       0x140683480: UpdateDrawOrderIndexes
+      0x140683A00: AddAddonToDrawOrder
+      0x140683C40: RemoveAddonFromDrawOrder
+      0x140683DD0: SetAddonOrderAfter
       0x1400E7380: UpdateCursor
   Client::UI::WindowContextMenuHandler:
     vtbls:
@@ -5832,10 +5854,14 @@ classes:
       23: GetData
       33: Load
     funcs:
+      0x1402FE810: GetExplicitAsync
+      0x1402FE8B0: GetExplicitSync
+      0x1402FE940: GetAsync
+      0x1402FEA00: GetSync
       0x1402FEAC0: DecRef
       0x1402FEAF0: IncRef
-      0x1402FFFB0: FinishLoad
       0x1402FECC0: ctor
+      0x1402FFFB0: FinishLoad
   Client::System::Resource::Handle::DefaultResourceHandle:
     vtbls:
       - ea: 0x142147440
@@ -7673,8 +7699,6 @@ classes:
     vtbls:
       - ea: 0x142163DC8
         base: Client::Graphics::Scene::Object
-    vfuncs:
-      10: PrepareRenderCamera
     funcs:
       0x14041F490: ctor
       0x1404205D0: ViewportPointToRay
@@ -8860,6 +8884,17 @@ classes:
       0x140674BB0: GetSingleton2
       0x140682FD0: GetSingleton3
       0x1406EC850: Finalizer
+  Component::GUI::AtkStage::FilterStruct:
+    funcs:
+      0x140647700: AcquireFilter
+      0x140647750: ReleaseFilter
+      0x1406477B0: AcquireSystemFilter
+      0x140647800: ReleaseSystemFilter
+      0x140647850: AcquireScreenFrame
+      0x140647890: ReleaseScreenFrame
+      0x1406478E0: CanAddonReceiveInput
+      0x140647A00: SetAdditionalFilterAddon
+      0x140647A20: ClearAdditionalFilterAddon
   Component::GUI::AtkFontCodeModule:
     vtbls:
       - ea: 0x142174910
@@ -9284,6 +9319,7 @@ classes:
       0x140675F60: GetImageNodeById
       0x140676060: FireCallback
       0x140676E70: MoveDelta
+      0x140677970: UpdateAppliedVisibilityState
       0x140679030: UpdateCollisionNodeList
       0x14067A150: PopulateCollisionNodeList
       0x14067A2B0: CountCollisionNodes
@@ -9503,7 +9539,7 @@ classes:
       64: GetColorThemeTypeForUIScene
       66: OpenMapWithMapLink
       67: OnCursorTypeChange
-      75: SetScreenSizeScale
+      76: SetScreenSizeScale
     funcs:
       0x1406A9BA0: GetAddonIdByName
       0x1406ABB20: ctor
@@ -9819,6 +9855,7 @@ classes:
       5: SetLayer
       6: GetSizeOf
       7: GetPrimaryPath
+      13: GetSphereBounds
       14: GetTranslation
       15: GetRotation
       16: GetScale
@@ -9855,6 +9892,8 @@ classes:
       70: GetTransformImpl
       71: SetTransformImpl
       72: GetBoundingSphereImpl
+      73: GetAxisAlignedBoundsImpl
+      74: GetOrientedBoundsImpl
     funcs:
       0x1406FB030: IsPrimaryReady
   Client::LayoutEngine::LayoutWorld:
@@ -11394,7 +11433,8 @@ classes:
       0x1407D2DF0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
       0x1407D2E10: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407D2E30: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
-      0x1407D3480: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*)
+      0x1407D3480: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUIIntermediate*)
+      0x1407D3280: PrepareSlotForRender  # (this, HotbarSlot*, HotbarUIIntermediate*)
       0x1407D7160: SetHotbarLocked
       0x1407D71A0: IsHotbarLocked
       0x1407D71E0: SetCrossHotbarLocked
@@ -11406,7 +11446,7 @@ classes:
       0x1407D7BB0: GetDutyActionCount
       0x1407D7BE0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
       0x1407D7C00: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
-      0x1407D8050: SetDutyActionSlot                 # (this, slotId, actionId)
+      0x1407D7C30: SetDutyActionSlot                 # (this, slotId, actionId)
       0x1407D7D60: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x1407D7DC0: ExecuteDutyActionSlot             # (this, slotId)
       0x1407D3DD0: GrandCompanyUpdateTask            # (this) -> void
@@ -11428,6 +11468,7 @@ classes:
       0x1407D7EB0: SetPhantomActionsPresent
       0x1407D7F60: GetPhantomActionCount
       0x1407D7FE0: GetPhantomActionId
+      0x1407D8050: SetPhantomActionSlot
       0x1407D70B0: PerformSavedHotbarMigrations
       0x1407DA660: CreateExpacSavedHotbar
       0x1407DA740: CreatePvPSavedHotbar
@@ -11468,14 +11509,14 @@ classes:
       0x1407CFCA0: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool
       0x1407CFC10: IsActionHighlighted               # (this, commandType, commandId) -> bool
       0x1407CFFC0: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
-      0x1407D0680: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)
+      0x1407D0680: PopulateIntermediateCooldownInfo # (this, HotbarUIIntermediate*)
       0x1407D0520: GetAdjustedCommandId  # ???
       0x1407D15B0: LoadMacroSlot
       0x1407D0820: GetSlotActionCooldownPercentage  # (this, out int, int) -> int
   Client::UI::Misc::RaptureHotbarModule::DutyActionSlot:
     funcs:
       0x1407D7D10: Initialize
-  Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
+  Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate:
     funcs:
       0x1407CE530: ctor
   Client::UI::Misc::HudLayoutAddon: # just a bunch of static functions
@@ -11785,6 +11826,8 @@ classes:
       - ea: 0x142410618
     funcs:
       0x141A42DD0: ctor
+    vfuncs:
+      0: dtor
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x142198BA8
@@ -13757,6 +13800,13 @@ classes:
         base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140CF2EC0: ctor
+      0x140CF3780: Open
+      0x140CF3A30: RefreshAddon
+      0x140CF4270: Confirm
+      0x140CF4530: AddItem
+      0x140CF4750: AddItemQuantity
+      0x140CF48D0: RemoveSlot
+      0x140CF4AC0: GetSlotsRemaining
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
       - ea: 0x1421BCDE8
@@ -15178,6 +15228,30 @@ classes:
         base: Client::UI::Agent::AgentInterface
       - ea: 0x14219AAA0
         base: Common::Component::Excel::ExcelSheetWaiter
+  Client::UI::Agent::AgentCuttingGrass:
+    vtbls:
+      - ea: 0x14219AB30
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A69E50: ctor
+  Client::UI::Agent::AgentKTGHud:
+    vtbls:
+      - ea: 0x1421F6F80
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410ED780: ctor
+  Client::UI::Agent::AgentKTGEnterDialogue:
+    vtbls:
+      - ea: 0x1421F70D8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410F7620: ctor
+  Client::UI::Agent::AgentKTGResult:
+    vtbls:
+      - ea: 0x1421F6F00
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1410EBDF0: ctor
   Client::UI::Agent::AgentSpearFishing:
     vtbls:
       - ea: 0x1421BDD70
@@ -15242,10 +15316,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1409E5780: ctor
+  Client::UI::Agent::AgentBannerGearsetLink:
+    vtbls:
+      - ea: 0x142199320
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409E51B0: ctor
   Client::UI::Agent::AgentBannerPreview:
     vtbls:
       - ea: 0x142199448
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1409E65C0: ctor
   Client::UI::Agent::AgentPvPMap:
     vtbls:
       - ea: 0x1421C1730
@@ -15346,6 +15428,7 @@ classes:
       0x140FB8990: OpenMap
       0x140FBA410: AddGatheringTempMarker
       0x140FBA730: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140FBDA20: CreateTooltip # (this, (Utf8String*) tooltipString, (uint) tooltipContext
       0x140FC0B20: ctor
       0x140FC17A0: Finalizer
       0x140FC37D0: ShowMap
@@ -15719,10 +15802,10 @@ classes:
       0x140A03EB0: GetHoursSinceCycleStart
   Client::UI::Agent::AgentMJINekomimiRequest:
     vtbls:
-      - ea: 0x142199958
+      - ea: 0x142199B68
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1409F79E0: ctor
+      0x140A07FB0: ctor
       0x140A08180: OpenUI
       0x140A08200: OpenUIFromCraftSchedule
       0x140A08280: ForceRequestFavorData
@@ -16418,23 +16501,32 @@ classes:
       0: dtor
       6: Terminate
       7: IsUnlocked
+      8: ResetState
       20: ProcessEnterTerritory
       26: ProcessUIEvent # CustomTalkEventHandler calls lua function "OnUI"
+      28: EnterEvent
       40: ProcessYield
+      52: ProcessEventSceneTask
+      58: EndEvent
       59: ProcessFormatStringCallback
       60: ProcessActionTimelineCallback
       61: ProcessDirectorUpdate
       62: ProcessEventSpecificDirectorUpdate
       70: CancelByPlayerMovement
       76: ProcessListenItemCallback
+      89: HandleStartOrEndCommand
+      90: HandleMenuResult
       159: CancelInteraction
       205: GetTitle # lua function "GetEventHandlerTitle"
       207: GetEventId
       209: GetNameplateIconForObject # (this, GameObject* gameObject)
+      213: IsActive
+      217: UpdateTargetableStatus
       227: GetIconId
       231: IsOccupied33
       232: GetOccupiedConditionId
       233: GetOccupiedPermissionId
+      250: ShouldDismissOrnament
       251: GetScriptVersion
       253: UpdateSharedTimelineState
       254: UpdateTimelinesByBitmask
@@ -18035,6 +18127,34 @@ classes:
     vtbls:
       - ea: 0x1421D1A60
         base: Client::Game::Event::GoldSaucerEventHandler
+      - ea: 0x1421D2300
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140E7A120: ctor
+      0x140E7A2C0: Finalizer
+      0x140E7A470: GetLocalPlayer #static
+      0x140E7A480: SetProgress
+      0x140E7A620: PauseTimer
+      0x140E7A660: ResumeTimer
+      0x140E7A670: GetOrCreateDirectorTodo
+      0x140E7B330: OnExcelSheetLoaded
+      0x140E7B690: ReceiveEvent
+      0x140E7B8A0: OpenGameUI
+      0x140E7B970: CloseGameUI
+      0x140E7BA10: BeginAgentGame #static
+      0x140E7BA60: ResetAgentAndSharedTimelines
+      0x140E7BAF0: PrepareNextRound #static
+      0x140E7BB40: ShowRoundResult #static
+      0x140E7BB90: Create #static
+      0x140E7BD60: StartGame
+      0x140E7BFD0: FinalizeGame
+      0x140E7C0B0: SendMachineAction
+      0x140E7C0F0: ClearEventSceneTasks
+      0x140E7C150: ShowBalloonMessage
+      0x140E7C2D0: ResetAgentStatesExcept
+      0x140E7C390: UpdateAgentAndDirectorTodo
+      0x140E7C500: SendAgentResultUpdate
+      0x140E7C5A0: SendAgentPhaseMessage
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x1421CAF00
@@ -18081,14 +18201,16 @@ classes:
     vtbls:
       - ea: 0x142389238
         base: Client::Game::InstanceContent::ContentNpcEventHandler
+  Client::Game::Event::RetainerBuybackEventHandler::UIListener:
+    vtbls:
+      - ea: 0x1422CA3A8
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::RetainerBuybackEventHandler: # 0x31
     vtbls:
       - ea: 0x1422CA3C0
         base: Client::Game::Event::EventHandler
       - ea: 0x1422CAC58
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
-      - ea: 0x1422CA3A8
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::TopicSelectEventHandler: # 0x32
     vtbls:
       - ea: 0x142395F80
@@ -18269,7 +18391,7 @@ classes:
       0x140B82580: GetTripleTriadDirector
       0x140B82660: GetSkyIslandDirector
       0x140B825B0: GetInstanceContentDirectorType22 # related to XBM
-      0x140B825E0: GetInstanceContentDirectorType23
+      0x140B825E0: GetKeyboundBrawlerDirector
       0x140B82610: GetPvPInstanceContentDirector # either of: CrystallineConflict, Frontlines or RivalWing
       0x140B82690: GetPublicContentDirector
       0x140B826C0: GetPublicContentEureka
@@ -20168,6 +20290,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14111D830: ctor
+      0x14111EC30: SetPage
   Client::UI::AddonTalk: # 40
     vtbls:
       - ea: 0x142235E98
@@ -20518,6 +20641,7 @@ classes:
       0x141321520: ctor
       0x1413218F0: SetCommonNamePlate  # x, y, scale, etc INLINED IN 7.0 in AddonNamePlate OnRequestedUpdate 1411CBBD5
       0x141321B20: SetPlayerNamePlate # player specific nodes INLINED IN 7.0 ^ 1411CBEB6
+      0x141325260: UpdateAllNamePlates
       0x141325310: ToggleTextRenderMode
   Client::UI::AddonCastBarEnemy: # 96
     vtbls:
@@ -26681,6 +26805,7 @@ classes:
         base: Client::Game::Object::GameObject
     funcs:
       0x141C3DBB0: ctor
+      0x141C3DC60: SetBaseAndGimmickId
   #  Client::Game::Object::BKJObject:
   #    vtbls:
   #      - ea: 0x142442F18
@@ -26799,6 +26924,7 @@ classes:
       7: CalculateSceneCameraPitch
       8: CalculateSceneCameraYaw
       9: ResetAngles2
+      10: PrepareRenderCamera
     funcs:
       0x141899AE0: ctor
       0x14189A370: ShouldDrawGameObject

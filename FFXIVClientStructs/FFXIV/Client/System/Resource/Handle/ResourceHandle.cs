@@ -48,6 +48,18 @@ public unsafe partial struct ResourceHandle {
         return new(data, (int)length);
     }
 
+    [MemberFunction("E8 ?? ?? ?? ?? 44 38 35"), GenerateStringOverloads]
+    public static partial ResourceHandle* GetExplicitAsync(ResourceCategory* category, uint* type, CStringPointer path, nint unknown = 0, nint unkDebugPtr = 0, uint unkDebugInt = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 40 0F B6 CF"), GenerateStringOverloads]
+    public static partial ResourceHandle* GetExplicitSync(ResourceCategory* category, uint* type, CStringPointer path, nint unknown = 0, nint unkDebugPtr = 0, uint unkDebugInt = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B B5"), GenerateStringOverloads]
+    public static partial ResourceHandle* GetAsync(CStringPointer path, nint unknown = 0, nint unkDebugPtr = 0, uint unkDebugInt = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 ?? 4D 85 F6"), GenerateStringOverloads]
+    public static partial ResourceHandle* GetSync(CStringPointer path, nint unknown = 0, nint unkDebugPtr = 0, uint unkDebugInt = 0);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 C7 03 ?? ?? ?? ?? C6 83")]
     public partial bool DecRef();
 

@@ -33,7 +33,7 @@ public partial struct RaptureHotbarModule {
         PetAction = 16,
         Mount = 17,
         FieldMarker = 18,
-        Unknown19 = 19,
+        ClassJob = 19, // used for /macroicon with the classjob category
         Recipe = 20,
         ChocoboRaceAbility = 21,
         ChocoboRaceItem = 22,

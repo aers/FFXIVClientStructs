@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::BattleChara
@@ -11,6 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 41 B8 ?? ?? ?? ?? 48 8D 05", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3810)]
 public unsafe partial struct BattleChara {
+    [FieldOffset(0x2370)] public StdDeque<ScreenLogEntry> ScreenLogManager;
     [FieldOffset(0x23B0)] public StatusManager StatusManager;
     [FieldOffset(0x2790)] public CastInfo CastInfo;
     [FieldOffset(0x2900)] public ActionEffectHandler ActionEffectHandler;

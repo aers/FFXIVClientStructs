@@ -98,6 +98,11 @@ public unsafe partial struct AgentContext {
         Muted = 1 << 1,
         TermFiltered = 1 << 2
     }
+
+    // Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+    [GenerateInterop(isInherited: true)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public partial struct AgentContextUpdateChecker;
 }
 
 [GenerateInterop]

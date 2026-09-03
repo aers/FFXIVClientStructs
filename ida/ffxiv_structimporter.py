@@ -1242,7 +1242,7 @@ if api is None:
                     def is_virtual(self) -> bool:
                         return self.struct.virtual_functions is not None
 
-                    def primary_base(self) -> 'BaseEdge' | None:
+                    def primary_base(self) -> 'BaseEdge | None':
                         primary_bases = [edge for edge in self.bases if edge.offset == 0]
                         if len(primary_bases) > 1:
                             base_names = ", ".join(edge.base.struct.type for edge in primary_bases)

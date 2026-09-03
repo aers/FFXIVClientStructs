@@ -157,10 +157,10 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     }
 
     public bool IsVisible {
-        readonly get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.IsVisible);
+        readonly get => VisibilityState.HasFlag(AtkUnitBaseVisibilityState.Show);
         set => VisibilityState = value
-            ? VisibilityState | AtkUnitBaseVisibilityState.IsVisible
-            : VisibilityState & ~AtkUnitBaseVisibilityState.IsVisible;
+            ? VisibilityState | AtkUnitBaseVisibilityState.Show
+            : VisibilityState & ~AtkUnitBaseVisibilityState.Show;
     }
 
     public Span<AtkValue> AtkValuesSpan => new(AtkValues, AtkValuesCount);
@@ -279,6 +279,10 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8D B3")]
     public partial bool UnregisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener);
+
+    /// <returns> <see langword="true"/> when this AtkUnitBase is supposed to be removed from the AtkUnitList(s). </returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 44 0F B6 97")]
+    public partial bool UpdateAppliedVisibilityState();
 
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
@@ -438,11 +442,25 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 [Flags]
 public enum AtkUnitBaseVisibilityState : byte {
     None = 0,
-    Unk1 = 1 << 0,
-    IsVisible = 1 << 1,
-    /// <remarks> Seen on Retainer Menu </remarks>
-    IsHiddenDueToModal = 1 << 2,
-    Unk4 = 1 << 3,
+
+    /// <summary>
+    /// Set when the addon is no longer in an open or close transition.
+    /// </summary>
+    TransitionComplete = 1 << 0,
+
+    /// <summary>
+    /// Set when the addon is in any state of being shown (during open transition, or shown).
+    /// </summary>
+    Show = 1 << 1,
+
+    /// <summary>
+    /// Set when the addon is in any state of being hidden (during close transition, or hidden).
+    /// </summary>
+    Hide = 1 << 2,
+
+    [Obsolete("Use TransitionComplete")] Unk1 = TransitionComplete,
+    [Obsolete("Use Show")] IsVisible = Show,
+    [Obsolete("Use Hide")] IsHiddenDueToModal = Hide,
 }
 
 public enum AtkUnitBaseLoadState : byte {

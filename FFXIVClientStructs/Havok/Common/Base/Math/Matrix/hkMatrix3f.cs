@@ -3,7 +3,7 @@ using FFXIVClientStructs.Havok.Common.Base.Math.Vector;
 namespace FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public struct hkMatrix3f {
+public struct hkMatrix3f : IEquatable<hkMatrix3f> {
     [FieldOffset(0x00)] public float M00;
     [FieldOffset(0x04)] public float M10;
     [FieldOffset(0x08)] public float M20;
@@ -20,4 +20,18 @@ public struct hkMatrix3f {
     [FieldOffset(0x00), CExporterIgnore] public hkVector4f Column0;
     [FieldOffset(0x10), CExporterIgnore] public hkVector4f Column1;
     [FieldOffset(0x20), CExporterIgnore] public hkVector4f Column2;
+
+    public static bool operator ==(hkMatrix3f left, hkMatrix3f right) => left.Equals(right);
+    public static bool operator !=(hkMatrix3f left, hkMatrix3f right) => !left.Equals(right);
+
+    public bool Equals(hkMatrix3f other) {
+        return Column0.Equals(other.Column0)
+            && Column1.Equals(other.Column1)
+            && Column2.Equals(other.Column2);
+    }
+
+    public override bool Equals(object? obj) => obj is hkMatrix3f other && Equals(other);
+    public override int GetHashCode() {
+        return HashCode.Combine(Column0, Column1, Column2);
+    }
 }

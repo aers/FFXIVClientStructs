@@ -153,6 +153,26 @@ public unsafe partial struct RaptureHotbarModule {
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
+    /// Load (most) intermediate data from a hotbar slot.
+    /// </summary>
+    /// <seealso cref="PrepareSlotForRender">Generally called via PrepareSlotForRender, consider using that instead.</seealso>
+    /// <param name="slot">The hotbar slot to resolve. <i>Will be mutated!</i></param>
+    /// <param name="intermediate">The intermediate to write to.</param>
+    /// <returns>A bool indicating successful load (?)</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 83 ?? ?? ?? ?? 48 83 C4 40")]
+    public partial bool PopulateIntermediateFromSlot(HotbarSlot* slot, HotbarUIIntermediate* intermediate);
+
+    /// <summary>
+    /// Prepares a hotbar slot for UI render.
+    /// *Requires* that the slot's <see cref="HotbarSlot.ApparentSlotType"/> and <see cref="HotbarSlot.ApparentActionId"/>
+    /// be set prior to calling (generally via <see cref="GetSlotAppearance"/>).
+    /// </summary>
+    /// <param name="slot">The hotbar slot to resolve. <i>Will be mutated!</i></param>
+    /// <param name="intermediate">The intermediate to write to.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C6 83 C5 11")]
+    public partial void PrepareSlotForRender(HotbarSlot* slot, HotbarUIIntermediate* intermediate);
+
+    /// <summary>
     /// Search through the hotbar module and delete all hotbar slots associated with the specified macro. Used when a user
     /// deletes a specific macro from their list, and should affect saved (but unloaded) hotbars as well.
     /// </summary>
@@ -374,7 +394,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the DutyAction slot to edit.</param>
     /// <param name="actionId">The ID of the action to set in this slot.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 05 72 C2")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 02 7C ?? 49 8B 8E")]
     public partial void SetDutyActionSlot(uint index, uint actionId);
 
     /// <summary>
@@ -384,6 +404,21 @@ public unsafe partial struct RaptureHotbarModule {
     /// <returns>Returns true always (?)</returns>
     [MemberFunction("48 83 EC 28 85 D2 78 25 83 FA 02")]
     public partial bool ExecuteDutyActionSlot(uint index);
+
+    /// <summary>
+    /// Sets the specified PhantomAction slot to hold the target action ID. Only takes effect if index is 0 to 4.
+    /// </summary>
+    /// <param name="index">The index of the PhantomAction slot to edit.</param>
+    /// <param name="actionId">The ID of the action to set in this slot.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 05 72 C2")]
+    public partial void SetPhantomActionSlot(uint index, uint actionId);
+
+    /// <summary>
+    /// Sets the value of <see cref="PhantomActionsPresent"/>.
+    /// </summary>
+    /// <param name="present">Whether to show/enable phantom actions or not.</param>
+    [MemberFunction("E9 ?? ?? ?? ?? FF D2 0F B6 D3 48 8B C8 E8 ?? ?? ?? ??", 14)]
+    public partial void SetPhantomActionsPresent(bool present);
 }
 
 [Flags]

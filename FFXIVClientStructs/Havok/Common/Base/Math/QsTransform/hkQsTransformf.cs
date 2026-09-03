@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe partial struct hkQsTransformf {
+public unsafe partial struct hkQsTransformf : IEquatable<hkQsTransformf> {
     [FieldOffset(0x00)] public hkVector4f Translation;
     [FieldOffset(0x10)] public hkQuaternionf Rotation;
     [FieldOffset(0x20)] public hkVector4f Scale;
@@ -49,4 +49,16 @@ public unsafe partial struct hkQsTransformf {
 
     [MemberFunction("48 83 EC 28 8B C2 C1 E8 02")]
     public static partial void fastRenormalizeQuaternionBatch(hkQsTransformf* poseOut, uint numTransforms);
+
+    public static bool operator ==(hkQsTransformf left, hkQsTransformf right) => left.Equals(right);
+    public static bool operator !=(hkQsTransformf left, hkQsTransformf right) => !left.Equals(right);
+
+    public bool Equals(hkQsTransformf other) {
+        return Translation.Equals(other.Translation)
+            && Rotation.Equals(other.Rotation)
+            && Scale.Equals(other.Scale);
+    }
+
+    public override bool Equals(object? obj) => obj is hkQsTransformf other && Equals(other);
+    public override int GetHashCode() => HashCode.Combine(Translation, Rotation, Scale);
 }

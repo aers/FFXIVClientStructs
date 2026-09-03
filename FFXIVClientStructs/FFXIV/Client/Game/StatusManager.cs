@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
@@ -13,14 +14,17 @@ public unsafe partial struct StatusManager {
     // Flags is a bit vector; bit #i is set if any of the active statuses has column 30/31 in the sheet containing 'i'
     [FieldOffset(0x3C8), FixedSizeArray] internal FixedSizeArray7<byte> _flags;
 
-    [FieldOffset(0x3D0)] private long Unk3D0;
-    //[FieldOffset(0x2E8)] private byte Unk180;
+    // Stores a forced-movement direction in radians or a timer, depending on the active status.
+    [FieldOffset(0x3D0)] public float SpecialStatusTimerOrDirection;
     [FieldOffset(0x3D8)] public byte NumValidStatuses;
 
     /// <summary>
     /// 0x01: lose control (set if any active status has IsGaze flag set in sheet)
     /// </summary>
     [FieldOffset(0x3D9)] public byte ExtraFlags;
+
+    [MemberFunction("48 8B C4 48 89 58 ?? 48 89 68 ?? 48 89 70 ?? 57 41 54 41 56 48 83 EC ?? 4C 89 78")]
+    public partial void ProcessHotDot(BattleChara* target, uint statusId, int tickMode, uint value, uint sourceEntityId, int damageType);
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 2D 00")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);

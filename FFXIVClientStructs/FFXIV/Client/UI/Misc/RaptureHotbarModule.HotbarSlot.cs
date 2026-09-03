@@ -54,12 +54,14 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         [FieldOffset(0xC0)] public uint ApparentActionId;
 
-        /// Unknown field with offset 0xC4 (196), possibly overloaded
-        ///
-        /// Appears to have relation to the following:
-        /// - Lost Finds Items appear to set this value to 1
-        /// - In PVP actions, the high byte controls combo icon and the low byte counts which action the combo is on
-        [FieldOffset(0xC4)] private ushort UNK_0xC4;
+        /// <summary>
+        /// Mode-specific state used while resolving the current apparent action.<br/>
+        /// For <see cref="HotbarSlotApparentActionMode.GeneralActionDutyOrPhantom"/>, this is the GeneralAction row ID minus 26.<br/>
+        /// For <see cref="HotbarSlotApparentActionMode.GeneralActionPhantom"/>, this is the GeneralAction row ID minus 31.<br/>
+        /// For <see cref="HotbarSlotApparentActionMode.PvPCombo"/>, this is the current combo step.<br/>
+        /// For <see cref="HotbarSlotApparentActionMode.LostFindsItem"/>, this indicates that the action has been resolved.
+        /// </summary>
+        [FieldOffset(0xC4)] public ushort ApparentActionModeParam;
 
         // 0xC6 (198) does not appear to be referenced *anywhere*. Nothing ever reads or writes to it, save for a zero-out
         // operation.
@@ -92,7 +94,7 @@ public partial struct RaptureHotbarModule {
         /// - 6: Blue (Job Gauge?)
         /// - 7: Bright Yellow (Rival Wings - CE)
         /// - All others: Grey
-        [FieldOffset(0xCB)] public byte CostType;
+        [FieldOffset(0xCB)] public byte CostType; // TODO: Change type to SlotCostType
 
         /// Appears to control display of the primary cost of the action (0xCA).
         ///
@@ -144,21 +146,11 @@ public partial struct RaptureHotbarModule {
         /// </remarks>
         [FieldOffset(0xE0)] public byte RecipeValid;
 
-        /// UNKNOWN. Appears to be Recipe specific.
-        ///
-        /// Always set to 1, apparently?
-        [FieldOffset(0xE1)] private byte UNK_0xE1;
+        /// Whether the recipe row has been loaded and <see cref="RecipeValid"/> has been populated.
+        [FieldOffset(0xE1)] public bool RecipeDataLoaded;
 
-        /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
-        ///
-        /// Known values so far:
-        /// - 2: Appears to be set for adjusted actions (e.g. upgraded spells/weaponskills)
-        /// - 3: Appears to mark a PVP combo action
-        /// - 4: Set on Squadron Order - Disengage, maybe others
-        /// - 5: Set for Lost Finds Items (?)
-        /// - 128: Appears as a flag?
-        /// - 0/255: "generic"
-        [FieldOffset(0xE2)] private byte UNK_0xE2;
+        /// Selects how the original apparent action is resolved into the current apparent action.
+        [FieldOffset(0xE2)] public HotbarSlotApparentActionMode ApparentActionMode;
 
         /// <summary>
         /// A boolean representing if this specific hotbar slot has been fully loaded. False for empty slots and slots
@@ -223,7 +215,7 @@ public partial struct RaptureHotbarModule {
         ///
         /// This method is virtually almost always called using the parameters from <see cref="ApparentSlotType"/> and <see cref="ApparentActionId"/>.
         ///
-        /// When <see cref="UNK_0xE2"/> is set to 3, this method will instead override the passed in slotType and actionId with
+        /// When <see cref="ApparentActionMode"/> is set to <see cref="HotbarSlotApparentActionMode.PvPCombo"/>, this method will instead override the passed in slotType and actionId with
         /// the values present in <see cref="OriginalApparentSlotType"/> and <see cref="OriginalApparentActionId"/>.
         /// </summary>
         /// <param name="slotType">The appearance slot type to use. Virtually almost always <see cref="ApparentSlotType"/>.</param>
@@ -246,8 +238,7 @@ public partial struct RaptureHotbarModule {
 
         /// <summary>
         /// Gets the <see cref="CostText"/> for a specific hotbar slot, taking account the specified appearance slot type
-        /// and action ID. This will normally match the result from <see cref="GetCostValueForSlot"/> but may differ for
-        /// Items and certain actions (e.g. Black Mage's Flare).
+        /// and action ID. May be empty if unused.
         ///
         /// This method is always called using the parameters from <see cref="ApparentSlotType"/> and <see cref="ApparentActionId"/>.
         /// </summary>
@@ -255,7 +246,19 @@ public partial struct RaptureHotbarModule {
         /// <param name="actionId">The action ID to look up and return information for.</param>
         /// <returns>Returns the cost text for this HotbarSlot.</returns>
         [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 29 80 38 00")]
-        public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
+        public partial CStringPointer GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
+
+        /// <summary>
+        /// Gets the <see cref="SlotCostType"/> for a hotbar slot, taking account the specified appearance slot type
+        /// and action ID. Note that the `this` is not used in the call, so... yeah.
+        ///
+        /// This method is no longer called, but may still be usable.
+        /// </summary>
+        /// <param name="slotType">The slot type to look up and return information for.</param>
+        /// <param name="actionId">The action ID to look up and return information for.</param>
+        /// <returns>Returns the cost type for the specified slot.</returns>
+        [MemberFunction("48 83 EC 28 0F B6 CA 83 E9 01")]
+        public partial SlotCostType GetCostTypeForSlot(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
         /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
@@ -334,9 +337,10 @@ public partial struct RaptureHotbarModule {
     /// <summary>
     /// A special extended <see cref="HotbarSlot"/> used for duty actions
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    [GenerateInterop]
     [Inherits<HotbarSlot>]
-    public struct DutyActionSlot {
+    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    public partial struct DutyActionSlot {
         public const int Size = HotbarSlot.Size + 8;
 
         /// <summary>
@@ -346,4 +350,41 @@ public partial struct RaptureHotbarModule {
 
         [FieldOffset(0xE9)] public bool IsActive;
     }
+}
+
+public enum HotbarSlotApparentActionMode : byte {
+    GeneralActionDutyOrPhantom = 0,
+    GeneralActionPhantom = 1,
+    GeneralActionAdjusted = 2,
+    AdjustedAction = 3,
+    PvPCombo = 4,
+    BgcArmyAction = 5,
+    LostFindsItem = 6,
+    SkipActionResolution = 0x80,
+    None = 0xFF,
+}
+
+public enum SlotCostType : byte {
+    Default = 0,
+
+    /// Indicates that this slot costs HP.  Shows as a green color.
+    Health = 1,
+
+    /// Indicates that this slot costs MP. Shows as a light pink color.
+    Magic = 2,
+
+    /// Indicates that this slot costs TP. Unused but still renders! Shows an orange color.
+    Tactical = 3,
+
+    /// Indicates that this slot costs CP. Shows a deeper pink color.
+    Crafting = 4,
+
+    /// Indicates that this slot costs GP. Shows a yellow color.
+    Gathering = 5,
+
+    /// Indicates that this slot costs whatever your job gauge is (job points?). Shows a blue color.
+    JobGauge = 6,
+
+    /// Indicates that this slot costs Ceruleum. Used exclusively for Rival Wings? Shows a bright yellow color.
+    Ceruleum = 7
 }

@@ -119,11 +119,9 @@ public enum TextFlags : ushort {
     MultiLine = 1 << 7,
     OverflowHidden = 1 << 8,
     LinkData = 1 << 9,
-    [Obsolete("Use LinkData for this value or UseFixedFontResolution for fixed font resolution.")]
-    FixedFontResolution = LinkData,
     Ellipsis = 1 << 10,
     // Unk11 = 1 << 11, // Copied to AtkTextNodeRenderer flags 0x20000000.
-    UseFixedFontResolution = 1 << 12, // TODO: Rename to FixedFontResolution
+    FixedFontResolution = 1 << 12,
     // Unk13 = 1 << 13, // Copied to AtkTextNodeRenderer +0x167 used by glyph/font fallback checks.
     FontCache = 1 << 14,
 }

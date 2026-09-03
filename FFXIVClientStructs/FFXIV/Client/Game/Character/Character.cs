@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Control.MoveControl;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
@@ -10,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>, Inherits<CharacterData>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2370)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3, 87)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3, 88)]
 public unsafe partial struct Character {
     [FieldOffset(0x1F0)] public MoveController MoveController;
     [FieldOffset(0x630)] public EmoteController EmoteController;
@@ -190,6 +191,9 @@ public unsafe partial struct Character {
 
     [VirtualFunction(82)]
     public partial ActionEffectHandler* GetActionEffectHandler();
+
+    [VirtualFunction(83)]
+    public partial StdDeque<ScreenLogEntry>* GetScreenLogManager();
 
     [VirtualFunction(84)]
     public partial ForayInfo* GetForayInfo();

@@ -160,18 +160,16 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 15 4C 8B C6")]
     public partial uint CheckActionResources(ActionType actionType, uint actionId, void* actionData = null);
 
-    /// <summary>
-    /// Start a cooldown cycle for the specified action. Upon calling, the game will begin to track state in the
-    /// relevant <see cref="RecastDetail"/>, which can be retrieved separately. Consult that struct's documentation for
-    /// more information.
-    /// </summary>
-    /// <remarks>
-    /// This method should not be called by developers and is instead provided for hooking and API completeness.
-    /// </remarks>
-    /// <param name="actionType">The type of action (generally, Spell) to trigger a cooldown for.</param>
-    /// <param name="actionId">The ID of the action to trigger a cooldown for.</param>
+    // inlined method; no longer available.
     [MemberFunction("48 89 6C 24 ?? 56 57 41 54 48 83 EC 30 44 8B E2")]
     public partial void StartCooldown(ActionType actionType, uint actionId);
+
+    /// <summary>
+    /// Method used by game server to update cooldowns on the client.
+    /// Only operates on *primary* recast group for the specified action.
+    /// </summary>
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 8B F2 0F 29 74 24 ?? 0F B6 D2")]
+    public partial void SetCooldown(ActionType actionType, uint actionId, float newElapsed, float newTotal);
 
     /// <summary>
     /// Check if a specific action is "off cooldown" and can be used again. This method will account for the slidecast
@@ -191,6 +189,15 @@ public unsafe partial struct ActionManager {
     /// <returns>Returns true if target constraints are satisfied, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 47 ?? 48 8B D7 0F B6 8B")]
     public partial bool IsActionTargetInRange(ActionType actionType, uint actionId);
+
+    /// <summary>
+    /// Gets a "Hotbar Cooldown Info" struct containing information used in RaptureHotbarModule rendering.
+    /// </summary>
+    /// <param name="outCooldownInfo">The struct to dump hotbar cooldown info to.</param>
+    /// <param name="actionType">The action type to resolve.</param>
+    /// <param name="actionId">The action ID to resolve.</param>
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 41 55 41 57 48 83 EC 30 45 8B E8")]
+    public partial void GetHotbarCooldownInfo(HotbarCooldownInfo* outCooldownInfo, ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 11 06 80 3B")]
     public static partial float GetActionRange(uint actionId);
@@ -279,6 +286,13 @@ public unsafe partial struct ActionManager {
     /// </summary>
     [MemberFunction("48 8B C4 48 89 58 ?? 56 48 81 EC ?? ?? ?? ?? 48 8B 35")]
     public partial void Update();
+
+    /// <summary>
+    /// Called whenever a cast is canceled, generally in response to player move or interruption.
+    /// Resets cooldowns and clears temporary state.
+    /// </summary>
+    [MemberFunction("48 8B C4 48 83 EC 48 48 89 58")]
+    public partial void OnCastCancelled();
 
     /// <summary>
     /// Determine character's category for action targeting purposes; this is used by the game to determine whether a spell can be used on that target.
@@ -392,6 +406,18 @@ public struct ComboDetail {
     [FieldOffset(0x04)] public uint Action;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x1A)]
+public struct HotbarCooldownInfo {
+    [FieldOffset(0x00)] public float PrimaryElapsedTime;
+    [FieldOffset(0x04)] public float PrimaryTotalTime;
+    [FieldOffset(0x08)] public float AdditionalElapsedTime;
+    [FieldOffset(0x0C)] public float AdditionalTotalTime;
+    [FieldOffset(0x10)] public CooldownDisplayType DisplayType; // control UI display type; passed directly to intermediates and then arrays
+    [FieldOffset(0x14)] public int CurrentMaxCharges;
+    [FieldOffset(0x18)] public bool CooldownActive;
+    [FieldOffset(0x19)] public bool IsGcd;
+}
+
 public enum ActionType : uint {
     None,
     Action,
@@ -414,4 +440,11 @@ public enum ActionType : uint {
     Unk18, // Not in UseAction (?)
     BgcArmyAction,
     Ornament,
+}
+
+public enum CooldownDisplayType {
+    NonGcd = 0,            // normal recast
+    GcdMultiCharge = 1,    // ring recharge
+    GcdSingleCharge = 2,   // normal recast
+    SpecialCharge = 3,     // sweeping recharge
 }
