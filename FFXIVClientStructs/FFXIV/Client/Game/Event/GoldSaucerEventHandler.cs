@@ -12,8 +12,9 @@ public unsafe partial struct GoldSaucerEventHandler {
     [FieldOffset(0x1B8)] public EventContext* Context;
     [FieldOffset(0x1C0)] public uint ContextScene;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-    public struct EventContext {
+    public partial struct EventContext {
         [FieldOffset(0x00)] public StdDeque<TextParameter> TextParameters;
         [FieldOffset(0x28)] public ExcelSheetWaiter ExcelSheetWaiter;
         [FieldOffset(0x70)] public ExcelSheet* ExcelSheet;
