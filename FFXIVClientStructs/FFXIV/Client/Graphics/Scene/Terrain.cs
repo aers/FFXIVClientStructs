@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Terrain {
     [FieldOffset(0x90), Obsolete("Use TerrainResourceHandle instead.")] public ResourceHandle* ResourceHandle;
     [FieldOffset(0x90)] public TerrainResourceHandle* TerrainResourceHandle;
-    [FieldOffset(0x98)] public ModelResourceHandle** TileModelResourceHandlesPtr;
+    [FieldOffset(0x98)] internal ModelResourceHandle** TileModelResourceHandlesPtr;
     [FieldOffset(0xA0)] public uint TileCount;
     [FieldOffset(0xA4)] public uint TerrainPlateCount;
     [FieldOffset(0xA8)] public uint WaterPlateCount;
