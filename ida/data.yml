@@ -6140,6 +6140,14 @@ classes:
     vtbls:
       - ea: 0x142149898
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x1403242C0: GetFileVersion
+      0x1403242E0: GetTileCount
+      0x140324310: GetTileWidth
+      0x1403243A0: GetClipDistance
+      0x1403243E0: GetUnk10
+      0x140324430: GetFlag
+      0x1403244C0: GetTileCoordinateArray
   Client::System::Resource::Handle::TerrainResourceHandleFactory:
     vtbls:
       - ea: 0x142149A00
@@ -7231,6 +7239,34 @@ classes:
     vtbls:
       - ea: 0x142144A78
         base: Client::Graphics::Render::RenderObject
+  Client::Graphics::Render::TerrainPlate:
+    vtbls:
+      - ea: 0x142144D18
+        base: Client::Graphics::Render::RenderObject
+    vfuncs:
+      4: ReleaseResources
+      5: RegisterWithRenderer
+      6: HasAllocatedMemory
+    funcs:
+      0x14028EDE0: ComputeAxisAlignedBounds
+  Client::Graphics::Render::WaterPlate:
+    vtbls:
+      - ea: 0x142144DF8
+        base: Client::Graphics::Render::RenderObject
+    vfuncs:
+      4: ReleaseResources
+      5: RegisterWithRenderer
+    funcs:
+      0x140296C00: ComputeAxisAlignedBounds
+  Client::Graphics::Render::VerticalFogPlate:
+    vtbls:
+      - ea: 0x142144F58
+        base: Client::Graphics::Render::RenderObject
+    vfuncs:
+      4: ReleaseResources
+      5: RegisterWithRenderer
+    funcs:
+      0x1402AC970: ComputeAxisAlignedBounds
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x142144950
@@ -7863,6 +7899,12 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x14044EB30: ctor
+      0x14044EFE0: Load
+      0x140450AA0: LoadTileModels
+      0x140450D50: LoadGrass
+      0x14044F2F0: CreateTerrainPlates
+      0x14044F670: CreateWaterPlates
+      0x14044F930: CreateVerticalFogPlates
   Client::Graphics::Scene::Light:
     vtbls:
       - ea: 0x142163EB0
@@ -9974,6 +10016,10 @@ classes:
     vtbls:
       - ea: 0x142178678
         base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x140726A40: Load
+      0x140726C80: CreateGraphics
+      0x140726F70: CreateCollision
   Client::LayoutEngine::Environment::LayoutEnvironment:
     vtbls:
       - ea: 0x1421786C0
