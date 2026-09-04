@@ -62,6 +62,22 @@ public unsafe partial struct WarpInfo {
     [FieldOffset(0xC7)] private byte UnkC7;
     [FieldOffset(0xC8)] private DrawObject* LocalPlayerDrawObject;
     [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray3<Pointer<Weapon>> _weapons;
+
+    /// <summary>
+    /// Finishes the current warp/loading screen after the ready check in Update succeeds. Clears loading, shows ui.
+    /// </summary>
+    /// <param name="eventParam">
+    /// Param for when when invoked from event handlers. 0 if not.
+    /// </param>
+    /// <param name="eventId">
+    /// Event id when invoked from EventFramework. 0 if not.
+    /// </param>
+    /// <remarks>
+    /// Runs various post-login events like near achievements, play guide, returner dialog.<br/>
+    /// This is a good post-login event if you check <see cref="WarpType"/>
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 66 0F 1F 44 00 ?? 48 C7 87 ?? ?? ?? ?? ?? ?? ?? ??")]
+    public partial void CompleteWarp(int eventParam, int eventId);
 }
 
 public enum WarpType {
