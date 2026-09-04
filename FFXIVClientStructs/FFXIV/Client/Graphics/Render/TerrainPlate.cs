@@ -13,14 +13,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct TerrainPlate {
-    [FieldOffset(0x10)] internal byte Unk10;
+    [FieldOffset(0x10)] private byte _unk10;
     [FieldOffset(0x18)] public TerrainGridCoordinates GridCoordinates;
     [FieldOffset(0x20)] public Vector3 BoundsCenter;
     [FieldOffset(0x30)] public ModelResourceHandle* ModelResourceHandle;
     [FieldOffset(0x38)] public ushort TileWidth; // The size of this plate's grid tile along the X and Z axes, in world units.
     [FieldOffset(0x3A)] public ushort LinearGridIndex; // A single index based on GridCoordinates flattened into the terrain renderer's 1D plate array
-    [FieldOffset(0x40)] internal void* PtrModelThingBuffer; // An array of things correspinding to something in the ModelResourceHandle.
-    [FieldOffset(0x48)] internal uint ModelThingBufferLength;
+    [FieldOffset(0x40)] private void* _ptrModelThingBuffer; // An array of things correspinding to something in the ModelResourceHandle.
+    [FieldOffset(0x48)] private uint _modelThingBufferLength;
 
     [MemberFunction("48 83 EC 38 48 8B 41 30 4C 8B D2")]
     public partial AxisAlignedBounds* ComputeAxisAlignedBounds(AxisAlignedBounds* outBounds);

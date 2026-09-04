@@ -13,24 +13,24 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Terrain {
     [FieldOffset(0x90), Obsolete("Use TerrainResourceHandle instead.")] public ResourceHandle* ResourceHandle;
     [FieldOffset(0x90)] public TerrainResourceHandle* TerrainResourceHandle;
-    [FieldOffset(0x98)] internal ModelResourceHandle** TileModelResourceHandlesPtr;
+    [FieldOffset(0x98)] private ModelResourceHandle** _tileModelResourceHandlesPtr;
     [FieldOffset(0xA0)] public uint TileCount;
     [FieldOffset(0xA4)] public uint TerrainPlateCount;
     [FieldOffset(0xA8)] public uint WaterPlateCount;
     [FieldOffset(0xAC)] public uint VerticalFogPlateCount;
-    [FieldOffset(0xB0)] internal TerrainPlate** _terrainPlates;
-    [FieldOffset(0xB8)] internal WaterPlate** _waterPlates;
-    [FieldOffset(0xC0)] internal VerticalFogPlate** _verticalFogPlates;
-    [FieldOffset(0xC8)] internal void** _terrainPlateCullingHandles;
-    [FieldOffset(0xD0)] internal void** _waterPlateCullingHandles;
-    [FieldOffset(0xD8)] internal void** _verticalFogPlateCullingHandles;
+    [FieldOffset(0xB0)] private TerrainPlate** _terrainPlates;
+    [FieldOffset(0xB8)] private WaterPlate** _waterPlates;
+    [FieldOffset(0xC0)] private VerticalFogPlate** _verticalFogPlates;
+    [FieldOffset(0xC8)] private void** _terrainPlateCullingHandles;
+    [FieldOffset(0xD0)] private void** _waterPlateCullingHandles;
+    [FieldOffset(0xD8)] private void** _verticalFogPlateCullingHandles;
 
     [FieldOffset(0xE0)] public byte ModelLoadPhase; // 1 -> Load the models with GetResourceAsync next UpdateRender, 2 -> Waiting for plate models to load, and each frame checks the model resource handles until they are loaded.
-    [FieldOffset(0xE1)][FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _terrainGameFolder; // The folder to read the plate models and grass zone data from
-    [FieldOffset(0x1E1)] internal byte Unk1E1;
+    [FieldOffset(0xE1), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _terrainGameFolder; // The folder to read the plate models and grass zone data from
+    [FieldOffset(0x1E1)] private byte _unk1E1;
     [FieldOffset(0x1E2)] public byte EnableGrass;
 
-    public Span<Pointer<ModelResourceHandle>> TileModelResourceHandles => new(TileModelResourceHandlesPtr, (int)TileCount);
+    public Span<Pointer<ModelResourceHandle>> TileModelResourceHandles => new(_tileModelResourceHandlesPtr, (int)TileCount);
 
     /// <summary>
     /// The terrain plates for each of the tile models that have terrain meshes.

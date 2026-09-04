@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct VerticalFogPlate {
-    [FieldOffset(0x10)] internal byte Unk10;
+    [FieldOffset(0x10)] private byte _unk10;
     [FieldOffset(0x18)] public ushort TileWidth;
     [FieldOffset(0x1A)] public TerrainGridCoordinates GridCoordinates;
     [FieldOffset(0x20)] public ModelResourceHandle* ModelResourceHandle;

@@ -23,7 +23,7 @@ public unsafe partial struct TerrainResourceHandle {
         [FieldOffset(0x04)] public uint TileCount;
         [FieldOffset(0x08)] public uint GridSize;
         [FieldOffset(0x0C)] public float ClipDistance;
-        [FieldOffset(0x10)] internal float Unk10;
+        [FieldOffset(0x10)] private float _unk10;
         [FieldOffset(0x14)] public uint Flags;
 
         [FieldOffset(0x34)] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates;
