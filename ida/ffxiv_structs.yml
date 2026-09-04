@@ -2209,6 +2209,16 @@ enums:
     "Collectible": 8
     "Action": 16
     "ActionSheet": 32
+- type: Client::UI::Misc::ScreenLogRelationKind
+  name: ScreenLogRelationKind
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "LocalPlayer": 0
+    "PartyMember": 1
+    "Other": 2
+    "Enemy": 3
 - type: Client::UI::Misc::TermFilterModule::TermFilterSetting
   name: TermFilterSetting
   underlying: byte
@@ -5736,6 +5746,48 @@ enums:
     "Harvesting": 3
     "Spearfishing": 4
     "Spearfishing2": 5
+- type: Client::Game::Event::GoldSaucerArcadeMachineState
+  name: GoldSaucerArcadeMachineState
+  underlying: int
+  namespace: Client.Game.Event
+  flags: False
+  values:
+    "None": 0
+    "Ready": 1
+    "Playing": 2
+- type: Client::Game::Event::GoldSaucerArcadeMachineUIState
+  name: GoldSaucerArcadeMachineUIState
+  underlying: int
+  namespace: Client.Game.Event
+  flags: False
+  values:
+    "Closed": 0
+    "Open": 1
+    "Playing": 2
+- type: Client::Game::Event::GoldSaucerArcadeMachineType
+  name: GoldSaucerArcadeMachineType
+  underlying: byte
+  namespace: Client.Game.Event
+  flags: False
+  values:
+    "MonsterToss": 0
+    "CuffACur": 1
+    "CrystalTowerStriker": 2
+    "MooglesPaw": 3
+    "TheFinerMiner": 4
+    "OutOnALimb": 5
+- type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveType
+  name: GuildleveType
+  underlying: int
+  namespace: Client.Game.Event
+  flags: False
+  values:
+    "Battlecraft": 0
+    "Fieldcraft": 1
+    "Tradecraft": 2
+    "Maelstrom": 3
+    "OrderOfTheTwinAdder": 4
+    "ImmortalFlames": 5
 - type: Client::Game::Control::CharacterLookAtTargetParam::TargetInfoType
   name: TargetInfoType
   underlying: int
@@ -8049,6 +8101,113 @@ structs:
     name: IsEnabled
     offset: 12
   member_functions: []
+- type: Client::Game::BattleLog
+  name: BattleLog
+  namespace: Client.Game
+  union: False
+  fields: []
+  member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 B8
+    return_type: void
+    name: AddLogMessage3Params
+    parameters:
+    - type: unsigned int
+      name: logMessageId
+    - type: Client::Game::Character::BattleChara*
+      name: source
+    - type: int
+      name: value1
+    - type: int
+      name: value2
+    - type: int
+      name: value3
+    - type: float
+      name: maxDistance
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? F3 0F 11 44 24
+    return_type: void
+    name: AddLogMessage
+    parameters:
+    - type: unsigned int
+      name: logMessageId
+    - type: Client::Game::Character::BattleChara*
+      name: source
+    - type: int
+      name: value1
+    - type: int
+      name: value2
+    - type: int
+      name: value3
+    - type: int
+      name: value4
+    - type: float
+      name: maxDistance
+  - signature: E8 ?? ?? ?? ?? 41 8B CC 83 E9
+    return_type: void
+    name: AddActionLogMessage
+    parameters:
+    - type: unsigned int
+      name: logMessageId
+    - type: Client::Game::Object::GameObject*
+      name: source
+    - type: Client::Game::Object::GameObject*
+      name: target
+    - type: Client::Game::ActionType
+      name: actionKind
+    - type: unsigned int
+      name: actionId
+    - type: int
+      name: value1
+    - type: int
+      name: value2
+    - type: int
+      name: value3
+    - type: int
+      name: value4
+    - type: float
+      name: maxDistance
+  - signature: E8 ?? ?? ?? ?? EB ?? 85 F6 0F 84
+    return_type: void
+    name: AddToScreenLogWithLogMessageId
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: target
+    - type: Client::Game::Character::BattleChara*
+      name: source
+    - type: int
+      name: logMessageId
+    - type: byte
+      name: actionKind
+    - type: unsigned int
+      name: actionId
+    - type: int
+      name: value1
+    - type: int
+      name: value2
+    - type: int
+      name: value3
+  - signature: E8 ?? ?? ?? ?? BF ?? ?? ?? ?? EB 39
+    return_type: void
+    name: AddToScreenLogWithScreenLogKind
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: target
+    - type: Client::Game::Character::BattleChara*
+      name: source
+    - type: int
+      name: screenLogKind
+    - type: byte
+      name: option
+    - type: byte
+      name: actionKind
+    - type: unsigned int
+      name: actionId
+    - type: int
+      name: value1
+    - type: int
+      name: value2
+    - type: int
+      name: value3
 - type: Client::Game::CSBonusEventInfo
   name: CSBonusEventInfo
   namespace: Client.Game
@@ -10114,6 +10273,19 @@ structs:
       name: str
     - type: unsigned __int64
       name: callbackParam
+  member_functions: []
+- type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler::ResultPresentation
+  name: ResultPresentation
+  namespace: Client.Game.Event
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: ActionTimelineId
+    offset: 0
+  - type: unsigned int
+    name: TimelineIndex
+    offset: 4
   member_functions: []
 - type: Client::Game::Event::ListenItemCallbackInterface
   name: ListenItemCallbackInterface
@@ -26962,14 +27134,77 @@ structs:
   fields: []
   member_functions: []
   static_member_functions:
-  - signature: C7 02 ?? ?? ?? ?? 81 F9 ?? ?? ?? ??
+  - signature: E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 44 8B C0
     return_type: int
     name: ConvertLogMessageIdToScreenLogKind
     parameters:
     - type: int
       name: logMessageId
     - type: int*
-      name: unkOption
+      name: outOption
+  - signature: E8 ?? ?? ?? ?? 8B 73 ?? 85 F6 74 ?? 8B C6
+    return_type: void
+    name: AddScreenLogMessage
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: target
+    - type: int
+      name: screenLogKind
+    - type: int
+      name: value
+  - signature: E8 ?? ?? ?? ?? 66 85 FF 0F 84
+    return_type: void
+    name: AddLootedItemScreenLogMessage
+    parameters:
+    - type: unsigned int
+      name: itemId
+    - type: unsigned int
+      name: quantity
+  - signature: E8 ?? ?? ?? ?? 45 85 E4 0F 84 ?? ?? ?? ?? 48 8B 0D
+    return_type: void
+    name: AddScreenLogEntry
+    parameters:
+    - type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
+      name: queue
+    - type: Client::UI::Misc::ScreenLogEntry*
+      name: entry
+- type: Client::UI::Misc::ScreenLogEntry
+  name: ScreenLogEntry
+  namespace: Client.UI.Misc
+  union: False
+  size: 32
+  fields:
+  - type: int
+    name: ScreenLogKind
+    offset: 0
+  - type: Client::UI::Misc::ScreenLogRelationKind
+    name: SourceRelation
+    offset: 4
+  - type: Client::UI::Misc::ScreenLogRelationKind
+    name: TargetRelation
+    offset: 5
+  - type: byte
+    name: Option
+    offset: 6
+  - type: byte
+    name: ActionKind
+    offset: 7
+  - type: unsigned int
+    name: ActionId
+    offset: 8
+  - type: int
+    name: Value1
+    offset: 12
+  - type: int
+    name: Value2
+    offset: 16
+  - type: int
+    name: Value3
+    offset: 20
+  - type: unsigned __int64
+    name: Timestamp
+    offset: 24
+  member_functions: []
 - type: Client::UI::Misc::TeleportHistoryModule::TeleportHistoryEntry
   name: TeleportHistoryEntry
   namespace: Client.UI.Misc
@@ -34227,6 +34462,18 @@ structs:
     name: MyFirstIter
     offset: 8
   member_functions: []
+- type: ContainerInterface::ContainerProxy<Client::UI::Misc::ScreenLogEntry>
+  name: ContainerProxy`1
+  namespace: ContainerInterface
+  union: False
+  fields:
+  - type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
+    name: MyCont
+    offset: 0
+  - type: ContainerInterface::IteratorBase12<Client::UI::Misc::ScreenLogEntry>*
+    name: MyFirstIter
+    offset: 8
+  member_functions: []
 - type: ContainerInterface::ContainerProxy<Component::Text::TextParameter>
   name: ContainerProxy`1
   namespace: ContainerInterface
@@ -34383,6 +34630,18 @@ structs:
     name: MyProxy
     offset: 0
   - type: ContainerInterface::IteratorBase12<Client::UI::Misc::LogMessageQueueItem>*
+    name: MyNextIter
+    offset: 8
+  member_functions: []
+- type: ContainerInterface::IteratorBase12<Client::UI::Misc::ScreenLogEntry>
+  name: IteratorBase12`1
+  namespace: ContainerInterface
+  union: False
+  fields:
+  - type: ContainerInterface::ContainerProxy<Client::UI::Misc::ScreenLogEntry>*
+    name: MyProxy
+    offset: 0
+  - type: ContainerInterface::IteratorBase12<Client::UI::Misc::ScreenLogEntry>*
     name: MyNextIter
     offset: 8
   member_functions: []
@@ -34573,6 +34832,27 @@ structs:
     name: ContainerBase
     offset: 0
   - type: Client::UI::Misc::LogMessageQueueItem**
+    name: Map
+    offset: 8
+  - type: unsigned __int64
+    name: MapSize
+    offset: 16
+  - type: unsigned __int64
+    name: MyOff
+    offset: 24
+  - type: unsigned __int64
+    name: MySize
+    offset: 32
+  member_functions: []
+- type: StdDeque<Client::UI::Misc::ScreenLogEntry>
+  name: StdDeque`1
+  namespace: ''
+  union: False
+  fields:
+  - type: ContainerInterface::ContainerProxy<Client::UI::Misc::ScreenLogEntry>*
+    name: ContainerBase
+    offset: 0
+  - type: Client::UI::Misc::ScreenLogEntry**
     name: Map
     offset: 8
   - type: unsigned __int64
@@ -35002,6 +35282,18 @@ structs:
   union: False
   fields:
   - type: RedBlackTree::Node<StdPair<unsigned __int16, StdPair<__int64, __int64>>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: StdMap<unsigned __int16, unsigned int>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<unsigned __int16, unsigned int>>*
     name: Head
     offset: 0
   - type: __int64
@@ -35452,6 +35744,18 @@ structs:
     name: Item2
     offset: 8
   member_functions: []
+- type: StdPair<unsigned __int16, unsigned int>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int16
+    name: Item1
+    offset: 0
+  - type: unsigned int
+    name: Item2
+    offset: 4
+  member_functions: []
 - type: StdPair<unsigned __int64, Client::Game::Event::LuaActor*>
   name: StdPair`2
   namespace: ''
@@ -35851,6 +36155,66 @@ structs:
     name: Last
     offset: 8
   - type: Client::Game::Event::EventSceneTaskInterface**
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentCategoryList>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentCategoryList*
+    name: First
+    offset: 0
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentCategoryList*
+    name: Last
+    offset: 8
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentCategoryList*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentGroup>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentGroup*
+    name: First
+    offset: 0
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentGroup*
+    name: Last
+    offset: 8
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentGroup*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve*
+    name: First
+    offset: 0
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve*
+    name: Last
+    offset: 8
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentSubList>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentSubList*
+    name: First
+    offset: 0
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentSubList*
+    name: Last
+    offset: 8
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentSubList*
     name: End
     offset: 16
   member_functions: []
@@ -39627,6 +39991,105 @@ structs:
       name: str
     - type: unsigned __int64
       name: callbackParam
+  member_functions: []
+- type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler::SheetWaiter
+  name: SheetWaiter
+  namespace: Client.Game.Event
+  union: False
+  size: 96
+  fields:
+  - type: Common::Component::Excel::ExcelSheetWaiter
+    name: ExcelSheetWaiter
+    offset: 0
+    base: true
+  - type: unsigned __int64
+    name: RefCount
+    offset: 48
+  - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+    name: EventHandler
+    offset: 56
+  - type: __int64
+    name: Callback
+    offset: 64
+  - type: int
+    name: CallbackThisOffset
+    offset: 72
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ExcelSheet
+    offset: 80
+  - type: char
+    name: IsLoaded
+    offset: 88
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Common::Component::Excel::ExcelSheetWaiter*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler::SheetWaiter*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentCategoryList
+  name: GuildleveAssignmentCategoryList
+  namespace: Client.Game.Event
+  union: False
+  size: 24
+  fields:
+  - type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentGroup>
+    name: Groups
+    offset: 0
+  member_functions: []
+- type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentGroup
+  name: GuildleveAssignmentGroup
+  namespace: Client.Game.Event
+  union: False
+  size: 32
+  fields:
+  - type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentSubList>
+    name: SubLists
+    offset: 0
+  - type: unsigned int
+    name: Flags
+    offset: 24
+  member_functions: []
+- type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve
+  name: GuildleveAssignmentLeve
+  namespace: Client.Game.Event
+  union: False
+  size: 232
+  fields:
+  - type: unsigned __int16
+    name: LeveId
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 8
+  - type: Client::System::String::Utf8String
+    name: ClientName
+    offset: 112
+  - type: unsigned __int16
+    name: ClassJobLevel
+    offset: 216
+  - type: byte
+    name: Unk0DA
+    offset: 218
+  - type: unsigned int
+    name: GenreIcon
+    offset: 220
+  - type: int
+    name: Unk0E0
+    offset: 224
+  member_functions: []
+- type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentSubList
+  name: GuildleveAssignmentSubList
+  namespace: Client.Game.Event
+  union: False
+  size: 24
+  fields:
+  - type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve>
+    name: Leves
+    offset: 0
   member_functions: []
 - type: Client::Game::Event::ListenItemCallback
   name: ListenItemCallback
@@ -61377,6 +61840,12 @@ structs:
       name: index
     - type: Component::GUI::AtkValue*
       name: outValue
+  - signature: E8 ?? ?? ?? ?? 8B F8 83 C0 ?? 83 F8 ?? 77 ?? 48 63 C8
+    return_type: int
+    name: GetInt
+    parameters:
+    - type: Component::GUI::AtkValue*
+      name: this
   - signature: E8 ?? ?? ?? ?? 4D 39 B7
     return_type: void
     name: ReleaseManagedMemoryInternal
@@ -62145,6 +62614,30 @@ structs:
   - type: StdPair<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>
     name: _Myval
     offset: 32
+  member_functions: []
+- type: RedBlackTree::Node<StdPair<unsigned __int16, unsigned int>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<unsigned __int16, unsigned int>>*
+    name: _Left
+    offset: 0
+  - type: RedBlackTree::Node<StdPair<unsigned __int16, unsigned int>>*
+    name: _Parent
+    offset: 8
+  - type: RedBlackTree::Node<StdPair<unsigned __int16, unsigned int>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: char
+    name: _Isnil
+    offset: 25
+  - type: StdPair<unsigned __int16, unsigned int>
+    name: _Myval
+    offset: 28
   member_functions: []
 - type: RedBlackTree::Node<StdPair<unsigned __int64, Client::Game::Event::LuaActor*>>
   name: Node
@@ -63553,6 +64046,36 @@ structs:
   - name: dtor
     offset: 0
   member_functions: []
+- type: Client::Game::Event::GoldSaucerEventHandler::EventContext
+  name: EventContext
+  namespace: Client.Game.Event
+  union: False
+  size: 272
+  fields:
+  - type: StdDeque<Component::Text::TextParameter>
+    name: TextParameters
+    offset: 0
+  - type: Common::Component::Excel::ExcelSheetWaiter
+    name: ExcelSheetWaiter
+    offset: 40
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ExcelSheet
+    offset: 112
+  - type: Client::Game::Event::EventHandler*
+    name: EventHandler
+    offset: 120
+  - type: int
+    name: SelectedOption
+    offset: 132
+  - type: int
+    name: ValueCount
+    offset: 136
+  - type: unsigned int
+    name: Values
+    offset: 140
+    size: 10
+    is_string: False
+  member_functions: []
 - type: Client::Game::Event::LuaAetheryte
   name: LuaAetheryte
   namespace: Client.Game.Event
@@ -64159,8 +64682,8 @@ structs:
     offset: 968
     size: 7
     is_string: False
-  - type: __int64
-    name: Unk3D0
+  - type: float
+    name: SpecialStatusTimerOrDirection
     offset: 976
   - type: byte
     name: NumValidStatuses
@@ -64169,6 +64692,24 @@ structs:
     name: ExtraFlags
     offset: 985
   member_functions:
+  - signature: 48 8B C4 48 89 58 ?? 48 89 68 ?? 48 89 70 ?? 57 41 54 41 56 48 83 EC ?? 4C 89 78
+    return_type: void
+    name: ProcessHotDot
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: Client::Game::Character::BattleChara*
+      name: target
+    - type: unsigned int
+      name: statusId
+    - type: int
+      name: tickMode
+    - type: unsigned int
+      name: value
+    - type: unsigned int
+      name: sourceEntityId
+    - type: int
+      name: damageType
   - signature: E8 ?? ?? ?? ?? C6 43 2D 00
     return_type: char
     name: HasStatus
@@ -87445,7 +87986,77 @@ structs:
   - type: StdVector<byte>
     name: LogMessageData
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: ClearLog
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+  - name: SetContentId
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+  - name: GetCurrentLogIndex
+    offset: 24
+    return_type: unsigned int
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+  - name: GetLogMessageOverflow
+    offset: 32
+    return_type: int
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+  - name: GetLogMessageCount
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+  - name: AddLogMessageRawString
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: rawString
+  - name: AddLogMessageRaw
+    offset: 56
+    return_type: unsigned int
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+    - type: char*
+      name: stringPointer
+    - type: int
+      name: size
+  - name: GetLogMessageRawString
+    offset: 64
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: rawString
+    - type: unsigned int
+      name: index
+  - name: GetLogMessageRaw
+    offset: 72
+    return_type: byte*
+    parameters:
+    - type: Component::Log::LogModule*
+      name: this
+    - type: int
+      name: index
+    - type: int*
+      name: outLogMessageIndex
   member_functions: []
 - type: Component::Shell::ShellCommands
   name: ShellCommands
@@ -112946,6 +113557,31 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::Control::TargetSystem
+- type: Client::Game::Event::GuildleveAssignmentEventHandler::RewardItem
+  name: RewardItem
+  namespace: Client.Game.Event
+  union: False
+  size: 192
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 0
+  - type: Client::Game::InventoryItem
+    name: Item
+    offset: 104
+  - type: unsigned __int16
+    name: Unk0B0
+    offset: 176
+  - type: unsigned int
+    name: Unk0B4
+    offset: 180
+  - type: char
+    name: Unk0B8
+    offset: 184
+  - type: unsigned int
+    name: Unk0BC
+    offset: 188
+  member_functions: []
 - type: Client::Game::FashionCheckManager
   name: FashionCheckManager
   namespace: Client.Game
@@ -133760,9 +134396,9 @@ structs:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
     - type: byte
-      name: a2
+      name: resultCount
     - type: int
-      name: a3
+      name: errorCode
   - signature: 41 83 F8 0A 0F 87 ?? ?? ?? ?? 55
     return_type: __int64
     name: ProcessPlayerRetainerInfo
@@ -145975,7 +146611,77 @@ structs:
   - type: Client::UI::Misc::RaptureLogModule::AddonMessageSub
     name: AddonMessageSub3488
     offset: 13448
-  virtual_functions: []
+  virtual_functions:
+  - name: ClearLog
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+  - name: SetContentId
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+  - name: GetCurrentLogIndex
+    offset: 24
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+  - name: GetLogMessageOverflow
+    offset: 32
+    return_type: int
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+  - name: GetLogMessageCount
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+  - name: AddLogMessageRawString
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: rawString
+  - name: AddLogMessageRaw
+    offset: 56
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: char*
+      name: stringPointer
+    - type: int
+      name: size
+  - name: GetLogMessageRawString
+    offset: 64
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: rawString
+    - type: unsigned int
+      name: index
+  - name: GetLogMessageRaw
+    offset: 72
+    return_type: byte*
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: index
+    - type: int*
+      name: outLogMessageIndex
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 83 EC ?? 89 43
     return_type: unsigned int
@@ -156600,6 +157306,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -156616,6 +157330,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -156630,6 +157354,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -156688,6 +157432,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -156727,6 +157489,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::EventHandler*
       name: this
@@ -200792,6 +201560,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -200808,6 +201584,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -200822,6 +201608,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -200880,6 +201686,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -200919,6 +201743,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
@@ -201074,6 +201904,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -201090,6 +201928,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -201104,6 +201952,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -201162,6 +202030,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -201201,6 +202087,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
       name: this
@@ -201301,6 +202193,308 @@ structs:
       name: gatheringPointRow
     - type: Client::Game::Object::GatheringPointObject*
       name: gatheringPointObject
+- type: Client::Game::Event::GoldSaucerEventHandler
+  name: GoldSaucerEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 456
+  fields:
+  - type: Client::Game::Event::EventHandler
+    name: EventHandler
+    offset: 0
+    base: true
+  - type: Client::Game::Event::GoldSaucerEventHandler::EventContext*
+    name: Context
+    offset: 440
+  - type: unsigned int
+    name: ContextScene
+    offset: 448
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerEventHandler*
+      name: this
+  member_functions: []
 - type: Client::Game::Event::TripleTriadEventHandler
   name: TripleTriadEventHandler
   namespace: Client.Game.Event
@@ -201320,6 +202514,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -201336,6 +202538,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -201350,6 +202562,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -201408,6 +202640,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -201447,6 +202697,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::TripleTriadEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::TripleTriadEventHandler*
       name: this
@@ -221651,6 +222907,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -221667,6 +222931,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -221681,6 +222955,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -221739,6 +223033,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -221778,6 +223090,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::FishingEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::FishingEventHandler*
       name: this
@@ -221888,6 +223206,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -221904,6 +223230,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -221918,6 +223254,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -221976,6 +223332,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -222015,6 +223389,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
       name: this
@@ -222143,6 +223523,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -222159,6 +223547,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -222173,6 +223571,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -222231,6 +223649,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -222270,6 +223706,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
@@ -242411,6 +243853,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -242427,6 +243877,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -242441,6 +243901,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -242499,6 +243979,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -242538,6 +244036,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::RetainerBuybackEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::RetainerBuybackEventHandler*
       name: this
@@ -248017,6 +249521,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -248033,6 +249545,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -248047,6 +249569,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -248105,6 +249647,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -248144,6 +249704,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
       name: this
@@ -248280,6 +249846,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -248296,6 +249870,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -248310,6 +249894,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -248368,6 +249972,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -248407,6 +250029,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
@@ -252755,6 +254383,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -252771,6 +254407,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -252785,6 +254431,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -252843,6 +254509,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -252882,6 +254566,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
       name: this
@@ -264454,6 +266144,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -264470,6 +266168,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -264484,6 +266192,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -264542,6 +266270,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -264581,6 +266327,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
       name: this
@@ -264688,6 +266440,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -264704,6 +266464,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -264718,6 +266488,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -264776,6 +266566,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -264815,6 +266623,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftLeveClientEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::CraftLeveClientEventHandler*
       name: this
@@ -264923,6 +266737,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -264939,6 +266761,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -264953,6 +266785,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -265011,6 +266863,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -265050,6 +266920,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
@@ -265157,6 +267033,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -265173,6 +267057,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -265187,6 +267081,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -265245,6 +267159,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -265284,6 +267216,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkResidentEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::CustomTalkResidentEventHandler*
       name: this
@@ -265391,6 +267329,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -265407,6 +267353,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -265421,6 +267377,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -265479,6 +267455,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -265518,6 +267512,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::ExitRangeEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::ExitRangeEventHandler*
       name: this
@@ -265628,6 +267628,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -265644,6 +267652,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -265658,6 +267676,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -265716,6 +267754,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -265755,6 +267811,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Gimmick::GimmickEventHandler*
       name: this
@@ -267732,6 +269794,16 @@ structs:
       name: this
     - type: StdVector<Client::Game::UI::MapMarkerData*>*
       name: markerPtrs
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 57 41 56 41 57 48 83 EC ?? 41 8B D8
+    return_type: char
+    name: CreateTooltip
+    parameters:
+    - type: Client::UI::Agent::AgentMap*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: tooltipString
+    - type: unsigned int
+      name: tooltipContext
 - type: Client::Game::Event::Director
   name: Director
   namespace: Client.Game.Event
@@ -267803,6 +269875,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -267819,6 +269899,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -267833,6 +269923,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -267891,6 +270001,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -267930,6 +270058,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::Director*
       name: this
@@ -268045,6 +270179,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -268061,6 +270203,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -268075,6 +270227,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -268133,6 +270305,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -268172,6 +270362,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::GroupPoseEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::GroupPoseEventHandler*
       name: this
@@ -268279,6 +270475,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -268295,6 +270499,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -268309,6 +270523,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -268367,6 +270601,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -268406,6 +270658,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::IdleCameraEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::IdleCameraEventHandler*
       name: this
@@ -268618,6 +270876,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -268634,6 +270900,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -268648,6 +270924,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -268706,6 +271002,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -268745,6 +271059,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
       name: this
@@ -268965,6 +271285,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -268981,6 +271309,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -268995,6 +271333,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -269053,6 +271411,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -269092,6 +271468,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::WarpEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::WarpEventHandler*
       name: this
@@ -269199,6 +271581,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -269215,6 +271605,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -269229,6 +271629,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -269287,6 +271707,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -269326,6 +271764,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickAccessor*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Gimmick::GimmickAccessor*
       name: this
@@ -269433,6 +271877,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -269449,6 +271901,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -269463,6 +271925,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -269521,6 +272003,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -269560,6 +272060,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickBill*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Gimmick::GimmickBill*
       name: this
@@ -269673,6 +272179,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -269689,6 +272203,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -269703,6 +272227,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -269761,6 +272305,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -269800,6 +272362,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Gimmick::GimmickRect*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Gimmick::GimmickRect*
       name: this
@@ -272750,6 +275318,606 @@ structs:
       name: a2
     - type: char
       name: a3
+- type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler
+  name: GoldSaucerArcadeMachineEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1416
+  fields:
+  - type: Client::Game::Event::GoldSaucerEventHandler
+    name: GoldSaucerEventHandler
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 456
+    base: true
+  - type: char
+    name: Unk1D0
+    offset: 464
+  - type: Client::Game::Event::GoldSaucerEventHandler::EventContext
+    name: EventContext
+    offset: 472
+  - type: unsigned int
+    name: EventSceneTaskIDs
+    offset: 744
+    size: 4
+    is_string: False
+  - type: StdVector<Client::Game::Event::DirectorTodo>
+    name: DirectorTodos
+    offset: 760
+  - type: Client::Game::Event::GoldSaucerArcadeMachineState
+    name: State
+    offset: 784
+  - type: Client::Game::Event::GoldSaucerArcadeMachineUIState
+    name: UIState
+    offset: 788
+  - type: unsigned int
+    name: StartActionTimelineId
+    offset: 792
+  - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler::ResultPresentation
+    name: ResultPresentations
+    offset: 796
+    size: 4
+    is_string: False
+  - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler::SheetWaiter
+    name: ExcelSheetWaiter
+    offset: 832
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 928
+  - type: Client::System::String::Utf8String*
+    name: CurrentDescription
+    offset: 1032
+  - type: Client::System::String::Utf8String
+    name: PayoutExplanation
+    offset: 1040
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 1144
+  - type: Client::System::String::Utf8String
+    name: TotalPayoutText
+    offset: 1248
+  - type: int
+    name: TimeoutSeconds
+    offset: 1352
+  - type: int
+    name: TimeLimit
+    offset: 1356
+  - type: unsigned int
+    name: EndTimestamp
+    offset: 1360
+  - type: int
+    name: PausedTimeRemaining
+    offset: 1364
+  - type: unsigned int
+    name: BalloonMessageId
+    offset: 1368
+  - type: unsigned int
+    name: FailImageId
+    offset: 1372
+  - type: int
+    name: CurrentPayout
+    offset: 1376
+  - type: int
+    name: PotentialPayout
+    offset: 1380
+  - type: unsigned int
+    name: LogMessageId
+    offset: 1384
+  - type: unsigned __int16
+    name: Progress
+    offset: 1388
+  - type: unsigned __int16
+    name: EntryFee
+    offset: 1390
+  - type: char
+    name: HasMultipleRounds
+    offset: 1392
+  - type: Client::Game::Event::GoldSaucerArcadeMachineType
+    name: MachineType
+    offset: 1393
+  - type: __int8
+    name: PlayerOffsetX
+    offset: 1394
+  - type: __int8
+    name: PlayerOffsetY
+    offset: 1395
+  - type: __int8
+    name: PlayerOffsetZ
+    offset: 1396
+  - type: byte
+    name: ResultUpdateDelayTenths
+    offset: 1397
+  - type: __int8
+    name: BalloonOffsetX
+    offset: 1398
+  - type: __int8
+    name: BalloonOffsetY
+    offset: 1399
+  - type: __int8
+    name: BalloonOffsetZ
+    offset: 1400
+  - type: byte
+    name: RoundTransitionDelayTenths
+    offset: 1401
+  - type: byte
+    name: MaxProgress
+    offset: 1402
+  - type: byte
+    name: RoundsPlayed
+    offset: 1403
+  - type: byte
+    name: RoundCount
+    offset: 1404
+  - type: byte
+    name: CurrentRound
+    offset: 1405
+  - type: unsigned int
+    name: Flags
+    offset: 1408
+  vtable_size: 2208
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 E8 ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D B7
+    return_type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+    name: ctor
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: eventId
+  - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? B8
+    return_type: void
+    name: Finalizer
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: E8 ?? ?? ?? ?? EB ?? 45 33 C9 45 33 C0 33 D2 48 8B CE
+    return_type: void
+    name: BeginAgentGame
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B D7 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B CB 48 83 C4 ?? 5F 5B E9 ?? ?? ?? ?? 3B BB
+    return_type: void
+    name: PrepareNextRound
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 BC 24 ?? ?? ?? ?? ?? 0F 86
+    return_type: void
+    name: ShowRoundResult
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 40 53 48 83 EC ?? 66 89 91 ?? ?? ?? ?? 48 8B D9 33 D2
+    return_type: void
+    name: SetProgress
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: progress
+  - signature: 40 53 48 83 EC ?? 83 A1 ?? ?? ?? ?? ?? 48 8B D9 48 8B 01
+    return_type: void
+    name: PauseTimer
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 4C 8B DC 53 55 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 8B EA
+    return_type: Client::Game::Event::DirectorTodo*
+    name: GetOrCreateDirectorTodo
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: todoId
+  - signature: 4C 8B DC 53 41 54 41 55 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 45 33 FF
+    return_type: void
+    name: OnExcelSheetLoaded
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: __int64
+      name: loadedSheet
+    - type: __int64**
+      name: rows
+    - type: unsigned __int64
+      name: rowCount
+  - signature: E8 ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? EB ?? 45 33 C9
+    return_type: void
+    name: OpenGameUI
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 44 8B CD 45 8B C6 41 0F B6 D7
+    return_type: void
+    name: CloseGameUI
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 40 57 48 83 EC ?? 48 8B F9 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 48 8B 10 48 8B C8 FF 92
+    return_type: void
+    name: ResetAgentAndSharedTimelines
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 89 6C 24 ?? 48 8D 99
+    return_type: void
+    name: StartGame
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 40 57 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B F9 66 39 41
+    return_type: void
+    name: FinalizeGame
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 48 83 EC ?? 83 B9 ?? ?? ?? ?? ?? 74 ?? 83 89
+    return_type: void
+    name: SendMachineAction
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: action
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 48 8D 99 ?? ?? ?? ?? BF ?? ?? ?? ?? 33 ED 8B 13
+    return_type: void
+    name: ClearEventSceneTasks
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+  - signature: 85 D2 0F 84 ?? ?? ?? ?? 48 89 6C 24 ?? 57 48 83 EC ?? 48 8B F9 48 89 74 24
+    return_type: void
+    name: ShowBalloonMessage
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: balloonMessageId
+  - signature: 48 89 74 24 ?? 57 48 83 EC ?? 48 83 79 ?? ?? 8B FA
+    return_type: void
+    name: ResetAgentStatesExcept
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: unsigned int
+      name: state
+  - signature: 40 53 55 56 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 45 8B F1 48 8B 0D ?? ?? ?? ?? 41 8B E8 8B FA
+    return_type: void
+    name: UpdateAgentAndDirectorTodo
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: int
+      name: state
+    - type: int
+      name: currentValue
+    - type: int
+      name: neededValue
+    - type: int
+      name: result0
+    - type: int
+      name: result1
+    - type: int
+      name: result2
+  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 41 8B F9
+    return_type: void
+    name: SendAgentResultUpdate
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: int
+      name: result0
+    - type: int
+      name: result1
+    - type: unsigned int
+      name: result2
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 41 8B D9 41 8B F8 8B F2 E8 ?? ?? ?? ?? 48 85 C0 74 ?? 4C 8B 10 48 8B C8 41 FF 92 ?? ?? ?? ?? 48 8B C8 BA ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0
+    return_type: void
+    name: SendAgentPhaseMessage
+    parameters:
+    - type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+      name: this
+    - type: int
+      name: phase
+    - type: int
+      name: value0
+    - type: int
+      name: value1
+  static_member_functions:
+  - signature: 48 89 5C 24 ?? 56 48 83 EC ?? 0F B7 D9 45 33 C0 B9 ?? ?? ?? ?? 33 D2 E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 8B D3 48 89 6C 24
+    return_type: Client::Game::Event::GoldSaucerArcadeMachineEventHandler*
+    name: Create
+    parameters:
+    - type: unsigned __int16
+      name: eventId
 - type: Client::Game::Event::GoldSaucerDirector
   name: GoldSaucerDirector
   namespace: Client.Game.Event
@@ -272769,6 +275937,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -272785,6 +275961,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -272799,6 +275985,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -272857,6 +276063,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -272896,6 +276120,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
       name: this
@@ -273037,6 +276267,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -273053,6 +276291,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -273067,6 +276315,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -273125,6 +276393,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -273164,6 +276450,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::LeveDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::LeveDirector*
       name: this
@@ -273291,6 +276583,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -273307,6 +276607,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -273321,6 +276631,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -273379,6 +276709,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -273418,6 +276766,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Fate::FateDirector*
       name: this
@@ -273727,6 +277081,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -273743,6 +277105,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -273757,6 +277129,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -273815,6 +277207,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -273854,6 +277264,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::Event::BattleLeveDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::Event::BattleLeveDirector*
       name: this
@@ -274009,6 +277425,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -274025,6 +277449,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -274039,6 +277473,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -274097,6 +277551,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -274136,6 +277608,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
@@ -274268,6 +277746,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -274284,6 +277770,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -274298,6 +277794,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -274356,6 +277872,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -274395,6 +277929,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::MassivePcContent::MassivePcContentDirector*
       name: this
@@ -275093,6 +278633,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -275109,6 +278657,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -275123,6 +278681,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -275181,6 +278759,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -275220,6 +278816,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
@@ -275966,6 +279568,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -275982,6 +279592,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -275996,6 +279616,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -276054,6 +279694,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -276093,6 +279751,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
@@ -276273,6 +279937,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -276289,6 +279961,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -276303,6 +279985,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -276361,6 +280063,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -276400,6 +280120,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
@@ -276526,6 +280252,389 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   member_functions: []
+- type: Client::Game::Event::GuildleveAssignmentEventHandler
+  name: GuildleveAssignmentEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1896
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+    base: true
+  - type: Client::System::String::Utf8String
+    name: Type
+    offset: 728
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveType
+    name: CurrentLeveType
+    offset: 832
+  - type: int
+    name: CategorySelection
+    offset: 836
+    size: 6
+    is_string: False
+  - type: unsigned __int16
+    name: ListLeveId
+    offset: 860
+    size: 6
+    is_string: False
+  - type: Component::Exd::Sheets::GuildleveAssignment
+    name: GuildleveAssignmentSheet
+    offset: 872
+  - type: Component::Exd::Sheets::GuildleveAssignmentTalk*
+    name: AssignmentTalkRow
+    offset: 896
+  - type: Component::Exd::Sheets::EventIconType*
+    name: EventIconTypeRow
+    offset: 904
+  - type: Component::Exd::Sheets::CraftLeve*
+    name: SelectedCraftLeveRow
+    offset: 912
+  - type: int
+    name: Unk398
+    offset: 920
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::RewardItem
+    name: RewardItems
+    offset: 928
+    size: 4
+    is_string: False
+  - type: int
+    name: Unk6A0
+    offset: 1696
+  - type: Component::Exd::Sheets::GatheringLeve*
+    name: SelectedGatheringLeveRow
+    offset: 1704
+  - type: unsigned __int16
+    name: SelectedGatheringLeveId
+    offset: 1712
+  - type: unsigned __int16
+    name: SelectedLeveId
+    offset: 1714
+  - type: unsigned __int16
+    name: Unk6B4
+    offset: 1716
+  - type: Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentLeve*
+    name: SelectedLeveEntry
+    offset: 1720
+  - type: StdVector<Client::Game::Event::GuildleveAssignmentEventHandler::GuildleveAssignmentCategoryList>
+    name: AssignmentLists
+    offset: 1728
+  - type: StdVector<unsigned __int16>
+    name: PendingLeveIds
+    offset: 1768
+  - type: __int64
+    name: PendingLeveCursor
+    offset: 1792
+  - type: Common::Component::Excel::ExcelSheet*
+    name: PendingSheet
+    offset: 1800
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: SheetWaiter
+    offset: 1808
+  - type: StdVector<unsigned int>
+    name: RewardLeveIds
+    offset: 1816
+  - type: StdMap<unsigned __int16, unsigned int>
+    name: RewardItemMap
+    offset: 1840
+  - type: StdVector<Client::System::String::Utf8String>
+    name: DifficultyLabels
+    offset: 1856
+  - type: int
+    name: Unk758
+    offset: 1880
+  - type: char
+    name: Unk75C
+    offset: 1884
+  - type: char
+    name: Unk75D
+    offset: 1885
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GuildleveAssignmentEventHandler*
+      name: this
+  member_functions: []
 - type: Client::Game::InstanceContent::PublicContentEureka
   name: PublicContentEureka
   namespace: Client.Game.InstanceContent
@@ -276565,6 +280674,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -276581,6 +280698,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -276595,6 +280722,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -276653,6 +280800,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -276692,6 +280857,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
@@ -277020,6 +281191,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -277036,6 +281215,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -277050,6 +281239,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -277108,6 +281317,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -277147,6 +281374,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
@@ -277410,6 +281643,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -277426,6 +281667,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -277440,6 +281691,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -277498,6 +281769,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -277537,6 +281826,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
@@ -278014,6 +282309,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -278030,6 +282333,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -278044,6 +282357,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -278102,6 +282435,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -278141,6 +282492,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
@@ -278717,6 +283074,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
   - name: ProcessEnterTerritory
     offset: 160
     return_type: void
@@ -278733,6 +283098,16 @@ structs:
       name: this
     - type: Client::Game::Event::UIEventType
       name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
   - name: ProcessYield
     offset: 320
     return_type: void
@@ -278747,6 +283122,26 @@ structs:
       name: intParams
     - type: byte
       name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
   - name: ProcessFormatStringCallback
     offset: 472
     return_type: void
@@ -278805,6 +283200,24 @@ structs:
       name: a2
     - type: char
       name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
   - name: CancelInteraction
     offset: 1272
     return_type: void
@@ -278844,6 +283257,12 @@ structs:
   - name: UpdateTargetableStatus
     offset: 1736
     return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
     parameters:
     - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
       name: this
@@ -279406,6 +283825,12 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
+  - name: GetScreenLogManager
+    offset: 664
+    return_type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
   - name: GetForayInfo
     offset: 672
     return_type: Client::Game::Character::ForayInfo*
@@ -279672,8 +284097,6 @@ structs:
       name: outModelChecked
   - name: GetModelChara
     offset: 616
-  - name: GetScreenLogManager
-    offset: 664
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B E0 48 8B 4F
     return_type: Client::Game::Object::GameObjectId
@@ -280060,6 +284483,12 @@ structs:
     parameters:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
+  - name: GetScreenLogManager
+    offset: 664
+    return_type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
   - name: GetForayInfo
     offset: 672
     return_type: Client::Game::Character::ForayInfo*
@@ -280369,6 +284798,12 @@ structs:
   - name: GetActionEffectHandler
     offset: 656
     return_type: Client::Game::Character::ActionEffectHandler*
+    parameters:
+    - type: Client::Game::Character::Ornament*
+      name: this
+  - name: GetScreenLogManager
+    offset: 664
+    return_type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
@@ -280869,6 +285304,12 @@ structs:
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
+  - name: GetScreenLogManager
+    offset: 664
+    return_type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
+    parameters:
+    - type: Client::Game::Character::Companion*
+      name: this
   - name: GetForayInfo
     offset: 672
     return_type: Client::Game::Character::ForayInfo*
@@ -280898,6 +285339,9 @@ structs:
     name: Character
     offset: 0
     base: true
+  - type: StdDeque<Client::UI::Misc::ScreenLogEntry>
+    name: ScreenLogManager
+    offset: 9072
   - type: Client::Game::StatusManager
     name: StatusManager
     offset: 9136
@@ -281190,6 +285634,12 @@ structs:
   - name: GetActionEffectHandler
     offset: 656
     return_type: Client::Game::Character::ActionEffectHandler*
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: this
+  - name: GetScreenLogManager
+    offset: 664
+    return_type: StdDeque<Client::UI::Misc::ScreenLogEntry>*
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
