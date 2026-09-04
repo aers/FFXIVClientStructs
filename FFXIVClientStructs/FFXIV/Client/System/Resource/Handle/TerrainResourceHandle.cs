@@ -30,13 +30,6 @@ public unsafe partial struct TerrainResourceHandle {
         public Span<TerrainGridCoordinates> TileCoordinates => MemoryMarshal.CreateSpan(ref _tileCoordinates[0], (int)TileCount);
     }
 
-    [Obsolete("Use the TeraFile overload")]
-    [VirtualFunction(23u)]
-    public partial byte* GetData();
-
-    [VirtualFunction(23u)]
-    public partial TeraFile* GetTeraFileData();
-
     /// <summary>
     /// Gets the version of the terrain resource.
     /// </summary>
