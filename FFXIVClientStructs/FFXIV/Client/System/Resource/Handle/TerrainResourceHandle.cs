@@ -27,7 +27,7 @@ public unsafe partial struct TerrainResourceHandle {
         [FieldOffset(0x10)] private float Unk10;
         [FieldOffset(0x14)] public uint Flags;
 
-        [FieldOffset(0x34), FixedSizeArray] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates;
+        [FieldOffset(0x34)] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates; // Does not have [FixedSizeArray] because the span is exposed manually with variably length
         public Span<TerrainGridCoordinates> TileCoordinates => MemoryMarshal.CreateSpan(ref _tileCoordinates[0], (int)TileCount);
     }
 
