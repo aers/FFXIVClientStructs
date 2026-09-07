@@ -65,7 +65,7 @@ public unsafe partial struct TerrainResourceHandle {
     /// <param name="flagIndex">Which flag to get.</param>
     /// <returns>1 if the flag is set, or 0 otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? 48 8B 7C 24")]
-    public partial uint GetFlag(TerrainResourceFlag flagIndex);
+    public partial bool GetFlag(TerrainResourceFlag flagIndex);
 
     /// <summary>
     /// Gets the array of grid coordinates for the tiles in the terrain resource.
