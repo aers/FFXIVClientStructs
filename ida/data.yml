@@ -18178,7 +18178,6 @@ classes:
       0x140E7A660: ResumeTimer
       0x140E7A670: GetOrCreateDirectorTodo
       0x140E7B330: OnExcelSheetLoaded
-      0x140E7B690: ReceiveEvent
       0x140E7B8A0: OpenGameUI
       0x140E7B970: CloseGameUI
       0x140E7BA10: BeginAgentGame #static
