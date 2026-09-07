@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
@@ -13,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct TerrainPlate {
-    [FieldOffset(0x10)] private byte _unk10;
+    [FieldOffset(0x10)] private byte Unk10;
     [FieldOffset(0x18)] public TerrainGridCoordinates GridCoordinates;
     [FieldOffset(0x20)] public Vector3 BoundsCenter;
     [FieldOffset(0x30)] public ModelResourceHandle* ModelResourceHandle;

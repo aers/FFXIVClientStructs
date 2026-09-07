@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Component.Excel;

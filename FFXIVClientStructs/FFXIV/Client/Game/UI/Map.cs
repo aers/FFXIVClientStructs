@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Common.Math;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Map

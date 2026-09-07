@@ -1,6 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Character;
-using FFXIVClientStructs.FFXIV.Common.Math;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 // Client::Game::Control::SpectatorSystem

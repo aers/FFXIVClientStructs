@@ -1,5 +1,4 @@
 using System.Numerics;
-using FFXIVClientStructs.FFXIV.Client.Graphics;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 

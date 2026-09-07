@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
