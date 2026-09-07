@@ -11,8 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Clip;
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 ?? ?? ?? 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 ?? E8 ?? ?? ?? ?? 83 BB ?? ?? ?? ?? 00", 3, 63)]
 public unsafe partial struct InstanceContentTextClip {
-    [FieldOffset(0x48), CExporterIgnore] public InstanceContentTextClipData* Data;
-
     /// <remarks> InstanceContentTextData </remarks>
     [FieldOffset(0x98)] public CStringPointer Text;
     /// <remarks> BNpcName </remarks>
@@ -23,11 +21,14 @@ public unsafe partial struct InstanceContentTextClip {
 
     /// <summary>The TalkSubtitle addon ID, or zero when the addon is not open.</summary>
     [FieldOffset(0xB4)] public uint AddonId;
+    /// <summary>Elapsed time in timeline frames (30 frames per second).</summary>
     [FieldOffset(0xB8)] public float ElapsedTime;
     [FieldOffset(0xBC)] public float SubtitleScaleX;
     [FieldOffset(0xC0)] public float SubtitleScaleY;
     [FieldOffset(0xC4)] public float SubtitlePositionX;
     [FieldOffset(0xC8)] public float SubtitlePositionY;
+
+    public InstanceContentTextClipData* TypedData => (InstanceContentTextClipData*)Data;
 
     [VirtualFunction(7)] public partial bool IsFinished();
     [VirtualFunction(16)] public partial bool ResolveText();
@@ -41,6 +42,9 @@ public unsafe partial struct InstanceContentTextClip {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct InstanceContentTextClipData {
+        [FieldOffset(0x00)] public ushort Id;
+        [FieldOffset(0x02)] public ushort StartFrame;
+        [FieldOffset(0x04)] public ushort FrameCount;
         [FieldOffset(0x0C)] public InstanceContentTextDisplayMode DisplayMode;
         [FieldOffset(0x10)] public uint RowId;
         [FieldOffset(0x14)] public uint BNpcNameRowId;
