@@ -17,9 +17,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct TerrainResourceHandle {
 
-    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)] // 0x34 header, plus the tile coordinates array
-    public partial struct TeraFile {
+    public struct TeraFile {
         [FieldOffset(0x00)] public uint Version;
         [FieldOffset(0x04)] public uint TileCount;
         [FieldOffset(0x08)] public uint GridSize;
@@ -30,6 +29,8 @@ public unsafe partial struct TerrainResourceHandle {
         [FieldOffset(0x34)] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates; // Does not have [FixedSizeArray] because the span is exposed manually with variably length
         public Span<TerrainGridCoordinates> TileCoordinates => MemoryMarshal.CreateSpan(ref _tileCoordinates[0], (int)TileCount);
     }
+
+    public TeraFile* TypedData => (TeraFile*)GetData();
 
     /// <summary>
     /// Gets the version of the terrain resource.
@@ -78,9 +79,9 @@ public unsafe partial struct TerrainResourceHandle {
 /// The flags that can be specified in a terrain resource.
 /// </summary>
 public enum TerrainResourceFlag : uint {
-    Flag0, // Value assigned to TerrainRenderer+0x43B5
-    Flag1, // Value assigned to TerrainRenderer+0x43B6
-    Flag2, // Value assigned to TerrainRenderer+0x43B7
+    Unk0, // Value assigned to TerrainRenderer+0x43B5
+    Unk1, // Value assigned to TerrainRenderer+0x43B6
+    Unk2, // Value assigned to TerrainRenderer+0x43B7
 }
 
 /// <summary>
