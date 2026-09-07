@@ -17,20 +17,19 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct TerrainResourceHandle {
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x38)] // 0x34 header, plus the tile coordinates array
-    public struct TeraFile {
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
+    public struct TeraFileHeader {
         [FieldOffset(0x00)] public uint Version;
         [FieldOffset(0x04)] public uint TileCount;
         [FieldOffset(0x08)] public uint GridSize;
         [FieldOffset(0x0C)] public float ClipDistance;
         [FieldOffset(0x10)] private float Unk10;
         [FieldOffset(0x14)] public uint Flags;
-
-        [FieldOffset(0x34)] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates; // Does not have [FixedSizeArray] because the span is exposed manually with variably length
-        public Span<TerrainGridCoordinates> TileCoordinates => MemoryMarshal.CreateSpan(ref _tileCoordinates[0], (int)TileCount);
     }
 
-    public TeraFile* TypedData => (TeraFile*)GetData();
+    public TeraFileHeader* FileHeader => (TeraFileHeader*)GetData();
+
+    public Span<TerrainGridCoordinates> TileCoordinates => new(GetTileCoordinateArray(), (int)GetTileCount());
 
     /// <summary>
     /// Gets the version of the terrain resource.
