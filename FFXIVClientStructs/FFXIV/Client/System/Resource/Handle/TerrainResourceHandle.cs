@@ -17,6 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct TerrainResourceHandle {
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)] // 0x34 header, plus the tile coordinates array
     public partial struct TeraFile {
         [FieldOffset(0x00)] public uint Version;
@@ -26,7 +27,7 @@ public unsafe partial struct TerrainResourceHandle {
         [FieldOffset(0x10)] private float Unk10;
         [FieldOffset(0x14)] public uint Flags;
 
-        [FieldOffset(0x34)] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates;
+        [FieldOffset(0x34), FixedSizeArray] internal FixedSizeArray1<TerrainGridCoordinates> _tileCoordinates;
         public Span<TerrainGridCoordinates> TileCoordinates => MemoryMarshal.CreateSpan(ref _tileCoordinates[0], (int)TileCount);
     }
 
