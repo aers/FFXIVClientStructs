@@ -3575,6 +3575,15 @@ enums:
     "SqpackTest": 18
     "Debug": 19
     "MaxCount": 20
+- type: Client::System::Resource::Handle::TerrainResourceFlag
+  name: TerrainResourceFlag
+  underlying: unsigned int
+  namespace: Client.System.Resource.Handle
+  flags: False
+  values:
+    "Flag0": 0
+    "Flag1": 1
+    "Flag2": 2
 - type: Client::System::Photo::ScreenShot::ScreenShotResultCode
   name: ScreenShotResultCode
   underlying: int
@@ -7523,6 +7532,14 @@ enums:
     "Locked": 32
     "ConditionLocked": 128
     "CurrentlyActive": 2048
+- type: Client::System::Scheduler::Clip::InstanceContentTextClip::InstanceContentTextDisplayMode
+  name: InstanceContentTextDisplayMode
+  underlying: unsigned int
+  namespace: Client.System.Scheduler.Clip
+  flags: False
+  values:
+    "BattleTalkImage": 0
+    "TalkSubtitle": 1
 - type: Client::System::Resource::Handle::SkpFlag
   name: SkpFlag
   underlying: int
@@ -15778,6 +15795,24 @@ structs:
       name: byteSize
     - type: byte
       name: flags
+- type: Client::Graphics::Kernel::ConstantBufferPointer<Client::Graphics::Render::VerticalFogPlateConstants>
+  name: ConstantBufferPointer`1
+  namespace: Client.Graphics.Kernel
+  union: False
+  fields:
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: CBuffer
+    offset: 0
+  member_functions: []
+- type: Client::Graphics::Kernel::ConstantBufferPointer<Client::Graphics::Render::WaterPlateConstants>
+  name: ConstantBufferPointer`1
+  namespace: Client.Graphics.Kernel
+  union: False
+  fields:
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: CBuffer
+    offset: 0
+  member_functions: []
 - type: Client::Graphics::Kernel::Context
   name: Context
   namespace: Client.Graphics.Kernel
@@ -16912,6 +16947,13 @@ structs:
     name: Camera
     offset: 16
   virtual_functions: []
+  member_functions: []
+- type: Client::Graphics::Render::WaterPlateConstants
+  name: WaterPlateConstants
+  namespace: Client.Graphics.Render
+  union: False
+  size: 64
+  fields: []
   member_functions: []
 - type: Client::Graphics::Scene::Attach::Owner
   name: Owner
@@ -19647,6 +19689,19 @@ structs:
     size: 4
     is_string: False
   member_functions: []
+- type: Client::System::Resource::Handle::TerrainGridCoordinates
+  name: TerrainGridCoordinates
+  namespace: Client.System.Resource.Handle
+  union: False
+  size: 4
+  fields:
+  - type: __int16
+    name: TileX
+    offset: 0
+  - type: __int16
+    name: TileZ
+    offset: 2
+  member_functions: []
 - type: Client::System::Resource::Handle::TextureResourceHandle::TexFileHeader
   name: TexFileHeader
   namespace: Client.System.Resource.Handle
@@ -19904,6 +19959,34 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  member_functions: []
+- type: Client::System::Scheduler::Clip::InstanceContentTextClip::InstanceContentTextClipData
+  name: InstanceContentTextClipData
+  namespace: Client.System.Scheduler.Clip
+  union: False
+  size: 28
+  fields:
+  - type: unsigned __int16
+    name: Id
+    offset: 0
+  - type: unsigned __int16
+    name: StartFrame
+    offset: 2
+  - type: unsigned __int16
+    name: FrameCount
+    offset: 4
+  - type: Client::System::Scheduler::Clip::InstanceContentTextClip::InstanceContentTextDisplayMode
+    name: DisplayMode
+    offset: 12
+  - type: unsigned int
+    name: RowId
+    offset: 16
+  - type: unsigned int
+    name: BNpcNameRowId
+    offset: 20
+  - type: float
+    name: Duration
+    offset: 24
   member_functions: []
 - type: Client::System::Scheduler::Object::ObjectManager
   name: ObjectManager
@@ -45945,6 +46028,16 @@ structs:
     offset: 17329
   virtual_functions: []
   member_functions: []
+- type: Client::Graphics::Render::VerticalFogPlateConstants
+  name: VerticalFogPlateConstants
+  namespace: Client.Graphics.Render
+  union: False
+  size: 16
+  fields:
+  - type: Common::Math::Vector3
+    name: Translation
+    offset: 0
+  member_functions: []
 - type: Client::Graphics::Render::VerticalFogRenderer
   name: VerticalFogRenderer
   namespace: Client.Graphics.Render
@@ -46727,7 +46820,39 @@ structs:
       name: this
     - type: float*
       name: dt
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 89 51 10
+    return_type: void
+    name: Load
+    parameters:
+    - type: Client::LayoutEngine::Terrain::TerrainManager*
+      name: this
+    - type: unsigned int
+      name: terrainManagerId
+    - type: char*
+      name: terrainResourcePath
+    - type: char
+      name: loadGrass
+    - type: char
+      name: disableCollision
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 36 C7 83
+    return_type: char
+    name: CreateGraphics
+    parameters:
+    - type: Client::LayoutEngine::Terrain::TerrainManager*
+      name: this
+    - type: char*
+      name: terrainFolder
+    - type: char
+      name: loadGrass
+  - signature: E8 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? EB B7
+    return_type: void
+    name: CreateCollision
+    parameters:
+    - type: Client::LayoutEngine::Terrain::TerrainManager*
+      name: this
+    - type: char*
+      name: terrainFolder
 - type: Client::SupportDesk::HttpConnectionImpl
   name: HttpConnectionImpl
   namespace: Client.SupportDesk
@@ -47289,6 +47414,36 @@ structs:
   - type: unsigned int
     name: Index
     offset: 52
+  member_functions: []
+- type: Client::System::Resource::Handle::TerrainResourceHandle::TeraFile
+  name: TeraFile
+  namespace: Client.System.Resource.Handle
+  union: False
+  size: 56
+  fields:
+  - type: unsigned int
+    name: Version
+    offset: 0
+  - type: unsigned int
+    name: TileCount
+    offset: 4
+  - type: unsigned int
+    name: GridSize
+    offset: 8
+  - type: float
+    name: ClipDistance
+    offset: 12
+  - type: float
+    name: Unk10
+    offset: 16
+  - type: unsigned int
+    name: Flags
+    offset: 20
+  - type: Client::System::Resource::Handle::TerrainGridCoordinates
+    name: TileCoordinates
+    offset: 52
+    size: 1
+    is_string: False
   member_functions: []
 - type: Client::System::Resource::ResourceGraph
   name: ResourceGraph
@@ -71617,6 +71772,9 @@ structs:
   - type: Client::System::Scheduler::Base::LinkedList<Client::System::Scheduler::Clip::BaseClip>
     name: List
     offset: 24
+  - type: __int64
+    name: Data
+    offset: 72
   vtable_size: 504
   virtual_functions:
   - name: ProcessEvent
@@ -71661,6 +71819,12 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: IsFinished
+    offset: 56
+  - name: ResolveText
+    offset: 128
+  - name: Publish
+    offset: 248
   member_functions: []
 - type: Client::System::Scheduler::Instance::BgObject
   name: BgObject
@@ -91570,6 +91734,126 @@ structs:
   - name: UpdateConstantBuffer
     offset: 40
   member_functions: []
+- type: Client::Graphics::Render::TerrainPlate
+  name: TerrainPlate
+  namespace: Client.Graphics.Render
+  union: False
+  size: 80
+  fields:
+  - type: Client::Graphics::ReferencedClassBase
+    name: ReferencedClassBase
+    offset: 0
+    base: true
+  - type: byte
+    name: _unk10
+    offset: 16
+  - type: Client::System::Resource::Handle::TerrainGridCoordinates
+    name: GridCoordinates
+    offset: 24
+  - type: Common::Math::Vector3
+    name: BoundsCenter
+    offset: 32
+  - type: Client::System::Resource::Handle::ModelResourceHandle*
+    name: ModelResourceHandle
+    offset: 48
+  - type: unsigned __int16
+    name: TileWidth
+    offset: 56
+  - type: unsigned __int16
+    name: LinearGridIndex
+    offset: 58
+  - type: __int64
+    name: ModelThingBufferPtr
+    offset: 64
+  - type: unsigned int
+    name: ModelThingBufferLength
+    offset: 72
+  virtual_functions: []
+  member_functions:
+  - signature: 48 83 EC 38 48 8B 41 30 4C 8B D2
+    return_type: Common::Math::AxisAlignedBounds*
+    name: ComputeAxisAlignedBounds
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outBounds
+- type: Client::Graphics::Render::VerticalFogPlate
+  name: VerticalFogPlate
+  namespace: Client.Graphics.Render
+  union: False
+  size: 48
+  fields:
+  - type: Client::Graphics::ReferencedClassBase
+    name: ReferencedClassBase
+    offset: 0
+    base: true
+  - type: byte
+    name: Unk10
+    offset: 16
+  - type: unsigned __int16
+    name: TileWidth
+    offset: 24
+  - type: Client::System::Resource::Handle::TerrainGridCoordinates
+    name: GridCoordinates
+    offset: 26
+  - type: Client::System::Resource::Handle::ModelResourceHandle*
+    name: ModelResourceHandle
+    offset: 32
+  - type: Client::Graphics::Kernel::ConstantBufferPointer<Client::Graphics::Render::VerticalFogPlateConstants>
+    name: ConstantBuffer
+    offset: 40
+  virtual_functions: []
+  member_functions:
+  - signature: 48 83 EC 38 48 8B 41 20 0F 57 DB
+    return_type: Common::Math::AxisAlignedBounds*
+    name: ComputeAxisAlignedBounds
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outBounds
+- type: Client::Graphics::Render::WaterPlate
+  name: WaterPlate
+  namespace: Client.Graphics.Render
+  union: False
+  size: 64
+  fields:
+  - type: Client::Graphics::ReferencedClassBase
+    name: ReferencedClassBase
+    offset: 0
+    base: true
+  - type: byte
+    name: Unk10
+    offset: 16
+  - type: unsigned __int16
+    name: TileWidth
+    offset: 24
+  - type: Client::System::Resource::Handle::TerrainGridCoordinates
+    name: GridCoordinates
+    offset: 26
+  - type: unsigned __int64
+    name: Unk20
+    offset: 32
+  - type: Client::System::Resource::Handle::ModelResourceHandle*
+    name: ModelResourceHandle
+    offset: 40
+  - type: Client::Graphics::Kernel::ConstantBufferPointer<Client::Graphics::Render::WaterPlateConstants>
+    name: ConstantBuffer
+    offset: 48
+  - type: byte
+    name: Unk38
+    offset: 56
+  virtual_functions: []
+  member_functions:
+  - signature: 48 83 EC 38 48 8B 41 28 4C 8B D2
+    return_type: Common::Math::AxisAlignedBounds*
+    name: ComputeAxisAlignedBounds
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+    - type: Common::Math::AxisAlignedBounds*
+      name: outBounds
 - type: Client::Graphics::Scene::DrawObject
   name: DrawObject
   namespace: Client.Graphics.Scene
@@ -92724,6 +93008,138 @@ structs:
       name: delta
     - type: byte
       name: a3
+- type: Client::System::Scheduler::Clip::InstanceContentTextClip
+  name: InstanceContentTextClip
+  namespace: Client.System.Scheduler.Clip
+  union: False
+  size: 208
+  fields:
+  - type: Client::System::Scheduler::Clip::BaseClip
+    name: BaseClip
+    offset: 0
+    base: true
+  - type: char*
+    name: Text
+    offset: 152
+  - type: char*
+    name: Speaker
+    offset: 160
+  - type: unsigned int
+    name: ResolvedRowId
+    offset: 168
+  - type: unsigned int
+    name: ResolvedBNpcNameRowId
+    offset: 172
+  - type: char
+    name: Finished
+    offset: 176
+  - type: unsigned int
+    name: AddonId
+    offset: 180
+  - type: float
+    name: ElapsedTime
+    offset: 184
+  - type: float
+    name: SubtitleScaleX
+    offset: 188
+  - type: float
+    name: SubtitleScaleY
+    offset: 192
+  - type: float
+    name: SubtitlePositionX
+    offset: 196
+  - type: float
+    name: SubtitlePositionY
+    offset: 200
+  vtable_size: 504
+  virtual_functions:
+  - name: IsFinished
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+  - name: ResolveText
+    offset: 128
+    return_type: char
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+  - name: Publish
+    offset: 248
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Scheduler::Base::SchedulerState*
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: int
+      name: eventType
+    - type: __int64
+      name: unknown
+  - name: Event10
+    offset: 376
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: __int64
+      name: unknown
+  - name: Event15
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: float
+      name: dt
+  - name: Event16
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: float
+      name: dt
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 ED 84 C0 0F 84 ?? ?? ?? ?? 48 89 9C 24 ?? ?? ?? ?? 48 8D 44 24 ?? BB
+    return_type: char
+    name: UpdateTalkSubtitleLayout
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: float*
+      name: scaleX
+    - type: float*
+      name: scaleY
+    - type: float*
+      name: positionY
+    - type: float*
+      name: positionX
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B D9 48 63 EA
+    return_type: void
+    name: OpenOrUpdateTalkSubtitle
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: int
+      name: eventKind
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
 - type: Client::System::Scheduler::Clip::SharedGroupClip
   name: SharedGroupClip
   namespace: Client.System.Scheduler.Clip
@@ -107154,9 +107570,56 @@ structs:
     name: DrawObject
     offset: 0
     base: true
-  - type: Client::System::Resource::Handle::ResourceHandle*
-    name: ResourceHandle
+  - type: Client::System::Resource::Handle::TerrainResourceHandle*
+    name: TerrainResourceHandle
     offset: 144
+  - type: Client::System::Resource::Handle::ModelResourceHandle**
+    name: _tileModelResourceHandlesPtr
+    offset: 152
+  - type: unsigned int
+    name: TileCount
+    offset: 160
+  - type: unsigned int
+    name: TerrainPlateCount
+    offset: 164
+  - type: unsigned int
+    name: WaterPlateCount
+    offset: 168
+  - type: unsigned int
+    name: VerticalFogPlateCount
+    offset: 172
+  - type: Client::Graphics::Render::TerrainPlate**
+    name: _terrainPlatesPtr
+    offset: 176
+  - type: Client::Graphics::Render::WaterPlate**
+    name: _waterPlatesPtr
+    offset: 184
+  - type: Client::Graphics::Render::VerticalFogPlate**
+    name: _verticalFogPlatesPtr
+    offset: 192
+  - type: __int64*
+    name: _terrainPlateCullingHandlesPtr
+    offset: 200
+  - type: __int64*
+    name: _waterPlateCullingHandlesPtr
+    offset: 208
+  - type: __int64*
+    name: _verticalFogPlateCullingHandlesPtr
+    offset: 216
+  - type: byte
+    name: ModelLoadPhase
+    offset: 224
+  - type: char
+    name: TerrainGameFolder
+    offset: 225
+    size: 256
+    is_string: True
+  - type: byte
+    name: Unk1E1
+    offset: 481
+  - type: byte
+    name: EnableGrass
+    offset: 482
   virtual_functions:
   - name: dtor
     offset: 0
@@ -107310,7 +107773,51 @@ structs:
     parameters:
     - type: Client::Graphics::Scene::Terrain*
       name: this
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? B3 01 EB 02 32 DB 48 8B 55 E8
+    return_type: void
+    name: Load
+    parameters:
+    - type: Client::Graphics::Scene::Terrain*
+      name: this
+    - type: Client::System::Resource::ResourceCategory*
+      name: terrainResourceCategory
+    - type: char*
+      name: terrainResourcePath
+    - type: char
+      name: unk1E1
+    - type: char
+      name: enableGrass
+  - signature: 40 53 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 45 33 F6
+    return_type: void
+    name: LoadTileModels
+    parameters:
+    - type: Client::Graphics::Scene::Terrain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 33 D2 C7 40
+    return_type: void
+    name: LoadGrass
+    parameters:
+    - type: Client::Graphics::Scene::Terrain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 48 8B 6C 24 ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B CB
+    return_type: char
+    name: CreateTerrainPlates
+    parameters:
+    - type: Client::Graphics::Scene::Terrain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 74 7D
+    return_type: char
+    name: CreateWaterPlates
+    parameters:
+    - type: Client::Graphics::Scene::Terrain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 7D 80 BB
+    return_type: char
+    name: CreateVerticalFogPlates
+    parameters:
+    - type: Client::Graphics::Scene::Terrain*
+      name: this
 - type: Client::LayoutEngine::FileLayerGroupInstanceCollisionBox
   name: FileLayerGroupInstanceCollisionBox
   namespace: Client.LayoutEngine
@@ -142786,6 +143293,18 @@ structs:
   - type: byte*
     name: ModelData
     offset: 200
+  - type: Common::Math::AxisAlignedBounds*
+    name: AxisAlignedBounds
+    offset: 352
+  - type: Common::Math::AxisAlignedBounds*
+    name: TerrainBounds
+    offset: 360
+  - type: Common::Math::AxisAlignedBounds*
+    name: WaterBounds
+    offset: 368
+  - type: Common::Math::AxisAlignedBounds*
+    name: VerticalFogBounds
+    offset: 376
   - type: Client::System::Resource::Handle::MaterialResourceHandle**
     name: MaterialResourceHandles
     offset: 552
@@ -144270,7 +144789,51 @@ structs:
       name: this
     - type: byte
       name: loadResult
-  member_functions: []
+  member_functions:
+  - signature: 48 83 EC 28 48 8B 01 FF 90 ?? ?? ?? ?? 8B 00
+    return_type: unsigned int
+    name: GetFileVersion
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B D0 81 FF
+    return_type: unsigned int
+    name: GetTileCount
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 41 89 85 ?? ?? ?? ?? 44 8B E0
+    return_type: unsigned int
+    name: GetTileWidth
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
+  - signature: E8 ?? ?? ?? ?? F3 0F 59 C0 F3 0F 11 87
+    return_type: float
+    name: GetClipDistance
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B CB F3 0F 11 87
+    return_type: float
+    name: GetUnk10
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? 48 8B 7C 24
+    return_type: unsigned int
+    name: GetFlag
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
+    - type: Client::System::Resource::Handle::TerrainResourceFlag
+      name: flagIndex
+  - signature: E8 ?? ?? ?? ?? 4C 8B F8 44 8B D5
+    return_type: Client::System::Resource::Handle::TerrainGridCoordinates*
+    name: GetTileCoordinateArray
+    parameters:
+    - type: Client::System::Resource::Handle::TerrainResourceHandle*
+      name: this
 - type: Client::System::Resource::Handle::TextureResourceHandle
   name: TextureResourceHandle
   namespace: Client.System.Resource.Handle
@@ -278586,6 +279149,9 @@ structs:
   - type: Client::Game::DutyActionManager
     name: DutyActionManager
     offset: 1320
+  - type: Client::System::String::Utf8String*
+    name: InstanceContentTexts
+    offset: 3208
   - type: Client::Game::InstanceContent::ContentDirector::MapEffectList*
     name: MapEffects
     offset: 3216
@@ -278595,6 +279161,12 @@ structs:
   - type: float
     name: ContentTimeLeft
     offset: 3312
+  - type: unsigned int
+    name: InstanceContentTextStartRowId
+    offset: 3324
+  - type: unsigned int
+    name: InstanceContentTextRowCount
+    offset: 3328
   vtable_size: 2984
   virtual_functions:
   - name: GetCurrentLevel
@@ -278625,6 +279197,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: dtor
     offset: 0
     return_type: Client::Game::Event::EventHandler*
@@ -278924,6 +279504,26 @@ structs:
   - name: SetExperience
     offset: 2680
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 80 AB ?? ?? ?? ?? ?? 75
+    return_type: __int64
+    name: LoadInstanceContentTexts
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned int
+      name: startRowId
+    - type: unsigned int
+      name: rowCount
+  - signature: E8 ?? ?? ?? ?? FF C7 48 8D 76 ?? 3B FD
+    return_type: void
+    name: SetInstanceContentText
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned int
+      name: rowId
+    - type: char*
+      name: text
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B FA 41 0F B7 E8
     return_type: void
     name: ApplyMapEffect
@@ -279532,6 +280132,11 @@ structs:
   - type: Client::Game::InstanceContent::ContentDirector::MapEffectList
     name: ManagedSharedGroups
     offset: 3552
+  - type: Client::System::String::Utf8String
+    name: CommonInstanceContentTexts
+    offset: 6752
+    size: 12
+    is_string: False
   vtable_size: 3248
   virtual_functions:
   - name: DispatchContentSpecificDirectorUpdate
@@ -279882,6 +280487,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: HandleGMCommand
     offset: 3224
   member_functions: []
@@ -280251,6 +280864,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: unsigned int
+      name: rowId
   member_functions: []
 - type: Client::Game::Event::GuildleveAssignmentEventHandler
   name: GuildleveAssignmentEventHandler
@@ -280988,6 +281609,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: DispatchContentSpecificDirectorUpdate
     offset: 2984
     return_type: void
@@ -281505,6 +282134,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: DispatchContentSpecificDirectorUpdate
     offset: 3040
     return_type: void
@@ -281957,6 +282594,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: DispatchContentSpecificDirectorUpdate
     offset: 3040
     return_type: void
@@ -282623,6 +283268,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: DispatchContentSpecificDirectorUpdate
     offset: 2984
     return_type: void
@@ -283388,6 +284041,14 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
       name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: unsigned int
+      name: rowId
   - name: DispatchContentSpecificDirectorUpdate
     offset: 2984
     return_type: void
