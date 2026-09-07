@@ -11,6 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Clip;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 33 D2 48 89 01 48 89 51 08 48 8B C1", 3, 63)]
 public unsafe partial struct BaseClip {
     [FieldOffset(0x18)] public Base.LinkedList<BaseClip> List;
+    [FieldOffset(0x48)] public void* Data;
 
     [VirtualFunction(9)] public partial void ProcessEvent(int eventType, void* unknown);
     [VirtualFunction(47)] public partial void Event10(void* unknown);
