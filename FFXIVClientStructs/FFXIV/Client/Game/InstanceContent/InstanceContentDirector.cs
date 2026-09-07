@@ -85,7 +85,7 @@ public unsafe partial struct InstanceContentDirector {
 
     /// <remarks> InstanceContentTextData Row 0 - 11 </remarks>
     [FieldOffset(0x1A60), FixedSizeArray] internal FixedSizeArray12<Utf8String> _commonInstanceContentTexts;
-    
+
     /// <summary>Dispatches updates specific to the content. This ends up calling ProcessContentSpecificDirectorUpdate and unrolls the parameters array.</summary>
     [VirtualFunction(380)]
     public partial void DispatchContentSpecificDirectorUpdate(uint category, uint* parameters);
