@@ -18,16 +18,16 @@ public unsafe partial struct Terrain {
     [FieldOffset(0xA4)] public uint TerrainPlateCount;
     [FieldOffset(0xA8)] public uint WaterPlateCount;
     [FieldOffset(0xAC)] public uint VerticalFogPlateCount;
-    [FieldOffset(0xB0)] private TerrainPlate** _terrainPlates;
-    [FieldOffset(0xB8)] private WaterPlate** _waterPlates;
-    [FieldOffset(0xC0)] private VerticalFogPlate** _verticalFogPlates;
-    [FieldOffset(0xC8)] private void** _terrainPlateCullingHandles;
-    [FieldOffset(0xD0)] private void** _waterPlateCullingHandles;
-    [FieldOffset(0xD8)] private void** _verticalFogPlateCullingHandles;
+    [FieldOffset(0xB0)] private TerrainPlate** _terrainPlatesPtr;
+    [FieldOffset(0xB8)] private WaterPlate** _waterPlatesPtr;
+    [FieldOffset(0xC0)] private VerticalFogPlate** _verticalFogPlatesPtr;
+    [FieldOffset(0xC8)] private void** _terrainPlateCullingHandlesPtr;
+    [FieldOffset(0xD0)] private void** _waterPlateCullingHandlesPtr;
+    [FieldOffset(0xD8)] private void** _verticalFogPlateCullingHandlesPtr;
 
     [FieldOffset(0xE0)] public byte ModelLoadPhase; // 1 -> Load the models with GetResourceAsync next UpdateRender, 2 -> Waiting for plate models to load, and each frame checks the model resource handles until they are loaded.
     [FieldOffset(0xE1), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _terrainGameFolder; // The folder to read the plate models and grass zone data from
-    [FieldOffset(0x1E1)] private byte _unk1E1;
+    [FieldOffset(0x1E1)] private byte Unk1E1;
     [FieldOffset(0x1E2)] public byte EnableGrass;
 
     public Span<Pointer<ModelResourceHandle>> TileModelResourceHandles => new(_tileModelResourceHandlesPtr, (int)TileCount);
@@ -35,19 +35,19 @@ public unsafe partial struct Terrain {
     /// <summary>
     /// The terrain plates for each of the tile models that have terrain meshes.
     /// </summary>
-    public Span<Pointer<TerrainPlate>> TerrainPlates => new(_terrainPlates, (int)TerrainPlateCount);
+    public Span<Pointer<TerrainPlate>> TerrainPlates => new(_terrainPlatesPtr, (int)TerrainPlateCount);
     /// <summary>
     /// The water plates for each of the tile models that have water meshes.
     /// </summary>
-    public Span<Pointer<WaterPlate>> WaterPlates => new(_waterPlates, (int)WaterPlateCount);
+    public Span<Pointer<WaterPlate>> WaterPlates => new(_waterPlatesPtr, (int)WaterPlateCount);
     /// <summary>
     /// The vertical fog plates for each of the tile models that have vertical fog meshes.
     /// </summary>
-    public Span<Pointer<VerticalFogPlate>> VerticalFogPlates => new(_verticalFogPlates, (int)VerticalFogPlateCount);
+    public Span<Pointer<VerticalFogPlate>> VerticalFogPlates => new(_verticalFogPlatesPtr, (int)VerticalFogPlateCount);
 
-    public Span<IntPtr> TerrainPlateCullingHandles => new(_terrainPlateCullingHandles, (int)TerrainPlateCount);
-    public Span<IntPtr> WaterPlateCullingHandles => new(_waterPlateCullingHandles, (int)WaterPlateCount);
-    public Span<IntPtr> VerticalFogPlateCullingHandles => new(_verticalFogPlateCullingHandles, (int)VerticalFogPlateCount);
+    public Span<nint> TerrainPlateCullingHandles => new(_terrainPlateCullingHandlesPtr, (int)TerrainPlateCount);
+    public Span<nint> WaterPlateCullingHandles => new(_waterPlateCullingHandlesPtr, (int)WaterPlateCount);
+    public Span<nint> VerticalFogPlateCullingHandles => new(_verticalFogPlateCullingHandlesPtr, (int)VerticalFogPlateCount);
 
     /// <summary>
     /// Loads <see cref="TerrainResourceHandle"/> by category and path.
