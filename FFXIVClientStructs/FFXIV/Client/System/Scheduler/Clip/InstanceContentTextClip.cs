@@ -30,10 +30,6 @@ public unsafe partial struct InstanceContentTextClip {
 
     public InstanceContentTextClipData* TypedData => (InstanceContentTextClipData*)Data;
 
-    [VirtualFunction(7)] public partial bool IsFinished();
-    [VirtualFunction(16)] public partial bool ResolveText();
-    [VirtualFunction(31)] public partial void Publish();
-
     [MemberFunction("E8 ?? ?? ?? ?? 33 ED 84 C0 0F 84 ?? ?? ?? ?? 48 89 9C 24 ?? ?? ?? ?? 48 8D 44 24 ?? BB")]
     public partial bool UpdateTalkSubtitleLayout(float* scaleX, float* scaleY, float* positionY, float* positionX);
 

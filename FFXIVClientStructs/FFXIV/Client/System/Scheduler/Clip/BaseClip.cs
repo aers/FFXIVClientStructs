@@ -13,8 +13,24 @@ public unsafe partial struct BaseClip {
     [FieldOffset(0x18)] public Base.LinkedList<BaseClip> List;
     [FieldOffset(0x48)] public void* Data;
 
-    [VirtualFunction(9)] public partial void ProcessEvent(int eventType, void* unknown);
-    [VirtualFunction(47)] public partial void Event10(void* unknown);
-    [VirtualFunction(49)] public partial void Event15(float dt);
-    [VirtualFunction(51)] public partial void Event16(float dt);
+    [VirtualFunction(7)]
+    public partial bool IsFinished();
+
+    [VirtualFunction(9)]
+    public partial void ProcessEvent(int eventType, void* a3);
+
+    [VirtualFunction(16)]
+    public partial bool ResolveText();
+
+    [VirtualFunction(31)]
+    public partial void Publish();
+
+    [VirtualFunction(47)]
+    public partial void Event10(void* a2);
+
+    [VirtualFunction(49)]
+    public partial void Event15(float dt);
+
+    [VirtualFunction(51)]
+    public partial void Event16(float dt);
 }
