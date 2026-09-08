@@ -102,8 +102,10 @@ public unsafe partial struct CharaViewModelData {
     [FieldOffset(0x88)] public bool HeadgearHidden;
     [FieldOffset(0x89)] public bool WeaponHidden;
     [FieldOffset(0x8A)] public bool VisorClosed;
-    [FieldOffset(0x8B)] public byte FreeCompanyCrestBitfield;
+    [FieldOffset(0x8B)] public bool VieraEarsHidden;
     [FieldOffset(0x90)] public CrestData FreeCompanyCrestData;
+
+    [FieldOffset(0x8B), Obsolete("Incorrect field. This is VieraEarsHidden now.")] public byte FreeCompanyCrestBitfield;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 55 87")]
     public partial void CopyFromCharacter(Character* character);

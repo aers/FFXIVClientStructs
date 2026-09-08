@@ -11842,6 +11842,7 @@ classes:
     funcs:
       0x1409CD690: ctor
       0x1409CD7C0: Finalize2
+      0x1409CD870: SetAgentCallbackGetCharacter
       0x1409CD880: SetModelData
       0x1409CD9E0: Render
       0x1409CE620: UnequipGear
@@ -12167,6 +12168,7 @@ classes:
       0x1408B31E0: LoadEquipment
       0x1408B3440: HideHeadgear
       0x1408B3BC0: HideLegacyTattoo
+      0x1408B3BF0: IsLegacyTattooHidden
       0x1408B35D0: SetVisor
       0x1408B3660: HideVieraEars
       0x1408B3E00: EquipGlassesIds # sends it to the server

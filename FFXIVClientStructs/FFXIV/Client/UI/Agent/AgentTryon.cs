@@ -47,11 +47,16 @@ public unsafe partial struct AgentTryon {
     public partial struct TryonCharaView {
         [FieldOffset(0x318)] public bool DoUpdate; // beware: fetches data from agent too, happens in vf10
         [FieldOffset(0x319)] public bool HideOtherEquipment;
-        [FieldOffset(0x31A)] public bool HideVisor;
-        [FieldOffset(0x31B)] public bool HideWeapon;
-        [FieldOffset(0x31C)] public bool CloseVisor;
-        [FieldOffset(0x31D)] public bool HideVieraEars;
+        [FieldOffset(0x31A)] public bool HeadgearHidden;
+        [FieldOffset(0x31B)] public bool WeaponHidden;
+        [FieldOffset(0x31C)] public bool VisorClosed;
+        [FieldOffset(0x31D)] public bool VieraEarsHidden;
         [FieldOffset(0x31E)] public bool DrawWeapon;
+
+        [FieldOffset(0x31A), Obsolete("Renamed to HeadgearHidden")] public bool HideVisor;
+        [FieldOffset(0x31B), Obsolete("Renamed to WeaponHidden")] public bool HideWeapon;
+        [FieldOffset(0x31C), Obsolete("Renamed to VisorClosed")] public bool CloseVisor;
+        [FieldOffset(0x31D), Obsolete("Renamed to VieraEarsHidden")] public bool HideVieraEars;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
