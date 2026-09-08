@@ -2810,6 +2810,27 @@ enums:
     "Say": 1
     "Party": 2
     "Alliance": 3
+- type: Client::UI::Agent::ColorantOpenType
+  name: ColorantOpenType
+  underlying: int
+  namespace: Client.UI.Agent
+  flags: False
+  values:
+    "None": 0
+    "Unk1": 1
+    "Unk2": 2
+    "HousingGoodsStain": 3
+    "AirShipParts": 4
+    "TryOn": 5
+    "TryOnRetainer": 6
+    "MiragePrismPrismBox": 7
+    "SubmersibleParts": 8
+    "MiragePrismMiragePlate": 9
+    "GcArmyMenberProfile": 10
+    "MiragePrismENpcSatisfaction": 11
+    "HousingCatalogPreview": 12
+    "MJIHousingGoodsStain": 13
+    "Unk14": 14
 - type: Client::UI::Agent::ContentsRouletteRole
   name: ContentsRouletteRole
   underlying: byte
@@ -3581,9 +3602,9 @@ enums:
   namespace: Client.System.Resource.Handle
   flags: False
   values:
-    "Flag0": 0
-    "Flag1": 1
-    "Flag2": 2
+    "Unk0": 0
+    "Unk1": 1
+    "Unk2": 2
 - type: Client::System::Photo::ScreenShot::ScreenShotResultCode
   name: ScreenShotResultCode
   underlying: int
@@ -19701,6 +19722,31 @@ structs:
   - type: __int16
     name: TileZ
     offset: 2
+  member_functions: []
+- type: Client::System::Resource::Handle::TerrainResourceHandle::TeraFileHeader
+  name: TeraFileHeader
+  namespace: Client.System.Resource.Handle
+  union: False
+  size: 52
+  fields:
+  - type: unsigned int
+    name: Version
+    offset: 0
+  - type: unsigned int
+    name: TileCount
+    offset: 4
+  - type: unsigned int
+    name: GridSize
+    offset: 8
+  - type: float
+    name: ClipDistance
+    offset: 12
+  - type: float
+    name: Unk10
+    offset: 16
+  - type: unsigned int
+    name: Flags
+    offset: 20
   member_functions: []
 - type: Client::System::Resource::Handle::TextureResourceHandle::TexFileHeader
   name: TexFileHeader
@@ -47415,36 +47461,6 @@ structs:
     name: Index
     offset: 52
   member_functions: []
-- type: Client::System::Resource::Handle::TerrainResourceHandle::TeraFile
-  name: TeraFile
-  namespace: Client.System.Resource.Handle
-  union: False
-  size: 56
-  fields:
-  - type: unsigned int
-    name: Version
-    offset: 0
-  - type: unsigned int
-    name: TileCount
-    offset: 4
-  - type: unsigned int
-    name: GridSize
-    offset: 8
-  - type: float
-    name: ClipDistance
-    offset: 12
-  - type: float
-    name: Unk10
-    offset: 16
-  - type: unsigned int
-    name: Flags
-    offset: 20
-  - type: Client::System::Resource::Handle::TerrainGridCoordinates
-    name: TileCoordinates
-    offset: 52
-    size: 1
-    is_string: False
-  member_functions: []
 - type: Client::System::Resource::ResourceGraph
   name: ResourceGraph
   namespace: Client.System.Resource
@@ -71777,6 +71793,12 @@ structs:
     offset: 72
   vtable_size: 504
   virtual_functions:
+  - name: IsFinished
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Scheduler::Clip::BaseClip*
+      name: this
   - name: ProcessEvent
     offset: 72
     return_type: void
@@ -71786,7 +71808,19 @@ structs:
     - type: int
       name: eventType
     - type: __int64
-      name: unknown
+      name: a3
+  - name: ResolveText
+    offset: 128
+    return_type: char
+    parameters:
+    - type: Client::System::Scheduler::Clip::BaseClip*
+      name: this
+  - name: Publish
+    offset: 248
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::BaseClip*
+      name: this
   - name: Event10
     offset: 376
     return_type: void
@@ -71794,7 +71828,7 @@ structs:
     - type: Client::System::Scheduler::Clip::BaseClip*
       name: this
     - type: __int64
-      name: unknown
+      name: a2
   - name: Event15
     offset: 392
     return_type: void
@@ -71819,12 +71853,6 @@ structs:
       name: this
     - type: byte
       name: freeFlags
-  - name: IsFinished
-    offset: 56
-  - name: ResolveText
-    offset: 128
-  - name: Publish
-    offset: 248
   member_functions: []
 - type: Client::System::Scheduler::Instance::BgObject
   name: BgObject
@@ -91745,7 +91773,7 @@ structs:
     offset: 0
     base: true
   - type: byte
-    name: _unk10
+    name: Unk10
     offset: 16
   - type: Client::System::Resource::Handle::TerrainGridCoordinates
     name: GridCoordinates
@@ -93053,12 +93081,30 @@ structs:
     offset: 200
   vtable_size: 504
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Scheduler::Base::SchedulerState*
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: byte
+      name: freeFlags
   - name: IsFinished
     offset: 56
     return_type: char
     parameters:
     - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
       name: this
+  - name: ProcessEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
+      name: this
+    - type: int
+      name: eventType
+    - type: __int64
+      name: a3
   - name: ResolveText
     offset: 128
     return_type: char
@@ -93071,24 +93117,6 @@ structs:
     parameters:
     - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
       name: this
-  - name: dtor
-    offset: 0
-    return_type: Client::System::Scheduler::Base::SchedulerState*
-    parameters:
-    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: ProcessEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
-      name: this
-    - type: int
-      name: eventType
-    - type: __int64
-      name: unknown
   - name: Event10
     offset: 376
     return_type: void
@@ -93096,7 +93124,7 @@ structs:
     - type: Client::System::Scheduler::Clip::InstanceContentTextClip*
       name: this
     - type: __int64
-      name: unknown
+      name: a2
   - name: Event15
     offset: 392
     return_type: void
@@ -93160,6 +93188,12 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: IsFinished
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Scheduler::Clip::SharedGroupClip*
+      name: this
   - name: ProcessEvent
     offset: 72
     return_type: void
@@ -93169,7 +93203,19 @@ structs:
     - type: int
       name: eventType
     - type: __int64
-      name: unknown
+      name: a3
+  - name: ResolveText
+    offset: 128
+    return_type: char
+    parameters:
+    - type: Client::System::Scheduler::Clip::SharedGroupClip*
+      name: this
+  - name: Publish
+    offset: 248
+    return_type: void
+    parameters:
+    - type: Client::System::Scheduler::Clip::SharedGroupClip*
+      name: this
   - name: Event10
     offset: 376
     return_type: void
@@ -93177,7 +93223,7 @@ structs:
     - type: Client::System::Scheduler::Clip::SharedGroupClip*
       name: this
     - type: __int64
-      name: unknown
+      name: a2
   - name: Event15
     offset: 392
     return_type: void
@@ -112232,8 +112278,8 @@ structs:
   - type: char
     name: VisorClosed
     offset: 138
-  - type: byte
-    name: FreeCompanyCrestBitfield
+  - type: char
+    name: VieraEarsHidden
     offset: 139
   - type: Client::UI::Agent::CrestData
     name: FreeCompanyCrestData
@@ -144821,7 +144867,7 @@ structs:
     - type: Client::System::Resource::Handle::TerrainResourceHandle*
       name: this
   - signature: E8 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? 48 8B 7C 24
-    return_type: unsigned int
+    return_type: char
     name: GetFlag
     parameters:
     - type: Client::System::Resource::Handle::TerrainResourceHandle*
@@ -145660,32 +145706,50 @@ structs:
     offset: 0
     base: true
   - type: unsigned int
-    name: EntityId
+    name: Unk318
+    offset: 792
+  - type: unsigned int
+    name: DyeCount
     offset: 796
-  - type: char
-    name: DoUpdate
+  - type: unsigned int
+    name: EntityId
     offset: 800
   - type: char
-    name: HideOtherEquipment
-    offset: 801
-  - type: char
-    name: GearPreview
-    offset: 802
-  - type: char
-    name: HideVisor
-    offset: 803
-  - type: char
-    name: HideWeapon
+    name: DoUpdate
     offset: 804
   - type: char
-    name: CloseVisor
+    name: HideOtherEquipment
     offset: 805
   - type: char
-    name: DrawWeapon
+    name: GearPreview
     offset: 806
+  - type: char
+    name: HeadgearHidden
+    offset: 808
+  - type: char
+    name: WeaponHidden
+    offset: 809
+  - type: char
+    name: VisorClosed
+    offset: 810
+  - type: char
+    name: VieraEarsHidden
+    offset: 811
+  - type: char
+    name: IsViera
+    offset: 812
+  - type: char
+    name: DrawWeapon
+    offset: 813
   - type: byte
-    name: SelectedStain
-    offset: 807
+    name: Unk32E
+    offset: 814
+  - type: byte
+    name: SelectedStain0
+    offset: 815
+  - type: byte
+    name: SelectedStain1
+    offset: 816
   virtual_functions:
   - name: dtor
     offset: 0
@@ -146236,14 +146300,17 @@ structs:
     name: UpdateItems
     offset: 793
   - type: char
-    name: HideVisor
+    name: HeadgearHidden
     offset: 794
   - type: char
-    name: HideWeapon
+    name: WeaponHidden
     offset: 795
   - type: char
-    name: CloseVisor
+    name: VisorClosed
     offset: 796
+  - type: char
+    name: VieraEarsHidden
+    offset: 797
   - type: char
     name: DrawWeapon
     offset: 799
@@ -147010,16 +147077,16 @@ structs:
     name: HideOtherEquipment
     offset: 793
   - type: char
-    name: HideVisor
+    name: HeadgearHidden
     offset: 794
   - type: char
-    name: HideWeapon
+    name: WeaponHidden
     offset: 795
   - type: char
-    name: CloseVisor
+    name: VisorClosed
     offset: 796
   - type: char
-    name: HideVieraEars
+    name: VieraEarsHidden
     offset: 797
   - type: char
     name: DrawWeapon
@@ -201574,9 +201641,15 @@ structs:
     name: AgentInterface
     offset: 0
     base: true
+  - type: Client::UI::Agent::ColorantOpenType
+    name: OpenType
+    offset: 48
   - type: Client::UI::Agent::AgentColorant::ColorantCharaView
     name: CharaView
     offset: 344
+  - type: Client::Graphics::Kernel::Texture*
+    name: CharaViewTexture
+    offset: 1168
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
