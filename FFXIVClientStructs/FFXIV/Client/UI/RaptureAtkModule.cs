@@ -36,7 +36,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x887F)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
     [FieldOffset(0x8880), FixedSizeArray] internal FixedSizeArray991<AddonFactoryInfo> _addonFactories;
     [FieldOffset(0x12358)] public StdVector<Utf8String> AddonNames;
-    [FieldOffset(0x12360)] public AddonConfig* AddonConfigPtr;
+    [FieldOffset(0x12370)] public AddonConfig* AddonConfigPtr;
 
     [FieldOffset(0x1237A)] public AtkCursor.CursorType CursorType;
 
@@ -46,7 +46,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x12420)] public char* AudioClientRpcTag;
 
     [FieldOffset(0x12428)] public UIModule* UIModulePtr;
-    [FieldOffset(0x12438)] public RaptureLogModule* RaptureLogModulePtr;
+    [FieldOffset(0x12430)] public RaptureLogModule* RaptureLogModulePtr;
     [FieldOffset(0x12438)] public AgentModule AgentModule;
     [FieldOffset(0x13450)] public RaptureHotbarModule* RaptureHotbarModulePtr;
 
