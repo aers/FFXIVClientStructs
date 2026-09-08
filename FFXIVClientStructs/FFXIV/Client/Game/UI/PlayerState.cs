@@ -87,7 +87,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x300)] private sbyte Unk2DC; // GCSupply stuff
     // BitCount: MountSheet.Where(row => row.ModelChara.RowId != 0).Max(row => row.Order))
     /// <remarks> Use <see cref="IsMountUnlocked"/>. </remarks>
-    [FieldOffset(0x301), FixedSizeArray(isBitArray: true, bitCount: 358)] internal FixedSizeArray45<byte> _unlockedMounts;
+    [FieldOffset(0x301), FixedSizeArray(isBitArray: true, bitCount: 359)] internal FixedSizeArray45<byte> _unlockedMounts;
     // BitCount: OrnamentSheet.RowCount
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/>. </remarks>
     [FieldOffset(0x32E), FixedSizeArray(isBitArray: true, bitCount: 59)] internal FixedSizeArray8<byte> _unlockedOrnaments;
