@@ -209,7 +209,6 @@ public unsafe partial struct AgentGearSet {
         [FieldOffset(0x31B)] public bool WeaponHidden;
         [FieldOffset(0x31C)] public bool VisorClosed;
         [FieldOffset(0x31D)] public bool VieraEarsHidden;
-        [FieldOffset(0x31D)] public bool IsViera;
         [FieldOffset(0x31F)] public bool DrawWeapon;
         [FieldOffset(0x320)] public bool CharacterDisplayMode;
 
