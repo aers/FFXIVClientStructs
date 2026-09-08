@@ -219,4 +219,5 @@ public enum TofuObjectType : ushort {
     HighlightedTriangle = 138,
     RotateClockwise = 139,
     RotateCounterclockwise = 140,
+    Beastmaster = 141,
 };
