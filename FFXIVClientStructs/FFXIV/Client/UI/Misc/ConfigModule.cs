@@ -54,7 +54,7 @@ public unsafe partial struct ConfigModule {
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 83 E7")]
     public partial int GetValueByIndex(int optionIndex, int valueSetIndex);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 41 54 41 56 41 57 48 83 EC ?? 45 33 E4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF C6 47 ?? ?? 48 8B 5C 24")]
     public partial void ResetOptionsByCategoryMask(uint categoryMask, int valueSetIndex);
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 45 32 F6")]

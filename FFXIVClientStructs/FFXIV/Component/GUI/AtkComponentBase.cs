@@ -30,7 +30,7 @@ public unsafe partial struct AtkComponentBase : ICreatable<AtkComponentBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B D7 48 89 87")]
     public partial AtkComponentBase* GetComponentById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 94 9E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 8B 3E")]
     public partial AtkImageNode* GetImageNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]

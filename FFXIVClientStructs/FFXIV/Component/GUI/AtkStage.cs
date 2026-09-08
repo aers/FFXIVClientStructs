@@ -61,7 +61,7 @@ public unsafe partial struct AtkStage {
     [MemberFunction("81 62 ?? ?? ?? ?? ?? 45 33 C0")]
     public partial void ReturnAtkEventToPool(AtkEvent* evt);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 6B 94")]
+    [MemberFunction("E8 ?? ?? ?? ?? 6B FF")]
     public partial NumberArrayData** GetNumberArrayData();
 
     public NumberArrayData* GetNumberArrayData(NumberArrayType type)

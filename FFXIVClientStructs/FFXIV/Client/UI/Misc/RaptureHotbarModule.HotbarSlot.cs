@@ -221,7 +221,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="slotType">The appearance slot type to use. Virtually almost always <see cref="ApparentSlotType"/>.</param>
         /// <param name="actionId">The appearance action ID to use. Virtually almost always <see cref="ApparentActionId"/>.</param>
         /// <returns>Returns a string representation of the name to be displayed to the user for this hotbar slot.</returns>
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12")]
+        [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 41 8B D8 48 89 74 24")]
         public partial CStringPointer GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
