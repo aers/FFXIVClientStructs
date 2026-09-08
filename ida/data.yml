@@ -3453,6 +3453,7 @@ classes:
       0x1408607B0: Finalizer
       0x1408609A0: Update
       0x140863540: IsWarping
+      0x140863860: CompleteWarp
   Client::Game::Conditions:
     instances:
       - ea: 0x142AE86A0
