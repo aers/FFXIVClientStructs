@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -9,9 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
-public partial struct AgentColorant {
+public unsafe partial struct AgentColorant {
+    [FieldOffset(0x30)] public ColorantOpenType OpenType;
 
     [FieldOffset(0x158)] public ColorantCharaView CharaView;
+    [FieldOffset(0x490)] public Texture* CharaViewTexture;
 
     // Client::UI::Agent::AgentColorant::ColorantCharaView
     //   Client::UI::Misc::CharaView
@@ -40,4 +43,22 @@ public partial struct AgentColorant {
         [FieldOffset(0x32A), Obsolete("Renamed to VisorClosed")] public bool CloseVisor;
         [FieldOffset(0x32F), Obsolete("Renamed to SelectedStain0")] public byte SelectedStain;
     }
+}
+
+public enum ColorantOpenType {
+    None = 0,
+    Unk1 = 1,
+    Unk2 = 2,
+    HousingGoodsStain = 3,
+    AirShipParts = 4,
+    TryOn = 5,
+    TryOnRetainer = 6,
+    MiragePrismPrismBox = 7,
+    SubmersibleParts = 8,
+    MiragePrismMiragePlate = 9,
+    GcArmyMenberProfile = 10,
+    MiragePrismENpcSatisfaction = 11,
+    HousingCatalogPreview = 12,
+    MJIHousingGoodsStain = 13,
+    Unk14 = 14, // also HousingCatalogPreview?!
 }
