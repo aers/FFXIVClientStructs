@@ -17,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<UIModuleInterface>, Inherits<AtkModuleEvent>, Inherits<ExcelLanguageEvent>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xFFB50)]
+[StructLayout(LayoutKind.Explicit, Size = 0xFFBA0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 4C 24 ?? 48 89 01", 3, 250)]
 public unsafe partial struct UIModule {
     public static UIModule* Instance() {
@@ -99,28 +99,28 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xAAC28)] internal GlassesModule GlassesModule;
     [FieldOffset(0xAACA0)] internal XBMNoteModule XBMNoteModule;
     [FieldOffset(0xAAD00)] internal XBMModule XBMModule;
-    // [FieldOffset(0xAAD88)] internal nint Vf81Struct;
-    [FieldOffset(0xAAE20)] internal ConfigModule ConfigModule;
-    [FieldOffset(0xB9B30)] internal RaptureShellModule RaptureShellModule;
-    [FieldOffset(0xBAD80)] internal PronounModule PronounModule;
+    // [FieldOffset(0xAADA8)] internal nint Vf81Struct;
+    [FieldOffset(0xAAE40)] internal ConfigModule ConfigModule;
+    [FieldOffset(0xB9B50)] internal RaptureShellModule RaptureShellModule;
+    [FieldOffset(0xBADA0)] internal PronounModule PronounModule;
 
-    [FieldOffset(0xBB130)] internal UI3DModule UI3DModule;
-    [FieldOffset(0xD2670)] internal RaptureAtkModule RaptureAtkModule;
-    [FieldOffset(0xFCFC0)] internal InfoModule InfoModule;
-    [FieldOffset(0xFEC38)] internal UIModuleHelpers UIModuleHelpers;
-    [FieldOffset(0xFEC88)] public Utf8String AddonSheetName;
+    [FieldOffset(0xBB150)] internal UI3DModule UI3DModule;
+    [FieldOffset(0xD2690)] internal RaptureAtkModule RaptureAtkModule;
+    [FieldOffset(0xFD010)] internal InfoModule InfoModule;
+    [FieldOffset(0xFEC88)] internal UIModuleHelpers UIModuleHelpers;
+    [FieldOffset(0xFECD8)] public Utf8String AddonSheetName;
 
-    [FieldOffset(0xFECF8)] public Utf8String UIColorSheetName;
+    [FieldOffset(0xFED48)] public Utf8String UIColorSheetName;
 
-    [FieldOffset(0xFED70)] public Utf8String CompletionSheetName;
-    [FieldOffset(0xFEDD8)] public Utf8String CompletionOpenIconMacro;
-    [FieldOffset(0xFEE40)] public Utf8String CompletionCloseIconMacro;
-    [FieldOffset(0xFEEA8)] public Utf8String NewLineMacro;
-    [FieldOffset(0xFEF10)] public Utf8String LastTalkName;
-    [FieldOffset(0xFEF78)] public Utf8String LastTalkText;
-    [FieldOffset(0xFEFE0)] internal UIInputData UIInputData;
-    [FieldOffset(0xFFA10)] internal UIInputModule UIInputModule;
-    // [FieldOffset(0xF7B08)] public Vf79Struct;
+    [FieldOffset(0xFEDC0)] public Utf8String CompletionSheetName;
+    [FieldOffset(0xFEE28)] public Utf8String CompletionOpenIconMacro;
+    [FieldOffset(0xFEE90)] public Utf8String CompletionCloseIconMacro;
+    [FieldOffset(0xFEEF8)] public Utf8String NewLineMacro;
+    [FieldOffset(0xFEF60)] public Utf8String LastTalkName;
+    [FieldOffset(0xFEFC8)] public Utf8String LastTalkText;
+    [FieldOffset(0xFF030)] internal UIInputData UIInputData;
+    [FieldOffset(0xFFA60)] internal UIInputModule UIInputModule;
+    // [FieldOffset(0xF7BA8)] public Vf79Struct;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
