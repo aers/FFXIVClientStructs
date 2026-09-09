@@ -70,7 +70,7 @@ public enum TerritoryIntendedUse : byte {
     Blunderville = 59,
     CosmicExploration = 60,
     OccultCrescent = 61,
-    Unknown62 = 62,
+    CrucibleOfTheUnbroken = 62,
     /// <summary> Lilyswim (Hatching-tide 2026) </summary>
     Seasonal3 = 63,
     AirForceOne = 64,
