@@ -25656,7 +25656,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14152E4E0: ctor
-  Client::UI::AddonXBMMonsterNotebookDetail: # 975
+  Client::UI::AddonXBMMonsterBookDetail: # 975
     vtbls:
       - ea: 0x1422845A8
         base: Component::GUI::AtkUnitBase
