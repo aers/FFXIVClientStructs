@@ -18432,7 +18432,7 @@ classes:
       0x140B86A50: GetTourismDirector
       0x140B86A80: GetTripleTriadDirector
       0x140B86B60: GetSkyIslandDirector
-      0x140B86AB0: GetCrucibleOfTheUnbrokenDirecotr # related to XBM
+      0x140B86AB0: GetCrucibleOfTheUnbrokenDirector # related to XBM
       0x140B86AE0: GetKeyboundBrawlerDirector
       0x140B86B10: GetPvPInstanceContentDirector # either of: CrystallineConflict, Frontlines or RivalWing
       0x140B86B90: GetPublicContentDirector
