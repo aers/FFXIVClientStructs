@@ -61,7 +61,8 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x120)] public ushort LastUsedActionSequence;
     [FieldOffset(0x122)] public ushort LastHandledActionSequence;
     [FieldOffset(0x124), FixedSizeArray] internal FixedSizeArray24<uint> _blueMageActions;
-    [FieldOffset(0x184), FixedSizeArray] internal FixedSizeArray80<RecastDetail> _cooldowns;
+    [FieldOffset(0x184), FixedSizeArray] internal FixedSizeArray3<byte> _beastmasterPets; // selected Battlehorn pets, XBMPet RowIds
+    [FieldOffset(0x188), FixedSizeArray] internal FixedSizeArray80<RecastDetail> _cooldowns;
 
     // used for some actions that are only conditionally usable, corresponding timer is set to 5s and ticks down every frame when ActionEffect is received
     // 0 = unused (padding bytes?)
@@ -69,9 +70,9 @@ public unsafe partial struct ActionManager {
     // 2 = player blocks
     // 3 = player parries
     // 4 = player dodges
-    [FieldOffset(0x7C4), FixedSizeArray] internal FixedSizeArray5<float> _procTimers;
+    [FieldOffset(0x7C8), FixedSizeArray] internal FixedSizeArray5<float> _procTimers;
 
-    [FieldOffset(0x7E8)] public float DistanceToTargetHitbox; // distance to target minus both self & target hitbox radius, clamped to 0
+    [FieldOffset(0x7EC)] public float DistanceToTargetHitbox; // distance to target minus both self & target hitbox radius, clamped to 0
 
     /// <summary>
     /// Initiate action execution.
