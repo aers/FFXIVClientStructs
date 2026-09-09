@@ -215,6 +215,7 @@ functions:
   0x1400E1DB0: IsInDelubrumReginae # Delubrum Reginae, Delubrum Reginae (Savage)
   0x1400E1DD0: IsInAnythingBozjaRelated # Bozja, Delubrum Reginae, Delubrum Reginae (Savage), Gangos
   0x1400E1E00: IsInOccultCrescent
+  0x1400E1E20: IsInCrucibleOfTheUnbroken
   0x1400E1F20: IsInIslandSanctuary
   0x1400E1F50: IsInBlunderville
   0x1400E1F70: IsInCosmicExploration
@@ -2865,6 +2866,23 @@ classes:
     vtbls:
       - ea: 0x14240CE70
         base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::XBMManager: # Beastmaster
+    instances:
+      - ea: 0x142AFB670
+        pointer: true
+    vtbls:
+      - ea: 0x1421E1360
+        base: Client::Game::ServerRequestCallbackInterface
+    funcs:
+      0x141975A00: GetInstance
+      0x141975A10: HasInstance
+      0x141975A30: Create
+      0x141975A80: Destroy
+      0x141975AC0: Update
+      0x141975B00: RequestPetList
+      0x141975B40: SetPetUnlocked
+      0x141975B90: HandlePetListPacket
+      0x1419760A0: IsPetUnlocked
   Client::System::String::Utf8String:
     funcs:
       0x140088820: ctor  # empty string ctor
@@ -3872,6 +3890,8 @@ classes:
       0x1408EF7B0: SwapBlueMageActionSlots
       0x1408EF8D0: SetBlueMageActions
       0x1408EFFA0: CanAssignBlueMageAction
+      0x1408F0590: GetBeastmasterPet
+      0x1408F05B0: SetProcTimer
       0x1408F0710: UseActionFromShell
       0x1408F08C0: IsAreaTargetingModeActive
       0x1408F08E0: IsAreaTargetingUnlockedFromCursor
@@ -6646,6 +6666,7 @@ classes:
       0x140B4F290: HandleQuestManagerUnkArray2SecondHalfEntryPacket
       0x140B4FAF0: HandleCurrentBannerDataPacket
       0x140B4FB10: HandleCurrentCharaCardDataPacket
+      0x140B4FDB0: HandleXBMPetListPacket
       0x140B525B0: HandleGatheringSuccessfulChainCountPacket
       0x140B525C0: HandleQuestManagerUnkArray2FirstHalfPacket
       0x140B52630: HandleQuestManagerUnkArray2FirstHalfEntryPacket
@@ -16434,6 +16455,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AAB8F0: ctor
+      0x140AAC470: HandlePetListPacket
   Client::UI::Agent::AgentXBMPetParty:
     vtbls:
       - ea: 0x1421A5330
