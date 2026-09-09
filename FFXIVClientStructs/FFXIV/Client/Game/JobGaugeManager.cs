@@ -33,6 +33,7 @@ public unsafe partial struct JobGaugeManager {
     [FieldOffset(0x08), CExporterUnion("Gauge")] public SamuraiGauge Samurai;
     [FieldOffset(0x08), CExporterUnion("Gauge")] public ReaperGauge Reaper;
     [FieldOffset(0x08), CExporterUnion("Gauge")] public ViperGauge Viper;
+    [FieldOffset(0x08), CExporterUnion("Gauge")] public BeastMasterGauge BeastMaster;
 
     [FieldOffset(0x08), CExporterUnion("Gauge")] public DarkKnightGauge DarkKnight;
     [FieldOffset(0x08), CExporterUnion("Gauge")] public PaladinGauge Paladin;

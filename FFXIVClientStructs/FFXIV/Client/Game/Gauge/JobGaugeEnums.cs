@@ -129,3 +129,14 @@ public enum SerpentCombo : byte {
     ThirdLegacy = 5,
     FourthLegacy = 6,
 }
+
+public enum InstinctualAffinity : byte {
+    None = 0,
+    Volant = 1,
+    Rampant = 2,
+    Durant = 3,
+    Eldritch = 4,
+    Sunstrider = 5,
+    Moonstalker = 6,
+    WaveringHeart = 7,
+}

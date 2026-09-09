@@ -198,6 +198,24 @@ public struct ViperGauge {
     public SerpentCombo SerpentCombo => (SerpentCombo)(SerpentComboState >> 2);
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct BeastMasterGauge {
+    [FieldOffset(0x08)] public byte PlayerTP;
+    [FieldOffset(0x09)] public byte BeastTP;
+    [FieldOffset(0x0A)] public byte LastBeastTPSpent;
+    [FieldOffset(0x0B)] public byte CurrentBattleHorn;
+
+    /// <summary>
+    /// Refers to the status the player gets, similar to <see cref="ActiveAffinity"/> but it includes the intermission state when a combo is completed, and the player gets the Wavering Heart status.
+    /// </summary>
+    [FieldOffset(0x0C)] public InstinctualAffinity AffinityStatus;
+    /// <summary>
+    /// Refers to the currently active and last affinity used by the player, similar to <see cref="AffinityStatus"/> but it does not include the intermission state when a combo is completed.
+    /// </summary>
+    [FieldOffset(0x0D)] public InstinctualAffinity ActiveAffinity;
+    [FieldOffset(0x0E)] public byte Chain;
+}
+
 #endregion
 
 #region Tanks
