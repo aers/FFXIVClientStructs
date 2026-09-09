@@ -39,5 +39,7 @@ public unsafe partial struct JobGaugeManager {
     [FieldOffset(0x08), CExporterUnion("Gauge")] public WarriorGauge Warrior;
     [FieldOffset(0x08), CExporterUnion("Gauge")] public GunbreakerGauge Gunbreaker;
 
+    [FieldOffset(0x08), CExporterUnion("Gauge")] public BeastmasterGauge Beastmaster;
+
     [FieldOffset(0x58)] public byte ClassJobId;
 }

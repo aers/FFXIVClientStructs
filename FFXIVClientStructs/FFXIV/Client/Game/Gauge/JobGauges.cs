@@ -198,6 +198,55 @@ public struct ViperGauge {
     public SerpentCombo SerpentCombo => (SerpentCombo)(SerpentComboState >> 2);
 }
 
+// Beastmaster is a limited job; its gauge drives the Inner Compass UI.
+// Verified at runtime on patch 7.56 by observing JobGaugeManager while playing.
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct BeastmasterGauge {
+    // Beastmaster's own TP, 0-250. This does NOT regenerate passively - it is granted by the
+    // combo bonuses on the player's weaponskill chain (Axeblade Bite grants +13, Shieldsplitter
+    // +15), and a broken combo grants nothing. Instinctual skills spend the entire pool.
+    [FieldOffset(0x08)] public byte TPGauge;
+    // Familiar TP, 0-250. A single pool shared across Battlehorn slots - it is NOT reset by
+    // swapping familiars. Arrives in fixed +12 increments at irregular intervals (observed
+    // 1.3s, 3.1s, 19.2s and 3.0s apart), so it is not a server tick either; it tracks the
+    // familiar's auto-attacks. Familiar actions spend the entire pool.
+    [FieldOffset(0x09)] public byte FamiliarTPGauge;
+    // Familiar TP immediately before the most recent familiar action, which scales that
+    // action's potency. A familiar action expends the ENTIRE familiar pool - FamiliarTPGauge
+    // drops to 0 on the same frame - so "TP consumed" and "TP at time of use" are the same
+    // number and this field is both. Seen taking 132 and 168 on actions that zeroed a gauge
+    // holding exactly 132 and 168.
+    [FieldOffset(0x0A)] public byte FamiliarTPAtLastUse;
+    // Which Battlehorn slot's familiar is summoned; 0 when none. This is the SLOT, not the
+    // creature - the summoned beast's identity is not exposed here.
+    [FieldOffset(0x0B)] public byte ActiveBattlehorn;
+    // Reads the active affinity, then 7 while an instinctual combo resolves, then - if the
+    // pair was clockwise and so formed an intentional combo - the resulting Sunstrider or
+    // Moonstalker affinity ~2.2s later. If the pair was not clockwise it returns to 0 from 7
+    // instead. The 7 is not an affinity: it marks the "Wavering Heart" status (Status row
+    // 4643, "Otherwise engaged. Unable to perform combos with your familiar."), which locks
+    // out further combo advancement until it clears. That is why this stays a byte while
+    // CurrentAffinity below is typed as the enum.
+    [FieldOffset(0x0C)] public byte InstinctualComboState;
+    // Affinity of the most recent instinctual skill, replaced by the resulting Sunstrider or
+    // Moonstalker affinity once an intentional combo resolves. Cleared ~7s after the last
+    // skill. Only ever observed holding 0-6.
+    [FieldOffset(0x0D)] public BeastmasterAffinity CurrentAffinity;
+    // Number of instinctual skills chained so far, shown beneath the Inner Compass.
+    // Increments on any instinctual combo, not only intentional (clockwise) ones, and
+    // increases the extra damage dealt.
+    [FieldOffset(0x0E)] public byte ChainCount;
+    // Identifies the familiar whose Kinship is currently active: high nibble is its kin type,
+    // low nibble is the Battlehorn slot it was summoned from. Set when Borrow grants a Kinship
+    // and cleared to 0 when that Kinship is lost. Latched at the moment Borrow is used, so the
+    // low nibble is NOT a mirror of ActiveBattlehorn - swapping familiars afterwards moves
+    // ActiveBattlehorn while this stays put.
+    [FieldOffset(0x0F)] public byte KinshipState;
+
+    public BeastmasterKinType KinshipKinType => (BeastmasterKinType)(KinshipState >> 4);
+    public byte KinshipBattlehorn => (byte)(KinshipState & 0x0F);
+}
+
 #endregion
 
 #region Tanks
