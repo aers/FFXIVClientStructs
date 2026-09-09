@@ -2870,9 +2870,6 @@ classes:
     instances:
       - ea: 0x142AFB670
         pointer: true
-    vtbls:
-      - ea: 0x1421E1360
-        base: Client::Game::ServerRequestCallbackInterface
     funcs:
       0x141975A00: GetInstance
       0x141975A10: HasInstance
