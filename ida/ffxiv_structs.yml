@@ -2392,6 +2392,7 @@ enums:
     "HighlightedTriangle": 138
     "RotateClockwise": 139
     "RotateCounterclockwise": 140
+    "Beastmaster": 141
 - type: Client::UI::Misc::TofuType
   name: TofuType
   underlying: unsigned int
@@ -17728,7 +17729,7 @@ structs:
       name: targetId
     - type: char
       name: isRecorded
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B D3
     return_type: void
     name: HandlePrepareZoningPacket
     parameters:
@@ -17808,7 +17809,7 @@ structs:
       name: targetId
     - type: Client::Game::Network::InventoryItemPacket*
       name: packet
-  - signature: E8 ?? ?? ?? ?? EB ?? 3D ?? ?? ?? ?? 75 ?? 48 8D 53 ?? 81 FE
+  - signature: E8 ?? ?? ?? ?? EB ?? 83 F8 ?? 75 ?? 48 8D 53
     return_type: void
     name: HandleInventoryItemPacket
     parameters:
@@ -17906,7 +17907,7 @@ structs:
       name: entityId
     - type: Client::Game::Network::ActorCastPacket*
       name: packet
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 0F B6 43
     return_type: void
     name: HandleMapEffectPacket
     parameters:
@@ -44554,7 +44555,17 @@ structs:
     offset: 208
     size: 3
     is_string: False
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 66 0F 1F 44 00 ?? 48 C7 87 ?? ?? ?? ?? ?? ?? ?? ??
+    return_type: void
+    name: CompleteWarp
+    parameters:
+    - type: Client::Game::UI::WarpInfo*
+      name: this
+    - type: int
+      name: eventParam
+    - type: int
+      name: eventId
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B D7
     relative_follow_offsets:
@@ -58303,7 +58314,7 @@ structs:
       name: slotType
     - type: unsigned int
       name: actionId
-  - signature: E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12
+  - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 41 8B D8 48 89 74 24
     return_type: char*
     name: GetDisplayNameForSlot
     parameters:
@@ -58770,7 +58781,7 @@ structs:
     - type: Client::UI::Misc::TofuHelper*
       name: this
   member_functions:
-  - signature: E8 ?? ?? ?? ?? EB ?? B8 ?? ?? ?? ?? 66 41 39 41
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB
     return_type: void
     name: HandleStartSharingPacket
     parameters:
@@ -58786,7 +58797,7 @@ structs:
       name: this
     - type: Client::Game::Network::ServerIpcSegment<Client::Game::Network::TofuStopSharingPacket>*
       name: packet
-  - signature: E8 ?? ?? ?? ?? EB ?? ?? ?? ?? 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6
+  - signature: E8 ?? ?? ?? ?? EB ?? B8 ?? ?? ?? ?? 66 41 39 41
     return_type: void
     name: HandleRealTimeUpdatePacket
     parameters:
@@ -59473,7 +59484,7 @@ structs:
   name: XBMModule
   namespace: Client.UI.Misc
   union: False
-  size: 136
+  size: 168
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -100593,7 +100604,7 @@ structs:
   name: AddonConfigDataSet
   namespace: Client.UI.Misc
   union: False
-  size: 56360
+  size: 56400
   fields:
   - type: Client::System::String::Utf8String
     name: Name
@@ -100607,21 +100618,21 @@ structs:
   - type: Client::UI::Misc::AddonConfigEntry
     name: ConfigEntries
     offset: 136
-    size: 1102
+    size: 1103
     is_string: False
   - type: Client::System::String::Utf8String
     name: HudLayoutNames
-    offset: 39808
+    offset: 39848
     size: 4
     is_string: False
   - type: Client::UI::Misc::AddonConfigEntry
     name: HudLayoutConfigEntries
-    offset: 40224
+    offset: 40264
     size: 448
     is_string: False
   - type: int
     name: CurrentHudLayout
-    offset: 56352
+    offset: 56392
   member_functions: []
 - type: Client::UI::Misc::BannerModuleData
   name: BannerModuleData
@@ -106790,7 +106801,7 @@ structs:
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 0D B0 02
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 3D
     return_type: char
     name: IsMentor
     parameters:
@@ -112797,7 +112808,7 @@ structs:
       name: this
     - type: unsigned int
       name: id
-  - signature: E8 ?? ?? ?? ?? 8B 94 9E
+  - signature: E8 ?? ?? ?? ?? 45 8B 3E
     return_type: Component::GUI::AtkImageNode*
     name: GetImageNodeById
     parameters:
@@ -125970,7 +125981,7 @@ structs:
     parameters:
     - type: Client::Game::UI::CharaCard*
       name: this
-  - signature: 40 53 48 83 EC ?? 8B 05 ?? ?? ?? ?? 48 8B DA
+  - signature: 40 53 48 83 EC ?? 48 8B DA 0F B6 52
     return_type: void
     name: HandleCurrentCharaCardDataPacket
     parameters:
@@ -154826,7 +154837,7 @@ structs:
       name: optionIndex
     - type: int
       name: valueSetIndex
-  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 41 54 41 56 41 57 48 83 EC ?? 45 33 E4
+  - signature: E8 ?? ?? ?? ?? 48 8B CF C6 47 ?? ?? 48 8B 5C 24
     return_type: void
     name: ResetOptionsByCategoryMask
     parameters:
@@ -280001,7 +280012,7 @@ structs:
       name: this
     - type: Component::GUI::AtkEvent*
       name: evt
-  - signature: E8 ?? ?? ?? ?? 6B 94
+  - signature: E8 ?? ?? ?? ?? 6B FF
     return_type: Component::GUI::NumberArrayData**
     name: GetNumberArrayData
     parameters:
@@ -284338,7 +284349,7 @@ structs:
     return_type: char
     name: IsInGPose
     parameters: []
-  - signature: E8 ?? ?? ?? ?? 32 DB 0F B6 C3
+  - signature: E8 ?? ?? ?? ?? 32 DB 0F B6 C3 E9
     return_type: char
     name: IsInIdleCam
     parameters: []
@@ -286402,7 +286413,7 @@ structs:
   name: RaptureAtkModule
   namespace: Client.UI
   union: False
-  size: 174416
+  size: 174464
   fields:
   - type: Component::GUI::AtkModule
     name: AtkModule
@@ -286444,107 +286455,107 @@ structs:
   - type: Client::UI::RaptureAtkModule::AddonFactoryInfo
     name: AddonFactories
     offset: 34944
-    size: 990
+    size: 991
     is_string: False
   - type: StdVector<Client::System::String::Utf8String>
     name: AddonNames
-    offset: 74544
+    offset: 74584
   - type: Client::UI::Misc::AddonConfig*
     name: AddonConfigPtr
-    offset: 74568
+    offset: 74608
   - type: Component::GUI::AtkCursor::CursorType
     name: CursorType
-    offset: 74578
+    offset: 74618
   - type: int
     name: AudioClientRpcTagSize
-    offset: 74736
+    offset: 74776
   - type: wchar_t*
     name: AudioClientRpcTag
-    offset: 74744
+    offset: 74784
   - type: Client::UI::UIModule*
     name: UIModulePtr
-    offset: 74752
+    offset: 74792
   - type: Client::UI::Misc::RaptureLogModule*
     name: RaptureLogModulePtr
-    offset: 74760
+    offset: 74800
   - type: Client::UI::Agent::AgentModule
     name: AgentModule
-    offset: 74768
+    offset: 74808
   - type: Client::UI::Misc::RaptureHotbarModule*
     name: RaptureHotbarModulePtr
-    offset: 78888
+    offset: 78928
   - type: Client::UI::RaptureAtkUnitManager
     name: RaptureAtkUnitManager
-    offset: 78896
+    offset: 78944
   - type: Client::UI::RaptureAtkColorDataManager
     name: RaptureAtkColorDataManager
-    offset: 119136
+    offset: 119184
   - type: int
     name: NameplateInfoCount
-    offset: 119776
+    offset: 119824
   - type: Client::UI::RaptureAtkModule::NamePlateInfo
     name: NamePlateInfoEntries
-    offset: 119784
+    offset: 119832
     size: 50
     is_string: False
   - type: Client::UI::RaptureAtkModule::CrystalCache
     name: CrystalItemCache
-    offset: 149600
+    offset: 149648
     size: 18
     is_string: False
   - type: Client::UI::RaptureAtkModule::ItemCache*
     name: KeyItemCache
-    offset: 152336
+    offset: 152384
   - type: Client::UI::RaptureAtkModule::ItemCache*
     name: EquippedItemCache
-    offset: 152344
+    offset: 152392
   - type: Client::UI::RaptureAtkModule::ItemCache
     name: InventoryItemCache
-    offset: 152352
+    offset: 152400
     size: 160
     is_string: False
   - type: unsigned int
     name: InventoryItemCacheSlotCount
-    offset: 174112
+    offset: 174160
   - type: unsigned int
     name: GilCap
-    offset: 174116
+    offset: 174164
   - type: unsigned int
     name: LocalPlayerClassJobId
-    offset: 174216
+    offset: 174264
   - type: unsigned int
     name: LocalPlayerLevel
-    offset: 174220
+    offset: 174268
   - type: char
     name: QuickGatheringEnabled
-    offset: 174229
+    offset: 174277
   - type: char
     name: QTEActive
-    offset: 174235
+    offset: 174283
   - type: Common::Component::Excel::ExcelSheet*
     name: AddonParamSheet
-    offset: 174336
+    offset: 174384
   - type: Component::GUI::AtkTexture
     name: CharaViewDefaultBackgroundTexture
-    offset: 174344
+    offset: 174392
   - type: Client::UI::CreditMode
     name: CreditMode
-    offset: 174368
+    offset: 174416
   - type: unsigned int
     name: LoginSummonCompanionId
-    offset: 174372
+    offset: 174420
   - type: float
     name: LoginSummonCompanionCountdown
-    offset: 174376
+    offset: 174424
   - type: float
     name: HourTimer
-    offset: 174380
+    offset: 174428
   - type: int
     name: HoursPlayed
-    offset: 174384
+    offset: 174432
   - type: __int64
     name: ShellCommands
-    offset: 174408
+    offset: 174456
   virtual_functions:
   - name: dtor
     offset: 0
@@ -287331,7 +287342,7 @@ structs:
   name: UIModule
   namespace: Client.UI
   union: False
-  size: 1047376
+  size: 1047456
   fields:
   - type: Client::UI::UIModuleInterface
     name: UIModuleInterface
@@ -287574,55 +287585,55 @@ structs:
     offset: 699648
   - type: Client::UI::Misc::ConfigModule
     name: ConfigModule
-    offset: 699936
+    offset: 699968
   - type: Client::UI::Shell::RaptureShellModule
     name: RaptureShellModule
-    offset: 760624
+    offset: 760656
   - type: Client::UI::Misc::PronounModule
     name: PronounModule
-    offset: 765312
+    offset: 765344
   - type: Client::UI::UI3DModule
     name: UI3DModule
-    offset: 766256
+    offset: 766288
   - type: Client::UI::RaptureAtkModule
     name: RaptureAtkModule
-    offset: 861808
+    offset: 861840
   - type: Client::UI::Info::InfoModule
     name: InfoModule
-    offset: 1036224
+    offset: 1036304
   - type: Client::UI::Misc::UIModuleHelpers
     name: UIModuleHelpers
-    offset: 1043512
-  - type: Client::System::String::Utf8String
-    name: AddonSheetName
     offset: 1043592
   - type: Client::System::String::Utf8String
+    name: AddonSheetName
+    offset: 1043672
+  - type: Client::System::String::Utf8String
     name: UIColorSheetName
-    offset: 1043704
+    offset: 1043784
   - type: Client::System::String::Utf8String
     name: CompletionSheetName
-    offset: 1043824
+    offset: 1043904
   - type: Client::System::String::Utf8String
     name: CompletionOpenIconMacro
-    offset: 1043928
+    offset: 1044008
   - type: Client::System::String::Utf8String
     name: CompletionCloseIconMacro
-    offset: 1044032
+    offset: 1044112
   - type: Client::System::String::Utf8String
     name: NewLineMacro
-    offset: 1044136
+    offset: 1044216
   - type: Client::System::String::Utf8String
     name: LastTalkName
-    offset: 1044240
+    offset: 1044320
   - type: Client::System::String::Utf8String
     name: LastTalkText
-    offset: 1044344
+    offset: 1044424
   - type: Client::UI::UIInputData
     name: UIInputData
-    offset: 1044448
+    offset: 1044528
   - type: Client::UI::UIInputModule
     name: UIInputModule
-    offset: 1047056
+    offset: 1047136
   vtable_size: 2000
   virtual_functions:
   - name: ExitGame
