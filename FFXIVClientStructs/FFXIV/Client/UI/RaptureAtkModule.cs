@@ -52,7 +52,7 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x13460)] public RaptureAtkUnitManager RaptureAtkUnitManager;
     [FieldOffset(0x1D190)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
-    
+
     [FieldOffset(0x1D410)] public int NameplateInfoCount;
     [FieldOffset(0x1D418), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
 
