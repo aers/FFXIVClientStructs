@@ -9,9 +9,9 @@ public unsafe partial struct XBMManager {
     public static partial XBMManager* Instance();
 
     [FieldOffset(0x00), FixedSizeArray(isBitArray: true, bitCount: 50)] internal FixedSizeArray7<byte> _unlockedPets;
-    [FieldOffset(0x10)] private int NumUnlockedPets;
-    [FieldOffset(0x14)] private DataState State;
-    [FieldOffset(0x18)] private bool HasNewUnlockedPets;
+    [FieldOffset(0x10)] public int NumUnlockedPets;
+    [FieldOffset(0x14)] public DataState State;
+    [FieldOffset(0x18)] public bool HasNewUnlockedPets;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 44 24 ?? ?? ?? ?? ?? ?? ?? 32 C0")]
     public partial bool IsPetUnlocked(uint petId);
