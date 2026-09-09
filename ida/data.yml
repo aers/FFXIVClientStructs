@@ -25734,13 +25734,19 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14153CD60: ctor
-  Client::UI::AddonEventImage: # 988
+  Client::UI::AddonXBMPresetPreview: # 988
+    vtbls:
+      - ea: 0x142286650
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14153D0F0: ctor
+  Client::UI::AddonEventImage: # 989
     vtbls:
       - ea: 0x142255A78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138E160: ctor
-  Client::UI::AddonKeyBoardInput: # 989
+  Client::UI::AddonKeyBoardInput: # 990
     vtbls:
       - ea: 0x142205710
         base: Component::GUI::AtkUnitBase
