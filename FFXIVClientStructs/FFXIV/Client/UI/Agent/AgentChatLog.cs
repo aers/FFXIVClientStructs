@@ -19,6 +19,7 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x120)] public Utf8String TellPlayerName;
     [FieldOffset(0x188)] public ushort TellWorldId;
 
+    [FieldOffset(0x194)] public int ContextTabOwnerAddonId;
     [FieldOffset(0x198)] public int ContextTabIndex;
 
     [FieldOffset(0x1A0), FixedSizeArray] internal FixedSizeArray8<Utf8String> _channelSelectorLSNames;
