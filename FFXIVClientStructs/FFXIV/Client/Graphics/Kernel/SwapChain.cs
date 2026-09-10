@@ -13,7 +13,7 @@ public unsafe partial struct SwapChain {
     [FieldOffset(0x58)] public Texture* BackBuffer;
     [FieldOffset(0x60)] public Texture* DepthStencil;
     [FieldOffset(0x68)] public void* DXGISwapChain; // IDXGISwapChain
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? C6 46 79 00 EB 40")]
     public partial void Present();
 }
