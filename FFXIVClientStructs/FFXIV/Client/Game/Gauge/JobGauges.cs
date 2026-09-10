@@ -242,9 +242,28 @@ public struct BeastmasterGauge {
     // low nibble is NOT a mirror of ActiveBattlehorn - swapping familiars afterwards moves
     // ActiveBattlehorn while this stays put.
     [FieldOffset(0x0F)] public byte KinshipState;
+    // Two instinct stack counters packed into one byte, two bits each, both gated behind
+    // traits - this reads 0 below level 28 and only the upper pair moves until level 40.
+    //
+    //   bits 0-1  Natural Instinct   (trait Wild Heart IV, Lv 40) - gained when a FAMILIAR
+    //             instinctual skill completes the combo. Spent by Rallying Cheer (44904) for
+    //             30 familiar TP plus 70 per stack.
+    //   bits 2-3  Mastered Instinct  (trait Wild Heart III, Lv 28) - gained when a BEASTMASTER
+    //             instinctual skill completes the combo. Spent by Rally (44905) for 40 TP plus
+    //             70 per stack, so three stacks fills an empty 250 gauge exactly. The excess is
+    //             clamped rather than scaled: three stacks spent while holding 28 TP still
+    //             landed on 250.
+    //
+    // Each field caps at 3, giving a maximum byte of 15. Observed as 8 -> 9 -> 13 -> 14 -> 15
+    // across four combos, gaining 4 whenever the player's skill completed the combo and 1
+    // whenever the familiar's did. Each spender clears only its own bits: Rally with both fields
+    // full took this from 15 to 3 while TPGauge went 0 -> 250.
+    [FieldOffset(0x10)] public byte InstinctState;
 
     public BeastmasterKinType KinshipKinType => (BeastmasterKinType)(KinshipState >> 4);
     public byte KinshipBattlehorn => (byte)(KinshipState & 0x0F);
+    public byte NaturalInstinct => (byte)(InstinctState & 0x03);
+    public byte MasteredInstinct => (byte)((InstinctState >> 2) & 0x03);
 }
 
 #endregion
