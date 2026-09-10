@@ -200,7 +200,7 @@ public struct ViperGauge {
 
 // Beastmaster is a limited job; its gauge drives the Inner Compass UI.
 // Verified at runtime on patch 7.56 by observing JobGaugeManager while playing.
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct BeastmasterGauge {
     // Beastmaster's own TP, 0-250. This does NOT regenerate passively - it is granted by the
     // combo bonuses on the player's weaponskill chain (Axeblade Bite grants +13, Shieldsplitter
