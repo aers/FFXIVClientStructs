@@ -1854,6 +1854,8 @@ enums:
     "TofuRealTimeUpdate": 38
     "TofuStopShare": 39
     "TofuConfirmation": 40
+    "Unknown41": 41
+    "Unknown42": 42
 - type: Client::Game::UI::WarpType
   name: WarpType
   underlying: int
@@ -2427,6 +2429,23 @@ enums:
   values:
     "IsVisible": 1
     "IsLocked": 8
+- type: Client::UI::Misc::XBMPetMirage
+  name: XBMPetMirage
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "Normal": 0
+    "Alternative": 1
+- type: Client::UI::Misc::XBMPetSize
+  name: XBMPetSize
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "Small": 0
+    "Medium": 1
+    "Large": 2
 - type: Client::UI::Info::InfoProxyId
   name: InfoProxyId
   underlying: unsigned int
@@ -27572,7 +27591,7 @@ structs:
   name: UIModuleHelpers
   namespace: Client.UI.Misc
   union: False
-  size: 56
+  size: 80
   fields:
   - type: Client::UI::Misc::CurrencySettingsHelper*
     name: CurrencySettingsHelper
@@ -27595,6 +27614,15 @@ structs:
   - type: Client::UI::Misc::HelperInterface*
     name: ScreenInfoFrontHelper
     offset: 48
+  - type: Client::UI::Misc::HelperInterface*
+    name: Unk38
+    offset: 56
+  - type: Client::UI::Misc::HelperInterface*
+    name: Unk40
+    offset: 64
+  - type: Client::UI::Misc::HelperInterface*
+    name: Unk48
+    offset: 72
   member_functions: []
 - type: Client::UI::Misc::UserFileManager::UserFileEvent
   name: UserFileEvent
@@ -27749,6 +27777,25 @@ structs:
     offset: 5
     size: 32
     is_string: True
+  member_functions: []
+- type: Client::UI::Misc::XBMNoteModule::PetSetting
+  name: PetSetting
+  namespace: Client.UI.Misc
+  union: False
+  size: 4
+  fields:
+  - type: byte
+    name: Id
+    offset: 0
+  - type: Client::UI::Misc::XBMPetSize
+    name: Size
+    offset: 1
+  - type: char
+    name: IsNewPetSeen
+    offset: 2
+  - type: Client::UI::Misc::XBMPetMirage
+    name: Mirage
+    offset: 3
   member_functions: []
 - type: Client::UI::MoveableAddonInfoStruct
   name: MoveableAddonInfoStruct
@@ -37676,6 +37723,21 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Misc::UiDataModule::MuteList::MuteListEntry*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Misc::XBMNoteModule::PetSetting>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Misc::XBMNoteModule::PetSetting*
+    name: First
+    offset: 0
+  - type: Client::UI::Misc::XBMNoteModule::PetSetting*
+    name: Last
+    offset: 8
+  - type: Client::UI::Misc::XBMNoteModule::PetSetting*
     name: End
     offset: 16
   member_functions: []
@@ -59664,94 +59726,6 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Misc::XBMModule*
-      name: this
-    - type: char
-      name: force
-  member_functions: []
-- type: Client::UI::Misc::XBMNoteModule
-  name: XBMNoteModule
-  namespace: Client.UI.Misc
-  union: False
-  size: 96
-  fields:
-  - type: Client::UI::Misc::UserFileManager::UserFileEvent
-    name: UserFileEvent
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: ReadFile
-    offset: 8
-    return_type: char
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-    - type: char
-      name: decrypt
-    - type: byte*
-      name: ptr
-    - type: unsigned __int16
-      name: version
-    - type: unsigned int
-      name: length
-  - name: WriteFile
-    offset: 16
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-    - type: byte*
-      name: ptr
-    - type: unsigned int
-      name: length
-  - name: GetFileSize
-    offset: 40
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-  - name: GetDataSize
-    offset: 48
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-  - name: GetFileVersion
-    offset: 56
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-  - name: GetFileType
-    offset: 64
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-  - name: GetHasChanges
-    offset: 88
-    return_type: char
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-  - name: GetIsSavePending
-    offset: 96
-    return_type: char
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-  - name: SetCharacterContentId
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
-      name: this
-    - type: unsigned __int64
-      name: contentId
-  - name: SaveFile
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::XBMNoteModule*
       name: this
     - type: char
       name: force
@@ -86501,6 +86475,141 @@ structs:
     - type: char
       name: force
   member_functions: []
+- type: Client::UI::Misc::XBMNoteModule
+  name: XBMNoteModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 96
+  fields:
+  - type: Client::UI::Misc::UserFileManager::UserFileEvent
+    name: UserFileEvent
+    offset: 0
+    base: true
+  - type: StdVector<Client::UI::Misc::XBMNoteModule::PetSetting>
+    name: PetSettings
+    offset: 72
+  virtual_functions:
+  - name: ReadFile
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: char
+      name: decrypt
+    - type: byte*
+      name: ptr
+    - type: unsigned __int16
+      name: version
+    - type: unsigned int
+      name: length
+  - name: WriteFile
+    offset: 16
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: byte*
+      name: ptr
+    - type: unsigned int
+      name: length
+  - name: GetFileSize
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+  - name: GetDataSize
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+  - name: GetFileVersion
+    offset: 56
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+  - name: GetFileType
+    offset: 64
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+  - name: GetHasChanges
+    offset: 88
+    return_type: char
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+  - name: GetIsSavePending
+    offset: 96
+    return_type: char
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+  - name: SaveFile
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: char
+      name: force
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 BA ?? ?? ?? ?? 48 8B CD 0F 94 C3
+    return_type: char
+    name: IsNewPetSeen
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: byte
+      name: petId
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 83 ?? ?? ?? ?? 48 2B 43
+    return_type: char
+    name: SetPetMirage
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: byte
+      name: petId
+    - type: Client::UI::Misc::XBMPetMirage
+      name: mirage
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 8D 4B ?? 8B C3
+    return_type: Client::UI::Misc::XBMPetMirage
+    name: GetPetMirage
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: byte
+      name: petId
+  - signature: E8 ?? ?? ?? ?? FF C7 83 FF ?? 7C ?? ?? ?? ?? 48 8B CB
+    return_type: char
+    name: SetPetSize
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: byte
+      name: petId
+    - type: Client::UI::Misc::XBMPetSize
+      name: size
+  - signature: E8 ?? ?? ?? ?? 41 8D 55 ?? 8B F8
+    return_type: Client::UI::Misc::XBMPetSize
+    name: GetPetSize
+    parameters:
+    - type: Client::UI::Misc::XBMNoteModule*
+      name: this
+    - type: byte
+      name: petId
 - type: Client::UI::PreviewController
   name: PreviewController
   namespace: Client.UI
@@ -106316,14 +106425,10 @@ structs:
     size: 4
     is_string: False
   - type: unsigned __int16
-    name: FreeAetheryteId
+    name: FreeAetheryteIds
     offset: 736
-  - type: unsigned __int16
-    name: FreeAetherytePSPlus
-    offset: 738
-  - type: unsigned __int16
-    name: FreeAetheryteNSO
-    offset: 740
+    size: 2
+    is_string: False
   - type: unsigned int
     name: BaseRestedExperience
     offset: 744
@@ -154475,6 +154580,12 @@ structs:
   - type: unsigned __int16
     name: TellWorldId
     offset: 392
+  - type: int
+    name: ContextTabOwnerAddonId
+    offset: 404
+  - type: int
+    name: ContextTabIndex
+    offset: 408
   - type: Client::System::String::Utf8String
     name: ChannelSelectorLSNames
     offset: 416
