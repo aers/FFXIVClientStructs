@@ -129,3 +129,27 @@ public enum SerpentCombo : byte {
     ThirdLegacy = 5,
     FourthLegacy = 6,
 }
+
+
+public enum BeastmasterAffinity : byte {
+    None = 0,
+    Volant = 1,
+    Rampant = 2,
+    Durant = 3,
+    Eldritch = 4,
+    Sunstrider = 5,
+    Moonstalker = 6,
+}
+
+
+public enum BeastmasterKinType : byte {
+    None = 0,
+    Beastkin = 1,
+    Vilekin = 2,
+    Cloudkin = 3,
+    Seedkin = 4,
+    Wavekin = 5,
+    Scalekin = 6,
+    Soulkin = 7,
+    Ashkin = 8,
+}
