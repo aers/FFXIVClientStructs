@@ -3163,6 +3163,7 @@ classes:
       - ea: 0x142ACC938
     funcs:
       0x140BDE180: ReadPacket
+      0x140954300: SetFreeAetheryteId
       0x140BE2110: SetCharacterName   # inlined
       0x140BE2210: SetClassJobId
       0x140BE22E0: GetClassJobId
