@@ -98,7 +98,7 @@ public sealed partial class InteropGenerator {
         // inherited virtual function bodies
         foreach ((StructInfo inheritedStruct, string path, int offset) in resolvedInheritanceOrder) {
             if (!inheritedStruct.VirtualFunctions.IsEmpty)
-                RenderInheritedVirtualFunctions(structInfo.Name, inheritedStruct, path, offset, writer);
+                RenderInheritedVirtualFunctions(structInfo, inheritedStruct, path, offset, writer);
         }
 
         token.ThrowIfCancellationRequested();
@@ -199,12 +199,21 @@ public sealed partial class InteropGenerator {
         if (!structInfo.HasVirtualTable())
             writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
+        HashSet<uint> presentVfuncOffsets = new();
+        foreach (var vfunc in structInfo.VirtualFunctions) {
+            presentVfuncOffsets.Add(vfunc.Index);
+        }
         using (writer.WriteBlock()) {
             foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
                 // only inherited structs at offset 0 are the primary inheritance chain that make up the main virtual table
                 if (offset != 0)
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
+                    // if the inherited vfunc has been redefined, skip it
+                    if (presentVfuncOffsets.Contains(virtualFunctionInfo.Index))
+                        continue;
+                    else
+                        presentVfuncOffsets.Add(virtualFunctionInfo.Index);
                     var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingTypeNoGenerics()}{virtualFunctionInfo.MethodInfo.ReturnTypeOrVoid}>";
                     foreach (string inheritedAttribute in virtualFunctionInfo.MethodInfo.InheritableAttributes)
                         writer.WriteLine(inheritedAttribute);
@@ -219,6 +228,10 @@ public sealed partial class InteropGenerator {
     }
 
     private static void RenderInheritedDelegateTypes(StructInfo structInfo, ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, IndentedTextWriter writer) {
+        HashSet<uint> presentVfuncOffsets = new();
+        foreach (var vfunc in structInfo.VirtualFunctions) {
+            presentVfuncOffsets.Add(vfunc.Index);
+        }
         writer.WriteLine("public static partial class Delegates");
         using (writer.WriteBlock()) {
             foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
@@ -226,14 +239,28 @@ public sealed partial class InteropGenerator {
                 if (offset != 0)
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
+                    // if the inherited vfunc has been redefined, skip it
+                    if (presentVfuncOffsets.Contains(virtualFunctionInfo.Index))
+                        continue;
+                    else
+                        presentVfuncOffsets.Add(virtualFunctionInfo.Index);
                     RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer);
                 }
             }
         }
     }
 
-    private static void RenderInheritedVirtualFunctions(string childTypeName, StructInfo inheritedStruct, string path, int offset, IndentedTextWriter writer) {
+    private static void RenderInheritedVirtualFunctions(StructInfo structInfo, StructInfo inheritedStruct, string path, int offset, IndentedTextWriter writer) {
+        HashSet<uint> presentVfuncOffsets = new();
+        foreach (var vfunc in structInfo.VirtualFunctions) {
+            presentVfuncOffsets.Add(vfunc.Index);
+        }
         foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
+            // if the inherited vfunc has been redefined, skip it
+            if (presentVfuncOffsets.Contains(virtualFunctionInfo.Index))
+                continue;
+            else
+                presentVfuncOffsets.Add(virtualFunctionInfo.Index);
             MethodInfo methodInfo = virtualFunctionInfo.MethodInfo;
             if (offset != 0 && methodInfo.Name == "Dtor") continue;
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.NameXmlEscaped}({methodInfo.GetParameterTypeStringForCref()})" />""");
@@ -247,7 +274,7 @@ public sealed partial class InteropGenerator {
                 var paramNames = string.Empty;
                 if (methodInfo.Parameters.Any())
                     paramNames = ", " + methodInfo.GetParameterNamesString();
-                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {virtualFunctionInfo.MethodInfo.ReturnTypeCast}VirtualTable->{methodInfo.NameNonGeneric}(({childTypeName}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {virtualFunctionInfo.MethodInfo.ReturnTypeCast}VirtualTable->{methodInfo.NameNonGeneric}(({structInfo.Name}*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this){paramNames});");
             } else {
                 writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
             }
