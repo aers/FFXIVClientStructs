@@ -232,4 +232,6 @@ public enum UIModulePacketType {
     TofuRealTimeUpdate = 38,
     TofuStopShare = 39,
     TofuConfirmation = 40,
+    Unknown41 = 41,
+    Unknown42 = 42,
 }
