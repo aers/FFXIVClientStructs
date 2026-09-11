@@ -11040,6 +11040,11 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14081A6D0: ctor
+      0x14081AA60: IsNewPetSeen
+      0x14081AAB0: SetPetMirage
+      0x14081AB40: GetPetMirage
+      0x14081AB90: SetPetSize
+      0x14081AC20: GetPetSize
   Client::UI::Misc::XBMModule:
     vtbls:
       - ea: 0x1421954C0
