@@ -130,17 +130,7 @@ public enum SerpentCombo : byte {
     FourthLegacy = 6,
 }
 
-// The Inner Compass runs clockwise Volant -> Rampant -> Durant -> Eldritch -> Volant, so an
-// intentional combo is simply the next affinity in sequence, wrapping Eldritch back to Volant.
-// Completing one grants a fifth or sixth affinity, which the game calls the "two additional
-// instinctual affinities". Which of the two you get is the parity of the affinity the combo
-// started from: odd -> Sunstrider, even -> Moonstalker. Pairing those two in turn triggers
-// what the game calls an "infinitive combo".
-// The upgrade only lands if the target survives the combo. Kill it with the second skill and
-// you still get Wavering Heart and a ChainCount increment, but no Sunstrider or Moonstalker.
-// These values match the player statuses the job applies, which are contiguous and in this
-// same order: Status rows 4595 Volant Heart, 4596 Rampant Heart, 4597 Durant Heart,
-// 4598 Eldritch Heart, 4599 Sunstrider, 4600 Moonstalker.
+
 public enum BeastmasterAffinity : byte {
     None = 0,
     Volant = 1,
@@ -151,10 +141,7 @@ public enum BeastmasterAffinity : byte {
     Moonstalker = 6,
 }
 
-// A familiar's kin type, which decides which Kinship status Borrow grants and therefore which
-// ability Beast Mode turns into. Matches the order of the eight contiguous Kinship statuses,
-// Status rows 4602 Beast Kinship through 4609 Ash Kinship. All eight values observed directly
-// in the gauge, each cross-checked against the Kinship status the familiar actually granted.
+
 public enum BeastmasterKinType : byte {
     None = 0,
     Beastkin = 1,
