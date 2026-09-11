@@ -43,7 +43,7 @@ public unsafe partial struct XBMNoteModule {
 public enum XBMPetSize : byte {
     Small = 0,
     Medium = 1,
-    Big = 2,
+    Large = 2,
 }
 
 public enum XBMPetMirage : byte {
