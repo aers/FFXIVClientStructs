@@ -70,17 +70,23 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x1A8), FixedSizeArray] internal FixedSizeArray74<int> _attributes;
     [FieldOffset(0x2D0)] public byte GrandCompany;
     /// <remarks>
-    /// 0 = Maelstrom <br/>
-    /// 1 = Order of the Twin Adder <br/>
+    /// 0 = Maelstrom<br/>
+    /// 1 = Order of the Twin Adder<br/>
     /// 2 = Immortal Flames
     /// </remarks>
     [FieldOffset(0x2D1), FixedSizeArray] internal FixedSizeArray3<byte> _GCRanks;
     [FieldOffset(0x2D4)] public ushort HomeAetheryteId;
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;
-    [FieldOffset(0x2E0)] public ushort FreeAetheryteId;
-    [FieldOffset(0x2E2)] public ushort FreeAetherytePSPlus; // PlayStation Plus
-    [FieldOffset(0x2E4)] public ushort FreeAetheryteNSO; // Nintendo Switch Online
+    /// <remarks>
+    /// 0 = Security Token<br/>
+    /// 1 = PlayStation Plus<br/>
+    /// 2 = Nintendo Switch Online
+    /// </remarks>
+    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray2<ushort> _freeAetheryteIds;
+    [FieldOffset(0x2E0), Obsolete("Use FreeAetheryteIds[0]")] public ushort FreeAetheryteId;
+    [FieldOffset(0x2E2), Obsolete("Use FreeAetheryteIds[1]")] public ushort FreeAetherytePSPlus;
+    [FieldOffset(0x2E4), Obsolete("Use FreeAetheryteIds[2]")] public ushort FreeAetheryteNSO;
     [FieldOffset(0x2E8)] public uint BaseRestedExperience;
     // [FieldOffset(0x2F8), FixedSizeArray] internal FixedSizeArray4<byte> _unk2C8; // GCSupply stuff
     // [FieldOffset(0x2FC), FixedSizeArray] internal FixedSizeArray16<byte> _unk2CC; // GCSupply stuff
