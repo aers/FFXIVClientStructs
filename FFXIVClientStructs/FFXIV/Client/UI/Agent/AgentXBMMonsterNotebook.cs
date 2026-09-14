@@ -55,19 +55,15 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 89 BE")]
     public partial void OpenAddon(int source);
 
-    /// <summary>Toggles AddonXBMActivePet.</summary>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 83 79 ?? ?? 48 8B D9 76 ?? 48 8D 51 ?? E8 ?? ?? ?? ?? C6 43")]
     public partial void ToggleActivePetAddon();
 
-    /// <summary>Checks the first pet flag bitfield, which holds the same bits as XBMManager.UnlockedPets.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 40 0F B6 D6 48 8B CF E8 ?? ?? ?? ?? 84 C0")]
     public partial bool IsPetUnlocked(uint petId);
 
-    /// <summary>Checks the second pet flag bitfield, which gates the "set appearance as variant" context menu entry.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 40 0F B6 D7 48 8B CE")]
     public partial bool IsPetMirageUnlocked(uint petId);
 
-    /// <summary>Returns the mirage set for the pet, clearing it when the pet is not in the mirage bitfield.</summary>
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 0F B6 DA 48 8B 49 ?? 48 8B 01")]
     public partial uint GetPetMirage(uint petId);
 
