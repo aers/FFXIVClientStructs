@@ -16478,8 +16478,15 @@ classes:
       - ea: 0x1421A3EA8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140AAB660: ctor
-      0x140AAC1E0: HandlePetListPacket
+      0x140AAB8F0: ctor
+      0x140AAC470: HandlePetListPacket
+      0x140AAC4C0: IsPetUnlocked
+      0x140AAC500: IsPetMirageUnlocked
+      0x140AAC540: GetPetMirage
+      0x140AAC6C0: ToggleActivePetAddon
+      0x140AAC9D0: OpenAddon
+      0x140AAD660: HandleAddonCallback
+      0x140AADC70: RebuildPetList
   Client::UI::Agent::AgentXBMPetParty:
     vtbls:
       - ea: 0x1421A3D20
