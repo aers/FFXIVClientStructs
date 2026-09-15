@@ -23316,6 +23316,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14136AED0: ctor
+      0x14136BB10: SetTab
   Client::UI::AddonShopExchangeCurrencyDialog: # 553
     vtbls:
       - ea: 0x14223EB48
