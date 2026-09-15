@@ -67,7 +67,7 @@ public enum DetailKind : byte {
     PhantomAction = 59,
     MKDTrait = 60,
     Unk61 = 61,
-    Unk62 = 62,
+    XBMPet = 62,
     Unk63 = 63,
     XBMBattleMonster = 64,
 }
