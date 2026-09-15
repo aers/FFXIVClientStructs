@@ -68,4 +68,8 @@ public unsafe partial struct GraphicsConfig {
     [FieldOffset(0x6A)] public bool IsIndoor; // This is true when the layouts lvb path contains "ind/", like for houses, apartments, or chambers.
 
     [FieldOffset(0x78)] public float JitterMultiplier;
+    [FieldOffset(0x80)] private ulong PendingEventFlags;
+    [FieldOffset(0x88)] private ulong EventFlags;
+
+    public bool ResetTemporalHistory => (EventFlags & 1) != 0;
 }
