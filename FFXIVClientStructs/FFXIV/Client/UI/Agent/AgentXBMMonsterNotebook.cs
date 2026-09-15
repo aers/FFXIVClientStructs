@@ -19,17 +19,18 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x40)] public StdVector<XBMPetParamGrowValues> PetParamGrowValues;
 
     [FieldOffset(0x58)] public uint Source; // 0 = opened from the notebook itself, 1 = opened from the pet party window
-    [FieldOffset(0x5C)] private bool NewPetListReceived;
-    [FieldOffset(0x5D)] private bool RequestPetListRebuild;
-    [FieldOffset(0x5E)] private bool RequestNotebookRebuild; // XBMMonsterNotebook left panel
-    [FieldOffset(0x5F)] private bool RequestNotebookDetailRebuild; // XBMMonsterNotebook right panel (XBMMonsterBookDetail)
-    [FieldOffset(0x60)] private bool ActivePetAddonOpened;
+    [FieldOffset(0x5C)] public bool IsPetListReceived;
+    [FieldOffset(0x5D)] public bool RequestPetListRebuild;
+    [FieldOffset(0x5E)] public bool RequestNotebookRebuild; // XBMMonsterNotebook left panel
+    [FieldOffset(0x5F)] public bool RequestNotebookDetailRebuild; // XBMMonsterNotebook right panel (XBMMonsterBookDetail)
+    [FieldOffset(0x60)] public bool IsActivePetAddonOpened;
     [FieldOffset(0x64)] public uint ActivePetAddonId; // AddonXBMActivePet
     [FieldOffset(0x68)] public uint FilterAddonId; // AddonXBMMonsterNotebookFilterSetting
 
     // Both bitfields are received in the same pet list packet as XBMManager.UnlockedPets.
     [FieldOffset(0x70), FixedSizeArray(isBitArray: true, bitCount: 50)] internal FixedSizeArray7<byte> _unlockedPets;
     [FieldOffset(0x77), FixedSizeArray(isBitArray: true, bitCount: 50)] internal FixedSizeArray7<byte> _mirageUnlockedPets;
+    
     [FieldOffset(0x7E)] private ushort Unk7E;
 
     [FieldOffset(0x80)] public StdVector<XBMMonsterNotebookEntry> PetList; // 25 entries per page
