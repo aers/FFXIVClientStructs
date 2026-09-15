@@ -19,7 +19,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x40)] public StdVector<XBMPetParamGrowValues> PetParamGrowValues;
 
     [FieldOffset(0x58)] public uint Source; // 0 = opened from the notebook itself, 1 = opened from the pet party window
-    [FieldOffset(0x5C)] public bool IsPetListReceived;
+    [FieldOffset(0x5C)] public bool IsNewPetListReceived;
     [FieldOffset(0x5D)] public bool RequestPetListRebuild;
     [FieldOffset(0x5E)] public bool RequestNotebookRebuild; // XBMMonsterNotebook left panel
     [FieldOffset(0x5F)] public bool RequestNotebookDetailRebuild; // XBMMonsterNotebook right panel (XBMMonsterBookDetail)
