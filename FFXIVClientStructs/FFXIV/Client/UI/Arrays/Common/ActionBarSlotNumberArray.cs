@@ -8,7 +8,7 @@ public partial struct ActionBarSlotNumberArray {
     [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray17<int> _data;
 
     [FieldOffset(0 * 4), Obsolete("Use ActionTypeEnum")] public int ActionType;
-    [FieldOffset(0 * 4)] public RaptureHotbarModule.ActionType ActionTypeEnum; // maybe rename to ActionType, once ActionType can be removed?
+    [FieldOffset(0 * 4)] public RaptureHotbarModule.SlotActionType ActionTypeEnum; // maybe rename to ActionType, once ActionType can be removed?
 
     [FieldOffset(1 * 4)] public int CostType;
     [FieldOffset(3 * 4)] public uint ActionId;

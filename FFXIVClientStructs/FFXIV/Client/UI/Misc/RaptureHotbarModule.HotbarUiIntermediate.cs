@@ -10,7 +10,7 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0x00)] public CStringPointer PopUpHelpText; // ref to Client::UI::Misc::RaptureHotbarModule::HotbarSlot.PopUpHelp.StringPtr
         [FieldOffset(0x08)] public CStringPointer CostText; // ref to Client::UI::Misc::RaptureHotbarModule::HotbarSlot.CostText
         [FieldOffset(0x10), Obsolete("Use ActionType")] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
-        [FieldOffset(0x10)] public ActionType ActionType; // to NumberArray idx slotBase + 0
+        [FieldOffset(0x10)] public SlotActionType ActionType; // to NumberArray idx slotBase + 0
         [FieldOffset(0x14)] public uint ActionId; // to NumberArray idx slotBase + 3
         [FieldOffset(0x18)] public uint IconId; // to NumberArray idx slotBase + 4
         [FieldOffset(0x1C)] public uint CooldownMode; // to NumberArray idx slotBase + 7
@@ -34,7 +34,7 @@ public partial struct RaptureHotbarModule {
     }
 
     // These values tend to shift up when new forays or jobs are added.
-    public enum ActionType {
+    public enum SlotActionType {
         None = 0,
 
         Macro = 47,
