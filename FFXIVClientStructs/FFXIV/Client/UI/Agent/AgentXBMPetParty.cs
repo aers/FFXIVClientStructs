@@ -34,8 +34,8 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x90)] public StdVector<XBMPetPartyEntry> SelectedPetIds;
     [FieldOffset(0xA8)] public StdVector<XBMPetPartyEntry> CandidatePets;
 
-    [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray15<uint> _petStatCache; // per SelectedPets entry, compared against the director data in Update
-    [FieldOffset(0xFC), FixedSizeArray] internal FixedSizeArray15<uint> _petStatCache2;
+    [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray15<uint> _petCurrentHealth;
+    [FieldOffset(0xFC), FixedSizeArray] internal FixedSizeArray15<uint> _petMaxHealth;
 
     [FieldOffset(0x138)] private uint Unk138; // value passed by SetMode(3)
     [FieldOffset(0x13C)] private uint Unk13C; // value passed by SetMode(5)
