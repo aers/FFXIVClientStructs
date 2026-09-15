@@ -37,7 +37,7 @@ public unsafe partial struct PostEffectManager {
     public partial struct ColorFilterParameters {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray3<Vector4> _matrix; // 3x4 RGB transform
         [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray3<Vector4> _darkMatrix;
-        [FieldOffset(0x60)] public Vector3 DarkParameters;
+        [FieldOffset(0x60)] public global::System.Numerics.Vector3 DarkParameters;
         [FieldOffset(0x6C)] public float Strength;
     }
 }
