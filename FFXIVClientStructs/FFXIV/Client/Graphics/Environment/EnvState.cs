@@ -4,4 +4,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Environment;
 [StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public unsafe struct EnvState {
     [FieldOffset(0x12C)] public float Rain;
+    [FieldOffset(0x224)] public EnvColorFilterParameters ColorFilter;
 }

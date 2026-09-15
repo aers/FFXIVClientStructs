@@ -5759,6 +5759,9 @@ classes:
       1: Cleanup # this is called by DecRef when there are no refs left, before the dtor is called
       2: IncRef
       3: DecRef
+  Client::Graphics::Environment::EnvColorFilterParameters:
+    funcs:
+      0x1400669A0: BuildMatrix
   Client::Graphics::Environment::EnvSoundState:
     vtbls:
       - ea: 0x14211CC78

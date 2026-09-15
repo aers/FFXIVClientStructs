@@ -17,6 +17,7 @@ public unsafe partial struct PostEffectManager {
     [FieldOffset(0x4C0)] public PostEffectChain DepthOfFieldCoCChain;
     [FieldOffset(0x4F8)] public PostEffectChain UpdatedDepthOfFieldChain;
     [FieldOffset(0x5D8)] public PostEffectChain ColorFilterChain;
+    [FieldOffset(0x610)] public PostEffectChain VignettingChain;
     [FieldOffset(0x4010)] public Texture* SceneInput;
     [FieldOffset(0x4030)] public Texture* Depth;
     [FieldOffset(0x4078)] public Texture* SceneOutput;
@@ -31,6 +32,7 @@ public unsafe partial struct PostEffectManager {
     [FieldOffset(0x46E8)] public PostEffectDepthOfFieldParameters DepthOfField;
     [FieldOffset(0x471C)] public Vector4 ColorFilterCurve;
     [FieldOffset(0x472C)] public ColorFilterParameters ColorFilter;
+    [FieldOffset(0x4808)] public PostEffectVignettingParameters Vignetting;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
