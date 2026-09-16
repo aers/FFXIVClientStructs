@@ -2767,7 +2767,7 @@ enums:
     "PhantomAction": 59
     "MKDTrait": 60
     "Unk61": 61
-    "Unk62": 62
+    "XBMPet": 62
     "Unk63": 63
     "XBMBattleMonster": 64
 - type: Client::UI::Agent::AlarmSoundEffect
@@ -17134,10 +17134,10 @@ structs:
     is_string: False
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: LegacyBodyDecalColorCBuffer
-    offset: 1008
+    offset: 1016
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: FreeCompanyCrestColorCBuffer
-    offset: 1016
+    offset: 1024
   virtual_functions: []
   member_functions: []
   static_members:
