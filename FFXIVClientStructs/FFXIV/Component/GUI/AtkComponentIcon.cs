@@ -127,5 +127,6 @@ public enum IconComponentFlags : uint {
     IsBeingDragged = 1 << 10,
     Unk2048 = 1 << 11, // overrides DrawOrderIndex with one from RaptureAtkUnitManager
     IsDisabled = 1 << 12, // for example due to casting or having a window open that disables actions
-    Unk8192 = 1 << 13,
+    IsImageDisabled = 1 << 13,
+    [Obsolete("Use IsImageDisabled")] Unk8192 = IsImageDisabled,
 }
