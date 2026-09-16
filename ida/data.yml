@@ -1141,8 +1141,6 @@ classes:
         base: Client::System::Input::KeyboardDeviceInterface
       - ea: 0x142177F88
         base: Client::System::Input::RepeatCounter
-    vfuncs:
-      0: dtor
     funcs:
       0x1405E7AC0: ctor
       0x1405E8200: ProcessKeyboardInputMessage # static
