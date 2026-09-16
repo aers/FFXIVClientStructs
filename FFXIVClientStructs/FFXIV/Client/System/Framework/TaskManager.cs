@@ -19,6 +19,9 @@ public unsafe partial struct TaskManager {
 
     public Span<RootTask> TaskListSpan => new(TaskList, (int)TaskCount);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9 74 ?? F3 0F 10 8B")]
+    public partial void ExecuteAllTasks(float* dt);
+
     // Client::System::Framework::TaskManager::JobPool
     [StructLayout(LayoutKind.Explicit, Size = 0x4C)]
     public partial struct JobPool {
