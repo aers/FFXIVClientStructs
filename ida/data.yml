@@ -1085,6 +1085,10 @@ classes:
       - ea: 0x1421269C0
     vfuncs:
       0: dtor
+      1: Initialize
+      2: Update
+      3: Deinitialize
+      4: GetData
       13: SetVibration
   Client::System::Input::PadDevice:
     vtbls:

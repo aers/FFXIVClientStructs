@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Configuration;
+
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 // Client::System::Input::PadDevice
@@ -10,4 +12,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 7E ?? 48 89 06 48 8D 4E", 3, 27)]
 public unsafe partial struct PadDevice {
     [FieldOffset(0x78)] public GamepadInputData GamepadInputData;
+
+    [FieldOffset(0x438)] public SystemConfig* SystemConfig;
 }
