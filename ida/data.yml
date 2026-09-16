@@ -1112,6 +1112,7 @@ classes:
     funcs:
       0x14178D640: ctor
       0x14178DB30: ScheduleCursorMove # static
+      0x14178DBF0: ProcessMouseInputMessage # static
   Client::System::Input::KeyboardDeviceInterface:
     vtbls:
       - ea: 0x142177F08
@@ -1125,6 +1126,7 @@ classes:
       0: dtor
     funcs:
       0x1405E7AC0: ctor
+      0x1405E8200: ProcessKeyboardInputMessage # static
   Client::System::Input::VibrationControl:
     vtbls:
       - ea: 0x1421916F0
