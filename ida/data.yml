@@ -9453,7 +9453,7 @@ classes:
       0x140690870: SetFrameLabelId
       0x1406908B0: ResetFrame # unused
       0x140690970: SetCooldownProgress
-      0x140690A70: SetComboBorder # unsure
+      0x140690A70: SetComboBorder
       0x140690B10: SetDyeColor
       0x140690B40: SetIconImageDisableState
       0x140690BB0: IsDisabled
@@ -9464,8 +9464,10 @@ classes:
       0x140690CC0: SetIsMacro
       0x140690D00: SetIsGlamoured
       0x140690D40: SetIsRecipe
+      0x140690D80: SetIsCommandPanelShortcut
       0x140690DC0: SetComboLevel
-      0x140690E20: SetUnk8192
+      0x140690E20: SetUnk14
+      0x140690E50: CopyIndicators
       0x140690F50: SetOuterResNode
       0x140690FB0: ctor
       0x1406919E0: UpdateIndicator

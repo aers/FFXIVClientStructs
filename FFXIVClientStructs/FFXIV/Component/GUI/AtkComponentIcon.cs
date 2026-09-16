@@ -82,11 +82,17 @@ public unsafe partial struct AtkComponentIcon : ICreatable<AtkComponentIcon> {
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 8D 45")]
     public partial void SetIsRecipe(bool enabled);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 45 ?? B2")]
+    public partial void SetIsCommandPanelShortcut(bool enabled);
+
     [MemberFunction("44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1")]
     public partial void SetComboLevel(bool enable, byte level = 0);
 
-    // [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 80 88")]
-    // private partial void SetUnk8192(bool enabled);
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 47 ?? 8D 45")]
+    public partial void SetComboBorder(bool enable, bool forced = false);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 7E ?? BA ?? ?? ?? ?? 48 8B BF")]
+    private partial void SetUnk14(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 FF C6")]
     public partial void SetOuterResNode(AtkResNode* node);
@@ -127,9 +133,10 @@ public enum IconComponentFlags : uint {
     IsMacro = 1 << 6,
     IsGlamoured = 1 << 7,
     IsRecipe = 1 << 8,
-    IsIconLoading = 1 << 9,
-    IsBeingDragged = 1 << 10,
-    Unk2048 = 1 << 11, // overrides DrawOrderIndex with one from RaptureAtkUnitManager
-    IsDisabled = 1 << 12, // for example due to casting or having a window open that disables actions
-    Unk8192 = 1 << 13,
+    IsCommandPanelShortcut = 1 << 9,
+    IsIconLoading = 1 << 10,
+    IsBeingDragged = 1 << 11,
+    HasComboBorder = 1 << 12,
+    IsDisabled = 1 << 13, // for example due to casting or having a window open that disables actions
+    Unk14 = 1 << 14,
 }
