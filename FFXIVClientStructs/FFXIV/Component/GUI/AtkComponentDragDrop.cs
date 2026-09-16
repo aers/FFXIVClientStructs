@@ -44,8 +44,14 @@ public unsafe partial struct AtkComponentDragDrop : ICreatable<AtkComponentDragD
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7E ?? 48 85 FF 75")]
     public partial void DetachTooltip();
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8D 46")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8D 46"), Obsolete("Renamed to SetIconEnabled for clarity")]
     public partial void SetIconDisableState(bool enabled); // the parameter is inverted against the name: true sets MultiplyRed/Green/Blue to 100, false sets them to 50
+
+    /// <remarks>
+    /// When set to <see langword="true"/>, MultiplyRed/Green/Blue are set to 100; <see langword="false"/> sets them to 50.
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8D 46")]
+    public partial void SetIconEnabled(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 18 66 C7 44 24")]
     public partial void BeginDragDrop(AtkMouseData* mouseData);

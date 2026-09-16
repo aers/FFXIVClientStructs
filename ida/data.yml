@@ -9837,7 +9837,7 @@ classes:
       0x1406D0B10: GetQuantityText
       0x1406D0B40: SetQuantityText
       0x1406D0BC0: SetQuantity
-      0x1406D0CE0: SetIconDisableState
+      0x1406D0CE0: SetIconEnabled
       0x1406D0FD0: AttachTooltip
       0x1406D1040: DetachTooltip
       0x1406D1120: PlayAnimation
