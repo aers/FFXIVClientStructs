@@ -1101,6 +1101,12 @@ classes:
       - ea: 0x1422D7E78
     vfuncs:
       0: dtor
+      1: Initialize
+      2: Update
+      3: Deinitialize
+      4: GetData
+      5: ResetState
+      6: SetAcquired
   Client::System::Input::MouseDevice:
     vtbls:
       - ea: 0x1422D7EC0

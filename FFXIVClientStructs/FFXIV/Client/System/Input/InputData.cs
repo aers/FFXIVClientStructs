@@ -130,7 +130,7 @@ public partial struct CursorInputData {
     [FieldOffset(0x20)] public int DeltaX; // Delta since last frame
     [FieldOffset(0x24)] public int DeltaY; // Delta since last frame
 
-    // At least this is what it seems to be
+    /// <remarks> The definition of this field overlaps with whether the cursor device was acquired using IDirectInputDevice8::Acquire/Unacquire. </remarks>
     [FieldOffset(0x2C)] public bool IsGameWindowFocused;
 
     [MemberFunction("84 D2 74 0F 33 C0")]

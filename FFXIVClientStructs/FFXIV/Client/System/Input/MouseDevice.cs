@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
+
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 // Client::System::Input::MouseDevice
@@ -10,7 +12,11 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 [GenerateInterop]
 [Inherits<MouseDeviceInterface>, Inherits<RepeatCounter>, Inherits<InputDevice>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public partial struct MouseDevice {
+public unsafe partial struct MouseDevice {
+    [FieldOffset(0x30), CExporterTypeForce("LPDIRECTINPUTDEVICE8A", true)] public void* DirectInputDevice;
+    [FieldOffset(0x38)] public bool IsAcquired;
+    [FieldOffset(0x40)] public GameWindow* GameWindow;
+
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 49 8B D8 C6 05")]
     public static partial void ProcessMouseInputMessage(nint hWnd, uint uMsg, nint wParam);
 
