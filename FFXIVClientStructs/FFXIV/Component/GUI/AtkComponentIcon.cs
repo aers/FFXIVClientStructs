@@ -95,10 +95,14 @@ public unsafe partial struct AtkComponentIcon : ICreatable<AtkComponentIcon> {
     public partial void UpdateIndicator();
 
     [MemberFunction("48 83 EC 38 41 83 F9 02")]
-    public partial void SetIndicatorVisuals(byte labelId, ByteColor color, uint index);
+    public partial void SetIndicatorVisuals(ushort labelId, ByteColor color, uint index);
+
+    [Obsolete("Use SetIndicatorVisuals with ushort labelId", true)]
+    public void SetIndicatorVisuals(byte labelId, ByteColor color, uint index)
+        => SetIndicatorVisuals((ushort)labelId, color, index);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe struct IndicatorNodesEntry {
+    public struct IndicatorNodesEntry {
         [FieldOffset(0x00)] public AtkResNode* ResNode;
         [FieldOffset(0x08)] public AtkImageNode* ImageNode;
     }
