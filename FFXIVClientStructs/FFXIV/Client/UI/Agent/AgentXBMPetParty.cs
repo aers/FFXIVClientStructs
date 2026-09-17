@@ -68,8 +68,7 @@ public unsafe partial struct AgentXBMPetParty {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 41 ?? 48 8B F1 FF C8")]
     public partial bool HasUnlockedPets();
 
-    /// <remarks>0 - current health</remarks>
-    [MemberFunction("CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 41 55 41 57 48 83 EC 28 4C 8B E9 E8")]
+    [MemberFunction("41 55 41 57 48 83 EC 28 4C 8B E9 E8")]
     public partial uint GetPetHealth(uint petId, byte index);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 59 ?? 0F B6 EA")]
