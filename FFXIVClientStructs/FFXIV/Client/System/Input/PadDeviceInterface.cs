@@ -21,6 +21,9 @@ public unsafe partial struct PadDeviceInterface {
     [VirtualFunction(3)]
     public partial void Deinitialize();
 
+    [VirtualFunction(4)]
+    public partial int GetNumberOfDevices();
+
     [VirtualFunction(5)]
     public partial GamepadInputData* GetData();
 

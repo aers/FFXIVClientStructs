@@ -1088,7 +1088,8 @@ classes:
       1: Initialize
       2: Update
       3: Deinitialize
-      4: GetData
+      4: GetNumberOfDevices
+      5: GetData
       13: SetVibration
   Client::System::Input::PadDevice:
     vtbls:
