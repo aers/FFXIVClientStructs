@@ -11,7 +11,7 @@ public partial struct RaptureHotbarModule {
     public unsafe partial struct HotbarUIIntermediate {
         [FieldOffset(0x00)] public CStringPointer PopUpHelpText; // ref to Client::UI::Misc::RaptureHotbarModule::HotbarSlot.PopUpHelp.StringPtr
         [FieldOffset(0x08)] public CStringPointer CostText; // ref to Client::UI::Misc::RaptureHotbarModule::HotbarSlot.CostText
-        [FieldOffset(0x10), Obsolete("Use SlotType")] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
+        [FieldOffset(0x10), Obsolete($"Use {nameof(SlotType)}")] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
         [FieldOffset(0x10)] public ActionBarSlotNumberArray.SlotType SlotType; // to NumberArray idx slotBase + 0
         [FieldOffset(0x14)] public uint ActionId; // to NumberArray idx slotBase + 3
         [FieldOffset(0x18)] public uint IconId; // to NumberArray idx slotBase + 4

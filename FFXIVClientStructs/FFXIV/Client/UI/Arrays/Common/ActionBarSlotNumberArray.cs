@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays.Common;
 public partial struct ActionBarSlotNumberArray {
     [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray17<int> _data;
 
-    [FieldOffset(0 * 4), Obsolete("Use ActionTypeEnum")] public int ActionType;
+    [FieldOffset(0 * 4), Obsolete($"Use {nameof(Type)}")] public int ActionType;
     [FieldOffset(0 * 4)] public SlotType Type;
 
     [FieldOffset(1 * 4)] public int CostType;
