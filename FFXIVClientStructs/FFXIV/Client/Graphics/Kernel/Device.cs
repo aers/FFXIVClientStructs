@@ -40,7 +40,7 @@ public unsafe partial struct Device {
     /// </summary>
     [FieldOffset(0xA8)] public int FrameRateLimitPreset;
 
-    [FieldOffset(0xAE)] public short FrameRateLimitPresent;
+    [FieldOffset(0xAC)] public short FrameRateLimitPresent;
 
     /// <summary>
     /// It will be copied to <see cref="FrameRateLimitPresent"/>
