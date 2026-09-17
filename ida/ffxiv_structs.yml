@@ -319,11 +319,12 @@ enums:
     "IsMacro": 64
     "IsGlamoured": 128
     "IsRecipe": 256
-    "IsIconLoading": 512
-    "IsBeingDragged": 1024
-    "Unk2048": 2048
-    "IsDisabled": 4096
-    "Unk8192": 8192
+    "IsCommandPanelShortcut": 512
+    "IsIconLoading": 1024
+    "IsBeingDragged": 2048
+    "HasComboBorder": 4096
+    "IsDisabled": 8192
+    "Unk14": 16384
 - type: Component::GUI::InputCallbackResult
   name: InputCallbackResult
   underlying: int
@@ -3674,6 +3675,17 @@ enums:
   values:
     "RightStick": 0
     "LeftStick": 1
+- type: Client::System::Input::KeyStateFlags
+  name: KeyStateFlags
+  underlying: int
+  namespace: Client.System.Input
+  flags: True
+  values:
+    "None": 0
+    "Down": 1
+    "Pressed": 2
+    "Released": 4
+    "Held": 8
 - type: Client::System::Input::GamepadButtonsFlags
   name: GamepadButtonsFlags
   underlying: unsigned __int16
@@ -3697,17 +3709,6 @@ enums:
     "R3": 8192
     "Select": 16384
     "Start": 32768
-- type: Client::System::Input::KeyStateFlags
-  name: KeyStateFlags
-  underlying: int
-  namespace: Client.System.Input
-  flags: True
-  values:
-    "None": 0
-    "Down": 1
-    "Pressed": 2
-    "Released": 4
-    "Held": 8
 - type: Client::System::Framework::ClientPlatform
   name: ClientPlatform
   underlying: int
@@ -19187,7 +19188,63 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::KeyboardDeviceInterface*
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::KeyboardInputData*
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: char
+      name: clearDown
+  - name: SendKey
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: Client::System::Input::SeVirtualKey
+      name: key
+  - name: GetIsKeyboardConnected
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
   member_functions: []
 - type: Client::System::Input::KeyboardInputData
   name: KeyboardInputData
@@ -19219,6 +19276,52 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::System::Input::MouseDeviceInterface*
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::CursorInputData*
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: SetAcquired
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+    - type: char
+      name: acquired
   member_functions: []
 - type: Client::System::Input::PadDeviceInterface
   name: PadDeviceInterface
@@ -19227,6 +19330,42 @@ structs:
   size: 24
   fields: []
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::PadDeviceInterface*
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+    - type: Client::System::Configuration::SystemConfig*
+      name: systemConfig
+    - type: char
+      name: a3
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: GetData
+    offset: 40
+    return_type: Client::System::Input::GamepadInputData*
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
   - name: SetVibration
     offset: 104
     return_type: void
@@ -19237,14 +19376,8 @@ structs:
       name: rightMotorSpeed
     - type: int
       name: leftMotorSpeed
-  - name: Poll
-    offset: 16
-    return_type: __int64
-    parameters:
-    - type: Client::System::Input::PadDeviceInterface*
-      name: this
-  - name: dtor
-    offset: 0
+  - name: GetData
+    offset: 32
   member_functions: []
 - type: Client::System::Input::SoftKeyboardDeviceInterface
   name: SoftKeyboardDeviceInterface
@@ -47329,6 +47462,14 @@ structs:
       name: priority
     - type: Client::System::Framework::Task*
       name: task
+  - signature: E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9 74 ?? F3 0F 10 8B
+    return_type: void
+    name: ExecuteAllTasks
+    parameters:
+    - type: Client::System::Framework::TaskManager*
+      name: this
+    - type: float*
+      name: dt
   static_members:
   - signature: 4C 89 35 ?? ?? ?? ?? ?? ?? ?? 39 0D
     relative_follow_offsets:
@@ -93153,10 +93294,86 @@ structs:
     name: RepeatCounter
     offset: 8
     base: true
+  - type: Client::System::Framework::GameWindow*
+    name: GameWindow
+    offset: 40
+  - type: char
+    name: IsKeyboardConnected
+    offset: 48
+  - type: Client::System::Threading::Thread*
+    name: UnkThread
+    offset: 56
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::System::Input::KeyboardDeviceInterface*
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::KeyboardInputData*
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: char
+      name: clearDown
+  - name: SendKey
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: Client::System::Input::SeVirtualKey
+      name: key
+  - name: GetIsKeyboardConnected
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
   member_functions: []
+  static_member_functions:
+  - signature: 48 89 5C 24 ?? 55 56 57 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 4D 8B F9
+    return_type: void
+    name: ProcessKeyboardInputMessage
+    parameters:
+    - type: __int64
+      name: hWnd
+    - type: unsigned int
+      name: uMsg
+    - type: __int64
+      name: wParam
+    - type: __int64
+      name: lParam
 - type: Client::System::Input::MouseDevice
   name: MouseDevice
   namespace: Client.System.Input
@@ -93171,9 +93388,76 @@ structs:
     name: RepeatCounter
     offset: 8
     base: true
-  virtual_functions: []
+  - type: LPDIRECTINPUTDEVICE8A
+    name: DirectInputDevice
+    offset: 48
+  - type: char
+    name: IsAcquired
+    offset: 56
+  - type: Client::System::Framework::GameWindow*
+    name: GameWindow
+    offset: 64
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::MouseDeviceInterface*
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::CursorInputData*
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: SetAcquired
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+    - type: char
+      name: acquired
   member_functions: []
   static_member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 49 8B D8 C6 05
+    return_type: void
+    name: ProcessMouseInputMessage
+    parameters:
+    - type: __int64
+      name: hWnd
+    - type: unsigned int
+      name: uMsg
+    - type: __int64
+      name: wParam
   - signature: 89 0D ?? ?? ?? ?? 89 15 ?? ?? ?? ?? C6 05 ?? ?? ?? ?? 01 C3
     return_type: void
     name: ScheduleCursorMove
@@ -108606,8 +108890,47 @@ structs:
   - type: Client::System::Input::GamepadInputData
     name: GamepadInputData
     offset: 120
+  - type: Client::System::Configuration::SystemConfig*
+    name: SystemConfig
+    offset: 1080
   vtable_size: 216
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::PadDeviceInterface*
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: Client::System::Configuration::SystemConfig*
+      name: systemConfig
+    - type: char
+      name: a3
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: GetData
+    offset: 40
+    return_type: Client::System::Input::GamepadInputData*
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
   - name: SetVibration
     offset: 104
     return_type: void
@@ -108618,12 +108941,6 @@ structs:
       name: rightMotorSpeed
     - type: int
       name: leftMotorSpeed
-  - name: Poll
-    offset: 16
-    return_type: __int64
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
   member_functions: []
 - type: Client::System::Scheduler::Instance::LayoutSharedGroupObject
   name: LayoutSharedGroupObject
@@ -136032,12 +136349,12 @@ structs:
       name: this
   - signature: E8 ?? ?? ?? ?? EB ?? 41 8D 46
     return_type: void
-    name: SetIconDisableState
+    name: SetIconEnabled
     parameters:
     - type: Component::GUI::AtkComponentDragDrop*
       name: this
     - type: char
-      name: disabled
+      name: enabled
   - signature: E8 ?? ?? ?? ?? EB 18 66 C7 44 24
     return_type: void
     name: BeginDragDrop
@@ -149297,6 +149614,14 @@ structs:
       name: this
     - type: char
       name: enabled
+  - signature: E8 ?? ?? ?? ?? 8D 45 ?? B2
+    return_type: void
+    name: SetIsCommandPanelShortcut
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: char
+      name: enabled
   - signature: 44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1
     return_type: void
     name: SetComboLevel
@@ -149307,6 +149632,24 @@ structs:
       name: enable
     - type: byte
       name: level
+  - signature: E8 ?? ?? ?? ?? 4D 8B 47 ?? 8D 45
+    return_type: void
+    name: SetComboBorder
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: char
+      name: enable
+    - type: char
+      name: forced
+  - signature: E8 ?? ?? ?? ?? 48 89 7E ?? BA ?? ?? ?? ?? 48 8B BF
+    return_type: void
+    name: SetUnk14
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: char
+      name: enabled
   - signature: E8 ?? ?? ?? ?? 45 33 F6 FF C6
     return_type: void
     name: SetOuterResNode
@@ -149327,7 +149670,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentIcon*
       name: this
-    - type: byte
+    - type: unsigned __int16
       name: labelId
     - type: Client::Graphics::ByteColor
       name: color
