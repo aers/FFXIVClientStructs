@@ -44,7 +44,7 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x150)] private bool Unk150;
     [FieldOffset(0x154)] public uint PetListSource; // 0 = CandidatePets, 1 = SelectedPetIds, 2 = pets unlocked in XBMNoteModule
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C0 8B D7 48 8B C8 E8 ?? ?? ?? ?? 48 8B CB")]
+    [MemberFunction("40 53 56 57 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 01 49 8B F0 8B FA")]
     public partial void SetMode(uint mode, int* param);
 
     [MemberFunction("40 56 57 48 83 EC ?? 83 79 ?? ?? 8B F2")]
@@ -59,7 +59,7 @@ public unsafe partial struct AgentXBMPetParty {
     [MemberFunction("40 53 48 83 EC ?? 83 79 ?? ?? 48 8D 51 ?? 48 8B D9 76 ?? E8 ?? ?? ?? ?? C7 83")]
     public partial void ClosePetListAddon();
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8D 42 ?? 8B FA 48 8B D9 83 F8 ?? 77")]
+    [MemberFunction("48 85 C0 0F 84 17 01 00 00 E8 ?? ?? ?? ?? BA D0 03 0B 00 48 8B C8")]
     public partial uint GetSyncedRank(uint petId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8D 42 ?? 8B FA 48 8B D9 83 F8 ?? 0F 87")]
@@ -68,7 +68,7 @@ public unsafe partial struct AgentXBMPetParty {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 41 ?? 48 8B F1 FF C8")]
     public partial bool HasUnlockedPets();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 43 ?? 48 83 C3 ?? 48 3B DF 75 ?? 48 8B 5D")]
+    [MemberFunction("CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 41 55 41 57 48 83 EC 28 4C 8B E9 E8")]
     public partial uint GetPetStatValue(uint petId, byte statIndex);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 59 ?? 0F B6 EA")]
@@ -80,7 +80,7 @@ public unsafe partial struct AgentXBMPetParty {
     [MemberFunction("48 83 EC ?? 83 79 ?? ?? 75 ?? 8B 49")]
     public partial uint GetTeamSize();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 FF 89 7B")]
+    [MemberFunction("48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC 90 00 00 00 48 8B 05")]
     public partial void ApplyPetSelection();
 }
 
