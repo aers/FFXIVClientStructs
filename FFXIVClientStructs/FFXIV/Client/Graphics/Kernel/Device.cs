@@ -28,8 +28,27 @@ public unsafe partial struct Device {
     [FieldOffset(0x9C)] public int ColorFilter;
     [FieldOffset(0xA0)] public float ColorFilterRange;
 
-    [FieldOffset(0xA8)] public bool IsFrameRateLimited;
+    [FieldOffset(0xA4)] public int FrameRateLimitPresetPresent;
+
+    /// <summary>
+    /// 0 - Disable FPS limitation
+    /// 1 - Use Sleep() + one V-Sync wait period to limit FPS
+    /// 2 - Use two V-Sync wait periods to limit FPS (half the monitor's refresh rate)
+    /// 3 - Use three V-Sync wait periods to limit FPS (one-third of the monitor's refresh rate)
+    /// 4 - Use four V-Sync wait periods to limit FPS (one-quarter of the monitor's refresh rate)
+    /// It will be copied to <see cref="FrameRateLimitPresetPresent"/>
+    /// </summary>
+    [FieldOffset(0xA8)] public int FrameRateLimitPreset;
+
+    [FieldOffset(0xAE)] public short FrameRateLimitPresent;
+
+    /// <summary>
+    /// It will be copied to <see cref="FrameRateLimitPresent"/>
+    /// </summary>
     [FieldOffset(0xAE)] public short FrameRateLimit;
+
+    [Obsolete("Use FrameRateLimitPreset instead.")]
+    [FieldOffset(0xA8)] public bool IsFrameRateLimited;
 
     // offset 0x758 contains render commands buffer
     // /// <summary>
