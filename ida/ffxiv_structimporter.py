@@ -1876,13 +1876,7 @@ if api is None:
                             or dt.getLength() < offset + ft.getLength()
                         ):
                             print(
-                                "Field {0} (off=0x{1:X} size=0x{2:X}) not within Struct {3} (size=0x{4:X})".format(
-                                    field.name,
-                                    offset,
-                                    ft.getLength(),
-                                    dt.getDataTypePath(),
-                                    dt.getLength(),
-                                )
+                                f"Field {field.name} (off=0x{offset:X} size=0x{ft.getLength():X}) not within Struct {dt.getDataTypePath()} (size=0x{dt.getLength():X})"
                             )
                             break
 
@@ -1928,7 +1922,7 @@ if api is None:
                             dtm.getPointer(func_def),
                             -1,
                             func.name,
-                            "vf{0}".format(func.offset / 8),
+                            f"vf{int(func.offset / 8)}",
                         )
                     else:
                         dtc = vt_type.getComponentAt(func.offset)
@@ -1938,7 +1932,7 @@ if api is None:
                                 void_ptr,
                                 -1,
                                 func.name,
-                                "vf{0}".format(func.offset / 8),
+                                f"vf{int(func.offset / 8)}",
                             )
                         else:
                             vt_type.insertAtOffset(
@@ -1946,7 +1940,7 @@ if api is None:
                                 void_ptr,
                                 -1,
                                 func.name,
-                                "vf{0}".format(func.offset / 8),
+                                f"vf{int(func.offset / 8)}",
                             )
                 
                 if struct.vtable_size:
@@ -1958,7 +1952,7 @@ if api is None:
                     dtc = vt_type.getComponentContaining(offset)
                     if not dtc or Undefined.isUndefined(dtc.getDataType()):
                         vt_type.replaceAtOffset(
-                            offset, void_ptr, -1, "vf{0}".format(offset / 8), None
+                            offset, void_ptr, -1, f"vf{int(offset / 8)}", None
                         )
 
             def finalise_struct(self, struct):
@@ -2019,7 +2013,7 @@ if api is None:
                     return
                 if not member_func.parameters:
                     return
-                func_name = "{0}.{1}".format(struct.type, member_func.name)
+                func_name = f"{struct.type}.{member_func.name}"
                 func = self.get_func_by_name(func_name)
                 if not func:
                     return
@@ -2042,7 +2036,7 @@ if api is None:
                 # type: (DefinedStructVFunc, DefinedStruct) -> None
                 if monitor.isCancelled():
                     return
-                func_name = "{0}.{1}".format(struct.type, virt_func.name)
+                func_name = f"{struct.type}.{virt_func.name}"
                 func = self.get_func_by_name(func_name)
                 if not func:
                     return
