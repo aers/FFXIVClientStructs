@@ -136,7 +136,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// <see langword="true" /> when renaming the gearset was successful, <see langword="false" /> when the gearset is invalid or the given name is empty.
     /// </returns>
     /// <remarks> Use <see cref="AgentGearSet.RenameGearset(int, CStringPointer)"/> to rename and send an update to the GearSetList addon </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8 E8 ?? ?? ?? ?? 40 84 FF")]
     public partial bool RenameGearset(int gearsetId, Utf8String* newGearsetName);
 
     /// <summary>
