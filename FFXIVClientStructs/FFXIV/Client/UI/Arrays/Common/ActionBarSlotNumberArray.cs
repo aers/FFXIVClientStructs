@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.UI.Misc;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays.Common;
 
 [GenerateInterop]
@@ -8,7 +6,7 @@ public partial struct ActionBarSlotNumberArray {
     [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray17<int> _data;
 
     [FieldOffset(0 * 4), Obsolete("Use ActionTypeEnum")] public int ActionType;
-    [FieldOffset(0 * 4)] public RaptureHotbarModule.SlotActionType ActionTypeEnum; // maybe rename to ActionType, once ActionType can be removed?
+    [FieldOffset(0 * 4)] public SlotType Type;
 
     [FieldOffset(1 * 4)] public int CostType;
     [FieldOffset(3 * 4)] public uint ActionId;
@@ -35,4 +33,44 @@ public partial struct ActionBarSlotNumberArray {
     [FieldOffset(14 * 4)] public bool Glows;
     [FieldOffset(15 * 4)] public bool Pulses;
     [FieldOffset(16 * 4)] public bool InRange;
+
+    // These values tend to shift up when new forays or jobs are added.
+    public enum SlotType {
+        None = 0,
+
+        Macro = 47,
+        Action = 48,
+        Emote = 49,
+        Item = 50,
+        InventoryItem = 51,
+        EventItem = 52,
+        KeyItem = 53,
+        Crystal = 54,
+        Marker = 55,
+        CraftAction = 56,
+        GeneralAction = 57,
+        BuddyAction = 58,
+        MainCommand = 59,
+        Companion = 60,
+        GearSet = 61,
+        PetAction = 62,
+        Mount = 63,
+        FieldMarker = 64,
+        Recipe = 65,
+        ChocoboRaceAbility = 66,
+        ChocoboRaceItem = 67,
+        Unknown23 = 68,
+        ExtraCommand = 69,
+        PvPQuickChat = 70,
+        PvPCombo = 71,
+        BgcArmyAction = 72,
+        Unknown28 = 73,
+        PerformanceInstrument = 74,
+        McGuffin = 75,
+        Ornament = 76,
+        LostFindsItem = 77,
+        Glasses = 78,
+        QuickPanel = 79,
+        Unknown36 = 80, // XBM related (AgentXBMContentsMainHUD), maybe BeastMasterAction
+    }
 }
