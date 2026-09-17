@@ -16499,8 +16499,8 @@ classes:
       0x140AA4D80: IsPetOverSyncedRank
       0x140AA4EE0: OpenPetListAddon
       0x140AA50B0: SetMode
-      0x140AA69F0: UpdatePetStatValues
-      0x140AA6960: GetPetStatValue
+      0x140AA69F0: GetPetHealth
+      0x140AA6960: UpdatePetsHealth
       0x140AA9FB0: IsPetAvailable
       0x140AAA3A0: GetTeamSize
       0x140AAA520: ClosePetListAddon
