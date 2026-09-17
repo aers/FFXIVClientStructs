@@ -66,13 +66,13 @@ public unsafe partial struct PadDevice {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct AxisCalibration {
-        [FieldOffset(0x00)] public Calibration Position;
-        [FieldOffset(0x0C)] public Calibration Velocity;
-        [FieldOffset(0x18)] public Calibration Acceleration;
-        [FieldOffset(0x24)] public Calibration Force;
+        [FieldOffset(0x00)] public AxisAspectCalibration Position;
+        [FieldOffset(0x0C)] public AxisAspectCalibration Velocity;
+        [FieldOffset(0x18)] public AxisAspectCalibration Acceleration;
+        [FieldOffset(0x24)] public AxisAspectCalibration Force;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
-        public struct Calibration {
+        public struct AxisAspectCalibration {
             [FieldOffset(0x00)] public float Offset;
             [FieldOffset(0x08)] public float Sensitivity;
         }
