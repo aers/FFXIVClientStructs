@@ -82,10 +82,10 @@ public unsafe partial struct PadDevice {
     [StructLayout(LayoutKind.Explicit, Size = 0x174)]
     public partial struct PadSettings {
         [FieldOffset(0x00)] public uint PadGuid;
-        [FieldOffset(0x04)] public Guid InstanceGuid;
-        [FieldOffset(0x14)] public Guid ProductGuid;
-        [FieldOffset(0x24)] public Guid ActiveInstanceGuid;
-        [FieldOffset(0x34)] public Guid ActiveProductGuid;
+        [FieldOffset(0x04), CExporterTypeForce("GUID", true)] public Guid InstanceGuid;
+        [FieldOffset(0x14), CExporterTypeForce("GUID", true)] public Guid ProductGuid;
+        [FieldOffset(0x24), CExporterTypeForce("GUID", true)] public Guid ActiveInstanceGuid;
+        [FieldOffset(0x34), CExporterTypeForce("GUID", true)] public Guid ActiveProductGuid;
         [FieldOffset(0x44)] public uint AlwaysInput;
         [FieldOffset(0x48)] public float DeadArea;
         [FieldOffset(0x4C), FixedSizeArray] internal FixedSizeArray24<byte> _alias; // device-specific input mapping
