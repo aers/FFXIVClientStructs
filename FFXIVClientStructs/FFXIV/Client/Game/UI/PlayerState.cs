@@ -83,7 +83,7 @@ public unsafe partial struct PlayerState {
     /// 1 = PlayStation Plus<br/>
     /// 2 = Nintendo Switch Online
     /// </remarks>
-    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray2<ushort> _freeAetheryteIds;
+    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray3<ushort> _freeAetheryteIds;
     [FieldOffset(0x2E0), Obsolete("Use FreeAetheryteIds[0]")] public ushort FreeAetheryteId;
     [FieldOffset(0x2E2), Obsolete("Use FreeAetheryteIds[1]")] public ushort FreeAetherytePSPlus;
     [FieldOffset(0x2E4), Obsolete("Use FreeAetheryteIds[2]")] public ushort FreeAetheryteNSO;
