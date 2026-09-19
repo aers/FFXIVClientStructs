@@ -1090,7 +1090,18 @@ classes:
       3: Deinitialize
       4: GetNumberOfDevices
       5: GetData
+      6: SetActiveDevice
+      7: GetActiveDeviceIndex
+      8: ApplyForceFeedback
+      9: ApplySettings
+      10: LoadInputMapping
+      11: ResetInputMapping
+      12: ClearPadData
       13: SetVibration
+      14: SetPovInputDisabled
+      15: GetPovInputDisabled
+      25: IsDualSense
+      26: IsDualShock4
   Client::System::Input::PadDevice:
     vtbls:
       - ea: 0x142126A98
@@ -1101,6 +1112,18 @@ classes:
         base: Client::System::Input::RepeatCounter
     funcs:
       0x1400C3240: ctor
+      0x1400C9D50: ReadPadSettings
+      0x14047EAD0: ToggleForceFeedback
+      0x1400C7BF0: ResetAllInputMappings
+      0x1400C7C80: ResetInputMappingForDevice
+      0x1400C7E90: ApplyAllInputMappings
+      0x1400C7F20: ApplyInputMappingForDevice
+      0x14047F850: GetPlayStationController
+  Client::System::Input::PadDevice::GamepadDevice:
+    funcs:
+      0x14047F8E0: IsPlayStationController
+      0x1400C9270: IsDualShock4
+      0x1400C9220: IsDualSense
   Client::System::Input::MouseDeviceInterface:
     vtbls:
       - ea: 0x1422D6C98
@@ -4093,6 +4116,8 @@ classes:
       0x140099230: SetConfigOption
       0x140099770: RegisterChangeEvent
       0x1400997E0: UnregisterChangeEvent
+      0x14009AB80: ParseGUID
+      0x14009AD30: FormatGUID
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x142125CC0
