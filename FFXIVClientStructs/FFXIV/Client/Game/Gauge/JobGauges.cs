@@ -32,17 +32,21 @@ public partial struct ScholarGauge {
 [Inherits<JobGauge>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public partial struct AstrologianGauge {
-    [FieldOffset(0x08)] public short Cards;
+    [BitField<AstrologianCard>(nameof(Card1), 0, 4)]
+    [BitField<AstrologianCard>(nameof(Card2), 4, 4)]
+    [BitField<AstrologianCard>(nameof(Card3), 8, 4)]
+    [BitField<AstrologianCard>(nameof(CurrentArcana), 12, 4)]
+    [FieldOffset(0x08)] private ushort CardsBacking; // TODO: remove this line, so that the BitFields are on the Cards field below
+    [FieldOffset(0x08)] public short Cards; // TODO: use ushort
     [FieldOffset(0x0A)] public AstrologianDraw CurrentDraw;
 
-    public AstrologianCard[] CurrentCards => new[]
-    {
-        (AstrologianCard)(0xF & (this.Cards >> 0)),
-        (AstrologianCard)(0xF & (this.Cards >> 4)),
-        (AstrologianCard)(0xF & (this.Cards >> 8)),
-    };
-
-    public AstrologianCard CurrentArcana => (AstrologianCard)(0xF & (this.Cards >> 12));
+    [Obsolete("Use Card1, Card2, Card3")]
+    public AstrologianCard[] CurrentCards =>
+    [
+        (AstrologianCard)(0xF & (Cards >> 0)),
+        (AstrologianCard)(0xF & (Cards >> 4)),
+        (AstrologianCard)(0xF & (Cards >> 8)),
+    ];
 }
 
 [GenerateInterop]
@@ -69,27 +73,29 @@ public partial struct BlackMageGauge {
     [FieldOffset(0x0A)] public sbyte ElementStance;
     [FieldOffset(0x0B)] public byte UmbralHearts;
     [FieldOffset(0x0C)] public byte PolyglotStacks;
-    [FieldOffset(0x0D)] public EnochianFlags EnochianFlags;
+    [BitField<bool>(nameof(EnochianActive), 0, 1)]
+    [BitField<bool>(nameof(ParadoxActive), 1, 1)]
+    [BitField<int>(nameof(AstralSoulStacks), 2, 3)]
+    [FieldOffset(0x0D)] private byte BitFieldD;
+    [FieldOffset(0x0D), Obsolete("Use EnochianActive, ParadoxActive, AstralSoulStacks")] public EnochianFlags EnochianFlags;
 
     public int UmbralStacks => ElementStance >= 0 ? 0 : ElementStance * -1;
     public int AstralStacks => ElementStance <= 0 ? 0 : ElementStance;
-    public bool EnochianActive => EnochianFlags.HasFlag(EnochianFlags.Enochian);
-    public bool ParadoxActive => EnochianFlags.HasFlag(EnochianFlags.Paradox);
-    public int AstralSoulStacks => ((int)EnochianFlags >> 2) & 7;
 }
 
 [GenerateInterop]
 [Inherits<JobGauge>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public partial struct SummonerGauge {
-    [FieldOffset(0x8)] public ushort SummonTimer; // millis counting down
-    [FieldOffset(0xA)] public ushort AttunementTimer; // millis counting down
-    [FieldOffset(0xC)] public byte ReturnSummon; // Pet sheet (23=Carbuncle, the only option now)
-    [FieldOffset(0xD)] public byte ReturnSummonGlam; // PetMirage sheet
-    [FieldOffset(0xE)] public byte Attunement; // Count of "Attunement cost" resource
-    [FieldOffset(0xF)] public AetherFlags AetherFlags; // bitfield
-    public byte AttunementCount => (byte)(Attunement >> 2);//new in 7.01,Attunement may be Bit Field
-    public byte AttunementType => (byte)(Attunement & 0x3);//new in 7.01
+    [FieldOffset(0x08)] public ushort SummonTimer; // millis counting down
+    [FieldOffset(0x0A)] public ushort AttunementTimer; // millis counting down
+    [FieldOffset(0x0C)] public byte ReturnSummon; // Pet sheet (23=Carbuncle, the only option now)
+    [FieldOffset(0x0D)] public byte ReturnSummonGlam; // PetMirage sheet
+    [BitField<byte>(nameof(AttunementType), 0, 2)]
+    [BitField<byte>(nameof(AttunementCount), 2, 6)]
+    [FieldOffset(0x0E)] private byte BitFieldE; // Count of "Attunement cost" resource
+    [FieldOffset(0x0E), Obsolete("Use AttunementCount, AttunementType")] public byte Attunement;
+    [FieldOffset(0x0F)] public AetherFlags AetherFlags; // bitfield
 }
 
 [GenerateInterop]
@@ -110,11 +116,11 @@ public partial struct PictomancerGauge {
     [FieldOffset(0x0B)] public CanvasFlags CanvasFlags;
     [FieldOffset(0x0C)] public CreatureFlags CreatureFlags;
 
-    public bool CreatureMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Pom) || CanvasFlags.HasFlag(CanvasFlags.Wing) || CanvasFlags.HasFlag(CanvasFlags.Claw) || CanvasFlags.HasFlag(CanvasFlags.Maw);
-    public bool WeaponMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Weapon);
-    public bool LandscapeMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Landscape);
-    public bool MooglePortraitReady => CreatureFlags.HasFlag(CreatureFlags.MooglePortait);
-    public bool MadeenPortraitReady => CreatureFlags.HasFlag(CreatureFlags.MadeenPortrait);
+    public bool CreatureMotifDrawn => (CanvasFlags & CanvasFlags.Pom) != 0 || (CanvasFlags & CanvasFlags.Wing) != 0 || (CanvasFlags & CanvasFlags.Claw) != 0 || (CanvasFlags & CanvasFlags.Maw) != 0;
+    public bool WeaponMotifDrawn => (CanvasFlags & CanvasFlags.Weapon) != 0;
+    public bool LandscapeMotifDrawn => (CanvasFlags & CanvasFlags.Landscape) != 0;
+    public bool MooglePortraitReady => (CreatureFlags & CreatureFlags.MooglePortait) != 0;
+    public bool MadeenPortraitReady => (CreatureFlags & CreatureFlags.MadeenPortrait) != 0;
 }
 
 #endregion
@@ -168,15 +174,15 @@ public partial struct MonkGauge {
     [FieldOffset(0x09)] public BeastChakraType BeastChakra1; // OpoOpoChakra = 1, RaptorChakra = 2, CoeurlChakra = 3 (only one value)
     [FieldOffset(0x0A)] public BeastChakraType BeastChakra2; // OpoOpoChakra = 1, RaptorChakra = 2, CoeurlChakra = 3 (only one value)
     [FieldOffset(0x0B)] public BeastChakraType BeastChakra3; // OpoOpoChakra = 1, RaptorChakra = 2, CoeurlChakra = 3 (only one value)
+    [BitField<int>(nameof(OpoOpoStacks), 0, 2)]
+    [BitField<int>(nameof(RaptorStacks), 2, 2)]
+    [BitField<int>(nameof(CoeurlStacks), 4, 2)]
     [FieldOffset(0x0C)] public byte BeastChakraStacks;
     [FieldOffset(0x0D)] public NadiFlags Nadi; // LunarNadi = 1, SolarNadi = 2, Both = 3
     [FieldOffset(0x0E)] public ushort BlitzTimeRemaining; // 20 seconds
 
+    [Obsolete("Use BeastChakra1, BeastChakra2, BeastChakra3")]
     public BeastChakraType[] BeastChakra => [BeastChakra1, BeastChakra2, BeastChakra3];
-
-    public int OpoOpoStacks => BeastChakraStacks & 3;
-    public int RaptorStacks => (BeastChakraStacks >> 2) & 3;
-    public int CoeurlStacks => (BeastChakraStacks >> 4) & 3;
 }
 
 [GenerateInterop]
@@ -229,8 +235,8 @@ public partial struct ViperGauge {
     [FieldOffset(0x0A)] public byte SerpentOffering;
     [FieldOffset(0x0B)] public DreadCombo DreadCombo;
     [FieldOffset(0x0E)] public ushort ReawakenedTimer;
+    [BitField<SerpentCombo>(nameof(SerpentCombo), 2, 6)]
     [FieldOffset(0x10)] public byte SerpentComboState;
-    public SerpentCombo SerpentCombo => (SerpentCombo)(SerpentComboState >> 2);
 }
 
 #endregion
