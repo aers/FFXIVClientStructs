@@ -27,28 +27,22 @@ public unsafe partial struct Device {
     [FieldOffset(0x98)] public float GammaCorrection;
     [FieldOffset(0x9C)] public int ColorFilter;
     [FieldOffset(0xA0)] public float ColorFilterRange;
-
-    [FieldOffset(0xA4)] public int FrameRateLimitPresetPresent;
-
+    [FieldOffset(0xA4)] public uint FrameRateLimitPresetPresent;
     /// <summary>
-    /// 0 - Disable FPS limitation
-    /// 1 - Use Sleep() + one V-Sync wait period to limit FPS
-    /// 2 - Use two V-Sync wait periods to limit FPS (half the monitor's refresh rate)
-    /// 3 - Use three V-Sync wait periods to limit FPS (one-third of the monitor's refresh rate)
-    /// 4 - Use four V-Sync wait periods to limit FPS (one-quarter of the monitor's refresh rate)
-    /// It will be copied to <see cref="FrameRateLimitPresetPresent"/>
+    /// 0 - Disable FPS limitation<br/>
+    /// 1 - Use Sleep() + one V-Sync wait period to limit FPS<br/>
+    /// 2 - Use two V-Sync wait periods to limit FPS (half the monitor's refresh rate)<br/>
+    /// 3 - Use three V-Sync wait periods to limit FPS (one-third of the monitor's refresh rate)<br/>
+    /// 4 - Use four V-Sync wait periods to limit FPS (one-quarter of the monitor's refresh rate)<br/>
+    /// Will be copied to <see cref="FrameRateLimitPresetPresent"/>.
     /// </summary>
-    [FieldOffset(0xA8)] public int FrameRateLimitPreset;
-
-    [FieldOffset(0xAC)] public short FrameRateLimitPresent;
-
+    [FieldOffset(0xA8)] public uint FrameRateLimitPreset;
+    [FieldOffset(0xA8), Obsolete("Use FrameRateLimitPreset instead.")] public bool IsFrameRateLimited;
+    [FieldOffset(0xAC)] public ushort FrameRateLimitPresent;
     /// <summary>
-    /// It will be copied to <see cref="FrameRateLimitPresent"/>
+    /// Will be copied to <see cref="FrameRateLimitPresent"/>.
     /// </summary>
-    [FieldOffset(0xAE)] public short FrameRateLimit;
-
-    [Obsolete("Use FrameRateLimitPreset instead.")]
-    [FieldOffset(0xA8)] public bool IsFrameRateLimited;
+    [FieldOffset(0xAE)] public ushort FrameRateLimit;
 
     // offset 0x758 contains render commands buffer
     // /// <summary>
