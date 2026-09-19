@@ -40,5 +40,5 @@ public unsafe partial struct AgentItemDetail {
 
     // half of these args are dependent on what DetailKind is set to
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 89 9C 24 ?? ?? ?? ?? 4C 89 A4 24")]
-    public partial byte OnItemHovered(InventoryItem** outItem, InventoryType* container, short* slot, uint itemId, uint rowIdOrIndex, InventoryItem* item);
+    public partial bool OnItemHovered(InventoryItem** outItem, InventoryType* container, short* slot, uint itemId, uint rowIdOrIndex, InventoryItem* item);
 }
