@@ -16547,12 +16547,32 @@ classes:
     funcs:
       0x140AAB660: ctor
       0x140AAC1E0: HandlePetListPacket
+      0x140AAC230: IsPetUnlocked
+      0x140AAC270: IsPetMirageUnlocked
+      0x140AAC2B0: GetPetMirage
+      0x140AAC430: ToggleActivePetAddon
+      0x140AAC740: OpenAddon
+      0x140AAD3D0: HandleAddonCallback
+      0x140AAD9E0: RebuildPetList
   Client::UI::Agent::AgentXBMPetParty:
     vtbls:
       - ea: 0x1421A3D20
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AA3680: ctor
+      0x140AA45F0: TogglePet
+      0x140AA49C0: ApplyPetSelection
+      0x140AA4CF0: GetSyncedRank
+      0x140AA4D80: IsPetOverSyncedRank
+      0x140AA4EE0: OpenPetListAddon
+      0x140AA50B0: SetMode
+      0x140AA69F0: GetPetHealth
+      0x140AA6960: UpdatePetsHealth
+      0x140AA9FB0: IsPetAvailable
+      0x140AAA3A0: GetTeamSize
+      0x140AAA520: ClosePetListAddon
+      0x140AAAAA0: ConfirmSelection
+      0x140AAAF20: HasUnlockedPets
   Client::UI::Agent::AgentXBMItemDetail:
     vtbls:
       - ea: 0x1421A3DA0
@@ -16577,6 +16597,16 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A9F940: ctor
+      0x140AA0740: StartBattle
+      0x140AA0B00: SetMode
+      0x140AA10A0: ClearAddonState
+      0x140AA11F0: FillStageListValues
+      0x140AA1B00: ResetEntries
+      0x140AA1BE0: BuildEntriesFromContent
+      0x140AA1E40: BuildEntriesFromDirector
+      0x140AA23A0: GetSelectedEntryIndex
+      0x140AA25F0: GetStageEventText
+      0x140AA2DA0: FillStageDetailValues
   Client::UI::Agent::AgentXBMStageList:
     vtbls:
       - ea: 0x1421A3F90
