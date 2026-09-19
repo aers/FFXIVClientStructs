@@ -82,6 +82,14 @@ public partial struct RaptureHotbarModule {
         /// <seealso cref="ApparentActionId"/>
         [FieldOffset(0xC9)] public HotbarSlotType ApparentSlotType;
 
+        /// <summary>
+        /// Uses general drag-and-drop types for <see cref="HotbarUIIntermediate.Type"/> instead of action-bar types.
+        /// </summary>
+        /// <remarks>
+        /// Set for Quick Panel slots. For example, Action uses 7 instead of 48.
+        /// </remarks>
+        [FieldOffset(0xCA)] public bool UsesGeneralDragDropType;
+
         /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 6, 7.
         ///
         /// Controls the color of the displayed cost when 0xCB is 1 or 2:
