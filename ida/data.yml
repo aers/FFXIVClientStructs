@@ -5785,6 +5785,9 @@ classes:
       1: Cleanup # this is called by DecRef when there are no refs left, before the dtor is called
       2: IncRef
       3: DecRef
+  Client::Graphics::Environment::EnvColorFilterParameters:
+    funcs:
+      0x1400669A0: BuildMatrix
   Client::Graphics::Environment::EnvSoundState:
     vtbls:
       - ea: 0x14211CC78
@@ -7226,6 +7229,7 @@ classes:
         base: Client::Graphics::Singleton
     funcs:
         0x14025DC80: ctor
+        0x14025E580: Update
         0x1400CE830: SetShadowVisibilityType
   Client::Graphics::Render::Camera:
     vtbls:
@@ -7467,6 +7471,8 @@ classes:
       0x1402B7B90: Terminate
       0x1402B8EC0: CreateCamera
       0x1402B93C0: CreateModel
+      0x1402BA1F0: Render
+      0x1402BABD0: RenderView
   Client::Graphics::Render::ShadowManager:
     instances:
       - ea: 0x1428F6480
@@ -7510,6 +7516,13 @@ classes:
       0x1402D4EE0: ctor
       0x1402D52E0: Initialize
       0x14026AA10: GetCharaViewTexture
+  Client::Graphics::PostEffect::PostEffectPart:
+    vtbls:
+      - ea: 0x14215AE90
+    vfuncs:
+      3: Resolve
+      4: IsValid
+      5: Draw
   Client::Graphics::PostEffect::PostEffectChain:
     vtbls:
       - ea: 0x14215AEC0
@@ -7533,6 +7546,28 @@ classes:
         base: Client::Graphics::Kernel::Notifier
     funcs:
       0x1403521D0: ctor
+      0x14035C240: SetEffectEnabled
+      0x14035C330: Prepare
+      0x14035E430: Submit
+  Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend:
+    vtbls:
+      - ea: 0x14215B160
+        base: Client::Graphics::PostEffect::PostEffectPart
+    funcs:
+      0x14036D0E0: UpdateLut
+  Client::Graphics::PostEffect::PostEffectResources:
+    instances:
+      - ea: 0x142A8F048
+        pointer: true
+  Client::Graphics::PostEffect::PostEffectDepthOfFieldCocLut:
+    vtbls:
+      - ea: 0x14215B0D0
+        base: Client::Graphics::PostEffect::PostEffectPart
+    vfuncs:
+      3: Resolve
+      5: Draw
+    funcs:
+      0x14036B460: UpdateParameters
   Client::Graphics::JobSystem<Apricot::Engine::Core>:
     instances:
       - ea: 0x142A8FD80

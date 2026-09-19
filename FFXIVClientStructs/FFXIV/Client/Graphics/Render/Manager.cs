@@ -33,7 +33,16 @@ public unsafe partial struct Manager {
 
     // [FieldOffset(0x381C0)] private ReflectionStruct Reflection; // 0x140?
 
+    [FieldOffset(0x3834C)] public uint InitializationFlags;
     [FieldOffset(0x38358)] public bool Is3DRenderingDisabled;
+
+    [MemberFunction("40 53 57 41 54 41 55 48 83 EC ?? 65 48 8B 04 25")]
+    public partial void Render();
+
+    [MemberFunction("E8 ?? ?? ?? ?? FF C5 49 83 C6 ?? BA")]
+    public partial void RenderView(bool enabled, RenderViews viewIndex);
+
+    public Camera* MainCamera => Views[(int)RenderViews.Main].SubViews[12].Camera;
 
     // TODO check and update for 7.2
     public enum RenderViews : uint {
@@ -68,7 +77,8 @@ public unsafe partial struct Manager {
         OffscreenRenderer2,
         OffscreenRenderer3,
         Main,
-        Unused // unused in retail
+        Presentation,
+        Offscreen = 85
     }
 
     public enum RenderSubViews : uint {

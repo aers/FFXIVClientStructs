@@ -44,8 +44,8 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0xF8)] internal Texture* UnkF8; // null?
     [FieldOffset(0x100)] internal Texture* Unk100; // Looks the same as Unk68
     [FieldOffset(0x108)] internal Texture* Unk108;
-    [FieldOffset(0x110)] internal Texture* Unk110; // Opaque passes, seems to combine screen-space coordinates and depth somehow?
-    [FieldOffset(0x118)] internal Texture* Unk118; // Equivalent of Unk110 for semitransparent passes
+    [FieldOffset(0x110)] public Texture* ViewPosition;
+    [FieldOffset(0x118)] internal Texture* Unk118; // Equivalent of ViewPosition for semitransparent passes
     [FieldOffset(0x120)] internal Texture* Unk120;
     [FieldOffset(0x128)] internal Texture* Unk128;
     [FieldOffset(0x130)] internal Texture* Unk130;
@@ -80,7 +80,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x340)] internal Texture* Unk340; // null?
     [FieldOffset(0x348)] internal Texture* Unk348; // null?
     [FieldOffset(0x350)] internal Texture* Unk350; // null?
-    [FieldOffset(0x358)] internal Texture* Unk358; // Equivalent of Unk110 for CharaView
+    [FieldOffset(0x358)] internal Texture* Unk358; // Equivalent of ViewPosition for CharaView
     [FieldOffset(0x360)] internal Texture* Unk360; // Depth/Stencil for CharaView?
     [FieldOffset(0x368)] internal Texture* Unk368; // Looks the same as Unk360
     // Only used when gamma != default or color filtering is enabled.
@@ -110,6 +110,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x440)] public uint FarShadowMap_Width;
     [FieldOffset(0x444)] public uint FarShadowMap_Height;
     [FieldOffset(0x448)] private bool UnkBool_1;
+    [FieldOffset(0x45E)] public byte DepthOfFieldSourceIndex;
 
     [FieldOffset(0x4A8)] internal Texture* Unk4A8; // Looks the same as Unk68
     [FieldOffset(0x4B0)] internal Texture* Unk4B0; // Looks the same as Unk68
@@ -147,8 +148,8 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x5E0)] internal Texture* Unk5E0;
     [FieldOffset(0x5E8)] internal Texture* Unk5E8;
     [FieldOffset(0x5F0)] internal Texture* Unk5F0;
-    [FieldOffset(0x5F8)] internal Texture* Unk5F8;
-    [FieldOffset(0x600)] internal Texture* Unk600;
+    [FieldOffset(0x5F8)] public Texture* DepthHistory0;
+    [FieldOffset(0x600)] public Texture* DepthHistory1;
     [FieldOffset(0x608)] internal Texture* Unk608; // GTAO stuff?
     [FieldOffset(0x610)] internal Texture* Unk610; // GTAO stuff?
     [FieldOffset(0x618)] internal Texture* Unk618; // GTAO stuff?
@@ -158,13 +159,13 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x638)] internal Texture* Unk638;
     [FieldOffset(0x640)] internal Texture* Unk640;
     [FieldOffset(0x648)] internal Texture* Unk648;
-    [FieldOffset(0x650)] internal Texture* Unk650;
+    [FieldOffset(0x650)] public Texture* Velocity;
     [FieldOffset(0x658)] internal Texture* Unk658;
     [FieldOffset(0x660)] internal Texture* Unk660;
-    [FieldOffset(0x668)] internal Texture* Unk668;
-    [FieldOffset(0x670)] internal Texture* Unk670;
-    [FieldOffset(0x678)] internal Texture* Unk678;
-    [FieldOffset(0x680)] internal Texture* Unk680;
+    [FieldOffset(0x668)] public Texture* DepthOfFieldSource0;
+    [FieldOffset(0x670)] public Texture* DepthOfFieldSource1;
+    [FieldOffset(0x678)] public Texture* DepthOfFieldCocLut;
+    [FieldOffset(0x680)] public Texture* DepthOfFieldEffectMask;
     [FieldOffset(0x688)] internal Texture* Unk688;
     [FieldOffset(0x690)] internal Texture* Unk690;
     [FieldOffset(0x698)] internal Texture* Unk698;
@@ -174,6 +175,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x710)] public float FrametimeAverage;
 
     [FieldOffset(0x720)] public float GraphicsRezoScale;
+    [FieldOffset(0x724)] public float GraphicsRezoScaleY;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 8B D0 FF D3")]
     public partial Texture* GetCharaViewTexture(uint clientObjectIndex);

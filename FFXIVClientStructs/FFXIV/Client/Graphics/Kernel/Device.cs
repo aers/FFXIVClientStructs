@@ -21,6 +21,7 @@ public unsafe partial struct Device {
     [FieldOffset(0x48)] public CallbackManager* OnResizeCreate;
     [FieldOffset(0x70)] public SwapChain* SwapChain;
     [FieldOffset(0x7A)] public byte RequestResolutionChange;
+    [FieldOffset(0x7C)] public byte LastResolutionChangeRequest;
     [FieldOffset(0x8C)] public uint Width;
     [FieldOffset(0x90)] public uint Height;
     [FieldOffset(0x94)] public float AspectRatio;
