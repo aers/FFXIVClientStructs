@@ -36,7 +36,7 @@ public partial struct AstrologianGauge {
     [BitField<AstrologianCard>(nameof(Card2), 4, 4)]
     [BitField<AstrologianCard>(nameof(Card3), 8, 4)]
     [BitField<AstrologianCard>(nameof(CurrentArcana), 12, 4)]
-    [FieldOffset(0x08)] private ushort CardsBacking; // TODO: remove this line, so that the BitFields are on the Cards field below
+    [FieldOffset(0x08), CExporterIgnore] private ushort CardsBacking; // TODO: remove this line, so that the BitFields are on the Cards field below
     [FieldOffset(0x08)] public short Cards; // TODO: use ushort
     [FieldOffset(0x0A)] public AstrologianDraw CurrentDraw;
 
