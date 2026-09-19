@@ -42,7 +42,7 @@ public unsafe partial struct Device {
     /// <summary>
     /// Will be copied to <see cref="FrameRateLimitPresent"/>.
     /// </summary>
-    [FieldOffset(0xAE)] public ushort FrameRateLimit;
+    [FieldOffset(0xAE)] public short FrameRateLimit; // TODO: ushort
 
     // offset 0x758 contains render commands buffer
     // /// <summary>
