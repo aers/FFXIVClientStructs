@@ -4093,6 +4093,10 @@ classes:
     vtbls:
       - ea: 0x142197E68
         base: Client::Game::Gauge::JobGauge
+  Client::Game::Gauge::BeastmasterGauge:
+    vtbls:
+      - ea: 0x142197ED8
+        base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigEntry:
     funcs:
       0x140097150: SetEmpty
