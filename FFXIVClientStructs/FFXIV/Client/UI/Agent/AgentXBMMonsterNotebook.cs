@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -53,20 +54,20 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     public partial void HandlePetListPacket(nint packet);
 
     /// <summary>Opens AddonXBMMonsterNotebook, reloading XBMPetParamGrow when <paramref name="source"/> is not 0.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 40 0F B6 D7 48 8B CE")]
+    [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 89 81")]
     public partial void OpenAddon(int source);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 83 79 ?? ?? 48 8B D9 76 ?? 48 8D 51 ?? E8 ?? ?? ?? ?? C6 43")]
     public partial void ToggleActivePetAddon();
 
-    [MemberFunction("48 83 EC ?? 0F 10 02 C6 41")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 40 0F B6 D6 48 8B CF E8 ?? ?? ?? ?? 84 C0")]
     public partial bool IsPetUnlocked(uint petId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 40 0F B6 D6 48 8B CF E8 ?? ?? ?? ?? 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 ?? 0F B6 F8")]
     public partial bool IsPetMirageUnlocked(uint petId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 0F B6 DA 48 8B 49 ?? 48 8B 01")]
-    public partial uint GetPetMirage(uint petId);
+    public partial XBMPetMirage GetPetMirage(byte petId);
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 ?? ?? 48 8B 03")]
     public partial void RebuildPetList();
