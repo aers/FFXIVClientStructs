@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Enums;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -36,4 +37,8 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x1B0)] public Utf8String String2;
     [FieldOffset(0x21A)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show
     [FieldOffset(0x21E)] public byte Flag3; // If set to zero, avoids an early return in addon->Show()
+
+    // half of these args are dependent on what DetailKind is set to
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 89 9C 24 ?? ?? ?? ?? 4C 89 A4 24")]
+    public partial bool OnItemHovered(InventoryItem** outItem, InventoryType* container, short* slot, uint itemId, uint rowIdOrIndex, InventoryItem* item);
 }
