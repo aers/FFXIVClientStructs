@@ -3294,6 +3294,7 @@ classes:
       0x140BE6710: UpdateTrackedStatus
       0x140BE6760: InvalidateTrackedUnlocks
       0x140BE82E0: IsTraitUnlocked # (this, traitId, outOptTraitRow, allowPVP, level)
+      0x140BE47E0: GetCurrentClassJobMaxLevel
   Client::Game::UI::Revive:
     instances:
       - ea: 0x142ACD280
