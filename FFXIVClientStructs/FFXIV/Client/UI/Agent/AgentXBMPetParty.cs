@@ -16,7 +16,7 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x30)] public ExcelSheetWaiter* PetParamGrowSheetWaiter;
     [FieldOffset(0x38)] public uint PetParamGrowLoadState; // 0 = not requested, 1 = loading, 2 = all main rows read
     [FieldOffset(0x3C)] public uint PetParamGrowRowId; // main row that is currently read, 0 to 50
-    [FieldOffset(0x40)] public StdVector<XBMPetParamGrowValues> PetParamGrowValues;
+    [FieldOffset(0x40)] public StdVector<ParamGrowValues> PetParamGrowValues;
 
     [FieldOffset(0x58)] public bool RequestRefresh;
     [FieldOffset(0x59)] public bool RequestSecondaryRefresh;
@@ -31,9 +31,9 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x70)] public uint ContentId; // XBMContent row
     [FieldOffset(0x74)] private bool Unk74; // recomputes and pushes the pet data in Update when set
 
-    [FieldOffset(0x78)] public StdVector<XBMPetPartyEntry> SelectedPets;
-    [FieldOffset(0x90)] public StdVector<XBMPetPartyEntry> SelectedPetIds;
-    [FieldOffset(0xA8)] public StdVector<XBMPetPartyEntry> CandidatePets;
+    [FieldOffset(0x78)] public StdVector<PartyEntry> SelectedPets;
+    [FieldOffset(0x90)] public StdVector<PartyEntry> SelectedPetIds;
+    [FieldOffset(0xA8)] public StdVector<PartyEntry> CandidatePets;
 
     [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray15<uint> _petCurrentHealth;
     [FieldOffset(0xFC), FixedSizeArray] internal FixedSizeArray15<uint> _petMaxHealth;
@@ -83,21 +83,21 @@ public unsafe partial struct AgentXBMPetParty {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 FF 89 7B")]
     public partial void ApplyPetSelection();
-}
+    
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
+    public struct ParamGrowValues {
+        [FieldOffset(0x00)] public uint ParamGrowId;
+        [FieldOffset(0x04)] public uint Rank; // subrow id, XBMPet.ParamGrow subrow is Rank - 1
+        [FieldOffset(0x08)] public uint Strength;
+        [FieldOffset(0x0C)] public uint PhysicalResistance;
+        [FieldOffset(0x10)] public uint Constitution;
+        [FieldOffset(0x14)] public uint Intelligence;
+        [FieldOffset(0x18)] public uint MagicalResistance;
+    }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1C)]
-public struct XBMPetParamGrowValues {
-    [FieldOffset(0x00)] public uint ParamGrowId;
-    [FieldOffset(0x04)] public uint Rank; // subrow id, XBMPet.ParamGrow subrow is Rank - 1
-    [FieldOffset(0x08)] public uint Strength;
-    [FieldOffset(0x0C)] public uint PhysicalResistance;
-    [FieldOffset(0x10)] public uint Constitution;
-    [FieldOffset(0x14)] public uint Intelligence;
-    [FieldOffset(0x18)] public uint MagicalResistance;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct XBMPetPartyEntry {
-    [FieldOffset(0x00)] public uint PetId; // XBMPet row
-    [FieldOffset(0x04)] public uint SortKey;
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public struct PartyEntry {
+        [FieldOffset(0x00)] public uint PetId; // XBMPet row
+        [FieldOffset(0x04)] public uint SortKey;
+    }
 }

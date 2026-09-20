@@ -28,7 +28,7 @@ public unsafe partial struct AgentXBMStageDetailList {
     [FieldOffset(0x4D)] private bool Unk4D;
     [FieldOffset(0x4E)] private bool Unk4E; // set when the addon is closed from the challenge flow
 
-    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray1000<XBMStageDetailEntry> _entries;
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray1000<StageDetailEntry> _entries;
     [FieldOffset(0x27150), FixedSizeArray] internal FixedSizeArray100<byte> _entrySelection;
 
     [MemberFunction("40 53 56 57 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 01 49 8B F0 8B FA")]
@@ -60,24 +60,24 @@ public unsafe partial struct AgentXBMStageDetailList {
 
     [MemberFunction("40 53 48 83 EC ?? 83 79 ?? ?? 48 8B D9 75 ?? 80 49")]
     public partial void StartBattle();
-}
-
-// Type 3 rows are the battle details of the preceding stage row.
-[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public unsafe struct XBMStageDetailEntry {
-    [FieldOffset(0x00)] public uint EntryType; // 0 = stage, 1 = stage with battles, 2 = stage without battles, 3 = battle detail
-    [FieldOffset(0x04)] public uint StageEventId; // XBMContentStageEvent subrow, also used as the index into _entrySelection
-    [FieldOffset(0x08)] public uint EventType; // XBMContentStageEvent.Unknown1
-    [FieldOffset(0x0C)] public uint StageEventType; // XBMContentStageEvent.Unknown0
-    [FieldOffset(0x10)] public Utf8String Name;
-    [FieldOffset(0x78)] public uint Icon; // XBMBattleDetail.Unknown1
-    [FieldOffset(0x7C)] public uint BattleDetailId; // XBMBattleDetail row
-    [FieldOffset(0x80)] public uint BattleDetailIndex; // XBMBattleDetail subrow
-    [FieldOffset(0x84)] public uint ElementId; // XBMElement row
-    [FieldOffset(0x88)] public uint Strength; // XBMBattleDetail.Unknown5
-    [FieldOffset(0x8C)] public uint PhysicalResistance; // XBMBattleDetail.Unknown7
-    [FieldOffset(0x90)] public uint Constitution; // XBMBattleDetail.Unknown9
-    [FieldOffset(0x94)] public uint Intelligence; // XBMBattleDetail.Unknown6
-    [FieldOffset(0x98)] public uint MagicalResistance; // XBMBattleDetail.Unknown8
-    [FieldOffset(0x9C)] public uint ResistId; // BNpcResist row
+    
+    // Type 3 rows are the battle details of the preceding stage row.
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+    public unsafe struct StageDetailEntry {
+        [FieldOffset(0x00)] public uint EntryType; // 0 = stage, 1 = stage with battles, 2 = stage without battles, 3 = battle detail
+        [FieldOffset(0x04)] public uint StageEventId; // XBMContentStageEvent subrow, also used as the index into _entrySelection
+        [FieldOffset(0x08)] public uint EventType; // XBMContentStageEvent.Unknown1
+        [FieldOffset(0x0C)] public uint StageEventType; // XBMContentStageEvent.Unknown0
+        [FieldOffset(0x10)] public Utf8String Name;
+        [FieldOffset(0x78)] public uint Icon; // XBMBattleDetail.Unknown1
+        [FieldOffset(0x7C)] public uint BattleDetailId; // XBMBattleDetail row
+        [FieldOffset(0x80)] public uint BattleDetailIndex; // XBMBattleDetail subrow
+        [FieldOffset(0x84)] public uint ElementId; // XBMElement row
+        [FieldOffset(0x88)] public uint Strength; // XBMBattleDetail.Unknown5
+        [FieldOffset(0x8C)] public uint PhysicalResistance; // XBMBattleDetail.Unknown7
+        [FieldOffset(0x90)] public uint Constitution; // XBMBattleDetail.Unknown9
+        [FieldOffset(0x94)] public uint Intelligence; // XBMBattleDetail.Unknown6
+        [FieldOffset(0x98)] public uint MagicalResistance; // XBMBattleDetail.Unknown8
+        [FieldOffset(0x9C)] public uint ResistId; // BNpcResist row
+    }
 }

@@ -17,7 +17,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x30)] public ExcelSheetWaiter* PetParamGrowSheetWaiter;
     [FieldOffset(0x38)] public uint PetParamGrowLoadState; // 0 = not requested, 1 = loading, 2 = all main rows read
     [FieldOffset(0x3C)] public uint PetParamGrowRowId; // currently read, 0 to 50
-    [FieldOffset(0x40)] public StdVector<XBMPetParamGrowValues> PetParamGrowValues;
+    [FieldOffset(0x40)] public StdVector<AgentXBMPetParty.ParamGrowValues> PetParamGrowValues;
 
     [FieldOffset(0x58)] public uint Source; // 0 = opened from the notebook itself, 1 = opened from the pet party window
     [FieldOffset(0x5C)] public bool IsNewPetListReceived;
