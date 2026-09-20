@@ -88,7 +88,7 @@ public unsafe partial struct Framework {
     /// Unlike <see cref="FrameDeltaTimeOverride"/>, this applies only to the next frame, and is reset to zero on next tick.
     /// </summary>
     [FieldOffset(0x17D4)] public float NextFrameDeltaTimeOverride;
-    [FieldOffset(0x17D8)] public bool WindowInactive;
+    [FieldOffset(0x17D8)] public bool WindowInactive; // TODO: this should be (u)int
 
     [FieldOffset(0x17E4)] public int UseSqPack;
     [FieldOffset(0x17E8)] public int DataPathType;
