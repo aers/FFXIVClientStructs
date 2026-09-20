@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -40,7 +41,7 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x138)] private uint Unk138; // value passed by SetMode(3)
     [FieldOffset(0x13C)] private uint Unk13C; // value passed by SetMode(5)
     [FieldOffset(0x140)] public uint SelectedPetIndex;
-    [FieldOffset(0x148)] public nint SoundEffect; // "sound/battle/etc/SE_Bt_Etc_XBM_03_BuyFeed.scd"
+    [FieldOffset(0x148)] public SoundResourceHandle* BuyFeedSoundEffect; // "sound/battle/etc/SE_Bt_Etc_XBM_03_BuyFeed.scd"
     [FieldOffset(0x150)] private bool Unk150;
     [FieldOffset(0x154)] public uint PetListSource; // 0 = CandidatePets, 1 = SelectedPetIds, 2 = pets unlocked in XBMNoteModule
 
