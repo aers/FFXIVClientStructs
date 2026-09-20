@@ -74,10 +74,10 @@ public unsafe struct XBMStageDetailEntry {
     [FieldOffset(0x7C)] public uint BattleDetailId; // XBMBattleDetail row
     [FieldOffset(0x80)] public uint BattleDetailIndex; // XBMBattleDetail subrow
     [FieldOffset(0x84)] public uint ElementId; // XBMElement row
-    [FieldOffset(0x88)] public uint Unknown5; // XBMBattleDetail.Unknown5
-    [FieldOffset(0x8C)] public uint Unknown7; // XBMBattleDetail.Unknown7
-    [FieldOffset(0x90)] public uint Unknown9; // XBMBattleDetail.Unknown9
-    [FieldOffset(0x94)] public uint Unknown6; // XBMBattleDetail.Unknown6
-    [FieldOffset(0x98)] public uint Unknown8; // XBMBattleDetail.Unknown8
+    [FieldOffset(0x88)] public uint Strength; // XBMBattleDetail.Unknown5
+    [FieldOffset(0x8C)] public uint PhysicalResistance; // XBMBattleDetail.Unknown7
+    [FieldOffset(0x90)] public uint Constitution; // XBMBattleDetail.Unknown9
+    [FieldOffset(0x94)] public uint Intelligence; // XBMBattleDetail.Unknown6
+    [FieldOffset(0x98)] public uint MagicalResistance; // XBMBattleDetail.Unknown8
     [FieldOffset(0x9C)] public uint ResistId; // BNpcResist row
 }
