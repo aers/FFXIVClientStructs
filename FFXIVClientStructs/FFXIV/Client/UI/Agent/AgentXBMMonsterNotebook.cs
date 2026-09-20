@@ -34,7 +34,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     
     [FieldOffset(0x7E)] private ushort Unk7E;
 
-    [FieldOffset(0x80)] public StdVector<XBMMonsterNotebookEntry> PetList; // 25 entries per page
+    [FieldOffset(0x80)] public StdVector<NotebookEntry> Entries; // 25 entries per page
     [FieldOffset(0x98)] public uint PageIndex;
     [FieldOffset(0x9C)] public uint SelectedPetId; // XBMPet row
     [FieldOffset(0xA0)] public uint HoveredPetId;
@@ -71,10 +71,10 @@ public unsafe partial struct AgentXBMMonsterNotebook {
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 ?? ?? 48 8B 03")]
     public partial void RebuildPetList();
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct XBMMonsterNotebookEntry {
-    [FieldOffset(0x00)] public uint PetId; // XBMPet row
-    [FieldOffset(0x04)] public uint SortKey;
+    
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public struct NotebookEntry {
+        [FieldOffset(0x00)] public uint PetId; // XBMPet row
+        [FieldOffset(0x04)] public uint SortKey;
+    }
 }
