@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.Interop.XInput;
+namespace FFXIVClientStructs.Interop.XInput;
 
 /// <summary>
 /// XINPUT_GAMEPAD

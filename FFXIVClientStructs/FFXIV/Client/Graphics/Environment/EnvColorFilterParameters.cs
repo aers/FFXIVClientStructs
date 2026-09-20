@@ -21,7 +21,7 @@ public unsafe partial struct EnvColorFilterParameters {
     [FieldOffset(0x50)] public float DarkRange;
     [FieldOffset(0x54)] public float DarkTintStrength;
     [FieldOffset(0x58)] public float Strength;
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B 46 78 48 8D 55 ?? F3 0F 10 45 ??")]
     public partial void BuildMatrix(Matrix4x4* output);
 }
