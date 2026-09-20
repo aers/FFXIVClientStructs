@@ -2685,6 +2685,47 @@ enums:
     "Show": 4096
     "Toggled": 16
     "AsCheckbox": 256
+- type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate::SlotType
+  name: SlotType
+  underlying: int
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "None": 0
+    "Macro": 47
+    "Action": 48
+    "Emote": 49
+    "Item": 50
+    "InventoryItem": 51
+    "EventItem": 52
+    "KeyItem": 53
+    "Crystal": 54
+    "Marker": 55
+    "CraftAction": 56
+    "GeneralAction": 57
+    "BuddyAction": 58
+    "MainCommand": 59
+    "Companion": 60
+    "GearSet": 61
+    "PetAction": 62
+    "Mount": 63
+    "FieldMarker": 64
+    "Recipe": 65
+    "ChocoboRaceAbility": 66
+    "ChocoboRaceItem": 67
+    "Unknown23": 68
+    "ExtraCommand": 69
+    "PvPQuickChat": 70
+    "PvPCombo": 71
+    "BgcArmyAction": 72
+    "Unknown28": 73
+    "PerformanceInstrument": 74
+    "McGuffin": 75
+    "Ornament": 76
+    "LostFindsItem": 77
+    "Glasses": 78
+    "QuickPanel": 79
+    "Unknown36": 80
 - type: Client::UI::Agent::AgentGameEvent
   name: AgentGameEvent
   underlying: int
@@ -4198,6 +4239,45 @@ enums:
     "Linear": 0
     "Quadratic": 1
     "Cubic": 2
+- type: Client::Graphics::Render::Manager::RenderViews
+  name: RenderViews
+  underlying: unsigned int
+  namespace: Client.Graphics.Render
+  flags: False
+  values:
+    "OmniShadow0": 0
+    "OmniShadow1": 1
+    "OmniShadow2": 2
+    "OmniShadow3": 3
+    "OmniShadow4": 4
+    "OmniShadow5": 5
+    "OmniShadow6": 6
+    "OmniShadow7": 7
+    "OmniShadow8": 8
+    "OmniShadow9": 9
+    "OmniShadow10": 10
+    "OmniShadow11": 11
+    "OmniShadow12": 12
+    "OmniShadow13": 13
+    "OmniShadow14": 14
+    "OmniShadow15": 15
+    "OmniShadow16": 16
+    "OmniShadow17": 17
+    "OmniShadow18": 18
+    "OmniShadow19": 19
+    "OmniShadow20": 20
+    "OmniShadow21": 21
+    "OmniShadow22": 22
+    "OmniShadow23": 23
+    "Environment": 24
+    "View25": 25
+    "OffscreenRenderer0": 26
+    "OffscreenRenderer1": 27
+    "OffscreenRenderer2": 28
+    "OffscreenRenderer3": 29
+    "Main": 30
+    "Presentation": 31
+    "Offscreen": 85
 - type: Client::Graphics::Render::WeatherRenderer::WeatherType
   name: WeatherType
   underlying: int
@@ -4208,6 +4288,33 @@ enums:
     "Snow": 1
     "Dust": 2
     "Unk3": 3
+- type: Client::Graphics::PostEffect::PostEffectFlags
+  name: PostEffectFlags
+  underlying: unsigned int
+  namespace: Client.Graphics.PostEffect
+  flags: True
+  values:
+    "None": 0
+    "AmbientOcclusion": 1
+    "AntiAliasing": 2
+    "Sky": 4
+    "Moon": 8
+    "SkyHaloRainbow": 16
+    "Halo": 32
+    "Fog": 64
+    "DepthOfField": 128
+    "CameraMotionBlur": 256
+    "RadialBlur": 512
+    "Glare": 1024
+    "GodRays": 2048
+    "LensFlare": 4096
+    "ToneMapping": 8192
+    "Saturate": 16384
+    "ColorFilterDarkBlend": 32768
+    "Vignetting": 65536
+    "ToneAdjust": 131072
+    "ChromaticAberration": 262144
+    "LetterBox": 524288
 - type: Client::Graphics::Physics::BoneSimulator::PhysicsGroup
   name: PhysicsGroup
   underlying: unsigned int
@@ -5356,15 +5463,6 @@ enums:
   values:
     "Astral": 0
     "Umbral": 1
-- type: Client::Game::Gauge::EnochianFlags
-  name: EnochianFlags
-  underlying: byte
-  namespace: Client.Game.Gauge
-  flags: True
-  values:
-    "None": 0
-    "Enochian": 1
-    "Paradox": 2
 - type: Client::Game::Gauge::AetherFlags
   name: AetherFlags
   underlying: byte
@@ -5470,6 +5568,18 @@ enums:
     "PitOfDread": 4
     "HuntersDen": 5
     "SwiftskinsDen": 6
+- type: Client::Game::Gauge::SerpentCombo
+  name: SerpentCombo
+  underlying: byte
+  namespace: Client.Game.Gauge
+  flags: False
+  values:
+    "DeathRattle": 1
+    "LastLash": 2
+    "FirstLegacy": 3
+    "SecondLegacy": 4
+    "ThirdLegacy": 5
+    "FourthLegacy": 6
 - type: Client::Game::Fate::FateState
   name: FateState
   underlying: byte
@@ -7196,6 +7306,15 @@ enums:
     "Unknown20": 32
     "Unknown40": 64
     "Unknown80": 128
+- type: Client::UI::SalvageDialogCheckboxType
+  name: SalvageDialogCheckboxType
+  underlying: byte
+  namespace: Client.UI
+  flags: False
+  values:
+    "BulkDesynth": 0
+    "Warning": 1
+    "GuaranteeNQ": 2
 - type: Client::UI::SpearfishSize
   name: SpearfishSize
   underlying: __int8
@@ -10525,148 +10644,6 @@ structs:
     name: Phase
     offset: 2
   member_functions: []
-- type: Client::Game::Gauge::AstrologianGauge
-  name: AstrologianGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 48
-  fields:
-  - type: __int16
-    name: Cards
-    offset: 8
-  - type: Client::Game::Gauge::AstrologianDraw
-    name: CurrentDraw
-    offset: 10
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::BardGauge
-  name: BardGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: unsigned __int16
-    name: SongTimer
-    offset: 8
-  - type: byte
-    name: Repertoire
-    offset: 12
-  - type: byte
-    name: SoulVoice
-    offset: 13
-  - type: byte
-    name: RadiantFinaleCoda
-    offset: 14
-  - type: Client::Game::Gauge::SongFlags
-    name: SongFlags
-    offset: 15
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::BlackMageGauge
-  name: BlackMageGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 48
-  fields:
-  - type: __int16
-    name: EnochianTimer
-    offset: 8
-  - type: __int8
-    name: ElementStance
-    offset: 10
-  - type: byte
-    name: UmbralHearts
-    offset: 11
-  - type: byte
-    name: PolyglotStacks
-    offset: 12
-  - type: Client::Game::Gauge::EnochianFlags
-    name: EnochianFlags
-    offset: 13
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::DancerGauge
-  name: DancerGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: Feathers
-    offset: 8
-  - type: byte
-    name: Esprit
-    offset: 9
-  - type: byte
-    name: DanceSteps
-    offset: 10
-    size: 4
-    is_string: False
-  - type: byte
-    name: StepIndex
-    offset: 14
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::DarkKnightGauge
-  name: DarkKnightGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 24
-  fields:
-  - type: byte
-    name: Blood
-    offset: 8
-  - type: byte
-    name: DarkArtsState
-    offset: 9
-  - type: unsigned __int16
-    name: DarksideTimer
-    offset: 10
-  - type: unsigned __int16
-    name: ShadowTimer
-    offset: 12
-  - type: unsigned __int16
-    name: DeliriumStep
-    offset: 16
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::DragoonGauge
-  name: DragoonGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: __int16
-    name: LotdTimer
-    offset: 8
-  - type: byte
-    name: LotdState
-    offset: 10
-  - type: byte
-    name: EyeCount
-    offset: 11
-  - type: byte
-    name: FirstmindsFocusCount
-    offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::GunbreakerGauge
-  name: GunbreakerGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: Ammo
-    offset: 8
-  - type: __int16
-    name: MaxTimerDuration
-    offset: 10
-  - type: byte
-    name: AmmoComboStep
-    offset: 12
-  virtual_functions: []
-  member_functions: []
 - type: Client::Game::Gauge::JobGauge
   name: JobGauge
   namespace: Client.Game.Gauge
@@ -10676,6 +10653,12 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::JobGauge*
+      name: this
+    - type: byte
+      name: freeFlags
   - name: Init
     offset: 8
   - name: Tick
@@ -10686,292 +10669,6 @@ structs:
     offset: 32
   - name: ProcessDeferredReplaceAction
     offset: 72
-  member_functions: []
-- type: Client::Game::Gauge::MachinistGauge
-  name: MachinistGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: __int16
-    name: OverheatTimeRemaining
-    offset: 8
-  - type: __int16
-    name: SummonTimeRemaining
-    offset: 10
-  - type: byte
-    name: Heat
-    offset: 12
-  - type: byte
-    name: Battery
-    offset: 13
-  - type: byte
-    name: LastSummonBatteryPower
-    offset: 14
-  - type: byte
-    name: TimerActive
-    offset: 15
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::MonkGauge
-  name: MonkGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: Chakra
-    offset: 8
-  - type: Client::Game::Gauge::BeastChakraType
-    name: BeastChakra1
-    offset: 9
-  - type: Client::Game::Gauge::BeastChakraType
-    name: BeastChakra2
-    offset: 10
-  - type: Client::Game::Gauge::BeastChakraType
-    name: BeastChakra3
-    offset: 11
-  - type: byte
-    name: BeastChakraStacks
-    offset: 12
-  - type: Client::Game::Gauge::NadiFlags
-    name: Nadi
-    offset: 13
-  - type: unsigned __int16
-    name: BlitzTimeRemaining
-    offset: 14
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::NinjaGauge
-  name: NinjaGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: Ninki
-    offset: 8
-  - type: byte
-    name: Kazematoi
-    offset: 10
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::PaladinGauge
-  name: PaladinGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: OathGauge
-    offset: 8
-  - type: unsigned __int16
-    name: ConfiteorComboTimer
-    offset: 10
-  - type: byte
-    name: ConfiteorComboStep
-    offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::PictomancerGauge
-  name: PictomancerGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: PalleteGauge
-    offset: 8
-  - type: byte
-    name: Paint
-    offset: 10
-  - type: Client::Game::Gauge::CanvasFlags
-    name: CanvasFlags
-    offset: 11
-  - type: Client::Game::Gauge::CreatureFlags
-    name: CreatureFlags
-    offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::ReaperGauge
-  name: ReaperGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 48
-  fields:
-  - type: byte
-    name: Soul
-    offset: 8
-  - type: byte
-    name: Shroud
-    offset: 9
-  - type: unsigned __int16
-    name: EnshroudedTimeRemaining
-    offset: 10
-  - type: byte
-    name: LemureShroud
-    offset: 12
-  - type: byte
-    name: VoidShroud
-    offset: 13
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::RedMageGauge
-  name: RedMageGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 80
-  fields:
-  - type: byte
-    name: WhiteMana
-    offset: 8
-  - type: byte
-    name: BlackMana
-    offset: 9
-  - type: byte
-    name: ManaStacks
-    offset: 10
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::SageGauge
-  name: SageGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: __int16
-    name: AddersgallTimer
-    offset: 8
-  - type: byte
-    name: Addersgall
-    offset: 10
-  - type: byte
-    name: Addersting
-    offset: 11
-  - type: byte
-    name: Eukrasia
-    offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::SamuraiGauge
-  name: SamuraiGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: Client::Game::Gauge::KaeshiAction
-    name: Kaeshi
-    offset: 10
-  - type: byte
-    name: Kenki
-    offset: 11
-  - type: byte
-    name: MeditationStacks
-    offset: 12
-  - type: Client::Game::Gauge::SenFlags
-    name: SenFlags
-    offset: 13
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::ScholarGauge
-  name: ScholarGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: Aetherflow
-    offset: 8
-  - type: byte
-    name: FairyGauge
-    offset: 9
-  - type: __int16
-    name: SeraphTimer
-    offset: 10
-  - type: byte
-    name: DismissedFairy
-    offset: 12
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::SummonerGauge
-  name: SummonerGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: unsigned __int16
-    name: SummonTimer
-    offset: 8
-  - type: unsigned __int16
-    name: AttunementTimer
-    offset: 10
-  - type: byte
-    name: ReturnSummon
-    offset: 12
-  - type: byte
-    name: ReturnSummonGlam
-    offset: 13
-  - type: byte
-    name: Attunement
-    offset: 14
-  - type: Client::Game::Gauge::AetherFlags
-    name: AetherFlags
-    offset: 15
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::ViperGauge
-  name: ViperGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 24
-  fields:
-  - type: byte
-    name: RattlingCoilStacks
-    offset: 8
-  - type: byte
-    name: AnguineTribute
-    offset: 9
-  - type: byte
-    name: SerpentOffering
-    offset: 10
-  - type: Client::Game::Gauge::DreadCombo
-    name: DreadCombo
-    offset: 11
-  - type: unsigned __int16
-    name: ReawakenedTimer
-    offset: 14
-  - type: byte
-    name: SerpentComboState
-    offset: 16
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::WarriorGauge
-  name: WarriorGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: byte
-    name: BeastGauge
-    offset: 8
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Gauge::WhiteMageGauge
-  name: WhiteMageGauge
-  namespace: Client.Game.Gauge
-  union: False
-  size: 16
-  fields:
-  - type: __int16
-    name: LilyTimer
-    offset: 10
-  - type: byte
-    name: Lily
-    offset: 12
-  - type: byte
-    name: BloodLily
-    offset: 13
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::GcArmyManager
   name: GcArmyManager
@@ -15838,17 +15535,6 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
-- type: Client::Graphics::Environment::EnvState
-  name: EnvState
-  namespace: Client.Graphics.Environment
-  union: False
-  size: 760
-  fields:
-  - type: float
-    name: Rain
-    offset: 300
-  virtual_functions: []
-  member_functions: []
 - type: Client::Graphics::JobSystem
   name: JobSystem
   namespace: Client.Graphics
@@ -16028,6 +15714,9 @@ structs:
   - type: byte
     name: RequestResolutionChange
     offset: 122
+  - type: byte
+    name: LastResolutionChangeRequest
+    offset: 124
   - type: unsigned int
     name: Width
     offset: 140
@@ -16046,9 +15735,15 @@ structs:
   - type: float
     name: ColorFilterRange
     offset: 160
-  - type: char
-    name: IsFrameRateLimited
+  - type: unsigned int
+    name: FrameRateLimitPresetPresent
+    offset: 164
+  - type: unsigned int
+    name: FrameRateLimitPreset
     offset: 168
+  - type: unsigned __int16
+    name: FrameRateLimitPresent
+    offset: 172
   - type: __int16
     name: FrameRateLimit
     offset: 174
@@ -16679,6 +16374,175 @@ structs:
       name: this
     - type: Client::Graphics::Render::Skeleton*
       name: skeleton
+- type: Client::Graphics::PostEffect::PostEffectChain
+  name: PostEffectChain
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 56
+  fields:
+  - type: Client::Graphics::PostEffect::PostEffectPart**
+    name: Parts
+    offset: 8
+  - type: unsigned int
+    name: PartCount
+    offset: 16
+  - type: unsigned int
+    name: CommonParameterIndex
+    offset: 32
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: CommonBuffer
+    offset: 40
+  - type: float
+    name: Scale
+    offset: 48
+  - type: unsigned int
+    name: EnabledPartMask
+    offset: 52
+  virtual_functions: []
+  member_functions: []
+- type: Client::Graphics::PostEffect::PostEffectDepthOfFieldParameters
+  name: PostEffectDepthOfFieldParameters
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 52
+  fields:
+  - type: char
+    name: UseUpdatedDepthOfField
+    offset: 0
+  - type: char
+    name: UseManualDepthOfField
+    offset: 1
+  - type: char
+    name: UseFocusDistanceOverride
+    offset: 2
+  - type: float
+    name: NearFocusDistance
+    offset: 4
+  - type: float
+    name: FarFocusDistance
+    offset: 8
+  - type: float
+    name: FarBlurDistance
+    offset: 12
+  - type: float
+    name: NearBlurRate
+    offset: 16
+  - type: float
+    name: FarBlurRate
+    offset: 20
+  - type: float
+    name: EffectMaskRate
+    offset: 28
+  - type: float
+    name: FocusDistance
+    offset: 32
+  - type: float
+    name: FNumber
+    offset: 36
+  - type: float
+    name: CocNormalizationDivisor
+    offset: 40
+  - type: float
+    name: PreviousFrameWeight
+    offset: 44
+  - type: float
+    name: PreviousRangeScale
+    offset: 48
+  member_functions: []
+- type: Client::Graphics::PostEffect::PostEffectPart
+  name: PostEffectPart
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 160
+  fields:
+  - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
+    name: PixelShader
+    offset: 8
+  - type: __int64
+    name: ParameterData
+    offset: 16
+  - type: __int64
+    name: ConstantBufferBindings
+    offset: 24
+  - type: __int64
+    name: SamplerBindings
+    offset: 32
+  - type: Client::Graphics::Kernel::Texture*
+    name: InputTexture
+    offset: 40
+  - type: Client::Graphics::Kernel::Texture*
+    name: OutputTextures
+    offset: 56
+    size: 5
+    is_string: False
+  - type: byte
+    name: ParameterCount
+    offset: 140
+  - type: byte
+    name: SamplerCount
+    offset: 141
+  - type: byte
+    name: OutputCount
+    offset: 142
+  - type: __int8
+    name: VertexShaderIndex
+    offset: 148
+  - type: byte
+    name: Flags
+    offset: 152
+  virtual_functions:
+  - name: Resolve
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectPart*
+      name: this
+  - name: IsValid
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectPart*
+      name: this
+  - name: Draw
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectPart*
+      name: this
+  member_functions: []
+- type: Client::Graphics::PostEffect::PostEffectResources
+  name: PostEffectResources
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 208
+  fields:
+  - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
+    name: VertexShaders
+    offset: 16
+    size: 16
+    is_string: False
+  - type: __int64
+    name: VertexDeclaration
+    offset: 144
+  - type: __int64
+    name: VertexBuffer
+    offset: 152
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: ParamBuffer
+    offset: 168
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: SamplingOffsetBuffer
+    offset: 184
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: DynamicViewportResolutionBuffer
+    offset: 200
+  member_functions: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B 44 D0 10 4D 85 C0 74 ?? 49 83 B8 B0 00 00 00 00 74 ?? F6 81 98 00 00 00 08 74 ?? 80 B9 8E 00 00 00 00 76 ?? 48 83 79 38 00
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::PostEffect::PostEffectResources
 - type: Client::Graphics::ReferencedClassBase
   name: ReferencedClassBase
   namespace: Client.Graphics
@@ -16857,6 +16721,12 @@ structs:
   - type: float
     name: JitterMultiplier
     offset: 120
+  - type: unsigned __int64
+    name: PendingEventFlags
+    offset: 128
+  - type: unsigned __int64
+    name: EventFlags
+    offset: 136
   virtual_functions: []
   member_functions: []
   static_members:
@@ -19323,6 +19193,80 @@ structs:
     - type: char
       name: acquired
   member_functions: []
+- type: Client::System::Input::PadDevice::AxisAspects
+  name: AxisAspects
+  namespace: Client.System.Input
+  union: False
+  size: 16
+  fields:
+  - type: float
+    name: Position
+    offset: 0
+  - type: float
+    name: Velocity
+    offset: 4
+  - type: float
+    name: Acceleration
+    offset: 8
+  - type: float
+    name: Force
+    offset: 12
+  member_functions: []
+- type: Client::System::Input::PadDevice::AxisCalibration::AxisAspectCalibration
+  name: AxisAspectCalibration
+  namespace: Client.System.Input
+  union: False
+  size: 12
+  fields:
+  - type: float
+    name: Offset
+    offset: 0
+  - type: float
+    name: Sensitivity
+    offset: 8
+  member_functions: []
+- type: Client::System::Input::PadDevice::PadSettings
+  name: PadSettings
+  namespace: Client.System.Input
+  union: False
+  size: 372
+  fields:
+  - type: unsigned int
+    name: PadGuid
+    offset: 0
+  - type: GUID
+    name: InstanceGuid
+    offset: 4
+  - type: GUID
+    name: ProductGuid
+    offset: 20
+  - type: GUID
+    name: ActiveInstanceGuid
+    offset: 36
+  - type: GUID
+    name: ActiveProductGuid
+    offset: 52
+  - type: unsigned int
+    name: AlwaysInput
+    offset: 68
+  - type: float
+    name: DeadArea
+    offset: 72
+  - type: byte
+    name: Alias
+    offset: 76
+    size: 24
+    is_string: False
+  - type: int
+    name: ForceFeedBack
+    offset: 100
+  - type: char
+    name: PovInputDisabled
+    offset: 360
+  - type: char
+    name: PadAvailable
+    offset: 361
+  member_functions: []
 - type: Client::System::Input::PadDeviceInterface
   name: PadDeviceInterface
   namespace: Client.System.Input
@@ -19372,6 +19316,50 @@ structs:
     parameters:
     - type: Client::System::Input::PadDeviceInterface*
       name: this
+  - name: SetActiveDevice
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+    - type: int
+      name: deviceIndex
+  - name: GetActiveDeviceIndex
+    offset: 56
+    return_type: int
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: ApplyForceFeedback
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: ApplySettings
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: LoadInputMapping
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: ResetInputMapping
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: ClearPadData
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
   - name: SetVibration
     offset: 104
     return_type: void
@@ -19382,6 +19370,32 @@ structs:
       name: rightMotorSpeed
     - type: int
       name: leftMotorSpeed
+  - name: SetPovInputDisabled
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+    - type: char
+      name: disabled
+  - name: GetPovInputDisabled
+    offset: 120
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: IsDualSense
+    offset: 200
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: IsDualShock4
+    offset: 208
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
   member_functions: []
 - type: Client::System::Input::SoftKeyboardDeviceInterface
   name: SoftKeyboardDeviceInterface
@@ -22148,6 +22162,22 @@ structs:
     name: CounterTextNode
     offset: 24
   member_functions: []
+- type: Client::UI::AddonSalvageDialog::CheckboxSlot
+  name: CheckboxSlot
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Client::UI::SalvageDialogCheckboxType
+    name: Type
+    offset: 0
+  - type: Component::GUI::AtkComponentCheckBox*
+    name: Checkbox
+    offset: 8
+  - type: char
+    name: IsCheckedCached
+    offset: 16
+  member_functions: []
 - type: Client::UI::AddonSalvageItemSelector::SalvageItem
   name: SalvageItem
   namespace: Client.UI
@@ -24880,11 +24910,11 @@ structs:
   union: False
   size: 68
   fields:
-  - type: int
-    name: ActionType
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate::SlotType
+    name: Type
     offset: 0
-  - type: char
-    name: Unk1
+  - type: int
+    name: CostType
     offset: 4
   - type: unsigned int
     name: ActionId
@@ -27256,8 +27286,8 @@ structs:
   - type: char*
     name: CostText
     offset: 8
-  - type: unsigned int
-    name: IntermediateActionType
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarUIIntermediate::SlotType
+    name: Type
     offset: 16
   - type: unsigned int
     name: ActionId
@@ -37008,6 +37038,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::System::Input::PadDevice::GamepadDevice>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::System::Input::PadDevice::GamepadDevice*
+    name: First
+    offset: 0
+  - type: Client::System::Input::PadDevice::GamepadDevice*
+    name: Last
+    offset: 8
+  - type: Client::System::Input::PadDevice::GamepadDevice*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::System::Resource::Handle::ResourceHandle*>
   name: StdVector`1
   namespace: ''
@@ -40966,6 +41011,730 @@ structs:
   - type: unsigned int
     name: Flags
     offset: 28
+  member_functions: []
+- type: Client::Game::Gauge::AstrologianGauge
+  name: AstrologianGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 48
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: __int16
+    name: Cards
+    offset: 8
+  - type: Client::Game::Gauge::AstrologianDraw
+    name: CurrentDraw
+    offset: 10
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::AstrologianGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::BardGauge
+  name: BardGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: SongTimer
+    offset: 8
+  - type: byte
+    name: Repertoire
+    offset: 12
+  - type: byte
+    name: SoulVoice
+    offset: 13
+  - type: byte
+    name: RadiantFinaleCoda
+    offset: 14
+  - type: Client::Game::Gauge::SongFlags
+    name: SongFlags
+    offset: 15
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::BardGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::BlackMageGauge
+  name: BlackMageGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 48
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: __int16
+    name: EnochianTimer
+    offset: 8
+  - type: __int8
+    name: ElementStance
+    offset: 10
+  - type: byte
+    name: UmbralHearts
+    offset: 11
+  - type: byte
+    name: PolyglotStacks
+    offset: 12
+  - type: byte
+    name: BitFieldD
+    offset: 13
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: EnochianActive
+    - type: byte
+      offset: 1
+      size: 1
+      name: ParadoxActive
+    - type: byte
+      offset: 2
+      size: 3
+      name: AstralSoulStacks
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::BlackMageGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::DancerGauge
+  name: DancerGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Feathers
+    offset: 8
+  - type: byte
+    name: Esprit
+    offset: 9
+  - type: byte
+    name: DanceSteps
+    offset: 10
+    size: 4
+    is_string: False
+  - type: byte
+    name: StepIndex
+    offset: 14
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::DancerGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::DarkKnightGauge
+  name: DarkKnightGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 24
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Blood
+    offset: 8
+  - type: byte
+    name: DarkArtsState
+    offset: 9
+  - type: unsigned __int16
+    name: DarksideTimer
+    offset: 10
+  - type: unsigned __int16
+    name: ShadowTimer
+    offset: 12
+  - type: unsigned __int16
+    name: DeliriumStep
+    offset: 16
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::DarkKnightGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::DragoonGauge
+  name: DragoonGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: __int16
+    name: LotdTimer
+    offset: 8
+  - type: byte
+    name: LotdState
+    offset: 10
+  - type: byte
+    name: EyeCount
+    offset: 11
+  - type: byte
+    name: FirstmindsFocusCount
+    offset: 12
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::DragoonGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::GunbreakerGauge
+  name: GunbreakerGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Ammo
+    offset: 8
+  - type: __int16
+    name: MaxTimerDuration
+    offset: 10
+  - type: byte
+    name: AmmoComboStep
+    offset: 12
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::GunbreakerGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::MachinistGauge
+  name: MachinistGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: __int16
+    name: OverheatTimeRemaining
+    offset: 8
+  - type: __int16
+    name: SummonTimeRemaining
+    offset: 10
+  - type: byte
+    name: Heat
+    offset: 12
+  - type: byte
+    name: Battery
+    offset: 13
+  - type: byte
+    name: LastSummonBatteryPower
+    offset: 14
+  - type: byte
+    name: TimerActive
+    offset: 15
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::MachinistGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::MonkGauge
+  name: MonkGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Chakra
+    offset: 8
+  - type: Client::Game::Gauge::BeastChakraType
+    name: BeastChakra1
+    offset: 9
+  - type: Client::Game::Gauge::BeastChakraType
+    name: BeastChakra2
+    offset: 10
+  - type: Client::Game::Gauge::BeastChakraType
+    name: BeastChakra3
+    offset: 11
+  - type: byte
+    name: BeastChakraStacks
+    offset: 12
+    bits:
+    - type: byte
+      offset: 0
+      size: 2
+      name: OpoOpoStacks
+    - type: byte
+      offset: 2
+      size: 2
+      name: RaptorStacks
+    - type: byte
+      offset: 4
+      size: 2
+      name: CoeurlStacks
+  - type: Client::Game::Gauge::NadiFlags
+    name: Nadi
+    offset: 13
+  - type: unsigned __int16
+    name: BlitzTimeRemaining
+    offset: 14
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::MonkGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::NinjaGauge
+  name: NinjaGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Ninki
+    offset: 8
+  - type: byte
+    name: Kazematoi
+    offset: 10
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::NinjaGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::PaladinGauge
+  name: PaladinGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: OathGauge
+    offset: 8
+  - type: unsigned __int16
+    name: ConfiteorComboTimer
+    offset: 10
+  - type: byte
+    name: ConfiteorComboStep
+    offset: 12
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::PaladinGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::PictomancerGauge
+  name: PictomancerGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: PalleteGauge
+    offset: 8
+  - type: byte
+    name: Paint
+    offset: 10
+  - type: Client::Game::Gauge::CanvasFlags
+    name: CanvasFlags
+    offset: 11
+  - type: Client::Game::Gauge::CreatureFlags
+    name: CreatureFlags
+    offset: 12
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::PictomancerGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::ReaperGauge
+  name: ReaperGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 48
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Soul
+    offset: 8
+  - type: byte
+    name: Shroud
+    offset: 9
+  - type: unsigned __int16
+    name: EnshroudedTimeRemaining
+    offset: 10
+  - type: byte
+    name: LemureShroud
+    offset: 12
+  - type: byte
+    name: VoidShroud
+    offset: 13
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::ReaperGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::RedMageGauge
+  name: RedMageGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 80
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: WhiteMana
+    offset: 8
+  - type: byte
+    name: BlackMana
+    offset: 9
+  - type: byte
+    name: ManaStacks
+    offset: 10
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::RedMageGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::SageGauge
+  name: SageGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: __int16
+    name: AddersgallTimer
+    offset: 8
+  - type: byte
+    name: Addersgall
+    offset: 10
+  - type: byte
+    name: Addersting
+    offset: 11
+  - type: byte
+    name: Eukrasia
+    offset: 12
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::SageGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::SamuraiGauge
+  name: SamuraiGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: Client::Game::Gauge::KaeshiAction
+    name: Kaeshi
+    offset: 10
+  - type: byte
+    name: Kenki
+    offset: 11
+  - type: byte
+    name: MeditationStacks
+    offset: 12
+  - type: Client::Game::Gauge::SenFlags
+    name: SenFlags
+    offset: 13
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::SamuraiGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::ScholarGauge
+  name: ScholarGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: Aetherflow
+    offset: 8
+  - type: byte
+    name: FairyGauge
+    offset: 9
+  - type: __int16
+    name: SeraphTimer
+    offset: 10
+  - type: byte
+    name: DismissedFairy
+    offset: 12
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::ScholarGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::SummonerGauge
+  name: SummonerGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: SummonTimer
+    offset: 8
+  - type: unsigned __int16
+    name: AttunementTimer
+    offset: 10
+  - type: byte
+    name: ReturnSummon
+    offset: 12
+  - type: byte
+    name: ReturnSummonGlam
+    offset: 13
+  - type: byte
+    name: BitFieldE
+    offset: 14
+    bits:
+    - type: byte
+      offset: 0
+      size: 2
+      name: AttunementType
+    - type: byte
+      offset: 2
+      size: 6
+      name: AttunementCount
+  - type: Client::Game::Gauge::AetherFlags
+    name: AetherFlags
+    offset: 15
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::SummonerGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::ViperGauge
+  name: ViperGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 24
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: RattlingCoilStacks
+    offset: 8
+  - type: byte
+    name: AnguineTribute
+    offset: 9
+  - type: byte
+    name: SerpentOffering
+    offset: 10
+  - type: Client::Game::Gauge::DreadCombo
+    name: DreadCombo
+    offset: 11
+  - type: unsigned __int16
+    name: ReawakenedTimer
+    offset: 14
+  - type: byte
+    name: SerpentComboState
+    offset: 16
+    bits:
+    - type: byte
+      offset: 0
+      size: 2
+      name: UnkBits0
+    - type: byte
+      offset: 2
+      size: 6
+      name: SerpentCombo
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::ViperGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::WarriorGauge
+  name: WarriorGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: BeastGauge
+    offset: 8
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::WarriorGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::WhiteMageGauge
+  name: WhiteMageGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: __int16
+    name: LilyTimer
+    offset: 10
+  - type: byte
+    name: Lily
+    offset: 12
+  - type: byte
+    name: BloodLily
+    offset: 13
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::WhiteMageGauge*
+      name: this
+    - type: byte
+      name: freeFlags
   member_functions: []
 - type: Client::Game::HWDManager
   name: HWDManager
@@ -45683,6 +46452,174 @@ structs:
     parameters:
     - type: Client::Graphics::Physics::ConstraintSpring*
       name: this
+- type: Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend
+  name: PostEffectColorFilterDarkBlend
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 208
+  fields:
+  - type: Client::Graphics::PostEffect::PostEffectPart
+    name: PostEffectPart
+    offset: 0
+    base: true
+  - type: Client::Graphics::Kernel::Texture*
+    name: LutTextures
+    offset: 160
+    size: 3
+    is_string: False
+  - type: unsigned int
+    name: LutIndex
+    offset: 184
+  - type: unsigned int
+    name: MatrixParameterIndex
+    offset: 188
+  - type: unsigned int
+    name: LutParameterIndex
+    offset: 192
+  - type: unsigned int
+    name: LutSamplerIndex
+    offset: 196
+  - type: unsigned int
+    name: DarkMatrixParameterIndex
+    offset: 200
+  - type: unsigned int
+    name: DarkParameterIndex
+    offset: 204
+  virtual_functions:
+  - name: Resolve
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend*
+      name: this
+  - name: IsValid
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend*
+      name: this
+  - name: Draw
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend*
+      name: this
+  member_functions:
+  - signature: 48 8B C4 48 89 58 ?? 55 56 41 56 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 0F 29 78
+    return_type: void
+    name: UpdateLut
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend*
+      name: this
+- type: Client::Graphics::PostEffect::PostEffectDepthOfFieldCocLut
+  name: PostEffectDepthOfFieldCocLut
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 248
+  fields:
+  - type: Client::Graphics::PostEffect::PostEffectPart
+    name: PostEffectPart
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: WeightParameterIndex
+    offset: 160
+  - type: unsigned int
+    name: CocParameterIndex
+    offset: 164
+  - type: unsigned int
+    name: LutSamplerIndex
+    offset: 168
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: CocParameterBuffer
+    offset: 176
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: DisabledCocParameterBuffer
+    offset: 184
+  - type: float
+    name: NearFocusDistance
+    offset: 192
+  - type: float
+    name: NearPlane
+    offset: 196
+  - type: float
+    name: FarFocusDistance
+    offset: 200
+  - type: float
+    name: FarBlurDistance
+    offset: 204
+  - type: float
+    name: NearBlurRate
+    offset: 208
+  - type: float
+    name: FarBlurRate
+    offset: 212
+  - type: float
+    name: EffectMaskRate
+    offset: 216
+  - type: float
+    name: FocalLength
+    offset: 220
+  - type: float
+    name: FocusDistance
+    offset: 224
+  - type: float
+    name: FNumber
+    offset: 228
+  - type: float
+    name: PreviousFrameWeight
+    offset: 236
+  - type: float
+    name: PreviousRangeScale
+    offset: 240
+  - type: char
+    name: ResetHistory
+    offset: 244
+  - type: char
+    name: UseManualDepthOfField
+    offset: 245
+  - type: char
+    name: DisableCoc
+    offset: 246
+  virtual_functions:
+  - name: Resolve
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectDepthOfFieldCocLut*
+      name: this
+  - name: IsValid
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectDepthOfFieldCocLut*
+      name: this
+  - name: Draw
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectDepthOfFieldCocLut*
+      name: this
+  member_functions: []
+- type: Client::Graphics::PostEffect::PostEffectVignettingParameters
+  name: PostEffectVignettingParameters
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 24
+  fields:
+  - type: float
+    name: AspectRatioBlend
+    offset: 0
+  - type: float
+    name: RadiusSquared
+    offset: 4
+  - type: float
+    name: Falloff
+    offset: 8
+  - type: System::Numerics::Vector3
+    name: Color
+    offset: 12
+  member_functions: []
 - type: Client::Graphics::Ray
   name: Ray
   namespace: Client.Graphics
@@ -45937,7 +46874,7 @@ structs:
     name: Unk108
     offset: 264
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk110
+    name: ViewPosition
     offset: 272
   - type: Client::Graphics::Kernel::Texture*
     name: Unk118
@@ -46141,6 +47078,9 @@ structs:
   - type: char
     name: UnkBool_1
     offset: 1096
+  - type: byte
+    name: DepthOfFieldSourceIndex
+    offset: 1118
   - type: Client::Graphics::Kernel::Texture*
     name: Unk4A8
     offset: 1192
@@ -46241,10 +47181,10 @@ structs:
     name: Unk5F0
     offset: 1520
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk5F8
+    name: DepthHistory0
     offset: 1528
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk600
+    name: DepthHistory1
     offset: 1536
   - type: Client::Graphics::Kernel::Texture*
     name: Unk608
@@ -46274,7 +47214,7 @@ structs:
     name: Unk648
     offset: 1608
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk650
+    name: Velocity
     offset: 1616
   - type: Client::Graphics::Kernel::Texture*
     name: Unk658
@@ -46283,16 +47223,16 @@ structs:
     name: Unk660
     offset: 1632
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk668
+    name: DepthOfFieldSource0
     offset: 1640
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk670
+    name: DepthOfFieldSource1
     offset: 1648
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk678
+    name: DepthOfFieldCocLut
     offset: 1656
   - type: Client::Graphics::Kernel::Texture*
-    name: Unk680
+    name: DepthOfFieldEffectMask
     offset: 1664
   - type: Client::Graphics::Kernel::Texture*
     name: Unk688
@@ -46315,6 +47255,9 @@ structs:
   - type: float
     name: GraphicsRezoScale
     offset: 1824
+  - type: float
+    name: GraphicsRezoScaleY
+    offset: 1828
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 48 8B D0 FF D3
@@ -47565,6 +48508,25 @@ structs:
   - type: Client::System::Input::KeySetting::Modifier
     name: Modifier
     offset: 1
+  member_functions: []
+- type: Client::System::Input::PadDevice::AxisCalibration
+  name: AxisCalibration
+  namespace: Client.System.Input
+  union: False
+  size: 48
+  fields:
+  - type: Client::System::Input::PadDevice::AxisCalibration::AxisAspectCalibration
+    name: Position
+    offset: 0
+  - type: Client::System::Input::PadDevice::AxisCalibration::AxisAspectCalibration
+    name: Velocity
+    offset: 12
+  - type: Client::System::Input::PadDevice::AxisCalibration::AxisAspectCalibration
+    name: Acceleration
+    offset: 24
+  - type: Client::System::Input::PadDevice::AxisCalibration::AxisAspectCalibration
+    name: Force
+    offset: 36
   member_functions: []
 - type: Client::System::Input::RepeatCounter
   name: RepeatCounter
@@ -58554,6 +59516,9 @@ structs:
   - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
     name: ApparentSlotType
     offset: 201
+  - type: char
+    name: UsesGeneralDragDropType
+    offset: 202
   - type: byte
     name: CostType
     offset: 203
@@ -67825,6 +68790,69 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::WeatherManager
+- type: Client::Graphics::Environment::EnvColorFilterParameters
+  name: EnvColorFilterParameters
+  namespace: Client.Graphics.Environment
+  union: False
+  size: 92
+  fields:
+  - type: Common::Math::Vector4
+    name: Curve
+    offset: 0
+  - type: float
+    name: Hue
+    offset: 16
+  - type: float
+    name: Saturation
+    offset: 20
+  - type: float
+    name: Brightness
+    offset: 24
+  - type: float
+    name: Contrast
+    offset: 28
+  - type: System::Numerics::Vector3
+    name: TintColor
+    offset: 32
+  - type: float
+    name: TintStrength
+    offset: 44
+  - type: float
+    name: Sepia
+    offset: 48
+  - type: float
+    name: Monochrome
+    offset: 52
+  - type: float
+    name: Invert
+    offset: 56
+  - type: float
+    name: DarkSaturation
+    offset: 60
+  - type: System::Numerics::Vector3
+    name: DarkTintColor
+    offset: 64
+  - type: float
+    name: DarkThreshold
+    offset: 76
+  - type: float
+    name: DarkRange
+    offset: 80
+  - type: float
+    name: DarkTintStrength
+    offset: 84
+  - type: float
+    name: Strength
+    offset: 88
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B 46 78 48 8D 55 ?? F3 0F 10 45 ??
+    return_type: void
+    name: BuildMatrix
+    parameters:
+    - type: Client::Graphics::Environment::EnvColorFilterParameters*
+      name: this
+    - type: Common::Math::Matrix4x4*
+      name: output
 - type: Client::Graphics::Kernel::PVShader
   name: PVShader
   namespace: Client.Graphics.Kernel
@@ -68159,6 +69187,29 @@ structs:
     parameters:
     - type: Client::Graphics::Physics::CollisionSphere*
       name: this
+- type: Client::Graphics::PostEffect::PostEffectManager::ColorFilterParameters
+  name: ColorFilterParameters
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 112
+  fields:
+  - type: Common::Math::Vector4
+    name: Matrix
+    offset: 0
+    size: 3
+    is_string: False
+  - type: Common::Math::Vector4
+    name: DarkMatrix
+    offset: 48
+    size: 3
+    is_string: False
+  - type: System::Numerics::Vector3
+    name: DarkParameters
+    offset: 96
+  - type: float
+    name: Strength
+    offset: 108
+  member_functions: []
 - type: Client::Graphics::Render::Skeleton::Bone
   name: Bone
   namespace: Client.Graphics.Render
@@ -91727,6 +92778,20 @@ structs:
     name: UnkC7
     offset: 199
   member_functions: []
+- type: Client::Graphics::Environment::EnvState
+  name: EnvState
+  namespace: Client.Graphics.Environment
+  union: False
+  size: 760
+  fields:
+  - type: float
+    name: Rain
+    offset: 300
+  - type: Client::Graphics::Environment::EnvColorFilterParameters
+    name: ColorFilter
+    offset: 548
+  virtual_functions: []
+  member_functions: []
 - type: Client::Graphics::Kernel::ComputeShader
   name: ComputeShader
   namespace: Client.Graphics.Kernel
@@ -93470,6 +94535,104 @@ structs:
       name: x
     - type: int
       name: y
+- type: Client::System::Input::PadDevice::GamepadDevice
+  name: GamepadDevice
+  namespace: Client.System.Input
+  union: False
+  size: 2152
+  fields:
+  - type: char
+    name: IsPollingRequired
+    offset: 0
+  - type: char
+    name: UseDefaultInputMapping
+    offset: 1
+  - type: char
+    name: Buttons
+    offset: 2
+    size: 32
+    is_string: False
+  - type: unsigned int
+    name: Index
+    offset: 36
+  - type: int
+    name: NumberOfAxes
+    offset: 40
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: LX
+    offset: 412
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: LY
+    offset: 428
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: LZ
+    offset: 444
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: RX
+    offset: 460
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: RY
+    offset: 476
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: RZ
+    offset: 492
+  - type: Client::System::Input::PadDevice::AxisAspects
+    name: Slider
+    offset: 508
+  - type: float
+    name: DPadX
+    offset: 524
+  - type: float
+    name: DPadY
+    offset: 528
+  - type: XINPUT_STATE
+    name: XInputState
+    offset: 532
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: LXCalibration
+    offset: 548
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: LYCalibration
+    offset: 596
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: LZCalibration
+    offset: 644
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: RXCalibration
+    offset: 692
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: RYCalibration
+    offset: 740
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: RZCalibration
+    offset: 788
+  - type: Client::System::Input::PadDevice::AxisCalibration
+    name: SliderCalibration
+    offset: 836
+  - type: DIDEVCAPS
+    name: Capabilities
+    offset: 884
+  - type: DIDEVICEINSTANCEA
+    name: DeviceInfo
+    offset: 928
+  - type: LPDIRECTINPUTDEVICE8A
+    name: DirectInputDevice
+    offset: 2064
+  - type: LPDIRECTINPUTEFFECT
+    name: DirectInputEffect
+    offset: 2072
+  - type: float
+    name: DeadZone
+    offset: 2080
+  - type: char
+    name: PovInputDisabled
+    offset: 2084
+  - type: byte
+    name: Alias
+    offset: 2085
+    size: 24
+    is_string: False
+  member_functions: []
 - type: Client::System::Scheduler::Base::SchedulerTimeline
   name: SchedulerTimeline
   namespace: Client.System.Scheduler.Base
@@ -107145,6 +108308,12 @@ structs:
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
+  - signature: 0F B6 51 7E 80 FA 24
+    return_type: byte
+    name: GetCurrentClassJobMaxLevel
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 0B EE
     return_type: char
     name: IsMountUnlocked
@@ -107535,6 +108704,9 @@ structs:
   - type: Client::Graphics::Render::Camera*
     name: RenderCamera
     offset: 224
+  - type: unsigned int
+    name: Flags
+    offset: 240
   virtual_functions:
   - name: dtor
     offset: 0
@@ -108877,81 +110049,6 @@ structs:
       name: this
     - type: unsigned int
       name: mode
-- type: Client::System::Input::PadDevice
-  name: PadDevice
-  namespace: Client.System.Input
-  union: False
-  size: 20360
-  fields:
-  - type: Client::System::Input::PadDeviceInterface
-    name: PadDeviceInterface
-    offset: 0
-    base: true
-  - type: Client::System::Input::RepeatCounter
-    name: RepeatCounter
-    offset: 32
-    base: true
-  - type: Client::System::Input::GamepadInputData
-    name: GamepadInputData
-    offset: 120
-  - type: Client::System::Configuration::SystemConfig*
-    name: SystemConfig
-    offset: 1080
-  vtable_size: 216
-  virtual_functions:
-  - name: dtor
-    offset: 0
-    return_type: Client::System::Input::PadDeviceInterface*
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: Initialize
-    offset: 8
-    return_type: char
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-    - type: Client::System::Configuration::SystemConfig*
-      name: systemConfig
-    - type: char
-      name: a3
-  - name: Update
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-  - name: Deinitialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-  - name: GetNumberOfDevices
-    offset: 32
-    return_type: int
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-  - name: GetData
-    offset: 40
-    return_type: Client::System::Input::GamepadInputData*
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-  - name: SetVibration
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
-    - type: int
-      name: rightMotorSpeed
-    - type: int
-      name: leftMotorSpeed
-  member_functions: []
 - type: Client::System::Scheduler::Instance::LayoutSharedGroupObject
   name: LayoutSharedGroupObject
   namespace: Client.System.Scheduler.Instance
@@ -110561,7 +111658,25 @@ structs:
       name: this
     - type: byte
       name: classJobId
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 89 9C 24 ?? ?? ?? ?? 4C 89 A4 24
+    return_type: char
+    name: OnItemHovered
+    parameters:
+    - type: Client::UI::Agent::AgentItemDetail*
+      name: this
+    - type: Client::Game::InventoryItem**
+      name: outItem
+    - type: Client::Game::InventoryType*
+      name: container
+    - type: __int16*
+      name: slot
+    - type: unsigned int
+      name: itemId
+    - type: unsigned int
+      name: rowIdOrIndex
+    - type: Client::Game::InventoryItem*
+      name: item
 - type: Client::UI::Agent::AgentLeveQuest
   name: AgentLeveQuest
   namespace: Client.UI.Agent
@@ -134192,6 +135307,163 @@ structs:
     - type: Client::LayoutEngine::Layer::WaterRangeLayoutInstance*
       name: this
   member_functions: []
+- type: Client::System::Input::PadDevice
+  name: PadDevice
+  namespace: Client.System.Input
+  union: False
+  size: 20360
+  fields:
+  - type: Client::System::Input::PadDeviceInterface
+    name: PadDeviceInterface
+    offset: 0
+    base: true
+  - type: Client::System::Input::RepeatCounter
+    name: RepeatCounter
+    offset: 32
+    base: true
+  - type: StdVector<Client::System::Input::PadDevice::GamepadDevice>
+    name: GamepadDevices
+    offset: 72
+  - type: StdVector<Client::System::Input::PadDevice::GamepadDevice>
+    name: GamepadDevices2
+    offset: 96
+  - type: Client::System::Input::GamepadInputData
+    name: GamepadInputData
+    offset: 120
+  - type: Client::System::Input::PadDevice::PadSettings
+    name: Settings
+    offset: 708
+  - type: Client::System::Configuration::SystemConfig*
+    name: SystemConfig
+    offset: 1080
+  - type: int
+    name: ActiveGamepadDeviceIndex
+    offset: 1088
+  vtable_size: 216
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::PadDeviceInterface*
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: Client::System::Configuration::SystemConfig*
+      name: systemConfig
+    - type: char
+      name: a3
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: GetNumberOfDevices
+    offset: 32
+    return_type: int
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: GetData
+    offset: 40
+    return_type: Client::System::Input::GamepadInputData*
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: SetActiveDevice
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: int
+      name: deviceIndex
+  - name: GetActiveDeviceIndex
+    offset: 56
+    return_type: int
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: ApplyForceFeedback
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: ApplySettings
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: LoadInputMapping
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: ResetInputMapping
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: ClearPadData
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: SetVibration
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: int
+      name: rightMotorSpeed
+    - type: int
+      name: leftMotorSpeed
+  - name: SetPovInputDisabled
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: char
+      name: disabled
+  - name: GetPovInputDisabled
+    offset: 120
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: IsDualSense
+    offset: 200
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: IsDualShock4
+    offset: 208
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  member_functions: []
 - type: Client::System::Resource::Handle::DefaultResourceHandle
   name: DefaultResourceHandle
   namespace: Client.System.Resource.Handle
@@ -138874,6 +140146,84 @@ structs:
     name: DutyHelperInfo
     offset: 9168
   member_functions: []
+- type: Client::Graphics::PostEffect::PostEffectManager
+  name: PostEffectManager
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 18624
+  fields:
+  - type: Client::Graphics::Kernel::Notifier
+    name: Notifier
+    offset: 8
+    base: true
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: DepthOfFieldChain
+    offset: 1160
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: DepthOfFieldCoCChain
+    offset: 1216
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: UpdatedDepthOfFieldChain
+    offset: 1272
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: ColorFilterChain
+    offset: 1496
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: VignettingChain
+    offset: 1552
+  - type: Client::Graphics::Kernel::Texture*
+    name: SceneInput
+    offset: 16400
+  - type: Client::Graphics::Kernel::Texture*
+    name: Depth
+    offset: 16432
+  - type: Client::Graphics::Kernel::Texture*
+    name: SceneOutput
+    offset: 16504
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40A0
+    offset: 16544
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40A8
+    offset: 16552
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40B0
+    offset: 16560
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40B8
+    offset: 16568
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40C8
+    offset: 16584
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40D0
+    offset: 16592
+  - type: unsigned __int64
+    name: InitializedEffects
+    offset: 17424
+  - type: Client::Graphics::PostEffect::PostEffectFlags
+    name: Flags
+    offset: 17520
+  - type: Client::Graphics::PostEffect::PostEffectDepthOfFieldParameters
+    name: DepthOfField
+    offset: 18152
+  - type: Common::Math::Vector4
+    name: ColorFilterCurve
+    offset: 18204
+  - type: Client::Graphics::PostEffect::PostEffectManager::ColorFilterParameters
+    name: ColorFilter
+    offset: 18220
+  - type: Client::Graphics::PostEffect::PostEffectVignettingParameters
+    name: Vignetting
+    offset: 18440
+  virtual_functions: []
+  member_functions: []
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? 8B 81 70 44 00 00 C1 E8 08 A8 01 0F 85
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::PostEffect::PostEffectManager
 - type: Client::LayoutEngine::Group::SGTransformActionController
   name: SGTransformActionController
   namespace: Client.LayoutEngine.Group
@@ -150996,56 +152346,6 @@ structs:
     - type: byte*
       name: packet
   member_functions: []
-- type: Client::Graphics::Environment::EnvManager
-  name: EnvManager
-  namespace: Client.Graphics.Environment
-  union: False
-  size: 3056
-  fields:
-  - type: Client::Graphics::Scene::EnvScene*
-    name: EnvScene
-    offset: 8
-  - type: float
-    name: DayTimeSeconds
-    offset: 16
-  - type: float
-    name: ActiveTransitionTime
-    offset: 20
-  - type: float
-    name: CurrentTransitionTime
-    offset: 24
-  - type: float
-    name: TransitionProgress
-    offset: 28
-  - type: byte
-    name: ActiveWeather
-    offset: 39
-  - type: float
-    name: TransitionTime
-    offset: 40
-  - type: Client::Graphics::Scene::EnvSpace*
-    name: EnvSpace
-    offset: 56
-  - type: Client::Graphics::Environment::EnvState
-    name: EnvState
-    offset: 88
-  - type: Client::Graphics::Environment::EnvSoundState
-    name: EnvSoundState
-    offset: 1128
-  - type: Client::Graphics::Environment::EnvSimulator
-    name: EnvSimulator
-    offset: 1248
-  - type: Client::Graphics::Render::ShadowCamera
-    name: ShadowCamera
-    offset: 2272
-  virtual_functions: []
-  member_functions: []
-  static_members:
-  - signature: 0F 28 F2 48 8B 05
-    relative_follow_offsets:
-    - 6
-    is_pointer: True
-    return_type: Client::Graphics::Environment::EnvManager
 - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance
   name: AetheryteLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -197410,460 +198710,6 @@ structs:
     - type: char
       name: a3
   member_functions: []
-- type: Client::UI::AddonSalvageDialog
-  name: AddonSalvageDialog
-  namespace: Client.UI
-  union: False
-  size: 672
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkComponentIcon*
-    name: ItemIconNode
-    offset: 576
-  - type: byte
-    name: Unk248
-    offset: 584
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GuaranteeNQResultsCheckboxNode
-    offset: 592
-  - type: char
-    name: GuaranteeNQResultsEnabled
-    offset: 600
-  - type: byte
-    name: Unk260
-    offset: 608
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: BulkDesynthCheckboxNode
-    offset: 616
-  - type: char
-    name: BulkDesynthEnabled
-    offset: 624
-  - type: byte
-    name: Unk278
-    offset: 632
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: Unk280
-    offset: 640
-  - type: char
-    name: Unk288Checked
-    offset: 648
-  - type: Component::GUI::AtkComponentButton*
-    name: DesynthesizeButton
-    offset: 656
-  - type: Component::GUI::AtkComponentButton*
-    name: CancelButtonNode
-    offset: 664
-  virtual_functions:
-  - name: dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: byte
-      name: freeFlags
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: eventType
-    - type: int
-      name: eventParam
-    - type: Component::GUI::AtkEvent*
-      name: atkEvent
-    - type: Component::GUI::AtkEventData*
-      name: atkEventData
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: eventType
-    - type: int
-      name: eventParam
-    - type: Component::GUI::AtkEvent*
-      name: atkEvent
-    - type: Component::GUI::AtkEventData*
-      name: atkEventData
-  - name: Open
-    offset: 24
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: unsigned int
-      name: depthLayer
-  - name: Close
-    offset: 32
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: char
-      name: fireCallback
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: char
-      name: disableShowTransition
-    - type: unsigned int
-      name: unsetShowHideFlags
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: char
-      name: disableHideTransition
-    - type: char
-      name: callCloseCallback
-    - type: unsigned int
-      name: setShowHideFlags
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: __int16
-      name: x
-    - type: __int16
-      name: y
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: __int16
-      name: value
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: __int16
-      name: value
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: __int16*
-      name: outX
-    - type: __int16*
-      name: outY
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: byte
-      name: alpha
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: float
-      name: scale
-    - type: char
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: unsigned __int16*
-      name: outWidth
-    - type: unsigned __int16*
-      name: outHeight
-    - type: char
-      name: scaled
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: collisionNode
-  - name: OnMove
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: HandleCursorTypeChange
-    offset: 176
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: ShouldIgnoreInputs
-    offset: 184
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: GetRootNode
-    offset: 192
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: GetWindowBounds
-    offset: 216
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Common::Math::Bounds*
-      name: outBounds
-  - name: GetRootBounds
-    offset: 240
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Common::Math::Bounds*
-      name: outBounds
-  - name: SetDepthLayer
-    offset: 248
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: unsigned int
-      name: depthLayerIndex
-  - name: ShouldAllowCursorFocus
-    offset: 256
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: GetUnitBaseForFocus
-    offset: 280
-    return_type: Component::GUI::AtkUnitBase*
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: Focus
-    offset: 296
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: Initialize
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: Finalizer
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: Update
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: float
-      name: delta
-  - name: Draw
-    offset: 352
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 368
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 376
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: __int16
-      name: x
-    - type: __int16
-      name: y
-  - name: OnSetup
-    offset: 392
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: unsigned int
-      name: valueCount
-    - type: Component::GUI::AtkValue*
-      name: values
-  - name: OnRefresh
-    offset: 408
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: unsigned int
-      name: valueCount
-    - type: Component::GUI::AtkValue*
-      name: values
-  - name: OnRequestedUpdate
-    offset: 416
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: numberArrayData
-    - type: Component::GUI::StringArrayData**
-      name: stringArrayData
-  - name: FireCloseCallback
-    offset: 432
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: SetSizeFromConfig
-    offset: 448
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: float
-      name: width
-    - type: float
-      name: height
-  - name: HandleCustomInput
-    offset: 456
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: Component::GUI::AtkEventData::AtkInputData*
-      name: inputData
-  - name: OnFocusChange
-    offset: 472
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: char
-      name: isFocused
-  - name: OnScreenSizeChange
-    offset: 480
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: int
-      name: width
-    - type: int
-      name: height
-  - name: OnConfigLoaded
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: char
-      name: isInitialLoad
-  - name: OnMouseOver
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: OnMouseOut
-    offset: 504
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: IsFullyLoaded
-    offset: 528
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-  - name: PlaySoundEffect
-    offset: 536
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: int
-      name: soundEffectId
-  - name: HandleDPadInput
-    offset: 552
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: int
-      name: inputId
-    - type: char
-      name: a3
-  - name: HandleBackButtonInput
-    offset: 568
-    return_type: char
-    parameters:
-    - type: Client::UI::AddonSalvageDialog*
-      name: this
-    - type: int
-      name: inputId
-    - type: char
-      name: a3
-  member_functions: []
 - type: Client::UI::AddonSalvageResult
   name: AddonSalvageResult
   namespace: Client.UI
@@ -204458,6 +205304,59 @@ structs:
     - type: Client::Game::Event::TripleTriadEventHandler*
       name: this
   member_functions: []
+- type: Client::Graphics::Environment::EnvManager
+  name: EnvManager
+  namespace: Client.Graphics.Environment
+  union: False
+  size: 3056
+  fields:
+  - type: Client::Graphics::Scene::EnvScene*
+    name: EnvScene
+    offset: 8
+  - type: float
+    name: DayTimeSeconds
+    offset: 16
+  - type: float
+    name: ActiveTransitionTime
+    offset: 20
+  - type: float
+    name: CurrentTransitionTime
+    offset: 24
+  - type: float
+    name: TransitionProgress
+    offset: 28
+  - type: byte
+    name: ActiveWeather
+    offset: 39
+  - type: float
+    name: TransitionTime
+    offset: 40
+  - type: Client::Graphics::Scene::EnvSpace*
+    name: EnvSpace
+    offset: 56
+  - type: Client::Graphics::Environment::EnvState
+    name: EnvState
+    offset: 88
+  - type: Client::Graphics::Environment::EnvColorFilterParameters
+    name: ColorFilterOverride
+    offset: 976
+  - type: Client::Graphics::Environment::EnvSoundState
+    name: EnvSoundState
+    offset: 1128
+  - type: Client::Graphics::Environment::EnvSimulator
+    name: EnvSimulator
+    offset: 1248
+  - type: Client::Graphics::Render::ShadowCamera
+    name: ShadowCamera
+    offset: 2272
+  virtual_functions: []
+  member_functions: []
+  static_members:
+  - signature: 0F 28 F2 48 8B 05
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::Graphics::Environment::EnvManager
 - type: Client::Graphics::Scene::Demihuman
   name: Demihuman
   namespace: Client.Graphics.Scene
@@ -219306,6 +220205,438 @@ structs:
     return_type: char
     parameters:
     - type: Client::UI::AddonRelicNoteBook*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions: []
+- type: Client::UI::AddonSalvageDialog
+  name: AddonSalvageDialog
+  namespace: Client.UI
+  union: False
+  size: 672
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkComponentIcon*
+    name: ItemIconNode
+    offset: 576
+  - type: Client::UI::AddonSalvageDialog::CheckboxSlot
+    name: Checkboxes
+    offset: 584
+    size: 3
+    is_string: False
+  - type: Component::GUI::AtkComponentButton*
+    name: DesynthesizeButton
+    offset: 656
+  - type: Component::GUI::AtkComponentButton*
+    name: CancelButtonNode
+    offset: 664
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
       name: this
     - type: int
       name: inputId
@@ -248830,6 +250161,16 @@ structs:
   - signature: E8 ?? ?? ?? ?? 41 8D 45 ?? 83 F8 ?? 77 ?? 48 8B 07 48 8B CF FF 50 ?? B2 ?? 48 8B CF 44 0F BF F0
     return_type: void
     name: UpdateGroupPositions
+    parameters:
+    - type: Client::UI::AddonItemDetail*
+      name: this
+    - type: Component::GUI::NumberArrayData*
+      name: numberArray
+    - type: Component::GUI::StringArrayData*
+      name: stringArray
+  - signature: E8 ?? ?? ?? ?? 48 8B 45 ?? 48 8B 8F ?? ?? ?? ?? F7 40 ?? ?? ?? ?? ?? 75 ?? 33 D2 E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? B2 ?? E8
+    return_type: void
+    name: GenerateItemTooltip
     parameters:
     - type: Client::UI::AddonItemDetail*
       name: this
@@ -283741,11 +285082,30 @@ structs:
   - type: Client::Graphics::Render::Raindrop
     name: Raindrop
     offset: 225576
+  - type: unsigned int
+    name: InitializationFlags
+    offset: 230220
   - type: char
     name: Is3DRenderingDisabled
     offset: 230232
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: 40 53 57 41 54 41 55 48 83 EC ?? 65 48 8B 04 25
+    return_type: void
+    name: Render
+    parameters:
+    - type: Client::Graphics::Render::Manager*
+      name: this
+  - signature: E8 ?? ?? ?? ?? FF C5 49 83 C6 ?? BA
+    return_type: void
+    name: RenderView
+    parameters:
+    - type: Client::Graphics::Render::Manager*
+      name: this
+    - type: char
+      name: enabled
+    - type: Client::Graphics::Render::Manager::RenderViews
+      name: viewIndex
   static_members:
   - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C9
     relative_follow_offsets:
