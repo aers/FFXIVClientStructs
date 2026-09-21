@@ -37,9 +37,11 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [BitField<AtkUnitBaseLoadState>(nameof(LoadState), 28, 4)]
     [FieldOffset(0x198)] public uint Flags198;
     // 4 bytes padding
+    [BitField<bool>(nameof(OnlyHideWhenFireCallback), 0)]
     [BitField<bool>(nameof(DisableFocusability), 7)]
     [FieldOffset(0x1A0)] public byte Flags1A0;
     [BitField<bool>(nameof(IsReady), 0)]
+    [BitField<bool>(nameof(HideAfterReady), 1)]
     [BitField<bool>(nameof(ShouldFireCallbackAndHideOrClose), 2)]
     [BitField<bool>(nameof(DisableFocusOnShow), 6)]
     [FieldOffset(0x1A1)] public byte Flags1A1;

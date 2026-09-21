@@ -148,8 +148,14 @@ public unsafe partial struct AtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 44 8B C5")]
     public partial void SetAddonBlocking(ushort addonId, byte isBlocking);
 
+    /// <remarks>
+    /// Set bit 0 (<see cref="AtkUnitBase.OnlyHideWhenFireCallback"/>) of <see cref="AtkUnitBase.Flags1A0"/> (Just Hide() instead of Close() when the callback requests closure)
+    /// </remarks>
+    /// <param name="addonId">Addon id</param>
+    /// <param name="hideAfterAddonReady">Set or maintain bit 1 (<see cref="AtkUnitBase.HideAfterReady"/>) of <see cref="AtkUnitBase.Flags1A1"/>. If false, it will read the value of the bit then write it back, which means you could not clear <see cref="AtkUnitBase.HideAfterReady"/> by passing false to this param</param>
+    /// <param name="addToHudInitList">Add the <c>addonId</c> to <see cref="HudInitAddonIds"/> </param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? 4D 8D 6D 20")]
-    public partial void SetAddonHideOnCallback(ushort addonId, bool setOrRetainBitFlag, bool addToHudInitList);
+    public partial void SetAddonHideOnCallback(ushort addonId, bool hideAfterAddonReady, bool addToHudInitList);
     
     [MemberFunction("E8 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 0F B7 D6")]
     public partial void AddAddonToHudInitAddonIds(ushort addonId);
