@@ -24,12 +24,14 @@ public unsafe partial struct AgentHousingPortal {
     [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray60<bool> _plotOccupied;
     
     /// <summary>
-    /// 0 - Personal Estate <br/>
-    /// 1 - Free Company Estate <br/>
-    /// 2 - Apartment Room <br/>
+    /// 0 - Teleport to Personal Estate ward <br/>
+    /// 1 - Teleport to Free Company Estate ward <br/>
+    /// 2 - Teleport to Apartment Room ward <br/>
+    /// 3 - Clear ward selection <br/>
+    /// 4 - Unknown <br/>
+    /// 5 - Unknown <br/>
     /// </summary>
-    [FieldOffset(0x80)] public int TeleportEstateType;
-    
+    [FieldOffset(0x80)] public int SelectedMenuAction;
     [FieldOffset(0x84), FixedSizeArray] internal FixedSizeArray6<uint> _menuActions;
     [FieldOffset(0x9C), FixedSizeArray] public uint MenuItemCount;
     
@@ -40,7 +42,7 @@ public unsafe partial struct AgentHousingPortal {
     public partial void SelectWard(int wardIndex);
     
     /// <summary>
-    /// <see cref="TeleportEstateType"/>
+    /// <see cref="SelectedMenuAction"/>
     /// </summary>
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 8B B1 ?? ?? ?? ?? 48 8B F9 83 FE")]
     public partial bool TeleportToOwnEstateWard();
