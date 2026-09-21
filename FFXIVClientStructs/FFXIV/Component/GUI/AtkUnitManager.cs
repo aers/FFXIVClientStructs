@@ -181,14 +181,15 @@ public unsafe partial struct AtkUnitManager {
     public partial void CloseAddonById(ushort addonId);
     
     /// <summary>
-    /// Closes or hides the specified addon depending on its flags.
+    /// Closes or hides the specified addon.
     /// </summary>
     /// <remarks>
     /// Determines whether to close or hide the addon based on bit 0 (<see cref="AtkUnitBase.OnlyHideWhenFireCallback"/>) 
     /// of <see cref="AtkUnitBase.Flags1A0"/>.<br/>
-    /// If this addon has child addons (addons referencing this addon via <see cref="AtkUnitBase.ParentId"/>), 
-    /// this function also closes them. For all child addons, it unconditionally clears their 
-    /// <see cref="AtkUnitBase.OnlyHideWhenFireCallback"/> flag to ensure they are closed rather than hidden.
+    /// If bit 7 (<see cref="AtkUnitBase.HasChildAddons"/>) of <see cref="AtkUnitBase.Flags1A2"/> is set, this function searches for 
+    /// any child addons referencing this addon via <see cref="AtkUnitBase.ParentId"/> and closes them as well. 
+    /// For all child addons, it unconditionally clears their <see cref="AtkUnitBase.OnlyHideWhenFireCallback"/> flag 
+    /// to ensure they are closed rather than hidden.
     /// </remarks>
     [MemberFunction("40 53 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 32 DB")]
     public partial void CloseOrHideAddon(AtkUnitBase* addon);
