@@ -169,6 +169,10 @@ public unsafe partial struct AtkUnitManager {
     
     [MemberFunction("40 56 41 55 41 57 48 83 EC ?? 48 8B 01")]
     public partial void RestoreBlockedAddons(AtkUnitBase* excludedAddon);
+    
+    /// <remarks>Will unconditionally clear the bit 0 (<see cref="AtkUnitBase.OnlyHideWhenFireCallback"/>) of <see cref="AtkUnitBase.Flags1A0"/></remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? BF ?? ?? ?? ?? 49 FF C7")]
+    public partial void CloseAddonById(ushort addonId);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
