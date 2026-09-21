@@ -141,6 +141,18 @@ public unsafe partial struct AtkUnitManager {
     
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8C 24 ?? ?? ?? ?? 48 8D 8F")]
     public partial void SetAddonParentId(ushort addonId, ushort parentId);
+    
+    public void SetAddonBlocking(ushort addonId, bool blocking) =>
+        SetAddonBlocking(addonId, blocking ? (byte)1 : (byte)0);
+    
+    [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 6C 24 ?? 56")]
+    public partial void SetAddonBlocking(ushort addonId, byte isBlocking);
+
+    public void SetAddonHideOnCallback(ushort addonId, byte value, bool addToHudInitList) =>
+        SetAddonHideOnCallback(addonId, value, addToHudInitList ? (byte)1 : (byte)0);
+    
+    [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 44 0F BF 91")]
+    public partial void SetAddonHideOnCallback(ushort addonId, byte value, byte addToHudInitList);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]

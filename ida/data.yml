@@ -5254,6 +5254,8 @@ classes:
       0x140682BE0: SetAddonOrderAfter
       0x1400E7540: UpdateCursor
       0x14067EE40: SetAddonParentId
+      0x14067F050: SetAddonBlocking
+      0x14067EF40: SetAddonHideOnCallback
   Client::UI::WindowContextMenuHandler:
     vtbls:
       - ea: 0x142134438
