@@ -145,18 +145,18 @@ public unsafe partial struct AtkUnitManager {
     public void SetAddonBlocking(ushort addonId, bool blocking) =>
         SetAddonBlocking(addonId, blocking ? (byte)1 : (byte)0);
     
-    [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 6C 24 ?? 56")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 44 8B C5")]
     public partial void SetAddonBlocking(ushort addonId, byte isBlocking);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? 4D 8D 6D 20")]
     public partial void SetAddonHideOnCallback(ushort addonId, bool setOrRetainBitFlag, bool addToHudInitList);
     
-    [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 44 0F BF 81")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 0F B7 D6")]
     public partial void AddAddonToHudInitAddonIds(ushort addonId);
     
     /// <returns>Parent addon count</returns>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 33 F6")]
-    public partial uint GetParentAddonsById(AtkUnitBase** outAddons, ushort parent, int maxCount);
+    public partial uint GetParentAddonsById(AtkUnitBase** outAddons, ushort parentId, int maxCount);
     
     [MemberFunction("40 55 41 56 48 83 EC ?? 48 8B 01 4C 8B F1")]
     public partial void HideBlockedAddons();
