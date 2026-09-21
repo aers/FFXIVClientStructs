@@ -160,6 +160,12 @@ public unsafe partial struct AtkUnitManager {
     /// <returns>Parent addon count</returns>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 33 F6")]
     public partial uint GetParentAddonsById(AtkUnitBase** outAddons, ushort parent, int maxCount);
+    
+    [MemberFunction("40 55 41 56 48 83 EC ?? 48 8B 01 4C 8B F1")]
+    public partial void HideBlockedAddons();
+    
+    [MemberFunction("40 56 41 55 41 57 48 83 EC ?? 48 8B 01")]
+    public partial void RestoreBlockedAddons(AtkUnitBase* excludedAddon);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]

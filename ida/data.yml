@@ -5258,6 +5258,8 @@ classes:
       0x14067EF40: SetAddonHideOnCallback
       0x14067F260: AddAddonToHudInitAddonIds
       0x14067F340: GetParentAddonsById
+      0x14067F3E0: HideBlockedAddons
+      0x14067F630: RestoreBlockedAddons
   Client::UI::WindowContextMenuHandler:
     vtbls:
       - ea: 0x142134438
