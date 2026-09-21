@@ -37,7 +37,7 @@ public unsafe partial struct AgentHousingPortal {
     public partial void ReadPacket(HousingPortalPacket* packet);
     
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? BA ?? ?? ?? ?? EB ?? BA ?? ?? ?? ?? EB ?? 48 8B CE")]
-    public partial void SelectWard(uint wardIndex);
+    public partial void SelectWard(int wardIndex);
     
     /// <summary>
     /// <see cref="TeleportEstateType"/>
