@@ -55,7 +55,7 @@ public unsafe partial struct AgentHousingPortal {
     public partial void ProcessMenuConfirm(AtkValue* values);
     
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 C7 41 ?? ?? ?? ?? ?? 48 8B CA E8 ?? ?? ?? ?? 85 C0 75 ?? 44 8B 43")]
-    public partial void ConfirmTeleport(AtkValue* values);
+    public partial bool ConfirmTeleport(AtkValue* values);
     
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 74 24 ?? B1 ?? EB")]
     public partial void OpenPortalMenu(ushort territoryType, AtkModuleInterface.AtkEventInterface* eventInterface, uint menuAction);
