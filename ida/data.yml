@@ -9471,6 +9471,7 @@ classes:
       0x140679350: SetAtkValues
       0x140679DE0: LoadAddonConfig
       0x14067AC10: SaveAddonConfig
+      0x1406717F0: IsStandaloneAddon
   Component::GUI::AtkComponentBase:
     vtbls:
       - ea: 0x14217CEB8

@@ -284,6 +284,9 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 44 0F B6 97")]
     public partial bool UpdateAppliedVisibilityState();
 
+    [MemberFunction("66 83 B9 ?? ?? ?? ?? ?? 75 ?? 66 83 B9 ?? ?? ?? ?? ?? 75 ?? F6 81")]
+    public partial bool IsStandaloneAddon();
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
