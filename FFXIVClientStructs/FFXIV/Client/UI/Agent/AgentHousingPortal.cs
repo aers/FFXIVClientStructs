@@ -60,9 +60,6 @@ public unsafe partial struct AgentHousingPortal {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 74 24 ?? B1 ?? EB")]
     public partial void OpenPortalMenu(ushort territoryType, AtkModuleInterface.AtkEventInterface* eventInterface, uint menuAction);
     
-    /// <param name="text">Text in SelectYesno</param>
-    /// <param name="a3">Doesn't seem to be used</param>
-    /// <param name="a4">Doesn't seem to be used</param>
     [MemberFunction("E8 ?? ?? ?? ?? B3 ?? E9 ?? ?? ?? ?? 83 FD")]
     public partial void ShowTeleportConfirm(CStringPointer text, uint callbackEventKind, ushort parentAddonId);
 }
