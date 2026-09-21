@@ -156,6 +156,10 @@ public unsafe partial struct AtkUnitManager {
     
     [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 44 0F BF 81")]
     public partial void AddAddonToHudInitAddonIds(ushort addonId);
+    
+    /// <returns>Parent addon count</returns>
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 33 F6")]
+    public partial uint GetParentAddonsById(AtkUnitBase** outAddons, ushort parent, int maxCount);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
