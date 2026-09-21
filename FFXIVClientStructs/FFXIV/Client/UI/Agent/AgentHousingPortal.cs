@@ -21,7 +21,7 @@ public unsafe partial struct AgentHousingPortal {
     [FieldOffset(0x3C)] public int SelectedWardIndex;
     
     [FieldOffset(0x40)] public uint PlotCount;
-    [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray60<byte> _plotOccupied;
+    [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray60<bool> _plotOccupied;
     
     /// <summary>
     /// 0 - Personal Estate <br/>
