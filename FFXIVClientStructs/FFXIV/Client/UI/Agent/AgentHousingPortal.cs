@@ -46,7 +46,7 @@ public unsafe partial struct AgentHousingPortal {
     public partial bool TeleportToOwnEstateWard();
     
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F9 48 8B F2")]
-    public partial void ProcessPortalMenuSelect(AtkValue* values);
+    public partial bool ProcessPortalMenuSelect(AtkValue* values);
     
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F1 48 8B DA")]
     public partial bool ProcessAction(AtkValue* values);
