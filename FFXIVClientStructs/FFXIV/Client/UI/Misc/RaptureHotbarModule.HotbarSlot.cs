@@ -176,8 +176,20 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         public bool IsEmpty => CommandId == 0;
 
+        /// <summary>
+        /// Initialize the slot (specifically the utf8string, then clearing).
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 48 81 C6 E8 00 00 00 48 83 ED 01 75 ?? 49 8D B6")]
+        public partial void Initialize();
+
         [MemberFunction("E8 ?? ?? ?? ?? EB 07 44 88 2F")]
         public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
+
+        /// <summary>
+        /// Reset data in this hotbar slot.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 44 8B 0B 48 8B CD")]
+        public partial void Clear();
 
         /// <summary>
         /// Update the <see cref="CommandType"/> and <see cref="CommandId"/> of this hotbar slot. This method will only affect
