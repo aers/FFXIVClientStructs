@@ -49,7 +49,7 @@ public unsafe partial struct AgentHousingPortal {
     public partial void ProcessPortalMenuSelect(AtkValue* values);
     
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F1 48 8B DA")]
-    public partial void ProcessAction(AtkValue* values);
+    public partial bool ProcessAction(AtkValue* values);
     
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 33 FF 89 79 ?? 48 8B CA E8 ?? ?? ?? ?? 83 F8 ?? 0F 84")]
     public partial void ProcessMenuConfirm(AtkValue* values);
