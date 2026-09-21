@@ -49,6 +49,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [BitField<bool>(nameof(DisableHideTransition), 3)]
     [BitField<bool>(nameof(DisableShowHideSoundEffects), 5)]
     [BitField<bool>(nameof(DisableAddonConfig), 6)]
+    [BitField<bool>(nameof(HasChildAddons), 7)]
     [FieldOffset(0x1A2)] public byte Flags1A2;
     [BitField<bool>(nameof(EnableTitleBarContextMenu), 0)]
     // Bit 5: Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)

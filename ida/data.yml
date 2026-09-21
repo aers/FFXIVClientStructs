@@ -5261,6 +5261,7 @@ classes:
       0x14067F3E0: HideBlockedAddons
       0x14067F630: RestoreBlockedAddons
       0x14067E2C0: CloseAddonById
+      0x14067E330: CloseOrHideAddon
   Client::UI::WindowContextMenuHandler:
     vtbls:
       - ea: 0x142134438
