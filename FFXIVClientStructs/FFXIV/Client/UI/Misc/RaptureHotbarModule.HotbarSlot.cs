@@ -180,7 +180,7 @@ public partial struct RaptureHotbarModule {
         /// Initialize the slot (specifically the utf8string, then clearing).
         /// </summary>
         [MemberFunction("E8 ?? ?? ?? ?? 48 81 C6 E8 00 00 00 48 83 ED 01 75 ?? 49 8D B6")]
-        public partial void Initialize();
+        public partial HotbarSlot* Initialize();
 
         [MemberFunction("E8 ?? ?? ?? ?? EB 07 44 88 2F")]
         public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
