@@ -149,6 +149,9 @@ public unsafe partial struct HousingManager {
     /// <returns>True or False</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 45 38")]
     public static partial bool IsSubmarineExplorationExplored(byte point);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 88 45 38")]
+    public static partial void RequestWardInfo(ushort territoryType, ushort wardIndex);
 
     public HousingTerritoryType GetCurrentHousingTerritoryType()
         => CurrentTerritory != null ? CurrentTerritory->GetTerritoryType() : HousingTerritoryType.None;

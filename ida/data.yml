@@ -2319,6 +2319,7 @@ classes:
       0x140E1E0A0: SetTemporaryObject
       0x140E1E160: SetTemporaryObjectStain
       0x140E1D2B0: DepositItemInStoreroom
+      0x140E20400: RequestWardInfo
   Client::Game::HouseId:
     funcs:
       0x140E24E80: GetWardIndex
