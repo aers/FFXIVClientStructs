@@ -64,5 +64,5 @@ public unsafe partial struct AgentHousingPortal {
     /// <param name="a3">Doesn't seem to be used</param>
     /// <param name="a4">Doesn't seem to be used</param>
     [MemberFunction("E8 ?? ?? ?? ?? B3 ?? E9 ?? ?? ?? ?? 83 FD")]
-    public partial void ShowTeleportConfirm(CStringPointer text, int a3, ushort a4);
+    public partial void ShowTeleportConfirm(CStringPointer text, uint callbackEventKind, ushort parentAddonId);
 }
