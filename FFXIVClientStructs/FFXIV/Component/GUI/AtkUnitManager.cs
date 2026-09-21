@@ -138,6 +138,9 @@ public unsafe partial struct AtkUnitManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE")]
     public partial void UpdateCursor();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8C 24 ?? ?? ?? ?? 48 8D 8F")]
+    public partial void SetAddonParentId();
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]

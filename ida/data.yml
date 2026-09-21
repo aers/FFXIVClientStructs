@@ -5253,6 +5253,7 @@ classes:
       0x140682A50: RemoveAddonFromDrawOrder
       0x140682BE0: SetAddonOrderAfter
       0x1400E7540: UpdateCursor
+      0x14067EE40: SetAddonParentId
   Client::UI::WindowContextMenuHandler:
     vtbls:
       - ea: 0x142134438
