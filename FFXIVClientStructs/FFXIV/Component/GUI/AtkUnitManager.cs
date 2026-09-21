@@ -140,7 +140,7 @@ public unsafe partial struct AtkUnitManager {
     public partial void UpdateCursor();
     
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8C 24 ?? ?? ?? ?? 48 8D 8F")]
-    public partial void SetAddonParentId();
+    public partial void SetAddonParentId(ushort addonId, ushort parentId);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
