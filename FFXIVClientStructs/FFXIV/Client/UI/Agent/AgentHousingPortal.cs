@@ -43,7 +43,7 @@ public unsafe partial struct AgentHousingPortal {
     /// <see cref="TeleportEstateType"/>
     /// </summary>
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 8B B1 ?? ?? ?? ?? 48 8B F9 83 FE")]
-    public partial void TeleportToOwnEstateWard();
+    public partial bool TeleportToOwnEstateWard();
     
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F9 48 8B F2")]
     public partial void ProcessPortalMenuSelect(AtkValue* values);
