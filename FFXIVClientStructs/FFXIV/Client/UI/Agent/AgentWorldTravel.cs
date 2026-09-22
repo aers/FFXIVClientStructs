@@ -141,9 +141,9 @@ public unsafe partial struct AgentWorldTravel {
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct WorldTravelStatusPacket {
         [FieldOffset(0x10)] public byte Status; // 1 = queue updated, 2 = travel started, 3 = travel ended
-        [FieldOffset(0x14)] public uint QueuePosition; // status 1
-        [FieldOffset(0x18)] public uint EstimatedWaitTimeMinute; // status 1
-        [FieldOffset(0x14)] public uint LogMessageId1; // status 3
-        [FieldOffset(0x18)] public uint LogMessageId2; // status 3
+        [FieldOffset(0x14), CExporterUnion("Queue")] public uint QueuePosition; // status 1
+        [FieldOffset(0x18), CExporterUnion("WaitTime")] public uint EstimatedWaitTimeMinute; // status 1
+        [FieldOffset(0x14), CExporterUnion("Queue")] public uint LogMessageId1; // status 3
+        [FieldOffset(0x18), CExporterUnion("WaitTime")] public uint LogMessageId2; // status 3
     }
 }
