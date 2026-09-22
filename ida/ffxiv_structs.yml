@@ -59550,6 +59550,12 @@ structs:
     name: IsLoaded
     offset: 227
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 81 C6 E8 00 00 00 48 83 ED 01 75 ?? 49 8D B6
+    return_type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+    name: Initialize
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+      name: this
   - signature: E8 ?? ?? ?? ?? EB 07 44 88 2F
     return_type: void
     name: Set
@@ -59562,6 +59568,12 @@ structs:
       name: type
     - type: unsigned int
       name: id
+  - signature: E8 ?? ?? ?? ?? 44 8B 0B 48 8B CD
+    return_type: void
+    name: Clear
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+      name: this
   - signature: 40 53 48 83 EC 20 44 8B 81 ?? ?? ?? ?? 48 8B D9 0F B6 91 ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0
     return_type: char
     name: LoadIconId
