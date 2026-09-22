@@ -35,9 +35,10 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                   {
+                                      byte zero = 0;
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
-                                          return TestFunction(argOne, stringArgPtr);
+                                          return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                       }
                                   }
                               }
@@ -81,9 +82,10 @@ public class GenerateStringOverloadsAttributeTests {
                                   [global::System.ObsoleteAttribute("This function is obsolete")]
                                   public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                   {
+                                      byte zero = 0;
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
-                                          return TestFunction(argOne, stringArgPtr);
+                                          return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                       }
                                   }
                               }
@@ -124,9 +126,10 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public int TestFunction(ReadOnlySpan<byte> stringArg, int intArg = 7)
                                   {
+                                      byte zero = 0;
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
-                                          return TestFunction(stringArgPtr, intArg);
+                                          return TestFunction(stringArgPtr == null ? &zero : stringArgPtr, intArg);
                                       }
                                   }
                               }
@@ -174,11 +177,12 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg, ReadOnlySpan<byte> stringArgTwo)
                                   {
+                                      byte zero = 0;
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
                                           fixed (byte* stringArgTwoPtr = stringArgTwo)
                                           {
-                                              return TestFunction(argOne, stringArgPtr, stringArgTwoPtr);
+                                              return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr, stringArgTwoPtr == null ? &zero : stringArgTwoPtr);
                                           }
                                       }
                                   }
@@ -220,9 +224,10 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg, global::InteropGenerator.Runtime.CStringPointer notStringArg)
                                   {
+                                      byte zero = 0;
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
-                                          return TestFunction(argOne, stringArgPtr, notStringArg);
+                                          return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr, notStringArg);
                                       }
                                   }
                               }
@@ -283,9 +288,10 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                   {
+                                      byte zero = 0;
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
-                                          return TestFunction(argOne, stringArgPtr);
+                                          return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                       }
                                   }
                               }

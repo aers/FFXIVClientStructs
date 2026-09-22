@@ -69,8 +69,8 @@ internal sealed record MethodInfo(
 
     public string GetParameterNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{(TypeArguments.Any(t => t + '*' == p.Type) ? "(void*)" : "") + p.Name}"));
 
-    public string GetParameterNamesStringForStringOverload(ImmutableArray<string> paramsToOverload) =>
-        string.Join(", ", Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetStringPrefix()}{p.Name}Ptr" : $"{p.RefKind.GetStringPrefix()}{p.Name}"));
+    public string GetParameterNamesStringForStringOverload(ImmutableArray<string> paramsToOverload, bool withNullCheck = false) =>
+        string.Join(", ", Parameters.Select(p => paramsToOverload.Contains(p.Name) ? ($"{p.RefKind.GetStringPrefix()}{p.Name}Ptr" + (withNullCheck ? $" == null ? &zero : {p.RefKind.GetStringPrefix()}{p.Name}Ptr" : "")) : $"{p.RefKind.GetStringPrefix()}{p.Name}"));
 
     public string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}"));
 

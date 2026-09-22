@@ -1980,9 +1980,10 @@ public class InheritsAttributeTests {
                                           }
                                           public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                           {
+                                              byte zero = 0;
                                               fixed (byte* stringArgPtr = stringArg)
                                               {
-                                                  return TestFunction(argOne, stringArgPtr);
+                                                  return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                               }
                                           }
                                       }
@@ -2012,9 +2013,10 @@ public class InheritsAttributeTests {
                                                     }
                                                     public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                                     {
+                                                        byte zero = 0;
                                                         fixed (byte* stringArgPtr = stringArg)
                                                         {
-                                                            return TestFunction(argOne, stringArgPtr);
+                                                            return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                                         }
                                                     }
                                                 }
@@ -2067,9 +2069,10 @@ public class InheritsAttributeTests {
                                           [global::System.ObsoleteAttribute("This function is obsolete")]
                                           public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                           {
+                                              byte zero = 0;
                                               fixed (byte* stringArgPtr = stringArg)
                                               {
-                                                  return TestFunction(argOne, stringArgPtr);
+                                                  return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                               }
                                           }
                                       }
@@ -2102,9 +2105,10 @@ public class InheritsAttributeTests {
                                                     [global::System.ObsoleteAttribute("This function is obsolete")]
                                                     public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                                     {
+                                                        byte zero = 0;
                                                         fixed (byte* stringArgPtr = stringArg)
                                                         {
-                                                            return TestFunction(argOne, stringArgPtr);
+                                                            return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                                         }
                                                     }
                                                 }
@@ -2159,9 +2163,10 @@ public class InheritsAttributeTests {
                                           [global::TestAttribute]
                                           public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                           {
+                                              byte zero = 0;
                                               fixed (byte* stringArgPtr = stringArg)
                                               {
-                                                  return TestFunction(argOne, stringArgPtr);
+                                                  return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                               }
                                           }
                                       }
@@ -2194,9 +2199,10 @@ public class InheritsAttributeTests {
                                                     [global::TestAttribute]
                                                     public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg)
                                                     {
+                                                        byte zero = 0;
                                                         fixed (byte* stringArgPtr = stringArg)
                                                         {
-                                                            return TestFunction(argOne, stringArgPtr);
+                                                            return TestFunction(argOne, stringArgPtr == null ? &zero : stringArgPtr);
                                                         }
                                                     }
                                                 }
@@ -2915,9 +2921,10 @@ public class InheritsAttributeTests {
                                        }
                                        public void BaseA_B_vf0(ReadOnlySpan<byte> arg)
                                        {
+                                           byte zero = 0;
                                            fixed (byte* argPtr = arg)
                                            {
-                                               BaseA_B_vf0(argPtr);
+                                               BaseA_B_vf0(argPtr == null ? &zero : argPtr);
                                            }
                                        }
                                    }
@@ -3109,9 +3116,10 @@ public class InheritsAttributeTests {
                                                 }
                                                 public void BaseA_B_vf0(ReadOnlySpan<byte> arg)
                                                 {
+                                                    byte zero = 0;
                                                     fixed (byte* argPtr = arg)
                                                     {
-                                                        BaseA_B_vf0(argPtr);
+                                                        BaseA_B_vf0(argPtr == null ? &zero : argPtr);
                                                     }
                                                 }
                                                 /// <inheritdoc cref="BaseA_A.BaseA_A_field0" />
@@ -3231,9 +3239,10 @@ public class InheritsAttributeTests {
                                               }
                                               public void BaseA_B_vf0(ReadOnlySpan<byte> arg)
                                               {
+                                                  byte zero = 0;
                                                   fixed (byte* argPtr = arg)
                                                   {
-                                                      BaseA_B_vf0(argPtr);
+                                                      BaseA_B_vf0(argPtr == null ? &zero : argPtr);
                                                   }
                                               }
                                               /// <inheritdoc cref="BaseA_A.BaseA_A_field0" />
