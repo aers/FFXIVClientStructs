@@ -304,7 +304,7 @@ public sealed partial class InteropGenerator {
                 }
 
                 // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
-                string paramNames = methodInfo.GetParameterNamesStringForStringOverload(paramsToOverload, true);
+                string paramNames = methodInfo.GetParameterNamesStringForStringOverloadWithNullCheck(paramsToOverload);
                 writer.WriteLine($"{methodInfo.GetReturnString()}{methodInfo.Name}({paramNames});");
 
                 foreach (string _ in paramsToOverload) {
