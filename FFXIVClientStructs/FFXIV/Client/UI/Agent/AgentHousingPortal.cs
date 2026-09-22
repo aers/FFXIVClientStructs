@@ -33,7 +33,7 @@ public unsafe partial struct AgentHousingPortal {
     /// </summary>
     [FieldOffset(0x80)] public int SelectedMenuAction;
     [FieldOffset(0x84), FixedSizeArray] internal FixedSizeArray6<uint> _menuActions;
-    [FieldOffset(0x9C), FixedSizeArray] public uint MenuItemCount;
+    [FieldOffset(0x9C)] public uint MenuItemCount;
     
     [MemberFunction("40 55 53 41 54 41 55 41 57 48 8D AC 24 ?? ?? ?? ?? B8")]
     public partial void ReadPacket(HousingPortalPacket* packet);
