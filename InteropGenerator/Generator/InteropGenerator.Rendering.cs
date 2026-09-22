@@ -256,9 +256,6 @@ public sealed partial class InteropGenerator {
             // collect valid replacement targets
             ImmutableArray<string> paramsToOverload = [.. methodInfo.Parameters.Where(p => p.Type == "global::" + InteropTypeNames.CStringPointer && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
 
-            // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
-            string paramNames = methodInfo.GetParameterNamesStringForStringOverload(paramsToOverload);
-
             // "string" overload
             foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
                 writer.WriteLine(inheritedAttribute);
@@ -282,6 +279,8 @@ public sealed partial class InteropGenerator {
                     writer.IncreaseIndent();
                 }
 
+                // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
+                string paramNames = methodInfo.GetParameterNamesStringForStringOverload(paramsToOverload);
                 writer.WriteLine($"{methodInfo.GetReturnString()}{methodInfo.Name}({paramNames});");
 
                 foreach (string _ in paramsToOverload) {
@@ -295,12 +294,17 @@ public sealed partial class InteropGenerator {
             }
             writer.WriteLine(methodInfo.GetDeclarationStringForStringOverload("ReadOnlySpan<byte>", paramsToOverload));
             using (writer.WriteBlock()) {
+                // ReadOnlySpan<byte>.GetPinnableReference() returns a nullptr when the span is of length 0,
+                // so we have to check for that and point to a null terminator instead.
+                writer.WriteLine("byte zero = 0;");
                 foreach (string overloadParamName in paramsToOverload) {
                     writer.WriteLine($"fixed (byte* {overloadParamName}Ptr = {overloadParamName})");
                     writer.WriteLine("{");
                     writer.IncreaseIndent();
                 }
 
+                // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
+                string paramNames = methodInfo.GetParameterNamesStringForStringOverloadWithNullCheck(paramsToOverload);
                 writer.WriteLine($"{methodInfo.GetReturnString()}{methodInfo.Name}({paramNames});");
 
                 foreach (string _ in paramsToOverload) {
