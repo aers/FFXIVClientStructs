@@ -14989,7 +14989,24 @@ classes:
     funcs:
       0x140D7DEF0: ctor
       0x140D7DFD0: Finalizer
+      0x140D7E710: ShowInternal
+      0x140D7EDE0: OnWorldListPacket
+      0x140D7F1F0: OnWorldTravelStatusPacket
+      0x140D7F360: StartWorldTravel
+      0x140D7F5B0: GetDestinationWorldName
+      0x140D7F600: UpdateFinderStatusAddon
+      0x140D7F6F0: BuildWorldList
+      0x140D7FAF0: AddWorldEntry
+      0x140D7FC50: UpdateWorldTravelAddon
+      0x140D800F0: OpenFinderStatusAddon
+      0x140D80380: CloseFinderStatusAddon
+      0x140D803C0: OpenFinderReadyAddon
+      0x140D805B0: CloseFinderReadyAddon
+      0x140D805F0: SetQueueInfo
       0x140D80680: SetupWorldTravelInfo # (agent*, uint currentWorld, uint targetWorld)
+      0x140D80750: FilterWorldList
+      0x140D80810: GetWorldDataCenter
+      0x140DE93F0: GetDataCenterCount
   Client::UI::Agent::AgentRideShooting:
     vtbls:
       - ea: 0x1421FEC40
