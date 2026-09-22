@@ -14989,7 +14989,6 @@ classes:
     funcs:
       0x140D7DEF0: ctor
       0x140D7DFD0: Finalizer
-      0x140D7E710: ShowInternal
       0x140D7EDE0: OnWorldListPacket
       0x140D7F1F0: OnWorldTravelStatusPacket
       0x140D7F360: StartWorldTravel
