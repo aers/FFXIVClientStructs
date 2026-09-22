@@ -12,8 +12,8 @@ public unsafe partial struct AgentWorldTravel {
     [FieldOffset(0x34)] public uint WorldTravelFinderStatusAddonId;
     [FieldOffset(0x38)] public uint WorldTravelFinderReadyAddonId;
     
-    [FieldOffset(0x3C)] public int WorldCount; // entries in Worlds
-    [FieldOffset(0x40)] public World* Worlds; // worlds of the data center selected in the travel window
+    [FieldOffset(0x3C)] public int WorldCount;
+    [FieldOffset(0x40)] public World* Worlds; // worlds of the data center selected in the travel addon
     
     [FieldOffset(0x40), Obsolete("Use Worlds and WorldCount")]
     public ushort* HomeWorldId;
@@ -47,10 +47,10 @@ public unsafe partial struct AgentWorldTravel {
     [FieldOffset(0x138)] public byte BetweenAreas; // Roughly corresponds to the BetweenAreas condition
 
     [FieldOffset(0x140)] public World* AllWorlds; // every world known to the client
-    [FieldOffset(0x148)] public int AllWorldCount; // entries in AllWorlds, excluding the entries of home world and current world
+    [FieldOffset(0x148)] public int AllWorldCount; // excluding the entries of home world and current world
     
     [FieldOffset(0x14C)] public ushort DataCenterId; // WorldDCGroupType row of the selected data center
-    [FieldOffset(0x150)] public uint SelectedDataCenterIndex; // index into DataCenters
+    [FieldOffset(0x150)] public uint SelectedDataCenterIndex;
     [FieldOffset(0x154)] public byte HomeWorldDataCenterId; // WorldDCGroupType row
     [FieldOffset(0x155)] public byte CurrentWorldDataCenterId; // WorldDCGroupType row
     [FieldOffset(0x158)] public StdVector<DataCenter> DataCenters;
@@ -68,9 +68,9 @@ public unsafe partial struct AgentWorldTravel {
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct World {
         [FieldOffset(0x00)] public ushort WorldId;
-        [FieldOffset(0x02)] public ushort Flags; // 1 = the world has no message, 2 = home world, 4 = current world
+        [FieldOffset(0x02)] public ushort Flags; // 1 = LogMessageId is 0, 2 = home world, 4 = current world
         [FieldOffset(0x04)] public byte DataCenterId; // WorldDCGroupType row
-        [FieldOffset(0x08)] public uint MessageId; // shown when this world cannot be visited
+        [FieldOffset(0x08)] public uint LogMessageId; // shown when this world cannot be visited
     }
 
     // Client::UI::Agent::AgentWorldTravel::DataCenter
