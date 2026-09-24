@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x68D0)]
 public unsafe partial struct AgentRetainer {
     [FieldOffset(0x58)] public InventoryType SellItemInventoryType;
-    [FieldOffset(0x5C)] public ushort SellItemInventorySlot;
+    [FieldOffset(0x5C)] public int SellItemInventorySlot;
     
     [FieldOffset(0x4B74)] public int SellItemTotalPrice;
     [FieldOffset(0x4B78)] public int SellItemPriceLimit;
