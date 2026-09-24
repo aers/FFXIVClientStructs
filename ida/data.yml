@@ -13407,6 +13407,7 @@ classes:
     funcs:
       0x140CB7830: ctor
       0x140CB7A40: Finalizer
+      0x140CBD8A0: OpenRetainerSell
   Client::UI::Agent::AgentRetainerItemTransfer:
     vtbls:
       - ea: 0x1421C51F8
