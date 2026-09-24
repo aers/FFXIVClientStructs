@@ -28,6 +28,9 @@ public unsafe partial struct AgentRetainer {
     [FieldOffset(0x688C)] public uint RetainerSellListAddonId;
     [FieldOffset(0x6890)] public uint RetainerSellAddonId;
     [FieldOffset(0x68B0)] public ShopEventHandler* ShopEventHandler;
+    
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 83 BF ?? ?? ?? ?? ?? 74 ?? 8B CE")]
+    public partial void OpenRetainerSell(InventoryType inventoryType, ushort inventorySlot);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x168)]
     public struct SellListEntry {
