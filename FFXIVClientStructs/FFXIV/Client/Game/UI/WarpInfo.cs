@@ -13,7 +13,7 @@ public unsafe partial struct WarpInfo {
     public static partial WarpInfo* Instance();
 
     [FieldOffset(0x00)] private uint State;
-    [FieldOffset(0x04)] private float ElapsedTimeSinceLastWarp;
+    [FieldOffset(0x04)] public float ElapsedTimeSinceLastWarp;
     [FieldOffset(0x08)] private float Unk8;
     [FieldOffset(0x0C)] public WarpType WarpType;
     [FieldOffset(0x10)] private ExitRangeLayoutInstance* ExitRange;
