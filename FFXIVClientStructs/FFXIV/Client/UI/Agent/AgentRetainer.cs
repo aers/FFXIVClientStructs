@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentRetainer
@@ -8,4 +10,28 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<AgentInventoryContext.InventoryContextEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68D0)]
-public partial struct AgentRetainer;
+public unsafe partial struct AgentRetainer {
+    [FieldOffset(0x4B74)] public int TotalPrice;
+    [FieldOffset(0x4B78)] public int PriceLimit;
+    [FieldOffset(0x4B7C)] public int UnitPrice;
+    [FieldOffset(0x4B80)] public int Quantity;
+
+    [FieldOffset(0x4B84)] public int ContextMenuIndex;
+    [FieldOffset(0x4B88)] public int SellListEntryCount;
+
+    [FieldOffset(0x4B90), FixedSizeArray] internal FixedSizeArray20<SellListEntry> _sellListEntries;
+
+    [FieldOffset(0x688C)] public uint RetainerSellListAddonId;
+    [FieldOffset(0x6890)] public uint RetainerSellAddonId;
+    [FieldOffset(0x68B0)] public ShopEventHandler* ShopEventHandler;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x168)]
+    public struct SellListEntry {
+        [FieldOffset(0x00)] public uint ItemId;
+        [FieldOffset(0x08)] public Utf8String ItemName;
+        [FieldOffset(0x70)] public int Quantity;
+        [FieldOffset(0x78)] public Utf8String TotalPriceText;
+        [FieldOffset(0xE0)] public Utf8String UnitPriceText;
+        [FieldOffset(0x148)] public ushort InventorySlot;
+    }
+}
