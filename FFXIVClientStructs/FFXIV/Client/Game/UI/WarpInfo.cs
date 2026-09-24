@@ -87,8 +87,6 @@ public enum WarpType {
     Translate = 3, // name based on TownTranslate further down. seen when walking through ExitRange, changing wards in original housing zones
     Teleport = 4,
     Revive = 5, // Revive by others
-    [Obsolete("Use WarpType.Revive instead.")]
-    Unk5 = 5,
     Unk6 = 6,
     Return = 7,
     Resurrection = 8,
