@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -11,10 +12,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>, Inherits<AgentInventoryContext.InventoryContextEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68D0)]
 public unsafe partial struct AgentRetainer {
-    [FieldOffset(0x4B74)] public int TotalPrice;
-    [FieldOffset(0x4B78)] public int PriceLimit;
-    [FieldOffset(0x4B7C)] public int UnitPrice;
-    [FieldOffset(0x4B80)] public int Quantity;
+    [FieldOffset(0x58)] public InventoryType SellItemInventoryType;
+    [FieldOffset(0x5C)] public ushort SellItemInventorySlot;
+    
+    [FieldOffset(0x4B74)] public int SellItemTotalPrice;
+    [FieldOffset(0x4B78)] public int SellItemPriceLimit;
+    [FieldOffset(0x4B7C)] public int SellItemUnitPrice;
+    [FieldOffset(0x4B80)] public int SellItemQuantity;
 
     [FieldOffset(0x4B84)] public int ContextMenuIndex;
     [FieldOffset(0x4B88)] public int SellListEntryCount;
