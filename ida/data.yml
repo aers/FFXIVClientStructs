@@ -18478,6 +18478,17 @@ classes:
     vtbls:
       - ea: 0x1421A52E8
         base: Client::Game::Event::Director
+  Client::Game::Event::RacingChocoboNameResolver:
+    vtbls:
+      - ea: 0x140E58D50
+        base: Common::Component::Excel::ExcelSheetWaiter
+    funcs:
+      0x140E58B70: ctor
+      0x140E58BE0: SetCallback
+      0x140E58C00: Resolve
+      0x140E58D30: GetHasComposedFullName
+      0x140E58D40: GetFullName
+      0x140E58D50: ProcessRows
   Client::Game::Event::GoldSaucerDirector:
     vtbls:
       - ea: 0x1421D0A38
