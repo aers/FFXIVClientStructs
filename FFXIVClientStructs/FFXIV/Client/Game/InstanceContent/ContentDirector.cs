@@ -24,10 +24,10 @@ public unsafe partial struct ContentDirector {
     [FieldOffset(0xCFC)] public uint InstanceContentTextStartRowId;
     [FieldOffset(0xD00)] public uint InstanceContentTextRowCount;
 
-    [VirtualFunction(303)]
+    [VirtualFunction(304)]
     public partial uint GetCurrentLevel();
 
-    [VirtualFunction(304)]
+    [VirtualFunction(305)]
     public partial uint GetMaxLevel();
 
     /// <summary>Processes updates specific for this director. This handles the categories between 0 and 0x80000000.</summary>
