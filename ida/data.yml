@@ -4426,6 +4426,7 @@ classes:
       0x14208C870: ctor
       0x14208C780: ctor_From
       0x14208C8A0: Finalizer
+      0x14208CEE0: EnqueueRowLookup
     vfuncs:
       0: dtor
       1: Finish

@@ -6,4 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 public unsafe partial struct ExcelSheetWaiter {
     [VirtualFunction(0)]
     public partial ExcelSheetWaiter* Dtor(byte freeFlags);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 94 EE")]
+    public partial void EnqueueRowLookup(uint index, uint rowId);
 }
