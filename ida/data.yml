@@ -3211,6 +3211,7 @@ classes:
       0x140BE2170: SetClassJobId
       0x140BE2240: GetClassJobId
       0x140BE2A40: SetSyncedLevel
+      0x140BE2C90: IsLevelSynced
       0x140BE2CD0: SetBirthdate
       0x140BE2D90: SetGrandCompany
       0x140BE2E50: SetGrandCompanyRank

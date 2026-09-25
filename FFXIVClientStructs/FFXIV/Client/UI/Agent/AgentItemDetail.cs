@@ -1,5 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Enums;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -13,7 +15,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VirtualTable("48 89 18 48 8D 05 ?? ?? ?? ?? 48 89 07", 6)]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AgentItemDetail {
-    [FieldOffset(0x118)] public DetailKind DetailKind;
+    [FieldOffset(0x50)] public RacingChocoboNameResolver RacingChocoboNameResolver;
+    [FieldOffset(0x108)] public NumberArrayData* NumberArray;
+    [FieldOffset(0x110)] public StringArrayData* StringArray;
+    [FieldOffset(0x118)] public DetailKind DetailKind; // occupies 4 bytes
     // Set to the item ID when hovering an item in the chat, otherwise it seems
     // to be different for each inventory. Doesn't appear to have any relation
     // to InventoryType.
@@ -30,12 +35,21 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x11C)] public uint TypeOrId;
     [FieldOffset(0x120)] public uint Index; // The index of the item in the inventory. 0 for chat, ??? for KeyItems, position top-bottom inside a shop.
     [FieldOffset(0x124)] public int BuyQuantity; // The quantity selected for buying, which is previewed on the tooltip as "in bag" quantity, -1 outside shops
-    [FieldOffset(0x128)] public byte Flag1; // Related to checking the inventory
+    [FieldOffset(0x128)] public byte Flag1; // TODO: uint // Related to checking the inventory
+    [FieldOffset(0x12C)] public uint UpdateFlags;
+    [FieldOffset(0x130)] private uint Unk130Flags; // 1 = Has Name (Crafter or RaceChocobo), 2 = HousingYardObject.Unknown7
     [FieldOffset(0x134)] public int MaxStackSize;
     [FieldOffset(0x138)] public uint ItemId;
+    [FieldOffset(0x13C)] private float Unk13C;
+    [FieldOffset(0x140)] private float Unk140;
     [FieldOffset(0x148)] public Utf8String String1;
     [FieldOffset(0x1B0)] public Utf8String String2;
+    [FieldOffset(0x218)] private byte Unk218;
+    [FieldOffset(0x219)] private byte Unk219;
     [FieldOffset(0x21A)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show
+    [FieldOffset(0x21B)] public bool ItemCanBeHq;
+    [FieldOffset(0x21C)] private byte Unk21C;
+    [FieldOffset(0x21D)] private byte Unk21D;
     [FieldOffset(0x21E)] public byte Flag3; // If set to zero, avoids an early return in addon->Show()
 
     // half of these args are dependent on what DetailKind is set to

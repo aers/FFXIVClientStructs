@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentGoldSaucer
@@ -18,6 +20,7 @@ public unsafe partial struct AgentGoldSaucer {
     [FieldOffset(0x121)] public byte FilterDeckCardType;
     [FieldOffset(0x122)] public ushort FilterDeckSides;
     [FieldOffset(0x124)] public byte FilterDeckSorting;
+    [FieldOffset(0x140)] public RacingChocoboNameResolver RacingChocoboNameResolver;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? EB ?? 83 F8")]
     public partial bool RefreshDeckEdit();
