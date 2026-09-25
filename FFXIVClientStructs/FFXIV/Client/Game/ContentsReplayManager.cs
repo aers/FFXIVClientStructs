@@ -31,7 +31,6 @@ public unsafe partial struct ContentsReplayManager {
     [FieldOffset(0x72C)] public float PlaybackSpeed;
 
     [FieldOffset(0x740)] public ushort Level;
-
     [FieldOffset(0x742)] public ContentsReplayStatus Status;
     [FieldOffset(0x743)] public ContentsReplayPlaybackControl PlaybackControls;
 
