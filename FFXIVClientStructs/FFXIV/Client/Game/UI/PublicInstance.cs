@@ -16,7 +16,7 @@ public unsafe partial struct PublicInstance {
     public bool IsInstancedArea() => InstanceId != 0;
 
     [MemberFunction("4D 85 C9 0F 84 ?? ?? ?? ?? 89 54 24")]
-    public partial byte ShowInstanceSelection(uint territoryType, uint instanceCount, uint* instancePlayerCounts, uint instancePlayerCountsLength);
+    public partial void ShowInstanceSelection(uint territoryType, uint instanceCount, uint* instancePlayerCounts, uint instancePlayerCountsLength);
 
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 83 3B ?? 74 ?? 48 8B 10 48 8B C8 FF 52 ?? 8B 13 48 8B C8 4C 8B 00 41 FF 90")]
     public partial void CloseInstanceSelection();
