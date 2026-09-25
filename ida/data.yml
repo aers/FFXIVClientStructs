@@ -18669,8 +18669,8 @@ classes:
       - ea: 0x1421B1258
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
-      303: GetCurrentLevel
-      304: GetMaxLevel
+      304: GetCurrentLevel
+      305: GetMaxLevel
       325: ProcessDirectorSpecificDirectorUpdate
       329: GetContentTimeMax
       330: GetContentTypeIconId
