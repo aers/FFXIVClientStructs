@@ -16,7 +16,7 @@ public unsafe partial struct RacingChocoboNameResolver : ICreatable<RacingChocob
     [FieldOffset(0x5A)] public ushort FirstNameId;
     [FieldOffset(0x5C)] public ushort LastNameId;
     [FieldOffset(0x5E), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _fullName;
-    [FieldOffset(0xA0)] public delegate* unmanaged<void*, void*, void>  Callback;
+    [FieldOffset(0xA0)] public delegate* unmanaged<void*, void*, void> Callback;
     [FieldOffset(0xA8)] public void* CallbackThisArg;
     [FieldOffset(0xB0)] public void* CallbackArg;
 
