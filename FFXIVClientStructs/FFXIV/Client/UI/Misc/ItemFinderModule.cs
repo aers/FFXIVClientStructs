@@ -51,6 +51,11 @@ public unsafe partial struct ItemFinderModule {
     /// <returns>If <c>true</c>, the retainer has been summoned in the current session. Otherwise, the retainer inventory is from a client side cache.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 56 ?? 0F B6 F0")]
     public partial bool IsRetainerCurrent(ulong retainerId);
+    
+    /// <remarks>Used by context menu "Search for Item".</remarks>
+    /// <returns>Returns false if the item ID is invalid or if the request will be processed in the next update.</returns>
+    [MemberFunction("40 55 56 41 54 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 48 8B F1")]
+    public partial bool FindItem(uint itemId);
 }
 
 [GenerateInterop]
