@@ -239,6 +239,28 @@ public partial struct ViperGauge {
     [FieldOffset(0x10)] public byte SerpentComboState;
 }
 
+[GenerateInterop]
+[Inherits<JobGauge>]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public partial struct BeastmasterGauge {
+    [FieldOffset(0x08)] public byte TPGauge;
+    [FieldOffset(0x09)] public byte FamiliarTPGauge;
+    [FieldOffset(0x0A)] public byte FamiliarTPAtLastUse;
+    /// <summary>0 when no familiar is summoned, otherwise Battlehorn index + 1.</summary>
+    [FieldOffset(0x0B)] public byte ActiveBattlehornIndex;
+    [FieldOffset(0x0C)] public byte InstinctualComboState;
+    [FieldOffset(0x0D)] public BeastmasterAffinity CurrentAffinity;
+    /// <summary>Instinctual skills chained so far. Shown beneath the Inner Compass. Increases dmg dealt.</summary>
+    [FieldOffset(0x0E)] public byte ChainCount;
+    /// <remarks>Battlehorn index +1, XBMPet.Classification is Addon row 17740 + Classification.</remarks>
+    [BitField<byte>(nameof(KinshipBattlehornIndex), 0, 4)]
+    [BitField<byte>(nameof(Classification), 4, 4)]
+    [FieldOffset(0x0F)] public byte KinshipState;
+    [BitField<byte>(nameof(NaturalInstinct), 0, 2)]
+    [BitField<byte>(nameof(MasteredInstinct), 2, 2)]
+    [FieldOffset(0x10)] public byte InstinctState;
+}
+
 #endregion
 
 #region Tanks
