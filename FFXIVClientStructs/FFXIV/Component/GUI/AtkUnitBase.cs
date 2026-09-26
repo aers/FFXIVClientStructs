@@ -37,9 +37,11 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [BitField<AtkUnitBaseLoadState>(nameof(LoadState), 28, 4)]
     [FieldOffset(0x198)] public uint Flags198;
     // 4 bytes padding
+    [BitField<bool>(nameof(OnlyHideWhenFireCallback), 0)]
     [BitField<bool>(nameof(DisableFocusability), 7)]
     [FieldOffset(0x1A0)] public byte Flags1A0;
     [BitField<bool>(nameof(IsReady), 0)]
+    [BitField<bool>(nameof(HideAfterReady), 1)]
     [BitField<bool>(nameof(ShouldFireCallbackAndHideOrClose), 2)]
     [BitField<bool>(nameof(DisableFocusOnShow), 6)]
     [FieldOffset(0x1A1)] public byte Flags1A1;
@@ -47,6 +49,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [BitField<bool>(nameof(DisableHideTransition), 3)]
     [BitField<bool>(nameof(DisableShowHideSoundEffects), 5)]
     [BitField<bool>(nameof(DisableAddonConfig), 6)]
+    [BitField<bool>(nameof(HasChildAddons), 7)]
     [FieldOffset(0x1A2)] public byte Flags1A2;
     [BitField<bool>(nameof(EnableTitleBarContextMenu), 0)]
     // Bit 5: Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
@@ -283,6 +286,9 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     /// <returns> <see langword="true"/> when this AtkUnitBase is supposed to be removed from the AtkUnitList(s). </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 44 0F B6 97")]
     public partial bool UpdateAppliedVisibilityState();
+
+    [MemberFunction("66 83 B9 ?? ?? ?? ?? ?? 75 ?? 66 83 B9 ?? ?? ?? ?? ?? 75 ?? F6 81")]
+    public partial bool IsStandaloneAddon();
 
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
