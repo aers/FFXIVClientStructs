@@ -2319,6 +2319,7 @@ classes:
       0x140E1E0A0: SetTemporaryObject
       0x140E1E160: SetTemporaryObjectStain
       0x140E1D2B0: DepositItemInStoreroom
+      0x140E20400: RequestWardInfo
   Client::Game::HouseId:
     funcs:
       0x140E24E80: GetWardIndex
@@ -13788,6 +13789,14 @@ classes:
     funcs:
       0x14173AA10: ctor
       0x14173B3F0: ReadPacket
+      0x14173B330: ConfirmTeleport
+      0x14173BF00: SelectWard
+      0x14173C2C0: TeleportToOwnEstate
+      0x14173AD10: ProcessPortalMenuSelect
+      0x14173AF00: ProcessAction
+      0x14173B1D0: ProcessMenuConfirm
+      0x14173B8C0: OpenPortalMenu
+      0x14173C170: ShowTeleportConfirm
   Client::UI::Agent::AgentHousingTravellersNote:
     vtbls:
       - ea: 0x1422CEB70
