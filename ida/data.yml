@@ -11786,6 +11786,7 @@ classes:
       0x1407E51C0: Finalizer
       0x1407E6B80: IsRetainerCurrent
       0x1407E6BB0: SearchForItem
+      0x1407E9520: FindItem
   Client::UI::Misc::DataCenterHelper:
     vtbls:
       - ea: 0x1421A0408
