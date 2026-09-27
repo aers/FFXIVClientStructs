@@ -10,7 +10,7 @@ public unsafe partial struct ExcelSheetWaiter {
     [FieldOffset(0x0C)] private uint UnkC; // row counter?
 
     [FieldOffset(0x18)] public long SheetIndex;
-    [FieldOffset(0x20)] public ExcelRowDescriptor* RowDescriptors;
+    [FieldOffset(0x20)] public DescriptorRowWrapperEntry* RowDescriptors;
     [FieldOffset(0x28)] public ExcelRow** Rows;
 
     [VirtualFunction(0)]
@@ -31,4 +31,10 @@ public unsafe partial struct ExcelSheetWaiter {
     /// <summary> Sets a <see cref="ExcelRowDescriptor"/> with the given <paramref name="rowId"/> at given <paramref name="index"/>. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 94 EE")]
     public partial void EnqueueRowLookup(uint index, uint rowId);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct DescriptorRowWrapperEntry {
+        [FieldOffset(0x00)] public ExcelRowDescriptor Descriptor;
+        [FieldOffset(0x10)] public IExcelRowWrapper* RowWrapper;
+    }
 }
