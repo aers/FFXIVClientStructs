@@ -56220,6 +56220,11 @@ structs:
   - type: byte
     name: Flags
     offset: 24
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: IsInNoviceNetwork
   virtual_functions:
   - name: AddData
     offset: 8
