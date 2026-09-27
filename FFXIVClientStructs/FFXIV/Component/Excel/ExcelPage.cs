@@ -12,6 +12,7 @@ public unsafe partial struct ExcelPage {
 
     [FieldOffset(0x38)] public uint StartRowId;
     [FieldOffset(0x3C)] public uint EndRowId;
+    [FieldOffset(0x40)] public uint RowCount;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 85 DB 74 ?? 48 8B 5B ?? 48 3B DD")]
     public partial bool ContainsRowId(ExcelRowDescriptor* descriptor);
