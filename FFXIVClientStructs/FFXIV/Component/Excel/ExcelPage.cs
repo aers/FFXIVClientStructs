@@ -1,8 +1,8 @@
-using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
-namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
+namespace FFXIVClientStructs.FFXIV.Component.Excel;
 
-// Common::Component::Excel::ExcelPage
+// Component::Excel::ExcelPage
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
 public unsafe partial struct ExcelPage {
@@ -15,7 +15,4 @@ public unsafe partial struct ExcelPage {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 85 DB 74 ?? 48 8B 5B ?? 48 3B DD")]
     public partial bool ContainsRowId(ExcelRowDescriptor* descriptor);
-
-    [Obsolete("Incorrect parameter type. Use ContainsRowId(ExcelRowDescriptor*)")]
-    public bool ContainsRowId(uint rowId) => false;
 }
