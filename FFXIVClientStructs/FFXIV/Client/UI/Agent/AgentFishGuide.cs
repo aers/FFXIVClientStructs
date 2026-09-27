@@ -123,7 +123,7 @@ public unsafe partial struct AgentFishGuide {
     public partial struct FishGuideSheetWaiter {
         [FieldOffset(0x70)] public void* CallbackFn; // 5 args!?
         [FieldOffset(0x80)] public void* CallbackThisArg;
-        [FieldOffset(0x88)] public uint SheetIndex;
+        [FieldOffset(0x88)] public uint TargetSheetIndex;
     }
 
     // Client::UI::Agent::AgentFishGuide::FishGuideData
@@ -146,7 +146,7 @@ public unsafe partial struct AgentFishGuide {
     public partial struct SpearfishGuideSheetWaiter {
         [FieldOffset(0x70)] public void* CallbackFn; // 5 args!?
         [FieldOffset(0x80)] public void* CallbackThisArg;
-        [FieldOffset(0x88)] public uint SheetIndex;
+        [FieldOffset(0x88)] public uint TargetSheetIndex;
     }
 
     // Client::UI::Agent::AgentFishGuide::SpearfishGuideData
