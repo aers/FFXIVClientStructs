@@ -5062,6 +5062,11 @@ classes:
     funcs:
       0x142084E90: SetSheetName
   Component::Excel::ExcelPage:
+    vtbls:
+      - ea: 0x14257F5C8
+        base: Common::Component::Excel::LinkList<Component::Excel::ExcelPage>
+      - ea: 0x14257F5D0
+        base: Common::Component::Excel::ExcelResourceListener
     funcs:
       0x14208D4D0: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
       0x14208E350: ContainsRowId  # (ExcelPage* this, int* pnRowId) -> bool
