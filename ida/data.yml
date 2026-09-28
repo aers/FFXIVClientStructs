@@ -4424,10 +4424,14 @@ classes:
     vtbls:
       - ea: 0x14257F588
     funcs:
-      0x14208C870: ctor
       0x14208C780: ctor_From
+      0x14208C870: ctor
       0x14208C8A0: Finalizer
+      0x14208CC30: Reset
+      0x14208CCF0: Prepare
+      0x14208CDE0: SetRowDescriptor
       0x14208CEE0: EnqueueRowLookup
+      0x14208CF30: SetSheetIndex
     vfuncs:
       0: dtor
       1: Finish
@@ -5017,11 +5021,19 @@ classes:
         base: Common::Component::Environment::ResourceInterface::ResourceHandleInterface
       - ea: 0x142178338
         base: Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>
+  Common::Component::Excel::LinkList<Component::Excel::ExcelPage>:
+    vtbls:
+      - ea: 0x14257F3E8
+    vfuncs:
+      0: dtor
   Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>:
     vtbls:
       - ea: 0x14257F3F0
     vfuncs:
       0: dtor
+  Common::Component::Excel::ExcelSheet::WaiterContainer:
+    vtbls:
+      - ea: 0x14257F450
   Common::Component::Excel::ExcelSheet:
     vtbls:
       - ea: 0x14257F458
@@ -5039,14 +5051,22 @@ classes:
       0x142088BB0: GetColumnStringByDescriptor
       0x142088DC0: GetRowByIndex
       0x142088E30: GetRowByDescriptor
-      0x142088F60: GetSheetName
+      0x142088F60: GetSheetInfo
       0x142088F70: GetColumnOffset
       0x142089020: GetColumnIndex2
       0x142089030: GetColumnType
       0x142089050: GetColumnTypeLength
       0x142089060: GetWaiterCount
       0x1420893D0: RemoveWaiter
+  Common::Component::Excel::ExcelSheetNameVar:
+    funcs:
+      0x142084E90: SetSheetName
   Component::Excel::ExcelPage:
+    vtbls:
+      - ea: 0x14257F5C8
+        base: Common::Component::Excel::LinkList<Component::Excel::ExcelPage>
+      - ea: 0x14257F5D0
+        base: Common::Component::Excel::ExcelResourceListener
     funcs:
       0x14208D4D0: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
       0x14208E350: ContainsRowId  # (ExcelPage* this, int* pnRowId) -> bool
