@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentRetainer {
     [FieldOffset(0x58)] public InventoryType SellItemInventoryType;
     [FieldOffset(0x5C)] public int SellItemInventorySlot;
-    
+
     [FieldOffset(0x4B74)] public int SellItemTotalPrice;
     [FieldOffset(0x4B78)] public int SellItemPriceLimit;
     [FieldOffset(0x4B7C)] public int SellItemUnitPrice;
@@ -28,7 +28,7 @@ public unsafe partial struct AgentRetainer {
     [FieldOffset(0x688C)] public uint RetainerSellListAddonId;
     [FieldOffset(0x6890)] public uint RetainerSellAddonId;
     [FieldOffset(0x68B0)] public ShopEventHandler* ShopEventHandler;
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 83 BF ?? ?? ?? ?? ?? 74 ?? 8B CE")]
     public partial void OpenRetainerSell(InventoryType inventoryType, ushort inventorySlot);
 

@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct InfoProxyNoviceNetwork {
+    [BitField<bool>(nameof(IsInNoviceNetwork), 0)]
     [FieldOffset(0x18)] public byte Flags;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 50 48 8B 9C 24")]

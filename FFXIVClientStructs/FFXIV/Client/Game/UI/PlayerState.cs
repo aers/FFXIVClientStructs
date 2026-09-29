@@ -354,6 +354,9 @@ public unsafe partial struct PlayerState {
     [MemberFunction("0F B6 51 7E 80 FA 24")]
     public partial byte GetCurrentClassJobMaxLevel();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 66 3B F1")]
+    public partial byte GetCurrentClassJobContentMaxLevel();
+
     #region Unlocks
 
     /// <summary>

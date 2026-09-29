@@ -15,7 +15,7 @@ public unsafe partial struct AddonNamePlate {
     [FieldOffset(0x480)] public NamePlateObject* NamePlateObjectArray; // 0 - 50
     // Cached from NamePlateNumberArray.IsInPvPArea. A change causes all nameplates to be updated.
     [FieldOffset(0x488)] public bool IsInPvPArea;
-    [Obsolete("This is cached PvP-area state. Use IsInPvPArea, or UpdateAllNamePlates to force an update.")]
+    [Obsolete("This is cached PvP-area state. Use IsInPvPArea.")]
     [FieldOffset(0x488)] public byte DoFullUpdate;
     [FieldOffset(0x48A)] public ushort AlternatePartId;
 
