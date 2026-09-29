@@ -17,6 +17,12 @@ public partial struct InstanceContentCrucible {
         [FieldOffset(4)] public ushort ItemId;
     }
 
+    /// <summary>
+    /// Uses a Crucible item.
+    /// </summary>
+    /// <remarks>If applicable, the item action will be used on the player's current soft or hard target.</remarks>
+    /// <param name="slot">Crucible inventory index (0-9).</param>
+    /// <param name="unk3"></param>
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F 44 00 48 8D 57 44")]
     public partial void UseItem(uint slot, int unk3);
 }
