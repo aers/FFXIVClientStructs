@@ -18501,7 +18501,7 @@ classes:
         base: Client::Game::Event::Director
   Client::Game::Event::RacingChocoboNameResolver:
     vtbls:
-      - ea: 0x140E58D50
+      - ea: 0x1421D0A18
         base: Common::Component::Excel::ExcelSheetWaiter
     funcs:
       0x140E58B70: ctor
