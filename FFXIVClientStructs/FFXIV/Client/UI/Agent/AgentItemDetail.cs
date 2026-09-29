@@ -48,7 +48,7 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x219)] private byte Unk219;
     [FieldOffset(0x21A)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show
     [FieldOffset(0x21B)] public bool ItemCanBeHq;
-    [FieldOffset(0x21C)] public byte IsDirty; // This will trigger the regeneration of the tooltip.
+    [FieldOffset(0x21C)] public bool IsDirty; // This will trigger the regeneration of the tooltip.
     [FieldOffset(0x21D)] private byte Unk21D;
     [FieldOffset(0x21E)] public byte Flag3; // If set to zero, avoids an early return in addon->Show()
 
