@@ -7275,6 +7275,31 @@ enums:
     "Up": 1
     "Held": 2
     "Repeat": 3
+- type: Common::Component::Excel::ExcelColumnType
+  name: ExcelColumnType
+  underlying: unsigned __int16
+  namespace: Common.Component.Excel
+  flags: False
+  values:
+    "String": 0
+    "Bool": 1
+    "Int8": 2
+    "UInt8": 3
+    "Int16": 4
+    "UInt16": 5
+    "Int32": 6
+    "UInt32": 7
+    "Float32": 9
+    "Int64": 10
+    "UInt64": 11
+    "PackedBool0": 25
+    "PackedBool1": 26
+    "PackedBool2": 27
+    "PackedBool3": 28
+    "PackedBool4": 29
+    "PackedBool5": 30
+    "PackedBool6": 31
+    "PackedBool7": 32
 - type: Client::UI::UIObjectKind
   name: UIObjectKind
   underlying: byte
@@ -30785,8 +30810,8 @@ structs:
   union: False
   size: 6
   fields:
-  - type: unsigned __int16
-    name: Type
+  - type: Common::Component::Excel::ExcelColumnType
+    name: ColumnType
     offset: 0
   - type: unsigned __int16
     name: Index
@@ -30795,12 +30820,59 @@ structs:
     name: Offset
     offset: 4
   member_functions: []
+- type: Common::Component::Excel::ExcelSheet::WaiterContainer::WaiterEntry
+  name: WaiterEntry
+  namespace: Common.Component.Excel
+  union: False
+  size: 24
+  fields:
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: Waiter
+    offset: 0
+  - type: int
+    name: Index
+    offset: 8
+  - type: Common::Component::Excel::ExcelSheet::WaiterContainer::WaiterEntry*
+    name: Next
+    offset: 16
+  member_functions: []
+- type: Common::Component::Excel::ExcelSheetNameVar
+  name: ExcelSheetNameVar
+  namespace: Common.Component.Excel
+  union: False
+  size: 16
+  fields:
+  - type: char*
+    name: SheetNamePtr
+    offset: 0
+  - type: unsigned __int16
+    name: SheetNameHash
+    offset: 8
+  - type: byte
+    name: Type
+    offset: 10
+  member_functions: []
 - type: Common::Component::Excel::ExcelSheetWaiter
   name: ExcelSheetWaiter
   namespace: Common.Component.Excel
   union: False
   size: 48
-  fields: []
+  fields:
+  - type: unsigned int
+    name: RowDescriptorCount
+    offset: 8
+  - type: unsigned int
+    name: UnkC
+    offset: 12
+  - type: __int64
+    name: SheetIndex
+    offset: 24
+  - type: Common::Component::Excel::ExcelSheetWaiter::DescriptorRowWrapperEntry*
+    name: RowDescriptors
+    offset: 32
+  - type: Component::Excel::ExcelRow**
+    name: Rows
+    offset: 40
   virtual_functions:
   - name: dtor
     offset: 0
@@ -30813,6 +30885,40 @@ structs:
   - name: Finish
     offset: 8
   member_functions:
+  - signature: E8 ?? ?? ?? ?? C0 E3
+    return_type: void
+    name: Reset
+    parameters:
+    - type: Common::Component::Excel::ExcelSheetWaiter*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 39 6B
+    return_type: void
+    name: Prepare
+    parameters:
+    - type: Common::Component::Excel::ExcelSheetWaiter*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: unsigned int
+      name: rowDescriptorCount
+  - signature: E8 ?? ?? ?? ?? 48 8D 74 24 ?? BF
+    return_type: void
+    name: SetSheetIndex
+    parameters:
+    - type: Common::Component::Excel::ExcelSheetWaiter*
+      name: this
+    - type: __int64
+      name: sheetIndex
+  - signature: E8 ?? ?? ?? ?? FF C7 4D 8D B6
+    return_type: void
+    name: SetRowDescriptor
+    parameters:
+    - type: Common::Component::Excel::ExcelSheetWaiter*
+      name: this
+    - type: unsigned int
+      name: index
+    - type: Component::Excel::ExcelRowDescriptor*
+      name: descriptor
   - signature: E8 ?? ?? ?? ?? 49 8B 94 EE
     return_type: void
     name: EnqueueRowLookup
@@ -53095,7 +53201,7 @@ structs:
     name: CallbackThisArg
     offset: 128
   - type: unsigned int
-    name: SheetIndex
+    name: TargetSheetIndex
     offset: 136
   virtual_functions:
   - name: dtor
@@ -53124,7 +53230,7 @@ structs:
     name: CallbackThisArg
     offset: 128
   - type: unsigned int
-    name: SheetIndex
+    name: TargetSheetIndex
     offset: 136
   virtual_functions:
   - name: dtor
@@ -61513,6 +61619,35 @@ structs:
     - type: __int64
       name: unk
   member_functions: []
+- type: Common::Component::Excel::ExcelSheetWaiter::DescriptorRowWrapperEntry
+  name: DescriptorRowWrapperEntry
+  namespace: Common.Component.Excel
+  union: False
+  size: 24
+  fields:
+  - type: Component::Excel::ExcelRowDescriptor
+    name: Descriptor
+    offset: 0
+  - type: Component::Excel::IExcelRowWrapper*
+    name: RowWrapper
+    offset: 16
+  member_functions: []
+- type: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet::WaiterContainer::WaiterEntry>
+  name: LinkList`1
+  namespace: Common.Component.Excel
+  union: False
+  fields:
+  - type: Common::Component::Excel::LinkList
+    name: Base
+    offset: 0
+    base: true
+  - type: Common::Component::Excel::ExcelSheet::WaiterContainer::WaiterEntry*
+    name: Previous
+    offset: 8
+  - type: Common::Component::Excel::ExcelSheet::WaiterContainer::WaiterEntry*
+    name: Next
+    offset: 16
+  member_functions: []
 - type: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
   name: LinkList`1
   namespace: Common.Component.Excel
@@ -61526,6 +61661,25 @@ structs:
     name: Previous
     offset: 8
   - type: Common::Component::Excel::ExcelSheet*
+    name: Next
+    offset: 16
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  member_functions: []
+- type: Common::Component::Excel::LinkList<Component::Excel::ExcelPage>
+  name: LinkList`1
+  namespace: Common.Component.Excel
+  union: False
+  fields:
+  - type: Common::Component::Excel::LinkList
+    name: Base
+    offset: 0
+    base: true
+  - type: Component::Excel::ExcelPage*
+    name: Previous
+    offset: 8
+  - type: Component::Excel::ExcelPage*
     name: Next
     offset: 16
   virtual_functions:
@@ -88770,106 +88924,37 @@ structs:
     - type: byte
       name: freeFlags
   member_functions: []
-- type: Common::Component::Excel::ExcelSheet
-  name: ExcelSheet
+- type: Common::Component::Excel::ExcelSheet::LinkedListContainer
+  name: LinkedListContainer
   namespace: Common.Component.Excel
   union: False
-  size: 256
+  size: 56
   fields:
-  - type: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
+  - type: Common::Component::Excel::LinkList<Component::Excel::ExcelPage>
+    name: List1
+    offset: 0
+  - type: Common::Component::Excel::LinkList<Component::Excel::ExcelPage>
+    name: List2
+    offset: 24
+  - type: int
+    name: NumCreatedExcelPages
+    offset: 48
+  member_functions: []
+- type: Common::Component::Excel::ExcelSheet::WaiterContainer
+  name: WaiterContainer
+  namespace: Common.Component.Excel
+  union: False
+  size: 32
+  fields:
+  - type: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet::WaiterContainer::WaiterEntry>
     name: Base
     offset: 0
     base: true
-  - type: Common::Component::Excel::ExcelLanguage
-    name: Language
+  - type: int
+    name: Count
     offset: 24
-  - type: char*
-    name: SheetName
-    offset: 32
-  - type: unsigned int
-    name: RowCount
-    offset: 48
-  - type: Common::Component::Excel::ExcelSheet::ColumnInfo*
-    name: ColumnDefinitions
-    offset: 56
-  - type: unsigned int
-    name: DataOffset
-    offset: 64
-  - type: unsigned int
-    name: RowLength
-    offset: 68
-  - type: unsigned int
-    name: CachedAllocatedRowCount
-    offset: 168
-  - type: Component::Excel::IExcelPageRowResolver*
-    name: RowResolver
-    offset: 176
-  - type: Common::Component::Excel::ExcelVariant
-    name: Variant
-    offset: 208
-  - type: unsigned __int16
-    name: ColumnCount
-    offset: 212
-  - type: __int16
-    name: StartColumn
-    offset: 214
-  - type: unsigned __int16
-    name: Version
-    offset: 216
-  - type: unsigned __int16
-    name: SheetIndex
-    offset: 218
-  - type: unsigned int
-    name: WaiterCount
-    offset: 248
   virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 8B D0 BD
-    return_type: unsigned int
-    name: GetAllocatedRowCount
-    parameters:
-    - type: Common::Component::Excel::ExcelSheet*
-      name: this
-  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8D 74 24
-    return_type: Component::Excel::IExcelRowWrapper*
-    name: GetRowByDescriptor
-    parameters:
-    - type: Common::Component::Excel::ExcelSheet*
-      name: this
-    - type: Component::Excel::ExcelRowDescriptor*
-      name: descriptor
-    - type: unsigned int*
-      name: outErrorCode
-  - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 49 89 44 0E
-    return_type: Component::Excel::IExcelRowWrapper*
-    name: GetSubRowByDescriptor
-    parameters:
-    - type: Common::Component::Excel::ExcelSheet*
-      name: this
-    - type: Component::Excel::ExcelRowDescriptor*
-      name: descriptor
-    - type: unsigned int*
-      name: outErrorCode
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 ?? B0 ?? EB
-    return_type: Component::Excel::IExcelRowWrapper*
-    name: GetRowByIndex
-    parameters:
-    - type: Common::Component::Excel::ExcelSheet*
-      name: this
-    - type: unsigned int
-      name: rowIndex
-    - type: Component::Excel::ExcelRowDescriptor*
-      name: descriptor
-  - signature: E8 ?? ?? ?? ?? 8B D3 48 8B F8
-    return_type: Component::Excel::IExcelRowWrapper*
-    name: GetRowById
-    parameters:
-    - type: Common::Component::Excel::ExcelSheet*
-      name: this
-    - type: unsigned int
-      name: rowId
-    - type: unsigned int*
-      name: outErrorCode
+  member_functions: []
 - type: Common::Configuration::DevConfig
   name: DevConfig
   namespace: Common.Configuration
@@ -104430,6 +104515,41 @@ structs:
     parameters:
     - type: Component::Completion::CategoryData*
       name: this
+- type: Component::Excel::ExcelPage
+  name: ExcelPage
+  namespace: Component.Excel
+  union: False
+  size: 704
+  fields:
+  - type: Common::Component::Excel::LinkList<Component::Excel::ExcelPage>
+    name: Base
+    offset: 0
+    base: true
+  - type: Common::Component::Excel::ExcelSheet*
+    name: Sheet
+    offset: 32
+  - type: Common::Component::Excel::ExcelSheetNameVar
+    name: SheetNameVar
+    offset: 40
+  - type: unsigned int
+    name: StartRowId
+    offset: 56
+  - type: unsigned int
+    name: EndRowId
+    offset: 60
+  - type: unsigned int
+    name: RowCount
+    offset: 64
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 85 DB 74 ?? 48 8B 5B ?? 48 3B DD
+    return_type: char
+    name: ContainsRowId
+    parameters:
+    - type: Component::Excel::ExcelPage*
+      name: this
+    - type: Component::Excel::ExcelRowDescriptor*
+      name: descriptor
 - type: Component::Excel::RingBufferExcelPageRowResolver
   name: RingBufferExcelPageRowResolver
   namespace: Component.Excel
@@ -150740,6 +150860,128 @@ structs:
   - name: RaycastSimple
     offset: 240
   member_functions: []
+- type: Common::Component::Excel::ExcelSheet
+  name: ExcelSheet
+  namespace: Common.Component.Excel
+  union: False
+  size: 256
+  fields:
+  - type: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
+    name: Base
+    offset: 0
+    base: true
+  - type: Common::Component::Excel::ExcelLanguage
+    name: Language
+    offset: 24
+  - type: Common::Component::Excel::ExcelSheetNameVar
+    name: SheetNameVar
+    offset: 32
+  - type: unsigned int
+    name: RowCount
+    offset: 48
+  - type: Common::Component::Excel::ExcelSheet::ColumnInfo*
+    name: ColumnDefinitions
+    offset: 56
+  - type: unsigned int
+    name: DataOffset
+    offset: 64
+  - type: unsigned int
+    name: RowLength
+    offset: 68
+  - type: Common::Component::Excel::ExcelSheet::LinkedListContainer
+    name: ExcelPages
+    offset: 112
+  - type: unsigned int
+    name: CachedAllocatedRowCount
+    offset: 168
+  - type: Component::Excel::IExcelPageRowResolver*
+    name: RowResolver
+    offset: 176
+  - type: Common::Component::Excel::ExcelVariant
+    name: Variant
+    offset: 208
+  - type: unsigned __int16
+    name: ColumnCount
+    offset: 212
+  - type: __int16
+    name: StartColumn
+    offset: 214
+  - type: unsigned __int16
+    name: Version
+    offset: 216
+  - type: unsigned __int16
+    name: SheetIndex
+    offset: 218
+  - type: char
+    name: ExcelPagesLinked
+    offset: 221
+  - type: Common::Component::Excel::ExcelSheet::WaiterContainer
+    name: Waiters
+    offset: 224
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B D0 BD
+    return_type: unsigned int
+    name: GetAllocatedRowCount
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8D 74 24
+    return_type: Component::Excel::IExcelRowWrapper*
+    name: GetRowByDescriptor
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+    - type: Component::Excel::ExcelRowDescriptor*
+      name: descriptor
+    - type: unsigned int*
+      name: outErrorCode
+  - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 49 89 44 0E
+    return_type: Component::Excel::IExcelRowWrapper*
+    name: GetSubRowByDescriptor
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+    - type: Component::Excel::ExcelRowDescriptor*
+      name: descriptor
+    - type: unsigned int*
+      name: outErrorCode
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 ?? B0 ?? EB
+    return_type: Component::Excel::IExcelRowWrapper*
+    name: GetRowByIndex
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+    - type: unsigned int
+      name: rowIndex
+    - type: Component::Excel::ExcelRowDescriptor*
+      name: descriptor
+  - signature: E8 ?? ?? ?? ?? 8B D3 48 8B F8
+    return_type: Component::Excel::IExcelRowWrapper*
+    name: GetRowById
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+    - type: unsigned int
+      name: rowId
+    - type: unsigned int*
+      name: outErrorCode
+  - signature: E9 ?? ?? ?? ?? 13 6D
+    return_type: char
+    name: AddWaiter
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+    - type: Common::Component::Excel::ExcelSheetWaiter*
+      name: waiter
+  - signature: E8 ?? ?? ?? ?? 8B 53 ?? 44 8B C5
+    return_type: void
+    name: RemoveWaiter
+    parameters:
+    - type: Common::Component::Excel::ExcelSheet*
+      name: this
+    - type: Common::Component::Excel::ExcelSheetWaiter*
+      name: waiter
 - type: Component::Exd::ExdEnvironment
   name: ExdEnvironment
   namespace: Component.Exd
