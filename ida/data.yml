@@ -8948,6 +8948,7 @@ classes:
       1: dtor
     funcs:
       0x140646C40: ctor
+      0x140646DE0: IsTweening
       0x140646DF0: Prepare
       0x140647000: Execute
       0x1406470C0: Clear
@@ -21312,6 +21313,9 @@ classes:
         base: Client::UI::AddonMainCommandInterface
     funcs:
       0x1415A4E60: ctor
+      0x1415A7480: RefreshCurrentItemNodes
+      0x1415A92B0: UpdateHelpText
+      0x1415FB240: StdVectorCommandDataInsert # static
   Client::UI::AddonCharaMakeFeatureColorL: # 172
   Client::UI::AddonCharaMakeFeatureColorFacePaint: # 173
     vtbls:
