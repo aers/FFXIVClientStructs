@@ -19738,10 +19738,12 @@ classes:
     vtbls:
       - ea: 0x1423861D8
         base: Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise
-  Client::Game::InstanceContent::InstanceContentCrucible:
+  Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken:
     vtbls:
       - ea: 0x1421F2D68
         base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x140EC06D0: UseItem
   Client::Game::InstanceContent::InstanceContentDeepDungeon:
     vtbls:
       - ea: 0x14238B010

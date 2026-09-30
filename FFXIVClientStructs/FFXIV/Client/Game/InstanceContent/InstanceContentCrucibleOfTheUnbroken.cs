@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
-// Client::Game::InstanceContent::InstanceContentCrucible
+// Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken
 //   Client::Game::InstanceContent::InstanceContentDirector
 //     Client::Game::InstanceContent::ContentDirector
 //       Client::Game::Event::Director
@@ -9,12 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x25A0)]
-public partial struct InstanceContentCrucible {
+public partial struct InstanceContentCrucibleOfTheUnbroken {
     [FieldOffset(0x2380), FixedSizeArray] internal FixedSizeArray10<InventorySlot> _inventory;
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct InventorySlot {
-        [FieldOffset(4)] public ushort ItemId;
+        [FieldOffset(0x04)] public ushort ItemId;
     }
 
     /// <summary>
@@ -26,4 +26,3 @@ public partial struct InstanceContentCrucible {
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F 44 00 48 8D 57 44")]
     public partial void UseItem(uint slot, int beastId);
 }
-
