@@ -21,7 +21,8 @@ public unsafe partial struct AtkSimpleTween : ICreatable<AtkSimpleTween> {
     [FieldOffset(0x1C)] public float Duration;
     [FieldOffset(0x20)] public StdVector<SimpleTweenAnimation> Animations;
     [FieldOffset(0x38)] public int Id;
-    [FieldOffset(0x40)] public AtkEvent* Event;
+    [FieldOffset(0x40), Obsolete("Incorrect field. This is EventManager.", true)] public AtkEvent* Event;
+    [FieldOffset(0x40)] public AtkEventManager EventManager;
     [FieldOffset(0x48)] public float EasingFactor;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C3 89 7B 58")]
