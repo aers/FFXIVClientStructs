@@ -15,12 +15,10 @@ public unsafe partial struct AgentHousingPortal {
     [FieldOffset(0x30)] public uint ConfirmAddonId;
     [FieldOffset(0x34)] public ushort PortalMenuAddonId;
     [FieldOffset(0x36)] public ushort WardSelectAddonId;
-    
     [FieldOffset(0x38)] public ushort TerritoryType;
     
     [FieldOffset(0x3C)] public int SelectedWardIndex;
     
-    [FieldOffset(0x40)] public uint PlotCount;
     [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray60<bool> _plotOccupied;
     
     /// <summary>
