@@ -181,10 +181,10 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial void SetSize(ushort width, ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 2A C7")]
-    public partial float GetScaledWidth(bool scaled); // TODO: return int
+    public partial float GetScaledWidth(bool scaled); // TODO: return ushort
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 2B DE")]
-    public partial float GetScaledHeight(bool scaled); // TODO: return int
+    public partial float GetScaledHeight(bool scaled); // TODO: return ushort
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 84 B7")]
     public partial AtkResNode* GetNodeById(uint nodeId);
