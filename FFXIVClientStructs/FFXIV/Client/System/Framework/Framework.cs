@@ -152,6 +152,9 @@ public unsafe partial struct Framework {
     [MemberFunction("E8 ?? ?? ?? ?? 4B 8B 8C F4")]
     public partial ClientPlatform GetClientPlatform();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C3 48 8D 4C 24 ?? 48 8B D0 E8 ?? ?? ?? ?? 33 D2")]
+    public partial CStringPointer GetBuildRevision();
+
     [MemberFunction("89 51 ?? C6 41 ?? ?? 48 8B 0D")]
     public partial void Exit(int exitCode);
 
