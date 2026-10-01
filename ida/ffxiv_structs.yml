@@ -5580,6 +5580,19 @@ enums:
     "SecondLegacy": 4
     "ThirdLegacy": 5
     "FourthLegacy": 6
+- type: Client::Game::Gauge::BeastmasterAffinity
+  name: BeastmasterAffinity
+  underlying: byte
+  namespace: Client.Game.Gauge
+  flags: False
+  values:
+    "None": 0
+    "Volant": 1
+    "Rampant": 2
+    "Durant": 3
+    "Eldritch": 4
+    "Sunstrider": 5
+    "Moonstalker": 6
 - type: Client::Game::Fate::FateState
   name: FateState
   underlying: byte
@@ -11174,6 +11187,14 @@ structs:
     parameters:
     - type: byte
       name: point
+  - signature: 48 83 EC ?? 45 0F B6 C0 45 33 C9 0F B7 D2
+    return_type: void
+    name: RequestWardInfo
+    parameters:
+    - type: unsigned __int16
+      name: territoryType
+    - type: byte
+      name: wardIndex
 - type: Client::Game::HousingObjectManager::HousingObjectArray
   name: HousingObjectArray
   namespace: Client.Game
@@ -11493,6 +11514,16 @@ structs:
   - type: byte
     name: MagiaAether
     offset: 17
+  member_functions: []
+- type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken::InventorySlot
+  name: InventorySlot
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 12
+  fields:
+  - type: unsigned __int16
+    name: ItemId
+    offset: 4
   member_functions: []
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
   name: DeepDungeonChestInfo
@@ -21859,6 +21890,51 @@ structs:
   - type: Component::GUI::AtkComponentRadioButton*
     name: Row3
     offset: 56
+  member_functions: []
+- type: Client::UI::AddonMainCross::CategoryNodeContainer
+  name: CategoryNodeContainer
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentNode*
+    name: Node
+    offset: 0
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: Component
+    offset: 8
+  - type: Component::GUI::AtkTextNode*
+    name: TextNode
+    offset: 16
+  member_functions: []
+- type: Client::UI::AddonMainCross::ColumnNodeContainer
+  name: ColumnNodeContainer
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentNode*
+    name: ComponentNode
+    offset: 8
+  - type: Client::UI::AddonMainCross::ItemNodeContainer*
+    name: ItemNodes
+    offset: 16
+  member_functions: []
+- type: Client::UI::AddonMainCross::ItemNodeContainer
+  name: ItemNodeContainer
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentNode*
+    name: Node
+    offset: 0
+  - type: Component::GUI::AtkComponentButton*
+    name: Component
+    offset: 8
+  - type: Component::GUI::AtkTextNode*
+    name: TextNode
+    offset: 16
   member_functions: []
 - type: Client::UI::AddonMiniTalk::TalkBubbleEntry
   name: TalkBubbleEntry
@@ -37244,6 +37320,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::UI::AddonMainCross::CommandData>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::AddonMainCross::CommandData*
+    name: First
+    offset: 0
+  - type: Client::UI::AddonMainCross::CommandData*
+    name: Last
+    offset: 8
+  - type: Client::UI::AddonMainCross::CommandData*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::UI::AddonPointMenu::Entry*>
   name: StdVector`1
   namespace: ''
@@ -41277,6 +41368,71 @@ structs:
     return_type: Client::Game::Gauge::JobGauge*
     parameters:
     - type: Client::Game::Gauge::BardGauge*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+- type: Client::Game::Gauge::BeastmasterGauge
+  name: BeastmasterGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 24
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: JobGauge
+    offset: 0
+    base: true
+  - type: byte
+    name: TPGauge
+    offset: 8
+  - type: byte
+    name: PetTPGauge
+    offset: 9
+  - type: byte
+    name: PetTPAtLastUse
+    offset: 10
+  - type: byte
+    name: ActiveBattlehorn
+    offset: 11
+  - type: byte
+    name: InstinctualComboState
+    offset: 12
+  - type: Client::Game::Gauge::BeastmasterAffinity
+    name: CurrentAffinity
+    offset: 13
+  - type: byte
+    name: ChainCount
+    offset: 14
+  - type: byte
+    name: KinshipState
+    offset: 15
+    bits:
+    - type: byte
+      offset: 0
+      size: 4
+      name: KinshipBattlehorn
+    - type: byte
+      offset: 4
+      size: 4
+      name: KinshipClassification
+  - type: byte
+    name: InstinctState
+    offset: 16
+    bits:
+    - type: byte
+      offset: 0
+      size: 2
+      name: NaturalInstinct
+    - type: byte
+      offset: 2
+      size: 2
+      name: MasteredInstinct
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Gauge::JobGauge*
+    parameters:
+    - type: Client::Game::Gauge::BeastmasterGauge*
       name: this
     - type: byte
       name: freeFlags
@@ -52573,6 +52729,50 @@ structs:
   - type: Client::UI::AddonLotteryDaily::GameTileRow
     name: Row3
     offset: 48
+  member_functions: []
+- type: Client::UI::AddonMainCross::CommandCategoryData
+  name: CommandCategoryData
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: StdVector<Client::UI::AddonMainCross::CommandData>
+    name: Commands
+    offset: 0
+  - type: int
+    name: SortId
+    offset: 24
+  - type: char
+    name: IsUnseen
+    offset: 28
+  member_functions: []
+- type: Client::UI::AddonMainCross::CommandData
+  name: CommandData
+  namespace: Client.UI
+  union: False
+  size: 232
+  fields:
+  - type: int
+    name: RowId
+    offset: 0
+  - type: int
+    name: SortId
+    offset: 4
+  - type: int
+    name: IconId
+    offset: 8
+  - type: Client::System::String::Utf8String
+    name: Label
+    offset: 16
+  - type: Client::System::String::Utf8String
+    name: LabelWithPatchMark
+    offset: 120
+  - type: char
+    name: IsEnabled
+    offset: 224
+  - type: char
+    name: IsUnseen
+    offset: 225
   member_functions: []
 - type: Client::UI::AddonNamePlate::BakePlateRenderer
   name: BakePlateRenderer
@@ -78846,6 +79046,37 @@ structs:
     name: AgentInterface
     offset: 0
     base: true
+  - type: unsigned int
+    name: ConfirmAddonId
+    offset: 48
+  - type: unsigned __int16
+    name: PortalMenuAddonId
+    offset: 52
+  - type: unsigned __int16
+    name: WardSelectAddonId
+    offset: 54
+  - type: unsigned __int16
+    name: TerritoryType
+    offset: 56
+  - type: int
+    name: SelectedWardIndex
+    offset: 60
+  - type: char
+    name: PlotOccupied
+    offset: 68
+    size: 60
+    is_string: False
+  - type: int
+    name: SelectedMenuAction
+    offset: 128
+  - type: unsigned int
+    name: MenuActions
+    offset: 132
+    size: 6
+    is_string: False
+  - type: unsigned int
+    name: MenuItemCount
+    offset: 156
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -78968,6 +79199,76 @@ structs:
       name: this
     - type: Client::Game::Network::HousingPortalPacket*
       name: packet
+  - signature: E8 ?? ?? ?? ?? EB ?? BA ?? ?? ?? ?? EB ?? BA ?? ?? ?? ?? EB ?? 48 8B CE
+    return_type: void
+    name: SelectWard
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: int
+      name: wardIndex
+  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 8B B1 ?? ?? ?? ?? 48 8B F9 83 FE
+    return_type: char
+    name: TeleportToOwnEstateWard
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F9 48 8B F2
+    return_type: char
+    name: ProcessPortalMenuSelect
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: values
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F1 48 8B DA
+    return_type: char
+    name: ProcessAction
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: values
+  - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 33 FF 89 79 ?? 48 8B CA E8 ?? ?? ?? ?? 83 F8 ?? 0F 84
+    return_type: char
+    name: ProcessMenuConfirm
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: values
+  - signature: 40 53 48 83 EC ?? 48 8B D9 C7 41 ?? ?? ?? ?? ?? 48 8B CA E8 ?? ?? ?? ?? 85 C0 75 ?? 44 8B 43
+    return_type: char
+    name: ConfirmTeleport
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: values
+  - signature: E8 ?? ?? ?? ?? 48 8B 74 24 ?? B1 ?? EB
+    return_type: void
+    name: OpenPortalMenu
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: unsigned __int16
+      name: territoryType
+    - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
+      name: eventInterface
+    - type: unsigned int
+      name: menuAction
+  - signature: E8 ?? ?? ?? ?? B3 ?? E9 ?? ?? ?? ?? 83 FD
+    return_type: void
+    name: ShowTeleportConfirm
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: char*
+      name: text
+    - type: unsigned int
+      name: callbackEventKind
+    - type: unsigned __int16
+      name: parentAddonId
 - type: Client::UI::Agent::AgentHousingSignboard
   name: AgentHousingSignboard
   namespace: Client.UI.Agent
@@ -83879,6 +84180,9 @@ structs:
     name: AgentInterface
     offset: 0
     base: true
+  - type: byte
+    name: ContextMenuAetheryteIndex
+    offset: 88
   - type: byte
     name: PendingAetheryteId
     offset: 92
@@ -161964,7 +162268,7 @@ structs:
     - type: Component::GUI::AtkUnitBase*
       name: this
     - type: char
-      name: getScaledWidth
+      name: scaled
   - signature: E8 ?? ?? ?? ?? 66 2B DE
     return_type: float
     name: GetScaledHeight
@@ -161972,7 +162276,7 @@ structs:
     - type: Component::GUI::AtkUnitBase*
       name: this
     - type: char
-      name: getScaledHeight
+      name: scaled
   - signature: E8 ?? ?? ?? ?? 44 84 B7
     return_type: Component::GUI::AtkResNode*
     name: GetNodeById
@@ -272337,6 +272641,541 @@ structs:
     - type: char
       name: a3
   member_functions: []
+- type: Client::UI::AddonMainCross
+  name: AddonMainCross
+  namespace: Client.UI
+  union: False
+  size: 2792
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::AddonMainCross::CategoryNodeContainer
+    name: CategoryNodes
+    offset: 584
+    size: 7
+    is_string: False
+  - type: Client::UI::AddonMainCross::ItemNodeContainer*
+    name: CurrentItemNodes
+    offset: 752
+  - type: int
+    name: DefaultCategoryItemIndexes
+    offset: 760
+    size: 7
+    is_string: False
+  - type: Client::UI::AddonMainCross::CommandCategoryData
+    name: CategoryData
+    offset: 792
+    size: 7
+    is_string: False
+  - type: Client::UI::AddonMainCross::ColumnNodeContainer
+    name: ColumnNodes
+    offset: 1016
+    size: 4
+    is_string: False
+  - type: Common::Math::Size
+    name: ScreenSize
+    offset: 1112
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: OperationGuideTextNineGrid
+    offset: 1120
+  - type: __int16
+    name: Unk468
+    offset: 1128
+  - type: __int16
+    name: Unk46A
+    offset: 1130
+  - type: __int16
+    name: Unk46C
+    offset: 1132
+  - type: __int16
+    name: Unk46E
+    offset: 1134
+  - type: Client::System::String::Utf8String
+    name: CategoryLabelsWithPatchMark
+    offset: 1136
+    size: 7
+    is_string: False
+  - type: Component::GUI::AtkSimpleTween
+    name: CategoryTweens
+    offset: 1864
+    size: 7
+    is_string: False
+  - type: Component::GUI::AtkSimpleTween*
+    name: CurrentItemTweens
+    offset: 2424
+  - type: Component::GUI::AtkSimpleTween
+    name: ColumnTween
+    offset: 2432
+  - type: Component::GUI::AtkSimpleTween
+    name: CrossfadeTweens
+    offset: 2512
+    size: 3
+    is_string: False
+  - type: int
+    name: ItemMaxCount
+    offset: 2752
+  - type: int
+    name: UnkAC4
+    offset: 2756
+  - type: int
+    name: UnkAC8
+    offset: 2760
+  - type: int
+    name: SelectedCategory
+    offset: 2764
+  - type: int
+    name: SelectedItem
+    offset: 2768
+  - type: int
+    name: UnkAD4
+    offset: 2772
+  - type: float
+    name: UnkAD8
+    offset: 2776
+  - type: float
+    name: UnkADC
+    offset: 2780
+  - type: float
+    name: UnkAE0
+    offset: 2784
+  - type: byte
+    name: UnkAE4
+    offset: 2788
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 DB 4D 8B CD
+    return_type: void
+    name: RefreshCurrentItemNodes
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 33 D2 49 8B CC E8 ?? ?? ?? ?? 0F 28 74 24
+    return_type: void
+    name: UpdateHelpText
+    parameters:
+    - type: Client::UI::AddonMainCross*
+      name: this
+    - type: char
+      name: a2
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B 7C 24 ?? FF C7 89 7C 24 ?? 48 83 EB
+    return_type: void
+    name: StdVectorCommandDataInsert
+    parameters:
+    - type: StdVector<Client::UI::AddonMainCross::CommandData>*
+      name: vector
+    - type: Client::UI::AddonMainCross::CommandData*
+      name: pos
+    - type: Client::UI::AddonMainCross::CommandData*
+      name: newItem
 - type: Client::UI::Agent::AgentContentsFinder
   name: AgentContentsFinder
   namespace: Client.UI.Agent
@@ -283431,79 +284270,6 @@ structs:
       name: arg3
     - type: unsigned int
       name: arg4
-- type: Client::Game::JobGaugeManager::Gauge
-  name: Gauge
-  namespace: Client::Game::JobGaugeManager
-  union: True
-  size: 80
-  fields:
-  - type: Client::Game::Gauge::JobGauge
-    name: EmptyGauge
-    offset: 0
-  - type: Client::Game::Gauge::WhiteMageGauge
-    name: WhiteMage
-    offset: 0
-  - type: Client::Game::Gauge::ScholarGauge
-    name: Scholar
-    offset: 0
-  - type: Client::Game::Gauge::AstrologianGauge
-    name: Astrologian
-    offset: 0
-  - type: Client::Game::Gauge::SageGauge
-    name: Sage
-    offset: 0
-  - type: Client::Game::Gauge::BardGauge
-    name: Bard
-    offset: 0
-  - type: Client::Game::Gauge::MachinistGauge
-    name: Machinist
-    offset: 0
-  - type: Client::Game::Gauge::DancerGauge
-    name: Dancer
-    offset: 0
-  - type: Client::Game::Gauge::BlackMageGauge
-    name: BlackMage
-    offset: 0
-  - type: Client::Game::Gauge::SummonerGauge
-    name: Summoner
-    offset: 0
-  - type: Client::Game::Gauge::RedMageGauge
-    name: RedMage
-    offset: 0
-  - type: Client::Game::Gauge::PictomancerGauge
-    name: Pictomancer
-    offset: 0
-  - type: Client::Game::Gauge::MonkGauge
-    name: Monk
-    offset: 0
-  - type: Client::Game::Gauge::DragoonGauge
-    name: Dragoon
-    offset: 0
-  - type: Client::Game::Gauge::NinjaGauge
-    name: Ninja
-    offset: 0
-  - type: Client::Game::Gauge::SamuraiGauge
-    name: Samurai
-    offset: 0
-  - type: Client::Game::Gauge::ReaperGauge
-    name: Reaper
-    offset: 0
-  - type: Client::Game::Gauge::ViperGauge
-    name: Viper
-    offset: 0
-  - type: Client::Game::Gauge::DarkKnightGauge
-    name: DarkKnight
-    offset: 0
-  - type: Client::Game::Gauge::PaladinGauge
-    name: Paladin
-    offset: 0
-  - type: Client::Game::Gauge::WarriorGauge
-    name: Warrior
-    offset: 0
-  - type: Client::Game::Gauge::GunbreakerGauge
-    name: Gunbreaker
-    offset: 0
-  member_functions: []
 - type: Client::Game::OutdoorTerritory
   name: OutdoorTerritory
   namespace: Client.Game
@@ -283627,28 +284393,82 @@ structs:
       name: this
     - type: byte
       name: plot
-- type: Client::Game::JobGaugeManager
-  name: JobGaugeManager
-  namespace: Client.Game
-  union: False
-  size: 96
+- type: Client::Game::JobGaugeManager::Gauge
+  name: Gauge
+  namespace: Client::Game::JobGaugeManager
+  union: True
+  size: 80
   fields:
-  - type: Client::Game::Gauge::JobGauge*
-    name: CurrentGauge
+  - type: Client::Game::Gauge::JobGauge
+    name: EmptyGauge
     offset: 0
-  - type: Client::Game::JobGaugeManager::Gauge
-    name: Gauge
-    offset: 8
-  - type: byte
-    name: ClassJobId
-    offset: 88
+  - type: Client::Game::Gauge::WhiteMageGauge
+    name: WhiteMage
+    offset: 0
+  - type: Client::Game::Gauge::ScholarGauge
+    name: Scholar
+    offset: 0
+  - type: Client::Game::Gauge::AstrologianGauge
+    name: Astrologian
+    offset: 0
+  - type: Client::Game::Gauge::SageGauge
+    name: Sage
+    offset: 0
+  - type: Client::Game::Gauge::BardGauge
+    name: Bard
+    offset: 0
+  - type: Client::Game::Gauge::MachinistGauge
+    name: Machinist
+    offset: 0
+  - type: Client::Game::Gauge::DancerGauge
+    name: Dancer
+    offset: 0
+  - type: Client::Game::Gauge::BlackMageGauge
+    name: BlackMage
+    offset: 0
+  - type: Client::Game::Gauge::SummonerGauge
+    name: Summoner
+    offset: 0
+  - type: Client::Game::Gauge::RedMageGauge
+    name: RedMage
+    offset: 0
+  - type: Client::Game::Gauge::PictomancerGauge
+    name: Pictomancer
+    offset: 0
+  - type: Client::Game::Gauge::MonkGauge
+    name: Monk
+    offset: 0
+  - type: Client::Game::Gauge::DragoonGauge
+    name: Dragoon
+    offset: 0
+  - type: Client::Game::Gauge::NinjaGauge
+    name: Ninja
+    offset: 0
+  - type: Client::Game::Gauge::SamuraiGauge
+    name: Samurai
+    offset: 0
+  - type: Client::Game::Gauge::ReaperGauge
+    name: Reaper
+    offset: 0
+  - type: Client::Game::Gauge::ViperGauge
+    name: Viper
+    offset: 0
+  - type: Client::Game::Gauge::BeastmasterGauge
+    name: Beastmaster
+    offset: 0
+  - type: Client::Game::Gauge::DarkKnightGauge
+    name: DarkKnight
+    offset: 0
+  - type: Client::Game::Gauge::PaladinGauge
+    name: Paladin
+    offset: 0
+  - type: Client::Game::Gauge::WarriorGauge
+    name: Warrior
+    offset: 0
+  - type: Client::Game::Gauge::GunbreakerGauge
+    name: Gunbreaker
+    offset: 0
   member_functions: []
-  static_members:
-  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 66 3B F0
-    relative_follow_offsets:
-    - 3
-    is_pointer: False
-    return_type: Client::Game::JobGaugeManager
 - type: Component::GUI::AtkStage
   name: AtkStage
   namespace: Component.GUI
@@ -284742,6 +285562,28 @@ structs:
     - type: unsigned int
       name: rowId
   member_functions: []
+- type: Client::Game::JobGaugeManager
+  name: JobGaugeManager
+  namespace: Client.Game
+  union: False
+  size: 96
+  fields:
+  - type: Client::Game::Gauge::JobGauge*
+    name: CurrentGauge
+    offset: 0
+  - type: Client::Game::JobGaugeManager::Gauge
+    name: Gauge
+    offset: 8
+  - type: byte
+    name: ClassJobId
+    offset: 88
+  member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 66 3B F0
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::JobGaugeManager
 - type: Client::Game::Event::GuildleveAssignmentEventHandler
   name: GuildleveAssignmentEventHandler
   namespace: Client.Game.Event
@@ -285125,6 +285967,389 @@ structs:
     - type: Client::Game::Event::GuildleveAssignmentEventHandler*
       name: this
   member_functions: []
+- type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken
+  name: InstanceContentCrucibleOfTheUnbroken
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 9632
+  fields:
+  - type: Client::Game::InstanceContent::InstanceContentDirector
+    name: InstanceContentDirector
+    offset: 0
+    base: true
+  - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken::InventorySlot
+    name: Inventory
+    offset: 9088
+    size: 10
+    is_string: False
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Game::Event::EventHandler*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ResetState
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+  - name: ProcessEnterTerritory
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+  - name: ProcessUIEvent
+    offset: 200
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Event::UIEventType
+      name: type
+  - name: EnterEvent
+    offset: 224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: sceneGameObject
+    - type: byte
+      name: eventState
+  - name: ProcessYield
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: __int16
+      name: scene
+    - type: byte
+      name: yieldId
+    - type: int*
+      name: intParams
+    - type: byte
+      name: intParamCount
+  - name: ProcessEventSceneTask
+    offset: 416
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: taskId
+  - name: EndEvent
+    offset: 464
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: char
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: unsigned int
+      name: exitReason
+  - name: ProcessFormatStringCallback
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: char
+      name: success
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessActionTimelineCallback
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: unsigned __int16
+      name: actionTimelineId
+    - type: unsigned __int64
+      name: callbackParam
+  - name: ProcessDirectorUpdate
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessEventSpecificDirectorUpdate
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  - name: CancelByPlayerMovement
+    offset: 560
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: char
+      name: a2
+    - type: char
+      name: a3
+  - name: HandleStartOrEndCommand
+    offset: 712
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: command
+  - name: HandleMenuResult
+    offset: 720
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: int
+      name: selectedOption
+    - type: int
+      name: menuType
+  - name: CancelInteraction
+    offset: 1272
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetTitle
+    offset: 1640
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1656
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1672
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: IsActive
+    offset: 1704
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: UpdateTargetableStatus
+    offset: 1736
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: ShouldDismissOrnament
+    offset: 2000
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: UpdateSharedTimelineState
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned __int16
+      name: oldSharedTimelineState
+    - type: unsigned __int16
+      name: newSharedTimelineState
+    - type: unsigned __int64
+      name: timelineIndices
+  - name: UpdateTimelinesByBitmask
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+    - type: unsigned int
+      name: sharedTimelineState
+    - type: unsigned int
+      name: bitmask
+    - type: unsigned __int64
+      name: unused
+  - name: GetDescription
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2072
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2080
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2088
+    return_type: char
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetEventItemId
+    offset: 2104
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2136
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2160
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2224
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: markerVector
+  - name: GetCurrentLevel
+    offset: 2432
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetMaxLevel
+    offset: 2440
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: ProcessDirectorSpecificDirectorUpdate
+    offset: 2600
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int*
+      name: parameters
+  - name: GetContentTimeMax
+    offset: 2632
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+  - name: GetInstanceContentText
+    offset: 2832
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: rowId
+  - name: DispatchContentSpecificDirectorUpdate
+    offset: 3040
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int*
+      name: parameters
+  - name: ProcessContentSpecificDirectorUpdate
+    offset: 3048
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: category
+    - type: unsigned int
+      name: arg1
+    - type: unsigned int
+      name: arg2
+    - type: unsigned int
+      name: arg3
+    - type: unsigned int
+      name: arg4
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 83 7F 44 00 48 8D 57 44
+    return_type: void
+    name: UseItem
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentCrucibleOfTheUnbroken*
+      name: this
+    - type: unsigned int
+      name: slot
+    - type: int
+      name: beastId
 - type: Client::Game::InstanceContent::PublicContentEureka
   name: PublicContentEureka
   namespace: Client.Game.InstanceContent
