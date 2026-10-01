@@ -16,7 +16,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x28)] public ExcelSheet* PetParamGrowSheet; // XBMPetParamGrow
     [FieldOffset(0x30)] public ExcelSheetWaiter* PetParamGrowSheetWaiter;
     [FieldOffset(0x38)] public uint PetParamGrowLoadState; // 0 = not requested, 1 = loading, 2 = all main rows read
-    [FieldOffset(0x3C)] public uint PetParamGrowRowId; // currently read, 0 to 50
+    [FieldOffset(0x3C)] private uint PetParamGrowRowId; // ??? counting up while reading or set to the length of the vector
     [FieldOffset(0x40)] public StdVector<AgentXBMPetParty.ParamGrowValues> PetParamGrowValues;
 
     [FieldOffset(0x58)] public uint Source; // 0 = opened from the notebook itself, 1 = opened from the pet party window
@@ -31,14 +31,12 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     // Both bitfields are received in the same pet list packet as XBMManager.UnlockedPets.
     [FieldOffset(0x70), FixedSizeArray(isBitArray: true, bitCount: 50)] internal FixedSizeArray7<byte> _unlockedPets;
     [FieldOffset(0x77), FixedSizeArray(isBitArray: true, bitCount: 50)] internal FixedSizeArray7<byte> _mirageUnlockedPets;
-    
-    [FieldOffset(0x7E)] private ushort Unk7E;
 
     [FieldOffset(0x80)] public StdVector<NotebookEntry> Entries; // 25 entries per page
     [FieldOffset(0x98)] public uint PageIndex;
-    [FieldOffset(0x9C)] public uint SelectedPetId; // XBMPet row
-    [FieldOffset(0xA0)] public uint HoveredPetId;
-    [FieldOffset(0xA4)] public uint DetailPetId;
+    [FieldOffset(0x9C)] public uint HoveredPetId;
+    [FieldOffset(0xA0)] public uint SelectedPetId; // XBMPet row
+    [FieldOffset(0xA4)] public uint ContextPetId;
     [FieldOffset(0xA8)] public uint ContentId; // XBMContent row, set by AgentXBMPetParty
     [FieldOffset(0xAC)] public bool UsesContentPetData; // set by AgentXBMPetParty
     [FieldOffset(0xB0)] public Utf8String SearchText;
@@ -46,7 +44,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x118)] public uint ClassificationFilter; // XBMPet.Classification bitfield
     [FieldOffset(0x11C)] public uint AttackTypeFilter; // Action.AttackType and Action.Aspect bitfield
     [FieldOffset(0x120)] public uint StatusFilter; // XBMPet.InflictsStatus bitfield
-    [FieldOffset(0x124)] private byte Unk124;
+    [FieldOffset(0x124)] private byte SortType;
     [FieldOffset(0x125)] private byte Unk125;
     [FieldOffset(0x126)] private byte Unk126;
 
