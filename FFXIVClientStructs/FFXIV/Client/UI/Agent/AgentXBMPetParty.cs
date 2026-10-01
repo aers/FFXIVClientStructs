@@ -15,7 +15,7 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x28)] public ExcelSheet* PetParamGrowSheet; // XBMPetParamGrow
     [FieldOffset(0x30)] public ExcelSheetWaiter* PetParamGrowSheetWaiter;
     [FieldOffset(0x38)] public uint PetParamGrowLoadState; // 0 = not requested, 1 = loading, 2 = all main rows read
-    [FieldOffset(0x3C)] public uint PetParamGrowRowId; // main row that is currently read, 0 to 50
+    [FieldOffset(0x3C)] private uint PetParamGrowRowId; // ???
     [FieldOffset(0x40)] public StdVector<ParamGrowValues> PetParamGrowValues;
 
     [FieldOffset(0x58)] public bool RequestRefresh;
