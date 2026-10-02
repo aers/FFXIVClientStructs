@@ -24,7 +24,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x5D)] public bool RequestPetListRebuild;
     [FieldOffset(0x5E)] public bool RequestNotebookRebuild; // XBMMonsterNotebook left panel
     [FieldOffset(0x5F)] public bool RequestNotebookDetailRebuild; // XBMMonsterNotebook right panel (XBMMonsterBookDetail)
-    [FieldOffset(0x60)] public bool IsActivePetAddonOpened;
+    
     [FieldOffset(0x64)] public uint ActivePetAddonId; // AddonXBMActivePet
     [FieldOffset(0x68)] public uint FilterAddonId; // AddonXBMMonsterNotebookFilterSetting
 

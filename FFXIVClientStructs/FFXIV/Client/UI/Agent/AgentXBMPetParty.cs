@@ -45,9 +45,6 @@ public unsafe partial struct AgentXBMPetParty {
     [FieldOffset(0x150)] private bool Unk150;
     [FieldOffset(0x154)] public uint PetListSource; // 0 = CandidatePets, 1 = SelectedPetIds, 2 = pets unlocked in XBMNoteModule
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 B8 90 4A 00 00 E8 ?? ?? ?? ?? 48 2B E0 48 8B 05")]
-    public partial void SetMode(uint mode, int* param);
-
     [MemberFunction("40 56 57 48 83 EC ?? 83 79 ?? ?? 8B F2")]
     public partial void TogglePet(uint petId);
 

@@ -31,12 +31,6 @@ public unsafe partial struct AgentXBMStageDetailList {
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray1000<StageDetailEntry> _entries;
     [FieldOffset(0x27150), FixedSizeArray] internal FixedSizeArray100<byte> _entrySelection;
 
-    [MemberFunction("40 53 56 57 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 01 49 8B F0 8B FA")]
-    public partial void SetMode(int mode, int* param);
-
-    [MemberFunction("40 53 48 83 EC ?? 80 79 ?? ?? 48 8B D9 74 ?? 83 79")]
-    public partial void ClearAddonState();
-
     [MemberFunction("40 53 55 56 57 48 83 EC ?? 48 8B EA")]
     public partial void FillStageListValues(AtkValue* values);
 
