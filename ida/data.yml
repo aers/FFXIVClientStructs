@@ -4990,6 +4990,13 @@ classes:
       3: IsLoadFail
       4: GetData
       5: GetSize
+  Common::Component::Excel::LinkList<Common::Component::Excel::ExcelReloadEvent>:
+    vtbls:
+      - ea: 0x1421782D0
+  Common::Component::Excel::ExcelReloadEvent:
+    vtbls:
+      - ea: 0x1421782D8
+        base: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelReloadEvent>
   Common::Component::Excel::LinkList<Component::Exd::ExdModuleResourceHandle>:
     vtbls:
       - ea: 0x1421782F8
@@ -5222,6 +5229,21 @@ classes:
       0x1400D9480: Finalizer
       0x1400DA030: ExecuteCommandInner
       0x1400DABE0: EvaluateTextCommand
+  Common::Component::Excel::CacheInterface<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>::CacheExecInterface:
+    vtbls:
+      - ea: 0x142127E18
+  Component::Shell::ShellCommandModule::ExecCachedRow<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>:
+    vtbls:
+      - ea: 0x142127E28
+        base: Common::Component::Excel::CacheInterface<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>::CacheExecInterface
+  Component::Shell::ShellCommandModule::ExecCachedRowKey<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>:
+    vtbls:
+      - ea: 0x142127E38
+        base: Common::Component::Excel::CacheInterface<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>::CacheExecInterface
+  Client::UI::AddonTitleDataCenter::ExdGetter:
+    vtbls:
+      - ea: 0x14220F3C0
+        base: Common::Component::Excel::CacheInterface<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>::CacheExecInterface
   Component::GUI::AtkEventListener:
     vtbls:
       - ea: 0x142134168
@@ -7591,9 +7613,6 @@ classes:
     vtbls:
       - ea: 0x14215B0D0
         base: Client::Graphics::PostEffect::PostEffectPart
-    vfuncs:
-      3: Resolve
-      5: Draw
     funcs:
       0x14036B460: UpdateParameters
   Client::Graphics::JobSystem<Apricot::Engine::Core>:
@@ -8550,6 +8569,7 @@ classes:
   Component::Exd::ExdModule:
     vtbls:
       - ea: 0x1421783D0
+        base: Common::Component::Excel::ExcelReloadEvent
     vfuncs:
       0: dtor
     funcs:
@@ -27354,6 +27374,10 @@ classes:
       0x1419A7680: ParseLookupTable
     vfuncs:
       5: GetSelection
+  Component::Completion::CompletionModule::CompletionCacheFunc<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>:
+    vtbls:
+      - ea: 0x14232B490
+        base: Common::Component::Excel::CacheInterface<Common::Component::Excel::ExcelEntryKey,Common::Component::Excel::ExcelEntry*>::CacheExecInterface
   Client::System::Data::BlockMemory:
     vtbls:
       - ea: 0x142446070
