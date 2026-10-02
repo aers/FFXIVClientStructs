@@ -257263,6 +257263,12 @@ structs:
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
+  - signature: E8 ?? ?? ?? ?? 4C 8B C3 48 8D 4C 24 ?? 48 8B D0 E8 ?? ?? ?? ?? 33 D2
+    return_type: char*
+    name: GetBuildRevision
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
   - signature: 89 51 ?? C6 41 ?? ?? 48 8B 0D
     return_type: void
     name: Exit
