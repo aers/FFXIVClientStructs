@@ -25,7 +25,6 @@ public unsafe partial struct AddonJobHudXBM0 {
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct TPGauge {
-        [FieldOffset(0x8)] public AddonJobHudXBM0* Parrent;
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray2<Gauge> _gauges;
 
         [GenerateInterop]
@@ -39,7 +38,6 @@ public unsafe partial struct AddonJobHudXBM0 {
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public partial struct TPGaugeSimple {
-        [FieldOffset(0x8)] public AddonJobHudXBM0* Parrent;
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray2<Gauge> _gauges;
 
         [GenerateInterop]
