@@ -67,7 +67,13 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x12B8)] public long QueueTimeSinceLastUpdate;
     [FieldOffset(0x12C8)] public int QueuePosition;
 
-    [FieldOffset(0x12CD)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    /// <summary>
+    /// Set to 60 when logout is requested, decremented by 1 each frame.
+    /// When it reaches 0, the game sets LobbyUIStage to 1.
+    /// </summary>
+    [FieldOffset(0x12CD)] public byte FramesUntilLogout;
+    
+    [FieldOffset(0x12CD), Obsolete("Use FramesUntilLogout instead.")] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
     [FieldOffset(0x12D0)] public ulong SelectedCharacterContentId;
 
