@@ -24,7 +24,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x5D)] public bool RequestPetListRebuild;
     [FieldOffset(0x5E)] public bool RequestNotebookRebuild; // XBMMonsterNotebook left panel
     [FieldOffset(0x5F)] public bool RequestNotebookDetailRebuild; // XBMMonsterNotebook right panel (XBMMonsterBookDetail)
-    
+
     [FieldOffset(0x64)] public uint ActivePetAddonId; // AddonXBMActivePet
     [FieldOffset(0x68)] public uint FilterAddonId; // AddonXBMMonsterNotebookFilterSetting
 
@@ -69,7 +69,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 ?? ?? 48 8B 03")]
     public partial void RebuildPetList();
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct NotebookEntry {
         [FieldOffset(0x00)] public uint PetId; // XBMPet row

@@ -80,7 +80,7 @@ public unsafe partial struct AgentXBMPetParty {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 FF 89 7B")]
     public partial void ApplyPetSelection();
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct ParamGrowValues {
         [FieldOffset(0x00)] public uint ParamGrowId;
