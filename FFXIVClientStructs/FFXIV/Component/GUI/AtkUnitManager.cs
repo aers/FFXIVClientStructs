@@ -138,6 +138,61 @@ public unsafe partial struct AtkUnitManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 CE 48 8B CB E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F 28 CE")]
     public partial void UpdateCursor();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8C 24 ?? ?? ?? ?? 48 8D 8F")]
+    public partial void SetAddonParentId(ushort addonId, ushort parentId);
+    
+    public void SetAddonBlocking(ushort addonId, bool blocking) =>
+        SetAddonBlocking(addonId, blocking ? (byte)1 : (byte)0);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 44 8B C5")]
+    public partial void SetAddonBlocking(ushort addonId, byte isBlocking);
+
+    /// <remarks>
+    /// Set bit 0 (<see cref="AtkUnitBase.OnlyHideWhenFireCallback"/>) of <see cref="AtkUnitBase.Flags1A0"/> (Just Hide() instead of Close() when the callback requests closure)
+    /// </remarks>
+    /// <param name="addonId">Addon id</param>
+    /// <param name="hideAfterAddonReady">Set or maintain bit 1 (<see cref="AtkUnitBase.HideAfterReady"/>) of <see cref="AtkUnitBase.Flags1A1"/>. If false, it will read the value of the bit then write it back, which means you could not clear <see cref="AtkUnitBase.HideAfterReady"/> by passing false to this param</param>
+    /// <param name="addToHudInitList">Add the <c>addonId</c> to <see cref="HudInitAddonIds"/> </param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? 4D 8D 6D 20")]
+    public partial void SetAddonHideOnCallback(ushort addonId, bool hideAfterAddonReady, bool addToHudInitList);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 85 F6 0F 84 ?? ?? ?? ?? 0F B7 D6")]
+    public partial void AddAddonToHudInitAddonIds(ushort addonId);
+    
+    /// <returns>Parent addon count</returns>
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 33 F6")]
+    public partial uint GetParentAddonsById(AtkUnitBase** outAddons, ushort parentId, int maxCount);
+    
+    [MemberFunction("40 55 41 56 48 83 EC ?? 48 8B 01 4C 8B F1")]
+    public partial void HideBlockedAddons();
+    
+    [MemberFunction("40 56 41 55 41 57 48 83 EC ?? 48 8B 01")]
+    public partial void RestoreBlockedAddons(AtkUnitBase* excludedAddon);
+    
+    /// <summary>
+    /// Closes the specified addon by its ID.
+    /// </summary>
+    /// <remarks>
+    /// Unconditionally clears bit 0 (<see cref="AtkUnitBase.OnlyHideWhenFireCallback"/>) of the target's 
+    /// <see cref="AtkUnitBase.Flags1A0"/> before delegating to <see cref="CloseOrHideAddon"/>.
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? BF ?? ?? ?? ?? 49 FF C7")]
+    public partial void CloseAddonById(ushort addonId);
+    
+    /// <summary>
+    /// Closes or hides the specified addon.
+    /// </summary>
+    /// <remarks>
+    /// Determines whether to close or hide the addon based on bit 0 (<see cref="AtkUnitBase.OnlyHideWhenFireCallback"/>) 
+    /// of <see cref="AtkUnitBase.Flags1A0"/>.<br/>
+    /// If bit 7 (<see cref="AtkUnitBase.HasChildAddons"/>) of <see cref="AtkUnitBase.Flags1A2"/> is set, this function searches for 
+    /// any child addons referencing this addon via <see cref="AtkUnitBase.ParentId"/> and closes them as well. 
+    /// For all child addons, it unconditionally clears their <see cref="AtkUnitBase.OnlyHideWhenFireCallback"/> flag 
+    /// to ensure they are closed rather than hidden.
+    /// </remarks>
+    [MemberFunction("40 53 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 32 DB")]
+    public partial void CloseOrHideAddon(AtkUnitBase* addon);
 
     // not sure how this works
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
