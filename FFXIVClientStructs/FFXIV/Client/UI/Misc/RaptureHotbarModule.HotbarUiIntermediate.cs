@@ -19,7 +19,8 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0x28)] public uint LastCooldownPercent;
         [FieldOffset(0x2C)] public uint ChargePercent; // to NumberArray idx slotBase + 9
         [FieldOffset(0x30)] public uint LastChargePercent;
-        [FieldOffset(0x34)] public uint CurrentCharges; // to NumberArray idx slotBase + 13
+        [FieldOffset(0x34), Obsolete("Field is -1 when unused, use CurrentChargeCount")] public uint CurrentCharges; // to NumberArray idx slotBase + 13
+        [FieldOffset(0x34)] public int CurrentChargeCount; // to NumberArray idx slotBase + 13
         [FieldOffset(0x38)] public uint CostValue; // to NumberArray idx slotBase + 10
         [FieldOffset(0x3C)] public byte CostType; // to NumberArray idx slotBase + 1
         [FieldOffset(0x3D)] public byte CostDisplayMode; // to NumberArray idx slotBase + 2
