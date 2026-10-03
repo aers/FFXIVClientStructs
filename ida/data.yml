@@ -27015,6 +27015,42 @@ classes:
     vtbls:
       - ea: 0x1422A0488
         base: Client::UI::AddonJobHudWHM0::HealingGauge
+  Client::UI::AddonJobHudXBM0:
+    vtbls:
+      - ea: 0x1422A2F08
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1415DAA40: ctor
+  Client::UI::AddonJobHudXBM0::TPGaugeData:
+    vtbls:
+      - ea: 0x1422A2E78
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudXBM0::TPGauge:
+    vtbls:
+      - ea: 0x1422A2E88
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudXBM0::TPGaugeSimple:
+    vtbls:
+      - ea: 0x1422A2EC8
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudXBM1:
+    vtbls:
+      - ea: 0x1422A3378
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x1415DD910: ctor
+  Client::UI::AddonJobHudXBM1::AffinityData:
+    vtbls:
+      - ea: 0x1422A3198
+        base: Client::UI::AddonJobHud::AddonJobHudGaugeData
+  Client::UI::AddonJobHudXBM1::AffinityGauge:
+    vtbls:
+      - ea: 0x1422A3250
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonJobHudXBM1::AffinityGaugeSimple:
+    vtbls:
+      - ea: 0x1422A3338
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x1422D4728
