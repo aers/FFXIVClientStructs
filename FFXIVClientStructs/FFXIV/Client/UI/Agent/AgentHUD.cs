@@ -168,6 +168,12 @@ public unsafe partial struct HudStatus {
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF 4C 8B C5 49 8B D6 48 8B CF")]
     public partial void Update(NumberArrayData* numberArray, StringArrayData* stringArray);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 4C 8B 6C 24 ?? 48 8B 6C 24 ??")]
+    public partial void UpdateCharacter(NumberArrayData* numberArray);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 86 ?? ?? ?? ?? 33 D2 48 8B CB")]
+    public partial void UpdateCharacterRecorded(NumberArrayData* numberArray, BattleChara* battleChara);
 }
 
 [Flags]

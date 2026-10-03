@@ -13072,6 +13072,8 @@ classes:
   Client::UI::Agent::HudStatus:
     funcs:
       0x1410A0670: Update
+      0x1410A2000: UpdateCharacter
+      0x1410A22A0: UpdateCharacterRecorded
   Client::UI::Agent::AgentChatLog::LinkedInventoryItem:
     vtbls:
       - ea: 0x1421F6A10
