@@ -24293,6 +24293,60 @@ structs:
     name: Flags
     offset: 20
   member_functions: []
+- type: Client::UI::Agent::AgentXBMMonsterNotebook::NotebookEntry
+  name: NotebookEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: PetId
+    offset: 0
+  - type: unsigned int
+    name: SortKey
+    offset: 4
+  member_functions: []
+- type: Client::UI::Agent::AgentXBMPetParty::ParamGrowValues
+  name: ParamGrowValues
+  namespace: Client.UI.Agent
+  union: False
+  size: 28
+  fields:
+  - type: unsigned int
+    name: ParamGrowId
+    offset: 0
+  - type: unsigned int
+    name: Rank
+    offset: 4
+  - type: unsigned int
+    name: Strength
+    offset: 8
+  - type: unsigned int
+    name: PhysicalResistance
+    offset: 12
+  - type: unsigned int
+    name: Constitution
+    offset: 16
+  - type: unsigned int
+    name: Intelligence
+    offset: 20
+  - type: unsigned int
+    name: MagicalResistance
+    offset: 24
+  member_functions: []
+- type: Client::UI::Agent::AgentXBMPetParty::PartyEntry
+  name: PartyEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: PetId
+    offset: 0
+  - type: unsigned int
+    name: SortKey
+    offset: 4
+  member_functions: []
 - type: Client::UI::Agent::AozArrangementData
   name: AozArrangementData
   namespace: Client.UI.Agent
@@ -27414,8 +27468,8 @@ structs:
   - type: unsigned int
     name: LastChargePercent
     offset: 48
-  - type: unsigned int
-    name: CurrentCharges
+  - type: int
+    name: CurrentChargeCount
     offset: 52
   - type: unsigned int
     name: CostValue
@@ -37857,6 +37911,51 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Agent::AgentWKSMission::MissionEntry*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Agent::AgentXBMMonsterNotebook::NotebookEntry>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentXBMMonsterNotebook::NotebookEntry*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentXBMMonsterNotebook::NotebookEntry*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentXBMMonsterNotebook::NotebookEntry*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Agent::AgentXBMPetParty::ParamGrowValues>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentXBMPetParty::ParamGrowValues*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentXBMPetParty::ParamGrowValues*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentXBMPetParty::ParamGrowValues*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Agent::AgentXBMPetParty::PartyEntry>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentXBMPetParty::PartyEntry*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentXBMPetParty::PartyEntry*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentXBMPetParty::PartyEntry*
     name: End
     offset: 16
   member_functions: []
@@ -54704,6 +54803,58 @@ structs:
   - type: Client::System::String::Utf8String
     name: ZoneCreditsText
     offset: 1488
+  member_functions: []
+- type: Client::UI::Agent::AgentXBMStageDetailList::StageDetailEntry
+  name: StageDetailEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 160
+  fields:
+  - type: unsigned int
+    name: EntryType
+    offset: 0
+  - type: unsigned int
+    name: StageEventId
+    offset: 4
+  - type: unsigned int
+    name: EventType
+    offset: 8
+  - type: unsigned int
+    name: StageEventType
+    offset: 12
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 16
+  - type: unsigned int
+    name: Icon
+    offset: 120
+  - type: unsigned int
+    name: BattleDetailId
+    offset: 124
+  - type: unsigned int
+    name: BattleDetailIndex
+    offset: 128
+  - type: unsigned int
+    name: ElementId
+    offset: 132
+  - type: unsigned int
+    name: Strength
+    offset: 136
+  - type: unsigned int
+    name: PhysicalResistance
+    offset: 140
+  - type: unsigned int
+    name: Constitution
+    offset: 144
+  - type: unsigned int
+    name: Intelligence
+    offset: 148
+  - type: unsigned int
+    name: MagicalResistance
+    offset: 152
+  - type: unsigned int
+    name: ResistId
+    offset: 156
   member_functions: []
 - type: Client::UI::Agent::AozContentResultData
   name: AozContentResultData
@@ -113464,6 +113615,544 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentTradeMultiple*
       name: this
+- type: Client::UI::Agent::AgentXBMPetParty
+  name: AgentXBMPetParty
+  namespace: Client.UI.Agent
+  union: False
+  size: 344
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Common::Component::Excel::ExcelSheet*
+    name: PetParamGrowSheet
+    offset: 40
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: PetParamGrowSheetWaiter
+    offset: 48
+  - type: unsigned int
+    name: PetParamGrowLoadState
+    offset: 56
+  - type: unsigned int
+    name: PetParamGrowRowId
+    offset: 60
+  - type: StdVector<Client::UI::Agent::AgentXBMPetParty::ParamGrowValues>
+    name: PetParamGrowValues
+    offset: 64
+  - type: char
+    name: RequestRefresh
+    offset: 88
+  - type: char
+    name: RequestSecondaryRefresh
+    offset: 89
+  - type: char
+    name: RequestPetListRefresh
+    offset: 90
+  - type: unsigned int
+    name: Unk5C
+    offset: 92
+  - type: unsigned int
+    name: PetListAddonId
+    offset: 96
+  - type: unsigned int
+    name: Mode
+    offset: 100
+  - type: unsigned int
+    name: SubMode
+    offset: 104
+  - type: char
+    name: UsesContentPetData
+    offset: 108
+  - type: char
+    name: Unk6D
+    offset: 109
+  - type: byte
+    name: StatIndex
+    offset: 110
+  - type: unsigned int
+    name: ContentId
+    offset: 112
+  - type: char
+    name: Unk74
+    offset: 116
+  - type: StdVector<Client::UI::Agent::AgentXBMPetParty::PartyEntry>
+    name: SelectedPets
+    offset: 120
+  - type: StdVector<Client::UI::Agent::AgentXBMPetParty::PartyEntry>
+    name: SelectedPetIds
+    offset: 144
+  - type: StdVector<Client::UI::Agent::AgentXBMPetParty::PartyEntry>
+    name: CandidatePets
+    offset: 168
+  - type: unsigned int
+    name: PetCurrentHealth
+    offset: 192
+    size: 15
+    is_string: False
+  - type: unsigned int
+    name: PetMaxHealth
+    offset: 252
+    size: 15
+    is_string: False
+  - type: unsigned int
+    name: Unk138
+    offset: 312
+  - type: unsigned int
+    name: Unk13C
+    offset: 316
+  - type: unsigned int
+    name: SelectedPetIndex
+    offset: 320
+  - type: Client::System::Resource::Handle::SoundResourceHandle*
+    name: BuyFeedSoundEffect
+    offset: 328
+  - type: char
+    name: Unk150
+    offset: 336
+  - type: unsigned int
+    name: PetListSource
+    offset: 340
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: 40 56 57 48 83 EC ?? 83 79 ?? ?? 8B F2
+    return_type: void
+    name: TogglePet
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: unsigned int
+      name: petId
+  - signature: 40 53 55 57 48 83 EC ?? 83 79
+    return_type: void
+    name: OpenPetListAddon
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: int
+      name: source
+  - signature: E8 ?? ?? ?? ?? 0F B6 E8 84 C0 74 ?? 48 8B CB E8 ?? ?? ?? ?? 4C 8D 9C 24
+    return_type: char
+    name: ConfirmSelection
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: value
+  - signature: 40 53 48 83 EC ?? 83 79 ?? ?? 48 8D 51 ?? 48 8B D9 76 ?? E8 ?? ?? ?? ?? C7 83
+    return_type: void
+    name: ClosePetListAddon
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 33 C9 44 8B E9
+    return_type: unsigned int
+    name: GetSyncedRank
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: unsigned int
+      name: petId
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8D 42 ?? 8B FA 48 8B D9 83 F8 ?? 0F 87
+    return_type: char
+    name: IsPetOverSyncedRank
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: unsigned int
+      name: petId
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 41 ?? 48 8B F1 FF C8
+    return_type: char
+    name: HasUnlockedPets
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 89 43 ?? 48 83 C3 ?? 48 3B DF 75 ?? 48 8B 5D
+    return_type: unsigned int
+    name: GetPetHealth
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: unsigned int
+      name: petId
+    - type: byte
+      name: index
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 59 ?? 0F B6 EA
+    return_type: void
+    name: UpdatePetsHealth
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: byte
+      name: index
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 41 ?? 48 8B F9
+    return_type: char
+    name: IsPetAvailable
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+    - type: unsigned int
+      name: petId
+  - signature: 48 83 EC ?? 83 79 ?? ?? 75 ?? 8B 49
+    return_type: unsigned int
+    name: GetTeamSize
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 FF 89 7B
+    return_type: void
+    name: ApplyPetSelection
+    parameters:
+    - type: Client::UI::Agent::AgentXBMPetParty*
+      name: this
+- type: Client::UI::Agent::AgentXBMStageDetailList
+  name: AgentXBMStageDetailList
+  namespace: Client.UI.Agent
+  union: False
+  size: 160184
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: AddonInitState
+    offset: 40
+  - type: char
+    name: HasRegisteredShortcuts
+    offset: 44
+  - type: char
+    name: PendingUpdate
+    offset: 45
+  - type: unsigned int
+    name: StageDetailAddonId
+    offset: 48
+  - type: unsigned int
+    name: SubAddonId
+    offset: 52
+  - type: unsigned int
+    name: ContentId
+    offset: 56
+  - type: unsigned int
+    name: Mode
+    offset: 60
+  - type: unsigned int
+    name: SelectedRank
+    offset: 64
+  - type: unsigned int
+    name: ScrollToStageId
+    offset: 68
+  - type: char
+    name: Unk48
+    offset: 72
+  - type: byte
+    name: Unk49
+    offset: 73
+  - type: char
+    name: Unk4A
+    offset: 74
+  - type: char
+    name: Unk4B
+    offset: 75
+  - type: char
+    name: ScrollToSelection
+    offset: 76
+  - type: char
+    name: Unk4D
+    offset: 77
+  - type: char
+    name: Unk4E
+    offset: 78
+  - type: Client::UI::Agent::AgentXBMStageDetailList::StageDetailEntry
+    name: Entries
+    offset: 80
+    size: 1000
+    is_string: False
+  - type: byte
+    name: EntrySelection
+    offset: 160080
+    size: 100
+    is_string: False
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: 40 53 55 56 57 48 83 EC ?? 48 8B EA
+    return_type: void
+    name: FillStageListValues
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: values
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B F2 48 8B E9
+    return_type: void
+    name: FillStageDetailValues
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: values
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8D 59 ?? BE ?? ?? ?? ?? 48 8D 79
+    return_type: void
+    name: ResetEntries
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - signature: 4C 8B DC 41 55 48 83 EC ?? 8B 41
+    return_type: unsigned int
+    name: BuildEntriesFromContent
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - signature: 48 89 4C 24 ?? 56 57 48 81 EC ?? ?? ?? ?? 8B 41
+    return_type: unsigned int
+    name: BuildEntriesFromDirector
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - signature: 48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 33 FF
+    return_type: char*
+    name: GetStageEventText
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+    - type: unsigned int
+      name: stageEventId
+  - signature: 40 53 48 83 EC ?? 83 79 ?? ?? 75 ?? E8
+    return_type: unsigned int
+    name: GetSelectedEntryIndex
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
+  - signature: 40 53 48 83 EC ?? 83 79 ?? ?? 48 8B D9 75 ?? 80 49
+    return_type: void
+    name: StartBattle
+    parameters:
+    - type: Client::UI::Agent::AgentXBMStageDetailList*
+      name: this
 - type: Client::UI::Agent::CharaSelectCharacterEntry
   name: CharaSelectCharacterEntry
   namespace: Client.UI.Agent
@@ -121346,6 +122035,270 @@ structs:
     - type: byte
       name: classJobId
   member_functions: []
+- type: Client::UI::Agent::AgentXBMMonsterNotebook
+  name: AgentXBMMonsterNotebook
+  namespace: Client.UI.Agent
+  union: False
+  size: 296
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Common::Component::Excel::ExcelSheet*
+    name: PetParamGrowSheet
+    offset: 40
+  - type: Common::Component::Excel::ExcelSheetWaiter*
+    name: PetParamGrowSheetWaiter
+    offset: 48
+  - type: unsigned int
+    name: PetParamGrowLoadState
+    offset: 56
+  - type: unsigned int
+    name: PetParamGrowRowId
+    offset: 60
+  - type: StdVector<Client::UI::Agent::AgentXBMPetParty::ParamGrowValues>
+    name: PetParamGrowValues
+    offset: 64
+  - type: unsigned int
+    name: Source
+    offset: 88
+  - type: char
+    name: IsNewPetListReceived
+    offset: 92
+  - type: char
+    name: RequestPetListRebuild
+    offset: 93
+  - type: char
+    name: RequestNotebookRebuild
+    offset: 94
+  - type: char
+    name: RequestNotebookDetailRebuild
+    offset: 95
+  - type: unsigned int
+    name: ActivePetAddonId
+    offset: 100
+  - type: unsigned int
+    name: FilterAddonId
+    offset: 104
+  - type: byte
+    name: UnlockedPets
+    offset: 112
+    size: 7
+    is_string: False
+  - type: byte
+    name: MirageUnlockedPets
+    offset: 119
+    size: 7
+    is_string: False
+  - type: StdVector<Client::UI::Agent::AgentXBMMonsterNotebook::NotebookEntry>
+    name: Entries
+    offset: 128
+  - type: unsigned int
+    name: PageIndex
+    offset: 152
+  - type: unsigned int
+    name: HoveredPetId
+    offset: 156
+  - type: unsigned int
+    name: SelectedPetId
+    offset: 160
+  - type: unsigned int
+    name: ContextPetId
+    offset: 164
+  - type: unsigned int
+    name: ContentId
+    offset: 168
+  - type: char
+    name: UsesContentPetData
+    offset: 172
+  - type: Client::System::String::Utf8String
+    name: SearchText
+    offset: 176
+  - type: unsigned int
+    name: ClassificationFilter
+    offset: 280
+  - type: unsigned int
+    name: AttackTypeFilter
+    offset: 284
+  - type: unsigned int
+    name: StatusFilter
+    offset: 288
+  - type: byte
+    name: SortType
+    offset: 292
+  - type: byte
+    name: Unk125
+    offset: 293
+  - type: byte
+    name: Unk126
+    offset: 294
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: 48 83 EC ?? 0F 10 02 C6 41
+    return_type: void
+    name: HandlePetListPacket
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: __int64
+      name: packet
+  - signature: E9 ?? ?? ?? ?? 33 C0 48 89 81
+    return_type: void
+    name: OpenAddon
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: int
+      name: source
+  - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 83 79 ?? ?? 48 8B D9 76 ?? 48 8D 51 ?? E8 ?? ?? ?? ?? C6 43
+    return_type: void
+    name: ToggleActivePetAddon
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 40 0F B6 D6 48 8B CF E8 ?? ?? ?? ?? 84 C0
+    return_type: char
+    name: IsPetUnlocked
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: petId
+  - signature: E8 ?? ?? ?? ?? 41 8D 55 ?? 0F B6 F8
+    return_type: char
+    name: IsPetMirageUnlocked
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: petId
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 0F B6 DA 48 8B 49 ?? 48 8B 01
+    return_type: Client::UI::Misc::XBMPetMirage
+    name: GetPetMirage
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
+    - type: byte
+      name: petId
+  - signature: E8 ?? ?? ?? ?? C6 43 ?? ?? 48 8B 03
+    return_type: void
+    name: RebuildPetList
+    parameters:
+    - type: Client::UI::Agent::AgentXBMMonsterNotebook*
+      name: this
 - type: Client::UI::Agent::MiragePrismPrismBoxData
   name: MiragePrismPrismBoxData
   namespace: Client.UI.Agent
