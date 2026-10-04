@@ -49,11 +49,16 @@ public unsafe partial struct AtkServer {
     [FieldOffset(0x170)] public PixelShader* FontEmbossPS;
     [FieldOffset(0x178)] public PixelShader* PrimitiveUIMaskPS;
 
+    [FieldOffset(0x1C0)] private void* /* VertexDeclaration */ VertexDeclarationArray; // array size 3
+    [FieldOffset(0x1D8)] private void* /* VertexBuffer */ VertexBuffer;
+    [FieldOffset(0x1E0)] private void* /* IndexBuffer */ IndexBuffer;
+    
     [FieldOffset(0x4C0)] public Texture* WhiteTexture; // 4x4 solid white
     [FieldOffset(0x4C8)] public Texture* BlackTexture; // 4x4 solid black
 
     [FieldOffset(0x580)] public AtkUICommandEntry* UICommandList;
     [FieldOffset(0x588)] public uint UICommandCount;
+    [FieldOffset(0x590)] public AtkContext* ContextArray; // size 16
 
     [VirtualFunction(0)]
     public partial AtkServer* Dtor(byte flags);
@@ -61,6 +66,8 @@ public unsafe partial struct AtkServer {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 54 41 56 41 57 48 83 EC ?? 44 8B 05")]
     public partial void Draw(bool a2);
 
+    // TODO: ProcessUICommands is used for 16-bit indexes in the index buffer, Alt is used for 32-bit indexes, should rename
+    // AtkServer is created with a 16-bit IndexBuffer, unsure if the game ever resizes it
     [MemberFunction("E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 56")]
     public partial void ProcessUICommands(bool a2);
 

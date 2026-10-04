@@ -7168,6 +7168,17 @@ classes:
     vtbls:
       - ea: 0x142142670
         base: Client::Graphics::Kernel::Resource
+  Client::Graphics::Kernel::VertexBuffer:
+    vtbls:
+      - ea: 0x142142A48
+        base: Client::Graphics::Kernel::Buffer
+  Client::Graphics::Kernel::IndexBuffer:
+    vtbls:
+      - ea: 0x142142B08
+        base: Client::Graphics::Kernel::Buffer
+    funcs:
+      0x14021DF90: Unmap
+      0x14021EAB0: Map
   Client::Graphics::Kernel::ConstantBuffer:
     vtbls:
       - ea: 0x142142BB0
@@ -7200,7 +7211,10 @@ classes:
       0x140222F30: ctor
       0x140222FE0: Initialize
       0x140224730: CreateTexture2D
+      0x140225F20: CreateVertexBuffer
+      0x140226170: CreateIndexBuffer
       0x1402262B0: CreateConstantBuffer
+      0x1402263A0: CreateVertexDeclaration
 #oldfail       0x1403570D0: PreTick
       0x140226870: PostTick
   Client::Graphics::Kernel::Context:
@@ -7263,6 +7277,7 @@ classes:
     funcs:
       0x1402369A0: ctor
       0x140236A20: Initialize
+      0x140236BE0: GetHandleByName
   Client::Graphics::Render::Skeleton:
     vtbls:
       - ea: 0x14214C100
@@ -8880,9 +8895,12 @@ classes:
       0: dtor
     funcs:
       0x140639990: ctor
+      0x140639CF0: Initialize
+      0x14063A550: Terminate
+      0x14063ACE0: Begin
       0x14063B000: Draw
-      0x1406E5480: ProcessUICommands
-      0x1406E6020: ProcessUICommandsAlt
+      0x1406E5480: ProcessUICommands32  # index size of buffer
+      0x1406E6020: ProcessUICommands16
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x14217C128
