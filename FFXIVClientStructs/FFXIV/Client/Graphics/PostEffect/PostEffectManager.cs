@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.PostEffect;
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 [GenerateInterop]
-[Inherits<Notifier>(parentOffset: 0x08)]
+[Inherits<Singleton>, Inherits<Notifier>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48C0)]
 public unsafe partial struct PostEffectManager {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? 8B 81 70 44 00 00 C1 E8 08 A8 01 0F 85", 3, isPointer: true)]
