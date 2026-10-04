@@ -30,7 +30,7 @@ public unsafe partial struct AddonJobHudXBM0 {
         [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 0x68)]
         public partial struct Gauge {
-            [FieldOffset(0x0)] public TPGauge* Parrent;
+            [FieldOffset(0x0)] public TPGauge* Parent;
         }
     }
 
@@ -43,7 +43,7 @@ public unsafe partial struct AddonJobHudXBM0 {
         [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 0x58)]
         public partial struct Gauge {
-            [FieldOffset(0x0)] public TPGaugeSimple* Parrent;
+            [FieldOffset(0x0)] public TPGaugeSimple* Parent;
         }
     }
 }
