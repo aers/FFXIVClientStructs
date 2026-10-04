@@ -6,10 +6,11 @@ class DefinedDataClassInstance:
         self.name = name
 
 class DefinedDataClassVtable:
-    def __init__(self, ea, base=None):
-        # type: (int, None | str) -> None
+    def __init__(self, ea, base=None, size=None):
+        # type: (int, None | str, None | int) -> None
         self.ea = ea
         self.base = base
+        self.size = size
 
 class DefinedDataClassFunction:
     def __init__(self, num, name):

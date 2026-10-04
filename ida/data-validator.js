@@ -65,6 +65,8 @@ try {
                         errors.push(`Invalid value for classes.${key}.vtbls.${i}.base: ${vtbl.base}`);
                     else if (!vtbl.hasOwnProperty('base') && i !== 0)
                         errors.push(`Missing value for classes.${key}.vtbls.${i}.base`);
+                    if (vtbl.hasOwnProperty('size') && !isNumeric(vtbl.size))
+                        errors.push(`Invalid value for classes.${key}.vtbls.${i}.size: ${vtbl.size}`);
                 });
             if (classI.hasOwnProperty('vfuncs') && classI["vfuncs"])
                 Object.keys(classI.vfuncs).forEach(subkey => {
