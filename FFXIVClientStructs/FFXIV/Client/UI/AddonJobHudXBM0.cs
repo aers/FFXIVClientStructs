@@ -14,7 +14,7 @@ public unsafe partial struct AddonJobHudXBM0 {
     [FieldOffset(0x278)] public TPGaugeData DataPrevious;
     [FieldOffset(0x298)] public TPGaugeData DataCurrent;
     [FieldOffset(0x2B8)] public TPGauge GaugeStandard;
-    [FieldOffset(0x328)] public TPGaugeSimple GaugeSimple;
+    [FieldOffset(0x398)] public TPGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
