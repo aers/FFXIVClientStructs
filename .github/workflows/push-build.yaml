@@ -1,6 +1,10 @@
 name: Push Build
 
-on: push
+on: 
+  push:
+    paths:
+      - 'FFXIVClientStructs/**/*.cs'
+      - 'CExporter/*.cs'
 
 concurrency: 
   group: ${{ github.workflow }}-${{ github.head_ref }}
