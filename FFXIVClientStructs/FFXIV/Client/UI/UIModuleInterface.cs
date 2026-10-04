@@ -100,7 +100,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(92)] public partial bool EnterGPose();
     [VirtualFunction(93)] public partial void ExitGPose();
     [VirtualFunction(94)] public partial bool IsInGPose();
-    [VirtualFunction(95)] public partial void EnterIdleCam(byte a1 = 0, ulong focusObject = 0xE0000000);
+    [VirtualFunction(95)] public partial void EnterIdleCam(byte a1 = 0, ulong focusObject = 0xE0000000); // TODO: return bool
     [VirtualFunction(96)] public partial void ExitIdleCam();
     [VirtualFunction(97)] public partial bool IsInIdleCam();
     [VirtualFunction(103)] public partial void ShowDeepDungeonHud();
