@@ -17124,6 +17124,22 @@ structs:
     name: Stain1
     offset: 4
   member_functions: []
+- type: Client::Graphics::Singleton
+  name: Singleton
+  namespace: Client.Graphics
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Singleton*
+    parameters:
+    - type: Client::Graphics::Singleton*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
 - type: Client::Graphics::Vfx::VfxData
   name: VfxData
   namespace: Client.Graphics.Vfx
@@ -21797,8 +21813,34 @@ structs:
   size: 104
   fields:
   - type: Client::UI::AddonJobHudXBM0::TPGauge*
-    name: Parrent
+    name: Parent
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: InstinctContainer
+    offset: 8
+  - type: Component::GUI::AtkResNode*
+    name: InstinctImageContainer
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: GaugeContainer
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: GaugeImageContainer
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: InstinctComponentBases
+    offset: 40
+    size: 3
+    is_string: False
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: TPGaugeBar
+    offset: 64
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: TPText
+    offset: 72
+  - type: Component::GUI::AtkResNode*
+    name: InstinctGlowContainer
+    offset: 80
   member_functions: []
 - type: Client::UI::AddonJobHudXBM0::TPGaugeSimple::Gauge
   name: Gauge
@@ -21807,8 +21849,28 @@ structs:
   size: 88
   fields:
   - type: Client::UI::AddonJobHudXBM0::TPGaugeSimple*
-    name: Parrent
+    name: Parent
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: InstinctContainer
+    offset: 8
+  - type: Component::GUI::AtkResNode*
+    name: GaugeContainer
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: GaugeImageContainer
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: InstinctComponentBases
+    offset: 32
+    size: 3
+    is_string: False
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: TPGaugeBar
+    offset: 56
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: TPText
+    offset: 64
   member_functions: []
 - type: Client::UI::AddonLimitBreak::GaugeNode
   name: GaugeNode
@@ -74754,7 +74816,7 @@ structs:
   name: TPGauge
   namespace: Client.UI
   union: False
-  size: 112
+  size: 224
   fields:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
@@ -74771,7 +74833,7 @@ structs:
   name: TPGaugeSimple
   namespace: Client.UI
   union: False
-  size: 160
+  size: 192
   fields:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
@@ -141869,84 +141931,6 @@ structs:
     name: DutyHelperInfo
     offset: 9168
   member_functions: []
-- type: Client::Graphics::PostEffect::PostEffectManager
-  name: PostEffectManager
-  namespace: Client.Graphics.PostEffect
-  union: False
-  size: 18624
-  fields:
-  - type: Client::Graphics::Kernel::Notifier
-    name: Notifier
-    offset: 8
-    base: true
-  - type: Client::Graphics::PostEffect::PostEffectChain
-    name: DepthOfFieldChain
-    offset: 1160
-  - type: Client::Graphics::PostEffect::PostEffectChain
-    name: DepthOfFieldCoCChain
-    offset: 1216
-  - type: Client::Graphics::PostEffect::PostEffectChain
-    name: UpdatedDepthOfFieldChain
-    offset: 1272
-  - type: Client::Graphics::PostEffect::PostEffectChain
-    name: ColorFilterChain
-    offset: 1496
-  - type: Client::Graphics::PostEffect::PostEffectChain
-    name: VignettingChain
-    offset: 1552
-  - type: Client::Graphics::Kernel::Texture*
-    name: SceneInput
-    offset: 16400
-  - type: Client::Graphics::Kernel::Texture*
-    name: Depth
-    offset: 16432
-  - type: Client::Graphics::Kernel::Texture*
-    name: SceneOutput
-    offset: 16504
-  - type: Client::Graphics::Kernel::Texture*
-    name: Unk40A0
-    offset: 16544
-  - type: Client::Graphics::Kernel::Texture*
-    name: Unk40A8
-    offset: 16552
-  - type: Client::Graphics::Kernel::Texture*
-    name: Unk40B0
-    offset: 16560
-  - type: Client::Graphics::Kernel::Texture*
-    name: Unk40B8
-    offset: 16568
-  - type: Client::Graphics::Kernel::Texture*
-    name: Unk40C8
-    offset: 16584
-  - type: Client::Graphics::Kernel::Texture*
-    name: Unk40D0
-    offset: 16592
-  - type: unsigned __int64
-    name: InitializedEffects
-    offset: 17424
-  - type: Client::Graphics::PostEffect::PostEffectFlags
-    name: Flags
-    offset: 17520
-  - type: Client::Graphics::PostEffect::PostEffectDepthOfFieldParameters
-    name: DepthOfField
-    offset: 18152
-  - type: Common::Math::Vector4
-    name: ColorFilterCurve
-    offset: 18204
-  - type: Client::Graphics::PostEffect::PostEffectManager::ColorFilterParameters
-    name: ColorFilter
-    offset: 18220
-  - type: Client::Graphics::PostEffect::PostEffectVignettingParameters
-    name: Vignetting
-    offset: 18440
-  virtual_functions: []
-  member_functions: []
-  static_members:
-  - signature: 48 8B 0D ?? ?? ?? ?? 8B 81 70 44 00 00 C1 E8 08 A8 01 0F 85
-    relative_follow_offsets:
-    - 3
-    is_pointer: True
-    return_type: Client::Graphics::PostEffect::PostEffectManager
 - type: Client::LayoutEngine::Group::SGTransformActionController
   name: SGTransformActionController
   namespace: Client.LayoutEngine.Group
@@ -154191,6 +154175,96 @@ structs:
     - type: byte*
       name: packet
   member_functions: []
+- type: Client::Graphics::PostEffect::PostEffectManager
+  name: PostEffectManager
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 18624
+  fields:
+  - type: Client::Graphics::Singleton
+    name: Singleton
+    offset: 0
+    base: true
+  - type: Client::Graphics::Kernel::Notifier
+    name: Notifier
+    offset: 8
+    base: true
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: DepthOfFieldChain
+    offset: 1160
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: DepthOfFieldCoCChain
+    offset: 1216
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: UpdatedDepthOfFieldChain
+    offset: 1272
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: ColorFilterChain
+    offset: 1496
+  - type: Client::Graphics::PostEffect::PostEffectChain
+    name: VignettingChain
+    offset: 1552
+  - type: Client::Graphics::Kernel::Texture*
+    name: SceneInput
+    offset: 16400
+  - type: Client::Graphics::Kernel::Texture*
+    name: Depth
+    offset: 16432
+  - type: Client::Graphics::Kernel::Texture*
+    name: SceneOutput
+    offset: 16504
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40A0
+    offset: 16544
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40A8
+    offset: 16552
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40B0
+    offset: 16560
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40B8
+    offset: 16568
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40C8
+    offset: 16584
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk40D0
+    offset: 16592
+  - type: unsigned __int64
+    name: InitializedEffects
+    offset: 17424
+  - type: Client::Graphics::PostEffect::PostEffectFlags
+    name: Flags
+    offset: 17520
+  - type: Client::Graphics::PostEffect::PostEffectDepthOfFieldParameters
+    name: DepthOfField
+    offset: 18152
+  - type: Common::Math::Vector4
+    name: ColorFilterCurve
+    offset: 18204
+  - type: Client::Graphics::PostEffect::PostEffectManager::ColorFilterParameters
+    name: ColorFilter
+    offset: 18220
+  - type: Client::Graphics::PostEffect::PostEffectVignettingParameters
+    name: Vignetting
+    offset: 18440
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::Singleton*
+    parameters:
+    - type: Client::Graphics::PostEffect::PostEffectManager*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? 8B 81 70 44 00 00 C1 E8 08 A8 01 0F 85
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::PostEffect::PostEffectManager
 - type: Client::LayoutEngine::Layer::AetheryteLayoutInstance
   name: AetheryteLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -283188,7 +283262,7 @@ structs:
   name: AddonJobHudXBM0
   namespace: Client.UI
   union: False
-  size: 968
+  size: 1112
   fields:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
@@ -283205,7 +283279,7 @@ structs:
     offset: 696
   - type: Client::UI::AddonJobHudXBM0::TPGaugeSimple
     name: GaugeSimple
-    offset: 808
+    offset: 920
   virtual_functions:
   - name: dtor
     offset: 0
