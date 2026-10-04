@@ -2369,6 +2369,10 @@ classes:
       0x140E366A0: GetPlotIcon # (this, plotIndex)  # inlined @ 140D1ECF0
       0x140E33FA0: IsEstateShared # (this, plotIndex)
       0x140E33E80: IsEstateResident # (this, plotIndex)
+  Client::Game::IndoorTerritory::OutdoorTerritoryUIEventListener:
+    vtbls:
+      - ea: 0x1421CEC88
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface # technically Client::Game::HousingUIEventListener<Client::Game::OutdoorTerritory>
   Client::Game::IndoorTerritory::IndoorTerritoryUIEventListener:
     vtbls:
       - ea: 0x1421CECA0
@@ -5408,6 +5412,7 @@ classes:
     vtbls:
       - ea: 0x1421344A0
         base: Client::UI::RaptureAtkModule::ItemCache
+        size: 4 # script detects this as 1 due to xref to vfunc 1
   Client::UI::RaptureAtkModule::CrystalCache:
     vtbls:
       - ea: 0x1421344C0
@@ -5415,6 +5420,7 @@ classes:
   Component::GUI::AtkModuleInterface::AtkHistoryInterface:
     vtbls:
       - ea: 0x1421340B0
+        size: 6 # script detects this as 8 due to following vtbl with no xref
     vfuncs:
       0: dtor
       1: Previous
@@ -17819,6 +17825,7 @@ classes:
     vtbls:
       - ea: 0x1421DE420
         base: Client::Game::Event::GatheringEventHandler
+        size: 291 # base class for an AtkModuleInterface::AtkEventInterface child for specific handler with no xrefs after this
     funcs:
       0x140E97DE0: ctor # not used due to being inlined
   Client::Game::Event::SpearFishingEventHandler:
@@ -17947,6 +17954,7 @@ classes:
     vtbls:
       - ea: 0x1421DD1F0
         base: Client::Game::Event::EventHandler
+        size: 291 # base class for an AtkModuleInterface::AtkEventInterface child for specific handler with no xrefs after this
     funcs:
       0x140E90680: ctor
       0x140E8E000: Setup
@@ -18262,6 +18270,7 @@ classes:
     vtbls:
       - ea: 0x142394E90
         base: Client::Game::Event::LuaEventHandler
+        size: 278 # base class for an AtkModuleInterface::AtkEventInterface child for specific handler with no xrefs after this
     funcs:
       0x1419F4910: GetChocoboTaxiStandId
       0x1419F49B0: GetFare
@@ -18532,6 +18541,7 @@ classes:
     vtbls:
       - ea: 0x142419130
         base: Client::Game::Event::CustomTalkResidentEventHandler
+        size: 286 # base class for an AtkModuleInterface::AtkEventInterface child for specific handler with no xrefs after this
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x1421CC3C8

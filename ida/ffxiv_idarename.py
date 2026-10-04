@@ -556,7 +556,7 @@ def load_data():
                 class_data = {}
 
             vtbls_raw = class_data.pop("vtbls", [])
-            vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None) for vtbl in vtbls_raw]
+            vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None, vtbl["size"] if "size" in vtbl else None) for vtbl in vtbls_raw]
             vfuncs = class_data.pop("vfuncs", {})
             funcs = class_data.pop("funcs", {})
             instances_raw = class_data.pop("instances", [])
@@ -599,7 +599,7 @@ class FfxivClassFactory:
         if not funcs:
             funcs = {}
 
-        for (vtbl_ea, _) in vtbls:
+        for (vtbl_ea, _, _) in vtbls:
             if vtbl_ea != 0x0 and vtbl_ea in self._vtbl_addresses:
                 print("Error: Multiple vtables are defined at 0x{0:X}".format(vtbl_ea))
                 return
@@ -607,7 +607,7 @@ class FfxivClassFactory:
         if class_name in self._classes:
             print("Error: Multiple classes are registered with the name \"{0}\"".format(class_name))
             return
-        for (vtbl_ea, _) in vtbls:
+        for (vtbl_ea, _, _) in vtbls:
             self._vtbl_addresses.append(vtbl_ea)
 
         if not instances:
@@ -680,16 +680,19 @@ class FfxivClassFactory:
 class Vtbl:
     resolved_base = None  # type: FfxivClass
 
-    def __init__(self, ea, base_name=None):
+    def __init__(self, ea, base_name=None, size=None):
         """
         Object representing a class's vtbl
         :param ea: Address of vtbl
         :type ea: int
         :param base_name: Name of the base class this vtbl inherits, if it exists
         :type base_name: str
+        :param size: Explicit size of vtbl used to override cases where size detection fails
+        :type size: int
         """
         self.ea = ea
         self.base_name = base_name
+        self.size = size
 
 
 class FfxivClass:
@@ -713,7 +716,7 @@ class FfxivClass:
         """
         self.name = class_name
         if vtbls:
-            self.vtbls = [Vtbl(ea, base_name) for (ea, base_name) in vtbls]
+            self.vtbls = [Vtbl(ea, base_name, size) for (ea, base_name, size) in vtbls]
         self.vfuncs = vfuncs
         self.funcs = funcs
         self.instances = instances
@@ -737,12 +740,17 @@ class FfxivClass:
         """
         Iterate from the vtbl start until a non-offset or xref is encountered.
         This strategy implies that the only xref in a vtbl is the first vfunc.
+        Can be overriden by explicit size in the vtbl definition.
         :return: VTable func count
         :rtype: int
         """
         if not self.vtbls:
             return self._main_vtbl_size
 
+        if self.vtbls[0].size:
+            self._main_vtbl_size = self.vtbls[0].size
+            return self._main_vtbl_size
+        
         if self._main_vtbl_size == 0:
             self._main_vtbl_size = 1  # Set to 1, skip the first entry
             for ea in itertools.count(self.vtbls[0].ea + 8, 8):
