@@ -8899,8 +8899,8 @@ classes:
       0x14063A550: Terminate
       0x14063ACE0: Begin
       0x14063B000: Draw
-      0x1406E5480: ProcessUICommands32  # index size of buffer
-      0x1406E6020: ProcessUICommands16
+      0x1406E5480: ProcessUICommands16  # index size of buffer
+      0x1406E6020: ProcessUICommands32
   Component::GUI::AtkEventTarget:
     vtbls:
       - ea: 0x14217C128
