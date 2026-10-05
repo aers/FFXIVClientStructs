@@ -107,7 +107,6 @@ globals:
   0x1428A8ED8: g_Component::SteamApi::InterfaceContext::ISteamUser
   0x1428A8F20: g_Component::SteamApi::InterfaceContext::ISteamApps
   0x1428A8F08: g_Component::SteamApi::InterfaceContext::ISteamUtils
-  0x1428F6478: g_SomeOtherRenderingState
   0x142A8EE34: g_InvSqrt3
   0x1428D5028: g_OodleNew
   0x1428D5030: g_OodleDelete
@@ -4323,6 +4322,8 @@ classes:
       0x140060F20: Finalizer
       0x140061050: AddTask
       0x1400610C0: ExecuteAllTasks
+      0x140061110: ExecuteJobList
+      0x140061310: EeecuteJobList2
   Client::System::Framework::TaskManager::JobPool:
     funcs:
       0x1400600F0: ctor
@@ -7185,7 +7186,7 @@ classes:
         base: Client::Graphics::Kernel::Buffer
     funcs:
       0x14021F7C0: ctor
-      0x14021F530: LoadSourcePointer
+      0x14021F530: LoadSourcePointer # Map
 #oldfail       0x140377650: LoadBuffer
       0x14023FEF0: Activate
   Client::Graphics::Kernel::Device:
@@ -7409,6 +7410,20 @@ classes:
   Client::Graphics::Render::BaseRenderer:
     vtbls:
       - ea: 0x14214C580
+    vfuncs:
+      2: Render
+  Client::Graphics::Singleton<Client::Graphics::RendererUtility>:
+    vtbls:
+      - ea: 0x14214C5A8
+  Client::Graphics::RendererUtility:
+    instances:
+      - ea: 0x1428F6478
+        pointer: true
+    vtbls:
+      - ea: 0x14214C5B0
+        base: Client::Graphics::Singleton<Client::Graphics::RendererUtility>
+    funcs:
+      0x140279920: RenderView      
   Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>:
     vtbls:
       - ea: 0x14214C5B8
@@ -7542,6 +7557,7 @@ classes:
       0x1402B7B90: Terminate
       0x1402B8EC0: CreateCamera
       0x1402B93C0: CreateModel
+      0x1402B9700: CreateLight
       0x1402BA1F0: Render
       0x1402BABD0: RenderView
   Client::Graphics::Render::ShadowManager:
@@ -7552,6 +7568,8 @@ classes:
       - ea: 0x14214CAB8
     funcs:
       0x1402BB9E0: ctor
+      0x1402BC9F0: UpdateShadows
+      0x1402C05B0: RegisterLight
   Client::Graphics::Render::LightingManager::LightShape:
     vtbls:
       - ea: 0x14214CAC8
@@ -7586,6 +7604,8 @@ classes:
     funcs:
       0x1402D4EE0: ctor
       0x1402D52E0: Initialize
+      0x1402D8D20: ResetMainView
+      0x1402D84B0: ResetShadow
       0x14026AA10: GetCharaViewTexture
   Client::Graphics::PostEffect::PostEffectPart:
     vtbls:
@@ -8074,6 +8094,7 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x1404216A0: ctor
+      0x1404216F0: Initialize
       0x140798B80: Create
   Client::Graphics::Scene::EnvLocation:
     vtbls:
