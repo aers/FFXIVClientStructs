@@ -122,6 +122,7 @@ public unsafe struct RenderCommandBufferGroup {
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandScissorsRect* ScissorsRectCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand"), Obsolete("Use ClearCommand.")] public RenderCommandClearDepth* ClearDepthCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandClear* ClearCommand;
+    [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandSetSaveTextureFilePath* SetSaveTextureFilePathCommand;
 }
 
 public enum RenderCommandType : int {
@@ -130,6 +131,23 @@ public enum RenderCommandType : int {
     MultiViewport = 2,
     ScissorRect = 3,
     Clear = 4,
+    Draw = 5,
+    DrawIndexed = 6,
+    DrawIndexedInstanced = 7,
+    Dispatch = 8, // Compute Shader
+    DispatchIndirect = 9,
+    None = 10, // this command does nothing, maybe a debug command
+    CopySubresourceRegion = 11, // DX11 call
+    CopyTexture = 12, // uses the Copy shaders, see ImmediateContext
+    CopyResource = 13, // DX11 call
+    // ??? = 14,
+    // ??? = 15,
+    None2 = 16, // ditto None above
+    SaveTextureToFile = 17,
+    SetSaveTextureFilePath = 18, // for screenshots
+    // ExecuteSubCommandList = 19,
+    // ??? = 20,
+    // SetRenderTarget2 = 21,
 }
 
 [GenerateInterop(isInherited: true)]
@@ -223,6 +241,13 @@ public unsafe partial struct RenderCommandClear {
     [FieldOffset(0x1D)] public byte StencilReference;
     [FieldOffset(0x20)] public IntRectangle* ClearRectanglePtr; // optional, generally points at ClearRectangle if set
     [FieldOffset(0x28)] public IntRectangle ClearRectangle;
+}
+
+[GenerateInterop]
+[Inherits<RenderCommand>]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe partial struct RenderCommandSetSaveTextureFilePath {
+    [FieldOffset(0x8)] public byte* FilePath;
 }
 
 [Flags]

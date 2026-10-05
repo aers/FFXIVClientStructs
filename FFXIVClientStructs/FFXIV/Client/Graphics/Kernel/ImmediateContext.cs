@@ -49,6 +49,12 @@ public unsafe partial struct ImmediateContext {
     //[FieldOffset(0x1D70)] public InputLayout* CurrentInputLayout;
     [FieldOffset(0x17D8), CExporterTypeForce("D3D11_PRIMITIVE_TOPOLOGY", true)] public int CurrentPrimitiveTopology;
 
+    [FieldOffset(0x1808)] public VertexShader* CopyVertexShader; // CopyVS.shcd
+    [FieldOffset(0x1810)] public PixelShader* CopyPixelShader; // CopyPS.shcd
+    [FieldOffset(0x1818)] public PixelShader* CopyValidColorPixelShader; // CopyValidColorPS.shcd
+    [FieldOffset(0x1820)] public VertexShader* DepthCopyVertexShader; // DepthCopyVS.shcd
+    [FieldOffset(0x1828)] public PixelShader* DepthCopyPixelShader; // DepthCopyPS.shcd
+    
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 47 58")]
     public partial void SetBlendState(PackedBlendStateDesc blendState);
 

@@ -7220,10 +7220,11 @@ classes:
       0x140226870: PostTick
   Client::Graphics::Kernel::Context:
     funcs:
-      0x140240A80: PushBackCommand
-      0x14023FE50: AllocateCommand
-      0x1406EE810: AllocateSpecificCommand # don't think this belongs on context
       0x14023BEF0: SetRenderTargets
+      0x14023FE50: AllocateCommand
+      0x140240A80: PushBackCommand
+      0x1405F6B10: PushSaveTextureToFileWithPathCommand
+      0x1406EE810: AllocateSpecificCommand # don't think this belongs on context
 #oldfail       0x140378480: PrepareModel
 #oldfail       0x1403DEC50: Draw_cmd
   Client::Graphics::Kernel::Device::ImmediateContextBase:
@@ -7234,6 +7235,8 @@ classes:
       - ea: 0x142142D80
         base: Client::Graphics::Kernel::Device::ImmediateContextBase
     funcs:
+      0x140229F40: Initialize
+      0x14022AA10: LoadResources
       0x1402346B0: ProcessCommands
       0x140231DD0: PreprocessCommands
       0x140234920: ExecuteCommands
@@ -7242,12 +7245,19 @@ classes:
       0x140241D30: SetRasterizerState
       0x140241DD0: SetVertexShader
       0x140241AF0: SetPixelShader
-      0x14022BAA0: SetViewport
-      0x14022D9D0: SetMultiViewports
-      0x14022D580: SetDefaultState
+      0x14022AEE0: CommandClear
       0x14022B010: DoClearCommandViaDraw
-      0x14022AEE0: DoClearCommand
-      0x14022B490: DoSetTargetCommand
+      0x14022B490: CommandSetRenderTarget
+      0x14022BAA0: CommandSetViewport
+      0x14022BB50: CommandSetScissorRects
+      # 0x14022BC30: SetBlendState2
+      # 0x14022BCC0: SetBlendState3
+      # 0x14022BD60: SetRasterizerState
+      0x14022BDD0: SetVertexBuffers
+      # 0x14022C010: SetVertexBuffers2
+      # 0x14022C440: SetShader
+      0x14022D580: SetDefaultState
+      0x14022D9D0: CommandSetMultiViewports
 #oldfail       0x14036DCB0: PrimeForDraw
   Client::Graphics::Kernel::Device::RenderThread:
     vtbls:
@@ -7617,6 +7627,8 @@ classes:
   Client::Graphics::PostEffect::PostEffectChain:
     vtbls:
       - ea: 0x14215AEC0
+    funcs:
+      0x140349D50: Render
   Client::Graphics::PostEffect::PostEffectRainbow:
     vtbls:
       - ea: 0x14215AEC8
