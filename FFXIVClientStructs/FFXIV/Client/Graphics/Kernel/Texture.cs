@@ -50,11 +50,24 @@ public unsafe partial struct Texture {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? ?? ?? 25 ?? ?? ?? ?? 3D")]
     public partial bool InitializeContents(void* contents);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B D8 48 39 7D")]
+    public partial void* Map(uint mipLevel, TextureMapResult* result);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5C 24 ?? EB")]
+    public partial void Unmap(uint mipLevel);
+
     [VirtualFunction(2u)]
     public partial void IncRef();
 
     [VirtualFunction(3u)]
     public partial void DecRef();
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe struct TextureMapResult {
+    [FieldOffset(0x00)] public uint RowPitch;
+    [FieldOffset(0x04)] private uint Unk04;
+    [FieldOffset(0x08)] public void* Data;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
