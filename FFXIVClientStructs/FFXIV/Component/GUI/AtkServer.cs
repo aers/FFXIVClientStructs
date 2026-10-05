@@ -52,7 +52,7 @@ public unsafe partial struct AtkServer {
     [FieldOffset(0x1C0)] private void* /* VertexDeclaration */ VertexDeclarationArray; // array size 3
     [FieldOffset(0x1D8)] private void* /* VertexBuffer */ VertexBuffer;
     [FieldOffset(0x1E0)] private void* /* IndexBuffer */ IndexBuffer;
-    
+
     [FieldOffset(0x4C0)] public Texture* WhiteTexture; // 4x4 solid white
     [FieldOffset(0x4C8)] public Texture* BlackTexture; // 4x4 solid black
 
