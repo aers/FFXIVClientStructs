@@ -32609,6 +32609,13 @@ structs:
     name: IsStateLoaded
     offset: 12
   member_functions: []
+- type: Component::GUI::AtkContext
+  name: AtkContext
+  namespace: Component.GUI
+  union: False
+  size: 256
+  fields: []
+  member_functions: []
 - type: Component::GUI::AtkCrestManager
   name: AtkCrestManager
   namespace: Component.GUI
@@ -33758,6 +33765,15 @@ structs:
   - type: Client::Graphics::Kernel::PixelShader*
     name: PrimitiveUIMaskPS
     offset: 376
+  - type: __int64
+    name: VertexDeclarationArray
+    offset: 448
+  - type: __int64
+    name: VertexBuffer
+    offset: 472
+  - type: __int64
+    name: IndexBuffer
+    offset: 480
   - type: Client::Graphics::Kernel::Texture*
     name: WhiteTexture
     offset: 1216
@@ -33770,6 +33786,9 @@ structs:
   - type: unsigned int
     name: UICommandCount
     offset: 1416
+  - type: Component::GUI::AtkContext*
+    name: ContextArray
+    offset: 1424
   virtual_functions:
   - name: dtor
     offset: 0
