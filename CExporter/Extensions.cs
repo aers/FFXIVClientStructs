@@ -94,6 +94,8 @@ public static partial class TypeExtensions {
                 _ when type == typeof(ulong) || type == typeof(nuint) => "uint64_t",
                 _ when type.IsPointer() && !type.IsGenericPointer() => $"{type.GetElementType()!.FixTypeName(shouldLower)}*", // able to handle infinite amount of pointers until stack size says no but this should never happen
                 _ when type.IsGenericPointer() => $"{type.GenericTypeArguments[0].FixTypeName(shouldLower)}*",
+                _ when type.IsGenericTypeParameter || type.IsGenericParameter => type.Name,
+                _ when type.IsConstructedGenericType || type.IsGenericTypeDefinition => type.SanitizeName(true),
                 _ => type.SanitizeName()
             };
             return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();
@@ -109,6 +111,7 @@ public static partial class TypeExtensions {
                 _ when type.GetCustomAttribute<InlineArrayAttribute>() is { Length: var length } => type.GetGenericArguments()[0].SizeOf() * length,
                 _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
                 _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
+                _ when type.ContainsGenericParameters => 1,
                 _ when type.IsGenericType => Marshal.SizeOf(Activator.CreateInstance(type)!),
                 _ => type.GetSizeOf()
             };
@@ -159,10 +162,10 @@ public static partial class TypeExtensions {
         }
 
         public bool IsGenericPointer() {
-            return type is { Name: "Pointer`1", Namespace: ExporterStatics.InteropNamespacePrefix } or { Name: "hkRefPtr`1", Namespace: ExporterStatics.HavokNamespacePrefix };
+            return type is { Name: "Pointer`1", Namespace: ExporterStatics.InteropNamespacePrefix } || (type.Name == "hkRefPtr`1" && type.Namespace!.StartsWith(ExporterStatics.HavokNamespacePrefix));
         }
 
-        public string SanitizeName() {
+        public string SanitizeName(bool ignoreGenericTypes = false) {
             if (type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName() + "*";
             var name = (type.FullName ?? type.GetFullname()).AsSpan();
             if (type.IsHavokStdXivOrInterop()) {
@@ -170,12 +173,8 @@ public static partial class TypeExtensions {
                 name = name[(name.IndexOf('.') + 1)..];
             }
             if (!type.IsGenericType) return name.ToString();
-            switch (type.Name) {
-                case "Pointer`1" when type.Namespace == ExporterStatics.InteropNamespacePrefix:
-                    return type.GenericTypeArguments[0].FixTypeName() + "*";
-                case "hkRefPtr`1" when type.Namespace == ExporterStatics.HavokNamespacePrefix:
-                    return type.GenericTypeArguments[0].FixTypeName() + "*";
-            }
+            if (type.IsGenericPointer())
+                return type.GenericTypeArguments[0].FixTypeName() + "*";
 
             var afterBacktick = name[name.IndexOf('`')..];
             name = name[..^afterBacktick.Length];
@@ -187,15 +186,18 @@ public static partial class TypeExtensions {
             if (me.MoveNext())
                 builder.Append('.').Append(afterBacktick.Slice(me.Current.Index + 3, me.Current.Length - 3));
 
-            builder.Append('<');
-            var gta = type.GenericTypeArguments;
-            for (var i = 0; i < gta.Length; i++) {
-                if (i != 0)
-                    builder.Append(", ");
-                builder.Append(gta[i].FixTypeName());
+            if (!ignoreGenericTypes)
+            {
+                builder.Append('<');
+                var gta = type.GenericTypeArguments;
+                for (var i = 0; i < gta.Length; i++) {
+                    if (i != 0)
+                        builder.Append(", ");
+                    builder.Append(gta[i].FixTypeName());
+                }
+                builder.Append('>');
             }
 
-            builder.Append('>');
             return builder.ToString();
         }
         public int PackSize() {
@@ -218,43 +220,50 @@ public static partial class TypeExtensions {
         public bool ShouldNotExportType() => type.IsPointer() || type.IsPrimitive || type.IsFixedBuffer() || type.IsEnum || type.IsBaseType();
 
         public bool IsGenericTypeParameterOrPointer() => type.IsGenericTypeParameter || (type.IsPointer() && type.GetPointerType().IsGenericTypeParameterOrPointer());
+
+        public bool IsStdDefiniton() => type.Namespace.AsSpan().SequenceEqual(ExporterStatics.StdNamespacePrefix);
     }
 
 }
 
 public static class FieldInfoExtensions {
-    public static int GetFieldOffset(this FieldInfo info) {
-        var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
-        return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
-    }
-
-    public static int GetFieldOffsetSequential(this FieldInfo info) {
-        if (info.DeclaringType is not { } declaring)
-            throw new Exception($"Unable to access declaring type of field {info.Name}");
-        var pack = declaring.StructLayoutAttribute?.Pack ?? 0; // Default to 0 if no pack is specified
-        var fields = declaring.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        var offset = 0;
-        foreach (var field in fields) {
-            var fieldPack = field.FieldType.PackSize();
-            if (pack != 0) {
-                fieldPack = Math.Min(pack, field.FieldType.PackSize());
-            }
-            offset = (offset + fieldPack - 1) / fieldPack * fieldPack;
-            if (field == info) {
-                return offset;
-            }
-            offset += field.FieldType.SizeOf();
+    extension(FieldInfo info) {
+        
+        public int GetFieldOffset() {
+            var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
+            return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
         }
-        throw new Exception("Field not found");
-    }
 
-    public static bool IsDirectBase(this FieldInfo field) {
-        var bases = field.DeclaringType?.GetInheritsTypes() ?? [];
-        return bases.Any(b => field.FieldType == b && field.Name == (b.Name == field.DeclaringType?.Name ? b.Name + "Base" : b.Name)) || field.GetCustomAttribute<CExporterBaseTypeAttribute>() != null;
-    }
+        public int GetFieldOffsetSequential() {
+            if (info.DeclaringType is not { } declaring)
+                throw new Exception($"Unable to access declaring type of field {info.Name}");
+            var pack = declaring.StructLayoutAttribute?.Pack ?? 0; // Default to 0 if no pack is specified
+            var fields = declaring.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var offset = 0;
+            foreach (var field in fields) {
+                var fieldPack = field.FieldType.PackSize();
+                if (pack != 0) {
+                    fieldPack = Math.Min(pack, field.FieldType.PackSize());
+                }
+                offset = (offset + fieldPack - 1) / fieldPack * fieldPack;
+                if (field == info) {
+                    return offset;
+                }
+                offset += field.FieldType.SizeOf();
+            }
+            throw new Exception("Field not found");
+        }
 
-    public static bool IsBitArray(this FieldInfo type) {
-        return type.GetCustomAttributes().Any(t => t.GetType().Name.Contains("BitFieldAttribute`1"));
+        public bool IsDirectBase() {
+            var bases = info.DeclaringType?.GetInheritsTypes() ?? [];
+            return bases.Any(b => info.FieldType == b && info.Name == (b.Name == info.DeclaringType?.Name ? b.Name + "Base" : b.Name)) || info.GetCustomAttribute<CExporterBaseTypeAttribute>() != null;
+        }
+
+        public bool IsBitArray() {
+            return info.GetCustomAttributes().Any(t => t.GetType().Name.Contains("BitFieldAttribute`1"));
+        }
+
+        public bool IsStdDefinition() => info.FieldType.IsStdDefiniton();
     }
 }
 public static class Extensions {
@@ -263,10 +272,14 @@ public static class Extensions {
         stream.Write(content);
     }
 
-    public static bool IsInStructList(this string name, List<ProcessedStruct> structs) {
-        foreach (var str in structs) {
-            if (str.StructTypeName == name) return true;
+    extension(string name) {
+        public bool IsInStructList(List<ProcessedStruct> structs) {
+            foreach (var str in structs) {
+                if (str.StructTypeName == name) return true;
+            }
+            return false;
         }
-        return false;
+
+        public string GetCorrectedName() => name is "Dtor" or "Ctor" ? name.ToLower() : name;
     }
 }
