@@ -54,7 +54,7 @@ public unsafe partial struct ImmediateContext {
     [FieldOffset(0x1818)] public PixelShader* CopyValidColorPixelShader; // CopyValidColorPS.shcd
     [FieldOffset(0x1820)] public VertexShader* DepthCopyVertexShader; // DepthCopyVS.shcd
     [FieldOffset(0x1828)] public PixelShader* DepthCopyPixelShader; // DepthCopyPS.shcd
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 47 58")]
     public partial void SetBlendState(PackedBlendStateDesc blendState);
 
