@@ -26,7 +26,11 @@ public static class ExporterStatics {
     public static readonly string Separator = "::";
 #pragma warning restore CA2211
 
-    public static Type[] GetXIVTypes() {
+    public static Type[] GetXIVTypes() => GetTypes(FFXIVNamespacePrefix);
+
+    public static Type[] GetHavokTypes() => GetTypes(HavokNamespacePrefix);
+
+    private static Type[] GetTypes(string namespacePrefix) {
         var assembly = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs));
 
         Type[] definedTypes;
@@ -36,20 +40,7 @@ public static class ExporterStatics {
             definedTypes = ex.Types.Where(t => t != null).ToArray()!;
         }
 
-        return definedTypes.Where(t => t.FullName!.StartsWith(FFXIVNamespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
-    }
-
-    public static Type[] GetHavokTypes() {
-        var assembly = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs));
-
-        Type[] definedTypes;
-        try {
-            definedTypes = assembly.DefinedTypes.Select(ti => ti.AsType()).ToArray();
-        } catch (ReflectionTypeLoadException ex) {
-            definedTypes = ex.Types.Where(t => t != null).ToArray()!;
-        }
-
-        return definedTypes.Where(t => t.FullName!.StartsWith(HavokNamespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
+        return definedTypes.Where(t => t.FullName!.StartsWith(namespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
     }
 
     public static Type GetBestMatchFromSize(int size) => size switch {
