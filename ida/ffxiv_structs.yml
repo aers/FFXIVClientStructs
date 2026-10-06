@@ -4360,6 +4360,18 @@ enums:
     "MultiViewport": 2
     "ScissorRect": 3
     "Clear": 4
+    "Draw": 5
+    "DrawIndexed": 6
+    "DrawIndexedInstanced": 7
+    "Dispatch": 8
+    "DispatchIndirect": 9
+    "None": 10
+    "CopySubresourceRegion": 11
+    "CopyTexture": 12
+    "CopyResource": 13
+    "None2": 16
+    "SaveTextureToFile": 17
+    "SetSaveTextureFilePath": 18
 - type: Client::Graphics::Kernel::TextureFormat
   name: TextureFormat
   underlying: unsigned int
@@ -16161,6 +16173,9 @@ structs:
   - type: Client::Graphics::Kernel::RenderCommandClear*
     name: ClearCommand
     offset: 0
+  - type: Client::Graphics::Kernel::RenderCommandSetSaveTextureFilePath*
+    name: SetSaveTextureFilePathCommand
+    offset: 0
   member_functions: []
 - type: Client::Graphics::Kernel::RenderCommandClearDepth
   name: RenderCommandClearDepth
@@ -16624,7 +16639,9 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
+  virtual_functions:
+  - name: Render
+    offset: 16
   member_functions: []
 - type: Client::Graphics::Render::Footprint
   name: Footprint
@@ -46677,6 +46694,20 @@ structs:
     offset: 4
   - type: Client::Graphics::Kernel::RenderCommandBufferGroup::RenderCommand
     name: RenderCommand
+    offset: 8
+  member_functions: []
+- type: Client::Graphics::Kernel::RenderCommandSetSaveTextureFilePath
+  name: RenderCommandSetSaveTextureFilePath
+  namespace: Client.Graphics.Kernel
+  union: False
+  size: 16
+  fields:
+  - type: Client::Graphics::Kernel::RenderCommand
+    name: RenderCommand
+    offset: 0
+    base: true
+  - type: byte*
+    name: FilePath
     offset: 8
   member_functions: []
 - type: Client::Graphics::Kernel::RenderCommandSetTarget
@@ -93488,6 +93519,21 @@ structs:
   - type: D3D11_PRIMITIVE_TOPOLOGY
     name: CurrentPrimitiveTopology
     offset: 6104
+  - type: Client::Graphics::Kernel::VertexShader*
+    name: CopyVertexShader
+    offset: 6152
+  - type: Client::Graphics::Kernel::PixelShader*
+    name: CopyPixelShader
+    offset: 6160
+  - type: Client::Graphics::Kernel::PixelShader*
+    name: CopyValidColorPixelShader
+    offset: 6168
+  - type: Client::Graphics::Kernel::VertexShader*
+    name: DepthCopyVertexShader
+    offset: 6176
+  - type: Client::Graphics::Kernel::PixelShader*
+    name: DepthCopyPixelShader
+    offset: 6184
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8D 47 58
     return_type: void
