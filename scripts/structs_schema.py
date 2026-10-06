@@ -7,9 +7,12 @@ try:
 except ImportError:
     from yaml import SafeLoader as Loader
 
-YamlStructValuesExport: TypeAlias = list[dict[str, Union[str, int, "YamlStructValuesExport"]]]
+YamlStructValuesExport: TypeAlias = list[
+    dict[str, Union[str, int, "YamlStructValuesExport"]]
+]
 YamlStructExport: TypeAlias = dict[str, YamlStructValuesExport]
 YamlExport: TypeAlias = dict[str, list[YamlStructExport]]
+
 
 @dataclass
 class DefinedStructBase:
@@ -51,6 +54,7 @@ class DefinedStructMemFunc:
 class DefinedStructField(DefinedStructFuncParam):
     offset: int
     base: bool
+    template_args: list[str]
 
 
 @dataclass
@@ -72,7 +76,9 @@ class DefinedStructFixedField(DefinedStructField):
     size: int
     is_string: bool
 
+
 Fields: TypeAlias = list[DefinedStructField | DefinedStructFixedField]
+
 
 @dataclass
 class DefinedStruct(DefinedStructBase):
@@ -93,10 +99,8 @@ class DefinedStructExport:
     structs: list[DefinedStruct]
 
 
-def get_yaml(stream, loader = Loader) -> DefinedStructExport:
-    dic: YamlExport = load(
-        stream, loader
-    )
+def get_yaml(stream, loader=Loader) -> DefinedStructExport:
+    dic: YamlExport = load(stream, loader)
     enums = []
     structs = []
     for enum in dic["enums"]:
@@ -116,8 +120,13 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
         member_functions = []
         static_member_functions = None
         static_members = None
+        template_types = []
         for field in struct["fields"]:
             base = field["base"] if "base" in field else False
+            template_args = []
+            if "template_args" in field:
+                for template_arg in field["template_args"]:
+                    template_args.append(template_arg)
             if "size" in field:
                 fields.append(
                     DefinedStructFixedField(
@@ -125,8 +134,9 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
                         field["type"],
                         field["offset"],
                         base,
+                        template_args,
                         field["size"],
-                        field["is_string"]
+                        field["is_string"],
                     )
                 )
             elif "return_type" in field:
@@ -141,6 +151,7 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
                         field["type"],
                         field["offset"],
                         base,
+                        template_args,
                         field["return_type"],
                         parameters,
                     )
@@ -148,7 +159,11 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
             else:
                 fields.append(
                     DefinedStructField(
-                        field["name"], field["type"], field["offset"], base
+                        field["name"],
+                        field["type"],
+                        field["offset"],
+                        base,
+                        template_args,
                     )
                 )
         if "virtual_functions" in struct:
@@ -170,18 +185,21 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
                         parameters,
                     )
                 )
-        for memfunc in struct["member_functions"]:
-            parameters = []
-            for param in memfunc["parameters"]:
-                parameters.append(DefinedStructFuncParam(param["name"], param["type"]))
-            member_functions.append(
-                DefinedStructMemFunc(
-                    memfunc["signature"],
-                    memfunc["return_type"],
-                    parameters,
-                    memfunc["name"],
+        if "member_functions" in struct:
+            for memfunc in struct["member_functions"]:
+                parameters = []
+                for param in memfunc["parameters"]:
+                    parameters.append(
+                        DefinedStructFuncParam(param["name"], param["type"])
+                    )
+                member_functions.append(
+                    DefinedStructMemFunc(
+                        memfunc["signature"],
+                        memfunc["return_type"],
+                        parameters,
+                        memfunc["name"],
+                    )
                 )
-            )
         if "static_member_functions" in struct:
             static_member_functions = []
             for smemfunc in struct["static_member_functions"]:
@@ -209,6 +227,9 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
                         sm["is_pointer"] if "is_pointer" in sm else False,
                     )
                 )
+        if "template_types" in struct:
+            for type in struct["template_types"]:
+                template_types.append(type)
         size = None
         if "size" in struct:
             size = struct["size"]
@@ -228,7 +249,7 @@ def get_yaml(stream, loader = Loader) -> DefinedStructExport:
                 struct["union"],
                 static_member_functions,
                 static_members,
-                []
+                template_types,
             )
         )
     return DefinedStructExport(enums, structs)
