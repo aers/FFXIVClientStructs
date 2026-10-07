@@ -35,7 +35,8 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xE30), FixedSizeArray] internal FixedSizeArray7<Utf8String> _unkUtf8Strings;
 
     [FieldOffset(0x1240)] public sbyte ServiceAccountIndex;
-    [FieldOffset(0x1241)] public byte SelectedCharacterIndex;
+    [FieldOffset(0x1241)] public sbyte DisplayedCharacterIndex;
+    [FieldOffset(0x1241), Obsolete("Renamed to DisplayedCharacterIndex")] public byte SelectedCharacterIndex;
 
     [FieldOffset(0x1248)] public ulong HoveredCharacterContentId;
     [FieldOffset(0x1250)] public byte DataCenter;
@@ -73,7 +74,7 @@ public unsafe partial struct AgentLobby {
     /// </summary>
     [FieldOffset(0x12CD)] public byte FramesUntilLogout;
     
-    [FieldOffset(0x12CD), Obsolete("Use FramesUntilLogout instead.")] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x12CD), Obsolete("Use DisplayedCharacterIndex")] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
     [FieldOffset(0x12D0)] public ulong SelectedCharacterContentId;
 
