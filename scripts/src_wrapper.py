@@ -334,11 +334,9 @@ class SrcInterface(object):
         Returns:
             Function pointer signature string
         """
-        # Special case for Dtor
-        if vfunc.name == "Dtor":
-            # Find the struct name from context - this will be passed separately
-            return "DTOR"
-        
+        if not (vfunc.return_type and vfunc.parameters):
+            return f"void* {vfunc.name};"
+
         return_type = vfunc.return_type if vfunc.return_type else "void"
         
         # Build parameter list
@@ -533,8 +531,9 @@ class SrcInterface(object):
         struct_string_define.indent()
 
         # Add __vtable member if this struct has virtual functions
-        if struct.virtual_functions:
+        if struct.virtual_functions and prev_size == 0:
             struct_string_define += f"{short_name}_vtbl{template_suffix}* __vtable;"
+            prev_size = 8
 
         offset = 0
 
@@ -586,7 +585,7 @@ class SrcInterface(object):
 
         if struct.size is not None and struct.size != 0:
             while struct.size > prev_size:
-                fill_size = offset - prev_size
+                fill_size = struct.size - prev_size
                 line, size = self.get_struct_pad(fill_size, prev_size)
                 struct_string_define += line
                 prev_size += size
@@ -600,13 +599,14 @@ class SrcInterface(object):
                 struct_string_vtable += template_declaration
             struct_string_vtable += f"struct __cppobj {short_name}_vtbl {{"
             struct_string_vtable.indent()
+            previous_offset = 0
             for vfunc in struct.virtual_functions:
-                sig = self.build_vfunc_signature(vfunc)
-                # Special case for DTOR macro
-                if sig.startswith("DTOR"):
-                    struct_string_vtable += f"DTOR({short_name})"
-                else:
-                    struct_string_vtable += sig
+                while previous_offset < vfunc.offset:
+                    struct_string_vtable += f"void* vf{int(previous_offset/8)};"
+                    previous_offset += 8
+
+                struct_string_vtable += self.build_vfunc_signature(vfunc)
+                previous_offset = vfunc.offset + 8
             struct_string_vtable.unindent()
             struct_string_vtable += "};"
             vtable_full_name = f"{struct.type}_vtbl"
