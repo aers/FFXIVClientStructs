@@ -159,6 +159,9 @@ class BaseApi:
             static_members = None
             for field in struct["fields"]:
                 base = field["base"] if "base" in field else False
+                template_types = []
+                if "template_args" in field:
+                    template_types = field["template_args"]
                 if "size" in field:
                     fields.append(
                         DefinedStructFixedField(
@@ -166,6 +169,7 @@ class BaseApi:
                             field["type"],
                             field["offset"],
                             base,
+                            template_types,
                             field["size"],
                             field["is_string"]
                         )
@@ -182,6 +186,7 @@ class BaseApi:
                             field["type"],
                             field["offset"],
                             base,
+                            template_types,
                             field["return_type"],
                             parameters,
                         )
@@ -189,7 +194,8 @@ class BaseApi:
                 else:
                     fields.append(
                         DefinedStructField(
-                            field["name"], field["type"], field["offset"], base
+                            field["name"], field["type"], field["offset"], base,
+                            template_types
                         )
                     )
             if "virtual_functions" in struct:
