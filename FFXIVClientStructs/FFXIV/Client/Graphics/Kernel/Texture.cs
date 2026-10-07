@@ -25,7 +25,7 @@ public unsafe partial struct Texture {
     [FieldOffset(0x57)] private byte Unk57;
     [FieldOffset(0x58)] public TextureFormat TextureFormat;
     [FieldOffset(0x5C)] public TextureFlags Flags;
-    [FieldOffset(0x60)] public byte ArraySize; // new in 6.3
+    [FieldOffset(0x60)] public byte ArraySize; // Face count for cube arrays.
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 
@@ -50,11 +50,55 @@ public unsafe partial struct Texture {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? ?? ?? 25 ?? ?? ?? ?? 3D")]
     public partial bool InitializeContents(void* contents);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B D8 48 39 7D")]
+    public partial void* Map2D(uint mipLevel, TextureMapResult* result);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5C 24 ?? EB")]
+    public partial void Unmap2D(uint mipLevel);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 56 08 8B CB")]
+    public partial void* Map3D(uint mipLevel, TextureMapResult* result);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C6 FF C5")]
+    public partial void Unmap3D(uint mipLevel);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 89 7C 24 ?? 48 8B F0")]
+    public partial void* MapCube(uint mipLevel, uint faceIndex, TextureMapResult* result);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 54 24 ?? FF C3")]
+    public partial void UnmapCube(uint mipLevel, uint faceIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 74 ?? 41 8B D5")]
+    public partial void* Map2DArray(uint mipLevel, uint arraySlice, TextureMapResult* result);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 45 0F")]
+    public partial void Unmap2DArray(uint mipLevel, uint arraySlice);
+
+    /// <remarks>KeepCpuCopy branch ignores faceIndex.</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 74 ?? 8B D7 49 8B CD")]
+    public partial void* MapCubeArray(uint mipLevel, uint cubeIndex, uint faceIndex, TextureMapResult* result);
+
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 41 3B DE 72 ?? FF C6")]
+    public partial void UnmapCubeArray(uint mipLevel, uint cubeIndex, uint faceIndex);
+
+    [MemberFunction("44 8B 41 38 48 8B C1 8B CA")]
+    public partial uint GetRowPitch(uint mipLevel);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B FD 44 8B F0")]
+    public partial uint GetDepthPitch(uint mipLevel);
+
     [VirtualFunction(2u)]
     public partial void IncRef();
 
     [VirtualFunction(3u)]
     public partial void DecRef();
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe struct TextureMapResult {
+    [FieldOffset(0x00)] public uint RowPitch;
+    [FieldOffset(0x04)] public uint DepthPitch;
+    [FieldOffset(0x08)] public void* Data;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
@@ -120,6 +164,7 @@ public enum TextureFlags : uint {
     LocationOnion = 0x200,
     ReadWrite = 0x400,
     Immutable = 0x800,
+    KeepCpuCopy = 0x1000,
     TextureRenderTarget = 0x100000,
     TextureDepthStencil = 0x200000,
     TextureType1D = 0x400000,
@@ -127,6 +172,7 @@ public enum TextureFlags : uint {
     TextureType3D = 0x1000000,
     TextureType2DArray = 0x10000000,
     TextureTypeCube = 0x2000000,
+    TextureTypeCubeArray = 0x12000000,
     TextureTypeMask = 0x13C00000,
     TextureSwizzle = 0x4000000,
     TextureNoTiled = 0x8000000,

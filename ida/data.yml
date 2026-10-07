@@ -7155,6 +7155,18 @@ classes:
     funcs:
       0x1402169E0: ctor
       0x140216F50: InitializeContents
+      0x1402170F0: Map2D
+      0x140217360: Unmap2D
+      0x1402173C0: Map3D
+      0x140217620: Unmap3D
+      0x140217690: MapCube
+      0x140217930: UnmapCube
+      0x1402179A0: Map2DArray
+      0x140217C70: Unmap2DArray
+      0x140217CE0: MapCubeArray
+      0x140217FC0: UnmapCubeArray
+      0x140219E50: GetRowPitch
+      0x140219EC0: GetDepthPitch
   Client::Graphics::Kernel::TextureDx11:
     vtbls:
       - ea: 0x142142570
