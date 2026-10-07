@@ -145,7 +145,7 @@ class BaseIdaInterface(object):
         """Sets the parser used for building struct data."""
         ida_srclang.set_parser_argv(
             "clang",
-            "-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -fdelayed-template-parsing",
+            "-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -fdelayed-template-parsing -std=c++17",
         )
 
     def parse_string(self, decl: str, vtables: list[str]):
@@ -153,6 +153,7 @@ class BaseIdaInterface(object):
         ida_srclang.parse_decls_with_parser("clang", None, decl, False)
         for vtable in vtables:
             self.mark_as_vtable(vtable)
+    
     def mark_as_vtable(vtbl_name: str) -> str | None:
         """
         Mark a struct as a vtable (TAUDT_VFTABLE).
@@ -373,176 +374,6 @@ class BaseIdaInterface(object):
         
         return (struct_string_forward, struct_string_define, struct_string_vtables)
     
-    def parse_string(self, decl: str, vtables: list[str]):
-        """"""
-        ida_srclang.parse_decls_with_parser("clang", None, decl, False)
-        for vtable in vtables:
-            self.mark_as_vtable(vtable)
-
-class BaseIdaInterface(SrcInterface):
-    @abstractmethod
-    def get_struct_id(self, name):
-        pass
-
-    @abstractmethod
-    def get_enum_id(self, name):
-        pass
-
-    @abstractmethod
-    def delete_enum_members(self, eid: int):
-        """Remove all enum members
-
-        Args:
-            eid (int): The id of the enum
-        """
-        pass
-
-    def mark_as_vtable(vtbl_name: str) -> str | None:
-        """
-        Mark a struct as a vtable (TAUDT_VFTABLE).
-        Compatible with IDA 8.x and 9.x.
-        Returns an error string on failure, None on success.
-        """
-        tif = ida_typeinf.tinfo_t()
-
-        if not tif.get_named_type(None, vtbl_name):
-            return f"Type '{vtbl_name}' not found in type library"
-
-        if not tif.is_struct():
-            actual = "union" if tif.is_union() else "enum" if tif.is_enum() else "unknown"
-            return f"'{vtbl_name}' is not a struct (got {actual})"
-
-        udt = ida_typeinf.udt_type_data_t()
-        if not tif.get_udt_details(udt):
-            return f"Failed to retrieve UDT details for '{vtbl_name}'"
-
-        if udt.taudt_bits & ida_typeinf.TAUDT_VFTABLE:
-            return f"'{vtbl_name}' is already marked as a vtable"
-
-        udt.taudt_bits |= ida_typeinf.TAUDT_VFTABLE
-
-        if not tif.create_udt(udt, ida_typeinf.BTF_STRUCT):
-            return f"Failed to reconstruct UDT for '{vtbl_name}' after setting vtable flag"
-
-        if _get_ida_major() >= 9:
-            result = tif.set_named_type(None, vtbl_name)
-        else:
-            result = tif.set_named_type(
-                ida_typeinf.get_idati(),
-                vtbl_name,
-                ida_typeinf.NTF_REPLACE
-            )
-
-        if not result:
-            return f"Failed to write back '{vtbl_name}' to type library"
-
-        return None
-
-    def enum_exists(self, name: str):
-        return self.get_enum_id(name) != idaapi.BADADDR
-
-    def clean_name(self, name: str):
-        """Clean a name
-
-        Args:
-            name (str): The name
-
-        Returns:
-            str: The cleaned name
-        """
-        return name
-
-    def clean_struct_name(self, name: str):
-        """Clean a struct name
-
-        Args:
-            name (str): The struct name
-
-        Returns:
-            str: The cleaned struct name
-        """
-
-        if name == "Tm":
-            return "tm"  # tm is a keyword in IDA for the time struct but C# exports it as Tm
-        return (
-            name.replace(" ", "")
-            .replace("unsigned", "u")
-            .replace("__int64", "long")
-            .replace("__int32", "int")
-            .replace("__int16", "short")
-            .replace("__int8", "char")
-        )
-
-    def get_named_type(self, name: str):
-        """Retrieve a tinfo_t from the named type.
-
-        Args:
-            name (str): Name of the type.
-        """
-
-        tinfo = ida_typeinf.tinfo_t()
-        clean_name = self.clean_struct_name(name)
-        if (
-            self.get_struct_id(clean_name) != idaapi.BADADDR
-            or self.get_enum_id(clean_name) != idaapi.BADADDR
-        ):
-            if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
-                raise ValueError("{0} not found in IDA database".format(clean_name))
-            return tinfo
-
-        if name == "void":
-            idaapi.parse_decl(
-                tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
-            )
-            return tinfo.get_rettype()
-
-        terminated = name + ";"
-        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-
-        tinfo_str = tinfo.dstr()
-        if tinfo_str == name or tinfo_str == clean_name:
-            return tinfo
-
-        terminated = clean_name + ";"
-        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-
-        return tinfo
-
-    def get_tinfo_from_type(self, raw_type: str, array_size=0):
-        """Retrieve a tinfo_t from a raw type string.
-
-        Args:
-            raw_type (str): Raw type string.
-            array_size (int, optional): Size of the array. Defaults to 0.
-        """
-
-        type = raw_type.rstrip("*")
-        ptr_count = len(raw_type) - len(type)
-
-        type_tinfo = self.get_named_type(type)
-
-        ptr_tinfo = None
-        if ptr_count > 0:
-            for i in range(ptr_count):
-                ptr_tinfo = idaapi.tinfo_t()
-                if not ptr_tinfo.create_ptr(type_tinfo):
-                    print("! failed to create pointer")
-                    return None
-                type_tinfo = ptr_tinfo
-        else:
-            ptr_tinfo = type_tinfo
-
-        if array_size > 0:
-            array_tinfo = idaapi.tinfo_t()
-            if not array_tinfo.create_array(ptr_tinfo, array_size):
-                print("! failed to create array")
-                return None
-
-            ptr_tinfo = array_tinfo
-
-        return ptr_tinfo
-        
-
     def rename_struct(self, sid: int, new_name: str):
         """Rename a struct in IDA.
 
