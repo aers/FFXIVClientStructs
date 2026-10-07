@@ -217,18 +217,19 @@ class BaseApi:
                             parameters,
                         )
                     )
-            for memfunc in struct["member_functions"]:
-                parameters = []
-                for param in memfunc["parameters"]:
-                    parameters.append(DefinedStructFuncParam(param["name"], param["type"]))
-                member_functions.append(
-                    DefinedStructMemFunc(
-                        memfunc["signature"],
-                        memfunc["return_type"],
-                        parameters,
-                        memfunc["name"],
+            if "member_functions" in struct:
+                for memfunc in struct["member_functions"]:
+                    parameters = []
+                    for param in memfunc["parameters"]:
+                        parameters.append(DefinedStructFuncParam(param["name"], param["type"]))
+                    member_functions.append(
+                        DefinedStructMemFunc(
+                            memfunc["signature"],
+                            memfunc["return_type"],
+                            parameters,
+                            memfunc["name"],
+                        )
                     )
-                )
             if "static_member_functions" in struct:
                 static_member_functions = []
                 for smemfunc in struct["static_member_functions"]:
