@@ -7163,6 +7163,10 @@ classes:
       0x140217930: UnmapCube
       0x1402179A0: Map2DArray
       0x140217C70: Unmap2DArray
+      0x140217CE0: MapCubeArray
+      0x140217FC0: UnmapCubeArray
+      0x140219E50: GetRowPitch
+      0x140219EC0: GetDepthPitch
   Client::Graphics::Kernel::TextureDx11:
     vtbls:
       - ea: 0x142142570
