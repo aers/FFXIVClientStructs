@@ -13,24 +13,20 @@ import os
 from abc import abstractmethod
 from time import time
 from structs_schema import *
+from src_wrapper import SrcInterface
 
 
-predefine = """
-typedef char  size8_st;
-typedef unsigned char  size8_t;
-typedef short size16_st;
-typedef unsigned short size16_t;
-typedef int   size32_st;
-typedef unsigned int   size32_t;
-typedef long long size64_st;
-typedef unsigned long long size64_t;
+predefine = """#define _HAS_ITERATOR_DEBUGGING 0
+#define _ITERATOR_DEBUG_LEVEL 0
+#include <vector>
+#include <set>
+#include <map>
+#include <string>
+#include <list>
+#include <deque>
+#include <cstdint>
 
-#define DTOR(type) type *(__fastcall *Dtor)(type *__hidden self, size8_t freeFlags);
 """
-
-struct_string_forward = ""
-struct_string_define = ""
-
 
 class BaseApi:
     @abstractmethod
@@ -430,7 +426,7 @@ if api is None:
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
-                self.remove_struct_members(self.get_struct_id(fullname))
+                pass
 
             @property
             def get_file_path(self):
@@ -439,626 +435,56 @@ if api is None:
                 )
             
             def generate_hashed_type_name(self, name: str) -> str:                
-                name = self.clean_struct_name(name)
-
-                name = hashlib.sha1(name.encode()).hexdigest()
-
-                return "struc_" + name
+                return ""
 
             def get_srclang_type_name(self, name: str) -> str:
-                if not self.srclang_importer:
-                    return name
-                
-                ptr_count = 0
-                i = len(name) - 1
-                while i >= 0 and name[i] == '*':
-                    ptr_count += 1
-                    i -= 1
-
-                full_name = name
-                if ptr_count > 0:
-                    name = name.strip("*")
-
-                cname = self.srclang_types.get(name)
-                if cname is None:
-                    cname = self.srclang_types.get(self.clean_struct_name(name))
-                    
-                if cname is not None:
-                    return cname + "*" * ptr_count
-                
-                return full_name
+                return ""
 
             def can_run(self):
                 return self.enum_exists("Component::Exd::SheetsEnum")
 
             def create_enum_struct(self, enum):
                 # type: (DefinedStructEnum) -> None
-                fullname = enum.type
-                
-                e = self.get_enum_id(fullname)
-                if e == idaapi.BADADDR:
-                    e = self.create_enum(fullname)
-
-                self.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
-                if self.is_signed(enum.underlying):
-                    self.set_enum_flag(e, 0x20000)
-                if enum.flags:
-                    if idaapi.IDA_SDK_VERSION < 900:
-                        self.add_enum_member(e, "{0}.{1}".format(enum.name, "tmp"), self.get_enum_default_mask(e))
-                    self.set_enum_as_bf(e)
-                for value in enum.values:
-                    self.add_enum_member(
-                        e, "{0}.{1}".format(enum.name, value), enum.values[value]
-                    )
-                if enum.flags and idaapi.IDA_SDK_VERSION < 900:
-                    self.remove_enum_member(e, "tmp", enum.name)
+                return
 
             def delete_enum(self, enum):
                 # type: (DefinedStructEnum) -> None
-                eid = idc.get_enum(enum.type)
-                if eid != idaapi.BADADDR:
-                    self.delete_enum_members(eid)
-                    idc.set_enum_bf(eid, False)
+                return
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
-                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-                fullname = self.clean_struct_name(struct.type)
-                self.delete_struct_members(fullname)
-                self.delete_struct_members(fullname + "_vtbl")
-
-                # also check C types in case of an incomplete C run
-                if self.srclang_importer:
-                    cname = self.get_srclang_type_name(fullname)
-                    self.delete_struct_members(cname)
-                    self.delete_struct_members(cname + "_vtbl")
-
-                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                return
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
-
-                # TODO: change this over to ida_srclang
-                fullname = self.clean_struct_name(struct.type)
-
-                if self.srclang_importer:
-                    # rename C++ -> C or create new C struct
-                    cname = self.generate_hashed_type_name(fullname)
-                    self.srclang_types[fullname] = cname
-                    
-                    sid = self.get_struct_id(fullname)
-                    if sid == idaapi.BADADDR:
-                        if self.get_struct_id(cname) == idaapi.BADADDR:
-                            self.create_struct_type(cname, struct.union)
-                    else:
-                        self.rename_struct(sid, cname)
-                    
-                    if not struct.virtual_functions:
-                        return
-                    
-                    sid = self.get_struct_id(fullname + "_vtbl")
-                    if sid == idaapi.BADADDR:
-                        if self.get_struct_id(cname + "_vtbl") == idaapi.BADADDR:
-                            self.create_struct_type(cname + "_vtbl")
-                    else:
-                        self.rename_struct(sid, cname + "_vtbl")
-
-                    return
-
-                if self.get_struct_id(fullname) == idaapi.BADADDR:
-                    self.create_struct_type(fullname, struct.union)
-
-                if struct.virtual_functions:
-                    self.create_struct_type(fullname + "_vtbl")
+                return
 
             def validate_srclang_struct(self, struct: DefinedStruct):
-                cname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
-                sid = self.get_struct_id(cname)
-                if sid == idaapi.BADADDR:
-                    ida_kernwin.warning(f"Struct {cname} ({struct.type}) not found during validation")
-                    exit()
-                
-                ti = self.get_struct(sid)
-
-                expected_base_offsets = {}
-                for field in struct.fields:
-                    if not field.srclang_is_baseclass:
-                        continue
-                    expected_base_offsets[field.offset] = (
-                        expected_base_offsets.get(field.offset, 0) + 1
-                    )
-
-                if expected_base_offsets:
-                    udt = ida_typeinf.udt_type_data_t()
-                    if not ti.get_udt_details(udt):
-                        ida_kernwin.warning(
-                            f"Could not find baseclass for {cname} ({struct.type}) during validation"
-                        )
-                        exit()
-
-                    actual_base_offsets = {}
-                    for udm in udt:
-                        if not udm.is_baseclass():
-                            continue
-                        offset = int(udm.offset / 8)
-                        actual_base_offsets[offset] = actual_base_offsets.get(offset, 0) + 1
-
-                    for offset, expected_count in expected_base_offsets.items():
-                        actual_count = actual_base_offsets.get(offset, 0)
-                        if actual_count < expected_count:
-                            ida_kernwin.warning(
-                                f"Baseclass offset mismatch in struct {cname} ({struct.type}).\n"
-                                f"Expected {expected_count} member(s) for baseclass at {offset}, got {actual_count}"
-                            )
-                            exit()
-                
-                last_offset = -1
-                for field in struct.fields:
-                    if field.offset == last_offset:
-                        continue
-
-                    last_offset = field.offset
-
-                    if field.offset is None or field.srclang_is_baseclass:
-                        continue
-
-                    if field.offset == 0 and field.name == "_vtable":
-                        continue
-
-                    # ugly hack to workaround duplicate field names in structs
-                    field_name = field.srclang_field_name
-
-                    (idx, udm) = ti.get_udm(field_name)
-                    if idx == -1:
-                        ida_kernwin.warning(f"Field {field_name} not found in struct {cname} ({struct.type}) during validation")
-                        exit()
-
-                    if (udm.offset / 8) != field.offset:
-                        ida_kernwin.warning(f"Field \"{field_name}\" offset mismatch in struct {cname} ({struct.type}) during validation.\nExpected {field.offset}, got {(udm.offset/8)}")
-                        exit()
+                pass
 
             def get_srclang_fill_type(self, available_bytes: int, current_offset: int) -> tuple[str, int]:
-                if available_bytes >= 8 and (current_offset % 8) == 0:
-                    return ("__int64", 8)
-                elif available_bytes >= 4 and (current_offset % 4) == 0:
-                    return ("__int32", 4)
-                elif available_bytes >= 2 and (current_offset % 2) == 0:
-                    return ("__int16", 2)
-                else:
-                    return ("char", 1)
+                return ("", 0)
 
             def append_srclang_padding(self, decl: list[str], current_size: int, target_size: int) -> int:
-                while current_size < target_size:
-                    if self.full_padding:
-                        (fill_type, fill_size) = self.get_srclang_fill_type(
-                            target_size - current_size, current_size
-                        )
-                        decl.append(f"{fill_type} field_{current_size:X};")
-                        current_size += fill_size
-                    else:
-                        arr_size = target_size - current_size
-                        decl.append(f"char field_{current_size:X}[{arr_size}];")
-                        current_size += arr_size
-
-                return current_size
+                return 0
 
             def create_srclang_decl(self, struct: DefinedStruct) -> str:
-                fullname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
-
-                decl = [ "_" ] # placeholder, filled after we determine base classes
-
-                cur_size = 0
-
-                contiguous_fields = True
-                
-                seen_fields = {}
-
-                inherits_from = []
-
-                has_explicit_vtable = (len(struct.fields) != 0 and struct.fields[0].name == "_vtable")
-                
-                if struct.virtual_functions != None or has_explicit_vtable:
-                    # the placeholder will force IDA to mark the _vtbl struct as a VFT
-                    # and attach it to this struct
-                    decl.append("virtual void _placeholder();")
-
-                    # offset for vfptr if needed
-                    if struct.srclang_needs_vfptr or has_explicit_vtable:
-                        cur_size += 8
-
-                last_field_offset = -1
-                for field in struct.fields:
-                    offset = field.offset
-
-                    # skip explicit vtable fields
-                    if offset == 0 and field.name == "_vtable":
-                        continue
-
-                    if offset == last_field_offset and not struct.union:
-                        # NOTE In IDA versions < 9.0 you could have overlapping fields or an automatically created union.
-                        # We're not able to support this for srclang, so overlapping fields should ideally be
-                        # treated as a layout error which requires a union to resolve.
-                        # 
-                        # I've made the decision here to drop these with a warning, but it is probably worth evaluating
-                        # whether it's worthwhile to make this an error later.
-                        print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset.")
-                        continue
-
-                    last_field_offset = offset
-
-                    if offset > cur_size:
-                        contiguous_fields = False
-                        cur_size = self.append_srclang_padding(decl, cur_size, offset)
-
-                    field_is_base = field.base and contiguous_fields
-                    field_name = (
-                        field.name
-                        if not field_is_base
-                        else f"baseclass_{offset:X}"
-                    )
-                    field.srclang_is_baseclass = field_is_base
-
-                    # ugly hack to workaround duplicate field names in structs
-                    if field_name in seen_fields:
-                        next_index = seen_fields[field_name] + 1
-                        seen_fields[field_name] = next_index
-
-                        field_name += f"_{next_index}"
-                    else:
-                        seen_fields[field_name] = 1
-
-                    field.srclang_field_name = field_name
-                    
-                    array_size = field.size if hasattr(field, "size") else 0
-
-                    field_type = self.clean_name(field.type)
-                    if field_type == "__fastcall":
-                        field_decl = self.get_srclang_type_name(self.clean_name(field.return_type))
-                        field_decl = field_decl + "(__fastcall* " + field_name + ")("
-                        for param in field.parameters:
-                            field_decl = field_decl + self.get_srclang_type_name(self.clean_name(param.type)) + ""
-                            field_decl = field_decl + param.name + ","
-                        field_decl = field_decl[:-2] + ")"
-
-                        decl.append(field_decl)
-                        cur_size += 8
-
-                        continue
-
-                    field_size = 0
-                    
-                    # struct type
-                    if self.get_idc_type_from_ida_type(
-                        self.get_srclang_type_name(self.clean_struct_name(field_type))
-                    ) == self.get_struct_flag():
-                        field_type = self.get_srclang_type_name(self.clean_struct_name(field_type))
-
-                        tinfo = self.get_tinfo_from_type(field_type)
-                        field_size = tinfo.get_size()
-
-                    # enum type
-                    elif (
-                        self.get_idc_type_from_ida_type(field_type)
-                        == self.get_enum_flag()
-                    ):
-                        field_size = idc.get_enum_width(self.get_enum_id(field_type))
-
-                    # primitive type
-                    else:
-                        field_size = self.get_size_from_ida_type(field_type)
-
-                        if field_type.endswith("*"):
-                            field_type = self.get_srclang_type_name(field_type)
-
-                    field_decl = f"{field_type} {field_name}"
-                    if array_size > 0:
-                        field_size *= array_size
-                        field_decl += f"[{array_size}];"
-                    else:
-                        field_decl += ";"
-
-                    if field_is_base:
-                        inherits_from.append(field_type)
-                    else:
-                        decl.append(field_decl)
-
-                    cur_size += field_size
-                
-                if struct.size is not None and struct.size != 0:
-                    cur_size = self.append_srclang_padding(decl, cur_size, struct.size)
-
-                decl.append("};")
-
-                # set struct type
-                if struct.union:
-                    decl[0] = f"union {fullname} "
-                else:
-                    decl[0] = f"struct __attribute__((packed)) {fullname} "
-                if len(inherits_from) > 0:
-                    inheritances = ", ".join(inherits_from)
-                    decl[0] += f": {inheritances}"
-                
-                decl[0] += " {"
-                
-                return "\n".join(decl)
+                return ""
 
             def create_struct_member_fill(self, struct_name, offset):
                 # type: (str, int) -> None
-                s = self.get_struct(self.get_struct_id(struct_name))
-                prev_size = self.get_struct_size(s)
-                if self.full_padding:
-                    flag = self.get_idc_type_from_size(prev_size)
-                    size = self.get_size_from_idc_type(flag)
-                    if size > offset - prev_size:
-                        flag = self.get_idc_type_from_size(
-                            offset - prev_size, prev_size
-                        )
-                        size = self.get_size_from_idc_type(flag)
-
-                    self.create_struct_member(
-                        s, "field_{0:X}".format(prev_size), prev_size, flag, None, size
-                    )
-                else:
-                    self.create_struct_member(
-                        s,
-                        "field_{0:X}".format(prev_size),
-                        prev_size,
-                        ida_bytes.byte_flag(),
-                        None,
-                        offset - prev_size,
-                    )
+                pass
                 
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
-                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-
-                if self.srclang_importer:
-                    idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-
-                    decl = self.create_srclang_decl(struct)
-                    num_errors = ida_srclang.parse_decls_for_srclang(
-                        ida_srclang.SRCLANG_C,
-                        None,
-                        decl,
-                        False
-                    )
-
-                    if num_errors != 0:
-                        # show messagebox
-                        print(f"above errors occurred while parsing the following:\n---\n{decl}\n---")
-                        ida_kernwin.warning(f"Error parsing srclang decl for {struct.type}, please see errors in Output window.")
-                        exit()
-
-                    if struct.virtual_functions is not None:
-                        # delete the _placeholder function from the VFT
-                        cname = self.srclang_types[self.clean_struct_name(struct.type)]
-                        sid = self.get_struct_id(f"{cname}_vtbl")
-                        tinfo = self.get_struct(sid)
-                        tinfo.del_udm(0)
-
-                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
-
-                    self.validate_srclang_struct(struct)
-                    return
-
-                fullname = self.clean_struct_name(struct.type)
-
-                tid = self.get_struct_id(fullname)
-                if tid == idaapi.BADADDR:
-                    print("Error: Struct {0} not found when trying to create members".format(fullname))
-                    return
-
-                s = self.get_struct(tid)
-
-                if struct.virtual_functions != None and (
-                    struct.fields == [] or struct.fields[0].offset > 0
-                ):
-                    self.create_struct_member(
-                        s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
-                    )
-                    type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
-                    meminfo = self.get_struct_member_by_name(s, "__vftable")
-                    self.set_struct_member_info(
-                        s, meminfo, 0, self.get_tinfo_from_type(type), 0, False
-                    )
-
-                contiguous_fields = True
-                for field in struct.fields:
-                    offset = field.offset
-
-                    prev_size = self.get_struct_size(s)
-                    while offset > prev_size:
-                        contiguous_fields = False
-                        self.create_struct_member_fill(fullname, offset)
-                        prev_size = self.get_struct_size(s)
-
-                    field_is_base = field.base and contiguous_fields
-                    field_name = (
-                        field.name
-                        if not field_is_base
-                        else "baseclass_{0:X}".format(offset)
-                    )
-                    field_type = self.clean_name(field.type)
-                    if field_type == "__fastcall":
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type("__int64"),
-                            None,
-                            self.get_size_from_ida_type("__int64"),
-                        )
-                        field_type = self.clean_name(field.return_type)
-                        field_type = field_type + "(__fastcall* " + field_name + ")("
-                        for param in field.parameters:
-                            field_type = field_type + self.clean_name(param.type) + ""
-                            field_type = field_type + param.name + ","
-                        field_type = field_type[:-2] + ")"
-                    elif (
-                        self.get_idc_type_from_ida_type(
-                            self.clean_struct_name(field_type)
-                        )
-                        == self.get_struct_flag()
-                    ):
-                        field_type = self.clean_struct_name(field_type)
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type(field_type),
-                            self.get_struct_opinfo_from_type(field_type),
-                            self.get_size_from_ida_type(field_type),
-                        )
-                    elif (
-                        self.get_idc_type_from_ida_type(field_type)
-                        == self.get_enum_flag()
-                    ):
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type(field_type),
-                            self.get_enum_opinfo_from_type(field_type),
-                            self.get_size_from_ida_type(field_type),
-                        )
-                    else:
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type(field_type),
-                            None,
-                            self.get_size_from_ida_type(field_type),
-                        )
-
-                    meminfo = self.get_struct_member_by_name(s, field_name)
-                    if meminfo is not None:    
-                        if field_is_base:
-                            if idaapi.IDA_SDK_VERSION >= 900:
-                                meminfo.set_baseclass()
-                            else:
-                                meminfo.props |= self.get_base_class_flag()
-                                
-                        array_size = field.size if hasattr(field, "size") else 0
-                        self.set_struct_member_info(
-                            s,
-                            meminfo,
-                            0,
-                            self.get_tinfo_from_type(field_type, array_size),
-                            0,
-                            field.is_string if hasattr(field, "is_string") and (field_type == "char" or field_type == "wchar_t") else False
-                        )
-
-                if struct.size is not None and struct.size != 0:
-                    prev_size = self.get_struct_size(s)
-                    while struct.size > prev_size:
-                        self.create_struct_member_fill(fullname, struct.size)
-                        prev_size = self.get_struct_size(s)
-
-                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                pass
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
-                s = self.get_struct(self.get_struct_id(fullname + "_vtbl"))
-                for virt_func in struct.virtual_functions:
-                    if virt_func is None:
-                        continue
-
-                    offset = virt_func.offset
-                    field_name = virt_func.name
-                    self.create_struct_member(
-                        s,
-                        field_name,
-                        offset,
-                        self.get_idc_type_from_ida_type("__int64"),
-                        None,
-                        self.get_size_from_ida_type("__int64"),
-                    )
-                    if virt_func.return_type == None or virt_func.parameters == None:
-                        continue
-
-                    meminfo = self.get_struct_member_by_name(s, field_name)
-                    if meminfo is None:
-                        raise RuntimeError("Failed to find member {0} in struct {1}".format(field_name, fullname))
-
-                    field_type = self.clean_name(virt_func.return_type)
-                    field_type = field_type + "(__fastcall* " + field_name + ")("
-                    for param in virt_func.parameters:
-                        field_type = field_type + self.clean_name(param.type) + " "
-                        field_type = field_type + param.name + ","
-                    field_type = field_type[:-1] + ")"
-
-                    self.set_struct_member_info(
-                        s, meminfo, 0, self.get_tinfo_from_type(field_type), 0, False
-                    )
-                if struct.vtable_size:
-                    size = int(struct.vtable_size / 8)
-                else:
-                    size = int(self.get_struct_size(s) / 8)
-
-                for i in range(size):
-                    offset = i * 8
-                    member_id = self.get_struct_member_id(s, offset)
-                    if idaapi.IDA_SDK_VERSION >= 900:
-                        udm_idx, udm = s.get_udm_by_offset(offset * 8)
-
-                        # srclang ends up with gap UDMs in VFTs that need to be deleted and filled back out as vf## placeholders
-                        is_vft_gap = (
-                            udm is not None
-                            and udm.name.startswith("gap")
-                            and udm.type.dstr().startswith("_BYTE[")
-                        )
-                        if is_vft_gap:
-                            result = s.del_udm(udm_idx)
-                            if result == ida_typeinf.TERR_OK:
-                                member_id = idc.BADADDR
-                            else:
-                                print(
-                                    f"Error: failed to delete VFT gap UDM {fullname}.{udm.name} "
-                                    f"at slot {i}: {ida_typeinf.tinfo_errstr(result)}"
-                                )
-                    if member_id == idc.BADADDR:
-                        name = "vf{0}".format(i)
-                        fallback_name = self.get_fallback_vfunc_name(struct.type, i)
-                        if fallback_name:
-                            name = fallback_name
-
-                        self.create_struct_member(
-                            s,
-                            name,
-                            i * 8,
-                            self.get_idc_type_from_ida_type("__int64"),
-                            None,
-                            self.get_size_from_ida_type("__int64"),
-                        )
-                        meminfo = self.get_struct_member_by_name(s, name)
-                        self.set_struct_member_info(
-                            s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0, False
-                        )
+                pass
 
             def finalise_struct(self, struct: DefinedStruct):
-                if not self.srclang_importer:
-                    return
-                
-                fullname = self.clean_struct_name(struct.type)
-                cname = self.get_srclang_type_name(fullname)
-
-                sid = self.get_struct_id(cname)
-                if sid == idaapi.BADADDR:
-                    ida_kernwin.warning(f"Failed to find and finalise struct {cname}")
-                
-                self.rename_struct(sid, fullname)
-
-                if not struct.virtual_functions:
-                    return
-                
-                sid = self.get_struct_id(cname + "_vtbl")
-                if sid == idaapi.BADADDR:
-                    ida_kernwin.warning(f"Failed to find and finalise vtable for struct {cname}")
-                    return
-                
-                self.rename_struct(sid, fullname + "_vtbl")
+                pass
 
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
@@ -2123,37 +1549,46 @@ def run():
     print("{0} Preprocessing yaml".format(get_time()))
     api.preprocess_yaml(yaml)
 
-    print("{0} Deleting old structs".format(get_time()))
-    for struct in yaml.structs[::-1]:
-        api.delete_struct(struct)
+    if isinstance(api, IdaApi):
+        print("{0} Generating src file in memory".format(get_time()))
+        src_interface = SrcInterface()
+        header, vtables = src_interface.build_export_string(yaml)
 
-    print("{0} Deleting old enums and creating new ones".format(get_time()))
-    for enum in yaml.enums:
-        api.delete_enum(enum)
-    
-    for enum in yaml.enums:
-        api.create_enum_struct(enum)
+        print("{0} Importing src file".format(get_time()))
+        api.select_parser()
+        api.parse_string(header, vtables)
+    else:
+        print("{0} Deleting old structs".format(get_time()))
+        for struct in yaml.structs[::-1]:
+            api.delete_struct(struct)
 
-    print("{0} Creating new structs".format(get_time()))
-    for struct in yaml.structs:
-        api.create_struct(struct)
+        print("{0} Deleting old enums and creating new ones".format(get_time()))
+        for enum in yaml.enums:
+            api.delete_enum(enum)
+        
+        for enum in yaml.enums:
+            api.create_enum_struct(enum)
 
-    print("{0} Creating members for structs".format(get_time()))
-    for struct in yaml.structs:
-        api.create_struct_members(struct)
+        print("{0} Creating new structs".format(get_time()))
+        for struct in yaml.structs:
+            api.create_struct(struct)
 
-    print("{0} Finalising structs".format(get_time()))
-    for struct in yaml.structs:
-        api.finalise_struct(struct)
+        print("{0} Creating members for structs".format(get_time()))
+        for struct in yaml.structs:
+            api.create_struct_members(struct)
 
-    print("{0} Creating vtables for structs".format(get_time()))
-    for struct in yaml.structs:
-        if struct.virtual_functions:
-            api.create_vtable(struct)
+        print("{0} Finalising structs".format(get_time()))
+        for struct in yaml.structs:
+            api.finalise_struct(struct)
 
-    print("{0} Mapping unions/vtables for structs".format(get_time()))
-    for struct in yaml.structs:
-        api.create_union(struct)
+        print("{0} Creating vtables for structs".format(get_time()))
+        for struct in yaml.structs:
+            if struct.virtual_functions:
+                api.create_vtable(struct)
+
+        print("{0} Mapping unions/vtables for structs".format(get_time()))
+        for struct in yaml.structs:
+            api.create_union(struct)
 
     if update_virt_func:
         for struct in yaml.structs:
