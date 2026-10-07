@@ -85,6 +85,17 @@ class SrcInterface(object):
             normalized = " ".join(base_type.split())
         return normalized + pointer_suffix
 
+    def _get_struct_size(
+        self,
+        type_name: str,
+        struct_lookup: dict[str, int],
+    ) -> int | None:
+        normalized_type = self._normalize_type(type_name)
+        if normalized_type in struct_lookup:
+            return struct_lookup[normalized_type]
+
+        return struct_lookup.get(self.get_short_name(normalized_type))
+
     def _get_field_type(
         self,
         field: DefinedStructField | DefinedStructFixedField,
@@ -139,8 +150,9 @@ class SrcInterface(object):
             return 0
 
         normalized_type = self._normalize_type(type_name)
-        if normalized_type in struct_lookup:
-            return struct_lookup[normalized_type]
+        struct_size = self._get_struct_size(normalized_type, struct_lookup)
+        if struct_size is not None:
+            return struct_size
         if normalized_type in enum_lookup:
             return enum_lookup[normalized_type]
 
@@ -210,8 +222,9 @@ class SrcInterface(object):
             return 8
 
         normalized_type = self._normalize_type(type_name)
-        if normalized_type in struct_lookup:
-            size = struct_lookup[normalized_type]
+        struct_size = self._get_struct_size(normalized_type, struct_lookup)
+        if struct_size is not None:
+            size = struct_size
         elif normalized_type in enum_lookup:
             size = enum_lookup[normalized_type]
         else:
@@ -354,11 +367,13 @@ class SrcInterface(object):
     ):
         output = IndentWriter()
 
-        struct_lookup = {
-            self._normalize_type(struct.type): struct.size
-            for struct in export.structs
-            if struct.size is not None
-        }
+        struct_lookup: dict[str, int] = {}
+        for struct in export.structs:
+            if struct.size is None:
+                continue
+            normalized_type = self._normalize_type(struct.type)
+            struct_lookup[normalized_type] = struct.size
+            struct_lookup.setdefault(self.get_short_name(normalized_type), struct.size)
         enum_lookup = {
             self._normalize_type(enum.type): self.get_size_from_string(enum.underlying)
             for enum in export.enums
