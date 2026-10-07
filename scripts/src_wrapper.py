@@ -400,7 +400,8 @@ class SrcInterface(object):
                     open_namespaces.pop()
 
                 for namespace_name in target_namespaces[shared_count:]:
-                    output.append(f"namespace {namespace_name} {{")
+                    formatted_name = namespace_name.replace(".", "::")
+                    output.append(f"namespace {formatted_name} {{")
                     output.indent()
                     open_namespaces.append(namespace_name)
 
