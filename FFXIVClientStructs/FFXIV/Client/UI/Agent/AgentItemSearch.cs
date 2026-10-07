@@ -21,6 +21,7 @@ public unsafe partial struct AgentItemSearch {
     [FieldOffset(0xBBC), FixedSizeArray] internal FixedSizeArray100<uint> _listingPageItemIds;
     [FieldOffset(0xD50)] public uint ListingPageItemCount;
     [FieldOffset(0xD58), FixedSizeArray] internal FixedSizeArray100<ListingItem> _listingPageItems;
+    [FieldOffset(0x19D8)] public byte ContextItemIndex;
     [FieldOffset(0x3128)] public byte ListingCurrentPage;
     [FieldOffset(0x3129)] public byte ListingPageCount;
     [FieldOffset(0x338C)] public uint ResultItemId;
