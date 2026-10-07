@@ -40,7 +40,7 @@ class RepeatDefinition(Definition):
     fields: "DefinitionFields"
 
     def size(self) -> int:
-        return len(self.fields) * self.count
+        return len(self.fields) * self.count if len(self.fields) > 0 else self.count
 
 
 DefinitionFields: TypeAlias = list[Union[Definition, RepeatDefinition]]
@@ -125,20 +125,23 @@ def map_header_and_schema(
     header: list[ExcelColumnDefinition],
     schema: DefinitionFields,
     header_index_offset: int = 0,
+    schema_index_offset: int = 0,
     schema_name: str = "",
 ):
     fields: Fields = []
     enums: list[DefinedStructEnum] = []
     enum_field_map: dict[int, int] = {}
     structs: list[DefinedStruct] = []
-    for index in range(len(schema)):
-        header_index = sum(f.size() for f in schema[:index]) + header_index_offset
-        definition = header[header_index]
-        field = schema[index]
+    prev_offset = 0
+    while prev_offset < len(schema):
+        header_offset = sum([f.size() if isinstance(f, RepeatDefinition) else 1 for f in schema[:prev_offset]])
+        definition = header[header_offset + schema_index_offset]
+        field = schema[prev_offset]
+        definition_offset = definition.offset - header_index_offset
 
         if isinstance(field, RepeatDefinition):
             exported_enums, exported_structs = map_header_and_schema(
-                header, field.fields, header_index, schema_name + field.name
+                header, field.fields, definition.offset, header_offset, schema_name + field.name
             )
             if len(exported_structs) == 0:
                 base_type = definition.get_base_type_string()
@@ -146,38 +149,37 @@ def map_header_and_schema(
                     DefinedStructFixedField(
                         field.name,
                         base_type,
-                        definition.offset,
+                        definition_offset,
                         False,
+                        [],
                         field.count,
                         False,
                     )
                 )
-                pass
             else:
                 fields.append(
                     DefinedStructFixedField(
                         field.name,
                         exported_structs[-1].name,
-                        definition.offset,
+                        definition_offset,
                         False,
+                        [],
                         field.count,
                         False,
                     )
                 )
                 structs.extend(exported_structs)
                 enums.extend(exported_enums)
-                pass
         else:
             if definition.is_packed_bool():
-                if definition.offset in enum_field_map:
-                    enums[enum_field_map[definition.offset]].values[field.name] = (
+                if definition_offset in enum_field_map:
+                    enums[enum_field_map[definition_offset]].values[field.name] = (
                         definition.type - ExcelColumnDataType.PackedBool0
                     )
-                    pass
                 else:
                     enum_index = len(enums)
-                    enum_field_map[definition.offset] = enum_index
-                    enum_type = f"{schema_name}PackedBool{definition.offset:X}"
+                    enum_field_map[definition_offset] = enum_index
+                    enum_type = f"{schema_name}PackedBool{definition_offset:X}"
                     enum_name = f"{exd_namespace}::{enum_type}"
                     enums.append(
                         DefinedStructEnum(
@@ -194,23 +196,25 @@ def map_header_and_schema(
                     )
                     fields.append(
                         DefinedStructField(
-                            f"PackedBool{definition.offset:X}",
+                            f"PackedBool{definition_offset:X}",
                             enum_name,
-                            definition.offset,
+                            definition_offset,
                             False,
+                            []
                         )
                     )
-                pass
             else:
                 fields.append(
                     DefinedStructField(
                         field.name,
                         definition.get_base_type_string(),
-                        definition.offset,
+                        definition_offset,
                         False,
+                        []
                     )
                 )
-                pass
+
+        prev_offset += 1
 
     size: int = 0
     for field in fields:
@@ -262,7 +266,7 @@ def create_struct_from_header_and_schema(
         index, header = headers[excel_header_name]
         schema = schemas[excel_header_name]
         excel_map[excel_header_name] = index
-        enums, structs = map_header_and_schema(header, schema, 0, excel_header_name)
+        enums, structs = map_header_and_schema(header, schema, 0, 0, excel_header_name)
         struct_export.enums.extend(enums)
         struct_export.structs.extend(structs)
     

@@ -29,7 +29,7 @@ struct_export, excel_map = create_struct_from_header_and_schema(
 
 exd_map = {excel_map[k]: k for k in excel_map}
 
-header, vtables = src.build_export_string(struct_export)
+header, vtables = src.build_export_string(struct_export, 4)
 
 ida = IdaInterface()
 

@@ -349,7 +349,8 @@ class SrcInterface(object):
     
     def build_export_string(
         self,
-        export: DefinedStructExport
+        export: DefinedStructExport,
+        full_declspec_align: int = 0
     ):
         output = IndentWriter()
 
@@ -420,7 +421,7 @@ class SrcInterface(object):
         vtable_names: list[str] = []
         for struct in export.structs:
             forward, define, vtable, vtable_full_name = self.build_struct_string(
-                struct, struct_lookup, enum_lookup, template_struct_lookup
+                struct, struct_lookup, enum_lookup, template_struct_lookup, full_declspec_align
             )
             if vtable_full_name:
                 vtable_names.append(vtable_full_name)
@@ -467,6 +468,7 @@ class SrcInterface(object):
         struct_lookup: dict[str, int],
         enum_lookup: dict[str, int],
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
+        declspec_align: int = 0
     ) -> tuple[IndentWriter, IndentWriter, IndentWriter, str | None]:
         """Builds the C++ struct definition with namespace wrapping.
 
@@ -491,19 +493,24 @@ class SrcInterface(object):
         short_name = self.get_short_name(struct.type)
         vtable_full_name: str | None = None
 
+        if declspec_align > 0:
+            declspec = f"__declspec(align({declspec_align})) "
+        else:
+            declspec = ""
+
         # Forward declarations
         if template_declaration:
             struct_string_forward += template_declaration
-        struct_string_forward += f"struct __cppobj {short_name};"
+        struct_string_forward += f"struct {short_name};"
         if struct.virtual_functions:
             if template_declaration:
                 struct_string_forward += template_declaration
-            struct_string_forward += f"struct __cppobj {short_name}_vtbl;"
+            struct_string_forward += f"struct {short_name}_vtbl;"
 
         # Struct definition
         if template_declaration:
             struct_string_define += template_declaration
-        struct_define_line = f"struct __cppobj {short_name}"
+        struct_define_line = f"struct {declspec}{short_name}"
         struct_extend_lines = []
 
         base_fields = [field for field in struct.fields if field.base]

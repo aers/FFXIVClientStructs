@@ -141,7 +141,7 @@ def get_nugpkg(package: str, version: str = ""):
     return get_nugpkg_deps(join(tempdirname, f"{package}.nuspec"))
 
 
-def get_excel_header_files() -> dict[str, list[ExcelColumnDefinition]]:
+def get_excel_header_files() -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
     deps = get_nugpkg("Lumina")
     deps_gotten: dict[str, str] = {}
 
