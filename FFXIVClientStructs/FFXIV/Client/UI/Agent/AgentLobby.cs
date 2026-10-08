@@ -73,7 +73,7 @@ public unsafe partial struct AgentLobby {
     /// When it reaches 0, the game sets LobbyUIStage to 1.
     /// </summary>
     [FieldOffset(0x12CD)] public byte FramesUntilLogout;
-    
+
     [FieldOffset(0x12CD), Obsolete("Use DisplayedCharacterIndex")] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
     [FieldOffset(0x12D0)] public ulong SelectedCharacterContentId;
