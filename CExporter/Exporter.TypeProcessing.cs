@@ -310,7 +310,7 @@ public partial class Exporter {
 
     private static ProcessedField ProcessVirtualParameter(Type parameter, int i, ParameterInfo[]? parameters) {
         var parameterInfo = i == 0 ? null : parameters?[i - 1];
-        var name = i == 0 ? "this" : parameterInfo?.Name ?? $"a{i + 1}";
+        var name = i == 0 ? "self" : parameterInfo?.Name ?? $"a{i + 1}";
         return ProcessParameter(
             parameter,
             name,
@@ -457,7 +457,7 @@ public partial class Exporter {
                                     FieldTypeOverride = memberFunctionClass.FixTypeName() + "*",
                                     FieldType = memberFunctionClass,
                                     FieldOffset = -1,
-                                    FieldName = "this",
+                                    FieldName = "self",
                                     Bits = [],
                                     IsUnion = false,
                                     UnionValues = []

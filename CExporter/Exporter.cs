@@ -243,7 +243,7 @@ public partial class Exporter {
                     vparams = [
                         new ProcessedField{
                             FieldType = vreturnType, 
-                            FieldName = "this",
+                            FieldName = "self",
                             Bits = [],
                             IsUnion = false,
                             UnionValues = [],
