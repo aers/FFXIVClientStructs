@@ -49,7 +49,7 @@ public unsafe partial struct AtkAddonControl : ICreatable<AtkAddonControl> {
     public partial bool Initialize(AtkUnitBase* parentAddon);
 
     [MemberFunction("40 53 55 57 41 57 48 81 EC ?? ?? ?? ?? 48 8B 79")]
-    public partial void Update();
+    public partial void Update(float deltaTime);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC ?? 48 8B 79 ?? 48 8B E9 48 8B 1F 48 3B DF 0F 84")]
     public partial void Draw();
