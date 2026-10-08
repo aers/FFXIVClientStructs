@@ -6,14 +6,11 @@ from os import getenv, getcwd, makedirs, listdir
 from sys import platform, path
 from shutil import rmtree
 from xml.dom import pulldom
-from pythonnet import load as dotnetload
+from pythonnet import load as dotnetload, unload
 from json import load as jsonload
 from enum import IntEnum
 from dataclasses import dataclass
 import gc
-
-dotnetload("coreclr")
-import clr
 
 tempdirname = join(getcwd(), "luminatmp")
 try:
@@ -146,72 +143,81 @@ def get_nugpkg(package: str, version: str = ""):
 
 
 def get_excel_header_files() -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
-    deps = get_nugpkg("Lumina")
-    deps_gotten: dict[str, str] = {}
+    dotnetload("coreclr")
+    def _isolated_clr():
+        import clr
 
-    while len(deps) > 0:
-        local_deps = []
-        for package, version in deps:
-            if package not in deps_gotten or deps_gotten[package] != version:
-                local_deps.extend(get_nugpkg(package, version))
-                deps_gotten[package] = version
-        deps = local_deps
+        deps = get_nugpkg("Lumina")
+        deps_gotten: dict[str, str] = {}
 
-    path.append(tempdirname)
+        while len(deps) > 0:
+            local_deps = []
+            for package, version in deps:
+                if package not in deps_gotten or deps_gotten[package] != version:
+                    local_deps.extend(get_nugpkg(package, version))
+                    deps_gotten[package] = version
+            deps = local_deps
 
-    from System.Runtime.Loader import AssemblyLoadContext # type: ignore
-    from System import Activator, GC # type: ignore
+        path.append(tempdirname)
 
-    ctx = AssemblyLoadContext("temp", isCollectible=True)
+        from System.Runtime.Loader import AssemblyLoadContext # type: ignore
+        from System import Activator, GC # type: ignore
 
-    def _isolated_extract(context):
-        assemblies: dict = {}
+        ctx = AssemblyLoadContext("temp", isCollectible=True)
 
-        for file in listdir(tempdirname):
-            if file.endswith(".dll"):
-                assemblies[file] = context.LoadFromAssemblyPath(
-                    abspath(join(tempdirname, file))
-                )
+        def _isolated_extract(context):
+            assemblies: dict = {}
 
-        assembly = assemblies["Lumina.dll"]
-        game_data_type = assembly.GetType("Lumina.GameData")
-        game_data_instance = Activator.CreateInstance(
-            game_data_type, [join(game_path, "game", "sqpack"), None]
-        )
-
-        excel_list_type = assembly.GetType("Lumina.Data.Files.Excel.ExcelListFile")
-        excel_header_type = assembly.GetType("Lumina.Data.Files.Excel.ExcelHeaderFile")
-
-        root_exl = game_data_instance.GetFile[excel_list_type]("exd/root.exl")
-
-        excel_header_files: dict[str, tuple[int, list[ExcelColumnDefinition]]] = {}
-
-        for kvp in root_exl.ExdMap:
-            key = kvp.Key
-            value = kvp.Value
-
-            if value != -1:
-                defs: list[ExcelColumnDefinition] = []
-                header = game_data_instance.GetFile[excel_header_type](f"exd/{key}.exh")
-                for column_definition in header.ColumnDefinitions:
-                    defs.append(
-                        ExcelColumnDefinition(
-                            int(column_definition.Type), column_definition.Offset
-                        )
+            for file in listdir(tempdirname):
+                if file.endswith(".dll"):
+                    assemblies[file] = context.LoadFromAssemblyPath(
+                        abspath(join(tempdirname, file))
                     )
-                excel_header_files[key] = (value, sorted(defs))
-        
 
+            assembly = assemblies["Lumina.dll"]
+            game_data_type = assembly.GetType("Lumina.GameData")
+            game_data_instance = Activator.CreateInstance(
+                game_data_type, [join(game_path, "game", "sqpack"), None]
+            )
+
+            excel_list_type = assembly.GetType("Lumina.Data.Files.Excel.ExcelListFile")
+            excel_header_type = assembly.GetType("Lumina.Data.Files.Excel.ExcelHeaderFile")
+
+            root_exl = game_data_instance.GetFile[excel_list_type]("exd/root.exl")
+
+            excel_header_files: dict[str, tuple[int, list[ExcelColumnDefinition]]] = {}
+
+            for kvp in root_exl.ExdMap:
+                key = kvp.Key
+                value = kvp.Value
+
+                if value != -1:
+                    defs: list[ExcelColumnDefinition] = []
+                    header = game_data_instance.GetFile[excel_header_type](f"exd/{key}.exh")
+                    for column_definition in header.ColumnDefinitions:
+                        defs.append(
+                            ExcelColumnDefinition(
+                                int(column_definition.Type), column_definition.Offset
+                            )
+                        )
+                    excel_header_files[key] = (value, sorted(defs))
+            
+
+            return excel_header_files
+
+        excel_header_files = _isolated_extract(ctx)
+
+        ctx.Unload()
+
+        del ctx
+
+        gc.collect()
+        GC.Collect()
+        GC.WaitForPendingFinalizers()
         return excel_header_files
 
-    excel_header_files = _isolated_extract(ctx)
+    excel_header_files = _isolated_clr()
 
-    ctx.Unload()
-
-    del ctx
-
-    gc.collect()
-    GC.Collect()
-    GC.WaitForPendingFinalizers()
+    unload()
 
     return excel_header_files
