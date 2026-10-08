@@ -154,7 +154,7 @@ class BaseIdaInterface(object):
         for vtable in vtables:
             self.mark_as_vtable(vtable)
     
-    def mark_as_vtable(vtbl_name: str) -> str | None:
+    def mark_as_vtable(self, vtbl_name: str) -> str | None:
         """
         Mark a struct as a vtable (TAUDT_VFTABLE).
 
