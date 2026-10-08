@@ -15052,6 +15052,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F82A40: ctor
+      0x140F82E40: RefreshAddon
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
       - ea: 0x1421F6F38
@@ -24165,6 +24166,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C8760: ctor
+      0x1412C94E0: RefreshItemList
   Client::UI::AddonMountainClimbingResult: # 677
     vtbls:
       - ea: 0x1422C8EE8
