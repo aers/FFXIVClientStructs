@@ -7376,6 +7376,7 @@ classes:
         base: Client::Graphics::Singleton
     funcs:
       0x140220540: ctor
+      0x140227590: GatherCommands
       0x140223AF0: AssignThreadContext
   Client::Graphics::Kernel::DeviceWin:
     vtbls:
@@ -7402,6 +7403,7 @@ classes:
       0x140226870: PostTick
   Client::Graphics::Kernel::Context:
     funcs:
+      0x14023BC40: GatherCommands
       0x14023BEF0: SetRenderTargets
       0x14023FE50: AllocateCommand
       0x140240A80: PushBackCommand
