@@ -51,5 +51,9 @@ public enum InputCallbackResult {
     /// <summary> Clears the current input text. </summary>
     /// <remarks> Does not update the character count. </remarks>
     ClearText = 1,
+
+    [Obsolete("Use InsertLineBreak instead.")]
     Unknown2 = 2,
+
+    InsertLineBreak = 2
 }
