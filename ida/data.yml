@@ -7497,6 +7497,7 @@ classes:
         0x14025DC80: ctor
         0x14025E580: Update
         0x1400CE830: SetShadowVisibilityType
+        0x14025DDE0: LoadConfig
   Client::Graphics::Render::Camera:
     vtbls:
       - ea: 0x14214C190
@@ -8097,6 +8098,13 @@ classes:
       29: GetTargetStatus
     funcs:
       0x14041DA40: ctor
+  Client::Graphics::Scene::CullingBox:
+    vtbls:
+      - ea: 0x14218E4B8
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x140461CC0: AddToOccluders
+      0x140798E90: Create
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
     vtbls:
       - ea: 0x14216BB28
@@ -27372,12 +27380,44 @@ classes:
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
       - ea: 0x142143340
+    funcs:
+      0x140255130: Run
+      0x140255AC0: Initialize
+      0x1402567A0: HelpBlocks
+      0x140256C70: HelpPerItem
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CallbackJobOpt>:
     vtbls:
       - ea: 0x142143348
-  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
+    funcs:
+      0x140255010: Run
+      0x1402558D0: Initialize
+      0x140256690: HelpBlocks
+      0x140256B90: HelpPerItem
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::OccluderJob>:
     vtbls:
       - ea: 0x142143350
+    funcs:
+      0x140255370: Start
+      0x1402553F0: Finish
+      0x1402556E0: Initialize
+      0x140256570: HelpBlocks
+      0x140256AB0: HelpPerItem
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::OcclusionTestJob>:
+    vtbls:
+      - ea: 0x142143358
+    funcs:
+      0x140254EF0: Run
+      0x1402554F0: Initialize
+      0x140256460: HelpBlocks
+      0x1402569D0: HelpPerItem
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
+    vtbls:
+      - ea: 0x142143360
+    funcs:
+      0x140255250: Run
+      0x140255CB0: Initialize
+      0x1402568B0: HelpBlocks
+      0x140256D50: HelpPerItem
   Client::Graphics::Culling::CullingManager:
     instances:
       - ea: 0x1428F5B98
@@ -27386,7 +27426,26 @@ classes:
       - ea: 0x142143368
         base: Client::Graphics::Singleton
     funcs:
+      0x140249B00: ctor
+      0x14024A050: Initialize
+      0x14024E860: ExecuteRenderCallbackJob
+      0x140250460: DrawOccluderBox
+      0x140251980: DrawOccluders
+      0x140252400: IsOccluded
+      0x140252C70: AddOccluder
+      0x140252D40: RemoveOccluder
+      0x140252D70: PrepareOcclusion
+      0x140253820: ExecuteOccluderJob
+      0x140253830: ExecuteOcclusionTestJob
       0x14024A270: AssignThreadWriters
+  Client::Graphics::Culling::CullingGridManager:
+    funcs:
+      0x1417EDFD0: ctor
+      0x1417EE130: Finalizer
+      0x1417EE1A0: Initialize
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingGridManager,Client::Graphics::Culling::CullingGridManager::CullingGridJob>:
+    vtbls:
+      - ea: 0x1422DB378
   Client::Graphics::Kernel::VertexShader:
     vtbls:
       - ea: 0x142142778
