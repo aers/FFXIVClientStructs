@@ -28,10 +28,10 @@ public unsafe partial struct AllocatorManager {
     public static partial AllocatorManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD E8")]
-    public partial void Initialize();
+    public partial bool Initialize();
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte flags);
+    public partial AllocatorManager* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void Cleanup();

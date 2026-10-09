@@ -2,20 +2,20 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics;
 
 // Client::Graphics::IAllocator
 [GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x08)] // Unknown size of abstract class, needs at least a vfptr
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct IAllocator {
     [VirtualFunction(0)]
-    public partial void Dtor(int flags);
+    public partial IAllocator* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void Cleanup();
 
     [VirtualFunction(2)]
-    public partial nint Allocate(nint size, nint alignment);
+    public partial void* Allocate(nint size, nint alignment);
 
     [VirtualFunction(3)]
-    public partial nint Reallocate(void* allocation, nint newSize, nint newAlignment);
+    public partial void* Reallocate(void* ptr, nint newSize, nint newAlignment);
 
     [VirtualFunction(4)]
-    public partial void Free(void* allocation);
+    public partial void Free(void* ptr);
 }
