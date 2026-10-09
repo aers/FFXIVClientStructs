@@ -36,6 +36,11 @@ globals:
   0x1428F6F2C: g_FrameTimeAccum # accumulates over a second to calc FPS
   0x1428F7040: g_OSVersion
   0x1428F89E0: g_NameplateColors
+  0x1428F8F28: g_Client::Graphics::Kernel::Notifier_ListHead
+  0x1428F8F30: g_Client::Graphics::Kernel::Notifier_PreviousBufferIndex
+  0x1428F8F34: g_Client::Graphics::Kernel::Notifier_BufferIndex # 0-2, advanced between EndFrame and BeginFrame
+  0x1428F8F38: g_Client::Graphics::Kernel::Notifier_FrameCount
+  0x1428F8F40: g_Client::Graphics::Kernel::Notifier_ListLock
   0x142A92D08: g_Client::UI::Agent::CharaSelectCharacterList_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x142A8ED00: g_RenderSkeletonLinkedListStart
   0x142A8ED08: g_RenderSkeletonLinkedListEnd
@@ -5853,9 +5858,109 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140998F60: ctor
-  Client::Graphics::Kernel::Notifier:
+  Client::Graphics::Kernel::NotifierBase:
     vtbls:
       - ea: 0x14213AAB8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140216680: Finalizer
+  Client::Graphics::Kernel::Notifier:
+    vtbls:
+      - ea: 0x14213AAC0
+        base: Client::Graphics::Kernel::NotifierBase
+    vfuncs:
+      1: BeginFrame
+      2: EndFrame
+    funcs:
+      0x1402166A0: Link
+      0x140216700: Unlink
+  Client::System::Streaming::StreamingNotifier:
+    vtbls:
+      - ea: 0x14213AAD8
+        base: Client::Graphics::Kernel::Notifier
+  Client::System::Streaming::IStreamingCtrl:
+    vtbls:
+      - ea: 0x14213AAF0
+  Client::System::Streaming::StreamingCtrl:
+    vtbls:
+      - ea: 0x14213ABC8
+        base: Client::System::Streaming::IStreamingCtrl
+      - ea: 0x14213ACB0
+        base: Client::System::Streaming::StreamingNotifier
+    funcs:
+      0x1401EB7F0: ctor
+      0x1401EB830: Finalizer
+  Client::System::Streaming::StreamingPlayer:
+    instances:
+      - ea: 0x1428F8EA0
+        pointer: true
+    vtbls:
+      - ea: 0x14213ACC8
+        base: Client::System::Framework::Task
+    funcs:
+      0x1401EBFC0: GetInstance
+      0x1401EC090: ctor
+  Client::System::Streaming::TextureRenderer:
+    vtbls:
+      - ea: 0x14213ACF8
+        base: CBaseVideoRenderer
+      - ea: 0x14213AE90
+        base: IBaseFilter
+      - ea: 0x14213AF08
+        base: IAMovieSetup
+      - ea: 0x14213AF30
+        base: IQualProp
+      - ea: 0x14213AF78
+        base: IQualityControl
+      - ea: 0x14213AFA0
+        base: Client::System::Streaming::StreamingNotifier
+    funcs:
+      0x1401ECEA0: ctor
+      0x1401ED020: Finalizer
+  CBaseVideoRenderer:
+  IBaseFilter:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: GetClassID
+      4: Stop
+      5: Pause
+      6: Run
+      7: GetState
+      8: SetSyncSource
+      9: GetSyncSource
+      10: EnumPins
+      11: FindPin
+      12: QueryFilterInfo
+      13: JoinFilterGraph
+      14: QueryVendorInfo
+  IAMovieSetup:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: Register
+      4: Unregister
+  IQualProp:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: get_FramesDroppedInRenderer
+      4: get_FramesDrawn
+      5: get_AvgFrameRate
+      6: get_Jitter
+      7: get_AvgSyncOffset
+      8: get_DevSyncOffset
+  IQualityControl:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: Notify
+      4: SetSink
   Client::System::Crypt::Md5:
     funcs:
       0x1401F8F80: Init
