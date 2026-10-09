@@ -6664,9 +6664,32 @@ classes:
   Client::Graphics::IAllocator:
     vtbls:
       - ea: 0x142127248
+    vfuncs:
+      0: dtor
+      1: Terminate
+      2: Alloc
+      3: Realloc
+      4: Free
+      9: GetSize
+  Client::Graphics::AllocatorPool:
+    vtbls:
+      - ea: 0x1421565E8
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorHeap:
+    vtbls:
+      - ea: 0x142156638
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorHybrid:
+    vtbls:
+      - ea: 0x142156688
+        base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorLowLevel:
     vtbls:
       - ea: 0x1421566E8
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorVRAM:
+    vtbls:
+      - ea: 0x142156738
         base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorManager:
     instances:
