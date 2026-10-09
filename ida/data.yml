@@ -6752,17 +6752,39 @@ classes:
     vtbls:
       - ea: 0x1421546D0
         base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::Graphics::Primitive::Server:
+    vtbls:
+      - ea: 0x1421432F0
+  Client::Graphics::Primitive::Context:
+    vtbls:
+      - ea: 0x1421432F8
+  Client::Graphics::Singleton<Client::Graphics::Primitive::Release>:
+    vtbls:
+      - ea: 0x142143300
+  Client::Graphics::Primitive::Release:
+    instances:
+      - ea: 0x1428F5B90
+        pointer: true
+    vtbls:
+      - ea: 0x142143308
+        base: Client::Graphics::Singleton<Client::Graphics::Primitive::Release>
     funcs:
+      0x140245A20: ctor
+      0x140245A60: Initialize
       0x140245C50: AssignThreadContexts
+  Client::Graphics::Singleton<Client::Graphics::Primitive::Manager>:
+    vtbls:
+      - ea: 0x142143310
   Client::Graphics::Primitive::Manager:
     instances:
       - ea: 0x1428F6EE0
         pointer: true
     vtbls:
       - ea: 0x142143318
-        base: Client::Graphics::Singleton
+        base: Client::Graphics::Singleton<Client::Graphics::Primitive::Manager>
     funcs:
       0x1402476A0: ctor
+      0x140247740: Initialize
   Client::Graphics::DelayedReleaseClassBase:
     vtbls:
       - ea: 0x1421565C0
@@ -7691,10 +7713,19 @@ classes:
         base: Client::Graphics::Render::BaseRenderer
     funcs:
       0x14028F6D0: ctor
-  Client::Graphics::Render::UnknownRenderer:
+  Client::Graphics::Render::Decal:
+    vtbls:
+      - ea: 0x14214C738
+        base: Client::Graphics::Render::RenderObject
+  Client::Graphics::Render::DecalRenderer:
     vtbls:
       - ea: 0x14214C780
         base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x140296180: ExecuteDecalJob
+  Client::Graphics::JobSystem<Client::Graphics::Render::DecalRenderer>:
+    vtbls:
+      - ea: 0x14214C778
   Client::Graphics::JobSystem<Client::Graphics::Render::WaterRenderer>:
     vtbls:
       - ea: 0x14214C7E8
@@ -7796,6 +7827,7 @@ classes:
       0x1402BA1F0: Render
       0x1402BABD0: RenderView
       0x1402B78E0: AssignThreadWriters
+      0x1402B9590: CreateDecal
   Client::Graphics::Render::ShadowManager:
     instances:
       - ea: 0x1428F6480
@@ -8361,6 +8393,8 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x1404501F0: ctor
+      0x140450240: CreateRenderObject
+      0x140798C40: Create
   Client::Graphics::Scene::BGObject:
     vtbls:
       - ea: 0x14216D328
