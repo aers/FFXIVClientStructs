@@ -17,6 +17,7 @@ globals:
   0x14289B9A0: g_EmptyUtf8String # empty Utf8String with just the null terminator
   0x14289BA10: g_WindowStyle
   0x14289CA78: g_FPS
+  0x14289F9A4: g_Client::Graphics::Render::Skeleton_SortedSkeletonCount
   0x1428A40B0: g_LanguageCharArr # byte[] no pointer
   0x1428A64E8: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x1428A65E0: g_GlobalUIScale
@@ -42,6 +43,8 @@ globals:
   0x1428F8F38: g_Client::Graphics::Kernel::Notifier_FrameCount
   0x1428F8F40: g_Client::Graphics::Kernel::Notifier_ListLock
   0x142A92D08: g_Client::UI::Agent::CharaSelectCharacterList_CurrentCharaSelectCharacter # Client::Game::Character::Character*
+  0x142A86500: g_Client::Graphics::Render::Skeleton_SortedSkeletons
+  0x142A8E500: g_Client::Graphics::Render::Skeleton_SortedSkeletonDepthChanged
   0x142A8ED00: g_RenderSkeletonLinkedListStart
   0x142A8ED08: g_RenderSkeletonLinkedListEnd
   0x142A8ED58: g_RenderModelLinkedListStart
@@ -7480,6 +7483,43 @@ classes:
     funcs:
       0x140257FE0: ctor
       0x140258140: Finalizer
+      0x140258ED0: FinishAnimation
+      0x14025C720: UpdateAnimations
+  Client::Graphics::Render::SkeletonHelper:
+    funcs:
+      0x14025CE70: SyncModelSpacePoses
+  Client::Graphics::Render::SkeletonUpdater: # job writers through TLS block +0x298
+    instances:
+      - ea: 0x142A8ED10
+        pointer: true
+    vtbls:
+      - ea: 0x14214C148
+        base: Client::Graphics::Singleton
+    funcs:
+      0x14025C550: SampleAnimations
+      0x14025D2A0: AppendSkeleton
+      0x14025D5B0: ExecuteUpdaterJob
+  Client::Graphics::JobSystem<Client::Graphics::Render::SkeletonUpdater,Client::Graphics::Render::SkeletonUpdater::UpdaterJob>:
+    vtbls:
+      - ea: 0x14214C140
+    funcs:
+      0x1402F4E20: Initialize
+      0x1402F7A40: HelpBlocks
+      0x1402F8860: HelpPerItem
+  Client::Graphics::Render::LookAtIkUpdater: # job writers through TLS block +0x290
+    instances:
+      - ea: 0x142A8ED18
+        pointer: true
+    vtbls:
+      - ea: 0x14214C160
+        base: Client::Graphics::Singleton
+    funcs:
+      0x14025CA30: Update
+  Client::Graphics::JobSystem<Client::Graphics::Render::LookAtIkUpdater,Client::Graphics::Render::LookAtIkUpdater::LookAtIkJob>:
+    vtbls:
+      - ea: 0x14214C158
+    funcs:
+      0x1402F4660: Initialize
   Client::Graphics::Kernel::ShaderSceneKey:
     vtbls:
       - ea: 0x14214C168
