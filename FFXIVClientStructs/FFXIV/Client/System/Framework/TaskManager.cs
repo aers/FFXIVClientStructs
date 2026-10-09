@@ -22,16 +22,30 @@ public unsafe partial struct TaskManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9 74 ?? F3 0F 10 8B")]
     public partial void ExecuteAllTasks(float* dt);
 
+    /// <summary>
+    /// Prepares the job list and puts it on the <see cref="JobQueue"/>, then wakes one thread if the list has a single
+    /// task, otherwise every thread. Returns without waiting, use <see cref="JobListInterface.Wait"/> to join.
+    /// </summary>
+    [MemberFunction("40 53 57 48 83 EC 58 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 40 48 8B 02")]
+    public partial void ScheduleJobList(JobListInterface* jobList);
+
     // Client::System::Framework::TaskManager::JobPool
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4C)]
     public partial struct JobPool {
         [FieldOffset(0x00)] public bool Initialized;
         [FieldOffset(0x08)] public InnerThread** Threads;
         [FieldOffset(0x10)] public int ThreadCount;
 
+        /// <summary> Threads pass a pointer to this to every task they run. </summary>
+        [FieldOffset(0x38)] public int TaskContext;
         [FieldOffset(0x40)] public nint Handle; // Win32 HANDLE type
 
         public Span<Pointer<InnerThread>> ThreadsSpan => new(Threads, ThreadCount);
+
+        /// <summary> Signals every thread that has fewer than 2 pending wakes. </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? BA ?? ?? ?? ?? FF 15")]
+        public partial void WakeAllThreads();
 
         // Client::System::Framework::TaskManager::JobPool::InnerThread
         //   Client::System::Threading::Thread
@@ -43,8 +57,9 @@ public unsafe partial struct TaskManager {
             [FieldOffset(0x28)] public JobPool* Pool;
             [FieldOffset(0x30)] public int Index;
             [FieldOffset(0x34)] private byte Unk34;
-            [FieldOffset(0x35)] private byte Unk35;
-            [FieldOffset(0x38)] private int Unk38;
+            [FieldOffset(0x35)] private byte Unk35; // wakes skip the thread while set
+            /// <summary> Wake requests not yet consumed. The thread sleeps on <see cref="EventHandle2"/> when this drops to 0. </summary>
+            [FieldOffset(0x38)] public int PendingWakes;
             [FieldOffset(0x40)] public nint EventHandle2; // Thread already has an EventHandle, not sure why there is a second one
         }
     }
