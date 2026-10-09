@@ -7704,6 +7704,7 @@ classes:
         base: Client::Graphics::Render::GeometryInstancingRenderer
     funcs:
       0x140289260: ctor
+      0x14028A620: PrepareJob
   Client::Graphics::JobSystem<Client::Graphics::Render::TerrainRenderer>:
     vtbls:
       - ea: 0x14214C708
@@ -27589,6 +27590,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x1408DB040: ctor
+      0x1417517B0: UpdateFollow
       0x1417539D0: PlaceCompanion
       0x14174CFA0: GetFollowMountId
   Client::Game::Character::Ornament:
