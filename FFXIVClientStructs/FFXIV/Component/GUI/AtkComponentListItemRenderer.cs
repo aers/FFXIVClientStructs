@@ -45,8 +45,7 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkCompon
     [BitField<bool>(nameof(StopNavigationAtEnd), 15)]
     [FieldOffset(0x1A4)] internal uint BitFields1A4;
     [FieldOffset(0x1A4), Obsolete("Use RowTemplateNodeCountByte")] public int RowTemplateNodeCount; // TODO: remove
-    [FieldOffset(0x1A4)] public byte RowTemplateNodeCountByte; // TODO: obsolete with a note that it was renamed back to RowTemplateNodeCount
-    [FieldOffset(0x1A6)] private ushort Unk1A6;
+    [FieldOffset(0x1A4), CExporterIgnore] public byte RowTemplateNodeCountByte; // TODO: obsolete with a note that it was renamed back to RowTemplateNodeCount
 
     public Span<Pointer<AtkResNode>> CollisionNodes => new(CollisionNodeList, CollisionNodeListCount);
 
