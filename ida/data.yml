@@ -8094,6 +8094,11 @@ classes:
     funcs:
       0x14044CCF0: ctor
       0x14044CD50: SetupFromData
+  Client::Graphics::Scene::Monster::DrawData:
+    funcs:
+      0x14044CC70: ctor
+      0x14044CC90: SetLoadMountAnimations
+      0x14044CCB0: SetLoadOrnamentAnimations
   Client::Graphics::Scene::BGManager:
     vtbls:
       - ea: 0x14216D4B8
