@@ -55,6 +55,6 @@ public enum InputCallbackResult {
     [Obsolete("Use InsertLineBreak instead.")]
     Unknown2 = 2,
 
-    /// <summary> Insert a line break (/r) to the text. </summary>
+    /// <summary> Inserts a line break (/r) to the text. </summary>
     InsertLineBreak = 2
 }
