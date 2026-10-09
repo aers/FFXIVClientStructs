@@ -4430,6 +4430,7 @@ enums:
     "LocationOnion": 512
     "ReadWrite": 1024
     "Immutable": 2048
+    "KeepCpuCopy": 4096
     "TextureRenderTarget": 1048576
     "TextureDepthStencil": 2097152
     "TextureType1D": 4194304
@@ -4437,6 +4438,7 @@ enums:
     "TextureType3D": 16777216
     "TextureType2DArray": 268435456
     "TextureTypeCube": 33554432
+    "TextureTypeCubeArray": 301989888
     "TextureTypeMask": 331350016
     "TextureSwizzle": 67108864
     "TextureNoTiled": 134217728
@@ -16358,6 +16360,22 @@ structs:
     parameters:
     - type: Client::Graphics::Kernel::SwapChain*
       name: this
+- type: Client::Graphics::Kernel::TextureMapResult
+  name: TextureMapResult
+  namespace: Client.Graphics.Kernel
+  union: False
+  size: 16
+  fields:
+  - type: unsigned int
+    name: RowPitch
+    offset: 0
+  - type: unsigned int
+    name: DepthPitch
+    offset: 4
+  - type: __int64
+    name: Data
+    offset: 8
+  member_functions: []
 - type: Client::Graphics::Kernel::TextureMipRenderTarget
   name: TextureMipRenderTarget
   namespace: Client.Graphics.Kernel
@@ -46833,6 +46851,128 @@ structs:
       name: this
     - type: __int64
       name: contents
+  - signature: E8 ?? ?? ?? ?? 4C 8B D8 48 39 7D
+    return_type: __int64
+    name: Map2D
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: Client::Graphics::Kernel::TextureMapResult*
+      name: result
+  - signature: E8 ?? ?? ?? ?? 0F B6 5C 24 ?? EB
+    return_type: void
+    name: Unmap2D
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+  - signature: E8 ?? ?? ?? ?? 49 8B 56 08 8B CB
+    return_type: __int64
+    name: Map3D
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: Client::Graphics::Kernel::TextureMapResult*
+      name: result
+  - signature: E8 ?? ?? ?? ?? 0F B7 C6 FF C5
+    return_type: void
+    name: Unmap3D
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+  - signature: E8 ?? ?? ?? ?? 89 7C 24 ?? 48 8B F0
+    return_type: __int64
+    name: MapCube
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: unsigned int
+      name: faceIndex
+    - type: Client::Graphics::Kernel::TextureMapResult*
+      name: result
+  - signature: E8 ?? ?? ?? ?? 4C 8B 54 24 ?? FF C3
+    return_type: void
+    name: UnmapCube
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: unsigned int
+      name: faceIndex
+  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 74 ?? 41 8B D5
+    return_type: __int64
+    name: Map2DArray
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: unsigned int
+      name: arraySlice
+    - type: Client::Graphics::Kernel::TextureMapResult*
+      name: result
+  - signature: E8 ?? ?? ?? ?? 41 0F B6 45 0F
+    return_type: void
+    name: Unmap2DArray
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: unsigned int
+      name: arraySlice
+  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 74 ?? 8B D7 49 8B CD
+    return_type: __int64
+    name: MapCubeArray
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: unsigned int
+      name: cubeIndex
+    - type: unsigned int
+      name: faceIndex
+    - type: Client::Graphics::Kernel::TextureMapResult*
+      name: result
+  - signature: E8 ?? ?? ?? ?? FF C3 41 3B DE 72 ?? FF C6
+    return_type: void
+    name: UnmapCubeArray
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+    - type: unsigned int
+      name: cubeIndex
+    - type: unsigned int
+      name: faceIndex
+  - signature: 44 8B 41 38 48 8B C1 8B CA
+    return_type: unsigned int
+    name: GetRowPitch
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
+  - signature: E8 ?? ?? ?? ?? 8B FD 44 8B F0
+    return_type: unsigned int
+    name: GetDepthPitch
+    parameters:
+    - type: Client::Graphics::Kernel::Texture*
+      name: this
+    - type: unsigned int
+      name: mipLevel
 - type: Client::Graphics::Physics::BoneCollisions
   name: BoneCollisions
   namespace: Client.Graphics.Physics
@@ -156380,6 +156520,9 @@ structs:
     size: 100
     is_string: False
   - type: byte
+    name: ContextItemIndex
+    offset: 6616
+  - type: byte
     name: ListingCurrentPage
     offset: 12584
   - type: byte
@@ -257282,8 +257425,8 @@ structs:
   - type: __int8
     name: ServiceAccountIndex
     offset: 4672
-  - type: byte
-    name: SelectedCharacterIndex
+  - type: __int8
+    name: DisplayedCharacterIndex
     offset: 4673
   - type: unsigned __int64
     name: HoveredCharacterContentId
@@ -257354,8 +257497,8 @@ structs:
   - type: int
     name: QueuePosition
     offset: 4808
-  - type: __int8
-    name: HoveredCharacterIndex
+  - type: byte
+    name: FramesUntilLogout
     offset: 4813
   - type: unsigned __int64
     name: SelectedCharacterContentId
@@ -257544,7 +257687,7 @@ structs:
     - type: char
       name: isExiting
     - type: byte
-      name: a3
+      name: framesUntilLogout
 - type: Client::UI::Agent::AgentRaidFinder
   name: AgentRaidFinder
   namespace: Client.UI.Agent
