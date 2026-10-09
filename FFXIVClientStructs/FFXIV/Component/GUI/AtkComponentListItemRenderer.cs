@@ -16,9 +16,18 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkCompon
     [FieldOffset(0x120), CExporterUnion("RowTemplate")] public AtkResNode** RowTemplateNodeList; // if RowTemplateNodeCount != 1
     [FieldOffset(0x128)] public AtkComponentListItemPopulator Populator;
 
+    [FieldOffset(0x150)] public AtkResNode* EventNode;
+    [FieldOffset(0x158)] public AtkResNode** CollisionNodeList;
+
     [FieldOffset(0x178)] public AtkComponentDragDrop* DragDropComponent;
 
     [FieldOffset(0x184)] public int ListItemIndex;
+    [FieldOffset(0x188)] public short OriginalX;
+    [FieldOffset(0x18A)] public short OriginalY;
+    [FieldOffset(0x18C)] public ushort OriginalWidth;
+    [FieldOffset(0x18E)] public ushort OriginalHeight;
+    [FieldOffset(0x190)] public ushort OriginalButtonTextHeight;
+    [FieldOffset(0x194)] public ushort CollisionNodeListCount;
 
     [FieldOffset(0x198)] public int DragDropListItemIndex;
     [FieldOffset(0x19C)] public short DragDropMouseDownPosX;
@@ -29,8 +38,27 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkCompon
 
     // TODO: Change this to a struct / use bitfield generator
     [FieldOffset(0x1A4)] public byte RowTemplateNodeCountByte; // TODO: change name back to RowTemplateNodeCount
-    [FieldOffset(0x1A5)] private byte Unk1A5;
+    [BitField<bool>(nameof(HasRequestedPayload), 0)]
+    [BitField<bool>(nameof(EnableDragDrop), 1)]
+    [BitField<bool>(nameof(UsesIconComponent), 2)]
+    [BitField<bool>(nameof(EnableChildNavigation), 3)]
+    [BitField<bool>(nameof(EnableHeldNavigation), 4)]
+    [BitField<bool>(nameof(DisableChildFocusReset), 5)]
+    [BitField<bool>(nameof(EnableChildAutoFocus), 6)]
+    [BitField<bool>(nameof(StopNavigationAtEnd), 7)]
+    [FieldOffset(0x1A5)] public byte Flags1A5;
     [FieldOffset(0x1A6)] private ushort Unk1A6;
+
+    public Span<Pointer<AtkResNode>> CollisionNodes => new(CollisionNodeList, CollisionNodeListCount);
+
+    public partial bool HasRequestedPayload { readonly get; set; }
+    public partial bool EnableDragDrop { readonly get; set; }
+    public partial bool UsesIconComponent { readonly get; set; }
+    public partial bool EnableChildNavigation { readonly get; set; }
+    public partial bool EnableHeldNavigation { readonly get; set; }
+    public partial bool DisableChildFocusReset { readonly get; set; }
+    public partial bool EnableChildAutoFocus { readonly get; set; }
+    public partial bool StopNavigationAtEnd { readonly get; set; }
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??")]
     public partial AtkComponentListItemRenderer* Ctor();

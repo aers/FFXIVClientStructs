@@ -9696,6 +9696,14 @@ classes:
       0x140691A70: ctor # no xrefs, inlined @ 0x14064B78B
       0x140691B70: Finalizer # no xrefs
       #0x140599CC0: RemoveAllEvents # 7.0: no longer exists. instead there is a new function to remove individual events - see 0x140671AFA
+      0x140693C60: InitializeCollisionNodeList
+      0x140693D00: GetOriginalPosition
+      0x140693D20: GetOriginalSize
+      0x140694AE0: SetStopNavigationAtEnd
+      0x140695590: PopulateCollisionNodeList
+      0x1406956B0: CountCollisionNodes
+      0x1406956C0: CountCollisionNodesRecursive
+      0x1406957E0: GetCollisionNode
       0x140696470: StartDragDrop
   Component::GUI::AtkComponentList:
     vtbls:
@@ -9741,6 +9749,7 @@ classes:
       0x14069A030: FireHoveredItemRollOver
       0x14069A0C0: FireHoveredItemRollOut
       0x14069A0E0: ToggleDroppingDisabled
+      0x14069A1F0: SetItemRendererDragDropEnabled
       0x14069A360: SetDragDropPayloadData
       0x14069A3D0: CancelDragDrop
       0x14069CC50: HandleFocusStop
@@ -21274,6 +21283,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412647E0: ctor
+      0x141267630: ShowHoveredItemTooltip
       0x140C37850: SetJoinInProgress
       0x140C378A0: SetIsUnrestrictedParty
       0x140C378E0: SetIsMinimalIL
