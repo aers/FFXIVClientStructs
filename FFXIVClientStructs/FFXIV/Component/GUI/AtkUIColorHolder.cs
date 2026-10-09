@@ -28,6 +28,12 @@ public unsafe partial struct AtkUIColorHolder {
         [FieldOffset(0x08)] public uint AccumulatedOffset; // used in the index calculation for the UIColors vector
     }
 
+    /// <summary>
+    /// Sets <see cref="ActiveColorThemeType"/> and reloads the UIColor sheet.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? B0 ?? C6 83 ?? ?? ?? ?? ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 80 BB")]
+    public partial void SetActiveColorThemeType(byte themeType);
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B C8 88 43 2C")]
     public partial uint GetColor(bool useThemeColor, uint id);
 }

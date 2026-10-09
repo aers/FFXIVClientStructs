@@ -9103,6 +9103,7 @@ classes:
   Component::GUI::AtkUIColorHolder:
     funcs:
       # 0x1405286A0: ctor # INLINED IN 7.0
+      0x14065C650: SetActiveColorThemeType
       0x14065C840: GetColor
   Component::GUI::AtkStage:
     instances:
