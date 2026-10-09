@@ -190,6 +190,13 @@ public unsafe partial struct Framework {
     /// <returns>Returns <c>true</c> if the API was initialized successfully, false otherwise.</returns>
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F9 C6 81")]
     public partial bool SetupSteamApi();
+    
+    /// <summary>
+    /// Marks the game client as (in)active in response to windows events. Note that this function may be called multiple times in a row,
+    /// but the final call state should always be valid.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 FF 02")]
+    public partial void SetInactive(bool isInactive); 
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
