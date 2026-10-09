@@ -64,7 +64,8 @@ public unsafe partial struct CurrencyManager {
     /// | 46178  | Yok Huy Ward            |<br/>
     /// | 48084  | Mamool Ja Nanook        |<br/>
     /// | 49124  |                         |<br/>
-    /// | 49125  |                         |<br/>
+    /// | 49125  | Corvosi Manuscript      |<br/>
+    /// | 52322  | MGC                     |<br/>
     /// |--------|-------------------------|
     /// </code>
     /// </remarks>
