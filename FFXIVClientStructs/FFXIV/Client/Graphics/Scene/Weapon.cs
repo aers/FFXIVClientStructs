@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
@@ -11,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [GenerateInterop]
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA60)]
-public unsafe partial struct Weapon {
+public unsafe partial struct Weapon : ICreatable<Weapon> {
     [FieldOffset(0xA20)] public ushort ModelSetId;
     [FieldOffset(0xA22)] public ushort SecondaryId;
     [FieldOffset(0xA24)] public ushort Variant;
@@ -27,6 +28,15 @@ public unsafe partial struct Weapon {
     [FieldOffset(0xA50)] public ChangedWeaponData* ChangedData;
     [FieldOffset(0xA58)] public CharacterBase* AttachTarget;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 4C 8B E0")]
+    public static partial Weapon* Create(WeaponCreateInfo* weaponData);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 48 8D 54 24")]
+    public partial Weapon* Ctor();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 16 48 8B 0D ?? ?? ?? ??")]
+    public partial bool Initialize(WeaponCreateInfo* weaponData);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct ChangedWeaponData {
         // No primary ID since this requires a new model to be setup.
@@ -35,12 +45,6 @@ public unsafe partial struct Weapon {
         [FieldOffset(0x03)] public byte Stain0;
         [FieldOffset(0x04)] public byte Stain1;
     }
-
-    [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 4C 8B E0")]
-    public static partial Weapon* Create(WeaponCreateInfo* weaponData);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 16 48 8B 0D ?? ?? ?? ??")]
-    public partial bool Initialize(WeaponCreateInfo* weaponData);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x09)]

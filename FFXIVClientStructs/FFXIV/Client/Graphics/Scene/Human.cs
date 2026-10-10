@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [GenerateInterop]
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xCD0)]
-public unsafe partial struct Human {
+public unsafe partial struct Human : ICreatable<Human> {
     [FieldOffset(0xA20)] public CustomizeData Customize;
     [FieldOffset(0xA3C)] public uint SlotNeedsUpdateBitfield;
     [FieldOffset(0xA40), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModels;
@@ -79,6 +79,9 @@ public unsafe partial struct Human {
     [FieldOffset(0xC18)] public uint SlotFreeCompanyCrestBitfield; // & 0x001 for slot 0, up to & 0x200 for slot 9
 
     [FieldOffset(0xC50)] public byte* ChangedEquipData;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 ?? 48 8D 55 ?? 48 8B C8 E8 ?? ?? ?? ?? 48 8B 0D")]
+    public partial Human* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]
     public partial byte SetupVisor(ushort modelId, bool visorState);
