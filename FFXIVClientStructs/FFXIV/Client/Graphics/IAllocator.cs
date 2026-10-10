@@ -18,4 +18,8 @@ public unsafe partial struct IAllocator {
 
     [VirtualFunction(4)]
     public partial void Free(void* ptr);
+
+    /// <summary> Usable size of a block from this allocator. </summary>
+    [VirtualFunction(9)]
+    public partial ulong GetSize(void* ptr);
 }

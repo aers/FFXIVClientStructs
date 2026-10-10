@@ -17,6 +17,7 @@ globals:
   0x14289B9A0: g_EmptyUtf8String # empty Utf8String with just the null terminator
   0x14289BA10: g_WindowStyle
   0x14289CA78: g_FPS
+  0x14289F9A4: g_Client::Graphics::Render::Skeleton_SortedSkeletonCount
   0x1428A40B0: g_LanguageCharArr # byte[] no pointer
   0x1428A64E8: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x1428A65E0: g_GlobalUIScale
@@ -36,7 +37,14 @@ globals:
   0x1428F6F2C: g_FrameTimeAccum # accumulates over a second to calc FPS
   0x1428F7040: g_OSVersion
   0x1428F89E0: g_NameplateColors
+  0x1428F8F28: g_Client::Graphics::Kernel::Notifier_ListHead
+  0x1428F8F30: g_Client::Graphics::Kernel::Notifier_PreviousBufferIndex
+  0x1428F8F34: g_Client::Graphics::Kernel::Notifier_BufferIndex # 0-2, advanced between EndFrame and BeginFrame
+  0x1428F8F38: g_Client::Graphics::Kernel::Notifier_FrameCount
+  0x1428F8F40: g_Client::Graphics::Kernel::Notifier_ListLock
   0x142A92D08: g_Client::UI::Agent::CharaSelectCharacterList_CurrentCharaSelectCharacter # Client::Game::Character::Character*
+  0x142A86500: g_Client::Graphics::Render::Skeleton_SortedSkeletons
+  0x142A8E500: g_Client::Graphics::Render::Skeleton_SortedSkeletonDepthChanged
   0x142A8ED00: g_RenderSkeletonLinkedListStart
   0x142A8ED08: g_RenderSkeletonLinkedListEnd
   0x142A8ED58: g_RenderModelLinkedListStart
@@ -4323,17 +4331,45 @@ classes:
       0x140061050: AddTask
       0x1400610C0: ExecuteAllTasks
       0x140061110: ExecuteJobList
-      0x140061310: EeecuteJobList2
+      0x140061310: ScheduleJobList
   Client::System::Framework::TaskManager::JobPool:
     funcs:
+      0x14005FF00: Enqueue
       0x1400600F0: ctor
+      0x140060B70: WakeAllThreads
   Client::System::Framework::TaskManager::JobPool::InnerThread:
     vtbls:
       - ea: 0x142112378
         base: Client::System::Threading::Thread
+  Client::System::Framework::JobQueue: # JobQueue<128>
+    instances:
+      - ea: 0x1428F0F38
+        pointer: false
+  Client::System::Framework::JobQueue::JobQueueListData:
+    vtbls:
+      - ea: 0x1421121D0
+        base: Client::System::Framework::Task
   Client::System::Framework::JobListInterface:
     vtbls:
       - ea: 0x1421123B0
+    vfuncs:
+      0: dtor
+      1: GetJob
+      2: Prepare
+      3: Wait
+      4: GetTaskCount
+  Client::System::Framework::JobListTaskPtrArray:
+    vtbls:
+      - ea: 0x1421123D8
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x142112400
+        base: Client::System::Framework::Task
+  Client::System::Framework::JobListArgArray:
+    vtbls:
+      - ea: 0x142112418
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x142112440
+        base: Client::System::Framework::Task
   Client::System::Framework::JobListArgArrayAndIndex:
     vtbls:
       - ea: 0x142112458
@@ -4341,8 +4377,19 @@ classes:
       - ea: 0x142112480
         base: Client::System::Framework::Task
     funcs:
+      0x140061F50: ClaimTask
       0x140062010: ctor
       0x1400620D0: ctor2
+  Client::System::Framework::JobListNoArg:
+    vtbls:
+      - ea: 0x142112498
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x1421124C0
+        base: Client::System::Framework::Task
+    funcs:
+      0x140062320: ClaimTask
+      0x1400623D0: ctor
+      0x140062480: ctor2
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x1421272D8
@@ -5814,9 +5861,109 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140998F60: ctor
-  Client::Graphics::Kernel::Notifier:
+  Client::Graphics::Kernel::NotifierBase:
     vtbls:
       - ea: 0x14213AAB8
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140216680: Finalizer
+  Client::Graphics::Kernel::Notifier:
+    vtbls:
+      - ea: 0x14213AAC0
+        base: Client::Graphics::Kernel::NotifierBase
+    vfuncs:
+      1: BeginFrame
+      2: EndFrame
+    funcs:
+      0x1402166A0: Link
+      0x140216700: Unlink
+  Client::System::Streaming::StreamingNotifier:
+    vtbls:
+      - ea: 0x14213AAD8
+        base: Client::Graphics::Kernel::Notifier
+  Client::System::Streaming::IStreamingCtrl:
+    vtbls:
+      - ea: 0x14213AAF0
+  Client::System::Streaming::StreamingCtrl:
+    vtbls:
+      - ea: 0x14213ABC8
+        base: Client::System::Streaming::IStreamingCtrl
+      - ea: 0x14213ACB0
+        base: Client::System::Streaming::StreamingNotifier
+    funcs:
+      0x1401EB7F0: ctor
+      0x1401EB830: Finalizer
+  Client::System::Streaming::StreamingPlayer:
+    instances:
+      - ea: 0x1428F8EA0
+        pointer: true
+    vtbls:
+      - ea: 0x14213ACC8
+        base: Client::System::Framework::Task
+    funcs:
+      0x1401EBFC0: GetInstance
+      0x1401EC090: ctor
+  Client::System::Streaming::TextureRenderer:
+    vtbls:
+      - ea: 0x14213ACF8
+        base: CBaseVideoRenderer
+      - ea: 0x14213AE90
+        base: IBaseFilter
+      - ea: 0x14213AF08
+        base: IAMovieSetup
+      - ea: 0x14213AF30
+        base: IQualProp
+      - ea: 0x14213AF78
+        base: IQualityControl
+      - ea: 0x14213AFA0
+        base: Client::System::Streaming::StreamingNotifier
+    funcs:
+      0x1401ECEA0: ctor
+      0x1401ED020: Finalizer
+  CBaseVideoRenderer:
+  IBaseFilter:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: GetClassID
+      4: Stop
+      5: Pause
+      6: Run
+      7: GetState
+      8: SetSyncSource
+      9: GetSyncSource
+      10: EnumPins
+      11: FindPin
+      12: QueryFilterInfo
+      13: JoinFilterGraph
+      14: QueryVendorInfo
+  IAMovieSetup:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: Register
+      4: Unregister
+  IQualProp:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: get_FramesDroppedInRenderer
+      4: get_FramesDrawn
+      5: get_AvgFrameRate
+      6: get_Jitter
+      7: get_AvgSyncOffset
+      8: get_DevSyncOffset
+  IQualityControl:
+    vfuncs:
+      0: QueryInterface
+      1: AddRef
+      2: Release
+      3: Notify
+      4: SetSink
   Client::System::Crypt::Md5:
     funcs:
       0x1401F8F80: Init
@@ -6605,15 +6752,39 @@ classes:
     vtbls:
       - ea: 0x1421546D0
         base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::Graphics::Primitive::Server:
+    vtbls:
+      - ea: 0x1421432F0
+  Client::Graphics::Primitive::Context:
+    vtbls:
+      - ea: 0x1421432F8
+  Client::Graphics::Singleton<Client::Graphics::Primitive::Release>:
+    vtbls:
+      - ea: 0x142143300
+  Client::Graphics::Primitive::Release:
+    instances:
+      - ea: 0x1428F5B90
+        pointer: true
+    vtbls:
+      - ea: 0x142143308
+        base: Client::Graphics::Singleton<Client::Graphics::Primitive::Release>
+    funcs:
+      0x140245A20: ctor
+      0x140245A60: Initialize
+      0x140245C50: AssignThreadContexts
+  Client::Graphics::Singleton<Client::Graphics::Primitive::Manager>:
+    vtbls:
+      - ea: 0x142143310
   Client::Graphics::Primitive::Manager:
     instances:
       - ea: 0x1428F6EE0
         pointer: true
     vtbls:
       - ea: 0x142143318
-        base: Client::Graphics::Singleton
+        base: Client::Graphics::Singleton<Client::Graphics::Primitive::Manager>
     funcs:
       0x1402476A0: ctor
+      0x140247740: Initialize
   Client::Graphics::DelayedReleaseClassBase:
     vtbls:
       - ea: 0x1421565C0
@@ -6629,9 +6800,26 @@ classes:
       2: Allocate
       3: Reallocate
       4: Free
+      9: GetSize
+  Client::Graphics::AllocatorPool:
+    vtbls:
+      - ea: 0x1421565E8
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorHeap:
+    vtbls:
+      - ea: 0x142156638
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorHybrid:
+    vtbls:
+      - ea: 0x142156688
+        base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorLowLevel:
     vtbls:
       - ea: 0x1421566E8
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorVRAM:
+    vtbls:
+      - ea: 0x142156738
         base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorManager:
     instances:
@@ -7217,6 +7405,8 @@ classes:
         base: Client::Graphics::Singleton
     funcs:
       0x140220540: ctor
+      0x140227590: GatherCommands
+      0x140223AF0: AssignThreadContext
   Client::Graphics::Kernel::DeviceWin:
     vtbls:
       - ea: 0x142142CB8
@@ -7242,6 +7432,7 @@ classes:
       0x140226870: PostTick
   Client::Graphics::Kernel::Context:
     funcs:
+      0x14023BC40: GatherCommands
       0x14023BEF0: SetRenderTargets
       0x14023FE50: AllocateCommand
       0x140240A80: PushBackCommand
@@ -7318,6 +7509,43 @@ classes:
     funcs:
       0x140257FE0: ctor
       0x140258140: Finalizer
+      0x140258ED0: FinishAnimation
+      0x14025C720: UpdateAnimations
+  Client::Graphics::Render::SkeletonHelper:
+    funcs:
+      0x14025CE70: SyncModelSpacePoses
+  Client::Graphics::Render::SkeletonUpdater: # job writers through TLS block +0x298
+    instances:
+      - ea: 0x142A8ED10
+        pointer: true
+    vtbls:
+      - ea: 0x14214C148
+        base: Client::Graphics::Singleton
+    funcs:
+      0x14025C550: SampleAnimations
+      0x14025D2A0: AppendSkeleton
+      0x14025D5B0: ExecuteUpdaterJob
+  Client::Graphics::JobSystem<Client::Graphics::Render::SkeletonUpdater,Client::Graphics::Render::SkeletonUpdater::UpdaterJob>:
+    vtbls:
+      - ea: 0x14214C140
+    funcs:
+      0x1402F4E20: Initialize
+      0x1402F7A40: HelpBlocks
+      0x1402F8860: HelpPerItem
+  Client::Graphics::Render::LookAtIkUpdater: # job writers through TLS block +0x290
+    instances:
+      - ea: 0x142A8ED18
+        pointer: true
+    vtbls:
+      - ea: 0x14214C160
+        base: Client::Graphics::Singleton
+    funcs:
+      0x14025CA30: Update
+  Client::Graphics::JobSystem<Client::Graphics::Render::LookAtIkUpdater,Client::Graphics::Render::LookAtIkUpdater::LookAtIkJob>:
+    vtbls:
+      - ea: 0x14214C158
+    funcs:
+      0x1402F4660: Initialize
   Client::Graphics::Kernel::ShaderSceneKey:
     vtbls:
       - ea: 0x14214C168
@@ -7335,6 +7563,7 @@ classes:
         0x14025DC80: ctor
         0x14025E580: Update
         0x1400CE830: SetShadowVisibilityType
+        0x14025DDE0: LoadConfig
   Client::Graphics::Render::Camera:
     vtbls:
       - ea: 0x14214C190
@@ -7479,6 +7708,7 @@ classes:
         base: Client::Graphics::Render::GeometryInstancingRenderer
     funcs:
       0x140289260: ctor
+      0x14028A620: PrepareJob
   Client::Graphics::JobSystem<Client::Graphics::Render::TerrainRenderer>:
     vtbls:
       - ea: 0x14214C708
@@ -7488,10 +7718,19 @@ classes:
         base: Client::Graphics::Render::BaseRenderer
     funcs:
       0x14028F6D0: ctor
-  Client::Graphics::Render::UnknownRenderer:
+  Client::Graphics::Render::Decal:
+    vtbls:
+      - ea: 0x14214C738
+        base: Client::Graphics::Render::RenderObject
+  Client::Graphics::Render::DecalRenderer:
     vtbls:
       - ea: 0x14214C780
         base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x140296180: ExecuteDecalJob
+  Client::Graphics::JobSystem<Client::Graphics::Render::DecalRenderer>:
+    vtbls:
+      - ea: 0x14214C778
   Client::Graphics::JobSystem<Client::Graphics::Render::WaterRenderer>:
     vtbls:
       - ea: 0x14214C7E8
@@ -7592,6 +7831,8 @@ classes:
       0x1402B9700: CreateLight
       0x1402BA1F0: Render
       0x1402BABD0: RenderView
+      0x1402B78E0: AssignThreadWriters
+      0x1402B9590: CreateDecal
   Client::Graphics::Render::ShadowManager:
     instances:
       - ea: 0x1428F6480
@@ -7934,6 +8175,13 @@ classes:
       29: GetTargetStatus
     funcs:
       0x14041DA40: ctor
+  Client::Graphics::Scene::CullingBox:
+    vtbls:
+      - ea: 0x14218E4B8
+        base: Client::Graphics::Scene::DrawObject
+    funcs:
+      0x140461CC0: AddToOccluders
+      0x140798E90: Create
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
     vtbls:
       - ea: 0x14216BB28
@@ -8155,6 +8403,8 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x1404501F0: ctor
+      0x140450240: CreateRenderObject
+      0x140798C40: Create
   Client::Graphics::Scene::BGObject:
     vtbls:
       - ea: 0x14216D328
@@ -27216,12 +27466,44 @@ classes:
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
       - ea: 0x142143340
+    funcs:
+      0x140255130: Run
+      0x140255AC0: Initialize
+      0x1402567A0: HelpBlocks
+      0x140256C70: HelpPerItem
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CallbackJobOpt>:
     vtbls:
       - ea: 0x142143348
-  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
+    funcs:
+      0x140255010: Run
+      0x1402558D0: Initialize
+      0x140256690: HelpBlocks
+      0x140256B90: HelpPerItem
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::OccluderJob>:
     vtbls:
       - ea: 0x142143350
+    funcs:
+      0x140255370: Start
+      0x1402553F0: Finish
+      0x1402556E0: Initialize
+      0x140256570: HelpBlocks
+      0x140256AB0: HelpPerItem
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::OcclusionTestJob>:
+    vtbls:
+      - ea: 0x142143358
+    funcs:
+      0x140254EF0: Run
+      0x1402554F0: Initialize
+      0x140256460: HelpBlocks
+      0x1402569D0: HelpPerItem
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
+    vtbls:
+      - ea: 0x142143360
+    funcs:
+      0x140255250: Run
+      0x140255CB0: Initialize
+      0x1402568B0: HelpBlocks
+      0x140256D50: HelpPerItem
   Client::Graphics::Culling::CullingManager:
     instances:
       - ea: 0x1428F5B98
@@ -27229,6 +27511,27 @@ classes:
     vtbls:
       - ea: 0x142143368
         base: Client::Graphics::Singleton
+    funcs:
+      0x140249B00: ctor
+      0x14024A050: Initialize
+      0x14024E860: ExecuteRenderCallbackJob
+      0x140250460: DrawOccluderBox
+      0x140251980: DrawOccluders
+      0x140252400: IsOccluded
+      0x140252C70: AddOccluder
+      0x140252D40: RemoveOccluder
+      0x140252D70: PrepareOcclusion
+      0x140253820: ExecuteOccluderJob
+      0x140253830: ExecuteOcclusionTestJob
+      0x14024A270: AssignThreadWriters
+  Client::Graphics::Culling::CullingGridManager:
+    funcs:
+      0x1417EDFD0: ctor
+      0x1417EE130: Finalizer
+      0x1417EE1A0: Initialize
+  Client::Graphics::JobSystem<Client::Graphics::Culling::CullingGridManager,Client::Graphics::Culling::CullingGridManager::CullingGridJob>:
+    vtbls:
+      - ea: 0x1422DB378
   Client::Graphics::Kernel::VertexShader:
     vtbls:
       - ea: 0x142142778
@@ -27298,6 +27601,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x1408DB040: ctor
+      0x1417517B0: UpdateFollow
       0x1417539D0: PlaceCompanion
       0x14174CFA0: GetFollowMountId
   Client::Game::Character::Ornament:

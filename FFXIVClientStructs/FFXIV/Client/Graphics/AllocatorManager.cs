@@ -11,7 +11,9 @@ public unsafe partial struct AllocatorManager {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray13<Pointer<IAllocator>> _allocators;
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray13<AllocatorLowLevel> _lowLevelAllocators;
 
+    /// <summary> Used by every JobSystem. </summary>
     public IAllocator* CommonAllocator => _allocators[0]; // "Client.Graphics.Common.Allocator"
+    /// <summary> Dynamic buffer staging during draw building. </summary>
     public IAllocator* TempAllocator => _allocators[1]; // "Client.Graphics.Temp.Allocator"
     public IAllocator* KernelAllocator => _allocators[2]; // "Client.Graphics.Kernel.Allocator"
     public IAllocator* ShaderPackageAllocator => _allocators[3]; // "Client.Graphics.ShaderPackage.Allocator"
