@@ -8,13 +8,13 @@ public unsafe partial struct IAllocator {
     public partial IAllocator* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
-    public partial void Terminate();
+    public partial void Cleanup();
 
     [VirtualFunction(2)]
-    public partial void* Alloc(ulong size, ulong alignment);
+    public partial void* Allocate(nint size, nint alignment);
 
     [VirtualFunction(3)]
-    public partial void* Realloc(void* ptr, ulong size, ulong alignment);
+    public partial void* Reallocate(void* ptr, nint newSize, nint newAlignment);
 
     [VirtualFunction(4)]
     public partial void Free(void* ptr);

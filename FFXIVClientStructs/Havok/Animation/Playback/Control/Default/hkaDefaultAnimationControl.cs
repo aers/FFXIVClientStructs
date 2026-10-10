@@ -16,8 +16,25 @@ public unsafe partial struct hkaDefaultAnimationControl {
         EasedOut,
     };
 
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-    public struct hkaDefaultAnimationControlListener;
+    public unsafe partial struct hkaDefaultAnimationControlListener {
+
+        [VirtualFunction(0)]
+        public partial void LoopOverflowCallback(hkaDefaultAnimationControl* control, float deltaTime, uint overflows);
+
+        [VirtualFunction(1)]
+        public partial void LoopUnderflowCallback(hkaDefaultAnimationControl* control, float deltaTime, uint underflows);
+
+        [VirtualFunction(2)]
+        public partial void EasedInCallback(hkaDefaultAnimationControl* control, float deltaTime);
+
+        [VirtualFunction(3)]
+        public partial void EasedOutCallback(hkaDefaultAnimationControl* control, float deltaTime);
+
+        [VirtualFunction(4)]
+        public partial hkaDefaultAnimationControlListener* Dtor(byte freeFlags);
+    }
 
     [GenerateInterop]
     [Inherits<hkReferencedObject>]
@@ -41,7 +58,7 @@ public unsafe partial struct hkaDefaultAnimationControl {
     [FieldOffset(0x98)] public EaseStatusEnum EaseStatus;
     [FieldOffset(0x9C)] public float CropStartAmountLocalTime;
     [FieldOffset(0xA0)] public float CropEndAmountLocalTime;
-    [FieldOffset(0xA8)] public hkArray<hkaDefaultAnimationControlListener> DefaultListeners;
+    [FieldOffset(0xA8)] public hkArray<Pointer<hkaDefaultAnimationControlListener>> DefaultListeners;
     [FieldOffset(0xB8)] public hkaDefaultAnimationControlMapperData* Mapper;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 48 8B 52 38")]

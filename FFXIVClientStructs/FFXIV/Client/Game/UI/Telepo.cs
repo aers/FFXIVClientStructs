@@ -21,14 +21,6 @@ public unsafe partial struct Telepo {
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 ?? BA")]
     public partial StdVector<TeleportInfo>* UpdateAetheryteList();
 
-    /// Territories have aetherstream coordinates X and Y, an associated ExpansionValue and an associated Plane in TerritoryTypeTelepo.
-    /// Planes have relays described in the TelepoRelay sheet, every pair of planes has an associated entry territory, exit territory and cost organized in a 6x6 matrix.
-    /// If planes are the same, the cost function is
-    ///     f(Entry, Exit) := `100 + AetherStreamDistance * Max(1000, EntryExpansionValue + ExitExpansionValue + 600) / 5000`.
-    /// If planes differ, the cost computes as
-    ///     f(Entry, Exit) := f(Entry, EntryRelay(EntryPlane, ExitPlane)) + Cost(EntryPlane, ExitPlane) + f(ExitRelay(EntryPlane, ExitPlane), Exit).
-    /// Then, the growth is halved after 1000, i.e. if f(Entry, Exit) > 1000, then return (f(Entry, Exit) - 1000) / 2 + 1000 instead.
-    /// Additionally, if <paramref name="residentArea"/> is true, the cost is quartered, and if <paramref name="favored"/> is true, the cost is halved.
     [MemberFunction("E8 ?? ?? ?? ?? 89 44 24 ?? 49 8D 4D")]
     public partial uint GetTeleportCost([CExporterExcel("Aetheryte")] void* aetheryteRow, short multiplier, bool favored, bool residentArea);
 

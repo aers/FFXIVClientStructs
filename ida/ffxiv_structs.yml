@@ -333,7 +333,7 @@ enums:
   values:
     "None": 0
     "ClearText": 1
-    "Unknown2": 2
+    "InsertLineBreak": 2
 - type: Component::GUI::InputCallbackType
   name: InputCallbackType
   underlying: int
@@ -8092,6 +8092,59 @@ structs:
   union: False
   size: 8
   fields: []
+  virtual_functions:
+  - name: LoopOverflowCallback
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+      name: this
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl*
+      name: control
+    - type: float
+      name: deltaTime
+    - type: unsigned int
+      name: overflows
+  - name: LoopUnderflowCallback
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+      name: this
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl*
+      name: control
+    - type: float
+      name: deltaTime
+    - type: unsigned int
+      name: underflows
+  - name: EasedInCallback
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+      name: this
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl*
+      name: control
+    - type: float
+      name: deltaTime
+  - name: EasedOutCallback
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+      name: this
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl*
+      name: control
+    - type: float
+      name: deltaTime
+  - name: dtor
+    offset: 32
+    return_type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+    parameters:
+    - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+      name: this
+    - type: byte
+      name: freeFlags
   member_functions: []
 - type: Animation::Playback::Control::hkaAnimationControlListener
   name: hkaAnimationControlListener
@@ -8099,6 +8152,23 @@ structs:
   union: False
   size: 8
   fields: []
+  virtual_functions:
+  - name: ControlDeletedCallback
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Animation::Playback::Control::hkaAnimationControlListener*
+      name: this
+    - type: Animation::Playback::Control::hkaAnimationControl*
+      name: control
+  - name: dtor
+    offset: 8
+    return_type: Animation::Playback::Control::hkaAnimationControlListener*
+    parameters:
+    - type: Animation::Playback::Control::hkaAnimationControlListener*
+      name: this
+    - type: byte
+      name: freeFlags
   member_functions: []
 - type: Animation::Playback::Multithreaded::hkaJobDoneNotifier
   name: hkaJobDoneNotifier
@@ -15605,6 +15675,58 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
+- type: Client::Graphics::IAllocator
+  name: IAllocator
+  namespace: Client.Graphics
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::IAllocator*
+    parameters:
+    - type: Client::Graphics::IAllocator*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::IAllocator*
+      name: this
+  - name: Allocate
+    offset: 16
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::IAllocator*
+      name: this
+    - type: __int64
+      name: size
+    - type: __int64
+      name: alignment
+  - name: Reallocate
+    offset: 24
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::IAllocator*
+      name: this
+    - type: __int64
+      name: ptr
+    - type: __int64
+      name: newSize
+    - type: __int64
+      name: newAlignment
+  - name: Free
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::Graphics::IAllocator*
+      name: this
+    - type: __int64
+      name: ptr
+  member_functions: []
 - type: Client::Graphics::JobSystem
   name: JobSystem
   namespace: Client.Graphics
@@ -16644,12 +16766,30 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
+    - type: byte
+      name: freeFlags
   - name: Cleanup
     offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
   - name: IncRef
     offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
   - name: DecRef
     offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::BaseRenderer
   name: BaseRenderer
@@ -17108,6 +17248,63 @@ structs:
     - 3
     is_pointer: True
     return_type: Client::Graphics::Scene::CharacterUtility
+- type: Client::Graphics::Scene::Monster::DrawData
+  name: DrawData
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 8
+  fields:
+  - type: unsigned __int16
+    name: ModelSetId
+    offset: 0
+  - type: unsigned __int16
+    name: SecondaryId
+    offset: 2
+  - type: unsigned __int16
+    name: Variant
+    offset: 4
+  - type: byte
+    name: BitFields
+    offset: 6
+    bits:
+    - type: byte
+      offset: 0
+      size: 1
+      name: LoadMountAnimations
+    - type: byte
+      offset: 1
+      size: 1
+      name: UnkBits1
+    - type: byte
+      offset: 2
+      size: 1
+      name: LoadOrnamentAnimations
+  - type: byte
+    name: AnimationVariant
+    offset: 7
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B CB E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 0F 84 ?? ?? ?? ?? 0F B6 48 10
+    return_type: Client::Graphics::Scene::Monster::DrawData*
+    name: ctor
+    parameters:
+    - type: Client::Graphics::Scene::Monster::DrawData*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 41 83 FE ?? 48 8D 4C 24 ?? 0F 94 C2 E8 ?? ?? ?? ?? 48 8D 54 24
+    return_type: void
+    name: SetLoadMountAnimations
+    parameters:
+    - type: Client::Graphics::Scene::Monster::DrawData*
+      name: this
+    - type: char
+      name: loadMountAnimations
+  - signature: E8 ?? ?? ?? ?? 48 8D 54 24 ?? 48 8B CF E8 ?? ?? ?? ?? E9
+    return_type: void
+    name: SetLoadOrnamentAnimations
+    parameters:
+    - type: Client::Graphics::Scene::Monster::DrawData*
+      name: this
+    - type: char
+      name: loadOrnamentAnimations
 - type: Client::Graphics::Scene::Object::SiblingEnumerator
   name: SiblingEnumerator
   namespace: Client.Graphics.Scene
@@ -21128,6 +21325,40 @@ structs:
     name: Slot
     offset: 16
   member_functions: []
+- type: Client::UI::AddonFreeShop::Item
+  name: Item
+  namespace: Client.UI
+  union: False
+  size: 40
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: IconId
+    offset: 4
+  - type: char*
+    name: Name
+    offset: 8
+  - type: char*
+    name: RequirementText
+    offset: 16
+  - type: int
+    name: Index
+    offset: 24
+  - type: unsigned int
+    name: ClassJobCategoryId
+    offset: 28
+  - type: char
+    name: IsOwned
+    offset: 32
+  - type: char
+    name: IsUnavailable
+    offset: 33
+  - type: char
+    name: IsNew
+    offset: 35
+  member_functions: []
 - type: Client::UI::AddonGuildLeve::Button1
   name: Button1
   namespace: Client::UI::AddonGuildLeve
@@ -23115,6 +23346,31 @@ structs:
   - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::RecruitmentType
     name: Recruitment
     offset: 5
+  member_functions: []
+- type: Client::UI::Agent::AgentFreeShop::Item
+  name: Item
+  namespace: Client.UI.Agent
+  union: False
+  size: 24
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: Quantity
+    offset: 4
+  - type: unsigned __int16
+    name: Patch
+    offset: 12
+  - type: char
+    name: IsOwned
+    offset: 20
+  - type: char
+    name: IsUnavailable
+    offset: 21
+  - type: char
+    name: IsCached
+    offset: 22
   member_functions: []
 - type: Client::UI::Agent::AgentGearSet::ContextMenuParam
   name: ContextMenuParam
@@ -29862,12 +30118,12 @@ structs:
     name: CapacityAndFlags
     offset: 12
   member_functions: []
-- type: Common::Base::Container::Array::hkArray<Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener>
+- type: Common::Base::Container::Array::hkArray<Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*>
   name: hkArray`1
   namespace: Common.Base.Container.Array
   union: False
   fields:
-  - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*
+  - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener**
     name: Data
     offset: 0
   - type: int
@@ -46620,6 +46876,68 @@ structs:
     parameters:
     - type: Client::Game::ZoneSharedGroupManager*
       name: this
+- type: Client::Graphics::AllocatorLowLevel
+  name: AllocatorLowLevel
+  namespace: Client.Graphics
+  union: False
+  size: 24
+  fields:
+  - type: Client::Graphics::IAllocator
+    name: IAllocator
+    offset: 0
+    base: true
+  - type: Client::System::Memory::IMemorySpace*
+    name: MemorySpace
+    offset: 8
+  - type: char*
+    name: Name
+    offset: 16
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::IAllocator*
+    parameters:
+    - type: Client::Graphics::AllocatorLowLevel*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::AllocatorLowLevel*
+      name: this
+  - name: Allocate
+    offset: 16
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::AllocatorLowLevel*
+      name: this
+    - type: __int64
+      name: size
+    - type: __int64
+      name: alignment
+  - name: Reallocate
+    offset: 24
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::AllocatorLowLevel*
+      name: this
+    - type: __int64
+      name: ptr
+    - type: __int64
+      name: newSize
+    - type: __int64
+      name: newAlignment
+  - name: Free
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::Graphics::AllocatorLowLevel*
+      name: this
+    - type: __int64
+      name: ptr
+  member_functions: []
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::DomainShader*>
   name: CVector`1
   namespace: Client.Graphics.Kernel
@@ -46766,7 +47084,33 @@ structs:
     name: ReferencedClassBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::Texture
   name: Texture
@@ -47081,7 +47425,33 @@ structs:
   - type: Client::Graphics::Physics::CollisionShape
     name: Shape
     offset: 128
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
   member_functions:
   - signature: C7 41 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B C1
     return_type: Client::Graphics::Physics::CollisionBase*
@@ -47447,7 +47817,33 @@ structs:
   - type: unsigned __int16
     name: TextureCount
     offset: 80
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::Model
   name: Model
@@ -47498,7 +47894,33 @@ structs:
   - type: unsigned int
     name: SlotIndex
     offset: 280
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 29 48 8B 13
     return_type: char
@@ -55418,6 +55840,46 @@ structs:
       name: numberArray
     - type: Client::Game::Character::BattleChara*
       name: battleChara
+- type: Client::UI::Agent::ItemCatalogContextEvent
+  name: ItemCatalogContextEvent
+  namespace: Client.UI.Agent
+  union: False
+  size: 56
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::ItemCatalogContextEvent*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::ItemCatalogContextEvent*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  member_functions: []
 - type: Client::UI::Agent::LinkedTooltipMarker
   name: LinkedTooltipMarker
   namespace: Client.UI.Agent
@@ -69761,6 +70223,50 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::WeatherManager
+- type: Client::Graphics::AllocatorManager
+  name: AllocatorManager
+  namespace: Client.Graphics
+  union: False
+  size: 440
+  fields:
+  - type: Client::Graphics::IAllocator*
+    name: Allocators
+    offset: 8
+    size: 13
+    is_string: False
+  - type: Client::Graphics::AllocatorLowLevel
+    name: LowLevelAllocators
+    offset: 112
+    size: 13
+    is_string: False
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::AllocatorManager*
+    parameters:
+    - type: Client::Graphics::AllocatorManager*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::AllocatorManager*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 0F B6 CD E8
+    return_type: char
+    name: Initialize
+    parameters:
+    - type: Client::Graphics::AllocatorManager*
+      name: this
+  static_members:
+  - signature: 74 12 48 8B 05 ?? ?? ?? ?? 48 8B 48 38
+    relative_follow_offsets:
+    - 5
+    is_pointer: True
+    return_type: Client::Graphics::AllocatorManager
 - type: Client::Graphics::Environment::EnvColorFilterParameters
   name: EnvColorFilterParameters
   namespace: Client.Graphics.Environment
@@ -69858,6 +70364,33 @@ structs:
   - type: unsigned int
     name: DxbcBlobSize
     offset: 88
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::RenderCommandClear
   name: RenderCommandClear
@@ -70094,7 +70627,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 89 5C 24
     return_type: Client::Graphics::Physics::CollisionCapsule*
@@ -70112,7 +70671,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 0F 28 05
     return_type: Client::Graphics::Physics::CollisionEllipsoid*
@@ -70130,7 +70715,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 33 C0
     return_type: Client::Graphics::Physics::CollisionPlane*
@@ -70150,7 +70761,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 33 C9
     return_type: Client::Graphics::Physics::CollisionSphere*
@@ -93553,7 +94190,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::DomainShader
   name: DomainShader
@@ -93568,7 +94231,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::GeometryShader
   name: GeometryShader
@@ -93583,7 +94272,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::HullShader
   name: HullShader
@@ -93598,7 +94313,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::ImmediateContext
   name: ImmediateContext
@@ -93822,7 +94563,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::VertexShader
   name: VertexShader
@@ -93846,7 +94613,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 112
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Physics::CollisionNormalPlane
   name: CollisionNormalPlane
@@ -93858,7 +94651,33 @@ structs:
     name: CollisionPlane
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 66 89 83
     return_type: Client::Graphics::Physics::CollisionNormalPlane*
@@ -93876,7 +94695,33 @@ structs:
     name: CollisionPlane
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? BA
     return_type: Client::Graphics::Physics::CollisionThreePointPlane*
@@ -93934,6 +94779,32 @@ structs:
     name: FiniteFarPlane
     offset: 516
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
   - name: UpdateConstantBuffer
     offset: 40
   member_functions: []
@@ -93971,7 +94842,33 @@ structs:
   - type: unsigned int
     name: ModelThingBufferLength
     offset: 72
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
   member_functions:
   - signature: 48 83 EC 38 48 8B 41 30 4C 8B D2
     return_type: Common::Math::AxisAlignedBounds*
@@ -94006,7 +94903,33 @@ structs:
   - type: Client::Graphics::Kernel::ConstantBufferPointer<Client::Graphics::Render::VerticalFogPlateConstants>
     name: ConstantBuffer
     offset: 40
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
   member_functions:
   - signature: 48 83 EC 38 48 8B 41 20 0F 57 DB
     return_type: Common::Math::AxisAlignedBounds*
@@ -94047,7 +94970,33 @@ structs:
   - type: byte
     name: Unk38
     offset: 56
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
   member_functions:
   - signature: 48 83 EC 38 48 8B 41 28 4C 8B D2
     return_type: Common::Math::AxisAlignedBounds*
@@ -105857,6 +106806,14 @@ structs:
     name: UIColorGroups
     offset: 144
   member_functions:
+  - signature: E8 ?? ?? ?? ?? B0 ?? C6 83 ?? ?? ?? ?? ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 80 BB
+    return_type: void
+    name: SetActiveColorThemeType
+    parameters:
+    - type: Component::GUI::AtkUIColorHolder*
+      name: this
+    - type: byte
+      name: themeType
   - signature: E8 ?? ?? ?? ?? 8B C8 88 43 2C
     return_type: unsigned int
     name: GetColor
@@ -109435,7 +110392,33 @@ structs:
     name: Camera
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::Skeleton
   name: Skeleton
@@ -109480,7 +110463,33 @@ structs:
   - type: Client::Graphics::Scene::CharacterBase*
     name: Owner
     offset: 184
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
   member_functions: []
 - type: Client::Graphics::Scene::Attach::Attachment
   name: Attachment
@@ -109929,7 +110938,7 @@ structs:
     name: RenderLight
     offset: 144
   - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: ProjectedCubemapTexture
+    name: ProjectedTexture
     offset: 152
   virtual_functions:
   - name: dtor
@@ -112033,6 +113042,156 @@ structs:
       name: this
     - type: byte
       name: memberIndex
+- type: Client::UI::Agent::AgentFreeShop
+  name: AgentFreeShop
+  namespace: Client.UI.Agent
+  union: False
+  size: 1584
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentFreeShop::Item
+    name: Items
+    offset: 40
+    size: 61
+    is_string: False
+  - type: Client::UI::Agent::ItemCatalogContextEvent
+    name: ItemCatalogContextEvent
+    offset: 1504
+  - type: unsigned int
+    name: ItemCount
+    offset: 1560
+  - type: unsigned __int64
+    name: ClassJobMask
+    offset: 1568
+  - type: char
+    name: IsInteractionBlocked
+    offset: 1576
+  - type: char
+    name: IsLoadingItems
+    offset: 1577
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: 40 53 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 2B E0 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 01 48 8B D9 66 C7 81
+    return_type: void
+    name: RefreshAddon
+    parameters:
+    - type: Client::UI::Agent::AgentFreeShop*
+      name: this
 - type: Client::UI::Agent::AgentGoldSaucer
   name: AgentGoldSaucer
   namespace: Client.UI.Agent
@@ -117766,7 +118925,36 @@ structs:
   - type: float
     name: LightSelect
     offset: 272
-  virtual_functions: []
+  - type: Client::Graphics::Kernel::Texture*
+    name: ProjectedTexture
+    offset: 288
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::PartialSkeleton
   name: PartialSkeleton
@@ -153729,7 +154917,7 @@ structs:
   - type: float
     name: CropEndAmountLocalTime
     offset: 160
-  - type: Common::Base::Container::Array::hkArray<Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener>
+  - type: Common::Base::Container::Array::hkArray<Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlListener*>
     name: DefaultListeners
     offset: 168
   - type: Animation::Playback::Control::Default::hkaDefaultAnimationControl::hkaDefaultAnimationControlMapperData*
@@ -159959,12 +161147,36 @@ structs:
   - type: Component::GUI::AtkComponentListItemPopulator
     name: Populator
     offset: 296
+  - type: Component::GUI::AtkResNode*
+    name: EventNode
+    offset: 336
+  - type: Component::GUI::AtkResNode**
+    name: CollisionNodeList
+    offset: 344
   - type: Component::GUI::AtkComponentDragDrop*
     name: DragDropComponent
     offset: 376
   - type: int
     name: ListItemIndex
     offset: 388
+  - type: __int16
+    name: OriginalX
+    offset: 392
+  - type: __int16
+    name: OriginalY
+    offset: 394
+  - type: unsigned __int16
+    name: OriginalWidth
+    offset: 396
+  - type: unsigned __int16
+    name: OriginalHeight
+    offset: 398
+  - type: unsigned __int16
+    name: OriginalButtonTextHeight
+    offset: 400
+  - type: unsigned __int16
+    name: CollisionNodeListCount
+    offset: 404
   - type: int
     name: DragDropListItemIndex
     offset: 408
@@ -159980,15 +161192,46 @@ structs:
   - type: __int16
     name: Unk1A2DragDropOwnerNodeScreenY
     offset: 418
-  - type: byte
-    name: RowTemplateNodeCountByte
+  - type: unsigned int
+    name: BitFields1A4
     offset: 420
-  - type: byte
-    name: Unk1A5
-    offset: 421
-  - type: unsigned __int16
-    name: Unk1A6
-    offset: 422
+    bits:
+    - type: byte
+      offset: 0
+      size: 8
+      name: UnkBits0
+    - type: byte
+      offset: 8
+      size: 1
+      name: HasRequestedPayload
+    - type: byte
+      offset: 9
+      size: 1
+      name: EnableDragDrop
+    - type: byte
+      offset: 10
+      size: 1
+      name: UsesIconComponent
+    - type: byte
+      offset: 11
+      size: 1
+      name: EnableChildNavigation
+    - type: byte
+      offset: 12
+      size: 1
+      name: EnableHeldNavigation
+    - type: byte
+      offset: 13
+      size: 1
+      name: DisableChildFocusReset
+    - type: byte
+      offset: 14
+      size: 1
+      name: EnableChildAutoFocus
+    - type: byte
+      offset: 15
+      size: 1
+      name: StopNavigationAtEnd
   virtual_functions:
   - name: dtor
     offset: 0
@@ -165749,6 +166992,12 @@ structs:
     - type: Client::Graphics::Kernel::Texture*
       name: freeCompanyCrest
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 54 24
+    return_type: Client::Graphics::Scene::Demihuman*
+    name: ctor
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 0F
     return_type: char
     name: SetupFromData
@@ -166253,6 +167502,12 @@ structs:
     - type: Client::Graphics::Kernel::Texture*
       name: freeCompanyCrest
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 89 AE
+    return_type: Client::Graphics::Scene::Monster*
+    name: ctor
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ?? 0F 11 44 24
     return_type: char
     name: SetupFromData
@@ -166784,6 +168039,12 @@ structs:
     - type: Client::Graphics::Kernel::Texture*
       name: freeCompanyCrest
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 4C 8B F0 48 8D 54 24
+    return_type: Client::Graphics::Scene::Weapon*
+    name: ctor
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
   - signature: E8 ?? ?? ?? ?? 49 8B 16 48 8B 0D ?? ?? ?? ??
     return_type: char
     name: Initialize
@@ -229659,7 +230920,33 @@ structs:
   - type: unsigned int
     name: SubviewValue2
     offset: 348
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
   member_functions: []
 - type: Client::Graphics::Scene::Human
   name: Human
@@ -230207,6 +231494,12 @@ structs:
     - type: Client::Graphics::Kernel::Texture*
       name: freeCompanyCrest
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 ?? 48 8D 55 ?? 48 8B C8 E8 ?? ?? ?? ?? 48 8B 0D
+    return_type: Client::Graphics::Scene::Human*
+    name: ctor
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF
     return_type: byte
     name: SetupVisor
@@ -236222,6 +237515,480 @@ structs:
     return_type: char
     parameters:
     - type: Client::UI::AddonFishingNote*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions: []
+- type: Client::UI::AddonFreeShop
+  name: AddonFreeShop
+  namespace: Client.UI
+  union: False
+  size: 4096
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkComponentList*
+    name: ItemList
+    offset: 568
+  - type: Component::GUI::AtkComponentCheckBox*
+    name: ShowNewItemsOnlyCheckbox
+    offset: 576
+  - type: Component::GUI::AtkComponentDropDownList*
+    name: ClassJobDropdown
+    offset: 584
+  - type: Component::GUI::AtkComponentButton*
+    name: CurrentClassJobButton
+    offset: 592
+  - type: Client::System::String::Utf8String
+    name: NoItemsText
+    offset: 600
+  - type: Client::UI::AddonFreeShop::Item
+    name: Items
+    offset: 704
+    size: 61
+    is_string: False
+  - type: Client::UI::AddonFreeShop::Item*
+    name: VisibleItems
+    offset: 3144
+    size: 61
+    is_string: False
+  - type: unsigned int
+    name: ItemCount
+    offset: 3632
+  - type: unsigned int
+    name: NewItemCount
+    offset: 3636
+  - type: char
+    name: ShowNewItemsOnly
+    offset: 3640
+  - type: char*
+    name: ClassJobNames
+    offset: 3648
+    size: 35
+    is_string: False
+  - type: unsigned int
+    name: ClassJobIds
+    offset: 3928
+    size: 35
+    is_string: False
+  - type: unsigned int
+    name: SelectedClassJobId
+    offset: 4068
+  - type: unsigned int
+    name: ClassJobCount
+    offset: 4072
+  - type: unsigned __int64
+    name: ClassJobMask
+    offset: 4080
+  - type: unsigned int
+    name: CurrentClassJobId
+    offset: 4088
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonFreeShop*
       name: this
     - type: int
       name: inputId
@@ -258632,6 +260399,14 @@ structs:
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 FF 02
+    return_type: void
+    name: SetInactive
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
+    - type: char
+      name: isInactive
   static_members:
   - signature: 48 8B 1D ?? ?? ?? ?? 8B 7C 24
     relative_follow_offsets:

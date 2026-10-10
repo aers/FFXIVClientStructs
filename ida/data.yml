@@ -6796,9 +6796,9 @@ classes:
       - ea: 0x142127248
     vfuncs:
       0: dtor
-      1: Terminate
-      2: Alloc
-      3: Realloc
+      1: Cleanup
+      2: Allocate
+      3: Reallocate
       4: Free
       9: GetSize
   Client::Graphics::AllocatorPool:
@@ -6828,8 +6828,12 @@ classes:
     vtbls:
       - ea: 0x1421272C0
         base: Client::Graphics::Singleton
+    vfuncs:
+      0: dtor
+      1: Cleanup
     funcs:
       0x140337210: ctor
+      0x140337280: Initialize
   Client::Network::NetworkModuleProxy:
     vtbls:
       - ea: 0x14216EA00
@@ -8348,6 +8352,11 @@ classes:
     funcs:
       0x14044CCF0: ctor
       0x14044CD50: SetupFromData
+  Client::Graphics::Scene::Monster::DrawData:
+    funcs:
+      0x14044CC70: ctor
+      0x14044CC90: SetLoadMountAnimations
+      0x14044CCB0: SetLoadOrnamentAnimations
   Client::Graphics::Scene::BGManager:
     vtbls:
       - ea: 0x14216D4B8
@@ -15318,6 +15327,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F82A40: ctor
+      0x140F82E40: RefreshAddon
   Client::UI::Agent::AgentAozNoteBook:
     vtbls:
       - ea: 0x1421F6F38
@@ -24432,6 +24442,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C8760: ctor
+      0x1412C94E0: RefreshItemList
   Client::UI::AddonMountainClimbingResult: # 677
     vtbls:
       - ea: 0x1422C8EE8
@@ -28762,6 +28773,10 @@ classes:
       0x141F26030: ??0hkaAnimationControl@@QEAA@PEBVhkaAnimationBinding@@@Z
       0x141F263A0: ?removeAnimationControlListener@hkaAnimationControl@@QEAAXPEAVhkaAnimationControlListener@@@Z
       0x141F26230: ?sampleTracks@hkaAnimationControl@@UEBAXPEAVhkQsTransformf@@PEAM@Z
+  hkaAnimationControlListener:
+    vfuncs:
+      0: ControlDeletedCallback
+      1: dtor
   hkaBlender:
     funcs:
       0x141F04F00: ?blend@hkaBlender@@YAXPEIAM0PEIBM111AEBVhkSimdFloat32@@HW4BLEND_MODE@1@@Z
@@ -28773,6 +28788,13 @@ classes:
       0x141F008A0: ??0hkaDefaultAnimationControl@@QEAA@AEBV0@@Z
       0x141F00F60: ?setSkeletonMapper@hkaDefaultAnimationControl@@QEAAXPEBVhkaSkeletonMapper@@@Z
       0x141F01020: ?getNumberOfTransformTracks@hkaDefaultAnimationControl@@UEBAHXZ
+  hkaDefaultAnimationControlListener:
+    vfuncs:
+      0: LoopOverflowCallback
+      1: LoopUnderflowCallback
+      2: EasedInCallback
+      3: EasedOutCallback
+      4: dtor
   hkaLookAtIkSolver:
     funcs:
       0x141F0D510: ?solve@hkaLookAtIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEBVhkVector4f@@MAEAVhkQsTransformf@@PEBURangeLimits@1@@Z
