@@ -9,7 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x630)]
 public partial struct AgentFreeShop {
     [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray61<Item> _items;
-    /// <summary>The base event interface of the embedded ItemCatalogContextEvent.</summary>
     [FieldOffset(0x5E0)] public ItemCatalogContextEvent ItemCatalogContextEvent;
     [FieldOffset(0x618)] public uint ItemCount;
     /// <summary>Bits refer to ClassJob row IDs.</summary>
