@@ -6623,6 +6623,12 @@ classes:
   Client::Graphics::IAllocator:
     vtbls:
       - ea: 0x142127248
+    vfuncs:
+      0: dtor
+      1: Cleanup
+      2: Allocate
+      3: Reallocate
+      4: Free
   Client::Graphics::AllocatorLowLevel:
     vtbls:
       - ea: 0x1421566E8
@@ -6634,8 +6640,12 @@ classes:
     vtbls:
       - ea: 0x1421272C0
         base: Client::Graphics::Singleton
+    vfuncs:
+      0: dtor
+      1: Cleanup
     funcs:
       0x140337210: ctor
+      0x140337280: Initialize
   Client::Network::NetworkModuleProxy:
     vtbls:
       - ea: 0x14216EA00
