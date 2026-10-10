@@ -6099,6 +6099,11 @@ classes:
     vtbls:
       - ea: 0x14214FDC0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x14030CDA0: GetAnimationIndex
+      0x14030CE30: GetAnimationHavokIndex
+      0x14030CEB0: GetFacialAnimationHavokIndex
+      0x14030CD30: GetAnimationHavokBinding
   Client::System::Resource::Handle::PartialAnimationPackResourceHandleFactory:
     vtbls:
       - ea: 0x14214FF28
