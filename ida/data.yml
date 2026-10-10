@@ -28467,6 +28467,10 @@ classes:
       0x141F26030: ??0hkaAnimationControl@@QEAA@PEBVhkaAnimationBinding@@@Z
       0x141F263A0: ?removeAnimationControlListener@hkaAnimationControl@@QEAAXPEAVhkaAnimationControlListener@@@Z
       0x141F26230: ?sampleTracks@hkaAnimationControl@@UEBAXPEAVhkQsTransformf@@PEAM@Z
+  hkaAnimationControlListener:
+    vfuncs:
+      0: ControlDeletedCallback
+      1: dtor
   hkaBlender:
     funcs:
       0x141F04F00: ?blend@hkaBlender@@YAXPEIAM0PEIBM111AEBVhkSimdFloat32@@HW4BLEND_MODE@1@@Z
@@ -28478,6 +28482,13 @@ classes:
       0x141F008A0: ??0hkaDefaultAnimationControl@@QEAA@AEBV0@@Z
       0x141F00F60: ?setSkeletonMapper@hkaDefaultAnimationControl@@QEAAXPEBVhkaSkeletonMapper@@@Z
       0x141F01020: ?getNumberOfTransformTracks@hkaDefaultAnimationControl@@UEBAHXZ
+  hkaDefaultAnimationControlListener:
+    vfuncs:
+      0: LoopOverflowCallback
+      1: LoopUnderflowCallback
+      2: EasedInCallback
+      3: EasedOutCallback
+      4: dtor
   hkaLookAtIkSolver:
     funcs:
       0x141F0D510: ?solve@hkaLookAtIkSolver@@SA?AVhkBool@@AEBUSetup@1@AEBVhkVector4f@@MAEAVhkQsTransformf@@PEBURangeLimits@1@@Z
