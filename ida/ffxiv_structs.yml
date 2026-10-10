@@ -333,7 +333,7 @@ enums:
   values:
     "None": 0
     "ClearText": 1
-    "Unknown2": 2
+    "InsertLineBreak": 2
 - type: Component::GUI::InputCallbackType
   name: InputCallbackType
   underlying: int
@@ -16644,12 +16644,30 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
+    - type: byte
+      name: freeFlags
   - name: Cleanup
     offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
   - name: IncRef
     offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
   - name: DecRef
     offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::ReferencedClassBase*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::BaseRenderer
   name: BaseRenderer
@@ -46766,7 +46784,33 @@ structs:
     name: ReferencedClassBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::Shader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::Texture
   name: Texture
@@ -47081,7 +47125,33 @@ structs:
   - type: Client::Graphics::Physics::CollisionShape
     name: Shape
     offset: 128
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionBase*
+      name: this
   member_functions:
   - signature: C7 41 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B C1
     return_type: Client::Graphics::Physics::CollisionBase*
@@ -47447,7 +47517,33 @@ structs:
   - type: unsigned __int16
     name: TextureCount
     offset: 80
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Material*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::Model
   name: Model
@@ -47498,7 +47594,33 @@ structs:
   - type: unsigned int
     name: SlotIndex
     offset: 280
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 29 48 8B 13
     return_type: char
@@ -69858,6 +69980,33 @@ structs:
   - type: unsigned int
     name: DxbcBlobSize
     offset: 88
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PVShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::RenderCommandClear
   name: RenderCommandClear
@@ -70094,7 +70243,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionCapsule*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 89 5C 24
     return_type: Client::Graphics::Physics::CollisionCapsule*
@@ -70112,7 +70287,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionEllipsoid*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 0F 28 05
     return_type: Client::Graphics::Physics::CollisionEllipsoid*
@@ -70130,7 +70331,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionPlane*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 33 C0
     return_type: Client::Graphics::Physics::CollisionPlane*
@@ -70150,7 +70377,33 @@ structs:
     name: CollisionBase
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionSphere*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 33 C9
     return_type: Client::Graphics::Physics::CollisionSphere*
@@ -93553,7 +93806,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ComputeShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::DomainShader
   name: DomainShader
@@ -93568,7 +93847,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::DomainShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::GeometryShader
   name: GeometryShader
@@ -93583,7 +93888,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::GeometryShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::HullShader
   name: HullShader
@@ -93598,7 +93929,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::HullShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::ImmediateContext
   name: ImmediateContext
@@ -93822,7 +94179,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::PixelShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Kernel::VertexShader
   name: VertexShader
@@ -93846,7 +94229,33 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 112
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::VertexShader*
+      name: this
   member_functions: []
 - type: Client::Graphics::Physics::CollisionNormalPlane
   name: CollisionNormalPlane
@@ -93858,7 +94267,33 @@ structs:
     name: CollisionPlane
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionNormalPlane*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 B8 ?? ?? ?? ?? 66 89 83
     return_type: Client::Graphics::Physics::CollisionNormalPlane*
@@ -93876,7 +94311,33 @@ structs:
     name: CollisionPlane
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
   member_functions:
   - signature: 40 53 48 83 EC ?? B2 ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? BA
     return_type: Client::Graphics::Physics::CollisionThreePointPlane*
@@ -93934,6 +94395,32 @@ structs:
     name: FiniteFarPlane
     offset: 516
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Camera*
+      name: this
   - name: UpdateConstantBuffer
     offset: 40
   member_functions: []
@@ -93971,7 +94458,33 @@ structs:
   - type: unsigned int
     name: ModelThingBufferLength
     offset: 72
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::TerrainPlate*
+      name: this
   member_functions:
   - signature: 48 83 EC 38 48 8B 41 30 4C 8B D2
     return_type: Common::Math::AxisAlignedBounds*
@@ -94006,7 +94519,33 @@ structs:
   - type: Client::Graphics::Kernel::ConstantBufferPointer<Client::Graphics::Render::VerticalFogPlateConstants>
     name: ConstantBuffer
     offset: 40
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::VerticalFogPlate*
+      name: this
   member_functions:
   - signature: 48 83 EC 38 48 8B 41 20 0F 57 DB
     return_type: Common::Math::AxisAlignedBounds*
@@ -94047,7 +94586,33 @@ structs:
   - type: byte
     name: Unk38
     offset: 56
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::WaterPlate*
+      name: this
   member_functions:
   - signature: 48 83 EC 38 48 8B 41 28 4C 8B D2
     return_type: Common::Math::AxisAlignedBounds*
@@ -105857,6 +106422,14 @@ structs:
     name: UIColorGroups
     offset: 144
   member_functions:
+  - signature: E8 ?? ?? ?? ?? B0 ?? C6 83 ?? ?? ?? ?? ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 80 BB
+    return_type: void
+    name: SetActiveColorThemeType
+    parameters:
+    - type: Component::GUI::AtkUIColorHolder*
+      name: this
+    - type: byte
+      name: themeType
   - signature: E8 ?? ?? ?? ?? 8B C8 88 43 2C
     return_type: unsigned int
     name: GetColor
@@ -109435,7 +110008,33 @@ structs:
     name: Camera
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::ShadowCamera*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::Skeleton
   name: Skeleton
@@ -109480,7 +110079,33 @@ structs:
   - type: Client::Graphics::Scene::CharacterBase*
     name: Owner
     offset: 184
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
   member_functions: []
 - type: Client::Graphics::Scene::Attach::Attachment
   name: Attachment
@@ -117766,7 +118391,33 @@ structs:
   - type: float
     name: LightSelect
     offset: 272
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Render::Light*
+      name: this
   member_functions: []
 - type: Client::Graphics::Render::PartialSkeleton
   name: PartialSkeleton
@@ -159959,12 +160610,36 @@ structs:
   - type: Component::GUI::AtkComponentListItemPopulator
     name: Populator
     offset: 296
+  - type: Component::GUI::AtkResNode*
+    name: EventNode
+    offset: 336
+  - type: Component::GUI::AtkResNode**
+    name: CollisionNodeList
+    offset: 344
   - type: Component::GUI::AtkComponentDragDrop*
     name: DragDropComponent
     offset: 376
   - type: int
     name: ListItemIndex
     offset: 388
+  - type: __int16
+    name: OriginalX
+    offset: 392
+  - type: __int16
+    name: OriginalY
+    offset: 394
+  - type: unsigned __int16
+    name: OriginalWidth
+    offset: 396
+  - type: unsigned __int16
+    name: OriginalHeight
+    offset: 398
+  - type: unsigned __int16
+    name: OriginalButtonTextHeight
+    offset: 400
+  - type: unsigned __int16
+    name: CollisionNodeListCount
+    offset: 404
   - type: int
     name: DragDropListItemIndex
     offset: 408
@@ -159980,15 +160655,46 @@ structs:
   - type: __int16
     name: Unk1A2DragDropOwnerNodeScreenY
     offset: 418
-  - type: byte
-    name: RowTemplateNodeCountByte
+  - type: unsigned int
+    name: BitFields1A4
     offset: 420
-  - type: byte
-    name: Unk1A5
-    offset: 421
-  - type: unsigned __int16
-    name: Unk1A6
-    offset: 422
+    bits:
+    - type: byte
+      offset: 0
+      size: 8
+      name: UnkBits0
+    - type: byte
+      offset: 8
+      size: 1
+      name: HasRequestedPayload
+    - type: byte
+      offset: 9
+      size: 1
+      name: EnableDragDrop
+    - type: byte
+      offset: 10
+      size: 1
+      name: UsesIconComponent
+    - type: byte
+      offset: 11
+      size: 1
+      name: EnableChildNavigation
+    - type: byte
+      offset: 12
+      size: 1
+      name: EnableHeldNavigation
+    - type: byte
+      offset: 13
+      size: 1
+      name: DisableChildFocusReset
+    - type: byte
+      offset: 14
+      size: 1
+      name: EnableChildAutoFocus
+    - type: byte
+      offset: 15
+      size: 1
+      name: StopNavigationAtEnd
   virtual_functions:
   - name: dtor
     offset: 0
@@ -229659,7 +230365,33 @@ structs:
   - type: unsigned int
     name: SubviewValue2
     offset: 348
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::Graphics::ReferencedClassBase*
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Cleanup
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
+  - name: IncRef
+    offset: 16
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
+  - name: DecRef
+    offset: 24
+    return_type: int
+    parameters:
+    - type: Client::Graphics::Kernel::ShaderPackage*
+      name: this
   member_functions: []
 - type: Client::Graphics::Scene::Human
   name: Human
@@ -258632,6 +259364,14 @@ structs:
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 FF 02
+    return_type: void
+    name: SetInactive
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
+    - type: char
+      name: isInactive
   static_members:
   - signature: 48 8B 1D ?? ?? ?? ?? 8B 7C 24
     relative_follow_offsets:
