@@ -19,7 +19,7 @@ public unsafe partial struct Skeleton {
     // Client::System::Resource::Handle::SkeletonResourceHandle pointer array, size = PartialSkeletonCount
     [FieldOffset(0x58)] public SkeletonResourceHandle** SkeletonResourceHandles;
 
-    [FieldOffset(0x60)] public AnimationResourceHandle** AnimationResourceHandles;
+    [FieldOffset(0x60)] public AnimationResourceHandle** AnimationResourceHandles; // TODO: This type is not a resource handle and needs a better name
 
     // Client::Graphics::Animation::PartialSkeleton array, size = PartialSkeletonCount
     [FieldOffset(0x68)] public PartialSkeleton* PartialSkeletons;
