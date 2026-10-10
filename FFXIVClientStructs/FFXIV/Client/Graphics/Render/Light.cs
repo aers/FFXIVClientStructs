@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
@@ -46,6 +47,7 @@ public unsafe partial struct Light {
     [FieldOffset(0x100)] public float LightFade;
     [FieldOffset(0x104)] public float LightFadeLength;
     [FieldOffset(0x110)] public float LightSelect;
+    [FieldOffset(0x120)] public Texture* ProjectedTexture;
 
     public Vector3 Color {
         readonly get => new(ColorIntensity.X, ColorIntensity.Y, ColorIntensity.Z);
