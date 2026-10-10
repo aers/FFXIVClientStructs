@@ -9010,15 +9010,25 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x1406E2B30: ctor
+      0x1406E2BC0: Destructor
+      0x1406E2CD0: Clear
       0x1406E2D80: Initialize
       0x1406E2DC0: Update
       0x1406E3210: Draw
+      0x1406E35D0: RemoveChildAddon
       0x1406E3660: Finalizer
+      0x1406E3770: RegisterChildAddon
+      0x1406E3B00: BindDragHandle
+      0x1406E3BC0: SelectTab
       0x1406E3D20: ShowAllChildren
       0x1406E3EB0: HideAllChildren
       0x1406E3F40: CloseAllChildren
       0x1406E3FA0: Hide2AllChildren
+      0x1406E3FF0: ActivateGroup
+      0x1406E4110: GetActiveChildAddonInfo
       0x1406E4140: GetChildAddonInfoByAtkUnitBase
+      0x1406E41B0: GetChildAddonInfoByGroupId
+      0x1406E4220: FocusSelectedGroup
       0x1406E4380: ChildRefresh
       0x1406E43B0: ChildRequestedUpdate
       0x1406E43E0: ChildSetSize
@@ -9026,6 +9036,12 @@ classes:
       0x1406E44A0: UnregisterEvent
       0x1406E44C0: IsEventRegistered
       0x1406E44F0: DispatchEvent
+      0x1406E4540: DetachChildAddon
+      0x1406E45C0: AttachChildAddon
+      0x1406E4640: SetChildAttachedState
+      0x1406E47D0: ReceiveEvent
+      0x1406E4C50: CancelDragListeners
+      0x1406E4DD0: CompleteChildSetup
   Component::GUI::AtkSimpleTweenHolder:
 #    funcs:
 #       0x140541EC0: Update # INLINED IN 7.0 0x14068A88C
