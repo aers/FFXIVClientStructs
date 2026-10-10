@@ -7143,6 +7143,18 @@ classes:
     vtbls:
       - ea: 0x142171F90
         base: Client::UI::Agent::AgentInterface
+  Client::Graphics::Animation::AnimationController:
+    vtbls:
+      - ea: 0x1421404E8
+        base: Client::Graphics::ReferencedClassBase
+      - ea: 0x142140508
+        base: Animation::Playback::Control::Default::hkaDefaultAnimationControlListener
+    funcs:
+      0x140200760: SetPlayParams
+      0x140200850: EaseOut
+      0x1402008F0: SetPapResourceHandle
+      0x140200910: CreateAnimationControl
+      0x1402009D0: ApplyIntroCheck
   Client::Graphics::Animation::IAnimationControllerListener:
     vtbls:
       - ea: 0x142140530
@@ -28465,12 +28477,12 @@ classes:
   hkaAnimationContainer:
     funcs:
       0x141EFB6B0: ?staticClass@hkaAnimationContainer@@SAAEBVhkClass@@XZ
-  hkaAnimationControl:
+  Animation::Playback::Control::hkaAnimationControl:
     funcs:
       0x141F26030: ??0hkaAnimationControl@@QEAA@PEBVhkaAnimationBinding@@@Z
       0x141F263A0: ?removeAnimationControlListener@hkaAnimationControl@@QEAAXPEAVhkaAnimationControlListener@@@Z
       0x141F26230: ?sampleTracks@hkaAnimationControl@@UEBAXPEAVhkQsTransformf@@PEAM@Z
-  hkaAnimationControlListener:
+  Animation::Playback::Control::hkaAnimationControlListener:
     vfuncs:
       0: ControlDeletedCallback
       1: dtor
@@ -28480,12 +28492,12 @@ classes:
       0x141F05DF0: ?blend@hkaBlender@@YAXPEIAVhkQsTransformf@@PEIAMPEIBV2@PEIBM23AEBVhkSimdFloat32@@HW4BLEND_MODE@1@W4ROTATION_MODE@1@@Z
       0x141F076C0: ?modelFromLocal@hkaBlender@@YAXPEAVhkQsTransformf@@0PEBFHAEBV2@@Z
       0x141F070E0: ?normalize@hkaBlender@@YAXPEAVhkQsTransformf@@H@Z
-  hkaDefaultAnimationControl:
+  Animation::Playback::Control::Default::hkaDefaultAnimationControl:
     funcs:
       0x141F008A0: ??0hkaDefaultAnimationControl@@QEAA@AEBV0@@Z
       0x141F00F60: ?setSkeletonMapper@hkaDefaultAnimationControl@@QEAAXPEBVhkaSkeletonMapper@@@Z
       0x141F01020: ?getNumberOfTransformTracks@hkaDefaultAnimationControl@@UEBAHXZ
-  hkaDefaultAnimationControlListener:
+  Animation::Playback::Control::Default::hkaDefaultAnimationControlListener:
     vfuncs:
       0: LoopOverflowCallback
       1: LoopUnderflowCallback
