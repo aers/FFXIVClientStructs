@@ -8052,6 +8052,7 @@ classes:
       0x14043A9A0: LoadMDLSubFilesIntoStaging
       0x14043ABA0: LoadMDLSubFilesForSlot
       0x14043B780: SetupSlotModel
+      0x14043BB80: PopulateAnimationsFromStaging
 #oldfail       0x14049C4C0: UpdateWetness
       0x14046A480: Destroy
       0x1408D3C00: Create
