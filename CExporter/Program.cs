@@ -37,6 +37,7 @@ public class Program {
 
         Exporter.VerifyNoNameOverlap(dataCheck);
         Exporter.ProcessDefinedVTables(data);
+        Exporter.VerifyDependencies();
 
         if (!quiet) Console.WriteLine($"Processed all types in: {DateTime.Now - timeStart}");
         timeStart = DateTime.Now;
