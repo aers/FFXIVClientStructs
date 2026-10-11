@@ -1,5 +1,6 @@
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Animation;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
@@ -133,6 +134,23 @@ public unsafe partial struct CharacterBase {
     /// <param name="slot">The slot to set up.</param>
     [MemberFunction("89 54 24 ?? 55 56 41 56 48 81 EC")]
     public partial nint SetupSlotModel(uint slot); // TODO: change return type to void
+
+    /// <summary>
+    /// Begins playing the specified animation, adding to the given animation controller handle or creating a new one as needed.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The animation must exist in a partial animation pack that this character has already finished loading.
+    /// </para>
+    /// <para>
+    /// This does not stop any previous animation(s) that are already playing.
+    /// </para>
+    /// </remarks>
+    /// <param name="animationName">The name of the animation to play, as specified in its <see cref="PartialAnimationPackResourceHandle"/>.</param>
+    /// <param name="playParams">Configuration for playing the animation.</param>
+    /// <param name="existingControllerHandle">The address of a pointer to the animation controller handle to add the new animation to, or of a null pointer that will point to the new animation controller handle.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 44 24 ?? 48 85 C0 75 19"), GenerateStringOverloads]
+    public partial void PlayAnimation(CStringPointer animationName, PlayAnimationParams* playParams, AnimationControllerHandle** existingControllerHandle);
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
