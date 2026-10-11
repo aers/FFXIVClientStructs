@@ -15733,6 +15733,12 @@ structs:
   union: False
   size: 192
   fields:
+  - type: unsigned int
+    name: JobThreadCount
+    offset: 16
+  - type: __int64
+    name: JobList
+    offset: 24
   - type: __int64
     name: CallbackThisArg
     offset: 32
@@ -15745,6 +15751,15 @@ structs:
       name: a1
     - type: __int64
       name: a2
+  - type: unsigned int
+    name: JobCount
+    offset: 176
+  - type: unsigned int
+    name: JobExecutedCount
+    offset: 180
+  - type: unsigned int
+    name: JobExecutedCount2
+    offset: 184
   member_functions: []
 - type: Client::Graphics::Kernel::ConstantBuffer
   name: ConstantBuffer
@@ -18961,6 +18976,9 @@ structs:
   - type: __int64
     name: Func
     offset: 24
+  - type: byte*
+    name: Name
+    offset: 32
   - type: Client::System::Framework::Task*
     name: Previous
     offset: 40
@@ -47372,6 +47390,12 @@ structs:
   - type: Client::Graphics::JobSystem
     name: TransformUpdaterJob
     offset: 416
+  - type: char
+    name: Enabled
+    offset: 608
+  - type: char
+    name: LastUpdateState
+    offset: 609
   virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? ?? ?? ?? 33 ED 4C 8B F2
