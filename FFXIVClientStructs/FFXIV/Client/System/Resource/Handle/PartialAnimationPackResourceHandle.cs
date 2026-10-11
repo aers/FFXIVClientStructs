@@ -48,7 +48,8 @@ public unsafe partial struct PartialAnimationPackResourceHandle {
     public partial int GetAnimationHavokIndex(CStringPointer animationName);
 
     /// <summary>
-    /// Searches <see cref="Animations"/> for an animation with the given name and the <see cref="Animation.IsFaceAnimation"/>.
+    /// Searches <see cref="Animations"/> for an animation with the given name and the <see cref="Animation.IsFaceAnimation"/> flag
+    /// and returns its <see cref="Animation.HavokIndex"/>.
     /// </summary>
     /// <param name="facialAnimationName">The name of the facial animation to search for.</param>
     /// <returns>The index of the first animation with the given name and the facial animation flag, or -1 if no matching animation was found.</returns>
