@@ -85,7 +85,7 @@ public unsafe partial struct AgentItemComp {
         }
 
         [StructLayout(LayoutKind.Sequential, Size = 0x14)]
-        public struct WeaponDataDelta {
+        public struct WeaponDataDelta { // TODO: Make layout explicit
             public int PhysicalDamage;
             public int MagicDamage;
             public int Delay;
@@ -94,13 +94,13 @@ public unsafe partial struct AgentItemComp {
         }
 
         [StructLayout(LayoutKind.Sequential, Size = 0x8)]
-        public struct ShieldDataDelta {
+        public struct ShieldDataDelta { // TODO: Make layout explicit
             public int Block;
             public int BlockDelta;
         }
 
         [StructLayout(LayoutKind.Sequential, Size = 0x20)]
-        public struct GearDataDelta {
+        public struct GearDataDelta { // TODO: Make layout explicit
             public int PhysicalDefense;
             public int MagicDefense;
             public int PhysicalDefenseDelta;

@@ -180,7 +180,7 @@ public unsafe partial struct IslandState {
 /// otherwise allow querying a specific field by ID directly.
 /// </summary>
 [StructLayout(LayoutKind.Sequential, Size = 0x08 + 5 * MaxWorkshops)]
-public unsafe struct MJIWorkshops {
+public unsafe struct MJIWorkshops { // TODO: Update to use FixedSizeArray and make layout explicit
     private const int MaxWorkshops = 4;
 
     /// <summary>
@@ -244,7 +244,7 @@ public unsafe struct MJIWorkshops {
 /// otherwise allow querying a specific field by ID directly.
 /// </summary>
 [StructLayout(LayoutKind.Sequential, Size = 0x08 + 5 * MaxGranaries)]
-public unsafe struct MJIGranaries {
+public unsafe struct MJIGranaries { // TODO: Update to use FixedSizeArray and make layout explicit
     private const int MaxGranaries = 2;
 
     /// <inheritdoc cref="MJIWorkshops.PlaceId"/>
