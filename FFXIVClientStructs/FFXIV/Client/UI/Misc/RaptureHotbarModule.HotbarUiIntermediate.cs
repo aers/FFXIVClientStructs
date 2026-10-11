@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 public partial struct RaptureHotbarModule {
@@ -6,7 +8,7 @@ public partial struct RaptureHotbarModule {
     /// </summary>
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x43)]
-    public unsafe partial struct HotbarUIIntermediate {
+    public unsafe partial struct HotbarUIIntermediate : ICreatable<HotbarUIIntermediate> {
         [FieldOffset(0x00)] public CStringPointer PopUpHelpText; // ref to Client::UI::Misc::RaptureHotbarModule::HotbarSlot.PopUpHelp.StringPtr
         [FieldOffset(0x08)] public CStringPointer CostText; // ref to Client::UI::Misc::RaptureHotbarModule::HotbarSlot.CostText
         [FieldOffset(0x10), Obsolete($"Use {nameof(Type)}")] public uint IntermediateActionType; // to NumberArray idx slotBase + 0
