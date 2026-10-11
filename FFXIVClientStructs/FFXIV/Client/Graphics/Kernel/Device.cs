@@ -145,8 +145,8 @@ public enum RenderCommandType : int {
     None2 = 16, // ditto None above
     SaveTextureToFile = 17,
     SetSaveTextureFilePath = 18, // for screenshots
-    // ExecuteSubCommandList = 19,
-    // ??? = 20,
+    // Begin??? = 19, debug
+    // End??? = 20, debug
     // SetRenderTarget2 = 21,
 }
 

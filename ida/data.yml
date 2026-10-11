@@ -4323,7 +4323,7 @@ classes:
       0x140061050: AddTask
       0x1400610C0: ExecuteAllTasks
       0x140061110: ExecuteJobList
-      0x140061310: EeecuteJobList2
+      0x140061310: ExecuteJobList2
   Client::System::Framework::TaskManager::JobPool:
     funcs:
       0x1400600F0: ctor
