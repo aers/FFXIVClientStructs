@@ -4264,7 +4264,7 @@ classes:
       16: GetSpeed
       17: SetSpeed
       36: Stop
-      37: IsPlaying
+      38: IsPlaying
       40: GetIsFadingOut
       41: GetFadeInEnabled
       42: GetIsAutoReleaseEnabled
