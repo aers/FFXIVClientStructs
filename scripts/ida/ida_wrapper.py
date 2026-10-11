@@ -180,7 +180,7 @@ class BaseIdaInterface(object):
             path = Path(path)
             vc_path = path / "vc" / "tools" / "msvc"
             vc_path = first_subfolder(vc_path) / "include"
-            window_kit = first_subfolder(path / "Windows Kits" / "10" / "Include")
+            window_kit = first_subfolder(path / "kits" / "10" / "include")
             winsdk_ucrt_path = window_kit / "ucrt"
             winsdk_um_path = window_kit / "um"
             winsdk_shared_path = window_kit / "shared"
