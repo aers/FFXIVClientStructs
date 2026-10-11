@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
-using FFXIVClientStructs.Havok.Common.Base.Types;
-using FFXIVClientStructs.STD;
 using InteropGenerator.Runtime.Attributes;
 
 namespace CExporter;
@@ -20,7 +17,40 @@ public partial class Exporter {
             case null:
                 return;
             case ProcessedStruct s:
-                _structs.Add(s);
+                var existingIndex = _structs.FindIndex(existing =>
+                    existing.StructTypeName == s.StructTypeName);
+                if (existingIndex < 0) {
+                    _structs.Add(s);
+                } else if (s.TemplateTypes.Length > 0 && _structs[existingIndex].TemplateTypes.Length == 0) {
+                    var nonGeneric = _structs[existingIndex];
+                    s.Fields = [.. s.Fields.Where(field =>
+                        !field.IsBase || field.FieldType != nonGeneric.StructType)];
+                    s.VirtualFunctions ??= nonGeneric.VirtualFunctions;
+                    s.VirtualFunctionSize = Math.Max(s.VirtualFunctionSize, nonGeneric.VirtualFunctionSize);
+                    s.MemberFunctions = [.. nonGeneric.MemberFunctions, .. s.MemberFunctions];
+                    var genericSelfType = $"{nonGeneric.StructTypeName}<{string.Join(", ", s.TemplateTypes)}>*";
+                    foreach (var virtualFunction in s.VirtualFunctions ?? []) {
+                        foreach (var parameter in virtualFunction.VirtualFunctionParameters ?? []) {
+                            if (parameter.FieldName == "self"
+                                && parameter.FieldType.IsPointer()
+                                && parameter.FieldType.GetPointerType() == nonGeneric.StructType)
+                                parameter.FieldTypeOverride = genericSelfType;
+                        }
+                        if ((virtualFunction.VirtualFunctionReturnType?.IsPointer() ?? false) && virtualFunction.VirtualFunctionReturnType?.GetPointerType() == nonGeneric.StructType)
+                            virtualFunction.VirtualFunctionReturnTypeOverride = genericSelfType;
+                    }
+                    foreach (var memberFunction in s.MemberFunctions) {
+                        foreach (var parameter in memberFunction.MemberFunctionParameters) {
+                            if (parameter.FieldName == "self"
+                                && parameter.FieldType.IsPointer()
+                                && parameter.FieldType.GetPointerType() == nonGeneric.StructType)
+                                parameter.FieldTypeOverride = genericSelfType;
+                        }
+                        if (memberFunction.MemberFunctionReturnType.Type.IsPointer() && memberFunction.MemberFunctionReturnType.Type.GetPointerType() == nonGeneric.StructType)
+                            memberFunction.MemberFunctionReturnType.OverrideType = genericSelfType;
+                    }
+                    _structs[existingIndex] = s;
+                }
                 break;
             case ProcessedEnum e:
                 _enums.Add(e);
@@ -413,7 +443,16 @@ public partial class Exporter {
             if (type.Name.Contains('`')) {
                 type = type.GetGenericTypeDefinition();
             }
-            if (type.IsInStructList(_structs) || (overrideType?.IsInStructList(_structs) ?? false)) return null;
+            var typeName = type.FixTypeName();
+            var existingIndex = _structs.FindIndex(existing =>
+                existing.StructTypeName == typeName);
+            var templateTypes = type.IsGenericTypeDefinition
+                && !type.GetGenericArguments().GenericSequenceEqual(type.DeclaringType?.GetGenericArguments() ?? [])
+                    ? type.GetGenericArguments().Select(t => t.Name).ToArray()
+                    : [];
+            if (existingIndex >= 0 && (templateTypes.Length == 0 || _structs[existingIndex].TemplateTypes.Length > 0))
+                return null;
+            if (overrideType?.IsInStructList(_structs) ?? false) return null;
             var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
             var vtableSize = 0;
             ProcessedVirtualFunction[]? virtualFunctions = null;
@@ -517,7 +556,7 @@ public partial class Exporter {
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray,
                 StructTypeOverride = overrideType,
-                TemplateTypes = type.IsGenericTypeDefinition && !type.GetGenericArguments().GenericSequenceEqual(type.DeclaringType?.GetGenericArguments() ?? []) ? type.GetGenericArguments().Select(t => t.Name).ToArray() : [],
+                TemplateTypes = templateTypes,
                 InlineStructs = nestedTypes.Where(t => t.IsStruct()).Select(t => (ProcessedStruct?)PreProcessType(t, quiet)).Where(t => t != null).ToArray()!,
                 InlineEnums = nestedTypes.Where(t => t.IsEnum).Select(t => (ProcessedEnum?)PreProcessType(t, quiet)).Where(t => t != null).ToArray()!,
                 IsSequential = type.StructLayoutAttribute?.Value == LayoutKind.Sequential,
@@ -600,7 +639,7 @@ public partial class Exporter {
         }
         for (var i = 0; i < fieldsToProcess.Length; i++) {
             var field = fieldsToProcess[i];
-            if (field.FieldType.ContainsGenericParameters) continue;
+            if (field.FieldType.ContainsGenericParameters && !field.FieldType.IsGenericTypeParameterOrPointer()) continue;
             if (field.GetCustomAttribute<CExporterForceAttribute>() != null)
                 _processType.Add(field.FieldType);
             if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {

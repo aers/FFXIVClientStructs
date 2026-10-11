@@ -89,6 +89,35 @@ class SrcInterface(object):
             normalized = " ".join(base_type.split())
         return normalized + pointer_suffix
 
+    def _qualify_template_arguments(
+        self, type_name: str, template_parameters: tuple[str, ...] = ()
+    ) -> str:
+        """Make non-primitive template arguments independent of the current namespace."""
+        type_name = type_name.strip()
+        pointer_suffix = ""
+        while type_name.endswith("*"):
+            pointer_suffix += "*"
+            type_name = type_name[:-1].strip()
+
+        base_type, template_args = self._split_template_type(type_name)
+        if not template_args:
+            return type_name + pointer_suffix
+
+        qualified_args = []
+        for argument in template_args:
+            argument = self._qualify_template_arguments(argument, template_parameters)
+            argument_base = argument
+            while argument_base.endswith("*"):
+                argument_base = argument_base[:-1].strip()
+            if (
+                argument_base not in template_parameters
+                and not self.is_base_type(argument_base)
+                and not argument_base.startswith("::")
+            ):
+                argument = f"::{argument}"
+            qualified_args.append(argument)
+        return f"{base_type}<{', '.join(qualified_args)}>{pointer_suffix}"
+
     def _get_struct_size(
         self,
         type_name: str,
@@ -362,10 +391,20 @@ class SrcInterface(object):
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
         template_parameters: list[str] = [],
         struct_definition_lookup: dict[str, DefinedStruct] | None = None,
+        field_name_override: str | None = None,
+        opaque_pointer_types: set[str] | None = None,
     ) -> tuple[str, int]:
         template_struct_lookup = template_struct_lookup or {}
         field_type = self._get_field_type(field, template_struct_lookup)
-        field_name = field.name
+        opaque_pointer_types = opaque_pointer_types or set()
+        pointer_count = 0
+        pointer_base = field_type
+        while pointer_base.endswith("*"):
+            pointer_base = pointer_base[:-1].strip()
+            pointer_count += 1
+        if pointer_count and self._normalize_type(pointer_base) in opaque_pointer_types:
+            field_type = "void" + "*" * pointer_count
+        field_name = field_name_override or field.name
         field_size = self.get_size_from_type(
             field_type,
             struct_lookup,
@@ -374,7 +413,9 @@ class SrcInterface(object):
             template_parameters,
             struct_definition_lookup,
         )
-        display_type = field_type
+        display_type = self._qualify_template_arguments(
+            field_type, tuple(template_parameters)
+        )
         if display_type.startswith(namespace):
             display_type = display_type.removeprefix(f"{namespace}::")
         elif not self.is_base_type(display_type) and not display_type.rstrip('*') in template_parameters:
@@ -397,7 +438,9 @@ class SrcInterface(object):
             index += 1
         return full_type[last_namespace_separator + 1 :]
 
-    def build_vfunc_signature(self, vfunc: DefinedStructVFunc) -> str:
+    def build_vfunc_signature(
+        self, vfunc: DefinedStructVFunc, name_override: str | None = None
+    ) -> str:
         """Build a function pointer signature for a virtual function.
         
         Args:
@@ -406,8 +449,9 @@ class SrcInterface(object):
         Returns:
             Function pointer signature string
         """
+        function_name = name_override or vfunc.name
         if not (vfunc.return_type and vfunc.parameters):
-            return f"void* {vfunc.name};"
+            return f"void* {function_name};"
 
         return_type = vfunc.return_type if vfunc.return_type else "void"
 
@@ -426,7 +470,7 @@ class SrcInterface(object):
                     
             param_list = ", ".join(params)
         
-        return f"{return_type} (__fastcall *{vfunc.name})({param_list});"
+        return f"{return_type} (__fastcall *{function_name})({param_list});"
     
     def build_export_string(
         self,
@@ -438,6 +482,7 @@ class SrcInterface(object):
         all_structs: list[DefinedStruct] = []
         inline_structs: list[DefinedStruct] = []
         inline_enums: list[DefinedStructEnum] = []
+        inline_type_owners: dict[str, str] = {}
 
         def collect_inline_types(struct: DefinedStruct):
             for inline_enum in struct.inline_enums:
@@ -454,6 +499,19 @@ class SrcInterface(object):
         inline_struct_types = {
             self._normalize_type(struct.type) for struct in inline_structs
         }
+
+        def collect_inline_type_owners(struct: DefinedStruct, owner_type: str):
+            for inline_struct in struct.inline_structs:
+                inline_type_owners.setdefault(
+                    self._normalize_type(inline_struct.type),
+                    self._normalize_type(owner_type),
+                )
+                collect_inline_type_owners(inline_struct, owner_type)
+
+        for struct in export.structs:
+            if self._normalize_type(struct.type) not in inline_struct_types:
+                collect_inline_type_owners(struct, struct.type)
+
         inline_enum_types = {
             self._normalize_type(enum.type) for enum in inline_enums
         }
@@ -477,6 +535,125 @@ class SrcInterface(object):
             struct_definition_lookup[normalized_type] = struct
             if struct.template_types:
                 template_struct_lookup[normalized_type] = struct
+
+        top_level_structs = [
+            struct
+            for struct in export.structs
+            if self._normalize_type(struct.type) not in inline_struct_types
+        ]
+        top_level_types = {
+            self._normalize_type(struct.type) for struct in top_level_structs
+        }
+        struct_dependencies = {type_name: set() for type_name in top_level_types}
+
+        def references_inline_type(reference: str, inline_type: str) -> bool:
+            start = reference.find(inline_type)
+            while start >= 0:
+                end = start + len(inline_type)
+                before_is_identifier = start > 0 and (
+                    reference[start - 1].isalnum() or reference[start - 1] == "_"
+                )
+                after_is_identifier = end < len(reference) and (
+                    reference[end].isalnum() or reference[end] == "_"
+                )
+                if not before_is_identifier and not after_is_identifier:
+                    return True
+                start = reference.find(inline_type, start + 1)
+            return False
+
+        def iter_struct_tree(struct: DefinedStruct):
+            yield struct
+            for inline_struct in struct.inline_structs:
+                yield from iter_struct_tree(inline_struct)
+
+        for struct in top_level_structs:
+            struct_type = self._normalize_type(struct.type)
+            references = []
+            for nested_struct in iter_struct_tree(struct):
+                for field in nested_struct.fields:
+                    references.append(field.type)
+                    references.extend(field.template_args or [])
+                    field_type = self._normalize_type(field.type)
+                    if (
+                        field_type in struct_dependencies
+                        and field_type != struct_type
+                        and not field_type.endswith("*")
+                    ):
+                        struct_dependencies[struct_type].add(field_type)
+                    if field.base:
+                        if field_type in struct_dependencies and field_type != struct_type:
+                            struct_dependencies[struct_type].add(field_type)
+                    if hasattr(field, "return_type"):
+                        references.append(field.return_type or "")
+                    if getattr(field, "parameters", None):
+                        references.extend(
+                            parameter.type for parameter in field.parameters
+                        )
+                for virtual_function in nested_struct.virtual_functions or []:
+                    references.append(virtual_function.return_type or "")
+                    references.extend(
+                        parameter.type
+                        for parameter in virtual_function.parameters or []
+                    )
+
+            for inline_type, owner_type in inline_type_owners.items():
+                if owner_type == struct_type or owner_type not in top_level_types:
+                    continue
+                if any(
+                    references_inline_type(
+                        self._normalize_type(reference), inline_type
+                    )
+                    for reference in references
+                ):
+                    struct_dependencies[struct_type].add(owner_type)
+
+        ordered_structs = []
+        remaining_structs = list(top_level_structs)
+        emitted_types = set()
+        while remaining_structs:
+            ready_index = next(
+                (
+                    index
+                    for index, struct in enumerate(remaining_structs)
+                    if struct_dependencies[self._normalize_type(struct.type)]
+                    <= emitted_types
+                ),
+                None,
+            )
+            if ready_index is None:
+                ready_index = 0
+            struct = remaining_structs.pop(ready_index)
+            ordered_structs.append(struct)
+            emitted_types.add(self._normalize_type(struct.type))
+
+        ordered_type_indices = {
+            self._normalize_type(struct.type): index
+            for index, struct in enumerate(ordered_structs)
+        }
+        opaque_pointer_types_by_struct: dict[str, set[str]] = {}
+        for struct in ordered_structs:
+            struct_type = self._normalize_type(struct.type)
+            opaque_pointer_types = set()
+            for nested_struct in iter_struct_tree(struct):
+                for field in nested_struct.fields:
+                    field_type = self._normalize_type(field.type)
+                    pointer_base = field_type
+                    has_pointer = pointer_base.endswith("*")
+                    while pointer_base.endswith("*"):
+                        pointer_base = pointer_base[:-1].strip()
+                    if not has_pointer:
+                        continue
+                    owner_type = inline_type_owners.get(pointer_base)
+                    if (
+                        owner_type is not None
+                        and owner_type != struct_type
+                        and owner_type in ordered_type_indices
+                        and ordered_type_indices[owner_type]
+                        > ordered_type_indices[struct_type]
+                    ):
+                        opaque_pointer_types.add(pointer_base)
+            if opaque_pointer_types:
+                opaque_pointer_types_by_struct[struct_type] = opaque_pointer_types
 
         def append_chunk(chunk: IndentWriter | str):
             chunk_text = str(chunk)
@@ -564,9 +741,7 @@ class SrcInterface(object):
             for inline_struct in struct.inline_structs:
                 collect_vtable_names(inline_struct)
 
-        for struct in export.structs:
-            if self._normalize_type(struct.type) in inline_struct_types:
-                continue
+        for struct in ordered_structs:
             forward, define, vtable, vtable_full_name = self.build_struct_string(
                 struct,
                 struct_lookup,
@@ -574,6 +749,9 @@ class SrcInterface(object):
                 template_struct_lookup,
                 full_declspec_align,
                 struct_definition_lookup,
+                opaque_pointer_types_by_struct.get(
+                    self._normalize_type(struct.type), set()
+                ),
             )
             if vtable_full_name and vtable_full_name not in seen_vtable_names:
                 seen_vtable_names.add(vtable_full_name)
@@ -638,6 +816,7 @@ class SrcInterface(object):
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
         declspec_align: int = 0,
         struct_definition_lookup: dict[str, DefinedStruct] | None = None,
+        opaque_pointer_types: set[str] | None = None,
     ) -> tuple[IndentWriter, IndentWriter, IndentWriter, str | None]:
         """Builds the C++ struct definition with namespace wrapping.
 
@@ -651,6 +830,7 @@ class SrcInterface(object):
         struct_string_define: IndentWriter = IndentWriter()
         struct_string_vtable: IndentWriter = IndentWriter()
         template_struct_lookup = template_struct_lookup or {}
+        opaque_pointer_types = opaque_pointer_types or set()
         template_declaration = ""
         template_suffix = ""
         if struct.template_types:
@@ -728,6 +908,7 @@ class SrcInterface(object):
                 template_struct_lookup,
                 declspec_align,
                 struct_definition_lookup,
+                opaque_pointer_types,
             )
             for inline_struct in struct.inline_structs
         ]
@@ -743,9 +924,29 @@ class SrcInterface(object):
             struct_string_define += f"{short_name}_vtbl{template_suffix}* __vtable;"
             prev_size = 8
 
+        field_name_counts: dict[str, int] = {}
+        field_name_last_indices: dict[str, int] = {}
+        for field_index, field in enumerate(struct.fields):
+            field_name_counts[field.name] = field_name_counts.get(field.name, 0) + 1
+            field_name_last_indices[field.name] = field_index
+        reserved_field_names = set(field_name_counts)
+        emitted_field_names = set()
+        field_names = []
+        for field_index, field in enumerate(struct.fields):
+            field_name = field.name
+            if (
+                field_name_counts[field.name] > 1
+                and field_name_last_indices[field.name] != field_index
+            ):
+                field_name = f"{field.name}_{field.offset:X}"
+                while field_name in reserved_field_names or field_name in emitted_field_names:
+                    field_name += "_"
+            field_names.append(field_name)
+            emitted_field_names.add(field_name)
+
         offset = 0
 
-        for field in struct.fields:
+        for field_index, field in enumerate(struct.fields):
             if field.type in base_fields_used:
                 continue
 
@@ -758,7 +959,7 @@ class SrcInterface(object):
                     struct_string_define += line
                     prev_size += size
 
-            field_name = field.name
+            field_name = field_names[field_index]
             field_type = field.type
             if isinstance(field, DefinedStructFixedField):
                 field_define, field_define_size = self.get_string_define_and_size(
@@ -769,6 +970,8 @@ class SrcInterface(object):
                     template_struct_lookup,
                     struct.template_types,
                     struct_definition_lookup,
+                    field_name,
+                    opaque_pointer_types,
                 )
                 struct_string_define += f"{field_define[:-1]}[{field.size}];"
                 prev_size += field_define_size * field.size
@@ -792,6 +995,8 @@ class SrcInterface(object):
                     template_struct_lookup,
                     struct.template_types,
                     struct_definition_lookup,
+                    field_name,
+                    opaque_pointer_types,
                 )
                 struct_string_define += field_define
                 prev_size += field_define_size
@@ -813,12 +1018,39 @@ class SrcInterface(object):
             struct_string_vtable += f"struct __cppobj {short_name}_vtbl {{"
             struct_string_vtable.indent()
             previous_offset = 0
-            for vfunc in struct.virtual_functions:
+            vfunc_name_counts: dict[str, int] = {}
+            vfunc_preferred_indices: dict[str, int] = {}
+            for vfunc_index, vfunc in enumerate(struct.virtual_functions):
+                vfunc_name_counts[vfunc.name] = vfunc_name_counts.get(vfunc.name, 0) + 1
+                preferred_index = vfunc_preferred_indices.get(vfunc.name)
+                if preferred_index is None or (
+                    vfunc.return_type
+                    and vfunc.parameters
+                    and not (
+                        struct.virtual_functions[preferred_index].return_type
+                        and struct.virtual_functions[preferred_index].parameters
+                    )
+                ):
+                    vfunc_preferred_indices[vfunc.name] = vfunc_index
+
+            emitted_vfunc_names = set()
+            for vfunc_index, vfunc in enumerate(struct.virtual_functions):
                 while previous_offset < vfunc.offset:
                     struct_string_vtable += f"void* vf{int(previous_offset/8)};"
                     previous_offset += 8
 
-                struct_string_vtable += self.build_vfunc_signature(vfunc)
+                vfunc_name = vfunc.name
+                if (
+                    vfunc_name_counts[vfunc.name] > 1
+                    and vfunc_preferred_indices[vfunc.name] != vfunc_index
+                ):
+                    vfunc_name = f"vf{vfunc.offset // 8}"
+                while vfunc_name in emitted_vfunc_names:
+                    vfunc_name += "_"
+                emitted_vfunc_names.add(vfunc_name)
+                struct_string_vtable += self.build_vfunc_signature(
+                    vfunc, vfunc_name
+                )
                 previous_offset = vfunc.offset + 8
             struct_string_vtable.unindent()
             struct_string_vtable += "};"
