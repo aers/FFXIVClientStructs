@@ -36,7 +36,7 @@ public unsafe struct StdSpan<T>
     public StdSpan(Span<T> span) {
         if (span.IsEmpty)
             return;
-        _begin = (T*)Unsafe.AsPointer(ref Unsafe.AsRef(in span[0]));
+        _begin = (T*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(span));
         _count = span.Length;
     }
 

@@ -7,6 +7,8 @@ public unsafe partial struct BonePhysicsUpdater {
     [FieldOffset(0x20)] public JobSystem CollisionObjectJob;
     [FieldOffset(0xE0)] public JobSystem BoneSimulatorJob;
     [FieldOffset(0x1A0)] public JobSystem TransformUpdaterJob;
+    [FieldOffset(0x260)] public bool Enabled;
+    [FieldOffset(0x261)] public bool LastUpdateState; // set to value of Enabled at the end of the update
 
     /// <remarks> This is executed by BoneSimulatorJob. </remarks>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? ?? ?? ?? 33 ED 4C 8B F2")] // don't use the lea instruction sig
