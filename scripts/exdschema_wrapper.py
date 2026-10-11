@@ -47,6 +47,7 @@ DefinitionFields: TypeAlias = list[Union[Definition, RepeatDefinition]]
 
 
 def get_exdschema_versions():
+    print("Fetching https://api.github.com/repos/xivdev/exdschema/branches")
     with urlopen("https://api.github.com/repos/xivdev/exdschema/branches") as response:
         vers: list[str] = []
         for branch in jsonload(response):
@@ -80,6 +81,7 @@ def process_exdschema_definition(fields: ExdSchemaYaml):
 
 
 def get_exdschema_data(version: str):
+    print(f"Downloading https://github.com/xivdev/EXDSchema/archive/refs/heads/{version}.zip")
     with urlopen(
         f"https://github.com/xivdev/EXDSchema/archive/refs/heads/{version}.zip"
     ) as response:
@@ -160,7 +162,7 @@ def map_header_and_schema(
                 fields.append(
                     DefinedStructFixedField(
                         field.name,
-                        exported_structs[-1].name,
+                        exported_structs[-1].type,
                         definition_offset,
                         False,
                         [],
@@ -179,8 +181,8 @@ def map_header_and_schema(
                 else:
                     enum_index = len(enums)
                     enum_field_map[definition_offset] = enum_index
-                    enum_type = f"{schema_name}PackedBool{definition_offset:X}"
-                    enum_name = f"{exd_namespace}::{enum_type}"
+                    enum_name = f"{schema_name}PackedBool{definition_offset:X}"
+                    enum_type = f"{exd_namespace}::{enum_name}"
                     enums.append(
                         DefinedStructEnum(
                             enum_name,
@@ -197,7 +199,7 @@ def map_header_and_schema(
                     fields.append(
                         DefinedStructField(
                             f"PackedBool{definition_offset:X}",
-                            enum_name,
+                            enum_type,
                             definition_offset,
                             False,
                             []
@@ -238,8 +240,8 @@ def map_header_and_schema(
     if len(fields) != 0:
         structs.append(
             DefinedStruct(
-                f"{exd_namespace}::{schema_name}",
                 schema_name,
+                f"{exd_namespace}::{schema_name}",
                 exd_namespace,
                 fields,
                 size,
@@ -250,6 +252,9 @@ def map_header_and_schema(
                 None,
                 None,
                 [],
+                [],
+                [],
+                False
             )
         )
 
