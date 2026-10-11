@@ -291,36 +291,75 @@ public partial class Exporter {
         }
     }
 
-    public static void Write(DirectoryInfo dir) {
-        // make sure we have all the dependencies for each struct before we write them
+    public static void VerifyDependencies() => ResolveFullDependencies();
+
+    private static Dictionary<string, HashSet<string>> ResolveFullDependencies() {
         var structs = _structs.SelectMany(t => t.ChildrenAndSelf).DistinctBy(x => x.StructTypeName).ToFrozenDictionary(x => x.StructTypeName, x => x);
         var structToFullDeps = new Dictionary<string, HashSet<string>>();
-        var structDeps = structs.SelectMany(t => ResolveFullDependencies(t.Value)).Distinct().ToArray();
+        var resolving = new List<string>();
+
+        foreach (var processedStruct in structs.Values)
+            resolve(processedStruct);
+
+        return structToFullDeps;
+
+        HashSet<string> resolve(ProcessedStruct s) {
+            if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
+                return deps;
+            var cycleStart = resolving.IndexOf(s.StructTypeName);
+            if (cycleStart >= 0) {
+                var cycle = resolving.Skip(cycleStart).Append(s.StructTypeName).ToArray();
+                var error = $"Cyclic type dependency detected: {string.Join(" -> ", cycle)}";
+                if (!ExporterStatics.ErrorList.Contains(error)) ExporterStatics.ErrorList.Add(error);
+                return [];
+            }
+
+            resolving.Add(s.StructTypeName);
+            var fullDeps = s.DependencyNames.ToHashSet();
+            foreach (var dependencyName in s.DependencyNames) {
+                if (!structs.TryGetValue(dependencyName, out var dependency)) {
+                    var error = $"Unable to resolve type dependency {dependencyName} referenced by {s.StructTypeName}";
+                    if (!ExporterStatics.ErrorList.Contains(error)) ExporterStatics.ErrorList.Add(error);
+                    continue;
+                }
+
+                fullDeps.UnionWith(resolve(dependency));
+                if (dependency.StructType.DeclaringType is not null) {
+                    var owner = dependency.StructType;
+                    while (owner.DeclaringType is not null) owner = owner.DeclaringType;
+                    var ownerName = owner.FixTypeName();
+                    var sourceOwner = s.StructType;
+                    while (sourceOwner.DeclaringType is not null) sourceOwner = sourceOwner.DeclaringType;
+                    if (ownerName != sourceOwner.FixTypeName() && structs.TryGetValue(ownerName, out var ownerStruct)) {
+                        fullDeps.Add(ownerName);
+                        fullDeps.UnionWith(resolve(ownerStruct));
+                    }
+                }
+            }
+            resolving.RemoveAt(resolving.Count - 1);
+            return structToFullDeps[s.StructTypeName] = fullDeps;
+        }
+    }
+
+    public static void Write(DirectoryInfo dir) {
+        // make sure we have all the dependencies for each struct before we write them
+        var structToFullDeps = ResolveFullDependencies();
         _structs.Sort((a, b) => {
-            var cmp = ResolveFullDependencies(a).Count.CompareTo(ResolveFullDependencies(b).Count);
+            var cmp = structToFullDeps[a.StructTypeName].Count.CompareTo(structToFullDeps[b.StructTypeName].Count);
             return cmp != 0 ? cmp : string.Compare(a.StructTypeName, b.StructTypeName, StringComparison.Ordinal);
         });
 
-        HashSet<string> ResolveFullDependencies(ProcessedStruct s) {
-            if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
-                return deps;
-            var fullDeps = s.DependencyNames.ToHashSet();
-            foreach (var dn in s.DependencyNames)
-                fullDeps.UnionWith(ResolveFullDependencies(structs[dn]));
-            return structToFullDeps[s.StructTypeName] = fullDeps;
-        }
-
-        void OrderInlineStructs(ProcessedStruct parent) {
+        void orderInlineStructs(ProcessedStruct parent) {
             if (parent.InlineStructs == null) return;
             parent.InlineStructs = [.. parent.InlineStructs
-                .OrderBy(t => ResolveFullDependencies(t).Count)
+                .OrderBy(t => structToFullDeps[t.StructTypeName].Count)
                 .ThenBy(t => t.StructTypeName, StringComparer.Ordinal)];
             foreach (var inlineStruct in parent.InlineStructs)
-                OrderInlineStructs(inlineStruct);
+                orderInlineStructs(inlineStruct);
         }
 
         foreach (var s in _structs)
-            OrderInlineStructs(s);
+            orderInlineStructs(s);
 
         var serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)

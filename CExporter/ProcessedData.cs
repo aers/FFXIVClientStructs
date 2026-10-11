@@ -83,20 +83,37 @@ public class ProcessedStruct {
             if (_dependencyNames.Length == 0) {
                 _dependencyNames = Fields
                     .Where(t => {
-                        if (t.FieldTypeOverride == null) return (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && !t.FieldType.ShouldNotExportType() && !ExporterStatics.BaseTypeNames.Contains(t.FieldType.FixTypeName()) && !t.FieldType.ContainsGenericParameters;
+                        if (t.FieldTypeOverride == null) {
+                            if (t.FieldType.IsEnum) {
+                                var enumOwner = t.FieldType.DeclaringType;
+                                return enumOwner != null && !IsNestedWithin(StructType, enumOwner);
+                            }
+                            return (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && !t.FieldType.ShouldNotExportType() && !ExporterStatics.BaseTypeNames.Contains(t.FieldType.FixTypeName()) && !t.FieldType.ContainsGenericParameters;
+                        }
                         if (t.FieldTypeOverride.EndsWith('*') || t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") || ExporterStatics.BaseTypeNames.Contains(t.FieldTypeOverride)) return false;
                         return !t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value;
                     })
                     .SelectMany(t => {
+                        if (t.FieldTypeOverride == null && t.FieldType.IsEnum)
+                            return [t.FieldType.DeclaringType!.FixTypeName()];
                         if (t.FieldTypeOverride?.StartsWith(ExporterStatics.StdCppNamespace) ?? false) return t.FieldTypeOverrideTemplates!.Where(k => !k.ShouldNotExportType()).Select(k => k.FixTypeName()).Where(k => !ExporterStatics.BaseTypeNames.Contains(k));
                         return [t.FieldTypeOverride ?? t.FieldType.FixTypeName()];
                     })
                     .Concat(InlineStructs?.SelectMany(t => t.DependencyNames) ?? Enumerable.Empty<string>())
+                    .Concat(InlineStructs?.Select(t => t.StructTypeName) ?? Enumerable.Empty<string>())
                     .Distinct()
                     .ToArray();
             }
             return _dependencyNames;
         }
+    }
+
+    private static bool IsNestedWithin(Type type, Type possibleOwner) {
+        if (type == possibleOwner) return true;
+        for (var declaringType = type.DeclaringType; declaringType != null; declaringType = declaringType.DeclaringType) {
+            if (declaringType == possibleOwner) return true;
+        }
+        return false;
     }
 
     public ProcessedStruct[] ChildrenAndSelf => InlineStructs != null && InlineStructs.Any() ? [this, .. InlineStructs.SelectMany(t => t.ChildrenAndSelf)] : [this];
