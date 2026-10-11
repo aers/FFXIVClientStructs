@@ -81,5 +81,8 @@ public enum ObjectType {
     EnvSpace = 7,
     EnvLocation = 8,
     Decal = 9,
+    CullingBox = 10,
+
+    [Obsolete("Renamed to CullingBox")]
     UnkType10 = 10,
 }
