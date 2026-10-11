@@ -27,7 +27,7 @@ public unsafe partial struct AnimationController {
     /// Sets the initial play parameters to use.
     /// </summary>
     [MemberFunction("48 83 EC 38 4C 8B 41 38")]
-    public partial void SetPlayParams(AnimationPlayParams* playParams);
+    public partial void SetPlayParams(PlayAnimationParams* playParams);
 
     /// <summary>
     /// Causes the animation to fade out over the given number of seconds.

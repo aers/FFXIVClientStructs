@@ -7155,6 +7155,33 @@ classes:
       0x1402008F0: SetPapResourceHandle
       0x140200910: CreateAnimationControl
       0x1402009D0: ApplyIntroCheck
+  Client::Graphics::Animation::AnimationControllerHandle:
+    vtbls:
+      - ea: 0x1421404C8
+        base: Client::Graphics::ReferencedClassBase
+    funcs:
+      0x1401FF5D0: SetInitialParameters
+      0x1401FF810: TogglePause
+      0x1401FF8F0: GetIsPaused
+      0x1401FF900: EaseOut
+      0x1401FFA10: SetWeight
+      0x1401FFAA0: GetAverageMasterWeight
+      0x1401FFC60: SetLocalTime
+      0x1401FFCF0: SetStartTime
+      0x1401FFD90: SetEndTime
+      0x1402002B0: SetEndTimesDistinct
+      0x1401FFED0: SetOverflowCount
+      0x1401FFF50: GetAverageEaseStatus
+      0x1401FFFF0: SetPlaybackSpeed
+      0x140200070: GetAveragePlaybackSpeed
+      0x140200110: GetLongestAnimationDuration
+      0x140200200: GetAverageBlendHint
+      0x140200480: AddController
+      0x1402004C0: RemoveController
+      0x140200500: Pause
+      0x1402005C0: Unpause
+      0x1401FF490: ctor
+      0x140214740: dtor
   Client::Graphics::Animation::IAnimationControllerListener:
     vtbls:
       - ea: 0x142140530

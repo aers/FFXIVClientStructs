@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Animation;
 
 // All the game's Animation classes insist on measuring things in integral frames, where each frame is 1/30th of a second--except for easing times, which are in floating point seconds.
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe struct AnimationPlayParams {
+public unsafe struct PlayAnimationParams {
     [FieldOffset(0x00)] internal uint Unk0; // Definitely used, might just be a 1 or a 0?
     [FieldOffset(0x04)] public float EaseTime;
     [FieldOffset(0x08)] public hkaDefaultAnimationControl* ExistingControl; // Optional, not really clear what it's for.
