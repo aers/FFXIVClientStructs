@@ -42,6 +42,10 @@ class SrcInterface(object):
             return 8
         return 0
 
+    def is_base_type(self, type: str) -> bool:
+        type = type.rstrip('*')
+        return type in ("byte", "wchar_t", "char", "float", "double", "bool", "int8_t", "uint8_t", "int16_t", "uint16_t", "int32_t", "uint32_t", "int64_t", "uint64_t", "void")
+
     def _split_template_type(self, type_name: str) -> tuple[str, list[str]]:
         """Split a type's base name and top-level template arguments."""
         type_name = type_name.strip()
@@ -112,7 +116,8 @@ class SrcInterface(object):
             and not self._split_template_type(field_type)[1]
             and self._normalize_type(field_type) in template_struct_lookup
         ):
-            field_type += f"<{', '.join(field.template_args)}>"
+            template_args = [f"::{template_arg}" if not self.is_base_type(template_arg) else template_arg for template_arg in field.template_args]
+            field_type += f"<{', '.join(template_args)}>"
         return field_type + pointer_suffix
 
     def _substitute_template_types(
@@ -141,6 +146,7 @@ class SrcInterface(object):
         enum_lookup: dict[str, int],
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
         template_parameters: tuple[str, ...] = (),
+        struct_definition_lookup: dict[str, DefinedStruct] | None = None,
     ) -> int:
         """Resolve a field's size using schema types and the target x64 ABI."""
         type_name = type_name.strip()
@@ -162,6 +168,17 @@ class SrcInterface(object):
 
         base_type, template_args = self._split_template_type(type_name)
         if not template_args:
+            struct_definition_lookup = struct_definition_lookup or {}
+            struct_definition = struct_definition_lookup.get(normalized_type)
+            if struct_definition is not None and not struct_definition.template_types:
+                return self._get_template_struct_size(
+                    struct_definition,
+                    [],
+                    struct_lookup,
+                    enum_lookup,
+                    template_struct_lookup or {},
+                    struct_definition_lookup,
+                )
             return 0
 
         stl_type_sizes = {
@@ -173,7 +190,6 @@ class SrcInterface(object):
             "std::basic_string": 32,
             "std::list": 16,
             "std::deque": 32,
-            "std::linkedlist": 24,
         }
         if base_type in stl_type_sizes:
             return stl_type_sizes[base_type]
@@ -182,16 +198,32 @@ class SrcInterface(object):
             if len(template_args) != 2:
                 raise ValueError(f"std::pair requires two type arguments: {type_name}")
             first_size = self.get_size_from_type(
-                template_args[0], struct_lookup, enum_lookup, template_struct_lookup
+                template_args[0],
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                struct_definition_lookup=struct_definition_lookup,
             )
             second_size = self.get_size_from_type(
-                template_args[1], struct_lookup, enum_lookup, template_struct_lookup
+                template_args[1],
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                struct_definition_lookup=struct_definition_lookup,
             )
             first_alignment = self._get_type_alignment(
-                template_args[0], struct_lookup, enum_lookup, template_struct_lookup
+                template_args[0],
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                struct_definition_lookup,
             )
             second_alignment = self._get_type_alignment(
-                template_args[1], struct_lookup, enum_lookup, template_struct_lookup
+                template_args[1],
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                struct_definition_lookup,
             )
             alignment = max(first_alignment, second_alignment)
             second_offset = self._align_size(first_size, second_alignment)
@@ -206,6 +238,7 @@ class SrcInterface(object):
                 struct_lookup,
                 enum_lookup,
                 template_struct_lookup,
+                struct_definition_lookup,
             )
 
         raise ValueError(f"Cannot determine size for template type: {type_name}")
@@ -216,6 +249,7 @@ class SrcInterface(object):
         struct_lookup: dict[str, int],
         enum_lookup: dict[str, int],
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
+        struct_definition_lookup: dict[str, DefinedStruct] | None = None,
     ) -> int:
         type_name = type_name.strip()
         if type_name.endswith("*"):
@@ -238,7 +272,11 @@ class SrcInterface(object):
                         raise ValueError(f"std::pair requires two type arguments: {type_name}")
                     return max(
                         self._get_type_alignment(
-                            arg, struct_lookup, enum_lookup, template_struct_lookup
+                            arg,
+                            struct_lookup,
+                            enum_lookup,
+                            template_struct_lookup,
+                            struct_definition_lookup,
                         )
                         for arg in template_args
                     )
@@ -247,6 +285,7 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
+                    struct_definition_lookup=struct_definition_lookup,
                 )
         return min(size & -size, 8) if size else 1
 
@@ -261,6 +300,7 @@ class SrcInterface(object):
         struct_lookup: dict[str, int],
         enum_lookup: dict[str, int],
         template_struct_lookup: dict[str, DefinedStruct],
+        struct_definition_lookup: dict[str, DefinedStruct] | None = None,
     ) -> int:
         if len(template_args) != len(struct.template_types):
             raise ValueError(
@@ -271,10 +311,16 @@ class SrcInterface(object):
             return struct.size
 
         substitutions = dict(zip(struct.template_types, template_args))
-        extent = 0
+        has_base_at_zero = any(
+            field.base and field.offset == 0 for field in struct.fields
+        )
+        has_implicit_vtable = bool(struct.virtual_functions) and not has_base_at_zero
+        extent = 8 if has_implicit_vtable else 1
+        alignment = 8 if has_implicit_vtable else 1
         for field in struct.fields:
             if field.type == "__fastcall":
                 field_size = 8
+                field_alignment = 8
             else:
                 field_type = self._get_field_type(field, template_struct_lookup)
                 field_type = self._substitute_template_types(field_type, substitutions)
@@ -283,20 +329,29 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
+                    struct_definition_lookup=struct_definition_lookup,
                 )
                 if field_size == 0:
                     raise ValueError(
                         f"Cannot determine size of {field_type} in template type {struct.type}"
                     )
+                field_alignment = self._get_type_alignment(
+                    field_type,
+                    struct_lookup,
+                    enum_lookup,
+                    template_struct_lookup,
+                    struct_definition_lookup,
+                )
                 if isinstance(field, DefinedStructFixedField):
                     field_size *= field.size
 
+            alignment = max(alignment, field_alignment)
             field_end = field.offset + field_size
             if struct.union:
                 extent = max(extent, field_size)
             else:
                 extent = max(extent, field_end)
-        return extent
+        return self._align_size(extent, alignment)
     
     def get_string_define_and_size(
         self,
@@ -305,7 +360,8 @@ class SrcInterface(object):
         struct_lookup: dict[str, int],
         enum_lookup: dict[str, int],
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
-        template_parameters: tuple[str, ...] = (),
+        template_parameters: list[str] = [],
+        struct_definition_lookup: dict[str, DefinedStruct] | None = None,
     ) -> tuple[str, int]:
         template_struct_lookup = template_struct_lookup or {}
         field_type = self._get_field_type(field, template_struct_lookup)
@@ -316,10 +372,13 @@ class SrcInterface(object):
             enum_lookup,
             template_struct_lookup,
             template_parameters,
+            struct_definition_lookup,
         )
         display_type = field_type
         if display_type.startswith(namespace):
             display_type = display_type.removeprefix(f"{namespace}::")
+        elif not self.is_base_type(display_type) and not display_type.rstrip('*') in template_parameters:
+            display_type = f"::{display_type}"
         return (f"{display_type} {field_name};", field_size)
 
     def get_short_name(self, full_type: str) -> str:
@@ -351,11 +410,20 @@ class SrcInterface(object):
             return f"void* {vfunc.name};"
 
         return_type = vfunc.return_type if vfunc.return_type else "void"
+
+        if not self.is_base_type(return_type):
+            return_type = f"::{return_type}"
         
         # Build parameter list
         param_list = ""
         if vfunc.parameters:
-            params = [f"{param.type} {param.name}" for param in vfunc.parameters]
+            params = []
+            for param in vfunc.parameters:
+                if not self.is_base_type(param.type):
+                    params.append(f"::{param.type} {param.name}")
+                else:
+                    params.append(f"{param.type} {param.name}")
+                    
             param_list = ", ".join(params)
         
         return f"{return_type} (__fastcall *{vfunc.name})({param_list});"
@@ -367,22 +435,48 @@ class SrcInterface(object):
     ):
         output = IndentWriter()
 
-        struct_lookup: dict[str, int] = {}
+        all_structs: list[DefinedStruct] = []
+        inline_structs: list[DefinedStruct] = []
+        inline_enums: list[DefinedStructEnum] = []
+
+        def collect_inline_types(struct: DefinedStruct):
+            for inline_enum in struct.inline_enums:
+                inline_enums.append(inline_enum)
+            for inline_struct in struct.inline_structs:
+                inline_structs.append(inline_struct)
+                all_structs.append(inline_struct)
+                collect_inline_types(inline_struct)
+
         for struct in export.structs:
+            all_structs.append(struct)
+            collect_inline_types(struct)
+
+        inline_struct_types = {
+            self._normalize_type(struct.type) for struct in inline_structs
+        }
+        inline_enum_types = {
+            self._normalize_type(enum.type) for enum in inline_enums
+        }
+
+        struct_lookup: dict[str, int] = {}
+        for struct in all_structs:
             if struct.size is None:
                 continue
             normalized_type = self._normalize_type(struct.type)
             struct_lookup[normalized_type] = struct.size
             struct_lookup.setdefault(self.get_short_name(normalized_type), struct.size)
-        enum_lookup = {
-            self._normalize_type(enum.type): self.get_size_from_string(enum.underlying)
-            for enum in export.enums
-        }
-        template_struct_lookup = {
-            self._normalize_type(struct.type): struct
-            for struct in export.structs
-            if struct.template_types
-        }
+        enum_lookup: dict[str, int] = {}
+        for enum in [*export.enums, *inline_enums]:
+            enum_lookup[self._normalize_type(enum.type)] = self.get_size_from_string(
+                enum.underlying
+            )
+        template_struct_lookup: dict[str, DefinedStruct] = {}
+        struct_definition_lookup: dict[str, DefinedStruct] = {}
+        for struct in all_structs:
+            normalized_type = self._normalize_type(struct.type)
+            struct_definition_lookup[normalized_type] = struct
+            if struct.template_types:
+                template_struct_lookup[normalized_type] = struct
 
         def append_chunk(chunk: IndentWriter | str):
             chunk_text = str(chunk)
@@ -427,37 +521,95 @@ class SrcInterface(object):
                 output.append("}")
                 open_namespaces.pop()
 
-        enum_chunks = [
-            (enum.namespace, self.build_enum_string(enum)) for enum in export.enums
-        ]
-        append_ordered_chunks(enum_chunks)
-
+        enum_chunks = []
         forward_chunks: list[tuple[str, IndentWriter]] = []
+
+        for enum in export.enums:
+            if self._normalize_type(enum.type) in inline_enum_types:
+                continue
+            enum_forward = IndentWriter()
+            enum_forward += f"enum {enum.name} : {enum.underlying};"
+            forward_chunks.append((enum.namespace, enum_forward))
+            enum_chunks.append((enum.namespace, self.build_enum_string(enum)))
+
         definition_chunks: list[tuple[str, IndentWriter]] = []
+        inline_enum_definition_chunks: list[tuple[str, IndentWriter]] = []
         vtable_names: list[str] = []
+        seen_vtable_names: set[str] = set()
+
+        def collect_inline_enum_definitions(struct: DefinedStruct):
+            namespace_prefix = struct.namespace.replace(".", "::")
+            owner_type = struct.type
+            if namespace_prefix and owner_type.startswith(f"{namespace_prefix}::"):
+                owner_type = owner_type[len(namespace_prefix) + 2 :]
+            if struct.template_types:
+                owner_type += f"<{', '.join(struct.template_types)}>"
+
+            for inline_enum in struct.inline_enums:
+                inline_enum_definition = self.build_enum_string(
+                    inline_enum, owner_type, tuple(struct.template_types)
+                )
+                inline_enum_definition_chunks.append(
+                    (inline_enum.namespace, inline_enum_definition)
+                )
+            for inline_struct in struct.inline_structs:
+                collect_inline_enum_definitions(inline_struct)
+
+        def collect_vtable_names(struct: DefinedStruct):
+            if struct.virtual_functions:
+                vtable_name = f"{struct.type}_vtbl"
+                if vtable_name not in seen_vtable_names:
+                    seen_vtable_names.add(vtable_name)
+                    vtable_names.append(vtable_name)
+            for inline_struct in struct.inline_structs:
+                collect_vtable_names(inline_struct)
+
         for struct in export.structs:
+            if self._normalize_type(struct.type) in inline_struct_types:
+                continue
             forward, define, vtable, vtable_full_name = self.build_struct_string(
-                struct, struct_lookup, enum_lookup, template_struct_lookup, full_declspec_align
+                struct,
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                full_declspec_align,
+                struct_definition_lookup,
             )
-            if vtable_full_name:
+            if vtable_full_name and vtable_full_name not in seen_vtable_names:
+                seen_vtable_names.add(vtable_full_name)
                 vtable_names.append(vtable_full_name)
+            collect_vtable_names(struct)
+            collect_inline_enum_definitions(struct)
             forward_chunks.append((struct.namespace, forward))
             definition_chunks.append((struct.namespace, define))
             definition_chunks.append((struct.namespace, vtable))
 
+        def forward_chunk_key(key: tuple[str, IndentWriter]) -> str:
+            (namespace, _) = key
+            return namespace
+
+        forward_chunks = sorted(forward_chunks, key=forward_chunk_key)
+
         append_ordered_chunks(forward_chunks)
+        append_ordered_chunks(enum_chunks)
         append_ordered_chunks(definition_chunks)
+        append_ordered_chunks(inline_enum_definition_chunks)
 
         return (str(output), vtable_names)
 
     def build_enum_string(
         self,
         enum: DefinedStructEnum,
+        enum_scope: str | None = None,
+        template_types: tuple[str, ...] = (),
     ):
         output = IndentWriter()
 
-        enum_name = self.get_short_name(enum.type)
-        output += f"enum {enum_name} : {enum.underlying} {{"
+        enum_name = enum.name
+        if template_types:
+            output += f"template<typename {', typename '.join(template_types)}>"
+        enum_type = f"{enum_scope}::{enum_name}" if enum_scope != None else enum_name
+        output += f"enum {enum_type} : {enum.underlying} {{"
         output.indent()
 
         for value_name, value in enum.values.items():
@@ -467,7 +619,7 @@ class SrcInterface(object):
         output += "};"
 
         return output
-    
+
     def get_struct_pad(self, fill_size: int, prev_size: int):
         if self.full_padding:
             type, size = self.get_type_and_type_size_from_gap(prev_size)
@@ -484,7 +636,8 @@ class SrcInterface(object):
         struct_lookup: dict[str, int],
         enum_lookup: dict[str, int],
         template_struct_lookup: dict[str, DefinedStruct] | None = None,
-        declspec_align: int = 0
+        declspec_align: int = 0,
+        struct_definition_lookup: dict[str, DefinedStruct] | None = None,
     ) -> tuple[IndentWriter, IndentWriter, IndentWriter, str | None]:
         """Builds the C++ struct definition with namespace wrapping.
 
@@ -517,7 +670,8 @@ class SrcInterface(object):
         # Forward declarations
         if template_declaration:
             struct_string_forward += template_declaration
-        struct_string_forward += f"struct {short_name};"
+        struct_string_forward += f"struct {struct.name};"
+        
         if struct.virtual_functions:
             if template_declaration:
                 struct_string_forward += template_declaration
@@ -536,14 +690,14 @@ class SrcInterface(object):
             if base_field.offset == prev_size:
                 base_fields_used.append(base_field.type)
                 field_type = self._get_field_type(base_field, template_struct_lookup)
-                short_base_name = self.get_short_name(field_type)
-                struct_extend_lines.append(short_base_name)
+                struct_extend_lines.append(f"::{field_type}" if not self.is_base_type(field_type) else field_type)
                 prev_size += self.get_size_from_type(
                     field_type,
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
                     tuple(struct.template_types),
+                    struct_definition_lookup,
                 )
         
         struct_extend_line = ""
@@ -552,6 +706,37 @@ class SrcInterface(object):
 
         struct_string_define += f"{struct_define_line}{struct_extend_line} {{"
         struct_string_define.indent()
+
+        for inline_enum in struct.inline_enums:
+            struct_string_define += f"enum {self.get_short_name(inline_enum.name)} : {inline_enum.underlying};"
+
+        def append_chunk(chunk: IndentWriter | str):
+            for line in str(chunk).split("\n"):
+                if not line.strip():
+                    continue
+                leading = len(line) - len(line.lstrip(" "))
+                previous_indent = struct_string_define.indent_level
+                struct_string_define.indent_level = previous_indent + leading // 2
+                struct_string_define.append(line.lstrip(" "))
+                struct_string_define.indent_level = previous_indent
+
+        inline_struct_chunks = [
+            self.build_struct_string(
+                inline_struct,
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                declspec_align,
+                struct_definition_lookup,
+            )
+            for inline_struct in struct.inline_structs
+        ]
+
+        for inline_forward, _, _, _ in inline_struct_chunks:
+            append_chunk(inline_forward)
+        for _, inline_define, inline_vtable, _ in inline_struct_chunks:
+            append_chunk(inline_define)
+            append_chunk(inline_vtable)
 
         # Add __vtable member if this struct has virtual functions
         if struct.virtual_functions and prev_size == 0:
@@ -566,11 +751,12 @@ class SrcInterface(object):
 
             offset = field.offset
 
-            while offset > prev_size:
-                fill_size = offset - prev_size
-                line, size = self.get_struct_pad(fill_size, prev_size)
-                struct_string_define += line
-                prev_size += size
+            if not struct.is_sequential:
+                while offset > prev_size:
+                    fill_size = offset - prev_size
+                    line, size = self.get_struct_pad(fill_size, prev_size)
+                    struct_string_define += line
+                    prev_size += size
 
             field_name = field.name
             field_type = field.type
@@ -581,7 +767,8 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
-                    tuple(struct.template_types),
+                    struct.template_types,
+                    struct_definition_lookup,
                 )
                 struct_string_define += f"{field_define[:-1]}[{field.size}];"
                 prev_size += field_define_size * field.size
@@ -592,7 +779,9 @@ class SrcInterface(object):
                 )
                 for param in field.parameters:
                     fastcall_field_define += param.type + " " + param.name + ", "
-                struct_string_define += fastcall_field_define[:-1] + ");"
+                if len(field.parameters) > 0:
+                    fastcall_field_define = fastcall_field_define[:-2]
+                struct_string_define += fastcall_field_define + ");"
                 prev_size += 8
             else:
                 field_define, field_define_size = self.get_string_define_and_size(
@@ -601,7 +790,8 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
-                    tuple(struct.template_types),
+                    struct.template_types,
+                    struct_definition_lookup,
                 )
                 struct_string_define += field_define
                 prev_size += field_define_size
@@ -635,3 +825,25 @@ class SrcInterface(object):
             vtable_full_name = f"{struct.type}_vtbl"
 
         return (struct_string_forward, struct_string_define, struct_string_vtable, vtable_full_name)
+    
+    def get_predef_header(self):
+        return """#define _HAS_ITERATOR_DEBUGGING 0
+#define _ITERATOR_DEBUG_LEVEL 0
+#define _AMD64_
+#undef __unaligned
+#define __unaligned
+#define __IZoneIdentifier2_FWD_DEFINED__
+#include <cstdint>
+#include <vector>
+#include <set>
+#include <map>
+#include <string>
+#include <list>
+#include <deque>
+#include <guiddef.h>
+#include <Xinput.h>
+#include <d3d11_4.h>
+#include <dinput.h>
+#include <dxgidebug.h>
+#include <dxgi1_6.h>
+"""

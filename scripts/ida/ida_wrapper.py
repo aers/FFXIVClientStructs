@@ -9,8 +9,37 @@ import ida_name
 import ida_funcs
 import ida_srclang
 from structs_schema import *
+from form_builder import DynamicForm
 
 from abc import abstractmethod
+from platform import system
+from pathlib import Path
+from webbrowser import open
+
+def pick_folder(form_content: list[dict[str, any]]) -> str | None:
+    f = DynamicForm(form_content)
+    f.Compile()
+    try:
+        if f.Execute() == 1:          # 1 = OK, 0 = Cancel
+            return f.folder.value or None
+        return None
+    finally:
+        f.Free()
+        
+fields = [
+  { "type": "label", "text": "Select msvc"},
+  { "type": "space" },
+  { "type": "label", "text": "It should be located where you used:", "prepend": True},
+  { "type": "button", "key": "msvcdownload", "label": "mstorsjo/msvc-wine", "on_click": lambda: open("https://github.com/mstorsjo/msvc-wine")},
+  { "type": "space" },
+  { "type": "folder", "key": "folder", "label": "Folder", "value": "", "tip": "Pick the folder where ./vsdownload.sh was run" }
+]
+
+def first_subfolder(base: Path) -> Path | None:
+    for p in sorted(base.iterdir()):
+        if p.is_dir():
+            return p
+    return None
 
 # For more information about TERR_ constants, see:
 # https://docs.hex-rays.com/developer-guide/idapython/idapython-porting-guide-ida-9#type-information-error-codes
@@ -143,9 +172,23 @@ class BaseIdaInterface(object):
 
     def select_parser(self):
         """Sets the parser used for building struct data."""
+        includes = ""
+        if system() != "Windows":
+            path = pick_folder(fields)
+            if path == None:
+                raise "Has to have msvc includes for the parsers to work with the project"
+            path = Path(path)
+            vc_path = path / "vc" / "tools" / "msvc"
+            vc_path = first_subfolder(vc_path) / "include"
+            window_kit = first_subfolder(path / "Windows Kits" / "10" / "Include")
+            winsdk_ucrt_path = window_kit / "ucrt"
+            winsdk_um_path = window_kit / "um"
+            winsdk_shared_path = window_kit / "shared"
+            includes = f" -I{vc_path.as_posix()} -I\"{winsdk_ucrt_path.as_posix()}\" -I\"{winsdk_um_path.as_posix()}\" -I\"{winsdk_shared_path.as_posix()}\""
+
         ida_srclang.set_parser_argv(
             "clang",
-            "-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -fdelayed-template-parsing -std=c++17",
+            f"-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -fdelayed-template-parsing -U__int64 -std=c++17{includes}",
         )
 
     def parse_string(self, decl: str, vtables: list[str]):
