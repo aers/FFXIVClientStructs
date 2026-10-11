@@ -1019,7 +1019,7 @@ def run():
                     if virt_func is None:
                         continue
 
-                    if virt_func.return_type != None and virt_func.parameters != None:
+                    if virt_func.return_type != None or virt_func.parameters != None:
                         api.update_virt_func(virt_func, struct)
 
     if update_member_func:
