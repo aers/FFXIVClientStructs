@@ -82,7 +82,7 @@ public partial class Exporter {
         while (_processType.Count > 0) {
             if (!quiet) Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
             var tmp = _processType
-                .Where(t => t.Type is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false } and not { Namespace: ExporterStatics.StdNamespacePrefix or ExporterStatics.StdHelperNamespacePrefix })
+                .Where(t => t.Type is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false } and not { Namespace: ExporterStatics.StdNamespacePrefix or ExporterStatics.StdHelperNamespacePrefix } || t.Type.Name.StartsWith("StdLinkedList"))
                 .ToArray();
             _processType.Clear();
             foreach (var @struct in tmp) {
@@ -103,70 +103,89 @@ public partial class Exporter {
 
     }
 
-    public static void ProcessStaticFunctions(bool quiet) {
-        Type[] types = [.. ExporterStatics.GetHavokTypes(), .. ExporterStatics.GetXIVTypes()];
-        types = types.Where(t => t.IsStruct()).Where(type => type.GetMethods(ExporterStatics.StaticBindingFlags).Length != 0).ToArray();
-        if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
-        var typeAndMembers = types.Select(t => (t, t.GetMethods(ExporterStatics.StaticBindingFlags))).ToArray();
-        foreach (var (type, methods) in typeAndMembers) {
-            if (!quiet) Console.WriteLine($"Processing {type} with {methods.Length} methods");
-            var sanitizedName = type.FixTypeName();
-            var currentStructIndex = _structs.FindIndex(s => s.StructTypeName == sanitizedName);
-            if (currentStructIndex == -1) {
-                if (!quiet) Console.WriteLine($"Error in struct {type} please fix");
-                continue;
-            }
-            var currentStruct = _structs[currentStructIndex];
-            foreach (var methodInfo in methods) {
-                var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
-                if (staticAddress != null) {
-                    var name = methodInfo.Name;
-                    if (name.StartsWith("Get")) {
-                        name = name[3..];
-                    }
-                    currentStruct.StaticMembers ??= [];
-                    currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
-                        new ProcessedStaticMembers {
-                            Name = name,
-                            Signature = staticAddress.Signature,
-                            RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
-                            IsPointer = staticAddress.IsPointer,
-                            ReturnType = methodInfo.ReturnType.GetPointerType()
-                        }];
-                }
-                var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
-                if (memberFunction != null || staticAddress != null)
-                    _processType.Add(methodInfo.ReturnType);
-                if (memberFunction == null) continue;
-                var returnType = methodInfo.ReturnType;
-                var pointerCount = 0;
-                while (returnType.IsPointer()) {
-                    pointerCount++;
-                    returnType = returnType.GetPointerType();
-                }
-                string? overrideType = null;
-                if (returnType is { Namespace: ExporterStatics.StdNamespacePrefix }) {
-                    (overrideType, var requiredTypes) = ProcessStdType(returnType);
-                    foreach (var requiredType in requiredTypes) {
-                        _processType.Add(requiredType);
-                    }
-                    overrideType += new string('*', pointerCount);
-                }
-                var memberFunctionReturnType = new ProcessedMemberFunctionReturn(methodInfo.ReturnType, overrideType);
-                if (methodInfo.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
-                    _processType.Add(memberFunctionReturnType.Type);
-                else
-                    memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
-                currentStruct.StaticMemberFunctions ??= [];
-                currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions,
-                    new ProcessedMemberFunction {
-                        MemberFunctionSignature = memberFunction.Signature,
-                        MemberFunctionName = methodInfo.Name,
-                        MemberFunctionReturnType = memberFunctionReturnType,
-                        MemberFunctionParameters = methodInfo.GetParameters().Select(ProcessParameter).ToArray()
+    public static (ProcessedStruct s, int c) ProcessStaticFunction(ProcessedStruct currentStruct)
+    {
+        var methods = currentStruct.StructType.GetMethods(ExporterStatics.StaticBindingFlags);
+        foreach (var methodInfo in methods) {
+            var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
+            if (staticAddress != null) {
+                currentStruct.StaticMembers ??= [];
+                currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
+                    new ProcessedStaticMembers {
+                        Signature = staticAddress.Signature,
+                        RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
+                        IsPointer = staticAddress.IsPointer,
+                        ReturnType = methodInfo.ReturnType.GetPointerType()
                     }];
             }
-            _structs[currentStructIndex] = currentStruct;
+            var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
+            if (memberFunction != null || staticAddress != null)
+                _processType.Add(methodInfo.ReturnType);
+            if (memberFunction == null) continue;
+            var returnType = methodInfo.ReturnType;
+            var pointerCount = 0;
+            while (returnType.IsPointer()) {
+                pointerCount++;
+                returnType = returnType.GetPointerType();
+            }
+            string? overrideType = null;
+            if (returnType is { Namespace: ExporterStatics.StdNamespacePrefix }) {
+                (overrideType, var requiredTypes) = ProcessStdType(returnType);
+                foreach (var requiredType in requiredTypes) {
+                    _processType.Add(requiredType);
+                }
+                overrideType += new string('*', pointerCount);
+            }
+            var memberFunctionReturnType = new ProcessedMemberFunctionReturn(methodInfo.ReturnType, overrideType);
+            if (methodInfo.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
+                _processType.Add(memberFunctionReturnType.Type);
+            else
+                memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
+            currentStruct.StaticMemberFunctions ??= [];
+            currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions,
+                new ProcessedMemberFunction {
+                    MemberFunctionSignature = memberFunction.Signature,
+                    MemberFunctionName = methodInfo.Name,
+                    MemberFunctionReturnType = memberFunctionReturnType,
+                    MemberFunctionParameters = methodInfo.GetParameters().Select(ProcessParameter).ToArray()
+                }];
+        }
+        return (currentStruct, methods.Length);
+    }
+
+    public static (ProcessedStruct[] inlineStruct, (uint s, uint c)) ProcessStaticFunctionsInline(ProcessedStruct[] inlineStruct)
+    {
+        var membersCount = 0u;
+        var structCount = 0u;
+        for (var currentStructIndex = 0; currentStructIndex < inlineStruct.Length; currentStructIndex++) {
+            var (s, c) = ProcessStaticFunction(inlineStruct[currentStructIndex]);
+            inlineStruct[currentStructIndex] = s;
+            structCount++;
+            membersCount += (uint)c;
+            if(inlineStruct[currentStructIndex].InlineStructs != null) {
+                var (inline, (inlineCount, memberCount)) = ProcessStaticFunctionsInline(_structs[currentStructIndex].InlineStructs!);
+                _structs[currentStructIndex].InlineStructs = inline;
+                structCount += inlineCount;
+                membersCount += memberCount;
+            }
+        }
+        return (inlineStruct, (structCount, membersCount));
+    }
+
+    public static void ProcessStaticFunctions(bool quiet) {
+        if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
+        uint structCount = 0, members = 0;
+        for (var currentStructIndex = 0; currentStructIndex < _structs.Count; currentStructIndex++) {
+            var (s, c) = ProcessStaticFunction(_structs[currentStructIndex]);
+            _structs[currentStructIndex] = s;
+            structCount++;
+            members += (uint)c;
+            if(_structs[currentStructIndex].InlineStructs != null) {
+                var (inline, (inlineCount, memberCount)) = ProcessStaticFunctionsInline(_structs[currentStructIndex].InlineStructs!);
+                _structs[currentStructIndex].InlineStructs = inline;
+                structCount += inlineCount;
+                members += memberCount;
+            }
         }
 
         if (!quiet) {
@@ -196,7 +215,7 @@ public partial class Exporter {
             Console.WriteLine("::endgroup::");
             Console.WriteLine();
             Console.WriteLine($"Processed {_enums.Count - enumsCount} enums and {_structs.Count - structsCount} structs");
-            Console.WriteLine($"Processed {typeAndMembers.Length} structs with {typeAndMembers.Sum(t => t.Item2.Length)} members");
+            Console.WriteLine($"Processed {structCount} structs with {members} members");
             Console.WriteLine();
             Console.WriteLine($"Processed total {_enums.Count} enums and {_structs.Count} structs");
         }
@@ -274,22 +293,13 @@ public partial class Exporter {
 
     public static void Write(DirectoryInfo dir) {
         // make sure we have all the dependencies for each struct before we write them
-        var structs = _structs.ToFrozenDictionary(x => x.StructTypeName, x => x);
+        var structs = _structs.SelectMany(t => t.ChildrenAndSelf).DistinctBy(x => x.StructTypeName).ToFrozenDictionary(x => x.StructTypeName, x => x);
         var structToFullDeps = new Dictionary<string, HashSet<string>>();
         var structDeps = structs.SelectMany(t => ResolveFullDependencies(t.Value)).Distinct().ToArray();
         _structs.Sort((a, b) => {
             var cmp = ResolveFullDependencies(a).Count.CompareTo(ResolveFullDependencies(b).Count);
             return cmp != 0 ? cmp : string.Compare(a.StructTypeName, b.StructTypeName, StringComparison.Ordinal);
         });
-
-#if DEBUG
-        for (var i = 0; i < _structs.Count; i++) {
-            foreach (var dep in _structs[i].DependencyNames) {
-                if (_structs.FindIndex(0, i, x => x.StructTypeName == dep) == -1)
-                    throw new InvalidOperationException();
-            }
-        }
-#endif
 
         HashSet<string> ResolveFullDependencies(ProcessedStruct s) {
             if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
@@ -299,6 +309,18 @@ public partial class Exporter {
                 fullDeps.UnionWith(ResolveFullDependencies(structs[dn]));
             return structToFullDeps[s.StructTypeName] = fullDeps;
         }
+
+        void OrderInlineStructs(ProcessedStruct parent) {
+            if (parent.InlineStructs == null) return;
+            parent.InlineStructs = [.. parent.InlineStructs
+                .OrderBy(t => ResolveFullDependencies(t).Count)
+                .ThenBy(t => t.StructTypeName, StringComparer.Ordinal)];
+            foreach (var inlineStruct in parent.InlineStructs)
+                OrderInlineStructs(inlineStruct);
+        }
+
+        foreach (var s in _structs)
+            OrderInlineStructs(s);
 
         var serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)

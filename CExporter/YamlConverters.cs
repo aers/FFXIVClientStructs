@@ -122,6 +122,15 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             }
             emitter.Emit(new SequenceEnd());
         }
+        else if (f.FieldTypeOverrideTemplates != null && f.FieldTypeOverrideTemplates.Any())
+        {
+            emitter.Emit(new Scalar("template_args"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Flow));
+            foreach (var templateArg in f.FieldTypeOverrideTemplates){
+                emitter.Emit(new Scalar(templateArg.FixTypeName()));
+            }
+            emitter.Emit(new SequenceEnd());
+        }
         emitter.Emit(new MappingEnd());
     }
 
@@ -142,7 +151,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(s.StructNamespace));
         emitter.Emit(new Scalar("union"));
         emitter.Emit(new Scalar(s.IsUnion.ToString()));
-        if (s.StructType.StructLayoutAttribute?.Value == LayoutKind.Explicit && s.StructSize != 0) {
+        if (s.StructSize > 1 || s.Fields.Any()) {
             emitter.Emit(new Scalar("size"));
             emitter.Emit(new Scalar(s.StructSize.ToString()));
         }
@@ -159,7 +168,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         if (s.VirtualFunctions != null) {
             emitter.Emit(new Scalar("virtual_functions"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var virtualFunction in s.VirtualFunctions) {
+            foreach (var virtualFunction in s.VirtualFunctions.OrderBy(t => t.Offset)) {
                 ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType(), serializer);
             }
             emitter.Emit(new SequenceEnd());
@@ -195,6 +204,26 @@ public class ProcessedStructConverter : IYamlTypeConverter {
                 emitter.Emit(new Scalar(templateType));
             }
             emitter.Emit(new SequenceEnd());
+        }
+        if (s.InlineStructs != null) {
+            emitter.Emit(new Scalar("inline_structs"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var inlineStruct in s.InlineStructs) {
+                Instance.WriteYaml(emitter, inlineStruct, inlineStruct.GetType(), serializer);
+            }
+            emitter.Emit(new SequenceEnd());
+        }
+        if (s.InlineEnums != null) {
+            emitter.Emit(new Scalar("inline_enums"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var inlineEnum in s.InlineEnums) {
+                ProcessedEnumConverter.Instance.WriteYaml(emitter, inlineEnum, inlineEnum.GetType(), serializer);
+            }
+            emitter.Emit(new SequenceEnd());
+        }
+        if (s.IsSequential) {
+            emitter.Emit(new Scalar("is_sequential"));
+            emitter.Emit(new Scalar(s.IsSequential.ToString()));
         }
         emitter.Emit(new MappingEnd());
     }
