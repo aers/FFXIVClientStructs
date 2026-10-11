@@ -6605,15 +6605,39 @@ classes:
     vtbls:
       - ea: 0x1421546D0
         base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::Graphics::Primitive::Server:
+    vtbls:
+      - ea: 0x1421432F0
+  Client::Graphics::Primitive::Context:
+    vtbls:
+      - ea: 0x1421432F8
+  Client::Graphics::Singleton<Client::Graphics::Primitive::Release>:
+    vtbls:
+      - ea: 0x142143300
+  Client::Graphics::Primitive::Release:
+    instances:
+      - ea: 0x1428F5B90
+        pointer: true
+    vtbls:
+      - ea: 0x142143308
+        base: Client::Graphics::Singleton<Client::Graphics::Primitive::Release>
+    funcs:
+      0x140245A20: ctor
+      0x140245A60: Initialize
+      0x140245C50: AssignThreadContexts
+  Client::Graphics::Singleton<Client::Graphics::Primitive::Manager>:
+    vtbls:
+      - ea: 0x142143310
   Client::Graphics::Primitive::Manager:
     instances:
       - ea: 0x1428F6EE0
         pointer: true
     vtbls:
       - ea: 0x142143318
-        base: Client::Graphics::Singleton
+        base: Client::Graphics::Singleton<Client::Graphics::Primitive::Manager>
     funcs:
       0x1402476A0: ctor
+      0x140247740: Initialize
   Client::Graphics::DelayedReleaseClassBase:
     vtbls:
       - ea: 0x1421565C0
