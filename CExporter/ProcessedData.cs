@@ -56,7 +56,6 @@ public class ProcessedStaticMembers {
     public required Type ReturnType;
 }
 
-// TODO: Export if struct is generic with types
 public class ProcessedStruct {
     public required string? StructTypeOverride;
     public required bool IsUnion;
@@ -66,11 +65,14 @@ public class ProcessedStruct {
     public required int StructSize;
     public required ProcessedField[] Fields;
     public required int VirtualFunctionSize;
-    public ProcessedVirtualFunction[]? VirtualFunctions; // null if there are no virtual functions, empty if there's a vtable with unknown contents
+    public required ProcessedVirtualFunction[]? VirtualFunctions;
     public required ProcessedMemberFunction[] MemberFunctions;
-    public ProcessedMemberFunction[]? StaticMemberFunctions;
-    public ProcessedStaticMembers[]? StaticMembers;
+    public required ProcessedMemberFunction[]? StaticMemberFunctions;
+    public required ProcessedStaticMembers[]? StaticMembers;
     public required string[] TemplateTypes;
+    public required ProcessedStruct[]? InlineStructs;
+    public required ProcessedEnum[]? InlineEnums;
+    public required bool IsSequential;
     [YamlIgnore]
     public string StructTypeName => StructTypeOverride ?? StructType.FixTypeName();
     [YamlIgnore]
@@ -88,13 +90,19 @@ public class ProcessedStruct {
                     .SelectMany(t => {
                         if (t.FieldTypeOverride?.StartsWith(ExporterStatics.StdCppNamespace) ?? false) return t.FieldTypeOverrideTemplates!.Where(k => !k.ShouldNotExportType()).Select(k => k.FixTypeName()).Where(k => !ExporterStatics.BaseTypeNames.Contains(k));
                         return [t.FieldTypeOverride ?? t.FieldType.FixTypeName()];
-                    }).Distinct().ToArray();
+                    })
+                    .Concat(InlineStructs?.SelectMany(t => t.DependencyNames) ?? Enumerable.Empty<string>())
+                    .Distinct()
+                    .ToArray();
             }
             return _dependencyNames;
         }
     }
+
+    public ProcessedStruct[] ChildrenAndSelf => InlineStructs != null && InlineStructs.Any() ? [this, .. InlineStructs.SelectMany(t => t.ChildrenAndSelf)] : [this];
     public ProcessedStruct FixOrder() {
         Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
+        if (InlineStructs != null) InlineStructs = [.. InlineStructs.Select(t => t.FixOrder())];
         return this;
     }
 }

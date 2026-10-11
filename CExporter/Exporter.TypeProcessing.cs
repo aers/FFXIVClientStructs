@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.Havok.Common.Base.Types;
+using FFXIVClientStructs.STD;
 using InteropGenerator.Runtime.Attributes;
 
 namespace CExporter;
@@ -27,7 +30,7 @@ public partial class Exporter {
 
     private static (string typeOverride, Type[] typeOverrideTemplates) ProcessStdType(Type fieldType) {
         const string basicString = "BasicString";
-        string[] pointerValuesType = ["Vector", "Deque", "Span"];
+        string[] pointerValuesType = ["Vector", "Span"];
         var pointerCount = 0;
         while (fieldType.IsPointer()) {
             fieldType = fieldType.GetPointerType();
@@ -85,14 +88,42 @@ public partial class Exporter {
 
     private static ProcessedField ProcessField(FieldInfo field, int offset) {
         if (field.FieldType is { Namespace: ExporterStatics.StdNamespacePrefix } && !field.FieldType.IsGenericTypeParameterOrPointer()) {
-            var (typeOverride, typeOverrideTemplates) = ProcessStdType(field.FieldType);
+            if (!field.FieldType.Name.StartsWith("StdLinkedList") && !(field.DeclaringType?.FullName!.Contains("StdLinkedList") ?? false)){
+                var (typeOverride, typeOverrideTemplates) = ProcessStdType(field.FieldType);
+                return new ProcessedField {
+                    FieldType = field.FieldType,
+                    FieldOffset = field.GetFieldOffset() - offset,
+                    FieldName = field.Name,
+                    IsBase = field.IsDirectBase(),
+                    FieldTypeOverride = typeOverride,
+                    FieldTypeOverrideTemplates = typeOverrideTemplates,
+                    Bits = [],
+                    IsUnion = false,
+                    UnionValues = []
+                };
+            }
+            if(!(field.DeclaringType?.FullName!.Contains("StdLinkedList") ?? false)) {
+                _processType.Add(field.FieldType);
+                return new ProcessedField {
+                    FieldType = field.FieldType,
+                    FieldOffset = field.GetFieldOffset() - offset,
+                    FieldName = field.Name,
+                    IsBase = field.IsDirectBase(),
+                    FieldTypeOverride = "StdLinkedList",
+                    FieldTypeOverrideTemplates = field.FieldType.GetGenericArguments(),
+                    Bits = [],
+                    IsUnion = false,
+                    UnionValues = []
+                };
+            }
+            _processType.Add(field.FieldType);
             return new ProcessedField {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
                 IsBase = field.IsDirectBase(),
-                FieldTypeOverride = typeOverride,
-                FieldTypeOverrideTemplates = typeOverrideTemplates,
+                FieldTypeOverride = null,
+                FieldTypeOverrideTemplates = null,
                 Bits = [],
                 IsUnion = false,
                 UnionValues = []
@@ -352,7 +383,7 @@ public partial class Exporter {
 
     private static object? PreProcessType(ProcessingType processingType, bool quiet) {
         var (type, overrideType) = processingType;
-        if (type.IsFixedBuffer() || type.IsBaseType()) return null;
+        if (type.IsFixedBuffer() || type.IsBaseType() || type.IsGenericTypeParameterOrPointer()) return null;
         while (type.IsPointer) type = type.GetElementType()!;
         while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
 
@@ -367,7 +398,7 @@ public partial class Exporter {
             };
 
             if (!quiet) Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
-            _enums.Add(processedEnum);
+            return processedEnum;
         } else if (type.IsStruct()) {
             while (type.IsPointer) type = type.GetElementType()!;
             while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
@@ -473,10 +504,12 @@ public partial class Exporter {
                 .GroupBy(t => t.GetCustomAttribute<CExporterUnionAttribute>()!.Union)
                 .ToFrozenDictionary(t => t.Key, t => t.GroupBy(k => k.GetCustomAttribute<CExporterUnionAttribute>()!.Struct).OrderBy(k => k.Key).ToFrozenDictionary(k => k.Key, k => k.ToArray()));
 
+            var nestedTypes = ((TypeInfo)type).DeclaredNestedTypes.Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && !t.Name.EndsWith("VirtualTable", StringComparison.Ordinal) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
+
             var processedStruct = new ProcessedStruct {
                 StructType = type,
                 IsUnion = type.GetCustomAttribute<CExporterStructUnionAttribute>() != null,
-                StructName = type.Name,
+                StructName = type.Name.IndexOf('`') != -1 ? type.Name[..type.Name.IndexOf('`')] : type.Name,
                 StructNamespace = type.GetNamespace(),
                 StructSize = size,
                 VirtualFunctionSize = vtableSize,
@@ -484,7 +517,12 @@ public partial class Exporter {
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray,
                 StructTypeOverride = overrideType,
-                TemplateTypes = type.IsGenericTypeDefinition ? type.GetGenericArguments().Select(t => t.Name).ToArray() : []
+                TemplateTypes = type.IsGenericTypeDefinition && !type.GetGenericArguments().GenericSequenceEqual(type.DeclaringType?.GetGenericArguments() ?? []) ? type.GetGenericArguments().Select(t => t.Name).ToArray() : [],
+                InlineStructs = nestedTypes.Where(t => t.IsStruct()).Select(t => (ProcessedStruct?)PreProcessType(t, quiet)).Where(t => t != null).ToArray()!,
+                InlineEnums = nestedTypes.Where(t => t.IsEnum).Select(t => (ProcessedEnum?)PreProcessType(t, quiet)).Where(t => t != null).ToArray()!,
+                IsSequential = type.StructLayoutAttribute?.Value == LayoutKind.Sequential,
+                StaticMemberFunctions = null,
+                StaticMembers = null,
             };
 
             foreach (var (fieldName, unionInfos) in unionInfoFields) {
@@ -505,7 +543,13 @@ public partial class Exporter {
                             VirtualFunctionSize = 0,
                             StructTypeOverride = unionStructType,
                             Fields = unionFields.Select(t => ProcessField(t, offsetStart)).ToArray(),
-                            IsUnion = false
+                            IsUnion = false,
+                            InlineStructs = null,
+                            InlineEnums = null,
+                            IsSequential = false,
+                            StaticMemberFunctions = null,
+                            StaticMembers = null,
+                            VirtualFunctions = null,
                         });
                         processedUnionStructFields.Add(new ProcessedFieldUnion {
                             FieldType = unionFields[0].FieldType,
@@ -541,7 +585,7 @@ public partial class Exporter {
             }
 
             if (!quiet) Console.WriteLine($"Processed {processedStruct.StructTypeName} with {processedStruct.Fields.Length + (processedStruct.VirtualFunctions?.Length ?? 0) + processedStruct.MemberFunctions.Length} fields and methods");
-            _structs.Add(processedStruct);
+            return processedStruct;
         }
         return null;
     }
