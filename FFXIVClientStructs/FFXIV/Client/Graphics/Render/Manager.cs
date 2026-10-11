@@ -15,7 +15,7 @@ public unsafe partial struct Manager {
     [FieldOffset(0x10AF8)] public ModelRenderer ModelRenderer;
     [FieldOffset(0x10F40)] public BGInstancingRenderer BGInstancingRenderer;
     [FieldOffset(0x29D40)] public TerrainRenderer TerrainRenderer;
-    // [FieldOffset(0x2E160)] private UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
+    [FieldOffset(0x2E160)] public DecalRenderer DecalRenderer;
     [FieldOffset(0x2E390)] public WaterRenderer WaterRenderer;
     [FieldOffset(0x2E910)] public VerticalFogRenderer VerticalFogRenderer;
     [FieldOffset(0x2EA68)] public LightShaftRenderer LightShaftRenderer;
