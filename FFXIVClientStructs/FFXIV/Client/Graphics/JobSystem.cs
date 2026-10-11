@@ -10,5 +10,4 @@ public unsafe struct JobSystem {
     [FieldOffset(0xB0)] public uint JobCount;
     [FieldOffset(0xB4)] public uint JobExecutedCount; // two different types of jobs, unsure difference
     [FieldOffset(0xB8)] public uint JobExecutedCount2;
-    [FieldOffset(0xC0)] private bool UnkC0; // changes something in task execution
 }
