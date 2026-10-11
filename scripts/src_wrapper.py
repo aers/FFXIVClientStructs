@@ -1015,7 +1015,7 @@ class SrcInterface(object):
         if struct.virtual_functions:
             if template_declaration:
                 struct_string_vtable += template_declaration
-            struct_string_vtable += f"struct __cppobj {short_name}_vtbl {{"
+            struct_string_vtable += f"struct {short_name}_vtbl {{"
             struct_string_vtable.indent()
             previous_offset = 0
             vfunc_name_counts: dict[str, int] = {}
@@ -1073,7 +1073,7 @@ class SrcInterface(object):
 #include <list>
 #include <deque>
 #include <guiddef.h>
-#include <Xinput.h>
+#include <xinput.h>
 #include <d3d11_4.h>
 #include <dinput.h>
 #include <dxgidebug.h>
