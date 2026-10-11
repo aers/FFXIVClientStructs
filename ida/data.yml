@@ -27298,6 +27298,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x1408DB040: ctor
+      0x1417517B0: UpdateFollow
       0x1417539D0: PlaceCompanion
       0x14174CFA0: GetFollowMountId
   Client::Game::Character::Ornament:
