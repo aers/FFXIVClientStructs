@@ -35,7 +35,7 @@ public static class ExporterStatics {
 
         Type[] definedTypes;
         try {
-            definedTypes = assembly.DefinedTypes.Select(ti => ti.AsType()).ToArray();
+            definedTypes = assembly.DefinedTypes.Where(ti => ti.IsValueType && !ti.IsEnum && !ti.IsNested).Select(ti => ti.AsType()).ToArray();
         } catch (ReflectionTypeLoadException ex) {
             definedTypes = ex.Types.Where(t => t != null).ToArray()!;
         }

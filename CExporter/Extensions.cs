@@ -127,7 +127,13 @@ public static partial class TypeExtensions {
 
         public string GetNamespace() {
             var ns = type.Namespace!;
-            var offset = ns.IndexOf('.', ns.IndexOf('.') + 1) + 1;
+            if (ns.StartsWith("System")) {
+                return ns;
+            }
+            var offset = ns.IndexOf('.') + 1;
+            ns = offset == 0 ? "" : ns[offset..];
+            if (ns.StartsWith("SQEX")) return ns;
+            offset = ns.IndexOf('.') + 1;
             return offset == 0 ? "" : ns[offset..];
         }
 
@@ -146,6 +152,16 @@ public static partial class TypeExtensions {
                    || ns.StartsWith("STD")
                    || ns.StartsWith("Interop")
                    || ns.StartsWith("Havok");
+        }
+        
+        private bool IsSQEX() {
+            var ns = type.Namespace.AsSpan();
+            const string cs = "FFXIVClientStructs.";
+            if (!ns.StartsWith(cs))
+                return false;
+            ns = ns[cs.Length..];
+
+            return ns.StartsWith("SQEX");
         }
 
         public Type GetPointerType() {
@@ -172,19 +188,28 @@ public static partial class TypeExtensions {
                 name = name[(name.IndexOf('.') + 1)..];
                 name = name[(name.IndexOf('.') + 1)..];
             }
+            if (type.IsSQEX()) {
+                name = name[(name.IndexOf('.') + 1)..];
+            }
             if (!type.IsGenericType) return name.ToString();
             if (type.IsGenericPointer())
                 return type.GenericTypeArguments[0].FixTypeName() + "*";
 
-            var afterBacktick = name[name.IndexOf('`')..];
-            name = name[..^afterBacktick.Length];
             using var builderPooled = StringBuilderPool.Get(500);
             var builder = builderPooled.Builder;
-            builder.Append(name);
+            if (name.IndexOf('`') != -1){
 
-            var me = StdNodeRegex().EnumerateMatches(afterBacktick);
-            if (me.MoveNext())
-                builder.Append('.').Append(afterBacktick.Slice(me.Current.Index + 3, me.Current.Length - 3));
+                var afterBacktick = name[name.IndexOf('`')..];
+                name = name[..^afterBacktick.Length];
+
+                builder.Append(name);
+
+                var me = StdNodeRegex().EnumerateMatches(afterBacktick);
+                if (me.MoveNext())
+                    builder.Append('.').Append(afterBacktick.Slice(me.Current.Index + 3, me.Current.Length - 3));
+            }
+            else
+                builder.Append(name);
 
             if (!ignoreGenericTypes)
             {
@@ -281,5 +306,11 @@ public static class Extensions {
         }
 
         public string GetCorrectedName() => name is "Dtor" or "Ctor" ? name.ToLower() : name;
+    }
+
+    extension(Type[] span){
+        public bool GenericSequenceEqual(Type[] other){
+            return span.Select(t => t.Name).SequenceEqual(other.Select(t => t.Name));
+        }
     }
 }
