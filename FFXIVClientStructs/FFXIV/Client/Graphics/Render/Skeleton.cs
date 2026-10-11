@@ -46,6 +46,36 @@ public unsafe partial struct Skeleton {
     public Span<Bone> AttachBonesSpan => new(AttachBones, (int)AttachBoneCount);
     public Span<BoneIndexMask> BoneMasksSpan => new(AttachBoneMasks, (int)AttachBoneCount);
 
+    /// <summary> Samples and finishes the animation of every skeleton from <paramref name="first"/> on. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B 6C 24 58")]
+    public static partial void UpdateAnimations(Skeleton* first, float deltaTime);
+
+    /// <summary> Blend timers and pose copies after sampling. Run by <see cref="UpdateAnimations"/> in attach depth order, parents first. </summary>
+    [MemberFunction("48 89 5C 24 18 55 48 83 EC 30 48 8B E9")]
+    public partial void FinishAnimation();
+
+    /// <summary> Skeletons in attach depth order, parents first. Rebuilt by <see cref="UpdateAnimations"/>. </summary>
+    [StaticAddress("89 35 ?? ?? ?? ?? 48 8D 3D ?? ?? ?? ?? 83 FE 01", 9)]
+    public static partial SortedSkeletonList* SortedSkeletons();
+
+    /// <summary> Count of <see cref="SortedSkeletons"/>, -1 once the frame's look-at IK has run. </summary>
+    [StaticAddress("89 35 ?? ?? ?? ?? 48 8D 3D ?? ?? ?? ?? 83 FE 01", 2)]
+    public static partial int* SortedSkeletonCount();
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x8800)]
+    public partial struct SortedSkeletonList {
+        [FieldOffset(0x0000), FixedSizeArray] internal FixedSizeArray2048<SortedSkeleton> _entries;
+        /// <summary> Set where an entry starts a new depth. </summary>
+        [FieldOffset(0x8000), FixedSizeArray] internal FixedSizeArray2048<bool> _depthChanged;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct SortedSkeleton {
+        [FieldOffset(0x00)] public Skeleton* Skeleton;
+        [FieldOffset(0x08)] public int Depth; // owner parent chain length
+    }
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x2)]
     public partial struct BoneIndexMask {
