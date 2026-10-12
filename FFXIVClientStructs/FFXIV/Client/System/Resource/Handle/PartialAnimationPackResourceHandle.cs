@@ -14,9 +14,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 public unsafe partial struct PartialAnimationPackResourceHandle {
     [FieldOffset(0xC0)] public hkaAnimationContainer* HavokAnimationContainer;
     [FieldOffset(0xD8)] public ushort AnimationCount;
-    [FieldOffset(0xF0)] private Animation* _animationsPtr;
+    [FieldOffset(0xF0)] public Animation* AnimationsPtr;
 
-    public Span<Animation> Animations => new(_animationsPtr, AnimationCount);
+    public Span<Animation> Animations => new(AnimationsPtr, AnimationCount);
 
     /// <summary>
     /// Searches <see cref="Animations"/> for an animation with the given name.
