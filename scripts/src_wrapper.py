@@ -218,7 +218,7 @@ class SrcInterface(object):
             "std::wstring": 32,
             "std::basic_string": 32,
             "std::list": 16,
-            "std::deque": 32,
+            "std::deque": 40,
         }
         if base_type in stl_type_sizes:
             return stl_type_sizes[base_type]
