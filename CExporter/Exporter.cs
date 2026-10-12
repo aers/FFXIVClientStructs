@@ -140,6 +140,8 @@ public partial class Exporter {
                     _processType.Add(requiredType);
                 }
                 overrideType += new string('*', pointerCount);
+            } else {
+                overrideType = GetGenericTypeOverride(methodInfo.ReturnType);
             }
             var memberFunctionReturnType = new ProcessedMemberFunctionReturn(methodInfo.ReturnType, overrideType);
             if (methodInfo.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)

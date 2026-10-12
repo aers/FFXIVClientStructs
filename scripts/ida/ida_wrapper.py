@@ -4,6 +4,7 @@ import ida_bytes
 import ida_nalt
 import ida_search
 import ida_ida
+import ida_idp
 import ida_typeinf
 import ida_name
 import ida_funcs
@@ -11,7 +12,7 @@ import ida_srclang
 import ida_kernwin
 from structs_schema import *
 from form_builder import DynamicForm
-from data_schema import get_yaml, DefinedData
+from data_schema import get_yaml, DefinedData, DefinedDataClassVtable
 
 from abc import abstractmethod
 from platform import system
@@ -95,34 +96,35 @@ class IdaInterface(object):
         """Retrieve a tinfo_t from the named type.
 
         Args:
-            name (str): Name of the type.
+            name (str): Name of the type, or any declaration IDA can parse.
+
+        Returns:
+            tinfo_t | None: The type, None if IDA does not know it.
         """
 
         tinfo = ida_typeinf.tinfo_t()
-        clean_name = name
-        if (
-            self.get_struct_id(clean_name) != idaapi.BADADDR
-            or self.get_enum_id(clean_name) != idaapi.BADADDR
-        ):
-            if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
-                raise ValueError(f"{clean_name} not found in IDA database")
+        if tinfo.get_named_type(idaapi.get_idati(), name):
             return tinfo
 
         if name == "void":
-            idaapi.parse_decl(
-                tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
-            )
-            return tinfo.get_rettype()
+            return ida_typeinf.tinfo_t(ida_typeinf.BT_VOID)
 
-        terminated = name + ";"
-        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+        if name == "__fastcall":
+            # function pointer parameters are exported without their signature
+            name = "void (__fastcall *)()"
 
-        tinfo_str = tinfo.dstr()
-        if tinfo_str == name or tinfo_str == clean_name:
+        if "<" in name and tinfo.get_named_type(
+            idaapi.get_idati(), get_template_alias(name)
+        ):
+            # use the type behind the typedef so IDA shows the real name
+            target = ida_typeinf.tinfo_t()
+            if target.get_named_type(idaapi.get_idati(), tinfo.get_final_type_name()):
+                return target
             return tinfo
 
-        terminated = clean_name + ";"
-        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+        terminated = name.rstrip(";") + ";"
+        if idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL) is None:
+            return None
 
         return tinfo
 
@@ -132,41 +134,86 @@ class IdaInterface(object):
         Args:
             raw_type (str): Raw type string.
             array_size (int, optional): Size of the array. Defaults to 0.
+
+        Returns:
+            tinfo_t | None: The type, None if it could not be built.
         """
 
         type = raw_type.rstrip("*")
         ptr_count = len(raw_type) - len(type)
 
-        type_tinfo = self.get_named_type(type)
+        tinfo = self.get_named_type(type)
+        if tinfo is None:
+            return None
 
-        ptr_tinfo = None
-        if ptr_count > 0:
-            for i in range(ptr_count):
-                ptr_tinfo = idaapi.tinfo_t()
-                if not ptr_tinfo.create_ptr(type_tinfo):
-                    print(
-                        f"! failed to create pointer for {raw_type!r}: "
-                        f"base type {type!r} resolved to {type_tinfo.dstr()!r} "
-                        f"(correct={type_tinfo.is_correct()}, "
-                        f"forward={type_tinfo.is_forward_decl()})"
-                    )
-                    return None
-                type_tinfo = ptr_tinfo
-        else:
-            ptr_tinfo = type_tinfo
+        for _ in range(ptr_count):
+            ptr_tinfo = idaapi.tinfo_t()
+            if not ptr_tinfo.create_ptr(tinfo):
+                return None
+            tinfo = ptr_tinfo
 
         if array_size > 0:
             array_tinfo = idaapi.tinfo_t()
-            if not array_tinfo.create_array(ptr_tinfo, array_size):
-                print("! failed to create array")
+            if not array_tinfo.create_array(tinfo, array_size):
                 return None
+            tinfo = array_tinfo
 
-            ptr_tinfo = array_tinfo
+        return tinfo
 
-        return ptr_tinfo
+    def apply_func_type(self, ea: int, func_name: str, return_type: str, parameters: list[DefinedStructFuncParam]) -> bool:
+        """Apply a __fastcall prototype built from the yml types to a function.
+
+        Returns:
+            bool: False if one of the types is not known to IDA.
+        """
+        func_data = ida_typeinf.func_type_data_t()
+        func_data.cc = ida_typeinf.CM_CC_FASTCALL
+
+        rettype = self.get_tinfo_from_type(return_type)
+        if rettype is None:
+            print(f"Error: {func_name} @ {ea:#x} has unknown return type {return_type!r}")
+            return False
+        func_data.rettype = rettype
+
+        for param in parameters:
+            arg = ida_typeinf.funcarg_t()
+            arg_type = self.get_tinfo_from_type(param.type)
+            if arg_type is None:
+                print(f"Error: {func_name} @ {ea:#x} has unknown type {param.type!r} on parameter {param.name!r}")
+                return False
+            arg.type = arg_type
+            arg.name = param.name
+            func_data.push_back(arg)
+
+        tif = ida_typeinf.tinfo_t()
+        if not tif.create_func(func_data):
+            print(f"Error: {func_name} @ {ea:#x} failed to create its function type")
+            return False
+        if not ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE):
+            print(f"Error: {func_name} @ {ea:#x} failed to apply {tif.dstr()!r}")
+            return False
+        return True
+
+    def allow_template_type_names(self):
+        """Allow the characters clang puts in template instantiation names.
+
+        Names such as 'std::vector<int, std::allocator<int>>::_Reallocation_guard2'
+        contain spaces, which TypeNameChars rejects by default (and which the
+        idauser.cfg from this repository does not add). IDA then fails with
+        "Failed to prepare forward declaration ... is not acceptable", and a
+        single such error makes the clang parser drop every top level declaration.
+        """
+        ida_idp.process_config_directive(
+            'TypeNameChars = "~.<>?!/,*&[]-+ "'
+            '"_:$()`\'{}"'
+            '"0123456789"'
+            '"ABCDEFGHIJKLMNOPQRSTUVWXYZ"'
+            '"abcdefghijklmnopqrstuvwxyz";'
+        )
 
     def select_parser(self):
         """Sets the parser used for building struct data."""
+        self.allow_template_type_names()
         includes = ""
         if system() != "Windows":
             path = pick_folder(fields)
@@ -186,11 +233,32 @@ class IdaInterface(object):
             f"-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -U__int64 -std=c++17{includes}",
         )
 
-    def parse_string(self, decl: str, vtables: list[str]):
-        """"""
-        ida_srclang.parse_decls_with_parser("clang", None, decl, False)
+    def parse_string(self, decl: str, vtables: list[str]) -> int:
+        """Parse declarations with the clang parser and mark the vtable types.
+
+        Returns:
+            int: The number of parser errors reported by IDA.
+        """
+        error_count = ida_srclang.parse_decls_with_parser("clang", None, decl, False)
+        if error_count < 0:
+            raise RuntimeError(
+                "parse_decls_with_parser failed: the clang parser is not available"
+            )
+        if error_count > 0:
+            print(f"Error: clang parser reported {error_count} error(s) while importing declarations")
+        else:
+            print("Clang parser imported declarations without errors")
+
+        vtable_errors = []
         for vtable in vtables:
-            self.mark_as_vtable(vtable)
+            error = self.mark_as_vtable(vtable)
+            if error is not None:
+                vtable_errors.append(error)
+        for error in vtable_errors:
+            print(f"Error: mark_as_vtable: {error}")
+        print(f"Marked {len(vtables) - len(vtable_errors)}/{len(vtables)} vtables ({len(vtable_errors)} failed)")
+
+        return error_count
 
     def op_type_as_name(self, n: int):
         """
@@ -207,21 +275,19 @@ class IdaInterface(object):
             if getattr(idc, item) == n:
                 return item
     
-    def get_vft_from_data(self, class_name: str) -> dict | None:
-        class_data = self.data_yaml.classes.get(class_name) or {}
-        vtables = class_data.get("vtbls", [])
-        if not isinstance(vtables, list) or not vtables:
+    def get_vft_from_data(self, class_name: str) -> DefinedDataClassVtable | None:
+        class_data = self.data_yaml.classes.get(class_name)
+        if class_data is None or not class_data.vtbls:
             return None
 
-        vtable = vtables[0]
-        return vtable if isinstance(vtable, dict) else None
-            
+        return class_data.vtbls[0]
+
     def get_vfunc_ea_from_data(self, class_name: str, offset: int) -> int:
         vtable = self.get_vft_from_data(class_name)
-        if vtable is None or "ea" not in vtable:
+        if vtable is None:
             return idc.BADADDR
 
-        vtable_ea = vtable["ea"] + idaapi.get_imagebase() - 0x140000000
+        vtable_ea = vtable.ea + idaapi.get_imagebase() - 0x140000000
         return idc.get_qword(vtable_ea + offset)
 
     def set_func_name(self, ea, name, cmt):
@@ -276,16 +342,14 @@ class IdaInterface(object):
         """
         ea = self.search_binary(0, pattern, ida_search.SEARCH_DOWN)
 
-        if ida_funcs.get_func(ea) is None:
-            finf = ida_funcs.func_t()
-            finf.start_ea = ea
-            finf.end_ea = idc.BADADDR
-            ida_funcs.add_func_ex(finf)
+        if ida_funcs.get_func_start(ea) == idc.BADADDR:
+            ida_funcs.add_func(ea)
 
-        if ida_funcs.get_func(ea) is None:
+        func_start = ida_funcs.get_func_start(ea)
+        if func_start == idc.BADADDR:
             return idc.BADADDR
 
-        if ida_funcs.get_func(ea).start_ea == ea:
+        if func_start == ea:
             return ea
         mnem = idc.print_insn_mnem(ea)
         if not mnem:
@@ -317,32 +381,16 @@ class IdaInterface(object):
             return
         if ida_funcs.get_func_name(ea) == f"sub_{ea:X}":
             idc.set_name(ea, func_name)
-        tif = ida_typeinf.tinfo_t()
-        ida_typeinf.guess_tinfo(tif, ea)
-        func_data = ida_typeinf.func_type_data_t()
-        tif.get_func_details(func_data)
-        func_data.clear()
-        func_data.cc = ida_typeinf.CM_CC_FASTCALL
-        func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
-        for param in member_func.parameters:
-            arg = ida_typeinf.funcarg_t()
-            try:
-                arg.type = self.get_tinfo_from_type(param.type)
-            except ValueError as exc:
-                print(
-                    f"Error: update_member_func: function={func_name!r}, ea={ea:#x}, parameter={param.name!r}, type={param.type!r}, error={exc}"
-                )
-                raise
-            arg.name = param.name
-            func_data.push_back(arg)
-        tif.create_func(func_data)
-        ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+        self.apply_func_type(ea, func_name, member_func.return_type, member_func.parameters)
 
     def update_virt_func(self, virt_func: DefinedStructVFunc, struct: DefinedStruct):
         func_name = f"{struct.type}.{virt_func.name}"
 
         ea = self.get_func_ea_by_name(func_name)
         if ea == idc.BADADDR:
+            if self.get_vft_from_data(struct.type) is None:
+                # no vtable address in data.yml, so there is no slot to look up
+                return
             ea = self.get_vfunc_ea_from_data(struct.type, virt_func.offset)
             if ea in (0, idc.BADADDR):
                 print(f"Error: {func_name} not found and its VFT slot could not be resolved")
@@ -358,7 +406,7 @@ class IdaInterface(object):
                 return
 
             primary_vtable = self.get_vft_from_data(struct.type)
-            primary_base = primary_vtable.get("base") if primary_vtable else None
+            primary_base = primary_vtable.base if primary_vtable else None
             if primary_base:
                 base_ea = self.get_vfunc_ea_from_data(primary_base, virt_func.offset)
                 if base_ea == ea:
@@ -369,35 +417,7 @@ class IdaInterface(object):
                 and not normalized_name.startswith(struct.type + ".")
             ):
                 return
-        if self.get_tinfo_from_type(virt_func.return_type) is None:
-            raise ValueError(f"Got invalid return type on virtual function: {virt_func}")
-
-        tif = ida_typeinf.tinfo_t()
-        ida_typeinf.guess_tinfo(tif, ea)
-
-        func_data = ida_typeinf.func_type_data_t()
-        tif.get_func_details(func_data)
-
-        func_data.clear()
-        func_data.cc = ida_typeinf.CM_CC_FASTCALL
-        func_data.rettype = self.get_tinfo_from_type(virt_func.return_type)
-
-        for param in virt_func.parameters:
-            arg = ida_typeinf.funcarg_t()
-            try:
-                arg.type = self.get_tinfo_from_type(param.type)
-            except ValueError as exc:
-                print(
-                    f"Error: update_virt_func: function={func_name!r}, ea={ea:#x}, "
-                    f"parameter={param.name!r}, type={param.type!r}, error={exc}"
-                )
-                raise
-
-            arg.name = param.name
-            func_data.push_back(arg)
-
-        tif.create_func(func_data)
-        ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+        self.apply_func_type(ea, func_name, virt_func.return_type, virt_func.parameters)
 
     def update_static_member(self, static_member: DefinedStructStaticMember, struct: DefinedStruct):
         ea = self.search_binary(
@@ -409,25 +429,18 @@ class IdaInterface(object):
         for follows in static_member.relative_offsets:
             ea = ea + follows
             ea = ea + 4 + self.get_dword(ea)
-        tif = ida_typeinf.tinfo_t()
-        ida_typeinf.guess_tinfo(tif, ea)
+        if ida_bytes.get_item_head(ea) != ea and static_member.return_type != struct.type:
+            # points into an already typed item (ex. a field of the struct instance)
+            return
         return_type = static_member.return_type
         if static_member.is_pointer:
             return_type = return_type + "*"
-        ida_typeinf.apply_tinfo(
-            ea,
-            self.get_tinfo_from_type(return_type),
-            ida_typeinf.TINFO_DEFINITE,
-        )
-        if static_member.is_pointer:
-            ida_name.set_name(
-                ea,
-                f"g_{struct.type}_PtrInstance",
-            )
+        tif = self.get_tinfo_from_type(return_type)
+        if tif is None:
+            print(f"Error: static member of {struct.type} @ {ea:#x} has unknown type {return_type!r}")
         else:
-            ida_name.set_name(
-                ea, f"g_{struct.type}_Instance"
-            )
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+        ida_name.set_name(ea, f"g_{struct.type}_{static_member.name}")
     
     def mark_as_vtable(self, vtbl_name: str) -> str | None:
         """
@@ -452,7 +465,7 @@ class IdaInterface(object):
             return f"Failed to retrieve UDT details for '{vtbl_name}'"
 
         if udt.taudt_bits & ida_typeinf.TAUDT_VFTABLE:
-            return f"'{vtbl_name}' is already marked as a vtable"
+            return None
 
         udt.taudt_bits |= ida_typeinf.TAUDT_VFTABLE
 
@@ -461,9 +474,12 @@ class IdaInterface(object):
                 f"Failed to reconstruct UDT for '{vtbl_name}' after setting vtable flag"
             )
 
-        result = tif.set_named_type(None, vtbl_name)
+        result = tif.set_named_type(None, vtbl_name, ida_typeinf.NTF_REPLACE)
 
-        if not result:
-            return f"Failed to write back '{vtbl_name}' to type library"
+        if result != ida_typeinf.TERR_OK:
+            return (
+                f"Failed to write back '{vtbl_name}' to type library: "
+                f"{ida_typeinf.tinfo_errstr(result)}"
+            )
 
         return None
