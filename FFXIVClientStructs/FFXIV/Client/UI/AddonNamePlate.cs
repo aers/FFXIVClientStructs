@@ -44,7 +44,7 @@ public unsafe partial struct AddonNamePlate {
 
         /// <summary>Sets a text node up for a draw; for a bake (<see cref="CurrentBakeData"/> set), the bake's rect and a node scale of 1.</summary>
         [VirtualFunction(3)]
-        public partial void PrepareNode(float* rect, AtkFontManager.FontSet* fontSet, AtkResNode* node);
+        public partial void PrepareNode(TextDrawArea* outArea, AtkFontManager.FontSet* fontSet, AtkResNode* node);
 
         /// <summary>Frees its data in <see cref="RenderTexture"/> and allocate a new one.</summary>
         /// <returns><c>false</c> if it doesn't fit.</returns>
@@ -54,6 +54,12 @@ public unsafe partial struct AddonNamePlate {
         /// <summary>Draws a bake at the node's transform, centered on the node.</summary>
         [MemberFunction("48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 54 41 56 41 57 48 83 EC 50 F3 0F 10 42 ??")]
         public partial void DrawBaked(AtkResNode* node, BakeData* bakeData);
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct TextDrawArea {
+        [FieldOffset(0x0)] public Common.Math.Rectangle Rect;
+        [FieldOffset(0x10)] public AlignmentType Alignment;
     }
 
     // this is the pre-rendered texture data for a nameplate
