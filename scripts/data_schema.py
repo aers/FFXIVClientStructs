@@ -1,34 +1,89 @@
+from dataclasses import dataclass, field, fields
+from typing import TypeAlias
+from yaml import load
+
+try:
+    from yaml import CSafeLoader as Loader
+except ImportError:
+    from yaml import SafeLoader as Loader
+
+
+@dataclass
 class DefinedDataClassInstance:
-    def __init__(self, ea, pointer=False, name=None):
-        # type: (int, bool, str | None) -> None
-        self.ea = ea
-        self.pointer = pointer
-        self.name = name
+    ea: int
+    pointer: bool = False
+    name: str | None = None
 
+
+@dataclass
 class DefinedDataClassVtable:
-    def __init__(self, ea, base=None, size=None):
-        # type: (int, None | str, None | int) -> None
-        self.ea = ea
-        self.base = base
-        self.size = size
+    ea: int
+    base: str | None = None
+    size: int | None = None
 
+
+@dataclass
 class DefinedDataClassFunction:
-    def __init__(self, num, name):
-        # type: (int, str) -> None
-        self.num = num
-        self.name = name
+    num: int
+    name: str
 
+
+@dataclass
 class DefinedDataClass:
-    def __init__(self, name, instances=[], vtbls=[], functions=[], vfuncs=[]):
-        # type: (str, list[DefinedDataClassInstance], list[DefinedDataClassVtable], list[DefinedDataClassFunction], list[DefinedDataClassFunction]) -> None
-        self.instances = instances
-        self.vtbls = vtbls
-        self.functions = functions
-        self.vfuncs = vfuncs
-        self.name = name
+    instances: list[DefinedDataClassInstance] = field(default_factory=list)
+    vtbls: list[DefinedDataClassVtable] = field(default_factory=list)
+    functions: list[DefinedDataClassFunction] = field(
+        default_factory=list, metadata={"yaml_name": "funcs"}
+    )
+    vfuncs: list[DefinedDataClassFunction] = field(default_factory=list)
 
+
+@dataclass
 class DefinedData:
-    def __init__(self, classes=[]):
-        # type: (list[DefinedDataClass]) -> None
-        self.classes = classes
-        pass
+    classes: dict[str, DefinedDataClass] = field(default_factory=dict)
+    version: str | None = None
+    globals: dict[int, str] = field(default_factory=dict)
+
+
+YamlExport: TypeAlias = dict[str, object]
+
+
+def get_yaml(stream, loader=Loader) -> DefinedData:
+    dic: YamlExport = load(stream, loader)
+    classes = {}
+    for name, class_values in dic.get("classes", {}).items():
+        class_values = class_values or {}
+        values = dict(class_values)
+
+        for key, value_type in (
+            ("instances", DefinedDataClassInstance),
+            ("vtbls", DefinedDataClassVtable),
+        ):
+            if key in class_values and class_values[key] is not None:
+                values[key] = [
+                    _from_dict(value_type, value) for value in class_values[key]
+                ]
+            else:
+                values.pop(key, None)
+
+        for yaml_key in ("funcs", "vfuncs"):
+            if yaml_key in class_values and class_values[yaml_key] is not None:
+                values[yaml_key] = [
+                    DefinedDataClassFunction(num, function_name)
+                    for num, function_name in class_values[yaml_key].items()
+                ]
+            else:
+                values.pop(yaml_key, None)
+
+        classes[name] = _from_dict(DefinedDataClass, values)
+
+    return _from_dict(DefinedData, {**dic, "classes": classes})
+
+
+def _from_dict(data_class, values):
+    class_values = {}
+    for data_field in fields(data_class):
+        key = data_field.metadata.get("yaml_name", data_field.name)
+        if key in values:
+            class_values[data_field.name] = values[key]
+    return data_class(**class_values)

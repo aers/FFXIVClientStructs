@@ -54,7 +54,7 @@ def build_spec(fields, change_cb):
                 names.append(name)
                 last = (i == len(items) - 1)
                 if last:
-                    end = f">{{{key}}}>" if t == "checks" else f">>{{{key}}}>"
+                    end = f">{{{key}}}>" if t == "checks" else f">{{{key}}}>"
                 else:
                     end = ">"
                 lines.append(f"{prepend_line}<{ilabel}:{{{name}}}{end}")
