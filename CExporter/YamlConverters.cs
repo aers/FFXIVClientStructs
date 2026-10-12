@@ -290,6 +290,8 @@ public class ProcessedStaticMembersConverter : IYamlTypeConverter {
     public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedStaticMembers s) return;
         emitter.Emit(new MappingStart());
+        emitter.Emit(new Scalar("name"));
+        emitter.Emit(new Scalar(s.Name));
         emitter.Emit(new Scalar("signature"));
         emitter.Emit(new Scalar(s.Signature));
         emitter.Emit(new Scalar("relative_follow_offsets"));
