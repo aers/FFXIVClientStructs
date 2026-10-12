@@ -8,8 +8,17 @@ public unsafe partial struct IAnimationControllerListener {
     // 9 vfuncs, though it looks like most aren't implemented by anything.
     // Someone enterprising could hook up their own vtbl and see when they are raised!
 
+    [VirtualFunction(2)]
+    public partial void ControllerEaseInFinished(AnimationController* controller);
+
     [VirtualFunction(3)]
     public partial void ControllerEaseOutFinished(AnimationController* controller);
+
+    [VirtualFunction(4)]
+    public partial void ControllerLoopOverflow(AnimationController* controller, float deltaTime, uint overflows);
+
+    [VirtualFunction(5)]
+    public partial void ControllerLoopUnderflow(AnimationController* controller, float deltaTime, uint overflows);
 
     [VirtualFunction(7)]
     public partial void ControllerStop(AnimationController* controller, StopControllerParams* stopParams);

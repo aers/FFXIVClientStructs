@@ -7186,7 +7186,10 @@ classes:
     vtbls:
       - ea: 0x142140530
     vfuncs:
+      2: ControllerEaseInFinished
       3: ControllerEaseOutFinished
+      4: ControllerLoopOverflow
+      5: ControllerLoopUnderflow
       7: ControllerStop
       8: ControllerCreated
   Client::Graphics::Animation::PartialSkeleton:
