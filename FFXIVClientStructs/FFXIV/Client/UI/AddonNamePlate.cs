@@ -29,12 +29,37 @@ public unsafe partial struct AddonNamePlate {
     // Client::UI::AddonNamePlate::BakePlateRenderer
     //   Component::GUI::AtkTextNodeRenderer
     //     Component::GUI::AtkResourceRendererBase
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x240)]
-    public struct BakePlateRenderer {
+    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 BB 48 02 00 00 48 89 83 40 02 00 00", 3)]
+    public partial struct BakePlateRenderer {
         [FieldOffset(0xB0)] public Texture* Texture;
         [FieldOffset(0x1E0)] public AtkRenderTexture RenderTexture;
         [FieldOffset(0x228)] public BakeData* CurrentBakeData;
         [FieldOffset(0x230)] public byte DisableFixedFontResolution; // added in 5.5
+
+        /// <summary>Draws a plate's text.</summary>
+        [VirtualFunction(2)]
+        public partial void Draw(AtkTextNode* node);
+
+        /// <summary>Sets a text node up for a draw; for a bake (<see cref="CurrentBakeData"/> set), the bake's rect and a node scale of 1.</summary>
+        [VirtualFunction(3)]
+        public partial void PrepareNode(TextDrawArea* outArea, AtkFontManager.FontSet* fontSet, AtkTextNode* node);
+
+        /// <summary>Frees its data in <see cref="RenderTexture"/> and allocate a new one.</summary>
+        /// <returns><c>false</c> if it doesn't fit.</returns>
+        [MemberFunction("48 89 5C 24 18 48 89 6C 24 20 57 41 54 41 55 41 56 41 57 48 83 EC 50 4C 8B 81 F8 01 00 00 4C 8B F2 4C 8B 4A 20")]
+        public partial bool AllocateBake(NamePlateObject* namePlateObject);
+
+        /// <summary>Draws a bake at the node's transform, centered on the node.</summary>
+        [MemberFunction("48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 54 41 56 41 57 48 83 EC 50 F3 0F 10 42 ??")]
+        public partial void DrawBaked(AtkTextNode* node, BakeData* bakeData);
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct TextDrawArea {
+        [FieldOffset(0x0)] public Common.Math.Rectangle Rect;
+        [FieldOffset(0x10)] public AlignmentType Alignment;
     }
 
     // this is the pre-rendered texture data for a nameplate
