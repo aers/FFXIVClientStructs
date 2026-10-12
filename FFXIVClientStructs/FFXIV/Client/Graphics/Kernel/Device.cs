@@ -145,14 +145,14 @@ public enum RenderCommandType : int {
     CopySubresourceRegion = 11, // DX11 call
     CopyTexture = 12, // uses the Copy shaders, see ImmediateContext
     CopyResource = 13, // DX11 call
-    // ??? = 14,
-    // ??? = 15,
+    Callback = 14, // runs a function on the render thread
+    Query = 15, // begins or ends a Kernel::Query
     None2 = 16, // ditto None above
     SaveTextureToFile = 17,
     SetSaveTextureFilePath = 18, // for screenshots
-    // Begin??? = 19, debug
-    // End??? = 20, debug
-    // SetRenderTarget2 = 21,
+    ExecuteSubCommandList = 19,
+    SaveRenderTargets = 20,
+    RestoreRenderTargets = 21,
 }
 
 [GenerateInterop(isInherited: true)]
@@ -253,6 +253,32 @@ public unsafe partial struct RenderCommandClear {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct RenderCommandSetSaveTextureFilePath {
     [FieldOffset(0x8)] public byte* FilePath;
+}
+
+[GenerateInterop]
+[Inherits<RenderCommand>]
+[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+public unsafe partial struct RenderCommandCallback {
+    [FieldOffset(0x8)] public delegate* unmanaged<void*, void> Function;
+    [FieldOffset(0x10)] public void* Argument;
+    /// <remarks> Bit 0 resets the device state to its defaults before and after the call. </remarks>
+    [FieldOffset(0x18)] public uint Flags;
+}
+
+[GenerateInterop]
+[Inherits<RenderCommand>]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public unsafe partial struct RenderCommandQuery {
+    [FieldOffset(0x8)] public void* Query; // Client::Graphics::Kernel::Query
+    [FieldOffset(0x10)] public uint Action; // 2 begins the query, anything else ends it
+}
+
+/// <summary> Runs one of the device's sub command lists in place, picked by <see cref="ListIndex"/>. </summary>
+[GenerateInterop]
+[Inherits<RenderCommand>]
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public partial struct RenderCommandExecuteSubCommandList {
+    [FieldOffset(0x4)] public uint ListIndex;
 }
 
 [Flags]
