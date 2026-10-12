@@ -94,6 +94,7 @@ public partial class Exporter {
         }
         while (stdNameSpan[^1] == '\0') stdNameSpan = stdNameSpan[..^1];
         if (stdNameSpan is "std::string") return ($"{stdNameSpan}", []);
+        if (stdNameSpan is "std::unorderedmap") stdNameSpan = "std::unordered_map".ToCharArray();
         var genericsDefine = generics.Select(t => {
             var pointerCount = 0;
             while (t.IsPointer()) {
@@ -355,6 +356,8 @@ public partial class Exporter {
             FieldOffset = field.GetFieldOffset() - offset,
             FieldName = field.Name,
             IsBase = field.IsDirectBase(),
+            // template_args only covers generic structs held by value
+            FieldTypeOverride = field.FieldType.IsPointer() ? GetGenericTypeOverride(field.FieldType) : null,
             Bits = [],
             IsUnion = false,
             UnionValues = []
@@ -379,6 +382,24 @@ public partial class Exporter {
             parameterInfo?.GetCustomAttribute<CExporterTypeForceAttribute>());
     }
 
+    /// <summary>
+    /// Builds the type name with its generic arguments for constructed non std generic structs (ex. hkArray&lt;hkQsTransformf&gt;*).
+    /// <see cref="Extensions.FixTypeName"/> drops the arguments as fields export them separately through template_args.
+    /// </summary>
+    private static string? GetGenericTypeOverride(Type type) {
+        if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return null;
+        var pointerCount = 0;
+        while (type.IsPointer()) {
+            if (type.IsPointer) type = type.GetElementType()!;
+            else type = type.GenericTypeArguments[0];
+            if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return null;
+            pointerCount++;
+        }
+        if (!type.IsConstructedGenericType || type.IsStdDefiniton() || type.IsFixedBuffer()) return null;
+        var arguments = type.GenericTypeArguments.Select(t => GetGenericTypeOverride(t) ?? t.FixTypeName());
+        return $"{type.FixTypeName()}<{string.Join(',', arguments)}>{new string('*', pointerCount)}";
+    }
+
     private static ProcessedField ProcessParameter(
         Type parameterType,
         string parameterName,
@@ -396,6 +417,7 @@ public partial class Exporter {
         } else if (typeForceAttribute != null) {
             typeOverride = typeForceAttribute.TypeName;
         } else {
+            typeOverride = GetGenericTypeOverride(parameterType);
             _processType.Add(parameterType);
         }
 
@@ -509,8 +531,10 @@ public partial class Exporter {
                             _processType.Add(requiredType);
                         }
                         memberFunctionOverrideType += new string('*', pointerCount);
+                    } else {
+                        memberFunctionOverrideType ??= GetGenericTypeOverride(memberFunction.ReturnType);
                     }
-                    var memberFunctionReturnType = new ProcessedMemberFunctionReturn(returnType, memberFunctionOverrideType);
+                    var memberFunctionReturnType = new ProcessedMemberFunctionReturn(memberFunction.ReturnType, memberFunctionOverrideType);
                     if (memberFunction.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
                         _processType.Add(memberFunctionReturnType.Type);
                     else

@@ -212,12 +212,12 @@ for pattern in exd_func_patterns:
 
 for pattern_key in exd_comment_patterns:
     for ea in list(get_all_eas(pattern_key)):
-        try:
-            sheetIdx = ida.get_dword(ea + exd_comment_patterns[pattern_key])
-            sheetName = exd_map[sheetIdx]
-            ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
-        except Exception as e:
-            print(f"An unexpected error occurred at {hex(ea)}: {e}")
+        sheetIdx = ida.get_dword(ea + exd_comment_patterns[pattern_key])
+        sheetName = exd_map.get(sheetIdx)
+        if sheetName is None:
+            print(f"Sheet getter @ 0x{ea:X} references unknown sheet {sheetIdx}!")
+            continue
+        ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
 
 if _function_update_options["virtual"]:
     for struct in import_structs.structs:

@@ -5,6 +5,7 @@ from structs_schema import (
     DefinedStructExport,
     DefinedStructEnum,
     DefinedStructVFunc,
+    get_template_alias,
 )
 from indent_writer import IndentWriter
 
@@ -214,6 +215,7 @@ class SrcInterface(object):
             "std::vector": 24,
             "std::set": 16,
             "std::map": 16,
+            "std::unordered_map": 64,
             "std::string": 32,
             "std::wstring": 32,
             "std::basic_string": 32,
@@ -294,7 +296,7 @@ class SrcInterface(object):
             size = self.get_size_from_string(type_name)
             if size == 0:
                 base_type, template_args = self._split_template_type(type_name)
-                if base_type in ("std::vector", "std::set", "std::map", "std::string", "std::wstring", "std::basic_string", "std::list", "std::deque", "std::linkedlist"):
+                if base_type in ("std::vector", "std::set", "std::map", "std::unordered_map", "std::string", "std::wstring", "std::basic_string", "std::list", "std::deque", "std::linkedlist"):
                     return 8
                 if base_type == "std::pair":
                     if len(template_args) != 2:
@@ -463,7 +465,10 @@ class SrcInterface(object):
         if vfunc.parameters:
             params = []
             for param in vfunc.parameters:
-                if not self.is_base_type(param.type):
+                if param.type == "__fastcall":
+                    # function pointer parameters are exported without their signature
+                    params.append(f"void* {param.name}")
+                elif not self.is_base_type(param.type):
                     params.append(f"::{param.type} {param.name}")
                 else:
                     params.append(f"{param.type} {param.name}")
@@ -655,6 +660,22 @@ class SrcInterface(object):
             if opaque_pointer_types:
                 opaque_pointer_types_by_struct[struct_type] = opaque_pointer_types
 
+        # Windows headers define macros such as DrawState (-> DrawStateA) that
+        # would silently rename the types and members sharing their name
+        identifiers: set[str] = set()
+        for enum in [*export.enums, *inline_enums]:
+            identifiers.add(self.get_short_name(enum.name))
+        for struct in all_structs:
+            identifiers.add(self.get_short_name(struct.type))
+            identifiers.update(field.name for field in struct.fields)
+            identifiers.update(
+                virtual_function.name
+                for virtual_function in struct.virtual_functions or []
+            )
+        for identifier in sorted(identifiers):
+            if identifier.isidentifier():
+                output.append(f"#undef {identifier}")
+
         def append_chunk(chunk: IndentWriter | str):
             chunk_text = str(chunk)
             for line in chunk_text.split("\n"):
@@ -733,7 +754,8 @@ class SrcInterface(object):
                 collect_inline_enum_definitions(inline_struct)
 
         def collect_vtable_names(struct: DefinedStruct):
-            if struct.virtual_functions:
+            # a template vtable only exists in IDA as its instantiations
+            if struct.virtual_functions and not struct.template_types:
                 vtable_name = f"{struct.type}_vtbl"
                 if vtable_name not in seen_vtable_names:
                     seen_vtable_names.add(vtable_name)
@@ -753,9 +775,6 @@ class SrcInterface(object):
                     self._normalize_type(struct.type), set()
                 ),
             )
-            if vtable_full_name and vtable_full_name not in seen_vtable_names:
-                seen_vtable_names.add(vtable_full_name)
-                vtable_names.append(vtable_full_name)
             collect_vtable_names(struct)
             collect_inline_enum_definitions(struct)
             forward_chunks.append((struct.namespace, forward))
@@ -773,7 +792,45 @@ class SrcInterface(object):
         append_ordered_chunks(definition_chunks)
         append_ordered_chunks(inline_enum_definition_chunks)
 
+        for alias, type_name in self._collect_template_aliases(export.structs).items():
+            output.append(f"typedef ::{type_name} {alias};")
+
         return (str(output), vtable_names)
+
+    def _collect_template_aliases(self, structs: list[DefinedStruct]) -> dict[str, str]:
+        """Collect the templated types used by function signatures.
+
+        Returns:
+            dict: typedef name (see get_template_alias) to the type it aliases
+        """
+        aliases: dict[str, str] = {}
+
+        def collect(type_name: str | None):
+            type_name = (type_name or "").strip().rstrip("*").strip()
+            if "<" in type_name:
+                aliases.setdefault(get_template_alias(type_name), type_name)
+
+        def collect_struct(struct: DefinedStruct):
+            # signatures of a template struct use its template parameters
+            if struct.template_types:
+                return
+            functions = [
+                *(struct.virtual_functions or []),
+                *(struct.member_functions or []),
+                *(struct.static_member_functions or []),
+            ]
+            for function in functions:
+                collect(function.return_type)
+                for parameter in function.parameters or []:
+                    collect(parameter.type)
+            for static_member in struct.static_members or []:
+                collect(static_member.return_type)
+            for inline_struct in struct.inline_structs:
+                collect_struct(inline_struct)
+
+        for struct in structs:
+            collect_struct(struct)
+        return aliases
 
     def build_enum_string(
         self,
@@ -1069,6 +1126,7 @@ class SrcInterface(object):
 #include <vector>
 #include <set>
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <list>
 #include <deque>
