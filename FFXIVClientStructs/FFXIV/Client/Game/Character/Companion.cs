@@ -87,6 +87,10 @@ public unsafe partial struct Companion {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 87")]
     public partial void PlaceCompanion();
 
+    /// <summary> Follow movement, including a sphere sweep against the level collision. Called by Update every frame. </summary>
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? F3 0F 58 87 ?? ?? ?? ?? 0F 2F 05")]
+    public partial void UpdateFollow();
+
     // Client::Game::Character::Companion::VfxList
     //   Client::Graphics::Vfx::VfxDataListenner
     [GenerateInterop]
