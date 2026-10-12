@@ -12,7 +12,7 @@ public unsafe partial struct AtkFontAnalyzerBase {
     public partial byte* LayOutCharacter(byte** text, AtkFontAnalyzerState* state);
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public struct AtkFontAnalyzerState {
     /// <summary>A copy of <see cref="AtkFontManager.FontSet.DrawFlags"/>. Affected by italicizing macro.</summary>
     [FieldOffset(0x38)] public AtkFontManager.DrawFlags Flags;
