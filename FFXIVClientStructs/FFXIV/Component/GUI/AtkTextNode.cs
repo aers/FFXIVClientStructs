@@ -95,6 +95,14 @@ public unsafe partial struct AtkTextNode : ICreatable<AtkTextNode> {
     [MemberFunction("48 85 C9 0F 84 ?? ?? ?? ?? 4C 8B DC 53 48 81 EC")]
     public partial void ApplyTextFlow();
 
+    /// <summary>Creates a layout cache. To be used when <see cref="TextFlags.FontCache"/> is set.</summary>
+    [MemberFunction("48 85 C9 0F 84 ?? ?? ?? ?? 56 48 83 EC 20 48 89 5C 24 30 48 8B F1 0F B7 89 ?? ?? ?? ??")]
+    public partial void BuildFontCache();
+
+    /// <summary>Frees the cache created from <see cref="BuildFontCache"/> if any.</summary>
+    [MemberFunction("48 85 C9 74 ?? 57 48 83 EC 20 48 8B F9 0F B7 89 ?? ?? ?? ??")]
+    public partial void FreeFontCache();
+
     public AlignmentType AlignmentType {
         get => (AlignmentType)BitOps.GetBits(AlignmentFontType, 0, 0b1111);
         set => SetAlignment(value);

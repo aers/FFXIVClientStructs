@@ -20,6 +20,9 @@ globals:
   0x1428A40B0: g_LanguageCharArr # byte[] no pointer
   0x1428A64E8: g_Client::Game::Control::InputManager_MouseButtonHoldState
   0x1428A65E0: g_GlobalUIScale
+  0x1428A6650: g_Component::GUI::AtkFontManager_GameFontTable # FontTableEntry[41]
+  0x1428A6A30: g_Component::GUI::AtkFontManager_LobbyFontTableStandardResolution # FontTableEntry[41]
+  0x1428A6E10: g_Component::GUI::AtkFontManager_LobbyFontTableHighResolution # FontTableEntry[41]
   0x1428C20D0: g_BoneSimulatorFrameRate # 60FPS, used as a divisor in BoneSimulator calculations
   0x1428C20D4: g_ForceOverrideSimulationTime # BonePhysicsModule.GetForceOverrideSimulationTime
   0x1428D3C98: g_StackCookie
@@ -8957,8 +8960,11 @@ classes:
       0x140639990: ctor
       0x140639CF0: Initialize
       0x14063A550: Terminate
+      0x14063A760: LoadShaders
       0x14063ACE0: Begin
       0x14063B000: Draw
+      0x14063BA60: SetDrawState
+      0x14063C210: BindShaders
       0x1406E5480: ProcessUICommands16  # index size of buffer
       0x1406E6020: ProcessUICommands32
   Component::GUI::AtkEventTarget:
@@ -9174,6 +9180,15 @@ classes:
       0x140657D50: ctor
       0x1406587F0: ReadIntExpression
       0x140658820: ReadStringExpression
+      0x14065AE60: FitUnits
+      0x14065B090: SplitWord
+  Component::GUI::AtkFontManager:
+    funcs:
+      0x14064ECF0: BuildFont
+  Component::GUI::AtkFontManager::FontSet:
+    funcs:
+      0x14064FC50: GetGlyph
+      0x140651DC0: PickFont
   Component::GUI::AtkCursor:
     funcs:
       0x140640DA0: Show
@@ -9185,6 +9200,8 @@ classes:
       - ea: 0x14217C288
     vfuncs:
       8: dtor
+    funcs:
+      0x1406EEC70: LayOutCharacter
   Component::GUI::AtkFontAnalyzerFunctor:
     vtbls:
       - ea: 0x14217C6A8
@@ -9455,6 +9472,8 @@ classes:
       0x140664960: SetLineSpacing
       0x140664980: GetLineSpacing
       0x1406650D0: ToggleFontCache
+      0x140665140: FreeFontCache
+      0x1406651D0: BuildFontCache
       0x1406653B0: ResizeNodeForCurrentText
 #     0x140471660: ctor # INLINED IN 7.0 in CreateResNode
   Component::GUI::AtkNineGridNode:
@@ -26208,6 +26227,11 @@ classes:
     vtbls:
       - ea: 0x142247E08
         base: Component::GUI::AtkTextNodeRenderer
+    vfuncs:
+      3: PrepareNode
+    funcs:
+      0x141326FF0: AllocateBake
+      0x141327640: DrawBaked
   Client::UI::AddonWeeklyBingo::DutySlot:
     vtbls:
       - ea: 0x142266850
