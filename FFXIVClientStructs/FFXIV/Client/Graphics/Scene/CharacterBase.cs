@@ -1,5 +1,6 @@
 using System.Text;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Animation;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
@@ -55,6 +56,8 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x2E8)] public float WetnessDepth;    // Set to ~character height in GPose and higher values when swimming or diving.
     [FieldOffset(0x2EC)] public float ForcedWetness;   // Set by vfunc 51 when using GPose, gets set to 0 in UpdateWetness every frame.
 
+    [FieldOffset(0x2F0)] public uint AnimationLoadInProgressBits; // Whether animations are loading and should be polled each PopulateAnimationsFromStaging to see if they are done. Each bit is a different kind of animation.
+    [FieldOffset(0x2F4)] public uint AnimationLoadDoneBits; // Whether animations are not loading (finished or there aren't any). Each bit is a different kind of animation.
     // next few fields are used temporarily when loading the render object and cleared after load
     [FieldOffset(0x2F8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
 
@@ -69,14 +72,21 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x358)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
     [FieldOffset(0x360)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+    [FieldOffset(0x368)] public StdVector<Pointer<PartialAnimationPackResourceHandle>> AnimationsToLoad; // Corresponds to bit 0 in AnimationLoadInProgressBits
 
+    [FieldOffset(0x3D0)] public PartialAnimationPackResourceHandle* FacePapHandle; // located with ResolvePapPath(..., "resident/face") if the AnimationWorkTableResourceHandle's flags for this character type have the right bit.
     [FieldOffset(0x3D8), FixedSizeArray] internal FixedSizeArray5<SkeletonAnimationContainer> _skeletonAnimationContainers; // tentative name
+
+    [FieldOffset(0x920)] public uint MaterialAnimationLoadInProgressBits; // For each index in MaterialAnimationPacks (if non null), if the corresponding bit is set here, the animation pack will be put into place when loaded.
 
     [FieldOffset(0x940)] public SkeletonResourceHandle* MaterialAnimationSkeleton;
 
     [FieldOffset(0x948)] public ResourceHandle** MaterialAnimationPacks;
 
+    [FieldOffset(0x950)] public ulong AnimationFlags; // Loaded from the AnimationWorkTableResourceHandle for the type of character (human/demi/monster/weapon). Can be used to load animations from the pap load table and/or the 'resident/extra.pap'.
     [FieldOffset(0x958)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap" in LoadAnimation
+
+    [FieldOffset(0x9B0)] public float AgeGameSecondsLooping; // The age in seconds (scaled by GameSpeedMultiplier) of this character, looping back to 0 after 1000 seconds.
 
     public bool IsChangingVisor {
         get => StateFlags.HasFlag(StateFlag.VisorChanging);
@@ -114,6 +124,9 @@ public unsafe partial struct CharacterBase {
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 39 BB ?? ?? ?? ?? 75 08 48 8B CB")]
+    public partial void PopulateAnimationsFromStaging();
+
     /// <summary>
     /// Sets up the given's slot <see cref="Models"/> and/or <see cref="Materials"/> from the resources newly loaded in <see cref="PerSlotStagingArea"/>.
     /// Can also perform other setup tasks on the slot, such as <see cref="ColorTableTextures"/>.
@@ -121,6 +134,23 @@ public unsafe partial struct CharacterBase {
     /// <param name="slot">The slot to set up.</param>
     [MemberFunction("89 54 24 ?? 55 56 41 56 48 81 EC")]
     public partial nint SetupSlotModel(uint slot); // TODO: change return type to void
+
+    /// <summary>
+    /// Begins playing the specified animation, adding to the given animation controller handle or creating a new one as needed.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The animation must exist in a partial animation pack that this character has already finished loading.
+    /// </para>
+    /// <para>
+    /// This does not stop any previous animation(s) that are already playing.
+    /// </para>
+    /// </remarks>
+    /// <param name="animationName">The name of the animation to play, as specified in its <see cref="PartialAnimationPackResourceHandle"/>.</param>
+    /// <param name="playParams">Configuration for playing the animation.</param>
+    /// <param name="existingControllerHandle">The address of a pointer to the animation controller handle to add the new animation to, or of a null pointer that will point to the new animation controller handle.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 44 24 ?? 48 85 C0 75 19"), GenerateStringOverloads]
+    public partial void PlayAnimation(CStringPointer animationName, PlayAnimationParams* playParams, AnimationControllerHandle** existingControllerHandle);
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
