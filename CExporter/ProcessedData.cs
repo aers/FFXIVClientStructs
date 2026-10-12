@@ -50,6 +50,7 @@ public class ProcessedFunctionField : ProcessedField {
 }
 
 public class ProcessedStaticMembers {
+    public required string Name;
     public required string Signature;
     public required ushort[] RelativeFollowOffsets;
     public bool IsPointer;

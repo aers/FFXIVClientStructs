@@ -109,9 +109,14 @@ public partial class Exporter {
         foreach (var methodInfo in methods) {
             var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
             if (staticAddress != null) {
+                var name = methodInfo.Name;
+                if (name.StartsWith("Get")) {
+                    name = name[3..];
+                }
                 currentStruct.StaticMembers ??= [];
                 currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
                     new ProcessedStaticMembers {
+                        Name = name,
                         Signature = staticAddress.Signature,
                         RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
                         IsPointer = staticAddress.IsPointer,
