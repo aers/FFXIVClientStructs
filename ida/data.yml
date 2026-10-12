@@ -6758,9 +6758,26 @@ classes:
       2: Allocate
       3: Reallocate
       4: Free
+      9: GetSize
+  Client::Graphics::AllocatorPool:
+    vtbls:
+      - ea: 0x1421565E8
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorHeap:
+    vtbls:
+      - ea: 0x142156638
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorHybrid:
+    vtbls:
+      - ea: 0x142156688
+        base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorLowLevel:
     vtbls:
       - ea: 0x1421566E8
+        base: Client::Graphics::IAllocator
+  Client::Graphics::AllocatorVRAM:
+    vtbls:
+      - ea: 0x142156738
         base: Client::Graphics::IAllocator
   Client::Graphics::AllocatorManager:
     instances:
