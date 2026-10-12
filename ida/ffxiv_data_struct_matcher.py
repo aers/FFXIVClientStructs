@@ -139,6 +139,7 @@ def get_structs() -> DefinedStructExport:
             for sm in struct["static_members"]:
                 static_members.append(
                     DefinedStructStaticMember(
+                        sm["name"],
                         sm["signature"],
                         sm["relative_follow_offsets"],
                         sm["return_type"],

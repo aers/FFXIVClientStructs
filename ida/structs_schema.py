@@ -65,8 +65,9 @@ class DefinedStructFuncField(DefinedStructField, object):
 
 
 class DefinedStructStaticMember:
-    def __init__(self, signature, relative_offsets, return_type, is_pointer):
-        # type: (str, list[int], str, bool) -> None
+    def __init__(self, name, signature, relative_offsets, return_type, is_pointer):
+        # type: (str, str, list[int], str, bool) -> None
+        self.name = name
         self.signature = signature
         self.relative_offsets = relative_offsets
         self.return_type = return_type

@@ -124,9 +124,14 @@ public class Exporter {
             foreach (var methodInfo in methods) {
                 var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
                 if (staticAddress != null) {
+                    var name = methodInfo.Name;
+                    if (name.StartsWith("Get")) {
+                        name = name[3..];
+                    }
                     currentStruct.StaticMembers ??= [];
                     currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
                         new ProcessedStaticMembers {
+                            Name = name,
                             Signature = staticAddress.Signature,
                             RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
                             IsPointer = staticAddress.IsPointer,
@@ -805,6 +810,7 @@ public class ProcessedFunctionField : ProcessedField {
 }
 
 public class ProcessedStaticMembers {
+    public required string Name;
     public required string Signature;
     public required ushort[] RelativeFollowOffsets;
     public bool IsPointer;
@@ -1105,6 +1111,8 @@ public class ProcessedStaticMembersConverter : IYamlTypeConverter {
     public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedStaticMembers s) return;
         emitter.Emit(new MappingStart());
+        emitter.Emit(new Scalar("name"));
+        emitter.Emit(new Scalar(s.Name));
         emitter.Emit(new Scalar("signature"));
         emitter.Emit(new Scalar(s.Signature));
         emitter.Emit(new Scalar("relative_follow_offsets"));

@@ -231,6 +231,7 @@ class BaseApi:
                 for sm in struct["static_members"]:
                     static_members.append(
                         DefinedStructStaticMember(
+                            sm["name"],
                             sm["signature"],
                             sm["relative_follow_offsets"],
                             sm["return_type"],
@@ -1182,15 +1183,10 @@ if api is None:
                     self.get_tinfo_from_type(return_type),
                     ida_typeinf.TINFO_DEFINITE,
                 )
-                if static_member.is_pointer:
-                    ida_name.set_name(
-                        ea,
-                        "g_{0}_{1}".format(self.clean_name(struct.type), "PtrInstance"),
-                    )
-                else:
-                    ida_name.set_name(
-                        ea, "g_{0}_{1}".format(self.clean_name(struct.type), "Instance")
-                    )
+                ida_name.set_name(
+                    ea,
+                    "g_{0}_{1}".format(self.clean_name(struct.type), static_member.name),
+                )
 
             def should_update_member_func(self):
                 return (
