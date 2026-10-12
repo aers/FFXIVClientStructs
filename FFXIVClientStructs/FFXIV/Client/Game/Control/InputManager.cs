@@ -4,7 +4,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct InputManager {
-    [FieldOffset(0x28)] public int MouseButtonHoldStateRaw; // MouseButtonHoldState stored as a dword
+
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F 28 F0 45 0F 57 C0", 3)]
+    public static partial InputManager* Instance();
+
+    [FieldOffset(0x28)] public int MouseButtonHoldStateRaw; // TODO: change to private uint and add [BitField<MouseButtonHoldState>(nameof(HeldMouseButtons), 0, 8)], then remove HeldMouseButtons property below
     [FieldOffset(0x2C)] public float MouseDragDistance; // accumulated cursor travel; < 10.0f is treated as a click on release.
     [FieldOffset(0x30)] public int MouseDragDeltaX;
     [FieldOffset(0x34)] public int MouseDragDeltaY;
@@ -13,16 +17,13 @@ public unsafe partial struct InputManager {
     [FieldOffset(0x40)] public bool MouseDragActive;
     [FieldOffset(0x48)] public bool CursorRectActive;
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F 28 F0 45 0F 57 C0", 3)]
-    public static partial InputManager* Instance();
-
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 44 8B C3")]
     public partial bool GetInputStatus(InputCode code);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C8 4C 8B C7")]
     public static partial bool IsAutoRunning();
 
-    [StaticAddress("8B 05 ?? ?? ?? ?? 41 8B DF", 2)]
+    [StaticAddress("8B 05 ?? ?? ?? ?? 41 8B DF", 2), Obsolete("Use InputManager.Instance()->HeldMouseButtons")]
     public static partial MouseButtonHoldState* GetMouseButtonHoldState();
 
     public MouseButtonHoldState HeldMouseButtons {
@@ -30,9 +31,9 @@ public unsafe partial struct InputManager {
         set => MouseButtonHoldStateRaw = (int)value;
     }
 
-    public static bool IsLeftMouseDown() => GetMouseButtonHoldState()->HasFlag(MouseButtonHoldState.Left);
-    public static bool IsRightMouseDown() => GetMouseButtonHoldState()->HasFlag(MouseButtonHoldState.Right);
-    public static bool IsAnyMouseDown() => *GetMouseButtonHoldState() != 0;
+    public static bool IsLeftMouseDown() => Instance()->HeldMouseButtons.HasFlag(MouseButtonHoldState.Left);
+    public static bool IsRightMouseDown() => Instance()->HeldMouseButtons.HasFlag(MouseButtonHoldState.Right);
+    public static bool IsAnyMouseDown() => Instance()->HeldMouseButtons != 0;
 
     [Flags]
     public enum MouseButtonHoldState : byte {
