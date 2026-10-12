@@ -53,7 +53,7 @@ public unsafe partial struct AddonNamePlate {
 
         /// <summary>Draws a bake at the node's transform, centered on the node.</summary>
         [MemberFunction("48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 54 41 56 41 57 48 83 EC 50 F3 0F 10 42 ??")]
-        public partial void DrawBaked(AtkResNode* node, BakeData* bakeData);
+        public partial void DrawBaked(AtkTextNode* node, BakeData* bakeData);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
