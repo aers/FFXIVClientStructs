@@ -7488,10 +7488,19 @@ classes:
         base: Client::Graphics::Render::BaseRenderer
     funcs:
       0x14028F6D0: ctor
-  Client::Graphics::Render::UnknownRenderer:
+  Client::Graphics::Render::Decal:
+    vtbls:
+      - ea: 0x14214C738
+        base: Client::Graphics::Render::RenderObject
+  Client::Graphics::Render::DecalRenderer:
     vtbls:
       - ea: 0x14214C780
         base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x140296180: ExecuteDecalJob
+  Client::Graphics::JobSystem<Client::Graphics::Render::DecalRenderer>:
+    vtbls:
+      - ea: 0x14214C778
   Client::Graphics::JobSystem<Client::Graphics::Render::WaterRenderer>:
     vtbls:
       - ea: 0x14214C7E8
@@ -7592,6 +7601,7 @@ classes:
       0x1402B9700: CreateLight
       0x1402BA1F0: Render
       0x1402BABD0: RenderView
+      0x1402B9590: CreateDecal
   Client::Graphics::Render::ShadowManager:
     instances:
       - ea: 0x1428F6480
@@ -8155,6 +8165,8 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     funcs:
       0x1404501F0: ctor
+      0x140450240: CreateRenderObject
+      0x140798C40: Create
   Client::Graphics::Scene::BGObject:
     vtbls:
       - ea: 0x14216D328
