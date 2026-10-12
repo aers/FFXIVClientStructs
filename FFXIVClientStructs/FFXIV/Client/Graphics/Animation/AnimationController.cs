@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Animation;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct AnimationController {
-    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<Pointer<hkaDefaultAnimationControl>> _unk18;
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<Pointer<IAnimationControllerListener>> _listeners;
     [FieldOffset(0x38)] public hkaDefaultAnimationControl* HavokAnimationControl;
     [FieldOffset(0x40)] public PartialAnimationPackResourceHandle* PapResourceHandle;
     [FieldOffset(0x48)] internal void* Unk48;

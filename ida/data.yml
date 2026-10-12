@@ -7185,6 +7185,10 @@ classes:
   Client::Graphics::Animation::IAnimationControllerListener:
     vtbls:
       - ea: 0x142140530
+    vfuncs:
+      3: ControllerEaseOutFinished
+      7: ControllerStop
+      8: ControllerCreated
   Client::Graphics::Animation::PartialSkeleton:
     vtbls:
       - ea: 0x142140578
