@@ -42,8 +42,7 @@ if api is None:
     except ImportError as e:
         print("Warning: Unable to load IDA failed with {0}".format(e))
     else:
-        print("Script has moved to new location inside of ida folder.")
-        exit(1)
+        raise ValueError("Script moved to new location in ./ida/struct_import.py")
 
 if api is None:
     try:
