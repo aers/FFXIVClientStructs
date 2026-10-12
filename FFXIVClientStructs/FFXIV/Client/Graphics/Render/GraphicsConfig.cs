@@ -16,6 +16,8 @@ public unsafe partial struct GraphicsConfig {
 
     [FieldOffset(0x12)] public bool ShadowLOD;
     [FieldOffset(0x13)] public bool ShadowBgLOD;
+    /// <summary> Gates the occlusion tests in <see cref="Culling.CullingManager"/>. Not tied to a ConfigOption, set on load. </summary>
+    [FieldOffset(0x14)] public bool OcclusionCulling;
 
     [FieldOffset(0x15)] public bool CharaWetness;
     [FieldOffset(0x16)] public bool CharaOutline; // based on the state of AtkUnitManagerFlags.UiHidden
