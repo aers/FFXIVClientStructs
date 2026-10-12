@@ -102,20 +102,20 @@ public unsafe partial struct AtkFontManager {
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public partial struct Glyph {
         [FieldOffset(0x00)] public uint Utf8Value; // imagine a UTF-8 byte sequence, reverse it, and pad before with zeroes
-        [BitField<ushort>(nameof(X), 0, 12)]
-        [BitField<ushort>(nameof(Y), 12, 12)]
-        [BitField<byte>(nameof(Channel), 24, 2)]
-        [BitField<byte>(nameof(TextureIndex), 26, 6)]
+        [BitField<int>(nameof(X), 0, 12)]
+        [BitField<int>(nameof(Y), 12, 12)]
+        [BitField<int>(nameof(Channel), 24, 2)]
+        [BitField<int>(nameof(TextureIndex), 26, 6)]
         [FieldOffset(0x04)] private uint _packed;
         [FieldOffset(0x08)] public byte Width;
         [FieldOffset(0x09)] public byte Height;
         [FieldOffset(0x0A)] public sbyte OffsetX;
         [FieldOffset(0x0B)] public sbyte OffsetY;
 
-        public partial ushort X { readonly get; set; }
-        public partial ushort Y { readonly get; set; }
-        public partial byte Channel { readonly get; set; }
-        public partial byte TextureIndex { readonly get; set; }
+        public partial int X { readonly get; set; }
+        public partial int Y { readonly get; set; }
+        public partial int Channel { readonly get; set; }
+        public partial int TextureIndex { readonly get; set; }
 
         public (int X, int Y, int Channel, int TextureIndex) Packed {
             readonly get => (X, Y, Channel, TextureIndex);
