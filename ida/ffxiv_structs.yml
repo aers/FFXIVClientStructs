@@ -18432,8 +18432,6 @@ structs:
     parameters:
     - type: Client::Sound::ISoundData*
       name: this
-  - name: IsPlaying
-    offset: 296
   member_functions: []
 - type: Client::Sound::SoundLayoutOptions
   name: SoundLayoutOptions
