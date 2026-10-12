@@ -4334,17 +4334,45 @@ classes:
       0x140061050: AddTask
       0x1400610C0: ExecuteAllTasks
       0x140061110: ExecuteJobList
-      0x140061310: ExecuteJobList2
+      0x140061310: ScheduleJobList
   Client::System::Framework::TaskManager::JobPool:
     funcs:
+      0x14005FF00: Enqueue
       0x1400600F0: ctor
+      0x140060B70: WakeAllThreads
   Client::System::Framework::TaskManager::JobPool::InnerThread:
     vtbls:
       - ea: 0x142112378
         base: Client::System::Threading::Thread
+  Client::System::Framework::JobQueue: # JobQueue<128>
+    instances:
+      - ea: 0x1428F0F38
+        pointer: false
+  Client::System::Framework::JobQueue::JobQueueListData:
+    vtbls:
+      - ea: 0x1421121D0
+        base: Client::System::Framework::Task
   Client::System::Framework::JobListInterface:
     vtbls:
       - ea: 0x1421123B0
+    vfuncs:
+      0: dtor
+      1: GetJob
+      2: Prepare
+      3: Wait
+      4: GetTaskCount
+  Client::System::Framework::JobListTaskPtrArray:
+    vtbls:
+      - ea: 0x1421123D8
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x142112400
+        base: Client::System::Framework::Task
+  Client::System::Framework::JobListArgArray:
+    vtbls:
+      - ea: 0x142112418
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x142112440
+        base: Client::System::Framework::Task
   Client::System::Framework::JobListArgArrayAndIndex:
     vtbls:
       - ea: 0x142112458
@@ -4352,8 +4380,19 @@ classes:
       - ea: 0x142112480
         base: Client::System::Framework::Task
     funcs:
+      0x140061F50: ClaimTask
       0x140062010: ctor
       0x1400620D0: ctor2
+  Client::System::Framework::JobListNoArg:
+    vtbls:
+      - ea: 0x142112498
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x1421124C0
+        base: Client::System::Framework::Task
+    funcs:
+      0x140062320: ClaimTask
+      0x1400623D0: ctor
+      0x140062480: ctor2
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x1421272D8
@@ -7672,6 +7711,7 @@ classes:
         base: Client::Graphics::Render::GeometryInstancingRenderer
     funcs:
       0x140289260: ctor
+      0x14028A620: PrepareJob
   Client::Graphics::JobSystem<Client::Graphics::Render::TerrainRenderer>:
     vtbls:
       - ea: 0x14214C708
@@ -7794,6 +7834,7 @@ classes:
       0x1402B9700: CreateLight
       0x1402BA1F0: Render
       0x1402BABD0: RenderView
+      0x1402B78E0: AssignThreadWriters
       0x1402B9590: CreateDecal
   Client::Graphics::Render::ShadowManager:
     instances:
