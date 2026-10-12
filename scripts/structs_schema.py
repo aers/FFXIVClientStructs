@@ -65,6 +65,7 @@ class DefinedStructFuncField(DefinedStructField):
 
 @dataclass
 class DefinedStructStaticMember:
+    name: str
     signature: str
     relative_offsets: list[int]
     return_type: str
@@ -229,6 +230,7 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
         for sm in struct["static_members"]:
             static_members.append(
                 DefinedStructStaticMember(
+                    sm["name"],
                     sm["signature"],
                     sm["relative_follow_offsets"],
                     sm["return_type"],
