@@ -40,11 +40,11 @@ public unsafe partial struct AddonNamePlate {
 
         /// <summary>Draws a plate's text.</summary>
         [VirtualFunction(2)]
-        public partial void Draw(AtkResNode* node);
+        public partial void Draw(AtkTextNode* node);
 
         /// <summary>Sets a text node up for a draw; for a bake (<see cref="CurrentBakeData"/> set), the bake's rect and a node scale of 1.</summary>
         [VirtualFunction(3)]
-        public partial void PrepareNode(TextDrawArea* outArea, AtkFontManager.FontSet* fontSet, AtkResNode* node);
+        public partial void PrepareNode(TextDrawArea* outArea, AtkFontManager.FontSet* fontSet, AtkTextNode* node);
 
         /// <summary>Frees its data in <see cref="RenderTexture"/> and allocate a new one.</summary>
         /// <returns><c>false</c> if it doesn't fit.</returns>

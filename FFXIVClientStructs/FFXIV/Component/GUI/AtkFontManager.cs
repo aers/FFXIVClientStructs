@@ -98,19 +98,39 @@ public unsafe partial struct AtkFontManager {
         Italic = 1 << 27,
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
-    public struct Glyph {
+    public partial struct Glyph {
         [FieldOffset(0x00)] public uint Utf8Value; // imagine a UTF-8 byte sequence, reverse it, and pad before with zeroes
-        [FieldOffset(0x04)] public uint Packed;
+        [BitField<ushort>(nameof(X), 0, 12)]
+        [BitField<ushort>(nameof(Y), 12, 12)]
+        [BitField<byte>(nameof(Channel), 24, 2)]
+        [BitField<byte>(nameof(TextureIndex), 26, 6)]
+        [FieldOffset(0x04)] private uint _packed;
         [FieldOffset(0x08)] public byte Width;
         [FieldOffset(0x09)] public byte Height;
         [FieldOffset(0x0A)] public sbyte OffsetX;
         [FieldOffset(0x0B)] public sbyte OffsetY;
 
-        public readonly int X => (int)(Packed & 0xFFF);
-        public readonly int Y => (int)((Packed >> 12) & 0xFFF);
-        public readonly int Channel => (int)((Packed >> 24) & 3);
-        public readonly int TextureIndex => (int)(Packed >> 26);
+        public partial ushort X { readonly get; set; }
+        public partial ushort Y { readonly get; set; }
+        public partial byte Channel { readonly get; set; }
+        public partial byte TextureIndex { readonly get; set; }
+
+        public (int X, int Y, int Channel, int TextureIndex) Packed {
+            readonly get => (X, Y, Channel, TextureIndex);
+            set {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.X, 0);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.X, 0xFFF);
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Y, 0);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.Y, 0xFFF);
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Channel, 0);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.Channel, 3);
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.TextureIndex, 0);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.TextureIndex, 0x3F);
+                _packed = (uint)(value.X & 0xFFF) | ((uint)(value.Y & 0xFFF) << 12) | ((uint)(value.Channel & 3) << 24) | ((uint)value.TextureIndex << 26);
+            }
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
