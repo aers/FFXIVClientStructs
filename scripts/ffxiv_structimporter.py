@@ -10,8 +10,20 @@ except ImportError:
     from yaml import SafeLoader as Loader
 
 import os
+import sys
 from abc import abstractmethod
 from time import time
+
+# The schema and wrapper modules live in ./shared
+try:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+except NameError:
+    script_dir = os.path.dirname(str(sourceFile))  # noqa
+
+for path in (script_dir, os.path.join(script_dir, "shared")):
+    if path not in sys.path:
+        sys.path.append(os.path.join(script_dir, "shared"))
+
 from structs_schema import *
 from src_wrapper import SrcInterface
 

@@ -1,7 +1,7 @@
 from os.path import join, dirname
 import sys
 
-sys.path.append(join(dirname(__file__), ".."))
+sys.path.append(join(dirname(__file__), "..", "shared"))
 
 from ida_wrapper import IdaInterface
 from structs_schema import get_yaml
