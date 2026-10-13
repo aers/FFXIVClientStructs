@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using FFXIVClientStructs.Attributes;
 using InteropGenerator.Runtime.Attributes;
 using Pastel;
@@ -348,6 +349,78 @@ public partial class Exporter {
         }
     }
 
+    [GeneratedRegex(@"[A-Za-z_]\w*(::[A-Za-z_]\w*)*")]
+    private static partial Regex TypeNameRegex();
+
+    // A nested type can't be forward declared in C++, so any reference to one (even through a pointer or a
+    // function signature) needs the struct that declares it to be emitted first.
+    private static void OrderByNestedTypeReferences(Dictionary<string, HashSet<string>> structToFullDeps) {
+        var inlineOwners = new Dictionary<string, string>();
+        var inlineTypes = _structs.SelectMany(t => t.ChildrenAndSelf.Skip(1)).Select(t => t.StructTypeName).ToHashSet();
+        var topLevel = _structs.Where(t => !inlineTypes.Contains(t.StructTypeName)).ToArray();
+        foreach (var owner in topLevel)
+            foreach (var inline in owner.ChildrenAndSelf.Skip(1))
+                inlineOwners.TryAdd(inline.StructTypeName, owner.StructTypeName);
+
+        var topLevelNames = topLevel.Select(t => t.StructTypeName).ToHashSet();
+        var dependencies = new Dictionary<string, HashSet<string>>();
+        foreach (var s in topLevel) {
+            var deps = new HashSet<string>();
+            foreach (var dependency in structToFullDeps[s.StructTypeName])
+                addDependency(dependency);
+            foreach (var reference in s.ChildrenAndSelf.SelectMany(typeReferences))
+                foreach (Match match in TypeNameRegex().Matches(reference))
+                    if (inlineOwners.ContainsKey(match.Value)) addDependency(match.Value);
+            dependencies[s.StructTypeName] = deps;
+
+            void addDependency(string name) {
+                if (inlineOwners.TryGetValue(name, out var owner)) name = owner;
+                if (name != s.StructTypeName && topLevelNames.Contains(name)) deps.Add(name);
+            }
+        }
+
+        // keeps the existing order wherever it already satisfies the dependencies
+        var remaining = topLevel.ToList();
+        var ordered = new List<ProcessedStruct>(_structs.Count);
+        var emitted = new HashSet<string>();
+        while (remaining.Count > 0) {
+            var index = remaining.FindIndex(t => dependencies[t.StructTypeName].IsSubsetOf(emitted));
+            if (index < 0) index = 0; // cyclic, the importer falls back to an opaque pointer for these
+            ordered.Add(remaining[index]);
+            emitted.Add(remaining[index].StructTypeName);
+            remaining.RemoveAt(index);
+        }
+        ordered.AddRange(_structs.Where(t => inlineTypes.Contains(t.StructTypeName)));
+        _structs = ordered;
+
+        static IEnumerable<string> typeReferences(ProcessedStruct s) {
+            foreach (var field in s.Fields) {
+                foreach (var reference in fieldReferences(field))
+                    yield return reference;
+                if (field is not ProcessedFunctionField functionField) continue;
+                yield return functionField.FunctionReturnType.FixTypeName();
+                foreach (var reference in functionField.FunctionParameters.SelectMany(fieldReferences))
+                    yield return reference;
+            }
+            foreach (var virtualFunction in s.VirtualFunctions ?? []) {
+                if (virtualFunction.VirtualFunctionReturnType != null)
+                    yield return virtualFunction.VirtualFunctionReturnTypeOverride ?? virtualFunction.VirtualFunctionReturnType.FixTypeName();
+                foreach (var reference in (virtualFunction.VirtualFunctionParameters ?? []).SelectMany(fieldReferences))
+                    yield return reference;
+            }
+        }
+
+        static IEnumerable<string> fieldReferences(ProcessedField field) {
+            if (field.FieldType.IsFunctionPointer || field.FieldType.IsUnmanagedFunctionPointer) yield break;
+            yield return field.FieldTypeOverride ?? field.FieldType.FixTypeName();
+            var templateArguments = field.FieldType.IsConstructedGenericType && !field.FieldType.IsStdDefiniton()
+                ? field.FieldType.GenericTypeArguments
+                : field.FieldTypeOverrideTemplates ?? [];
+            foreach (var templateArgument in templateArguments)
+                yield return templateArgument.FixTypeName();
+        }
+    }
+
     public static void Write(DirectoryInfo dir) {
         // make sure we have all the dependencies for each struct before we write them
         var structToFullDeps = ResolveFullDependencies();
@@ -355,6 +428,8 @@ public partial class Exporter {
             var cmp = structToFullDeps[a.StructTypeName].Count.CompareTo(structToFullDeps[b.StructTypeName].Count);
             return cmp != 0 ? cmp : string.Compare(a.StructTypeName, b.StructTypeName, StringComparison.Ordinal);
         });
+
+        OrderByNestedTypeReferences(structToFullDeps);
 
         void orderInlineStructs(ProcessedStruct parent) {
             if (parent.InlineStructs == null) return;

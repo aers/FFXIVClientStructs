@@ -532,90 +532,14 @@ class SrcInterface(object):
             for struct in export.structs
             if self._normalize_type(struct.type) not in inline_struct_types
         ]
-        top_level_types = {
-            self._normalize_type(struct.type) for struct in top_level_structs
-        }
-        struct_dependencies = {type_name: set() for type_name in top_level_types}
-
-        def references_inline_type(reference: str, inline_type: str) -> bool:
-            start = reference.find(inline_type)
-            while start >= 0:
-                end = start + len(inline_type)
-                before_is_identifier = start > 0 and (
-                    reference[start - 1].isalnum() or reference[start - 1] == "_"
-                )
-                after_is_identifier = end < len(reference) and (
-                    reference[end].isalnum() or reference[end] == "_"
-                )
-                if not before_is_identifier and not after_is_identifier:
-                    return True
-                start = reference.find(inline_type, start + 1)
-            return False
 
         def iter_struct_tree(struct: DefinedStruct):
             yield struct
             for inline_struct in struct.inline_structs:
                 yield from iter_struct_tree(inline_struct)
 
-        for struct in top_level_structs:
-            struct_type = self._normalize_type(struct.type)
-            references = []
-            for nested_struct in iter_struct_tree(struct):
-                for field in nested_struct.fields:
-                    references.append(field.type)
-                    references.extend(field.template_args or [])
-                    field_type = self._normalize_type(field.type)
-                    if (
-                        field_type in struct_dependencies
-                        and field_type != struct_type
-                        and not field_type.endswith("*")
-                    ):
-                        struct_dependencies[struct_type].add(field_type)
-                    if field.base:
-                        if field_type in struct_dependencies and field_type != struct_type:
-                            struct_dependencies[struct_type].add(field_type)
-                    if hasattr(field, "return_type"):
-                        references.append(field.return_type or "")
-                    if getattr(field, "parameters", None):
-                        references.extend(
-                            parameter.type for parameter in field.parameters
-                        )
-                for virtual_function in nested_struct.virtual_functions or []:
-                    references.append(virtual_function.return_type or "")
-                    references.extend(
-                        parameter.type
-                        for parameter in virtual_function.parameters or []
-                    )
-
-            for inline_type, owner_type in inline_type_owners.items():
-                if owner_type == struct_type or owner_type not in top_level_types:
-                    continue
-                if any(
-                    references_inline_type(
-                        self._normalize_type(reference), inline_type
-                    )
-                    for reference in references
-                ):
-                    struct_dependencies[struct_type].add(owner_type)
-
-        ordered_structs = []
-        remaining_structs = list(top_level_structs)
-        emitted_types = set()
-        while remaining_structs:
-            ready_index = next(
-                (
-                    index
-                    for index, struct in enumerate(remaining_structs)
-                    if struct_dependencies[self._normalize_type(struct.type)]
-                    <= emitted_types
-                ),
-                None,
-            )
-            if ready_index is None:
-                ready_index = 0
-            struct = remaining_structs.pop(ready_index)
-            ordered_structs.append(struct)
-            emitted_types.add(self._normalize_type(struct.type))
+        # CExporter writes the structs in dependency order
+        ordered_structs = top_level_structs
 
         ordered_type_indices = {
             self._normalize_type(struct.type): index
