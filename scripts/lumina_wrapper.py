@@ -6,19 +6,15 @@ from os import getenv, getcwd, makedirs, listdir
 from sys import platform, path
 from shutil import rmtree
 from xml.dom import pulldom
-from pythonnet import load as dotnetload, unload
+from pythonnet import load as dotnetload
 from json import load as jsonload
 from enum import IntEnum
 from dataclasses import dataclass
 import gc
 
 tempdirname = join(getcwd(), "luminatmp")
-try:
-    rmtree(tempdirname)
-except:
-    pass  # ignore error
-finally:
-    makedirs(tempdirname)
+rmtree(tempdirname, ignore_errors=True)
+makedirs(tempdirname, exist_ok=True)
 
 if platform.startswith("linux"):
     launcher_ini = join(getenv("HOME"), ".xlcore", "launcher.ini")
@@ -162,6 +158,7 @@ def get_excel_header_files() -> dict[str, tuple[int, list[ExcelColumnDefinition]
 
         from System.Runtime.Loader import AssemblyLoadContext # type: ignore
         from System import Activator, GC # type: ignore
+        from System.IO import File, MemoryStream # type: ignore
 
         ctx = AssemblyLoadContext("temp", isCollectible=True)
 
@@ -170,8 +167,9 @@ def get_excel_header_files() -> dict[str, tuple[int, list[ExcelColumnDefinition]
 
             for file in listdir(tempdirname):
                 if file.endswith(".dll"):
-                    assemblies[file] = context.LoadFromAssemblyPath(
-                        abspath(join(tempdirname, file))
+                    # LoadFromAssemblyPath would keep the file locked until the process exits
+                    assemblies[file] = context.LoadFromStream(
+                        MemoryStream(File.ReadAllBytes(abspath(join(tempdirname, file))))
                     )
 
             assembly = assemblies["Lumina.dll"]
@@ -216,8 +214,5 @@ def get_excel_header_files() -> dict[str, tuple[int, list[ExcelColumnDefinition]
         GC.WaitForPendingFinalizers()
         return excel_header_files
 
-    excel_header_files = _isolated_clr()
-
-    unload()
-
-    return excel_header_files
+    # pythonnet.unload() would break every later use of clr in the same process
+    return _isolated_clr()
