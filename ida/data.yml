@@ -9487,6 +9487,7 @@ classes:
       0x14065B090: SplitWord
   Component::GUI::AtkFontManager:
     funcs:
+      0x14064E8C0: UnloadFonts
       0x14064ECF0: BuildFont
   Component::GUI::AtkFontManager::FontSet:
     funcs:
