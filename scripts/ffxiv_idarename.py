@@ -17,6 +17,19 @@ from abc import abstractmethod
 if sys.version_info[0] >= 3:
     long = int
 
+# class_factory.py lives next to this script, the schema modules in ./shared
+try:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+except NameError:
+    script_dir = os.path.dirname(str(sourceFile))  # noqa
+
+for path in (script_dir, os.path.join(script_dir, "shared")):
+    if path not in sys.path:
+        sys.path.append(path)
+        
+from data_schema import get_yaml  # noqa
+from class_factory import apply_data  # noqa
+
 # region Api
 
 class BaseApi(object):
