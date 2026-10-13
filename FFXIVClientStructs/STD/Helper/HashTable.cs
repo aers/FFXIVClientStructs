@@ -97,7 +97,7 @@ public unsafe struct HashTable<T, TKey, TKeyExtractor, THasher> : IEnumerable<Po
             _node = _node is null ? _head->Next : _node->Next;
             return _node != _head;
         }
-        
+
         public void Dispose() {
         }
     }

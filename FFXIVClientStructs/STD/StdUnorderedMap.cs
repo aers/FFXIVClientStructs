@@ -35,9 +35,9 @@ public unsafe struct StdUnorderedMap<TKey, TValue> : IReadOnlyDictionary<TKey, T
             return ref node->Myval.Item2;
         }
     }
-    
+
     TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key] => this[key];
-    
+
     public KeyEnumerator Keys => new(WithOps.GetEnumerator());
     public ValueEnumerator Values => new(WithOps.GetEnumerator());
 
@@ -46,7 +46,7 @@ public unsafe struct StdUnorderedMap<TKey, TValue> : IReadOnlyDictionary<TKey, T
 
     public bool Contains(KeyValuePair<TKey, TValue> item) => throw new NotImplementedException();
     public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => throw new NotImplementedException();
-    
+
     public readonly HashTable<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>, DefaultHasher<TKey>>.Node* FindNode(TKey key) => WithOps.FindNode(key);
     public readonly HashTable<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>, DefaultHasher<TKey>>.Enumerator GetEnumerator() => WithOps.GetEnumerator();
 
@@ -60,36 +60,36 @@ public unsafe struct StdUnorderedMap<TKey, TValue> : IReadOnlyDictionary<TKey, T
 #pragma warning restore CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
 
         public ref readonly TKey Current => ref activeEnumerator.Current.Value->Myval.Item1;
-        
+
         public KeyEnumerator GetEnumerator() => new(enumerator);
         public bool MoveNext() => activeEnumerator.MoveNext();
         public void Reset() => activeEnumerator.Reset();
-        public void Dispose() {}
+        public void Dispose() { }
 
         object IEnumerator.Current => Current;
         TKey IEnumerator<TKey>.Current => Current;
         IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator() => GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
-    
+
     public struct ValueEnumerator(HashTable<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>, DefaultHasher<TKey>>.Enumerator enumerator) : IEnumerable<TValue>, IEnumerator<TValue> {
 #pragma warning disable CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
         private HashTable<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>, DefaultHasher<TKey>>.Enumerator activeEnumerator = enumerator;
 #pragma warning restore CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
 
         public ref TValue Current => ref activeEnumerator.Current.Value->Myval.Item2;
-        
+
         public ValueEnumerator GetEnumerator() => new(enumerator);
         public bool MoveNext() => activeEnumerator.MoveNext();
         public void Reset() => activeEnumerator.Reset();
-        public void Dispose() {}
+        public void Dispose() { }
 
         object IEnumerator.Current => Current;
         TValue IEnumerator<TValue>.Current => Current;
         IEnumerator<TValue> IEnumerable<TValue>.GetEnumerator() => GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
-    
+
     public struct Enumerator(HashTable<StdPair<TKey, TValue>, TKey, PairKeyExtractor<TKey, TValue>, DefaultHasher<TKey>>.Enumerator enumerator)
         : IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerator<KeyValuePair<TKey, TValue>> {
 #pragma warning disable CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
@@ -97,11 +97,11 @@ public unsafe struct StdUnorderedMap<TKey, TValue> : IReadOnlyDictionary<TKey, T
 #pragma warning restore CS9124 // Parameter is captured into the state of the enclosing type and its value is also used to initialize a field, property, or event.
 
         public ref StdPair<TKey, TValue> Current => ref activeEnumerator.Current.Value->Myval;
-        
+
         public Enumerator GetEnumerator() => new(enumerator);
         public bool MoveNext() => activeEnumerator.MoveNext();
         public void Reset() => activeEnumerator.Reset();
-        public void Dispose() {}
+        public void Dispose() { }
 
         object IEnumerator.Current => new KeyValuePair<TKey, TValue>(Current.Item1, Current.Item2);
         KeyValuePair<TKey, TValue> IEnumerator<KeyValuePair<TKey, TValue>>.Current => new(Current.Item1, Current.Item2);
