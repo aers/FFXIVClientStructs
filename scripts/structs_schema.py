@@ -104,12 +104,7 @@ class DefinedStructExport:
 
 
 def get_template_alias(type_name: str) -> str:
-    """Name of the typedef the exported header declares for a templated type.
-
-    The yml spells templated types differently than IDA names them
-    (std::vector<uint32_t> is 'std::vector<unsigned int, std::allocator<unsigned int>>'
-    in IDA), so they are found through a typedef with a predictable name instead.
-    """
+    """Typedef name the exported header declares for a templated type, as IDA spells template names differently than the yml."""
     alias = "".join(char if char.isalnum() else "_" for char in type_name.replace(" ", "").replace("*", "_ptr"))
     return f"__cs_{alias}"
 

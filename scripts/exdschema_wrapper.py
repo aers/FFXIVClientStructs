@@ -97,9 +97,6 @@ def get_exdschema_data(version: str):
 
 
 def get_size_from_string(type: str) -> int:
-    """
-    Gets the int of a base type string.
-    """
     if type == "int8_t" or type == "uint8_t" or type == "bool":
         return 1
     if type == "int16_t" or type == "uint16_t":
