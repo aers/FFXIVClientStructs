@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 //   Common::Component::Excel::ExcelResourceListener
 [GenerateInterop]
 [Inherits<ExcelResourceListener>]
-[StructLayout(LayoutKind.Explicit, Size = 0x810)]
+[StructLayout(LayoutKind.Explicit, Size = 0x820)]
 public unsafe partial struct ExcelModule {
     [FieldOffset(0x2C)] public ExcelLanguage Language;
 
