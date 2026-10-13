@@ -43,6 +43,7 @@ class DefinedData:
     classes: dict[str, DefinedDataClass] = field(default_factory=dict)
     version: str | None = None
     globals: dict[int, str] = field(default_factory=dict)
+    functions: dict[int, str] = field(default_factory=dict)
 
 
 YamlExport: TypeAlias = dict[str, object]
@@ -51,9 +52,13 @@ YamlExport: TypeAlias = dict[str, object]
 def get_yaml(stream, loader=Loader) -> DefinedData:
     dic: YamlExport = load(stream, loader)
     classes = {}
-    for name, class_values in dic.get("classes", {}).items():
+    class_keys = {f.metadata.get("yaml_name", f.name) for f in fields(DefinedDataClass)}
+    for name, class_values in (dic.get("classes") or {}).items():
         class_values = class_values or {}
         values = dict(class_values)
+
+        for leftover in class_values.keys() - class_keys:
+            print('Warning: Extra key "{0}" present in {1}'.format(leftover, name))
 
         for key, value_type in (
             ("instances", DefinedDataClassInstance),
