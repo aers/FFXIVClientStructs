@@ -513,16 +513,21 @@ class IdaInterface(object):
                 return
         self.apply_func_type(ea, func_name, virt_func.return_type, virt_func.parameters)
 
-    def update_static_member(self, static_member: DefinedStructStaticMember, struct: DefinedStruct):
-        ea = self.search_binary(
-            0, static_member.signature, ida_search.SEARCH_DOWN
-        )
+    def get_static_member_ea(self, static_member: DefinedStructStaticMember) -> int:
+        """Address the static member's signature resolves to, BADADDR if the signature is not found."""
+        ea = self.search_binary(0, static_member.signature)
         if ea == idc.BADADDR:
-            print(f"Error: {static_member.signature} not found something is wrong")
-            return
+            return ea
         for follows in static_member.relative_offsets:
             ea = ea + follows
             ea = ea + 4 + self.get_dword(ea)
+        return ea
+
+    def update_static_member(self, static_member: DefinedStructStaticMember, struct: DefinedStruct):
+        ea = self.get_static_member_ea(static_member)
+        if ea == idc.BADADDR:
+            print(f"Error: {static_member.signature} not found something is wrong")
+            return
         if ida_bytes.get_item_head(ea) != ea and static_member.return_type != struct.type:
             # points into an already typed item (ex. a field of the struct instance)
             return
