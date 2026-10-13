@@ -1,7 +1,7 @@
 import idaapi
 import idc
+import idautils
 import ida_bytes
-import ida_nalt
 import ida_search
 import ida_ida
 import ida_idp
@@ -9,12 +9,11 @@ import ida_typeinf
 import ida_name
 import ida_funcs
 import ida_srclang
-import ida_kernwin
+import ida_hexrays
 from structs_schema import *
 from form_builder import DynamicForm
 from data_schema import get_yaml, DefinedData, DefinedDataClassVtable
 
-from abc import abstractmethod
 from platform import system
 from pathlib import Path
 from webbrowser import open as webopen
@@ -52,6 +51,8 @@ if _get_ida_major() < 9:
     raise "Unsupported IDA version used. Need to be on IDA 9 or newer."
 
 class IdaInterface(object):
+    BADADDR = idc.BADADDR
+
     data_yaml: DefinedData
 
     def get_base_path(self):
@@ -151,10 +152,25 @@ class IdaInterface(object):
         if not tif.create_func(func_data):
             print(f"Error: {func_name} @ {ea:#x} failed to create its function type")
             return False
-        if not ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE):
+        if not self.apply_tinfo(ea, tif):
             print(f"Error: {func_name} @ {ea:#x} failed to apply {tif.dstr()!r}")
             return False
         return True
+
+    def apply_tinfo(self, ea: int, tif) -> bool:
+        return ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+
+    def can_guess_func_type(self, ea: int) -> bool:
+        """Returns False if IDA can not work out the type of the function, even after decompiling it."""
+        tif, funcdata = ida_typeinf.tinfo_t(), ida_typeinf.func_type_data_t()
+
+        ida_typeinf.guess_tinfo(tif, ea)
+        if tif.get_func_details(funcdata):
+            return True
+
+        ida_hexrays.decompile(ea)
+        ida_typeinf.guess_tinfo(tif, ea)
+        return tif.get_func_details(funcdata)
 
     def allow_template_type_names(self):
         """clang puts spaces in template instantiation names, a single rejected name makes it drop every top level declaration."""
@@ -227,17 +243,189 @@ class IdaInterface(object):
         if vtable is None:
             return idc.BADADDR
 
-        vtable_ea = vtable.ea + idaapi.get_imagebase() - 0x140000000
-        return idc.get_qword(vtable_ea + offset)
+        vtable_ea = vtable.ea + self.get_image_base() - 0x140000000
+        return self.get_qword(vtable_ea + offset)
 
-    def set_func_name(self, ea, name, cmt):
+    def set_func_name(self, ea, name, cmt=None, unique=False):
+        """
+        :param unique: Only name functions IDA has not named yet, a number is appended if the name is taken by another address
+        """
+        if unique:
+            if not idc.get_func_name(ea).startswith("sub_"):
+                return
+            base_name, count = name, 1
+            while self.get_func_ea_by_name(name) not in (idc.BADADDR, ea):
+                count += 1
+                name = f"{base_name}{count}"
+            print(name)
+
         ida_name.set_name(ea, name)
-        ida_bytes.set_cmt(ea, cmt, 0)
+        if cmt is not None:
+            ida_bytes.set_cmt(ea, cmt, 0)
 
-    def search_binary(self, ea: int, pattern: str, flag: int):
+    def get_image_base(self) -> int:
+        return idaapi.get_imagebase()
+
+    def is_offset(self, ea: int) -> bool:
+        return idc.is_off0(idc.get_full_flags(ea))
+
+    def xrefs_to(self, ea: int) -> list[int]:
+        return [xref.to for xref in idautils.XrefsTo(ea)]
+
+    def get_qword(self, ea: int) -> int:
+        return idc.get_qword(ea)
+
+    def get_addr_name(self, ea: int) -> str:
+        name = idc.get_name(ea)
+        # if name is None or '' and segment name is .text then create the function and get the name of it.
+        # this is done for parts of the code that has no xrefs to it due to how IDA detects function boundaries
+        if (name is None or name == '') and idc.get_segm_name(ea) == '.text':
+            ida_funcs.add_func(ea)
+            name = idc.get_name(ea)
+        return name
+
+    def set_addr_name(self, ea: int, name: str) -> bool:
+        if ida_bytes.get_item_head(ea) != ea:
+            return True
+        result = idc.set_name(ea, name)
+        return bool(result)
+
+    def get_comment(self, ea: int):
+        idc.get_cmt(ea, False)
+
+    def set_comment(self, ea: int, comment: str):
+        idc.set_cmt(ea, comment, False)
+
+    def get_func_name(self, ea: int) -> str:
+        """Name of the function containing ea."""
+        return idc.get_func_name(ea)
+
+    def get_func_start(self, ea: int) -> int:
+        """Start of the function containing ea."""
+        return ida_funcs.get_func(ea).start_ea
+
+    def get_string_from_ptr(self, ea: int) -> str:
+        val = idc.get_strlit_contents(ea)
+        if val == None:
+            val = idc.get_strlit_contents(idc.get_qword(ea))
+        return val.decode('utf-8')
+
+    def heads_before(self, ea: int, count: int):
+        """The instructions in front of ea, closest first, ex. the argument setup of a call."""
+        for _ in range(count):
+            ea = idc.prev_head(ea)
+            yield ea
+
+    def heads_until_call(self, ea: int, func_name: str):
+        """The instructions from ea up to the call of the named function."""
+        while not (idc.print_insn_mnem(ea) == 'call' and idc.print_operand(ea, 0) == func_name):
+            yield ea
+            ea = idc.next_head(ea)
+
+    def get_registers(self, eas, mnemonics=None) -> dict[str, dict[str, object]]:
+        """
+        Collect what the instructions write to each register, keyed by register name.
+        :param eas: Instruction addresses to look at, later ones win
+        :param mnemonics: Only look at these instructions, all of them if omitted
+        """
+        regs = {}
+        for ea in eas:
+            if mnemonics is not None and idc.print_insn_mnem(ea) not in mnemonics:
+                continue
+            val_text = idc.print_operand(ea, 1)
+            val = idc.get_operand_value(ea, 1)
+            if val_text.startswith('cs:'):
+                val_text = self.get_string_from_ptr(val)
+            regs[idc.print_operand(ea, 0)] = {'val_text': val_text, 'val': val}
+        return regs
+
+    def get_func_xrefs(self, ea: int) -> list[int]:
+        """The addresses calling ea."""
+        return [xref for xref in idautils.CodeRefsTo(ea, True) if idc.print_insn_mnem(xref).lower() == "call"]
+
+    def format_class_name_for_vtbl(self, class_name: str) -> str:
+        return f"vtbl_{class_name}"
+
+    def format_class_name_for_secondary_vtbl(self, class_name: str, secondary_name: str) -> str:
+        return f"vtbl_{class_name}___{secondary_name}"
+
+    def format_class_name(self, class_name: str) -> str:
+        return class_name
+
+    def format_vfunc_name(self, ea: int, current_func_name: str, proposed_func_name: str, class_name: str, base_class_names: list[str]) -> str | None:
+        if current_func_name.startswith("j_"):  # jump
+            current_func_name = current_func_name.lstrip("j_")
+
+        if current_func_name.startswith("qword_"):
+            idc.auto_mark_range(ea, ea + 1, idc.AU_CODE)
+            idc.create_insn(ea)
+            idc.add_func(ea)
+            current_func_name = self.get_addr_name(ea)
+            print(f"Info: qword in vtbl of {class_name} at 0x{ea:X}, it may be an offset to undefined code")
+
+        # Previously renamed as a vfunc
+        if current_func_name.startswith(class_name):
+            # return the proposed func name in case it was updated since last run
+            current_class_name = current_func_name.rsplit(".", 1)[0]
+            return f"{current_class_name}.{proposed_func_name}"
+
+        # This should have been handled in the base class
+        if any(current_func_name.startswith(name) for name in base_class_names):
+            return ""
+
+        if current_func_name.startswith("sub_"):
+            return f"{class_name}.{proposed_func_name}"
+
+        if current_func_name.startswith("unknown_libname_"):
+            return f"{class_name}.{proposed_func_name}"
+
+        if current_func_name.startswith("nullsub_"):
+            return f"{class_name}.{proposed_func_name}_nullsub"
+
+        if current_func_name.startswith("loc_"):
+            return f"{class_name}.{proposed_func_name}_loc"
+
+        if current_func_name.startswith("locret_"):
+            return f"{class_name}.{proposed_func_name}_locret"
+
+        # Name it later in a child class when it gets overridden
+        if current_func_name == "_purecall":
+            return ""
+
+        # Mangled func names, thanks IDA
+        if current_func_name.startswith("?") or current_func_name.startswith("_"):
+            return f"{class_name}.{proposed_func_name}"
+
+        return None
+
+    def format_func_name(self, ea: int, current_func_name: str, proposed_func_name: str, class_name: str) -> str | None:
+        if current_func_name.startswith("j_"):  # jump
+            current_func_name = current_func_name.lstrip("j_")
+
+        # Mangled func names, thanks IDA
+        if proposed_func_name.startswith("?") or proposed_func_name.startswith("_"):
+            return proposed_func_name
+
+        proposed_qualified_func_name = f"{class_name}.{proposed_func_name}"
+        if current_func_name == proposed_qualified_func_name:
+            return ""
+
+        if any(current_func_name.startswith(prefix) for prefix in ("sub_", "nullsub_", "loc_", "qword_", "unknown_libname_", "?", "_")):
+            return proposed_qualified_func_name
+
+        return None
+
+    def search_binary(self, ea: int, pattern: str, flag: int = ida_search.SEARCH_DOWN):
         return ida_bytes.find_bytes(
             pattern, ea, None, ida_ida.inf_get_max_ea(), None, flag
         )
+
+    def search_binary_all(self, pattern: str, ea: int = 0):
+        """Every address matching the pattern, starting from ea."""
+        ea = self.search_binary(ea, pattern)
+        while ea != idc.BADADDR:
+            yield ea
+            ea = self.search_binary(ea + 1, pattern)
 
     def get_dword(self, ea: int):
         return ida_bytes.get_original_dword(ea)
@@ -345,7 +533,7 @@ class IdaInterface(object):
         if tif is None:
             print(f"Error: static member of {struct.type} @ {ea:#x} has unknown type {return_type!r}")
         else:
-            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+            self.apply_tinfo(ea, tif)
         ida_name.set_name(ea, f"g_{struct.type}_{static_member.name}")
     
     def mark_as_vtable(self, vtbl_name: str) -> str | None:
@@ -361,14 +549,14 @@ class IdaInterface(object):
             )
             return f"'{vtbl_name}' is not a struct (got {actual})"
 
+        if tif.is_vftable():
+            return None
+
         udt = ida_typeinf.udt_type_data_t()
         if not tif.get_udt_details(udt):
             return f"Failed to retrieve UDT details for '{vtbl_name}'"
 
-        if udt.taudt_bits & ida_typeinf.TAUDT_VFTABLE:
-            return None
-
-        udt.taudt_bits |= ida_typeinf.TAUDT_VFTABLE
+        udt.set_vftable()
 
         if not tif.create_udt(udt, ida_typeinf.BTF_STRUCT):
             return (
