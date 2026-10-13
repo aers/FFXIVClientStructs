@@ -26,6 +26,9 @@ public unsafe partial struct AtkFontManager {
     [MemberFunction("40 56 48 83 EC 60 66 3B 51 10 0F 83 ?? ?? ?? ?? 0F B7 C2 48 69 F0 F8 00 00 00")]
     public partial int BuildFont(ushort index);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF 4C 89 BF ?? ?? ?? ?? E8")]
+    public partial int UnloadFonts();
+
     [StaticAddress("48 8D 1D ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 0F 45 D8 EB 07 48 8D 1D ?? ?? ?? ??", 23)]
     public static partial FontTableEntry* GameFontTable();
 
