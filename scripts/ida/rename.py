@@ -1,7 +1,7 @@
 from os.path import join, dirname
 import sys
 
-for path in (dirname(__file__), join(dirname(__file__), "..")):
+for path in (dirname(__file__), join(dirname(__file__), ".."), join(dirname(__file__), "..", "shared")):
     if path not in sys.path:
         sys.path.append(path)
 
