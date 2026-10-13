@@ -14,12 +14,6 @@ from src_wrapper import SrcInterface
 from ida_wrapper import IdaInterface
 from form_builder import DynamicForm
 from structs_schema import get_yaml
-import ida_bytes
-import ida_search
-import ida_typeinf
-import ida_hexrays
-import idc
-import idaapi
 
 src = SrcInterface()
 ida = IdaInterface()
@@ -70,7 +64,7 @@ form.Compile()
 try:
     if form.Execute() == 1:
         _function_update_options = form.results()["function_types"]
-        idc.set_name(idaapi.get_imagebase(), form.results()["base_name"])
+        ida.set_addr_name(ida.get_image_base(), form.results()["base_name"])
     else:
         _function_update_options = {
             "virtual": False,
@@ -110,23 +104,16 @@ ida.parse_string(
 )
 
 def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
-    ea = 0
-
-    while True:
-        ea = ida.search_binary(ea + 1, pattern, ida_search.SEARCH_DOWN)
-
-        if ea == 0xFFFFFFFFFFFFFFFF:
-            break
-
+    for ea in ida.search_binary_all(pattern, 1):
         if sheetSearchPattern == None:
             sheetEa = ea + sheetSearchOffset
         else:
             sheetEa = (
-                ida.search_binary(ea, sheetSearchPattern, ida_search.SEARCH_DOWN)
+                ida.search_binary(ea, sheetSearchPattern)
                 + sheetSearchOffset
             )
         sheetIdx = ida.get_dword(sheetEa)
-        origName = idc.get_func_name(ea)
+        origName = ida.get_func_name(ea)
 
         # don't rename any funcs that are already named
         if origName[0:4] == "sub_":
@@ -150,7 +137,7 @@ def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
             while True:
                 uniqueName = fnName + (f"_{uniquifier}" if uniquifier > 0 else "")
 
-                if idc.get_name_ea_simple(uniqueName) == idc.BADADDR and uniquifier > 0:
+                if ida.get_func_ea_by_name(uniqueName) == ida.BADADDR and uniquifier > 0:
                     fnName = uniqueName
                     break
 
@@ -163,18 +150,9 @@ def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
             if suffix == "SheetIndex":
                 continue
 
-            tif, funcdata = (
-                ida_typeinf.tinfo_t(),
-                ida_typeinf.func_type_data_t(),
-            )
-
-            ida_typeinf.guess_tinfo(tif, ea)
-            if not tif.get_func_details(funcdata):
-                ida_hexrays.decompile(ea)
-                ida_typeinf.guess_tinfo(tif, ea)
-                if not tif.get_func_details(funcdata):
-                    print("Failed to get func details for %s @ %X" % (fnName, ea))
-                    continue
+            if not ida.can_guess_func_type(ea):
+                print("Failed to get func details for %s @ %X" % (fnName, ea))
+                continue
 
             if suffix == "RowAndSubRowId":
                 tif = ida.get_tinfo_from_type(
@@ -189,15 +167,8 @@ def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
                     f"Component::Exd::Sheets::{exd_map[sheetIdx]} *__fastcall func(unsigned int rowIdOrIndex);"
                 )
 
-            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+            ida.apply_tinfo(ea, tif)
 
-
-def get_all_eas(pattern: str):
-    ea = ida.search_binary(0, pattern, ida_search.SEARCH_DOWN)
-    while ea != idc.BADADDR:
-        yield ea
-        ea = ea + 1
-        ea = ida.search_binary(ea, pattern, ida_search.SEARCH_DOWN)
 
 print("Fixing up Excel functions")
 
@@ -210,13 +181,13 @@ for pattern in exd_func_patterns:
 
 
 for pattern_key in exd_comment_patterns:
-    for ea in list(get_all_eas(pattern_key)):
+    for ea in list(ida.search_binary_all(pattern_key)):
         sheetIdx = ida.get_dword(ea + exd_comment_patterns[pattern_key])
         sheetName = exd_map.get(sheetIdx)
         if sheetName is None:
             print(f"Sheet getter @ 0x{ea:X} references unknown sheet {sheetIdx}!")
             continue
-        ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
+        ida.set_comment(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx))
 
 if _function_update_options["virtual"]:
     for struct in import_structs.structs:
