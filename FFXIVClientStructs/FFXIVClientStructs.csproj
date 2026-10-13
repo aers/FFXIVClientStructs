@@ -35,7 +35,7 @@
 
   <Target Name="PopulateInfo" DependsOnTargets="GitVersion" BeforeTargets="GetAssemblyVersion">
     <PropertyGroup>
-      <AssemblyVersion>7.56.2.$(GitCommits)</AssemblyVersion>
+      <AssemblyVersion>7.57.0.$(GitCommits)</AssemblyVersion>
     </PropertyGroup>
   </Target>
 
