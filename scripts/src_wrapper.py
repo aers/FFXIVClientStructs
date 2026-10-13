@@ -25,9 +25,6 @@ class SrcInterface(object):
             return ("uint8_t", 1)
 
     def get_size_from_string(self, type: str) -> int:
-        """
-        Gets the int of a base type string.
-        """
         if type in ("int8_t", "uint8_t", "bool", "char", "unsigned char", "signed char"):
             return 1
         if type in ("int16_t", "uint16_t", "wchar_t"):
@@ -48,7 +45,6 @@ class SrcInterface(object):
         return type in ("byte", "wchar_t", "char", "float", "double", "bool", "int8_t", "uint8_t", "int16_t", "uint16_t", "int32_t", "uint32_t", "int64_t", "uint64_t", "void")
 
     def _split_template_type(self, type_name: str) -> tuple[str, list[str]]:
-        """Split a type's base name and top-level template arguments."""
         type_name = type_name.strip()
         template_start = type_name.find("<")
         if template_start < 0:
@@ -425,7 +421,6 @@ class SrcInterface(object):
         return (f"{display_type} {field_name};", field_size)
 
     def get_short_name(self, full_type: str) -> str:
-        """Extract the short name from a fully qualified type name."""
         depth = 0
         last_namespace_separator = -1
         index = 0
@@ -443,14 +438,6 @@ class SrcInterface(object):
     def build_vfunc_signature(
         self, vfunc: DefinedStructVFunc, name_override: str | None = None
     ) -> str:
-        """Build a function pointer signature for a virtual function.
-        
-        Args:
-            vfunc: Virtual function definition
-            
-        Returns:
-            Function pointer signature string
-        """
         function_name = name_override or vfunc.name
         if not (vfunc.return_type and vfunc.parameters):
             return f"void* {function_name};"
@@ -460,7 +447,6 @@ class SrcInterface(object):
         if not self.is_base_type(return_type):
             return_type = f"::{return_type}"
         
-        # Build parameter list
         param_list = ""
         if vfunc.parameters:
             params = []
@@ -681,7 +667,6 @@ class SrcInterface(object):
             for line in chunk_text.split("\n"):
                 if not line.strip():
                     continue
-                # preserve the chunk's indentation by measuring leading spaces
                 leading = len(line) - len(line.lstrip(" "))
                 chunk_indent = leading // 2
                 prev_indent = output.indent_level
@@ -798,11 +783,7 @@ class SrcInterface(object):
         return (str(output), vtable_names)
 
     def _collect_template_aliases(self, structs: list[DefinedStruct]) -> dict[str, str]:
-        """Collect the templated types used by function signatures.
-
-        Returns:
-            dict: typedef name (see get_template_alias) to the type it aliases
-        """
+        """Map the typedef name (see get_template_alias) to the templated type for every function signature."""
         aliases: dict[str, str] = {}
 
         def collect(type_name: str | None):
@@ -875,14 +856,7 @@ class SrcInterface(object):
         struct_definition_lookup: dict[str, DefinedStruct] | None = None,
         opaque_pointer_types: set[str] | None = None,
     ) -> tuple[IndentWriter, IndentWriter, IndentWriter, str | None]:
-        """Builds the C++ struct definition with namespace wrapping.
-
-        Args:
-            struct (DefinedStruct): The struct data to build
-            
-        Returns:
-            tuple: (forward_declarations, struct_definition, vtable_definition, vtable_full_name or None)
-        """
+        """Returns (forward_declarations, struct_definition, vtable_definition, vtable_full_name or None)."""
         struct_string_forward: IndentWriter = IndentWriter()
         struct_string_define: IndentWriter = IndentWriter()
         struct_string_vtable: IndentWriter = IndentWriter()
@@ -904,7 +878,6 @@ class SrcInterface(object):
         else:
             declspec = ""
 
-        # Forward declarations
         if template_declaration:
             struct_string_forward += template_declaration
         struct_string_forward += f"struct {struct.name};"
@@ -914,7 +887,6 @@ class SrcInterface(object):
                 struct_string_forward += template_declaration
             struct_string_forward += f"struct {short_name}_vtbl;"
 
-        # Struct definition
         if template_declaration:
             struct_string_define += template_declaration
         struct_define_line = f"struct {declspec}{short_name}"
@@ -976,7 +948,6 @@ class SrcInterface(object):
             append_chunk(inline_define)
             append_chunk(inline_vtable)
 
-        # Add __vtable member if this struct has virtual functions
         if struct.virtual_functions and prev_size == 0:
             struct_string_define += f"{short_name}_vtbl{template_suffix}* __vtable;"
             prev_size = 8
@@ -1068,7 +1039,6 @@ class SrcInterface(object):
         struct_string_define.unindent()
         struct_string_define += "};"
 
-        # Virtual table struct definition
         if struct.virtual_functions:
             if template_declaration:
                 struct_string_vtable += template_declaration

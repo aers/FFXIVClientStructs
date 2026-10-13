@@ -150,7 +150,6 @@ def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
             while True:
                 uniqueName = fnName + (f"_{uniquifier}" if uniquifier > 0 else "")
 
-                # check if this name is unique now
                 if idc.get_name_ea_simple(uniqueName) == idc.BADADDR and uniquifier > 0:
                     fnName = uniqueName
                     break

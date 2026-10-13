@@ -70,38 +70,13 @@ class IdaInterface(object):
         return os.path.join(self.get_base_path(), "ffxiv_structs.yml")
 
     def get_enum_id(self, name: str):
-        """Get the id of an enum by its name
-
-        Args:
-            name (str): The name of the enum
-
-        Returns:
-            int: The id of the enum
-        """
-
         return idc.get_enum(name)
 
     def get_struct_id(self, name: str) -> int:
-        """Get the struct id
-
-        Args:
-            name (str): The name of the struct
-
-        Returns:
-            int: The struct id
-        """
         return ida_typeinf.get_named_type_tid(name)
 
     def get_named_type(self, name: str):
-        """Retrieve a tinfo_t from the named type.
-
-        Args:
-            name (str): Name of the type, or any declaration IDA can parse.
-
-        Returns:
-            tinfo_t | None: The type, None if IDA does not know it.
-        """
-
+        """Returns None if IDA does not know the type."""
         tinfo = ida_typeinf.tinfo_t()
         if tinfo.get_named_type(idaapi.get_idati(), name):
             return tinfo
@@ -129,16 +104,7 @@ class IdaInterface(object):
         return tinfo
 
     def get_tinfo_from_type(self, raw_type: str, array_size=0):
-        """Retrieve a tinfo_t from a raw type string.
-
-        Args:
-            raw_type (str): Raw type string.
-            array_size (int, optional): Size of the array. Defaults to 0.
-
-        Returns:
-            tinfo_t | None: The type, None if it could not be built.
-        """
-
+        """Returns None if the type could not be built."""
         type = raw_type.rstrip("*")
         ptr_count = len(raw_type) - len(type)
 
@@ -161,11 +127,7 @@ class IdaInterface(object):
         return tinfo
 
     def apply_func_type(self, ea: int, func_name: str, return_type: str, parameters: list[DefinedStructFuncParam]) -> bool:
-        """Apply a __fastcall prototype built from the yml types to a function.
-
-        Returns:
-            bool: False if one of the types is not known to IDA.
-        """
+        """Returns False if one of the types is not known to IDA."""
         func_data = ida_typeinf.func_type_data_t()
         func_data.cc = ida_typeinf.CM_CC_FASTCALL
 
@@ -195,14 +157,7 @@ class IdaInterface(object):
         return True
 
     def allow_template_type_names(self):
-        """Allow the characters clang puts in template instantiation names.
-
-        Names such as 'std::vector<int, std::allocator<int>>::_Reallocation_guard2'
-        contain spaces, which TypeNameChars rejects by default (and which the
-        idauser.cfg from this repository does not add). IDA then fails with
-        "Failed to prepare forward declaration ... is not acceptable", and a
-        single such error makes the clang parser drop every top level declaration.
-        """
+        """clang puts spaces in template instantiation names, a single rejected name makes it drop every top level declaration."""
         ida_idp.process_config_directive(
             'TypeNameChars = "~.<>?!/,*&[]-+ "'
             '"_:$()`\'{}"'
@@ -212,7 +167,6 @@ class IdaInterface(object):
         )
 
     def select_parser(self):
-        """Sets the parser used for building struct data."""
         self.allow_template_type_names()
         includes = ""
         if system() != "Windows":
@@ -234,11 +188,7 @@ class IdaInterface(object):
         )
 
     def parse_string(self, decl: str, vtables: list[str]) -> int:
-        """Parse declarations with the clang parser and mark the vtable types.
-
-        Returns:
-            int: The number of parser errors reported by IDA.
-        """
+        """Returns the number of parser errors reported by IDA."""
         error_count = ida_srclang.parse_decls_with_parser("clang", None, decl, False)
         if error_count < 0:
             raise RuntimeError(
@@ -261,16 +211,6 @@ class IdaInterface(object):
         return error_count
 
     def op_type_as_name(self, n: int):
-        """
-        Retrieve the name of the operand type constant.
-
-        Args:
-            n (int): The integer value of the operand type.
-
-        Returns:
-            str: The name of the operand type constant if found; otherwise, None.
-        """
-
         for item in [x for x in dir(idc) if x.startswith("o_")]:
             if getattr(idc, item) == n:
                 return item
@@ -295,51 +235,17 @@ class IdaInterface(object):
         ida_bytes.set_cmt(ea, cmt, 0)
 
     def search_binary(self, ea: int, pattern: str, flag: int):
-        """Search for a pattern in a binary
-
-        Args:
-            ea (int): The address to start searching from
-            pattern (str): The pattern to search for
-            flag (int): The search flags
-
-        Returns:
-            int: The start address of the pattern
-        """
         return ida_bytes.find_bytes(
             pattern, ea, None, ida_ida.inf_get_max_ea(), None, flag
         )
 
     def get_dword(self, ea: int):
-        """Retrieve a dword (32-bit value) from the specified address.
-
-        Args:
-            ea (int): The effective address to read the dword from.
-
-        Returns:
-            int: The dword value read from the given address.
-        """
         return ida_bytes.get_original_dword(ea)
 
     def get_func_ea_by_name(self, name: str):
-        """Retrieve the effective address of a function by its name.
-
-        Args:
-            name (str): The name of the function.
-
-        Returns:
-            int: The effective address of the function.
-        """
         return ida_name.get_name_ea(0, name)
 
     def get_func_ea_by_sig(self, pattern: str):
-        """Retrieve the effective address of a function by its signature.
-
-        Args:
-            pattern (str): The signature of the function.
-
-        Returns:
-            int: The effective address of the function.
-        """
         ea = self.search_binary(0, pattern, ida_search.SEARCH_DOWN)
 
         if ida_funcs.get_func_start(ea) == idc.BADADDR:
@@ -443,12 +349,7 @@ class IdaInterface(object):
         ida_name.set_name(ea, f"g_{struct.type}_{static_member.name}")
     
     def mark_as_vtable(self, vtbl_name: str) -> str | None:
-        """
-        Mark a struct as a vtable (TAUDT_VFTABLE).
-
-        Returns:
-            An error string on failure, None on success.
-        """
+        """Returns an error string on failure, None on success."""
         tif = ida_typeinf.tinfo_t()
 
         if not tif.get_named_type(None, vtbl_name):
