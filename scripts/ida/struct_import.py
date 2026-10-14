@@ -37,24 +37,26 @@ finally:
 
 ida.select_parser()
 
-game_path = find_game_path()
-if game_path is None:
-    game_fields = [
-        {"type": "label", "text": "The game install was not found through XLCore, XIVLauncher or the default folder."},
-        {"type": "space"},
-        {"type": "folder", "key": "game_path", "label": "Folder holding both game and boot"},
-    ]
-    form = DynamicForm(game_fields)
-    form.Compile()
-    try:
-        if form.Execute() != 1:
-            raise RuntimeError("No game install selected")
-        game_path = form.results()["game_path"]
-    finally:
-        form.Free()
-    if not is_game_path(game_path):
-        raise RuntimeError(f"No game or boot folder in {game_path}, select the folder holding both")
-print(f"Using game install at {game_path}")
+def ask_game_path() -> str:
+    game_path = find_game_path()
+    if game_path is None:
+        game_fields = [
+            {"type": "label", "text": "The game install was not found through XLCore, XIVLauncher or the default folder."},
+            {"type": "space"},
+            {"type": "folder", "key": "game_path", "label": "Folder holding both game and boot"},
+        ]
+        form = DynamicForm(game_fields)
+        form.Compile()
+        try:
+            if form.Execute() != 1:
+                raise RuntimeError("No game install selected")
+            game_path = form.results()["game_path"]
+        finally:
+            form.Free()
+        if not is_game_path(game_path):
+            raise RuntimeError(f"No game or boot folder in {game_path}, select the folder holding both")
+    print(f"Using game install at {game_path}")
+    return game_path
 
 fields = [
     {"type": "label", "text": "Select function types to update"},
@@ -95,7 +97,7 @@ finally:
 
 print("Grabbing ExdSchema and Lumina")
 
-excel_header_files = get_excel_header_files(game_path)
+excel_header_files = get_excel_header_files(ida.data_yaml.version, ask_game_path)
 exdschema = get_exdschema_data("latest")
 
 excel_structs, excel_map = create_struct_from_header_and_schema(

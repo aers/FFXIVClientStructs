@@ -1,4 +1,4 @@
-from yaml import load, SafeLoader
+from yaml import load, SafeLoader, SafeDumper
 
 try:
     from yaml import CSafeLoader
@@ -9,3 +9,8 @@ try:
     Loader = CSafeLoader
 except Exception:
     Loader = SafeLoader
+
+try:
+    from yaml import CSafeDumper as Dumper
+except ImportError:
+    Dumper = SafeDumper
