@@ -1,7 +1,6 @@
 from os.path import join, dirname
 import sys
 
-sys.path.append(join(dirname(__file__), ".."))
 sys.path.append(join(dirname(__file__), "..", "shared"))
 
 from lumina_wrapper import get_excel_header_files
