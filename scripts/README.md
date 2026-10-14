@@ -5,7 +5,7 @@ Both folders hold the same scripts for their disassembler, and share the files i
 This script ingests the `data.yml` file in the scripts directory, and renames various offsets as globals, functions, vtables and such.
 
 ### struct_import.py
-This script imports the Excel sheets and `ffxiv_structs.yml` as types, names the Excel getter functions and applies the function types.
+This script imports the Excel sheets and `structs.yml` as types, names the Excel getter functions and applies the function types.
 Both generate the same C++ header and let clang work out the layout of every struct, template instances included. IDA uses its built in clang parser. Ghidra has no C++ parser, so `ghidra/clang_wrapper.py` reads the layouts back from libclang and `ghidra_wrapper.py` creates the data types from that.
 
 ### full_run.py

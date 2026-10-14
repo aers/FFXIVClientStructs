@@ -10,7 +10,7 @@ ida = IdaInterface()
 print("Loading data.yml")
 ida.load_data_yml()
 
-print("Parsing ffxiv_structs.yml")
+print("Parsing structs.yml")
 with open(ida.get_struct_path()) as f:
     structs = {struct.type: struct for struct in get_yaml(f).structs}
 
