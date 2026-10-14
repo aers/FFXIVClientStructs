@@ -2,10 +2,7 @@ from dataclasses import dataclass, field, fields
 from typing import TypeAlias
 from yaml import load
 
-try:
-    from yaml import CSafeLoader as Loader
-except ImportError:
-    from yaml import SafeLoader as Loader
+from yaml_loader import Loader
 
 
 @dataclass
