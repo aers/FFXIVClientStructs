@@ -665,7 +665,7 @@ class SrcInterface(object):
         def collect_vtable_names(struct: DefinedStruct):
             # a template vtable only exists in IDA as its instantiations
             if struct.virtual_functions and not struct.template_types:
-                vtable_name = f"{struct.type}_vtbl"
+                vtable_name = f"{struct.type}::VTable"
                 if vtable_name not in seen_vtable_names:
                     seen_vtable_names.add(vtable_name)
                     vtable_names.append(vtable_name)
@@ -673,7 +673,7 @@ class SrcInterface(object):
                 collect_vtable_names(inline_struct)
 
         for struct in ordered_structs:
-            forward, define, vtable, vtable_full_name = self.build_struct_string(
+            forward, define = self.build_struct_string(
                 struct,
                 struct_lookup,
                 enum_lookup,
@@ -688,7 +688,6 @@ class SrcInterface(object):
             collect_inline_enum_definitions(struct)
             forward_chunks.append((struct.namespace, forward))
             definition_chunks.append((struct.namespace, define))
-            definition_chunks.append((struct.namespace, vtable))
 
         def forward_chunk_key(key: tuple[str, IndentWriter]) -> str:
             (namespace, _) = key
@@ -779,23 +778,19 @@ class SrcInterface(object):
         declspec_align: int = 0,
         struct_definition_lookup: dict[str, DefinedStruct] | None = None,
         opaque_pointer_types: set[str] | None = None,
-    ) -> tuple[IndentWriter, IndentWriter, IndentWriter, str | None]:
-        """Returns (forward_declarations, struct_definition, vtable_definition, vtable_full_name or None)."""
+    ) -> tuple[IndentWriter, IndentWriter]:
+        """Returns (forward_declarations, struct_definition), the vtable is defined inside the struct as VTable."""
         struct_string_forward: IndentWriter = IndentWriter()
         struct_string_define: IndentWriter = IndentWriter()
-        struct_string_vtable: IndentWriter = IndentWriter()
         template_struct_lookup = template_struct_lookup or {}
         opaque_pointer_types = opaque_pointer_types or set()
         template_declaration = ""
-        template_suffix = ""
         if struct.template_types:
             template_declaration = (
                 f"template<typename {', typename '.join(struct.template_types)}>"
             )
-            template_suffix = f"<{', '.join(struct.template_types)}>"
         
         short_name = self.get_short_name(struct.type)
-        vtable_full_name: str | None = None
 
         if declspec_align > 0:
             declspec = f"__declspec(align({declspec_align})) "
@@ -805,11 +800,6 @@ class SrcInterface(object):
         if template_declaration:
             struct_string_forward += template_declaration
         struct_string_forward += f"struct {struct.name};"
-        
-        if struct.virtual_functions:
-            if template_declaration:
-                struct_string_forward += template_declaration
-            struct_string_forward += f"struct {short_name}_vtbl;"
 
         if template_declaration:
             struct_string_define += template_declaration
@@ -866,15 +856,23 @@ class SrcInterface(object):
             for inline_struct in struct.inline_structs
         ]
 
-        for inline_forward, _, _, _ in inline_struct_chunks:
+        for inline_forward, _ in inline_struct_chunks:
             append_chunk(inline_forward)
-        for _, inline_define, inline_vtable, _ in inline_struct_chunks:
+        for _, inline_define in inline_struct_chunks:
             append_chunk(inline_define)
-            append_chunk(inline_vtable)
 
-        if struct.virtual_functions and prev_size == 0:
-            struct_string_define += f"{short_name}_vtbl{template_suffix}* __vtable;"
-            prev_size = 8
+        if struct.virtual_functions:
+            struct_string_define += "struct VTable {"
+            struct_string_define.indent()
+            for vfunc_line in self.build_vtable_lines(struct):
+                struct_string_define += vfunc_line
+            struct_string_define.unindent()
+            # with a base at offset 0 the pointer comes from the base
+            if prev_size == 0:
+                struct_string_define += "} *__vtable;"
+                prev_size = 8
+            else:
+                struct_string_define += "};"
 
         field_name_counts: dict[str, int] = {}
         field_name_last_indices: dict[str, int] = {}
@@ -963,51 +961,45 @@ class SrcInterface(object):
         struct_string_define.unindent()
         struct_string_define += "};"
 
-        if struct.virtual_functions:
-            if template_declaration:
-                struct_string_vtable += template_declaration
-            struct_string_vtable += f"struct {short_name}_vtbl {{"
-            struct_string_vtable.indent()
-            previous_offset = 0
-            vfunc_name_counts: dict[str, int] = {}
-            vfunc_preferred_indices: dict[str, int] = {}
-            for vfunc_index, vfunc in enumerate(struct.virtual_functions):
-                vfunc_name_counts[vfunc.name] = vfunc_name_counts.get(vfunc.name, 0) + 1
-                preferred_index = vfunc_preferred_indices.get(vfunc.name)
-                if preferred_index is None or (
-                    vfunc.return_type
-                    and vfunc.parameters
-                    and not (
-                        struct.virtual_functions[preferred_index].return_type
-                        and struct.virtual_functions[preferred_index].parameters
-                    )
-                ):
-                    vfunc_preferred_indices[vfunc.name] = vfunc_index
+        return (struct_string_forward, struct_string_define)
 
-            emitted_vfunc_names = set()
-            for vfunc_index, vfunc in enumerate(struct.virtual_functions):
-                while previous_offset < vfunc.offset:
-                    struct_string_vtable += f"void* vf{int(previous_offset/8)};"
-                    previous_offset += 8
-
-                vfunc_name = vfunc.name
-                if (
-                    vfunc_name_counts[vfunc.name] > 1
-                    and vfunc_preferred_indices[vfunc.name] != vfunc_index
-                ):
-                    vfunc_name = f"vf{vfunc.offset // 8}"
-                while vfunc_name in emitted_vfunc_names:
-                    vfunc_name += "_"
-                emitted_vfunc_names.add(vfunc_name)
-                struct_string_vtable += self.build_vfunc_signature(
-                    vfunc, vfunc_name
+    def build_vtable_lines(self, struct: DefinedStruct) -> list[str]:
+        """One line per vtable slot, the gaps filled with void* vfN."""
+        lines: list[str] = []
+        previous_offset = 0
+        vfunc_name_counts: dict[str, int] = {}
+        vfunc_preferred_indices: dict[str, int] = {}
+        for vfunc_index, vfunc in enumerate(struct.virtual_functions):
+            vfunc_name_counts[vfunc.name] = vfunc_name_counts.get(vfunc.name, 0) + 1
+            preferred_index = vfunc_preferred_indices.get(vfunc.name)
+            if preferred_index is None or (
+                vfunc.return_type
+                and vfunc.parameters
+                and not (
+                    struct.virtual_functions[preferred_index].return_type
+                    and struct.virtual_functions[preferred_index].parameters
                 )
-                previous_offset = vfunc.offset + 8
-            struct_string_vtable.unindent()
-            struct_string_vtable += "};"
-            vtable_full_name = f"{struct.type}_vtbl"
+            ):
+                vfunc_preferred_indices[vfunc.name] = vfunc_index
 
-        return (struct_string_forward, struct_string_define, struct_string_vtable, vtable_full_name)
+        emitted_vfunc_names = set()
+        for vfunc_index, vfunc in enumerate(struct.virtual_functions):
+            while previous_offset < vfunc.offset:
+                lines.append(f"void* vf{int(previous_offset/8)};")
+                previous_offset += 8
+
+            vfunc_name = vfunc.name
+            if (
+                vfunc_name_counts[vfunc.name] > 1
+                and vfunc_preferred_indices[vfunc.name] != vfunc_index
+            ):
+                vfunc_name = f"vf{vfunc.offset // 8}"
+            while vfunc_name in emitted_vfunc_names:
+                vfunc_name += "_"
+            emitted_vfunc_names.add(vfunc_name)
+            lines.append(self.build_vfunc_signature(vfunc, vfunc_name))
+            previous_offset = vfunc.offset + 8
+        return lines
     
     def get_predef_header(self):
         return """#define _HAS_ITERATOR_DEBUGGING 0
