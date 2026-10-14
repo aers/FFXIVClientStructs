@@ -15,10 +15,7 @@ from structs_schema import (
     Fields,
 )
 
-try:
-    from yaml import CSafeLoader as Loader
-except ImportError:
-    from yaml import SafeLoader as Loader
+from yaml_loader import Loader
 
 exd_namespace = "Component::Exd::Sheets"
 
