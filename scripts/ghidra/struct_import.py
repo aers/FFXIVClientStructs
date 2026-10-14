@@ -46,7 +46,7 @@ if not askYesNo(  # noqa
 msvc_path = None
 if sys.platform != "win32":
     msvc_path = str(askDirectory(  # noqa
-        "Select msvc, the folder where ./vsdownload.sh of mstorsjo/msvc-wine was run", "Select"
+        "Select msvc, the folder mstorsjo/msvc-wine install.sh was run on", "Select"
     ))
 ghidra.select_parser(msvc_path)
 
