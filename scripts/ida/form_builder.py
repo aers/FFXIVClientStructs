@@ -89,7 +89,7 @@ class DynamicForm(F):
         return 1
 
     def results(self):
-        """Return all values as a plain dict keyed by each field's 'key'."""
+        """All values keyed by each field's key."""
         out = {}
         for fld in self.fields:
             t, key = fld["type"], fld.get("key")
