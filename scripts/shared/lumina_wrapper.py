@@ -1,14 +1,15 @@
 from urllib.request import urlopen
 from zipfile import ZipFile
 from io import BytesIO
-from os.path import join, basename, abspath
+from os.path import join, basename, abspath, isdir, isfile
 from os import getenv, getcwd, makedirs, listdir
-from sys import platform, path
+from sys import path
 from shutil import rmtree
 from xml.dom import pulldom
 from pythonnet import load as dotnetload
 from json import load as jsonload
 from enum import IntEnum
+import re
 from dataclasses import dataclass
 import gc
 
@@ -16,28 +17,95 @@ tempdirname = join(getcwd(), "luminatmp")
 rmtree(tempdirname, ignore_errors=True)
 makedirs(tempdirname, exist_ok=True)
 
-if platform.startswith("linux"):
-    launcher_ini = join(getenv("HOME"), ".xlcore", "launcher.ini")
-    game_path = None
+default_game_path = r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn"
+steam_install_folder = "FINAL FANTASY XIV Online"
 
-    f = open(launcher_ini, "r")
-    try:
+
+def is_game_path(game_path: str | None) -> bool:
+    """The game install holds both the game and the boot folder."""
+    return bool(game_path) and isdir(join(game_path, "game", "sqpack")) and isdir(join(game_path, "boot"))
+
+
+def _get_xlcore_game_path() -> str | None:
+    if getenv("HOME") is None:
+        return None
+    launcher_ini = join(getenv("HOME"), ".xlcore", "launcher.ini")
+    if not isfile(launcher_ini):
+        return None
+    with open(launcher_ini, "r") as f:
         for line in f:
             if line.startswith("GamePath="):
-                game_path = line.split("=", 1)[1].strip()
-                break
-    finally:
-        f.close()
+                return line.split("=", 1)[1].strip()
+    return None
 
-    if not game_path:
-        raise ValueError("GamePath key not found in {0}".format(launcher_ini))
-else:
-    f = open(join(getenv("APPDATA"), "XIVLauncher", "launcherConfigV3.json"), "r")
+
+def _get_xivlauncher_game_path() -> str | None:
+    if getenv("APPDATA") is None:
+        return None
+    launcher_config = join(getenv("APPDATA"), "XIVLauncher", "launcherConfigV3.json")
+    if not isfile(launcher_config):
+        return None
+    with open(launcher_config, "r") as f:
+        return jsonload(f).get("GamePath")
+
+
+def _get_steam_paths() -> list[str]:
+    steam_paths = []
     try:
-        config = jsonload(f)
-    finally:
-        f.close()
-    game_path = config["GamePath"]
+        import winreg
+
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Valve\Steam") as key:
+            steam_paths.append(winreg.QueryValueEx(key, "SteamPath")[0])
+    except (ImportError, OSError):
+        pass
+    steam_paths.append(r"C:\Program Files (x86)\Steam")
+    if getenv("HOME") is not None:
+        steam_paths.extend(
+            join(getenv("HOME"), *folder)
+            for folder in (
+                (".local", "share", "Steam"),
+                (".steam", "steam"),
+                (".var", "app", "com.valvesoftware.Steam", ".local", "share", "Steam"),
+            )
+        )
+    return steam_paths
+
+
+def _get_steam_game_paths() -> list[str]:
+    """The game folder in every Steam library, libraries can be on other drives than Steam itself."""
+    libraries = []
+    for steam_path in _get_steam_paths():
+        libraries.append(steam_path)
+        library_folders = join(steam_path, "steamapps", "libraryfolders.vdf")
+        if isfile(library_folders):
+            with open(library_folders, "r", encoding="utf-8") as f:
+                libraries.extend(
+                    library.replace("\\\\", "\\")
+                    for library in re.findall(r'"path"\s+"([^"]+)"', f.read())
+                )
+    return [join(library, "steamapps", "common", steam_install_folder) for library in dict.fromkeys(libraries)]
+
+
+def find_game_path() -> str | None:
+    """
+    Where XLCore or XIVLauncher have the game installed, else the default install folder or a Steam library.
+    :return: None if none of them hold the game, the scripts ask for the folder then
+    """
+    for get_paths in (
+        lambda: [_get_xlcore_game_path()],
+        lambda: [_get_xivlauncher_game_path()],
+        lambda: [default_game_path],
+        _get_steam_game_paths,
+    ):
+        try:
+            game_paths = get_paths()
+        except (OSError, ValueError):
+            # a config that can not be read is the same as not having one
+            continue
+        for game_path in game_paths:
+            if is_game_path(game_path):
+                return game_path
+    return None
 
 
 class ExcelColumnDataType(IntEnum):
@@ -138,7 +206,10 @@ def get_nugpkg(package: str, version: str = ""):
     return get_nugpkg_deps(join(tempdirname, f"{package}.nuspec"))
 
 
-def get_excel_header_files() -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
+def get_excel_header_files(game_path: str) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
+    """
+    :param game_path: The game install, the folder holding both game and boot, see find_game_path
+    """
     dotnetload("coreclr")
     def _isolated_clr():
         import clr
