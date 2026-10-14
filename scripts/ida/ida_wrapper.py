@@ -75,7 +75,7 @@ class IdaInterface(object):
             self.data_yaml = get_yaml(f)
 
     def get_struct_path(self):
-        return os.path.join(self.get_base_path(), "ffxiv_structs.yml")
+        return os.path.join(self.get_base_path(), "structs.yml")
 
     def get_enum_id(self, name: str):
         return idc.get_enum(name)

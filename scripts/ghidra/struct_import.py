@@ -1,4 +1,4 @@
-# Imports the Excel sheets and ffxiv_structs.yml as data types, and names and types the functions using them
+# Imports the Excel sheets and structs.yml as data types, and names and types the functions using them
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_struct_import
 # @runtime PyGhidra
@@ -88,7 +88,7 @@ exd_map = {excel_map[k]: k for k in excel_map}
 excel_header, excel_vtables = src.build_export_string(excel_structs, 4)
 
 
-print("Parsing ffxiv_structs.yml")
+print("Parsing structs.yml")
 
 with open(ghidra.get_struct_path()) as f:
     import_structs = get_yaml(f)

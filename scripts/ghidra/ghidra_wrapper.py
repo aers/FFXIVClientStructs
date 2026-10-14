@@ -126,7 +126,7 @@ class GhidraInterface(object):
             self.data_yaml = get_yaml(f)
 
     def get_struct_path(self):
-        return os.path.join(self.get_base_path(), "ffxiv_structs.yml")
+        return os.path.join(self.get_base_path(), "structs.yml")
 
     def to_addr(self, ea: int):
         return self.flat.toAddr(JLong(ea))

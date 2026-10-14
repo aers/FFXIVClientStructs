@@ -136,7 +136,7 @@ undefined8 FUN_1406cb6c0(undefined4 param_1)
 
 The label `Component::Exd::ExdModule.GetRowBySheetIndexAndRowIndex` came from data.yml, but unfortunately it's still not obvious exactly what that method is fetching.  The sheet indexes are fairly well-known, and this script parses these and relabels the function from `FUN_1406cb6c0` to `Component::Exd::ExdModule_GetClassJobRow_1`, returning a `Component::Exd::Sheets::ClassJob*`, which is much more useful.
 
-It also imports the Excel sheets and everything in [ffxiv_structs.yml](../scripts/ffxiv_structs.yml) as data types, and can apply the types of the virtual and member functions.  It asks you to confirm the game version of data.yml, for the folder of the MSVC headers (outside of Windows) and which function types to update.  Go ahead and run this too.
+It also imports the Excel sheets and everything in [structs.yml](../scripts/structs.yml) as data types, and can apply the types of the virtual and member functions.  It asks you to confirm the game version of data.yml, for the folder of the MSVC headers (outside of Windows) and which function types to update.  Go ahead and run this too.
 
 ## full_run.py
 Runs rename.py and struct_import.py in sequence, then lets Ghidra analyze the changes.

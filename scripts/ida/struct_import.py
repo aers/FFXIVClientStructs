@@ -107,7 +107,7 @@ exd_map = {excel_map[k]: k for k in excel_map}
 excel_header, excel_vtables = src.build_export_string(excel_structs, 4)
 
 
-print("Parsing ffxiv_structs.yml")
+print("Parsing structs.yml")
 
 with open(ida.get_struct_path()) as f:
     import_structs = get_yaml(f)

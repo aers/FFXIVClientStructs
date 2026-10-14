@@ -456,7 +456,7 @@ public partial class Exporter {
             Structs = _structs.Select(t => t.FixOrder()).ToArray()
         });
 
-        new FileInfo(Path.Join(dir.FullName, "ffxiv_structs.yml")).WriteFile(yaml);
+        new FileInfo(Path.Join(dir.FullName, "structs.yml")).WriteFile(yaml);
     }
 
 }

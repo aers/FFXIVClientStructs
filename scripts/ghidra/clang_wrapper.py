@@ -19,7 +19,7 @@ main_file = "ffxiv_structs.hpp"
 # an instantiation can use templates that are only pointed to themselves
 max_instantiation_passes = 8
 
-# named like ffxiv_structs.yml does, sized for x86_64-pc-windows-msvc
+# named like structs.yml does, sized for x86_64-pc-windows-msvc
 primitive_types = {
     TypeKind.VOID: "void",
     TypeKind.BOOL: "bool",
@@ -67,7 +67,7 @@ def split_type_path(name: str) -> list[str]:
 
 
 class RecordCollector(object):
-    """Turns the records clang laid out into the same structs ffxiv_structs.yml is read as."""
+    """Turns the records clang laid out into the same structs structs.yml is read as."""
 
     def __init__(self):
         self.enums: dict[str, DefinedStructEnum] = {}
