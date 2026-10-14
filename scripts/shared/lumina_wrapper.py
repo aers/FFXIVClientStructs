@@ -13,10 +13,6 @@ import re
 from dataclasses import dataclass
 import gc
 
-tempdirname = join(getcwd(), "luminatmp")
-rmtree(tempdirname, ignore_errors=True)
-makedirs(tempdirname, exist_ok=True)
-
 default_game_path = r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn"
 steam_install_folder = "FINAL FANTASY XIV Online"
 
@@ -177,7 +173,7 @@ class ExcelColumnDefinition:
         return self.get_base_type_string()
 
 
-def get_nugpkg_and_extract(package: str, version: str = ""):
+def get_nugpkg_and_extract(tempdirname: str, package: str, version: str = ""):
     with urlopen(
         f"https://www.nuget.org/api/v2/package/{package}/{version}"
     ) as response:
@@ -199,10 +195,10 @@ def get_nugpkg_deps(nuspec_path: str) -> list[tuple[str, str]]:
     return deps
 
 
-def get_nugpkg(package: str, version: str = ""):
+def get_nugpkg(tempdirname: str, package: str, version: str = ""):
     ver_str = f"version {version}" if version != "" else "latest version"
     print(f"Requesting nugpkg {package} with {ver_str}")
-    get_nugpkg_and_extract(package, version)
+    get_nugpkg_and_extract(tempdirname, package, version)
     return get_nugpkg_deps(join(tempdirname, f"{package}.nuspec"))
 
 
@@ -210,18 +206,20 @@ def get_excel_header_files(game_path: str) -> dict[str, tuple[int, list[ExcelCol
     """
     :param game_path: The game install, the folder holding both game and boot, see find_game_path
     """
+    tempdirname = join(getcwd(), "luminatmp")
+    makedirs(tempdirname, exist_ok=True)
     dotnetload("coreclr")
     def _isolated_clr():
         import clr
 
-        deps = get_nugpkg("Lumina")
+        deps = get_nugpkg(tempdirname, "Lumina")
         deps_gotten: dict[str, str] = {}
 
         while len(deps) > 0:
             local_deps = []
             for package, version in deps:
                 if package not in deps_gotten or deps_gotten[package] != version:
-                    local_deps.extend(get_nugpkg(package, version))
+                    local_deps.extend(get_nugpkg(tempdirname, package, version))
                     deps_gotten[package] = version
             deps = local_deps
 
@@ -286,4 +284,8 @@ def get_excel_header_files(game_path: str) -> dict[str, tuple[int, list[ExcelCol
         return excel_header_files
 
     # pythonnet.unload() would break every later use of clr in the same process
-    return _isolated_clr()
+    excel_header_files = _isolated_clr()
+
+    rmtree(tempdirname, ignore_errors=True)
+
+    return excel_header_files
