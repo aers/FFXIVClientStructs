@@ -2,10 +2,7 @@ from dataclasses import dataclass
 from typing import TypeAlias, Union
 from yaml import load
 
-try:
-    from yaml import CSafeLoader as Loader
-except ImportError:
-    from yaml import SafeLoader as Loader
+from yaml_loader import Loader
 
 YamlStructValuesExport: TypeAlias = list[
     dict[str, Union[str, int, "YamlStructValuesExport"]]
