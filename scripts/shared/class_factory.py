@@ -14,9 +14,7 @@ STANDARD_IMAGE_BASE = 0x140000000
 
 @dataclass(eq=False)
 class Vtbl:
-    """
-    Object representing a class's vtbl
-    """
+    """A class's vtbl."""
     # Address of vtbl
     ea: int
     # Name of the base class this vtbl inherits, if it exists
@@ -27,19 +25,13 @@ class Vtbl:
 
     @classmethod
     def from_data(cls, vtbl_data: DefinedDataClassVtable, rebase_offset: int = 0) -> Vtbl:
-        """
-        Create a vtbl from its data.yml definition
-        :param vtbl_data: Vtbl definition as contained in data.yml
-        :param rebase_offset: Offset to apply to the address if the program has been rebased
-        """
+        """A vtbl from its data.yml definition, rebased by rebase_offset."""
         return cls(ea=vtbl_data.ea + rebase_offset, base_name=vtbl_data.base, size=vtbl_data.size)
 
 
 @dataclass(eq=False, repr=False)
 class FfxivClass:
-    """
-    Object representing a class
-    """
+    """A class of data.yml."""
     # Disassembler api, see BaseApi in ffxiv_idarename.py
     api: Any
     name: str
@@ -58,12 +50,7 @@ class FfxivClass:
 
     @classmethod
     def from_data(cls, api: Any, class_name: str, class_data: DefinedDataClass) -> FfxivClass:
-        """
-        Create a class from its data.yml definition
-        :param api: Disassembler api
-        :param class_name: Class name
-        :param class_data: Class definition as contained in data.yml
-        """
+        """A class from its data.yml definition."""
         # Offset the vtbl and funcs if the program has been rebased
         rebase_offset = api.get_image_base() - STANDARD_IMAGE_BASE
 
@@ -80,12 +67,7 @@ class FfxivClass:
 
     @property
     def main_vtbl_size(self) -> int:
-        """
-        Iterate from the vtbl start until a non-offset or xref is encountered.
-        This strategy implies that the only xref in a vtbl is the first vfunc.
-        Can be overriden by explicit size in the vtbl definition.
-        :return: VTable func count
-        """
+        """The vfunc count, the data.yml size or up to the first non-offset or xref."""
         if not self.vtbls:
             return self._main_vtbl_size
 
@@ -133,10 +115,7 @@ class FfxivClass:
 
     @property
     def finalized(self) -> bool:
-        """
-        Has this class and its hierarchy been written out or not
-        :return: bool yes/no
-        """
+        """If the class and its hierarchy have been written out."""
         if self.vtbls:
             return self._finalized and all(
                 vtbl.resolved_base is not None and vtbl.resolved_base._finalized for vtbl in self.vtbls)
@@ -145,10 +124,7 @@ class FfxivClass:
 
     @finalized.setter
     def finalized(self, value: bool):
-        """
-        Set if finalized or not
-        :param value: Finalized state
-        """
+        """Set if the class has been written out."""
         self._finalized = value
 
     # endregion
@@ -156,9 +132,7 @@ class FfxivClass:
     # region finalize
 
     def finalize(self):
-        """
-        Write out this class
-        """
+        """Write out this class."""
         self._inherit_func_names_from_main_base()
         self._comment_vtbls_with_inheritance_tree()
 
@@ -170,10 +144,7 @@ class FfxivClass:
         self.finalized = True
 
     def _inherit_func_names_from_main_base(self):
-        """
-        A base is guaranteed to be finalized before the child,
-        so a base has all the vfunc names of its base already.
-        """
+        """A base is finalized before its child, so it has the vfunc names of its bases."""
         if self.vtbls and self.vtbls[0].resolved_base:
             for idx, base_vfunc_name in self.vtbls[0].resolved_base.vfuncs.items():
                 if idx in self.vfuncs:
@@ -183,12 +154,7 @@ class FfxivClass:
                     self.vfuncs[idx] = base_vfunc_name
 
     def _comment_vtbls_with_inheritance_tree(self):
-        """
-        Adds the inheritance tree as a comment to the start of the vtbl.
-        grandbase_name
-            base_name
-                self_name
-        """
+        """Comment the inheritance tree at the start of the vtbl."""
         for vtbl in self.vtbls:
             comment = self.api.get_comment(vtbl.ea) or ""
 
@@ -199,18 +165,14 @@ class FfxivClass:
             self.api.set_comment(vtbl.ea, comment)
 
     def write_vtbl_names(self):
-        """
-        Write out the vtbl name.
-        """
+        """Write out the vtbl names."""
         self.api.set_addr_name(self.vtbls[0].ea, self.api.format_class_name_for_vtbl(self.name))
         for vtbl in self.vtbls[1:]:
             self.api.set_addr_name(vtbl.ea, self.api.format_class_name_for_secondary_vtbl(self.name,
                                                                                           vtbl.base_name))
 
     def _write_vtbl_functions(self):
-        """
-        Write out the vtbl function names
-        """
+        """Write out the vtbl function names."""
 
         def collect_vtbl_functions(ea: int, size: int, class_name: str, vfunc_names: dict[int, str],
                                    base_class_names: list[str]) -> list[tuple[int, str]]:
@@ -255,9 +217,7 @@ class FfxivClass:
                     self.api.set_addr_name(func_ea, func_name)
 
     def _write_funcs(self):
-        """
-        Write the names of all non-vtbl funcs
-        """
+        """Write the names of all non-vtbl funcs."""
         for func_ea, proposed_func_name in self.funcs.items():
             current_func_name = self.api.get_addr_name(func_ea)  # type: str
 
@@ -271,9 +231,7 @@ class FfxivClass:
                 self.api.set_addr_name(func_ea, func_name)
 
     def _write_instances(self):
-        """
-        Write the names of all instances
-        """
+        """Write the names of all instances."""
         for instance in self.instances:
             name = "g_{}_{}".format(self.name, instance.name or "Instance")
             self.api.set_addr_name(instance.ea, name)
@@ -293,11 +251,7 @@ class FfxivClassFactory:
     _finalize_stack: deque[FfxivClass] = field(default_factory=deque)
 
     def register(self, class_name: str, class_data: DefinedDataClass | None = None):
-        """
-        Register a class
-        :param class_name: Class name
-        :param class_data: Class definition as contained in data.yml, omit for a placeholder entry
-        """
+        """Register a class, a placeholder if class_data is omitted."""
         if class_data is None:
             class_data = DefinedDataClass()
 
@@ -315,9 +269,7 @@ class FfxivClassFactory:
         self._classes[class_name] = FfxivClass.from_data(self.api, class_name, class_data)
 
     def finalize(self):
-        """
-        Perform the class naming
-        """
+        """Name every class."""
         self._resolve_base_classes()
 
         # We write the vtbl names first for an added check so that
@@ -330,10 +282,7 @@ class FfxivClassFactory:
             self._finalize_class(cls)
 
     def _resolve_base_classes(self):
-        """
-        Resolve base classes for a class
-        If missing, warn the user and add a stub entry.
-        """
+        """Resolve the base classes, missing ones get a stub entry and a warning."""
         for cls in list(self._classes.values()):
             for idx, vtbl in enumerate(cls.vtbls):
                 if vtbl.resolved_base is None and vtbl.base_name:
@@ -346,10 +295,7 @@ class FfxivClassFactory:
                         cls.first_base = self._classes[vtbl.base_name]
 
     def _finalize_class(self, cls: FfxivClass):
-        """
-        Perform a single class naming
-        :param cls: Class object
-        """
+        """Name a single class."""
         if cls in self._finalize_stack:
             names = [c.name for c in self._finalize_stack] + [cls.name]
             names = "\n".join(["    - {0}".format(name) for name in names])
@@ -366,11 +312,7 @@ class FfxivClassFactory:
 
 
 def apply_data(api: Any, data: DefinedData):
-    """
-    Name everything contained in data.yml
-    :param api: Disassembler api
-    :param data: Parsed data.yml
-    """
+    """Name everything in data.yml."""
     for section in (data.globals, data.functions):
         for ea, name in (section or {}).items():
             if not isinstance(ea, int):

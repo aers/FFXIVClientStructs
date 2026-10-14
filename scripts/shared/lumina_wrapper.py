@@ -23,7 +23,7 @@ excel_header_folder = abspath(join(dirname(__file__), "..", "excel_headers"))
 
 
 def is_game_path(game_path: str | None) -> bool:
-    """The game install holds both the game and the boot folder."""
+    """If the folder holds both game and boot."""
     return bool(game_path) and isdir(join(game_path, "game", "sqpack")) and isdir(join(game_path, "boot"))
 
 
@@ -73,7 +73,7 @@ def _get_steam_paths() -> list[str]:
 
 
 def _get_steam_game_paths() -> list[str]:
-    """The game folder in every Steam library, libraries can be on other drives than Steam itself."""
+    """The game folder in every Steam library."""
     libraries = []
     for steam_path in _get_steam_paths():
         libraries.append(steam_path)
@@ -88,10 +88,7 @@ def _get_steam_game_paths() -> list[str]:
 
 
 def find_game_path() -> str | None:
-    """
-    Where XLCore or XIVLauncher have the game installed, else the default install folder or a Steam library.
-    :return: None if none of them hold the game, the scripts ask for the folder then
-    """
+    """The game install from it's known locations, None if none of them hold it."""
     for get_paths in (
         lambda: [_get_xlcore_game_path()],
         lambda: [_get_xivlauncher_game_path()],
@@ -236,11 +233,7 @@ def _save_excel_header_files(file_path: str, excel_header_files: dict[str, tuple
 def get_excel_header_files(
     version: str | None, get_game_path: Callable[[], str]
 ) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
-    """
-    The file saved for the version is used if there is one, otherwise Lumina reads the game and the result is saved.
-    :param version: The version of data.yml, the headers are read from the game every time if None
-    :param get_game_path: Returns the game install, the folder holding both game and boot, only called when Lumina has to read the game
-    """
+    """The saved headers of the version, read with Lumina if there are none."""
     if not version:
         return _read_excel_header_files(get_game_path())
 
@@ -256,9 +249,7 @@ def get_excel_header_files(
 
 
 def _read_excel_header_files(game_path: str) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
-    """
-    :param game_path: The game install, the folder holding both game and boot, see find_game_path
-    """
+    """The headers Lumina reads from the game install."""
     tempdirname = join(getcwd(), "luminatmp")
     makedirs(tempdirname, exist_ok=True)
     dotnetload("coreclr")

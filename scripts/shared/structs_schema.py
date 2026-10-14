@@ -101,7 +101,7 @@ class DefinedStructExport:
 
 
 def get_template_alias(type_name: str) -> str:
-    """Typedef name the exported header declares for a templated type, as IDA spells template names differently than the yml."""
+    """The typedef name of a templated type, IDA spells template names differently."""
     alias = "".join(char if char.isalnum() else "_" for char in type_name.replace(" ", "").replace("*", "_ptr"))
     return f"__cs_{alias}"
 

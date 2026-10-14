@@ -50,7 +50,7 @@ function_kinds = (TypeKind.FUNCTIONPROTO, TypeKind.FUNCTIONNOPROTO)
 
 
 def split_type_path(name: str) -> list[str]:
-    """Split a type on its namespaces, the ones inside template arguments are left alone."""
+    """Split a type on its namespaces, not the ones in template arguments."""
     parts, depth, start, index = [], 0, 0, 0
     while index < len(name):
         if name[index] == "<":
@@ -83,7 +83,7 @@ class RecordCollector(object):
         self._deferred: list[tuple[Type, Cursor, str]] = []
 
     def collect(self, cursor: Cursor):
-        """Everything declared in the parsed string, and whatever that needs from the headers it includes."""
+        """Everything declared in the string and what it needs from the headers."""
         self._collect_declarations(cursor)
         while self._deferred:
             type, decl, name = self._deferred.pop()
@@ -130,11 +130,7 @@ class RecordCollector(object):
         return name
 
     def get_type_string(self, type: Type, follow: bool, by_value: bool) -> str | None:
-        """
-        :param follow: Lay out the records this type points to, they are only declared by name otherwise
-        :param by_value: The type is held and not pointed to, so its layout is needed
-        :return: None if the type can not be described
-        """
+        """The type as structs.yml spells it, None if it can not be described."""
         type = type.get_canonical()
         if type.kind in primitive_types:
             return primitive_types[type.kind]
@@ -267,19 +263,13 @@ class RecordCollector(object):
 
 class ClangInterface(object):
     def __init__(self, args: list[str], library_file: str | None = None):
-        """
-        :param args: Arguments for clang, the same ones the compiler would get
-        :param library_file: Path of the libclang to use, the one of the python package if omitted
-        """
+        """Uses the libclang of the python package unless library_file is given."""
         if library_file is not None and not Config.loaded:
             Config.set_library_file(library_file)
         self.args = args
 
     def parse_string(self, decl: str) -> tuple[DefinedStructExport, dict[str, str], int]:
-        """
-        Let clang work out the layout of every struct, template instances included.
-        :return: The structs and enums, the typedefs for templated types, the number of parser errors
-        """
+        """The layout of every struct, the template typedefs and the error count."""
         index = Index.create()
         forced: list[str] = []
         for _ in range(max_instantiation_passes):

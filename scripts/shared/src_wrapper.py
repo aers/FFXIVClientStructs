@@ -706,7 +706,7 @@ class SrcInterface(object):
         return (str(output), vtable_names)
 
     def _collect_template_aliases(self, structs: list[DefinedStruct]) -> dict[str, str]:
-        """Map the typedef name (see get_template_alias) to the templated type for every function signature."""
+        """The typedef name of every templated type in a function signature."""
         aliases: dict[str, str] = {}
 
         def collect(type_name: str | None):
@@ -779,7 +779,7 @@ class SrcInterface(object):
         struct_definition_lookup: dict[str, DefinedStruct] | None = None,
         opaque_pointer_types: set[str] | None = None,
     ) -> tuple[IndentWriter, IndentWriter]:
-        """Returns (forward_declarations, struct_definition), the vtable is defined inside the struct as VTable."""
+        """The forward declarations and the definition, the vtable inside as VTable."""
         struct_string_forward: IndentWriter = IndentWriter()
         struct_string_define: IndentWriter = IndentWriter()
         template_struct_lookup = template_struct_lookup or {}
@@ -964,7 +964,7 @@ class SrcInterface(object):
         return (struct_string_forward, struct_string_define)
 
     def build_vtable_lines(self, struct: DefinedStruct) -> list[str]:
-        """One line per vtable slot, the gaps filled with void* vfN."""
+        """One line per vtable slot."""
         lines: list[str] = []
         previous_offset = 0
         vfunc_name_counts: dict[str, int] = {}
