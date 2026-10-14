@@ -25,9 +25,9 @@ Additionally, you will need to place "idauser.cfg" from this repository in "%App
 
 #### Ghidra dependency installation:
 See [Getting Started](../Ghidra/Getting%20Started.md) for information on how to set up PyGhidra. The same packages as IDA are needed in the PyGhidra environment, plus `libclang`.
-Outside of Windows the MSVC and Windows SDK headers are needed as well, `struct_import.py` asks for the folder [mstorsjo/msvc-wine](https://github.com/mstorsjo/msvc-wine)'s `vsdownload.sh` was run in.
-The `libclang` python package ships libclang 18, the MSVC headers want clang 20 or newer and report errors otherwise (the layouts still come out the same).
-Set the `LIBCLANG_LIBRARY_FILE` environment variable to a libclang 20 or newer to avoid those, ex. `/usr/lib/llvm-20/lib/libclang-20.so.1`.
+Outside of Windows the MSVC and Windows SDK headers are needed as well, `struct_import.py` asks for the folder [mstorsjo/msvc-wine](https://github.com/mstorsjo/msvc-wine)'s `vsdownload.py` downloaded to and `install.sh` was then run on, it picks the newest MSVC and Windows SDK version in it.
+The `libclang` python package ships libclang 18 while newer MSVC headers want clang 20 or newer, the Ghidra scripts define `_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH` and `_MSVC_STL_USE_ABORT_AS_DOOM_FUNCTION` so they parse anyway.
+The `LIBCLANG_LIBRARY_FILE` environment variable can point to another libclang, ex. `/usr/lib/llvm-20/lib/libclang-20.so.1`.
 
 ## ffxiv_sigmaker.py
 > [!WARNING]

@@ -51,8 +51,8 @@ Windows: `%AppData%\ghidra\ghidra_VERSION\venv`<br>
 Linux: `/home/user/.config/ghidra/ghidra_VERSION/venv`
 
 - Execute the following in your terminal, using Python from the same environment as PyGhidra:<br>
-venv: `.../venv/bin/python -m pip install pyyaml==6.0.3 anytree==2.13.0 pythonnet libclang`<br>
-system: `python -m pip install pyyaml==6.0.3 anytree==2.13.0 pythonnet libclang`<br>
+venv: `.../venv/bin/python -m pip install pyyaml anytree pythonnet libclang`<br>
+system: `python -m pip install pyyaml anytree pythonnet libclang`<br>
 `pythonnet` is only used by struct_import.py to read the Excel headers with Lumina, it needs the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0) installed, the same version FFXIVClientStructs uses.<br>
 `libclang` is only used by struct_import.py to work out the layout of the structs.  Outside of Windows it also needs the MSVC and Windows SDK headers, download them with [mstorsjo/msvc-wine](https://github.com/mstorsjo/msvc-wine)'s `vsdownload.sh`.<br>
 The `libclang` package ships libclang 18 while the MSVC headers want clang 20 or newer, set the `LIBCLANG_LIBRARY_FILE` environment variable to a libclang 20 or newer (ex. `/usr/lib/llvm-20/lib/libclang-20.so.1`) to avoid the errors this reports.<br>
@@ -64,7 +64,7 @@ struct_import.py looks for the game in the [XIVLauncher](https://goatcorp.github
 
 - Click the plus to add a directory <p align="center"><img src=".\images\Script Manager Add Directory.png"></p>
 
-- Add both `FFXIVClientStructs/scripts/ghidra` (for rename.py, struct_import.py and full_run.py) and `FFXIVClientStructs/Ghidra/scripts` (for SigScanner)
+- Add `FFXIVClientStructs/scripts/ghidra` (for rename.py, struct_import.py and full_run.py)
 
 After adding both, select `__UserScripts` and you should see all of the scripts.  SigScanner should already have a key binding assigned of `Ctrl-Alt-S`.  Assign any others you wish, and ensure the checkbox is ticked.
 <p align="center"><img src=".\images\User Scripts.png"></p>
