@@ -30,7 +30,18 @@ from ghidra.program.model.symbol import SourceType
 from java.util import ArrayList
 from jpype import JArray, JByte, JLong
 
-from structs_schema import *
+from structs_schema import (
+    DefinedStruct,
+    DefinedStructEnum,
+    DefinedStructExport,
+    DefinedStructFixedField,
+    DefinedStructFuncField,
+    DefinedStructFuncParam,
+    DefinedStructMemFunc,
+    DefinedStructStaticMember,
+    DefinedStructVFunc,
+    get_template_alias,
+)
 from data_schema import get_yaml, DefinedData, DefinedDataClassVtable
 from clang_wrapper import ClangInterface, split_type_path
 
