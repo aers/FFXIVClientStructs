@@ -10,7 +10,14 @@ import ida_name
 import ida_funcs
 import ida_srclang
 import ida_hexrays
-from structs_schema import *
+from structs_schema import (
+    DefinedStruct,
+    DefinedStructFuncParam,
+    DefinedStructMemFunc,
+    DefinedStructStaticMember,
+    DefinedStructVFunc,
+    get_template_alias,
+)
 from form_builder import DynamicForm
 from data_schema import get_yaml, DefinedData, DefinedDataClassVtable
 
