@@ -449,7 +449,7 @@ public partial class Exporter {
                 EnumValues = type.GetFields().Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.FieldType == type).ToDictionary(f => f.Name, f => f.GetRawConstantValue()!.ToString()!)
             };
 
-            if (!quiet) Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
+            if (!quiet) Console.WriteLine($"Processed {processedEnum.EnumNamespace.Replace(".", "::")}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
             return processedEnum;
         } else if (type.IsStruct()) {
             while (type.IsPointer) type = type.GetElementType()!;
