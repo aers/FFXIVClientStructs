@@ -54,11 +54,14 @@ DEFAULT_NAME_PREFIXES = ("FUN_", "LAB_", "SUB_", "LOC_", "DAT_")
 # the fields SrcInterface.get_struct_pad fills the unknown parts of a struct with
 PAD_FIELD_NAME = re.compile(r"field_[0-9A-F]+")
 
-def first_subfolder(base: Path) -> Path | None:
-    for p in sorted(base.iterdir()):
-        if p.is_dir():
-            return p
-    return None
+def newest_version_folder(base: Path) -> Path:
+    """The highest version folder in base, ex. vc/tools/msvc/14.51.36231 or kits/10/include/10.0.26100.0"""
+    if not base.is_dir():
+        raise RuntimeError(f"{base} is missing, select the folder msvc-wine's install.sh was run on")
+    versions = [p for p in base.iterdir() if p.is_dir() and re.fullmatch(r"[\d.]+", p.name)]
+    if not versions:
+        raise RuntimeError(f"No version folder in {base}")
+    return max(versions, key=lambda p: tuple(int(part) for part in p.name.split(".") if part))
 
 
 class GhidraInterface(object):
@@ -276,20 +279,25 @@ class GhidraInterface(object):
 
     def select_parser(self, msvc_path: str | None = None):
         """
-        :param msvc_path: Folder where ./vsdownload.sh of mstorsjo/msvc-wine was run, clang finds the headers itself on windows
+        :param msvc_path: Folder msvc-wine's install.sh was run on, clang finds the headers itself on windows
         """
         includes = []
         if system() != "Windows":
             if msvc_path is None:
                 raise RuntimeError("Has to have msvc includes for the parsers to work with the project")
             path = Path(msvc_path)
-            vc_path = first_subfolder(path / "vc" / "tools" / "msvc") / "include"
-            window_kit = first_subfolder(path / "kits" / "10" / "include")
-            includes = [f"-I{folder.as_posix()}" for folder in (vc_path, window_kit / "ucrt", window_kit / "um", window_kit / "shared")]
+            vc_path = newest_version_folder(path / "vc" / "tools" / "msvc") / "include"
+            window_kit = newest_version_folder(path / "kits" / "10" / "include")
+            # as system headers like clang adds them on windows, otherwise the warnings it treats as errors in them count
+            for folder in (vc_path, window_kit / "ucrt", window_kit / "um", window_kit / "shared"):
+                includes += ["-isystem", folder.as_posix()]
 
         self.parser_args = [
             "-x", "c++", "-target", "x86_64-pc-windows-msvc", "-fms-compatibility", "-fms-extensions",
-            "-U__int64", "-std=c++17", "-ferror-limit=0", *includes,
+            "-U__int64", "-std=c++17", "-ferror-limit=0",
+            # the libclang package is older than what newer msvc headers expect
+            "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH", "-D_MSVC_STL_USE_ABORT_AS_DOOM_FUNCTION",
+            *includes,
         ]
 
     def parse_string(self, decl: str, vtables: list[str]) -> int:
