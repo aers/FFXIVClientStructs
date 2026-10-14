@@ -1,13 +1,16 @@
 from urllib.request import urlopen
 from zipfile import ZipFile
 from io import BytesIO
-from os.path import join, basename, abspath, isdir, isfile
+from os.path import join, basename, abspath, dirname, isdir, isfile
 from os import getenv, getcwd, makedirs, listdir
 from sys import path
 from shutil import rmtree
 from xml.dom import pulldom
 from pythonnet import load as dotnetload
 from json import load as jsonload
+from yaml import load as yamlload, dump as yamldump
+from yaml_loader import Loader, Dumper
+from typing import Callable
 from enum import IntEnum
 import re
 from dataclasses import dataclass
@@ -15,6 +18,8 @@ import gc
 
 default_game_path = r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn"
 steam_install_folder = "FINAL FANTASY XIV Online"
+# one file per data.yml version, so Lumina only reads the game once for each version
+excel_header_folder = abspath(join(dirname(__file__), "..", "excel_headers"))
 
 
 def is_game_path(game_path: str | None) -> bool:
@@ -202,7 +207,55 @@ def get_nugpkg(tempdirname: str, package: str, version: str = ""):
     return get_nugpkg_deps(join(tempdirname, f"{package}.nuspec"))
 
 
-def get_excel_header_files(game_path: str) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
+def get_excel_header_file_path(version: str) -> str:
+    return join(excel_header_folder, f"{version}.yml")
+
+
+def _load_excel_header_files(file_path: str) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
+    with open(file_path, "r", encoding="utf-8") as f:
+        excel_header_files = yamlload(f, Loader)
+    return {
+        name: (id, [ExcelColumnDefinition(type, offset) for type, offset in columns])
+        for name, (id, columns) in excel_header_files.items()
+    }
+
+
+def _save_excel_header_files(file_path: str, excel_header_files: dict[str, tuple[int, list[ExcelColumnDefinition]]]):
+    makedirs(excel_header_folder, exist_ok=True)
+    with open(file_path, "w", encoding="utf-8") as f:
+        # Sheet: [id, [[type, offset], ...]]
+        yamldump(
+            {
+                name: [id, [[int(column.type), column.offset] for column in columns]]
+                for name, (id, columns) in excel_header_files.items()
+            },
+            f, Dumper, default_flow_style=None, sort_keys=False, width=1 << 16,
+        )
+
+
+def get_excel_header_files(
+    version: str | None, get_game_path: Callable[[], str]
+) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
+    """
+    The file saved for the version is used if there is one, otherwise Lumina reads the game and the result is saved.
+    :param version: The version of data.yml, the headers are read from the game every time if None
+    :param get_game_path: Returns the game install, the folder holding both game and boot, only called when Lumina has to read the game
+    """
+    if not version:
+        return _read_excel_header_files(get_game_path())
+
+    file_path = get_excel_header_file_path(version)
+    if isfile(file_path):
+        print(f"Using Excel headers from {file_path}")
+        return _load_excel_header_files(file_path)
+
+    excel_header_files = _read_excel_header_files(get_game_path())
+    _save_excel_header_files(file_path, excel_header_files)
+    print(f"Saved Excel headers to {file_path}")
+    return excel_header_files
+
+
+def _read_excel_header_files(game_path: str) -> dict[str, tuple[int, list[ExcelColumnDefinition]]]:
     """
     :param game_path: The game install, the folder holding both game and boot, see find_game_path
     """

@@ -436,5 +436,6 @@ FodyWeavers.xsd
 
 # test folders
 scripts/luminatmp/
+scripts/excel_headers/
 tests/
 luminatmp/
