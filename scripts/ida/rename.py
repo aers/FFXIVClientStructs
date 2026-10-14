@@ -11,7 +11,7 @@ from class_factory import apply_data
 lua_namespace = "Client::Game::Event::Lua"
 
 def apply_lua_funcs():
-    """Relies on the Common::Lua::LuaState names from data.yml, so apply_data has to run first."""
+    """Needs the LuaState names, so apply_data has to run first."""
     string_eas = ida.get_func_xrefs(ida.get_func_ea_by_name('Common::Lua::LuaState.SetStringField'))
     func_eas = ida.get_func_xrefs(ida.get_func_ea_by_name('Common::Lua::LuaState.SetFunctionField'))
 

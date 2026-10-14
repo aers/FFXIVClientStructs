@@ -55,7 +55,7 @@ DEFAULT_NAME_PREFIXES = ("FUN_", "LAB_", "SUB_", "LOC_", "DAT_")
 PAD_FIELD_NAME = re.compile(r"field_[0-9A-F]+")
 
 def newest_version_folder(base: Path) -> Path:
-    """The highest version folder in base, ex. vc/tools/msvc/14.51.36231 or kits/10/include/10.0.26100.0"""
+    """The highest version folder in base."""
     if not base.is_dir():
         raise RuntimeError(f"{base} is missing, select the folder msvc-wine's install.sh was run on")
     versions = [p for p in base.iterdir() if p.is_dir() and re.fullmatch(r"[\d.]+", p.name)]
@@ -73,10 +73,7 @@ class GhidraInterface(object):
     template_aliases: dict[str, str] = {}
 
     def __init__(self, program, monitor):
-        """
-        :param program: currentProgram of the running script
-        :param monitor: monitor of the running script
-        """
+        """Takes currentProgram and monitor of the running script."""
         # the script globals (currentProgram, getFunctionAt, ...) only exist in the script itself
         self.program = program
         self.monitor = monitor
@@ -141,7 +138,7 @@ class GhidraInterface(object):
     # region types
 
     def get_category_path(self, type_name: str):
-        """Category a type lives in, ex. Component::GUI::AtkResNode is AtkResNode in /Component/GUI."""
+        """The category a type lives in, ex. /Component/GUI."""
         category = CategoryPath.ROOT
         for part in split_type_path(type_name)[:-1]:
             category = CategoryPath(category, part)
@@ -195,7 +192,7 @@ class GhidraInterface(object):
         return self.get_named_type(name)
 
     def create_datatype(self, datatype):
-        """Add the type to the program, an existing one with the same path gets its content replaced."""
+        """Add the type, replacing the one with the same path."""
         old = self.dtm.getDataType(datatype.getDataTypePath())
         if old is not None:
             old.replaceWith(datatype)
@@ -217,7 +214,7 @@ class GhidraInterface(object):
         self.create_datatype(dt)
 
     def create_struct(self, struct: DefinedStruct):
-        """Create the struct without its members so every struct can be pointed to."""
+        """The struct without its members, so it can be pointed to."""
         category, name = self.get_category_path(struct.type), self.get_type_name(struct.type)
         if struct.union:
             dt = UnionDataType(category, name)
@@ -265,7 +262,7 @@ class GhidraInterface(object):
             dt.replaceAtOffset(field.offset, ft, -1, field.name, "")
 
     def create_function_def(self, func: DefinedStructFuncField, struct: DefinedStruct):
-        """Signature of a function pointer field, ex. an entry of a vtable."""
+        """Signature of a function pointer field."""
         fd = FunctionDefinitionDataType(
             CategoryPath(self.get_category_path(struct.type), self.get_type_name(struct.type)), func.name
         )
@@ -278,9 +275,7 @@ class GhidraInterface(object):
         return fd
 
     def select_parser(self, msvc_path: str | None = None):
-        """
-        :param msvc_path: Folder msvc-wine's install.sh was run on, clang finds the headers itself on windows
-        """
+        """msvc_path is where msvc-wine was installed, not needed on windows."""
         includes = []
         if system() != "Windows":
             if msvc_path is None:
@@ -301,10 +296,7 @@ class GhidraInterface(object):
         ]
 
     def parse_string(self, decl: str, vtables: list[str]) -> int:
-        """
-        Ghidra can not parse C++, so clang lays out the declarations and the result is imported as data types.
-        :return: The number of parser errors reported by clang
-        """
+        """Import the declarations as clang lays them out, returns the error count."""
         export, self.template_aliases, error_count = ClangInterface(
             self.parser_args, os.environ.get("LIBCLANG_LIBRARY_FILE")
         ).parse_string(decl)
@@ -323,10 +315,7 @@ class GhidraInterface(object):
         return error_count
 
     def import_structs(self, export: DefinedStructExport) -> int:
-        """
-        :param export: Structs in dependency order with their size and field offsets known
-        :return: The number of types that failed to import
-        """
+        """Import the structs in dependency order, returns the failure count."""
         steps = [
             ("Creating enums", export.enums, self.create_enum),
             ("Creating structs", export.structs, self.create_struct),
@@ -422,9 +411,7 @@ class GhidraInterface(object):
             return self.BADADDR
 
     def set_func_name(self, ea, name, cmt=None, unique=False):
-        """
-        :param unique: Only name functions Ghidra has not named yet, a number is appended if the name is taken by another address
-        """
+        """With unique only default names are replaced, a taken name gets a number."""
         if unique:
             if not self.has_default_name(ea):
                 return
@@ -532,7 +519,7 @@ class GhidraInterface(object):
         self.apply_func_type(ea, func_name, virt_func.return_type, virt_func.parameters)
 
     def get_static_member_ea(self, static_member: DefinedStructStaticMember) -> int:
-        """Address the static member's signature resolves to, BADADDR if the signature is not found."""
+        """Where the static member's signature resolves to, BADADDR if not found."""
         ea = self.search_binary(0, static_member.signature)
         if ea == self.BADADDR:
             return ea
@@ -640,7 +627,7 @@ class GhidraInterface(object):
     # region instructions
 
     def heads_before(self, ea: int, count: int):
-        """The instructions in front of ea, closest first, ex. the argument setup of a call."""
+        """The instructions before ea, closest first."""
         insn = self.listing.getInstructionContaining(self.to_addr(ea))
         for _ in range(count):
             insn = insn.getPrevious()
@@ -659,11 +646,7 @@ class GhidraInterface(object):
             insn = insn.getNext()
 
     def get_registers(self, eas, mnemonics=None) -> dict[str, dict[str, object]]:
-        """
-        Collect what the instructions write to each register, keyed by lower case register name.
-        :param eas: Instruction addresses to look at, later ones win
-        :param mnemonics: Only look at these instructions, all of them if omitted
-        """
+        """What the instructions write to each register, later ones win."""
         regs = {}
         for ea in eas:
             insn = self.listing.getInstructionAt(self.to_addr(ea))
@@ -739,16 +722,14 @@ class GhidraInterface(object):
     # region search
 
     def get_search_range(self):
-        """The signatures are all code, so only .text is looked at when the program has one."""
+        """Only .text if the program has one, the signatures are all code."""
         block = self.memory.getBlock(".text")
         if block is not None:
             return block.getStart(), block.getEnd()
         return self.memory.getMinAddress(), self.memory.getMaxAddress()
 
     def search_binary(self, ea: int, pattern: str) -> int:
-        """
-        :param pattern: Space separated hex bytes, ? or ?? for a wildcard
-        """
+        """The pattern is space separated hex bytes, ? or ?? for a wildcard."""
         start, end = self.get_search_range()
         if ea > end.getOffset():
             return self.BADADDR

@@ -168,7 +168,7 @@ class IdaInterface(object):
         return ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
     def can_guess_func_type(self, ea: int) -> bool:
-        """Returns False if IDA can not work out the type of the function, even after decompiling it."""
+        """Returns False if IDA can not work out the type, even after decompiling."""
         tif, funcdata = ida_typeinf.tinfo_t(), ida_typeinf.func_type_data_t()
 
         ida_typeinf.guess_tinfo(tif, ea)
@@ -180,7 +180,7 @@ class IdaInterface(object):
         return tif.get_func_details(funcdata)
 
     def allow_template_type_names(self):
-        """clang puts spaces in template instantiation names, a single rejected name makes it drop every top level declaration."""
+        """Allow the spaces clang puts in template names, one rejected name drops every declaration."""
         ida_idp.process_config_directive(
             'TypeNameChars = "~.<>?!/,*&[]-+ "'
             '"_:$()`\'{}"'
@@ -254,9 +254,7 @@ class IdaInterface(object):
         return self.get_qword(vtable_ea + offset)
 
     def set_func_name(self, ea, name, cmt=None, unique=False):
-        """
-        :param unique: Only name functions IDA has not named yet, a number is appended if the name is taken by another address
-        """
+        """With unique only default names are replaced, a taken name gets a number."""
         if unique:
             if not idc.get_func_name(ea).startswith("sub_"):
                 return
@@ -318,7 +316,7 @@ class IdaInterface(object):
         return val.decode('utf-8')
 
     def heads_before(self, ea: int, count: int):
-        """The instructions in front of ea, closest first, ex. the argument setup of a call."""
+        """The instructions before ea, closest first."""
         for _ in range(count):
             ea = idc.prev_head(ea)
             yield ea
@@ -330,11 +328,7 @@ class IdaInterface(object):
             ea = idc.next_head(ea)
 
     def get_registers(self, eas, mnemonics=None) -> dict[str, dict[str, object]]:
-        """
-        Collect what the instructions write to each register, keyed by register name.
-        :param eas: Instruction addresses to look at, later ones win
-        :param mnemonics: Only look at these instructions, all of them if omitted
-        """
+        """What the instructions write to each register, later ones win."""
         regs = {}
         for ea in eas:
             if mnemonics is not None and idc.print_insn_mnem(ea) not in mnemonics:
@@ -521,7 +515,7 @@ class IdaInterface(object):
         self.apply_func_type(ea, func_name, virt_func.return_type, virt_func.parameters)
 
     def get_static_member_ea(self, static_member: DefinedStructStaticMember) -> int:
-        """Address the static member's signature resolves to, BADADDR if the signature is not found."""
+        """Where the static member's signature resolves to, BADADDR if not found."""
         ea = self.search_binary(0, static_member.signature)
         if ea == idc.BADADDR:
             return ea
@@ -549,7 +543,7 @@ class IdaInterface(object):
         ida_name.set_name(ea, f"g_{struct.type}_{static_member.name}")
     
     def mark_as_vtable(self, vtbl_name: str) -> str | None:
-        """Returns an error string on failure, None on success."""
+        """Returns an error string on failure."""
         tif = ida_typeinf.tinfo_t()
 
         if not tif.get_named_type(None, vtbl_name):
