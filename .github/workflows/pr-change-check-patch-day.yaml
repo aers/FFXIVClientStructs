@@ -108,5 +108,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: structs.yml
-          path: ./scripts/ffxiv_structs.yml
+          path: ./scripts/structs.yml
           retention-days: 7
