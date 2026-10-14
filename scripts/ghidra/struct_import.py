@@ -18,7 +18,7 @@ for import_path in (script_dir, join(script_dir, "..", "shared")):
 from java.util import ArrayList
 from ghidra.util.exception import CancelledException
 
-from lumina_wrapper import get_excel_header_files
+from lumina_wrapper import get_excel_header_files, find_game_path, is_game_path
 from exdschema_wrapper import (
     create_struct_from_header_and_schema,
     get_exdschema_data,
@@ -50,6 +50,15 @@ if sys.platform != "win32":
     ))
 ghidra.select_parser(msvc_path)
 
+game_path = find_game_path()
+if game_path is None:
+    game_path = str(askDirectory(  # noqa
+        "Select the game install, the folder holding both game and boot", "Select"
+    ))
+    if not is_game_path(game_path):
+        raise RuntimeError(f"No game or boot folder in {game_path}, select the folder holding both")
+print(f"Using game install at {game_path}")
+
 function_types = {"virtual": "Virtual functions", "member": "Member functions"}
 try:
     _selected = askChoices(  # noqa
@@ -67,7 +76,7 @@ except CancelledException:
 
 print("Grabbing ExdSchema and Lumina")
 
-excel_header_files = get_excel_header_files()
+excel_header_files = get_excel_header_files(game_path)
 exdschema = get_exdschema_data("latest")
 
 excel_structs, excel_map = create_struct_from_header_and_schema(
