@@ -9,7 +9,7 @@ We make extensive use of [C# Source Generators](https://learn.microsoft.com/en-u
 
 ### Reverse Engineering Rename Database
 
-A database and script(s) are maintained in the [ida](https://github.com/aers/FFXIVClientStructs/tree/main/ida) folder which can be used to import a large number of location names to IDA or Ghidra. This database is updated with every patch, although keep in mind this is volunteer work and some patches require more effort than others. There is more info in the readme in the folder itself.
+A database and script(s) are maintained in the [scripts](https://github.com/aers/FFXIVClientStructs/tree/main/scripts) folder which can be used to import a large number of location names to IDA or Ghidra. This database is updated with every patch, although keep in mind this is volunteer work and some patches require more effort than others. There is more info in the readme in the folder itself.
 
 ### Credits
 
@@ -96,7 +96,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkResNode : ICreatable { }
 ```
 
-Native game classes are represented as explicit layout structs. If the official name of the class is available (via [old RTTI](https://github.com/aers/FFXIVClientStructs/blob/main/ida/classinformer.csv)) use that for the name and namespace. For new classes or classes without virtual functions, make up a name that seems appropriate.
+Native game classes are represented as explicit layout structs. If the official name of the class is available (via [old RTTI](https://github.com/aers/FFXIVClientStructs/blob/main/scripts/classinformer.csv)) use that for the name and namespace. For new classes or classes without virtual functions, make up a name that seems appropriate.
 
 If the struct has unsafe members, mark the struct unsafe rather than the individual members. If you are using a generator, the struct must also be partial. If you are unable to get the exact size, use your best estimate.
 
