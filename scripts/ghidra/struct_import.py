@@ -87,7 +87,7 @@ excel_structs, excel_map = create_struct_from_header_and_schema(
 
 exd_map = {excel_map[k]: k for k in excel_map}
 
-excel_header, excel_vtables = src.build_export_string(excel_structs, 4)
+excel_header, excel_vtables = src.build_export_string(excel_structs, 4, ghidra.get_probe_layouts)
 
 
 print("Parsing structs.yml")
@@ -95,7 +95,7 @@ print("Parsing structs.yml")
 with open(ghidra.get_struct_path()) as f:
     import_structs = get_yaml(f)
 
-struct_header, struct_vtables = src.build_export_string(import_structs, 1)
+struct_header, struct_vtables = src.build_export_string(import_structs, 1, ghidra.get_probe_layouts, excel_header)
 
 print("Parsing combined Excel and FFXIV declarations")
 ghidra.parse_string(

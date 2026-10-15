@@ -7,10 +7,21 @@ from structs_schema import (
     DefinedStructVFunc,
     get_template_alias,
 )
-from indent_writer import IndentWriter
+from typing import Callable
+
+from indent_writer import IndentWriter, IndentWriterValue
+
+# a probe struct per type the schema can not size, the offset of value is the alignment of the type
+layout_probe_prefix = "__cs_layout_probe_"
 
 class SrcInterface(object):
     full_padding: bool = True
+
+    def __init__(self):
+        self._layout_cache: dict[tuple[str, tuple[str, ...]], tuple[int, bool]] = {}
+        self._external_layouts: dict[str, tuple[int, int]] = {}
+        # inline structs of a template use its parameters, ex. the Node of StdLinkedList
+        self._inherited_template_types: dict[str, tuple[str, ...]] = {}
 
     def get_type_and_type_size_from_gap(self, gap: int, offset: int = 0) -> tuple[str, int]:
         if offset == 0:
@@ -182,15 +193,18 @@ class SrcInterface(object):
             return 0
 
         normalized_type = self._normalize_type(type_name)
+        # the short name lookup of the structs can match an unrelated struct
+        if normalized_type in enum_lookup:
+            return enum_lookup[normalized_type]
         struct_size = self._get_struct_size(normalized_type, struct_lookup)
         if struct_size is not None:
             return struct_size
-        if normalized_type in enum_lookup:
-            return enum_lookup[normalized_type]
 
         primitive_size = self.get_size_from_string(type_name)
         if primitive_size:
             return primitive_size
+        if normalized_type.removeprefix("::") in self._external_layouts:
+            return self._external_layouts[normalized_type.removeprefix("::")][0]
 
         base_type, template_args = self._split_template_type(type_name)
         if not template_args:
@@ -283,11 +297,29 @@ class SrcInterface(object):
             return 8
 
         normalized_type = self._normalize_type(type_name)
+        base_type, template_args = self._split_template_type(normalized_type.removeprefix("::"))
+        if template_args:
+            struct_definition = (template_struct_lookup or {}).get(base_type)
+        else:
+            struct_definition = (struct_definition_lookup or {}).get(base_type)
+        if base_type in self._external_layouts and not template_args:
+            return self._external_layouts[base_type][1]
+        if struct_definition is not None and len(template_args) == len(struct_definition.template_types):
+            alignment, packed = self._get_struct_layout(
+                struct_definition,
+                template_args,
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                struct_definition_lookup,
+            )
+            return 1 if packed else alignment
+
         struct_size = self._get_struct_size(normalized_type, struct_lookup)
-        if struct_size is not None:
-            size = struct_size
-        elif normalized_type in enum_lookup:
+        if normalized_type in enum_lookup:
             size = enum_lookup[normalized_type]
+        elif struct_size is not None:
+            size = struct_size
         else:
             size = self.get_size_from_string(type_name)
             if size == 0:
@@ -316,6 +348,111 @@ class SrcInterface(object):
                 )
         return min(size & -size, 8) if size else 1
 
+    def _get_template_parameters(self, struct: DefinedStruct) -> tuple[str, ...]:
+        """The template parameters of the struct and of the templates it is declared in."""
+        return (
+            *self._inherited_template_types.get(self._normalize_type(struct.type), ()),
+            *struct.template_types,
+        )
+
+    def _is_template_value_field(self, field: DefinedStructField, template_parameters: tuple[str, ...]) -> bool:
+        """A template parameter held by value, its size depends on the arguments."""
+        return not field.type.strip().endswith("*") and field.type.strip() in template_parameters
+
+    def _has_template_value_field(self, struct: DefinedStruct) -> bool:
+        """The size of the struct then depends on the arguments."""
+        template_parameters = self._get_template_parameters(struct)
+        return any(self._is_template_value_field(field, template_parameters) for field in struct.fields)
+
+    def _get_pad_alignment(self, prev_size: int, end: int) -> int:
+        """The alignment of the filler fields get_struct_pad writes from prev_size up to end."""
+        alignment = 1
+        while end > prev_size:
+            _, size = self.get_struct_pad(end - prev_size, prev_size)
+            if self.full_padding:
+                alignment = max(alignment, size)
+            prev_size += size
+        return alignment
+
+    def _get_struct_layout(
+        self,
+        struct: DefinedStruct,
+        template_args: list[str],
+        struct_lookup: dict[str, int],
+        enum_lookup: dict[str, int],
+        template_struct_lookup: dict[str, DefinedStruct] | None = None,
+        struct_definition_lookup: dict[str, DefinedStruct] | None = None,
+    ) -> tuple[int, bool]:
+        """The natural alignment of the struct, and if it has to be packed to keep its field offsets and size."""
+        cache_key = (self._normalize_type(struct.type), tuple(template_args))
+        if cache_key in self._layout_cache:
+            return self._layout_cache[cache_key]
+
+        substitutions = dict(zip(struct.template_types, template_args))
+        has_base_at_zero = any(
+            field.base and field.offset == 0 for field in struct.fields
+        )
+        alignment = 8 if struct.virtual_functions and not has_base_at_zero else 1
+        packed = False
+        template_parameters = self._get_template_parameters(struct)
+        track_padding = not template_parameters and not struct.union
+        prev_size = 0
+        base_types_used = set()
+        for field in struct.fields:
+            if field.base and field.offset == prev_size:
+                base_types_used.add(field.type)
+                prev_size += self.get_size_from_type(
+                    self._get_field_type(field, template_struct_lookup or {}),
+                    struct_lookup,
+                    enum_lookup,
+                    template_struct_lookup,
+                    template_parameters,
+                    struct_definition_lookup,
+                )
+        if struct.virtual_functions and prev_size == 0:
+            prev_size = 8
+        for field in struct.fields:
+            if field.type == "__fastcall":
+                field_alignment = field_size = 8
+            else:
+                field_type = self._get_field_type(field, template_struct_lookup or {})
+                field_type = self._substitute_template_types(field_type, substitutions)
+                field_alignment = self._get_type_alignment(
+                    field_type,
+                    struct_lookup,
+                    enum_lookup,
+                    template_struct_lookup,
+                    struct_definition_lookup,
+                )
+                field_size = 0
+                if track_padding and field.type not in base_types_used:
+                    field_size = self.get_size_from_type(
+                        field_type,
+                        struct_lookup,
+                        enum_lookup,
+                        template_struct_lookup,
+                        template_parameters,
+                        struct_definition_lookup,
+                    )
+                    if isinstance(field, DefinedStructFixedField):
+                        field_size *= field.size
+            alignment = max(alignment, field_alignment)
+            if field.offset % field_alignment != 0:
+                packed = True
+            if track_padding and field.type not in base_types_used:
+                if field.offset > prev_size:
+                    alignment = max(alignment, self._get_pad_alignment(prev_size, field.offset))
+                    prev_size = field.offset
+                prev_size += field_size
+        if track_padding and struct.size:
+            alignment = max(alignment, self._get_pad_alignment(prev_size, struct.size))
+        if struct.size and struct.size % alignment != 0:
+            packed = True
+        if template_parameters:
+            packed = False
+        self._layout_cache[cache_key] = (alignment, packed)
+        return alignment, packed
+
     @staticmethod
     def _align_size(size: int, alignment: int) -> int:
         return (size + alignment - 1) // alignment * alignment
@@ -334,7 +471,7 @@ class SrcInterface(object):
                 f"Template type {struct.type} expects {len(struct.template_types)} "
                 f"arguments, got {len(template_args)}"
             )
-        if struct.size is not None:
+        if struct.size is not None and not self._has_template_value_field(struct):
             return struct.size
 
         substitutions = dict(zip(struct.template_types, template_args))
@@ -466,9 +603,15 @@ class SrcInterface(object):
     def build_export_string(
         self,
         export: DefinedStructExport,
-        full_declspec_align: int = 0
+        full_declspec_align: int = 0,
+        layout_parser: Callable[[str], dict[str, tuple[int, int]]] | None = None,
+        layout_header: str = "",
     ):
+        """layout_parser measures the types the schema can not size, see get_layout_probe, layout_header is what it needs declared."""
         output = IndentWriter()
+        self._layout_cache = {}
+        self._external_layouts = {}
+        self._inherited_template_types = {}
 
         all_structs: list[DefinedStruct] = []
         inline_structs: list[DefinedStruct] = []
@@ -486,6 +629,16 @@ class SrcInterface(object):
         for struct in export.structs:
             all_structs.append(struct)
             collect_inline_types(struct)
+
+        def collect_inherited_template_types(struct: DefinedStruct, template_parameters: tuple[str, ...]):
+            template_parameters = (*template_parameters, *struct.template_types)
+            for inline_struct in struct.inline_structs:
+                if template_parameters:
+                    self._inherited_template_types[self._normalize_type(inline_struct.type)] = template_parameters
+                collect_inherited_template_types(inline_struct, template_parameters)
+
+        for struct in export.structs:
+            collect_inherited_template_types(struct, ())
 
         inline_struct_types = {
             self._normalize_type(struct.type) for struct in inline_structs
@@ -526,6 +679,22 @@ class SrcInterface(object):
             struct_definition_lookup[normalized_type] = struct
             if struct.template_types:
                 template_struct_lookup[normalized_type] = struct
+
+        self._external_layouts = self.resolve_external_layouts(
+            self._collect_external_types(
+                [
+                    struct
+                    for struct in export.structs
+                    if self._normalize_type(struct.type) not in inline_struct_types
+                ],
+                struct_lookup,
+                enum_lookup,
+                template_struct_lookup,
+                struct_definition_lookup,
+            ),
+            layout_parser,
+            layout_header,
+        )
 
         top_level_structs = [
             struct
@@ -705,6 +874,88 @@ class SrcInterface(object):
 
         return (str(output), vtable_names)
 
+    def _collect_external_types(
+        self,
+        structs: list[DefinedStruct],
+        struct_lookup: dict[str, int],
+        enum_lookup: dict[str, int],
+        template_struct_lookup: dict[str, DefinedStruct],
+        struct_definition_lookup: dict[str, DefinedStruct],
+    ) -> list[str]:
+        """The types held by value that are not in the schema, ex. GUID or HANDLE from the windows headers."""
+        type_names: set[str] = set()
+
+        def collect(type_name: str, template_parameters: tuple[str, ...]):
+            type_name = type_name.strip()
+            if type_name.endswith("*") or type_name == "__fastcall":
+                return
+            _, template_args = self._split_template_type(type_name)
+            if template_args:
+                for template_arg in template_args:
+                    collect(template_arg, template_parameters)
+                return
+            type_name = self._normalize_type(type_name).removeprefix("::")
+            if type_name in template_parameters or self.is_base_type(type_name):
+                return
+            try:
+                size = self.get_size_from_type(
+                    type_name,
+                    struct_lookup,
+                    enum_lookup,
+                    template_struct_lookup,
+                    template_parameters,
+                    struct_definition_lookup,
+                )
+            except ValueError:
+                return
+            if size == 0:
+                type_names.add(type_name)
+
+        def collect_struct(struct: DefinedStruct, template_parameters: tuple[str, ...]):
+            template_parameters = (*template_parameters, *struct.template_types)
+            for field in struct.fields:
+                collect(self._get_field_type(field, template_struct_lookup), template_parameters)
+            for inline_struct in struct.inline_structs:
+                collect_struct(inline_struct, template_parameters)
+
+        for struct in structs:
+            collect_struct(struct, ())
+        return sorted(type_names)
+
+    def get_layout_probe(self, type_names: list[str], header: str = "") -> str:
+        """A probe struct per type, a layout parser returns {probe name: (size of value, offset of value)} for it."""
+        probes = "\n".join(
+            f"struct {layout_probe_prefix}{index} {{ char pad; ::{type_name} value; }};"
+            for index, type_name in enumerate(type_names)
+        )
+        return f"{self.get_predef_header()}\n{header}\n{probes}\n"
+
+    def resolve_external_layouts(
+        self,
+        type_names: list[str],
+        layout_parser: Callable[[str], dict[str, tuple[int, int]]] | None,
+        layout_header: str = "",
+    ) -> dict[str, tuple[int, int]]:
+        """Size and alignment of the types, measured by the parser of the disassembler."""
+        if not type_names:
+            return {}
+        if layout_parser is None:
+            print(f"Warning: no layout parser, {len(type_names)} type(s) can not be sized: {', '.join(type_names)}")
+            return {}
+
+        probe_layouts = layout_parser(self.get_layout_probe(type_names, layout_header))
+        layouts: dict[str, tuple[int, int]] = {}
+        missing: list[str] = []
+        for index, type_name in enumerate(type_names):
+            probe_layout = probe_layouts.get(f"{layout_probe_prefix}{index}")
+            if probe_layout is None or probe_layout[0] <= 0 or probe_layout[1] <= 0:
+                missing.append(type_name)
+            else:
+                layouts[type_name] = probe_layout
+        if missing:
+            print(f"Warning: the parser could not size {len(missing)} type(s): {', '.join(missing)}")
+        return layouts
+
     def _collect_template_aliases(self, structs: list[DefinedStruct]) -> dict[str, str]:
         """The typedef name of every templated type in a function signature."""
         aliases: dict[str, str] = {}
@@ -791,19 +1042,22 @@ class SrcInterface(object):
             )
         
         short_name = self.get_short_name(struct.type)
+        template_parameters = self._get_template_parameters(struct)
 
-        if declspec_align > 0:
+        # pragma pack can not lower a declspec align, even align(1)
+        if declspec_align > 1:
             declspec = f"__declspec(align({declspec_align})) "
         else:
             declspec = ""
 
         if template_declaration:
             struct_string_forward += template_declaration
-        struct_string_forward += f"struct {struct.name};"
+        record_keyword = "union" if struct.union else "struct"
+        struct_string_forward += f"{record_keyword} {struct.name};"
 
         if template_declaration:
             struct_string_define += template_declaration
-        struct_define_line = f"struct {declspec}{short_name}"
+        struct_define_line = f"{record_keyword} {declspec}{short_name}"
         struct_extend_lines = []
 
         base_fields = [field for field in struct.fields if field.base]
@@ -819,7 +1073,7 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
-                    tuple(struct.template_types),
+                    template_parameters,
                     struct_definition_lookup,
                 )
         
@@ -895,14 +1149,28 @@ class SrcInterface(object):
             emitted_field_names.add(field_name)
 
         offset = 0
+        union_size = 0
+        size_known = True
+        packed = not template_parameters and self._get_struct_layout(
+            struct,
+            [],
+            struct_lookup,
+            enum_lookup,
+            template_struct_lookup,
+            struct_definition_lookup,
+        )[1]
 
         for field_index, field in enumerate(struct.fields):
             if field.type in base_fields_used:
                 continue
 
+            if struct.union:
+                union_size = max(union_size, prev_size)
+                prev_size = 0
+
             offset = field.offset
 
-            if not struct.is_sequential:
+            if (not struct.is_sequential or packed) and size_known:
                 while offset > prev_size:
                     fill_size = offset - prev_size
                     line, size = self.get_struct_pad(fill_size, prev_size)
@@ -918,7 +1186,7 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
-                    struct.template_types,
+                    list(template_parameters),
                     struct_definition_lookup,
                     field_name,
                     opaque_pointer_types,
@@ -943,15 +1211,23 @@ class SrcInterface(object):
                     struct_lookup,
                     enum_lookup,
                     template_struct_lookup,
-                    struct.template_types,
+                    list(template_parameters),
                     struct_definition_lookup,
                     field_name,
                     opaque_pointer_types,
                 )
                 struct_string_define += field_define
                 prev_size += field_define_size
+                if self._is_template_value_field(field, template_parameters):
+                    size_known = False
 
-        if struct.size is not None and struct.size != 0:
+        if struct.union:
+            prev_size = max(union_size, prev_size)
+            if struct.size and struct.size > prev_size:
+                struct_string_define += f"uint8_t field_0[{struct.size}];"
+                prev_size = struct.size
+
+        if struct.size is not None and struct.size != 0 and not self._has_template_value_field(struct):
             while struct.size > prev_size:
                 fill_size = struct.size - prev_size
                 line, size = self.get_struct_pad(fill_size, prev_size)
@@ -960,6 +1236,10 @@ class SrcInterface(object):
         
         struct_string_define.unindent()
         struct_string_define += "};"
+
+        if packed:
+            struct_string_define.lines.insert(0, IndentWriterValue(0, "#pragma pack(push, 1)"))
+            struct_string_define += "#pragma pack(pop)"
 
         return (struct_string_forward, struct_string_define)
 

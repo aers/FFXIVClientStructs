@@ -20,6 +20,7 @@ from structs_schema import (
 )
 from form_builder import DynamicForm
 from data_schema import get_yaml, DefinedData, DefinedDataClassVtable
+from src_wrapper import layout_probe_prefix
 
 from platform import system
 from pathlib import Path
@@ -209,6 +210,29 @@ class IdaInterface(object):
             "clang",
             f"-x c++ -target x86_64-pc-windows-msvc -fms-compatibility -fms-extensions -U__int64 -std=c++17{includes}",
         )
+
+    def get_probe_layouts(self, source: str) -> dict[str, tuple[int, int]]:
+        """Size and offset of value in each probe struct of SrcInterface.get_layout_probe."""
+        # a til of its own keeps the probes out of the database
+        til = ida_typeinf.new_til("cs_layout_probe.til", "FFXIVClientStructs layout probe")
+        try:
+            if ida_srclang.parse_decls_with_parser("clang", til, source, False) < 0:
+                raise RuntimeError("parse_decls_with_parser failed: the clang parser is not available")
+
+            layouts: dict[str, tuple[int, int]] = {}
+            name = ida_typeinf.first_named_type(til, ida_typeinf.NTF_TYPE)
+            while name:
+                if name.startswith(layout_probe_prefix):
+                    tinfo = ida_typeinf.tinfo_t()
+                    udt = ida_typeinf.udt_type_data_t()
+                    if tinfo.get_named_type(til, name) and tinfo.get_udt_details(udt):
+                        for member in udt:
+                            if member.name == "value" and member.size > 0:
+                                layouts[name] = (member.size // 8, member.offset // 8)
+                name = ida_typeinf.next_named_type(til, name, ida_typeinf.NTF_TYPE)
+            return layouts
+        finally:
+            ida_typeinf.free_til(til)
 
     def parse_string(self, decl: str, vtables: list[str]) -> int:
         """Returns the number of parser errors reported by IDA."""

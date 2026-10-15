@@ -295,6 +295,12 @@ class GhidraInterface(object):
             *includes,
         ]
 
+    def get_probe_layouts(self, source: str) -> dict[str, tuple[int, int]]:
+        """Size and offset of value in each probe struct of SrcInterface.get_layout_probe."""
+        return ClangInterface(
+            self.parser_args, os.environ.get("LIBCLANG_LIBRARY_FILE")
+        ).parse_layout_probe(source)
+
     def parse_string(self, decl: str, vtables: list[str]) -> int:
         """Import the declarations as clang lays them out, returns the error count."""
         export, self.template_aliases, error_count = ClangInterface(
