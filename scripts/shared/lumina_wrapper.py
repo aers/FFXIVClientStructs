@@ -220,7 +220,6 @@ def _load_excel_header_files(file_path: str) -> dict[str, tuple[int, list[ExcelC
 def _save_excel_header_files(file_path: str, excel_header_files: dict[str, tuple[int, list[ExcelColumnDefinition]]]):
     makedirs(excel_header_folder, exist_ok=True)
     with open(file_path, "w", encoding="utf-8") as f:
-        # Sheet: [id, [[type, offset], ...]]
         yamldump(
             {
                 name: [id, [[int(column.type), column.offset] for column in columns]]
