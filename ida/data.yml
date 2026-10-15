@@ -20569,7 +20569,7 @@ classes:
       0x14123DAB0: SetMarkerRadiusScale
       0x14123DBE0: HandleDragPosition
       0x1414552C0: CenterOnPlayer
-      0x14123DC40: CenterOnMap # Sets x and y to 1024.0 which is the center point
+      0x14123DC40: SetCenter # Sets MapCenterX and MapCenterY to 1024.0
       0x14123DAE0: SyncComponentMapScale # Just sets the contained AtkComponentMap's scale to match the Atk2DMap's scale
       0x14123DB30: SetPosition # Also updates player marker fields and clamps
   Client::UI::Atk2DNaviMap:
