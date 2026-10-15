@@ -5,6 +5,7 @@ import re
 os.environ.setdefault("LIBCLANG_DISABLE_CRASH_RECOVERY", "1")
 
 from clang.cindex import Config, Cursor, CursorKind, Index, Type, TypeKind
+from src_wrapper import layout_probe_prefix
 from structs_schema import (
     DefinedStruct,
     DefinedStructEnum,
@@ -205,15 +206,40 @@ class RecordCollector(object):
             )
             offset += base.get_size()
 
-        for field in type.get_fields():
-            bit_offset = field.get_field_offsetof()
-            if field.is_bitfield() or bit_offset < 0 or bit_offset % 8 != 0:
+        union = decl.kind == CursorKind.UNION_DECL
+        # libclang validates the whole record for every offset asked for, so it is only asked where alignment moved a field
+        max_field_align = type.get_align()
+        end = offset
+        ask_clang = False
+        for index, field in enumerate(type.get_fields()):
+            if field.is_bitfield():
+                ask_clang = True
                 continue
-            defined_field = self.get_field(field, bit_offset // 8, follow)
+            field_type = field.type.get_canonical()
+            field_size, field_align = field_type.get_size(), field_type.get_align()
+            if union:
+                field_offset = 0
+            elif ask_clang or index == 0 or field_size < 0 or field_align <= 0:
+                bit_offset = field.get_field_offsetof()
+                if bit_offset < 0 or bit_offset % 8 != 0:
+                    continue
+                field_offset = bit_offset // 8
+            else:
+                field_align = min(field_align, max_field_align)
+                field_offset = -(-end // field_align) * field_align
+                if field_offset != end:
+                    bit_offset = field.get_field_offsetof()
+                    if bit_offset != field_offset * 8:
+                        ask_clang = True
+                        if bit_offset < 0 or bit_offset % 8 != 0:
+                            continue
+                        field_offset = bit_offset // 8
+            end = field_offset + max(field_size, 0)
+            defined_field = self.get_field(field, field_offset, follow)
             if defined_field is not None:
                 fields.append(defined_field)
 
-        self.structs[name] = self.new_struct(name, fields, type.get_size(), decl.kind == CursorKind.UNION_DECL)
+        self.structs[name] = self.new_struct(name, fields, type.get_size(), union)
 
     def is_empty(self, type: Type) -> bool:
         """An empty base takes up no room in the struct inheriting it."""
@@ -294,3 +320,16 @@ class ClangInterface(object):
             print(f"Error: clang: {len(errors) - 50} more error(s) not shown")
 
         return collector.get_export(), collector.aliases, len(errors)
+
+    def parse_layout_probe(self, source: str) -> dict[str, tuple[int, int]]:
+        """Size and offset of value in each probe struct of SrcInterface.get_layout_probe."""
+        unit = Index.create().parse(main_file, args=self.args, unsaved_files=[(main_file, source)])
+        layouts: dict[str, tuple[int, int]] = {}
+        for child in unit.cursor.get_children():
+            if child.kind != CursorKind.STRUCT_DECL or not child.spelling.startswith(layout_probe_prefix):
+                continue
+            for field in child.type.get_fields():
+                size, bit_offset = field.type.get_size(), field.get_field_offsetof()
+                if field.spelling == "value" and size > 0 and bit_offset >= 0:
+                    layouts[child.spelling] = (size, bit_offset // 8)
+        return layouts
