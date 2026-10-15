@@ -21,8 +21,8 @@ public unsafe partial struct Atk2DAreaMap {
     [FieldOffset(0x68)] public float DragCursorY;
     [FieldOffset(0x6C)] public float PlayerMarkerX;
     [FieldOffset(0x70)] public float PlayerMarkerY;
-    [FieldOffset(0x74)] public float FollowedPlayerMarkerX;
-    [FieldOffset(0x78)] public float FollowedPlayerMarkerY;
+    [FieldOffset(0x74)] public float FollowedPlayerMarkerX; // PreviousX position
+    [FieldOffset(0x78)] public float FollowedPlayerMarkerY; // PreviousY position
     [FieldOffset(0x7C)] public float MapCenterX;
     [FieldOffset(0x80)] public float MapCenterY;
 
@@ -60,6 +60,12 @@ public unsafe partial struct Atk2DAreaMap {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 86 ?? ?? ?? ?? 89 86 ?? ?? ?? ?? 8B 86 ?? ?? ?? ?? 89 86 ?? ?? ?? ?? 48 8B 45")]
     public partial void CenterOnPlayer();
+
+    /// <summary>
+    /// Sets the maps offsets and updates PlayerMarker fields. Clamps to bounds.
+    /// </summary>
+    [MemberFunction("8B 41 ?? 89 41 ?? 8B 41 ?? 89 41 ?? F3 0F 11 49")]
+    public partial void SetPosition(float x, float y);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public unsafe struct AreaMapMarker {
