@@ -1,5 +1,6 @@
 import os
 import re
+from dataclasses import replace
 
 # the crash recovery of libclang takes the SIGSEGV the JVM raises on purpose and kills Ghidra, read when the index is created
 os.environ.setdefault("LIBCLANG_DISABLE_CRASH_RECOVERY", "1")
@@ -109,12 +110,61 @@ class RecordCollector(object):
                     self.aliases[child.spelling] = type_string
 
     def get_export(self) -> DefinedStructExport:
+        self.flatten_primary_bases()
         opaque = [
             self.new_struct(name, [], None, union)
             for name, union in self.opaque.items()
             if name not in self.structs
         ]
         return DefinedStructExport(list(self.enums.values()), [*opaque, *self.structs.values()])
+
+    def get_primary_base(self, struct: DefinedStruct) -> DefinedStruct | None:
+        """The base at offset 0, it shares its vtable pointer with the struct inheriting it."""
+        if struct.union:
+            return None
+        base_field = next((field for field in struct.fields if field.base and field.offset == 0), None)
+        if base_field is None:
+            return None
+        base = self.structs.get(base_field.type)
+        return None if base is None or base.union else base
+
+    def flatten_primary_bases(self):
+        """Ghidra can not retype the vtable pointer inside an embedded base, so a struct with a vtable of its own
+        gets the members of its offset 0 bases with __vtable pointing to its own VTable instead."""
+
+        def get_primary_fields(struct: DefinedStruct) -> list:
+            base = self.get_primary_base(struct)
+            if base is None:
+                return list(struct.fields)
+            fields = [field for field in struct.fields if not (field.base and field.offset == 0)]
+            return [*get_primary_fields(base), *fields]
+
+        flattened: dict[str, list] = {}
+        for name, struct in self.structs.items():
+            vtable_name = f"{name}::VTable"
+            if vtable_name not in self.structs or self.get_primary_base(struct) is None:
+                continue
+            primary_fields = get_primary_fields(struct)
+            vtable_field = next((field for field in primary_fields if field.offset == 0 and field.name == "__vtable"), None)
+            if vtable_field is None:
+                # the root base has no vtable pointer to replace
+                continue
+
+            fields = [DefinedStructField("__vtable", f"{vtable_name}*", 0, False, [])]
+            names = {"__vtable"}
+            # the most derived first, a member hides the one of a base with the same name
+            for field in reversed(primary_fields):
+                if field is vtable_field:
+                    continue
+                if field.name in names:
+                    field = replace(field, name=f"{field.name}_{field.offset:X}")
+                names.add(field.name)
+                fields.append(field)
+            flattened[name] = sorted(fields, key=lambda field: field.offset)
+
+        # replaced after the loop, so every struct is flattened from its bases as clang laid them out
+        for name, fields in flattened.items():
+            self.structs[name] = replace(self.structs[name], fields=fields)
 
     def new_struct(self, type_name: str, fields: list, size: int | None, union: bool) -> DefinedStruct:
         parts = split_type_path(type_name)
