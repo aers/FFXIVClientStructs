@@ -51,7 +51,6 @@ class FfxivClass:
     @classmethod
     def from_data(cls, api: Any, class_name: str, class_data: DefinedDataClass) -> FfxivClass:
         """A class from its data.yml definition."""
-        # Offset the vtbl and funcs if the program has been rebased
         rebase_offset = api.get_image_base() - STANDARD_IMAGE_BASE
 
         return cls(
@@ -76,7 +75,7 @@ class FfxivClass:
             return self._main_vtbl_size
 
         if self._main_vtbl_size == 0:
-            self._main_vtbl_size = 1  # Set to 1, skip the first entry
+            self._main_vtbl_size = 1  # skip the first entry
             for ea in itertools.count(self.vtbls[0].ea + 8, 8):
                 if self.api.get_addr_name(ea) != '':
                     break
@@ -177,7 +176,6 @@ class FfxivClass:
         def collect_vtbl_functions(ea: int, size: int, class_name: str, vfunc_names: dict[int, str],
                                    base_class_names: list[str]) -> list[tuple[int, str]]:
             vtbl_builder = []
-            # Iterate through each offset
             for func_idx in range(0, size):
                 vtbl_vfunc_ea = ea + func_idx * 8
                 vfunc_ea = self.api.get_qword(vtbl_vfunc_ea)  # type: int

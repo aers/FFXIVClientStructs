@@ -499,7 +499,6 @@ class GhidraInterface(object):
         ea = self.get_func_ea_by_name(func_name)
         if ea == self.BADADDR:
             if self.get_vft_from_data(struct.type) is None:
-                # no vtable address in data.yml, so there is no slot to look up
                 return
             ea = self.get_vfunc_ea_from_data(struct.type, virt_func.offset)
             if ea in (0, self.BADADDR):
@@ -687,7 +686,7 @@ class GhidraInterface(object):
         return class_name
 
     def format_vfunc_name(self, ea: int, current_func_name: str, proposed_func_name: str, class_name: str, base_class_names: list[str]) -> str | None:
-        current_func_name = current_func_name.removeprefix("thunk_")  # jump
+        current_func_name = current_func_name.removeprefix("thunk_")
 
         # Previously renamed as a vfunc
         if current_func_name.startswith(class_name):

@@ -306,8 +306,7 @@ class IdaInterface(object):
 
     def get_addr_name(self, ea: int) -> str:
         name = idc.get_name(ea)
-        # if name is None or '' and segment name is .text then create the function and get the name of it.
-        # this is done for parts of the code that has no xrefs to it due to how IDA detects function boundaries
+        # code with no xrefs to it is not made a function due to how IDA detects function boundaries
         if (name is None or name == '') and idc.get_segm_name(ea) == '.text':
             ida_funcs.add_func(ea)
             name = idc.get_name(ea)
@@ -508,7 +507,6 @@ class IdaInterface(object):
         ea = self.get_func_ea_by_name(func_name)
         if ea == idc.BADADDR:
             if self.get_vft_from_data(struct.type) is None:
-                # no vtable address in data.yml, so there is no slot to look up
                 return
             ea = self.get_vfunc_ea_from_data(struct.type, virt_func.offset)
             if ea in (0, idc.BADADDR):

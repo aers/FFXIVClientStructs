@@ -117,7 +117,6 @@ def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
             )
         sheetIdx = ghidra.get_dword(sheetEa)
 
-        # don't rename any funcs that are already named
         if ghidra.has_default_name(ea):
             if exd_map.get(sheetIdx) == None:
                 print(
