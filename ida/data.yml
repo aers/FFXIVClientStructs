@@ -15501,12 +15501,27 @@ classes:
         base: Client::UI::Misc::CharaView
     funcs:
       0x1409D01E0: ctor
+  Client::UI::Agent::AgentEmj::EmjGame:
+    vtbls:
+      - ea: 0x1421FF168
+    funcs:
+      0x141104280: ctor
+      0x141107A90: GetEmjAddonText
+      0x141107C80: GetEmjAddonText2
+      0x141107F90: GetEmjAddonText3
+      0x14110A1C0: UpdateDangerMarkers
+      0x14110A550: UpdateCallHint
+      0x14110C490: AutoPlaySeat
+      0x14110C620: UpdateResultYakuText
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x1421FEF98
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1410DAFA0: ctor
+      0x1410DC3C0: GetEngine
+      0x1410E1E50: OpenChiSelection
+      0x1410E4270: CreateGame
   Client::UI::Agent::AgentAozContentBriefing:
     vtbls:
       - ea: 0x1421CA210
