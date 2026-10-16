@@ -1812,6 +1812,11 @@ classes:
       0x140E55930: GetAbilityIdFromItem
       0x140E55950: GetStainFromItem
       0x140E55970: GetBeedingCapacityFromItem
+  Client::Game::EmjEngineCore:
+    vtbls:
+      - ea: 0x14243EE10
+    funcs:
+      0x141ADFBB0: ctor
   Client::Game::Emj::Table:
     vtbls:
       - ea: 0x14243EDE8
