@@ -1812,6 +1812,30 @@ classes:
       0x140E55930: GetAbilityIdFromItem
       0x140E55950: GetStainFromItem
       0x140E55970: GetBeedingCapacityFromItem
+  Client::Game::Emj::RoundState:
+    vtbls:
+      - ea: 0x1424678C0
+    funcs:
+      0x141C73A20: ctor
+      0x141C73D20: IsFinalHand
+      0x141C73EA0: GetRiichiSticks # position 4 returns the table total
+      0x141C74090: DeclareRiichi
+      0x141C740D0: CancelRiichi
+      0x141C74140: ClearFirstTurn
+      0x141C74180: InterruptFirstTurn # on any call
+      0x141C74430: DecodeDoraIndicators
+      0x141C74740: AddKanDora
+      0x141C74A20: DistributeRiichiSticks
+      0x141C74B50: UpdateStandings
+      0x141C74E00: GetStandings
+      0x141C74E50: GetStandingSeats
+      0x141C74ED0: GetPlacement
+      0x141C74FA0: ResetUnseenTileCounts
+      0x141C75390: RemoveUnseenTile
+      0x141C755D0: ResetGame
+      0x141C75760: ResetHand
+      0x141C75900: CheckGameEnd
+      0x141C75AB0: AdvanceRound
   Client::Game::Group::PartyMember:
     funcs:
       0x140B25350: Reset
