@@ -1819,6 +1819,15 @@ classes:
       0x141C72910: GetDisplayTiles
       0x141C72B80: GetTileCount
       0x141C72BB0: CopyTiles
+  Client::Game::Emj::MeldList:
+    funcs:
+      0x141C72C90: ctor
+      0x141C72CE0: GetMeld
+      0x141C72EA0: AddChi
+      0x141C72F90: AddPon
+      0x141C73060: AddOpenKan
+      0x141C73120: UpgradePonToAddedKan
+      0x141C731D0: AddConcealedKan
   Client::Game::Emj::RoundState:
     vtbls:
       - ea: 0x1424678C0
