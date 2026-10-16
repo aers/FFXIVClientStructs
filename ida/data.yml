@@ -1812,6 +1812,17 @@ classes:
       0x140E55930: GetAbilityIdFromItem
       0x140E55950: GetStainFromItem
       0x140E55970: GetBeedingCapacityFromItem
+  Client::Game::Emj::Table:
+    vtbls:
+      - ea: 0x14243EDE8
+    funcs:
+      0x141ADF550: ctor
+      0x141AE77D0: BuildWinResult
+      0x141C79220: GetYakuDisplayId # static, internal yaku id -> Addon row 12282 + id
+  Client::Game::Emj::ClientTable:
+    vtbls:
+      - ea: 0x14243EE08
+        base: Client::Game::Emj::Table
   Client::Game::Emj::Meld:
     funcs:
       0x141C72470: CalcFu
