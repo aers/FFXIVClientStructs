@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct Atk2DMap {
     [FieldOffset(0x08)] public AtkComponentNode* PlayerPin;
     [FieldOffset(0x10)] public AtkImageNode* PlayerCone;
-    [FieldOffset(0x18)] private float Unk18;
-    [FieldOffset(0x1C)] private float Unk1C;
+    [FieldOffset(0x18)] public float PlayerPositionX;
+    [FieldOffset(0x1C)] public float PlayerPositionY;
     [FieldOffset(0x20)] public float X;
     [FieldOffset(0x24)] public float Y;
     [FieldOffset(0x28)] public float MarkerRadiusScale;

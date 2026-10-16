@@ -7738,7 +7738,7 @@ classes:
       - ea: 0x14214CFF0
         base: Client::Graphics::Singleton<Client::Graphics::RendererUtility>
     funcs:
-      0x140279A50: RenderView      
+      0x140279A50: RenderView
   Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>:
     vtbls:
       - ea: 0x14214CFF8
@@ -20569,6 +20569,9 @@ classes:
       0x14123DAB0: SetMarkerRadiusScale
       0x14123DBE0: HandleDragPosition
       0x1414552C0: CenterOnPlayer
+      0x14123DC40: SetCenter # Sets MapCenterX and MapCenterY to 1024.0
+      0x14123DAE0: SyncComponentMapScale # Just sets the contained AtkComponentMap's scale to match the Atk2DMap's scale
+      0x14123DB30: SetPosition # Also updates player marker fields and clamps
   Client::UI::Atk2DNaviMap:
     vtbls:
       - ea: 0x1422306D0
