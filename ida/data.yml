@@ -1852,6 +1852,15 @@ classes:
       0x141C75760: ResetHand
       0x141C75900: CheckGameEnd
       0x141C75AB0: AdvanceRound
+  Client::Game::Emj::Player:
+    funcs:
+      0x141C7B6F0: ctor
+      0x141C7B970: Initialize
+      0x141C7C0E0: CountRedFives
+      0x141C7CA50: AnalyzeWin
+      0x141C7D580: IsTenpai
+      0x141C7D660: FindRiichiDiscards
+      0x141C7DB50: GetAvailableActions
   Client::Game::Group::PartyMember:
     funcs:
       0x140B25350: Reset
