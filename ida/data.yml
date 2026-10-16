@@ -1812,6 +1812,18 @@ classes:
       0x140E55930: GetAbilityIdFromItem
       0x140E55950: GetStainFromItem
       0x140E55970: GetBeedingCapacityFromItem
+  Client::Game::EmjEngine:
+    vtbls:
+      - ea: 0x14243ED88
+    funcs:
+      0x141ADDBC0: ctor
+      0x141ADE570: RunAiDecision # (seat)
+      0x141ADE700: GetAiAction
+      0x141ADE840: RunDangerEvaluation # (seat)
+      0x141ADEB70: GetLocalSeatHandle
+      0x141ADEBC0: HasLocalEngine
+      0x141ADEC00: GetLocalEngine
+      0x141ADECF0: SetGame
   Client::Game::EmjEngineCore:
     vtbls:
       - ea: 0x14243EE10
