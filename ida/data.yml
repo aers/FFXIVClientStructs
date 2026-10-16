@@ -1812,6 +1812,13 @@ classes:
       0x140E55930: GetAbilityIdFromItem
       0x140E55950: GetStainFromItem
       0x140E55970: GetBeedingCapacityFromItem
+  Client::Game::Emj::Meld:
+    funcs:
+      0x141C72470: CalcFu
+      0x141C725D0: Initialize
+      0x141C72910: GetDisplayTiles
+      0x141C72B80: GetTileCount
+      0x141C72BB0: CopyTiles
   Client::Game::Emj::RoundState:
     vtbls:
       - ea: 0x1424678C0
