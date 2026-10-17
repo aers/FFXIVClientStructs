@@ -45,6 +45,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x97)] public byte Visibility;
     [FieldOffset(0x9A)] public ObjectTargetableFlags TargetableStatus; // Determines whether the game object can be targeted by the user
     [FieldOffset(0x9B)] public ObjectUpdateFlags UpdateFlags;
+    [FieldOffset(0x9C)] public ObjectSceneFlags SceneFlags;
     [FieldOffset(0xB0)] public Vector3 Position;
     [FieldOffset(0xC0)] public float Rotation;
     [FieldOffset(0xC4)] public float Scale;
@@ -428,6 +429,12 @@ public enum VisibilityFlags : ulong {
     None = 0,
     Model = 1ul << 1,
     Nameplate = 1ul << 11
+}
+
+[Flags]
+public enum ObjectSceneFlags : byte {
+    VisualsLoaded = 1 << 4, // found in Client::Game::Object::GameObject.Update; set once drawing is enabled, DrawObject.LoadState reaches 3 and vf57 (object type based checks) agrees, cleared by EnableDraw and DisableDraw
+    CountsForPresenceChecks = 1 << 6, // found in Client::LayoutEngine::Group::SGDoorActionController; a local client object with this flag active can actuate doors 
 }
 
 [Flags]
