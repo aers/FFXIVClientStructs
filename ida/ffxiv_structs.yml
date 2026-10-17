@@ -27002,10 +27002,10 @@ structs:
     name: PlayerCone
     offset: 16
   - type: float
-    name: Unk18
+    name: PlayerPositionX
     offset: 24
   - type: float
-    name: Unk1C
+    name: PlayerPositionY
     offset: 28
   - type: float
     name: X
@@ -57565,6 +57565,16 @@ structs:
     parameters:
     - type: Client::UI::Atk2DAreaMap*
       name: this
+  - signature: 8B 41 ?? 89 41 ?? 8B 41 ?? 89 41 ?? F3 0F 11 49
+    return_type: void
+    name: SetPosition
+    parameters:
+    - type: Client::UI::Atk2DAreaMap*
+      name: this
+    - type: float
+      name: x
+    - type: float
+      name: y
 - type: Client::UI::DutySlotList
   name: DutySlotList
   namespace: Client.UI
@@ -279200,6 +279210,14 @@ structs:
   - type: char
     name: IsControlKeyPressed
     offset: 23312
+  - type: Client::System::String::Utf8String
+    name: TooltipString
+    offset: 23328
+  - type: char
+    name: RawTooltip
+    offset: 23432
+    size: 512
+    is_string: True
   - type: Client::UI::Agent::QuestLinkContainer
     name: MapQuestLinkContainer
     offset: 24352
