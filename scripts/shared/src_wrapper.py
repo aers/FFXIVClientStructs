@@ -348,6 +348,17 @@ class SrcInterface(object):
                 )
         return min(size & -size, 8) if size else 1
 
+    def _get_union_members(
+        self, field: DefinedStructField | DefinedStructFixedField
+    ) -> list[DefinedStructField]:
+        """The members of a union field as fields at its offset, empty when the field is not a union."""
+        if isinstance(field, DefinedStructFixedField) or field.type == "__fastcall":
+            return []
+        return [
+            DefinedStructField(union_value.name, union_value.type, field.offset, False, [])
+            for union_value in field.union_values
+        ]
+
     def _get_template_parameters(self, struct: DefinedStruct) -> tuple[str, ...]:
         """The template parameters of the struct and of the templates it is declared in."""
         return (
@@ -415,24 +426,36 @@ class SrcInterface(object):
             if field.type == "__fastcall":
                 field_alignment = field_size = 8
             else:
-                field_type = self._get_field_type(field, template_struct_lookup or {})
-                field_type = self._substitute_template_types(field_type, substitutions)
-                field_alignment = self._get_type_alignment(
-                    field_type,
-                    struct_lookup,
-                    enum_lookup,
-                    template_struct_lookup,
-                    struct_definition_lookup,
-                )
-                field_size = 0
-                if track_padding and field.type not in base_types_used:
-                    field_size = self.get_size_from_type(
+                # a union is as large and as aligned as its largest and most aligned member
+                field_types = [
+                    self._substitute_template_types(
+                        self._get_field_type(member, template_struct_lookup or {}),
+                        substitutions,
+                    )
+                    for member in self._get_union_members(field) or [field]
+                ]
+                field_alignment = max(
+                    self._get_type_alignment(
                         field_type,
                         struct_lookup,
                         enum_lookup,
                         template_struct_lookup,
-                        template_parameters,
                         struct_definition_lookup,
+                    )
+                    for field_type in field_types
+                )
+                field_size = 0
+                if track_padding and field.type not in base_types_used:
+                    field_size = max(
+                        self.get_size_from_type(
+                            field_type,
+                            struct_lookup,
+                            enum_lookup,
+                            template_struct_lookup,
+                            template_parameters,
+                            struct_definition_lookup,
+                        )
+                        for field_type in field_types
                     )
                     if isinstance(field, DefinedStructFixedField):
                         field_size *= field.size
@@ -486,26 +509,33 @@ class SrcInterface(object):
                 field_size = 8
                 field_alignment = 8
             else:
-                field_type = self._get_field_type(field, template_struct_lookup)
-                field_type = self._substitute_template_types(field_type, substitutions)
-                field_size = self.get_size_from_type(
-                    field_type,
-                    struct_lookup,
-                    enum_lookup,
-                    template_struct_lookup,
-                    struct_definition_lookup=struct_definition_lookup,
-                )
-                if field_size == 0:
-                    raise ValueError(
-                        f"Cannot determine size of {field_type} in template type {struct.type}"
+                field_size = 0
+                field_alignment = 1
+                for member in self._get_union_members(field) or [field]:
+                    field_type = self._get_field_type(member, template_struct_lookup)
+                    field_type = self._substitute_template_types(field_type, substitutions)
+                    member_size = self.get_size_from_type(
+                        field_type,
+                        struct_lookup,
+                        enum_lookup,
+                        template_struct_lookup,
+                        struct_definition_lookup=struct_definition_lookup,
                     )
-                field_alignment = self._get_type_alignment(
-                    field_type,
-                    struct_lookup,
-                    enum_lookup,
-                    template_struct_lookup,
-                    struct_definition_lookup,
-                )
+                    if member_size == 0:
+                        raise ValueError(
+                            f"Cannot determine size of {field_type} in template type {struct.type}"
+                        )
+                    field_size = max(field_size, member_size)
+                    field_alignment = max(
+                        field_alignment,
+                        self._get_type_alignment(
+                            field_type,
+                            struct_lookup,
+                            enum_lookup,
+                            template_struct_lookup,
+                            struct_definition_lookup,
+                        ),
+                    )
                 if isinstance(field, DefinedStructFixedField):
                     field_size *= field.size
 
@@ -719,7 +749,11 @@ class SrcInterface(object):
             struct_type = self._normalize_type(struct.type)
             opaque_pointer_types = set()
             for nested_struct in iter_struct_tree(struct):
-                for field in nested_struct.fields:
+                for field in [
+                    member
+                    for nested_field in nested_struct.fields
+                    for member in [nested_field, *self._get_union_members(nested_field)]
+                ]:
                     field_type = self._normalize_type(field.type)
                     pointer_base = field_type
                     has_pointer = pointer_base.endswith("*")
@@ -747,6 +781,11 @@ class SrcInterface(object):
         for struct in all_structs:
             identifiers.add(self.get_short_name(struct.type))
             identifiers.update(field.name for field in struct.fields)
+            identifiers.update(
+                union_value.name
+                for field in struct.fields
+                for union_value in field.union_values
+            )
             identifiers.update(
                 virtual_function.name
                 for virtual_function in struct.virtual_functions or []
@@ -914,7 +953,8 @@ class SrcInterface(object):
         def collect_struct(struct: DefinedStruct, template_parameters: tuple[str, ...]):
             template_parameters = (*template_parameters, *struct.template_types)
             for field in struct.fields:
-                collect(self._get_field_type(field, template_struct_lookup), template_parameters)
+                for member in self._get_union_members(field) or [field]:
+                    collect(self._get_field_type(member, template_struct_lookup), template_parameters)
             for inline_struct in struct.inline_structs:
                 collect_struct(inline_struct, template_parameters)
 
@@ -1204,6 +1244,29 @@ class SrcInterface(object):
                     fastcall_field_define = fastcall_field_define[:-2]
                 struct_string_define += fastcall_field_define + ");"
                 prev_size += 8
+            elif union_members := self._get_union_members(field):
+                struct_string_define += "union {"
+                struct_string_define.indent()
+                union_define_size = 0
+                for member in union_members:
+                    member_define, member_define_size = self.get_string_define_and_size(
+                        member,
+                        struct.namespace,
+                        struct_lookup,
+                        enum_lookup,
+                        template_struct_lookup,
+                        list(template_parameters),
+                        struct_definition_lookup,
+                        None,
+                        opaque_pointer_types,
+                    )
+                    struct_string_define += member_define
+                    union_define_size = max(union_define_size, member_define_size)
+                    if self._is_template_value_field(member, template_parameters):
+                        size_known = False
+                struct_string_define.unindent()
+                struct_string_define += f"}} {field_name};"
+                prev_size += union_define_size
             else:
                 field_define, field_define_size = self.get_string_define_and_size(
                     field,
