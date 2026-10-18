@@ -150,7 +150,7 @@ class RecordCollector(object):
                 # the root base has no vtable pointer to replace
                 continue
 
-            fields = [DefinedStructField("__vtable", f"{vtable_name}*", 0, False, [])]
+            fields = [DefinedStructField("__vtable", f"{vtable_name}*", 0, False, [], [])]
             names = {"__vtable"}
             # the most derived first, a member hides the one of a base with the same name
             for field in reversed(primary_fields):
@@ -252,7 +252,7 @@ class RecordCollector(object):
                 continue
             offset = -(-offset // base.get_align()) * base.get_align()
             fields.append(
-                DefinedStructField(f"baseclass_{offset:X}", self.get_type_string(base, follow, True), offset, True, [])
+                DefinedStructField(f"baseclass_{offset:X}", self.get_type_string(base, follow, True), offset, True, [], [])
             )
             offset += base.get_size()
 
@@ -323,7 +323,7 @@ class RecordCollector(object):
                 for index, argument in enumerate(function.argument_types())
             ]
             return_type = self.get_type_string(function.get_result(), follow, False) or "__int64"
-            return DefinedStructFuncField(name, "__fastcall", offset, False, [], return_type, parameters)
+            return DefinedStructFuncField(name, "__fastcall", offset, False, [], [], return_type, parameters)
 
         type_string = self.get_type_string(type, follow, True)
         if type_string is None:
@@ -333,8 +333,8 @@ class RecordCollector(object):
                 return None
 
         if count is not None:
-            return DefinedStructFixedField(name, type_string, offset, False, [], count, False)
-        return DefinedStructField(name, type_string, offset, False, [])
+            return DefinedStructFixedField(name, type_string, offset, False, [], [], count, False)
+        return DefinedStructField(name, type_string, offset, False, [], [])
 
 
 class ClangInterface(object):

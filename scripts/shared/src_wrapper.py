@@ -355,7 +355,7 @@ class SrcInterface(object):
         if isinstance(field, DefinedStructFixedField) or field.type == "__fastcall":
             return []
         return [
-            DefinedStructField(union_value.name, union_value.type, field.offset, False, [])
+            DefinedStructField(union_value.name, union_value.type, field.offset, False, [], [])
             for union_value in field.union_values
         ]
 

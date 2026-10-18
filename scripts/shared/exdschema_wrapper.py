@@ -148,6 +148,7 @@ def map_header_and_schema(
                         definition_offset,
                         False,
                         [],
+                        [],
                         field.count,
                         False,
                     )
@@ -159,6 +160,7 @@ def map_header_and_schema(
                         exported_structs[-1].type,
                         definition_offset,
                         False,
+                        [],
                         [],
                         field.count,
                         False,
@@ -196,7 +198,8 @@ def map_header_and_schema(
                             enum_type,
                             definition_offset,
                             False,
-                            []
+                            [],
+                            [],
                         )
                     )
             else:
@@ -206,7 +209,8 @@ def map_header_and_schema(
                         definition.get_base_type_string(),
                         definition_offset,
                         False,
-                        []
+                        [],
+                        [],
                     )
                 )
 
