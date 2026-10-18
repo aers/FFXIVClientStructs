@@ -129,7 +129,7 @@ def do_pattern(pattern, suffix, sheetSearchPattern, sheetSearchOffset):
             if suffix == None:
                 suffix = ""
 
-            fnName = "Component::Exd::ExdModule_Get%s%s" % (
+            fnName = "Component::Exd::ExdModule.Get%s%s" % (
                 exd_map[sheetIdx],
                 suffix,
             )
