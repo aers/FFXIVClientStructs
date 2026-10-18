@@ -52,6 +52,7 @@ class DefinedStructField(DefinedStructFuncParam):
     offset: int
     base: bool
     template_args: list[str]
+    union_values: list[DefinedStructFuncParam]
 
 
 @dataclass
@@ -137,9 +138,15 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
     for field in struct["fields"]:
         base = field["base"] if "base" in field else False
         template_args = []
+        union_values = []
         if "template_args" in field:
             for template_arg in field["template_args"]:
                 template_args.append(template_arg)
+        if "union_values" in field:
+            for union_value in field["union_values"]:
+                union_values.append(
+                    DefinedStructFuncParam(union_value["name"], union_value["type"])
+                )
         if "size" in field:
             fields.append(
                 DefinedStructFixedField(
@@ -177,6 +184,7 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
                     field["offset"],
                     base,
                     template_args,
+                    union_values,
                 )
             )
     if "virtual_functions" in struct:
