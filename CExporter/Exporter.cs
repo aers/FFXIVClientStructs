@@ -418,6 +418,10 @@ public partial class Exporter {
                 : field.FieldTypeOverrideTemplates ?? [];
             foreach (var templateArgument in templateArguments)
                 yield return templateArgument.FixTypeName();
+            foreach (var unionValue in field.UnionValues) {
+                if (unionValue.FieldType.IsFunctionPointer || unionValue.FieldType.IsUnmanagedFunctionPointer) continue;
+                yield return unionValue.FieldTypeOverride ?? unionValue.FieldType.FixTypeName();
+            }
         }
     }
 
