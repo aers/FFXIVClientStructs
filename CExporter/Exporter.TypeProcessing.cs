@@ -626,13 +626,19 @@ public partial class Exporter {
 
                 var unionValues = unionFields.Select(unionField => {
                     (string? typeOverride, Type[] typeOverrideTemplates) = (null, []);
-                    if (unionField.FieldType is { Namespace: ExporterStatics.StdNamespacePrefix })
+                    if (unionField.FieldType is { Namespace: ExporterStatics.StdNamespacePrefix }) {
                         (typeOverride, typeOverrideTemplates) = ProcessStdType(unionField.FieldType);
+                        foreach (var requiredType in typeOverrideTemplates) {
+                            _processType.Add(requiredType);
+                        }
+                    } else
+                        _processType.Add(unionField.FieldType);
 
                     return (new ProcessedFieldUnion {
                         FieldName = unionField.Name,
                         FieldType = unionField.FieldType,
-                        FieldTypeOverride = typeOverride
+                        FieldTypeOverride = typeOverride,
+                        FieldTypeOverrideTemplates = typeOverrideTemplates
                     }, typeOverrideTemplates);
                 }).ToArray();
 

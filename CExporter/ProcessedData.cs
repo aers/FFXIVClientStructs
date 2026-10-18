@@ -21,6 +21,7 @@ public class ProcessedFieldUnion {
     public required Type FieldType;
     public required string FieldName;
     public required string? FieldTypeOverride;
+    public Type[]? FieldTypeOverrideTemplates;
 }
 
 public class ProcessedField {
@@ -82,7 +83,18 @@ public class ProcessedStruct {
     public string[] DependencyNames {
         get {
             if (_dependencyNames.Length == 0) {
+                var unionMembers = Fields.SelectMany(unionField => unionField.UnionValues.Select(unionValue => new ProcessedField {
+                    FieldType = unionValue.FieldType,
+                    FieldTypeOverride = unionValue.FieldTypeOverride,
+                    FieldTypeOverrideTemplates = unionValue.FieldTypeOverrideTemplates,
+                    FieldName = unionValue.FieldName,
+                    FieldOffset = unionField.FieldOffset,
+                    Bits = [],
+                    IsUnion = false,
+                    UnionValues = []
+                }));
                 _dependencyNames = Fields
+                    .Concat(unionMembers)
                     .Where(t => {
                         if (t.FieldTypeOverride == null) {
                             if (t.FieldType.IsEnum) {
