@@ -155,6 +155,7 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
                     field["offset"],
                     base,
                     template_args,
+                    union_values,
                     field["size"],
                     field["is_string"],
                 )
@@ -172,6 +173,7 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
                     field["offset"],
                     base,
                     template_args,
+                    union_values,
                     field["return_type"],
                     parameters,
                 )
