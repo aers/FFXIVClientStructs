@@ -1815,6 +1815,8 @@ classes:
   Client::Game::EmjEngine:
     vtbls:
       - ea: 0x14243ED88
+    vfuncs:
+      0: dtor
     funcs:
       0x141ADDBC0: ctor
       0x141ADE570: RunAiDecision # (seat)
@@ -1827,11 +1829,15 @@ classes:
   Client::Game::EmjEngineCore:
     vtbls:
       - ea: 0x14243EE10
+    vfuncs:
+      0: dtor
     funcs:
       0x141ADFBB0: ctor
   Client::Game::Emj::Table:
     vtbls:
       - ea: 0x14243EDE8
+    vfuncs:
+      0: dtor
     funcs:
       0x141ADF550: ctor
       0x141AE77D0: BuildWinResult
@@ -1859,6 +1865,8 @@ classes:
   Client::Game::Emj::RoundState:
     vtbls:
       - ea: 0x1424678C0
+    vfuncs:
+      0: dtor
     funcs:
       0x141C73A20: ctor
       0x141C73D20: IsFinalHand
@@ -15504,6 +15512,8 @@ classes:
   Client::UI::Agent::AgentEmj::EmjGame:
     vtbls:
       - ea: 0x1421FF168
+    vfuncs:
+      0: dtor
     funcs:
       0x141104280: ctor
       0x141107A90: GetEmjAddonText
