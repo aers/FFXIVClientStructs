@@ -15509,11 +15509,15 @@ classes:
         base: Client::UI::Misc::CharaView
     funcs:
       0x1409D01E0: ctor
+  Client::UI::Agent::AgentEmj::EmjGameInterface:
+    vtbls:
+      - ea: 0x1421FF0C0
+    vfuncs:
+      0: dtor
   Client::UI::Agent::AgentEmj::EmjGame:
     vtbls:
       - ea: 0x1421FF168
-    vfuncs:
-      0: dtor
+        base: Client::UI::Agent::AgentEmj::EmjGameInterface 
     funcs:
       0x141104280: ctor
       0x141107A90: GetEmjAddonText
