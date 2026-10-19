@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Emj;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
