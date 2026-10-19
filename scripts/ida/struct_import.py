@@ -16,6 +16,7 @@ from form_builder import DynamicForm
 from structs_schema import get_yaml
 
 src = SrcInterface()
+src.ida_vtables = True
 ida = IdaInterface()
 print("Loading data.yml")
 ida.load_data_yml()
