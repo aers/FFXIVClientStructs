@@ -16,6 +16,7 @@ layout_probe_prefix = "__cs_layout_probe_"
 
 class SrcInterface(object):
     full_padding: bool = True
+    ida_vtables: bool = False
 
     def __init__(self):
         self._layout_cache: dict[tuple[str, tuple[str, ...]], tuple[int, bool]] = {}
@@ -873,7 +874,7 @@ class SrcInterface(object):
         def collect_vtable_names(struct: DefinedStruct):
             # a template vtable only exists in IDA as its instantiations
             if struct.virtual_functions and not struct.template_types:
-                vtable_name = f"{struct.type}::VTable"
+                vtable_name = f"{struct.type}_vtbl" if self.ida_vtables else f"{struct.type}::VTable"
                 if vtable_name not in seen_vtable_names:
                     seen_vtable_names.add(vtable_name)
                     vtable_names.append(vtable_name)
@@ -1070,7 +1071,7 @@ class SrcInterface(object):
         struct_definition_lookup: dict[str, DefinedStruct] | None = None,
         opaque_pointer_types: set[str] | None = None,
     ) -> tuple[IndentWriter, IndentWriter]:
-        """The forward declarations and the definition, the vtable inside as VTable."""
+        """The forward declarations and the definition, the vtable inside as VTable or beside as Name_vtbl for IDA."""
         struct_string_forward: IndentWriter = IndentWriter()
         struct_string_define: IndentWriter = IndentWriter()
         template_struct_lookup = template_struct_lookup or {}
@@ -1155,7 +1156,16 @@ class SrcInterface(object):
         for _, inline_define in inline_struct_chunks:
             append_chunk(inline_define)
 
-        if struct.virtual_functions:
+        ida_vtable = bool(struct.virtual_functions) and self.ida_vtables
+        if ida_vtable:
+            if template_declaration:
+                struct_string_forward += template_declaration
+            struct_string_forward += f"struct {short_name}_vtbl;"
+            if prev_size == 0:
+                template_suffix = f"<{', '.join(struct.template_types)}>" if struct.template_types else ""
+                struct_string_define += f"{short_name}_vtbl{template_suffix}* __vftable;"
+                prev_size = 8
+        elif struct.virtual_functions:
             struct_string_define += "struct VTable {"
             struct_string_define.indent()
             for vfunc_line in self.build_vtable_lines(struct):
@@ -1299,6 +1309,16 @@ class SrcInterface(object):
         
         struct_string_define.unindent()
         struct_string_define += "};"
+
+        if ida_vtable:
+            if template_declaration:
+                struct_string_define += template_declaration
+            struct_string_define += f"struct {short_name}_vtbl {{"
+            struct_string_define.indent()
+            for vfunc_line in self.build_vtable_lines(struct):
+                struct_string_define += vfunc_line
+            struct_string_define.unindent()
+            struct_string_define += "};"
 
         if packed:
             struct_string_define.lines.insert(0, IndentWriterValue(0, "#pragma pack(push, 1)"))
