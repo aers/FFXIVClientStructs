@@ -1,6 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Emj;
-
-namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Emj;
 
 // Client::Game::EmjEngineCore
 [GenerateInterop]
