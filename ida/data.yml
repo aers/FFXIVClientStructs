@@ -1812,7 +1812,7 @@ classes:
       0x140E55930: GetAbilityIdFromItem
       0x140E55950: GetStainFromItem
       0x140E55970: GetBeedingCapacityFromItem
-  Client::Game::EmjEngine:
+  Client::Game::Emj::EmjEngine:
     vtbls:
       - ea: 0x14243ED88
     vfuncs:
@@ -1826,7 +1826,7 @@ classes:
       0x141ADEBC0: HasLocalEngine
       0x141ADEC00: GetLocalEngine
       0x141ADECF0: SetGame
-  Client::Game::EmjEngineCore:
+  Client::Game::Emj::EmjEngineCore:
     vtbls:
       - ea: 0x14243EE10
     vfuncs:
