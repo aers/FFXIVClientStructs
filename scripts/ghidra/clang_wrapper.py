@@ -110,7 +110,7 @@ class RecordCollector(object):
                     self.aliases[child.spelling] = type_string
 
     def get_export(self) -> DefinedStructExport:
-        self.flatten_primary_bases()
+        self.wrap_primary_bases()
         opaque = [
             self.new_struct(name, [], None, union)
             for name, union in self.opaque.items()
@@ -128,43 +128,48 @@ class RecordCollector(object):
         base = self.structs.get(base_field.type)
         return None if base is None or base.union else base
 
-    def flatten_primary_bases(self):
+    def has_vtable_pointer(self, struct: DefinedStruct) -> bool:
+        """The struct or a base at offset 0 starts with __vtable."""
+        if any(field.offset == 0 and field.name == "__vtable" for field in struct.fields):
+            return True
+        base = self.get_primary_base(struct)
+        return base is not None and self.has_vtable_pointer(base)
+
+    def wrap_primary_bases(self):
         """Ghidra can not retype the vtable pointer inside an embedded base, so a struct with a vtable of its own
-        gets the members of its offset 0 bases with __vtable pointing to its own VTable instead."""
-
-        def get_primary_fields(struct: DefinedStruct) -> list:
-            base = self.get_primary_base(struct)
-            if base is None:
-                return list(struct.fields)
-            fields = [field for field in struct.fields if not (field.base and field.offset == 0)]
-            return [*get_primary_fields(base), *fields]
-
-        flattened: dict[str, list] = {}
+        holds its offset 0 base in a union with __vtable pointing to its own VTable, the base keeps its layout."""
+        wrappers: dict[str, DefinedStruct] = {}
         for name, struct in self.structs.items():
             vtable_name = f"{name}::VTable"
-            if vtable_name not in self.structs or self.get_primary_base(struct) is None:
+            base = self.get_primary_base(struct)
+            if vtable_name not in self.structs or base is None or not self.has_vtable_pointer(base):
                 continue
-            primary_fields = get_primary_fields(struct)
-            vtable_field = next((field for field in primary_fields if field.offset == 0 and field.name == "__vtable"), None)
-            if vtable_field is None:
-                # the root base has no vtable pointer to replace
-                continue
+            base_field = next(field for field in struct.fields if field.base and field.offset == 0)
+            # ghidra settles a tie between union members on the first, so a vtable call goes through __vtable
+            wrapper = self.new_struct(
+                f"{name}::__primary_base",
+                [
+                    DefinedStructField("__vtable", f"{vtable_name}*", 0, False, [], []),
+                    replace(base_field, name=re.sub(r"\W", "_", split_type_path(base.type)[-1]), base=False),
+                ],
+                base.size,
+                True,
+            )
+            wrappers[name] = wrapper
 
-            fields = [DefinedStructField("__vtable", f"{vtable_name}*", 0, False, [], [])]
-            names = {"__vtable"}
-            # the most derived first, a member hides the one of a base with the same name
-            for field in reversed(primary_fields):
-                if field is vtable_field:
-                    continue
-                if field.name in names:
-                    field = replace(field, name=f"{field.name}_{field.offset:X}")
-                names.add(field.name)
-                fields.append(field)
-            flattened[name] = sorted(fields, key=lambda field: field.offset)
-
-        # replaced after the loop, so every struct is flattened from its bases as clang laid them out
-        for name, fields in flattened.items():
-            self.structs[name] = replace(self.structs[name], fields=fields)
+        # replaced after the loop, so every base is looked at as clang laid it out
+        # every union comes right before the struct holding it, after the base and vtable it is made of
+        structs: dict[str, DefinedStruct] = {}
+        for name, struct in self.structs.items():
+            if name in wrappers:
+                wrapper = wrappers[name]
+                structs[wrapper.type] = wrapper
+                struct = replace(struct, fields=[
+                    replace(field, type=wrapper.type) if field.base and field.offset == 0 else field
+                    for field in struct.fields
+                ])
+            structs[name] = struct
+        self.structs = structs
 
     def new_struct(self, type_name: str, fields: list, size: int | None, union: bool) -> DefinedStruct:
         parts = split_type_path(type_name)
