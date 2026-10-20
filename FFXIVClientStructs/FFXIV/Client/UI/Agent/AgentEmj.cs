@@ -71,7 +71,7 @@ public unsafe partial struct AgentEmj {
         /// <returns>Pointer to the allocated memory</returns>
         [VirtualFunction(1)]
         public partial void* Malloc(nuint size);
-        
+
         [VirtualFunction(2)]
         public partial void Free(void* ptr);
     }
