@@ -5,19 +5,16 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using FFXIVClientStructs.Attributes;
 using InteropGenerator.Runtime.Attributes;
 using Pastel;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace CExporter;
 
-public class Exporter {
+public partial class Exporter {
     private static List<ProcessedEnum> _enums = [];
     private static List<ProcessedStruct> _structs = [];
     private static HashSet<ProcessingType> _processType = [];
@@ -86,7 +83,7 @@ public class Exporter {
         while (_processType.Count > 0) {
             if (!quiet) Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
             var tmp = _processType
-                .Where(t => t.Type is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false })
+                .Where(t => t.Type is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false } and not { Namespace: ExporterStatics.StdNamespacePrefix or ExporterStatics.StdHelperNamespacePrefix } || t.Type.Name.StartsWith("StdLinkedList"))
                 .ToArray();
             _processType.Clear();
             foreach (var @struct in tmp) {
@@ -107,56 +104,96 @@ public class Exporter {
 
     }
 
-    public static void ProcessStaticFunctions(bool quiet) {
-        Type[] types = [.. ExporterStatics.GetHavokTypes(), .. ExporterStatics.GetXIVTypes()];
-        types = types.Where(t => t.IsStruct()).Where(type => type.GetMethods(ExporterStatics.StaticBindingFlags).Length != 0).ToArray();
-        if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
-        var typeAndMembers = types.Select(t => (t, t.GetMethods(ExporterStatics.StaticBindingFlags))).ToArray();
-        foreach (var (type, methods) in typeAndMembers) {
-            if (!quiet) Console.WriteLine($"Processing {type} with {methods.Length} methods");
-            var sanitizedName = type.FixTypeName();
-            var currentStructIndex = _structs.FindIndex(s => s.StructTypeName == sanitizedName);
-            if (currentStructIndex == -1) {
-                if (!quiet) Console.WriteLine($"Error in struct {type} please fix");
-                continue;
-            }
-            var currentStruct = _structs[currentStructIndex];
-            foreach (var methodInfo in methods) {
-                var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
-                if (staticAddress != null) {
-                    var name = methodInfo.Name;
-                    if (name.StartsWith("Get")) {
-                        name = name[3..];
-                    }
-                    currentStruct.StaticMembers ??= [];
-                    currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
-                        new ProcessedStaticMembers {
-                            Name = name,
-                            Signature = staticAddress.Signature,
-                            RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
-                            IsPointer = staticAddress.IsPointer,
-                            ReturnType = methodInfo.ReturnType.GetPointerType()
-                        }];
+    public static (ProcessedStruct s, int c) ProcessStaticFunction(ProcessedStruct currentStruct)
+    {
+        var methods = currentStruct.StructType.GetMethods(ExporterStatics.StaticBindingFlags);
+        foreach (var methodInfo in methods) {
+            var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
+            if (staticAddress != null) {
+                var name = methodInfo.Name;
+                if (name.StartsWith("Get")) {
+                    name = name[3..];
                 }
-                var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
-                if (memberFunction != null || staticAddress != null)
-                    _processType.Add(methodInfo.ReturnType);
-                if (memberFunction == null) continue;
-                var memberFunctionReturnType = new ProcessedMemberFunctionReturn(methodInfo.ReturnType, null);
-                if (methodInfo.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
-                    _processType.Add(memberFunctionReturnType.Type);
-                else
-                    memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
-                currentStruct.StaticMemberFunctions ??= [];
-                currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions,
-                    new ProcessedMemberFunction {
-                        MemberFunctionSignature = memberFunction.Signature,
-                        MemberFunctionName = methodInfo.Name,
-                        MemberFunctionReturnType = memberFunctionReturnType,
-                        MemberFunctionParameters = methodInfo.GetParameters().Select(ProcessParameter).ToArray()
+                currentStruct.StaticMembers ??= [];
+                currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
+                    new ProcessedStaticMembers {
+                        Name = name,
+                        Signature = staticAddress.Signature,
+                        RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
+                        IsPointer = staticAddress.IsPointer,
+                        ReturnType = methodInfo.ReturnType.GetPointerType()
                     }];
             }
-            _structs[currentStructIndex] = currentStruct;
+            var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
+            if (memberFunction != null || staticAddress != null)
+                _processType.Add(methodInfo.ReturnType);
+            if (memberFunction == null) continue;
+            var returnType = methodInfo.ReturnType;
+            var pointerCount = 0;
+            while (returnType.IsPointer()) {
+                pointerCount++;
+                returnType = returnType.GetPointerType();
+            }
+            string? overrideType = null;
+            if (returnType is { Namespace: ExporterStatics.StdNamespacePrefix }) {
+                (overrideType, var requiredTypes) = ProcessStdType(returnType);
+                foreach (var requiredType in requiredTypes) {
+                    _processType.Add(requiredType);
+                }
+                overrideType += new string('*', pointerCount);
+            } else {
+                overrideType = GetGenericTypeOverride(methodInfo.ReturnType);
+            }
+            var memberFunctionReturnType = new ProcessedMemberFunctionReturn(methodInfo.ReturnType, overrideType);
+            if (methodInfo.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
+                _processType.Add(memberFunctionReturnType.Type);
+            else
+                memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
+            currentStruct.StaticMemberFunctions ??= [];
+            currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions,
+                new ProcessedMemberFunction {
+                    MemberFunctionSignature = memberFunction.Signature,
+                    MemberFunctionName = methodInfo.Name,
+                    MemberFunctionReturnType = memberFunctionReturnType,
+                    MemberFunctionParameters = methodInfo.GetParameters().Select(ProcessParameter).ToArray()
+                }];
+        }
+        return (currentStruct, methods.Length);
+    }
+
+    public static (ProcessedStruct[] inlineStruct, (uint s, uint c)) ProcessStaticFunctionsInline(ProcessedStruct[] inlineStruct)
+    {
+        var membersCount = 0u;
+        var structCount = 0u;
+        for (var currentStructIndex = 0; currentStructIndex < inlineStruct.Length; currentStructIndex++) {
+            var (s, c) = ProcessStaticFunction(inlineStruct[currentStructIndex]);
+            inlineStruct[currentStructIndex] = s;
+            structCount++;
+            membersCount += (uint)c;
+            if(inlineStruct[currentStructIndex].InlineStructs != null) {
+                var (inline, (inlineCount, memberCount)) = ProcessStaticFunctionsInline(_structs[currentStructIndex].InlineStructs!);
+                _structs[currentStructIndex].InlineStructs = inline;
+                structCount += inlineCount;
+                membersCount += memberCount;
+            }
+        }
+        return (inlineStruct, (structCount, membersCount));
+    }
+
+    public static void ProcessStaticFunctions(bool quiet) {
+        if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
+        uint structCount = 0, members = 0;
+        for (var currentStructIndex = 0; currentStructIndex < _structs.Count; currentStructIndex++) {
+            var (s, c) = ProcessStaticFunction(_structs[currentStructIndex]);
+            _structs[currentStructIndex] = s;
+            structCount++;
+            members += (uint)c;
+            if(_structs[currentStructIndex].InlineStructs != null) {
+                var (inline, (inlineCount, memberCount)) = ProcessStaticFunctionsInline(_structs[currentStructIndex].InlineStructs!);
+                _structs[currentStructIndex].InlineStructs = inline;
+                structCount += inlineCount;
+                members += memberCount;
+            }
         }
 
         if (!quiet) {
@@ -186,7 +223,7 @@ public class Exporter {
             Console.WriteLine("::endgroup::");
             Console.WriteLine();
             Console.WriteLine($"Processed {_enums.Count - enumsCount} enums and {_structs.Count - structsCount} structs");
-            Console.WriteLine($"Processed {typeAndMembers.Length} structs with {typeAndMembers.Sum(t => t.Item2.Length)} members");
+            Console.WriteLine($"Processed {structCount} structs with {members} members");
             Console.WriteLine();
             Console.WriteLine($"Processed total {_enums.Count} enums and {_structs.Count} structs");
         }
@@ -200,8 +237,6 @@ public class Exporter {
                 var checks = sizes.Where(t => t != size && t.StartOffset <= size.StartOffset).ToArray();
                 if (checks.Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset))
                     ExporterStatics.ErrorList.Add($"Field overlap detected in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
-                if (checks.Any(t => t.StartOffset == size.StartOffset))
-                    ExporterStatics.ErrorList.Add($"Union field detected but not defined in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
                 if (size.StartOffset >= processedStruct.StructSize)
                     ExporterStatics.ErrorList.Add($"Field offset exceeds struct size in {processedStruct.StructType.FixTypeName().Pastel(Color.MediumSlateBlue)} with field {size.Field.Pastel(Color.BlueViolet)}");
                 if (size.EndOffset > processedStruct.StructSize)
@@ -233,40 +268,184 @@ public class Exporter {
             foreach (var (index, name) in c.Value.vfuncs) {
                 var offset = (int)index * 8;
                 var vf = s.VirtualFunctions.FirstOrDefault(vf => vf.Offset == offset);
+                ProcessedField[]? vparams = null;
+                Type? vreturnType = null;
+                if (name == "dtor") {
+                    vreturnType = s.StructType.MakePointerType();
+                    vparams = [
+                        new ProcessedField{
+                            FieldType = vreturnType, 
+                            FieldName = "self",
+                            Bits = [],
+                            IsUnion = false,
+                            UnionValues = [],
+                            FieldOffset = -1
+                        },
+                        new ProcessedField{
+                            FieldType = typeof(byte),
+                            FieldName = "freeFlags",
+                            Bits = [],
+                            IsUnion = false,
+                            UnionValues = [],
+                            FieldOffset = -1
+                        }
+                    ];
+                }
                 if (vf == null)
-                    s.VirtualFunctions = [.. s.VirtualFunctions, new() { VirtualFunctionName = name, Offset = offset }];
+                    s.VirtualFunctions = [.. s.VirtualFunctions, new() { VirtualFunctionName = name, Offset = offset, VirtualFunctionParameters = vparams, VirtualFunctionReturnType = vreturnType, VirtualFunctionReturnTypeOverride = null }];
                 else if (vf.VirtualFunctionName != name)
                     ExporterStatics.WarningList.Add($"Virtual function name mismatch: {c.Key} vf#{index}, '{vf.VirtualFunctionName}' in CS, '{name}' in data.yml");
             }
         }
     }
 
+    public static void VerifyDependencies() => ResolveFullDependencies();
+
+    private static Dictionary<string, HashSet<string>> ResolveFullDependencies() {
+        var structs = _structs.SelectMany(t => t.ChildrenAndSelf).DistinctBy(x => x.StructTypeName).ToFrozenDictionary(x => x.StructTypeName, x => x);
+        var structToFullDeps = new Dictionary<string, HashSet<string>>();
+        var resolving = new List<string>();
+
+        foreach (var processedStruct in structs.Values)
+            resolve(processedStruct);
+
+        return structToFullDeps;
+
+        HashSet<string> resolve(ProcessedStruct s) {
+            if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
+                return deps;
+            var cycleStart = resolving.IndexOf(s.StructTypeName);
+            if (cycleStart >= 0) {
+                var cycle = resolving.Skip(cycleStart).Append(s.StructTypeName).ToArray();
+                var error = $"Cyclic type dependency detected: {string.Join(" -> ", cycle)}";
+                if (!ExporterStatics.ErrorList.Contains(error)) ExporterStatics.ErrorList.Add(error);
+                return [];
+            }
+
+            resolving.Add(s.StructTypeName);
+            var fullDeps = s.DependencyNames.ToHashSet();
+            foreach (var dependencyName in s.DependencyNames) {
+                if (!structs.TryGetValue(dependencyName, out var dependency)) {
+                    var error = $"Unable to resolve type dependency {dependencyName} referenced by {s.StructTypeName}";
+                    if (!ExporterStatics.ErrorList.Contains(error)) ExporterStatics.ErrorList.Add(error);
+                    continue;
+                }
+
+                fullDeps.UnionWith(resolve(dependency));
+                if (dependency.StructType.DeclaringType is not null) {
+                    var owner = dependency.StructType;
+                    while (owner.DeclaringType is not null) owner = owner.DeclaringType;
+                    var ownerName = owner.FixTypeName();
+                    var sourceOwner = s.StructType;
+                    while (sourceOwner.DeclaringType is not null) sourceOwner = sourceOwner.DeclaringType;
+                    if (ownerName != sourceOwner.FixTypeName() && structs.TryGetValue(ownerName, out var ownerStruct)) {
+                        fullDeps.Add(ownerName);
+                        fullDeps.UnionWith(resolve(ownerStruct));
+                    }
+                }
+            }
+            resolving.RemoveAt(resolving.Count - 1);
+            return structToFullDeps[s.StructTypeName] = fullDeps;
+        }
+    }
+
+    [GeneratedRegex(@"[A-Za-z_]\w*(::[A-Za-z_]\w*)*")]
+    private static partial Regex TypeNameRegex();
+
+    // A nested type can't be forward declared in C++, so any reference to one (even through a pointer or a
+    // function signature) needs the struct that declares it to be emitted first.
+    private static void OrderByNestedTypeReferences(Dictionary<string, HashSet<string>> structToFullDeps) {
+        var inlineOwners = new Dictionary<string, string>();
+        var inlineTypes = _structs.SelectMany(t => t.ChildrenAndSelf.Skip(1)).Select(t => t.StructTypeName).ToHashSet();
+        var topLevel = _structs.Where(t => !inlineTypes.Contains(t.StructTypeName)).ToArray();
+        foreach (var owner in topLevel)
+            foreach (var inline in owner.ChildrenAndSelf.Skip(1))
+                inlineOwners.TryAdd(inline.StructTypeName, owner.StructTypeName);
+
+        var topLevelNames = topLevel.Select(t => t.StructTypeName).ToHashSet();
+        var dependencies = new Dictionary<string, HashSet<string>>();
+        foreach (var s in topLevel) {
+            var deps = new HashSet<string>();
+            foreach (var dependency in structToFullDeps[s.StructTypeName])
+                addDependency(dependency);
+            foreach (var reference in s.ChildrenAndSelf.SelectMany(typeReferences))
+                foreach (Match match in TypeNameRegex().Matches(reference))
+                    if (inlineOwners.ContainsKey(match.Value)) addDependency(match.Value);
+            dependencies[s.StructTypeName] = deps;
+
+            void addDependency(string name) {
+                if (inlineOwners.TryGetValue(name, out var owner)) name = owner;
+                if (name != s.StructTypeName && topLevelNames.Contains(name)) deps.Add(name);
+            }
+        }
+
+        // keeps the existing order wherever it already satisfies the dependencies
+        var remaining = topLevel.ToList();
+        var ordered = new List<ProcessedStruct>(_structs.Count);
+        var emitted = new HashSet<string>();
+        while (remaining.Count > 0) {
+            var index = remaining.FindIndex(t => dependencies[t.StructTypeName].IsSubsetOf(emitted));
+            if (index < 0) index = 0; // cyclic, the importer falls back to an opaque pointer for these
+            ordered.Add(remaining[index]);
+            emitted.Add(remaining[index].StructTypeName);
+            remaining.RemoveAt(index);
+        }
+        ordered.AddRange(_structs.Where(t => inlineTypes.Contains(t.StructTypeName)));
+        _structs = ordered;
+
+        static IEnumerable<string> typeReferences(ProcessedStruct s) {
+            foreach (var field in s.Fields) {
+                foreach (var reference in fieldReferences(field))
+                    yield return reference;
+                if (field is not ProcessedFunctionField functionField) continue;
+                yield return functionField.FunctionReturnType.FixTypeName();
+                foreach (var reference in functionField.FunctionParameters.SelectMany(fieldReferences))
+                    yield return reference;
+            }
+            foreach (var virtualFunction in s.VirtualFunctions ?? []) {
+                if (virtualFunction.VirtualFunctionReturnType != null)
+                    yield return virtualFunction.VirtualFunctionReturnTypeOverride ?? virtualFunction.VirtualFunctionReturnType.FixTypeName();
+                foreach (var reference in (virtualFunction.VirtualFunctionParameters ?? []).SelectMany(fieldReferences))
+                    yield return reference;
+            }
+        }
+
+        static IEnumerable<string> fieldReferences(ProcessedField field) {
+            if (field.FieldType.IsFunctionPointer || field.FieldType.IsUnmanagedFunctionPointer) yield break;
+            yield return field.FieldTypeOverride ?? field.FieldType.FixTypeName();
+            var templateArguments = field.FieldType.IsConstructedGenericType && !field.FieldType.IsStdDefiniton()
+                ? field.FieldType.GenericTypeArguments
+                : field.FieldTypeOverrideTemplates ?? [];
+            foreach (var templateArgument in templateArguments)
+                yield return templateArgument.FixTypeName();
+            foreach (var unionValue in field.UnionValues) {
+                if (unionValue.FieldType.IsFunctionPointer || unionValue.FieldType.IsUnmanagedFunctionPointer) continue;
+                yield return unionValue.FieldTypeOverride ?? unionValue.FieldType.FixTypeName();
+            }
+        }
+    }
+
     public static void Write(DirectoryInfo dir) {
         // make sure we have all the dependencies for each struct before we write them
-        var structs = _structs.ToFrozenDictionary(x => x.StructTypeName, x => x);
-        var structToFullDeps = new Dictionary<string, HashSet<string>>();
+        var structToFullDeps = ResolveFullDependencies();
         _structs.Sort((a, b) => {
-            var cmp = ResolveFullDependencies(a).Count.CompareTo(ResolveFullDependencies(b).Count);
+            var cmp = structToFullDeps[a.StructTypeName].Count.CompareTo(structToFullDeps[b.StructTypeName].Count);
             return cmp != 0 ? cmp : string.Compare(a.StructTypeName, b.StructTypeName, StringComparison.Ordinal);
         });
 
-#if DEBUG
-        for (var i = 0; i < _structs.Count; i++) {
-            foreach (var dep in _structs[i].DependencyNames) {
-                if (_structs.FindIndex(0, i, x => x.StructTypeName == dep) == -1)
-                    throw new InvalidOperationException();
-            }
-        }
-#endif
+        OrderByNestedTypeReferences(structToFullDeps);
 
-        HashSet<string> ResolveFullDependencies(ProcessedStruct s) {
-            if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
-                return deps;
-            var fullDeps = s.DependencyNames.ToHashSet();
-            foreach (var dn in s.DependencyNames)
-                fullDeps.UnionWith(ResolveFullDependencies(structs[dn]));
-            return structToFullDeps[s.StructTypeName] = fullDeps;
+        void orderInlineStructs(ProcessedStruct parent) {
+            if (parent.InlineStructs == null) return;
+            parent.InlineStructs = [.. parent.InlineStructs
+                .OrderBy(t => structToFullDeps[t.StructTypeName].Count)
+                .ThenBy(t => t.StructTypeName, StringComparer.Ordinal)];
+            foreach (var inlineStruct in parent.InlineStructs)
+                orderInlineStructs(inlineStruct);
         }
+
+        foreach (var s in _structs)
+            orderInlineStructs(s);
 
         var serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
@@ -281,857 +460,7 @@ public class Exporter {
             Structs = _structs.Select(t => t.FixOrder()).ToArray()
         });
 
-        new FileInfo(Path.Join(dir.FullName, "ffxiv_structs.yml")).WriteFile(yaml);
+        new FileInfo(Path.Join(dir.FullName, "structs.yml")).WriteFile(yaml);
     }
 
-    private static void ProcessType(ProcessingType type, bool quiet) {
-        var ret = PreProcessType(type, quiet);
-        switch (ret) {
-            case null:
-                return;
-            case ProcessedStruct s:
-                _structs.Add(s);
-                break;
-            case ProcessedEnum e:
-                _enums.Add(e);
-                break;
-        }
-    }
-
-    private static ProcessedField ProcessField(FieldInfo field, int offset) {
-        if (field.FieldType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{field.FieldType.GetGenericArguments()[0].FixTypeName()}>*";
-            _processType.Add(new ProcessingType(field.FieldType, fieldTypeOverride[..^1]));
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                IsBase = field.IsDirectBase(),
-                FieldTypeOverride = fieldTypeOverride,
-                Bits = []
-            };
-        }
-        if (field.FieldType.IsFunctionPointer || field.FieldType.IsUnmanagedFunctionPointer) {
-            _processType.Add(field.FieldType.GetFunctionPointerReturnType());
-            return new ProcessedFunctionField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                FunctionReturnType = field.FieldType.GetFunctionPointerReturnType(),
-                FunctionParameters = field.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => {
-                    _processType.Add(p);
-                    return new ProcessedField {
-                        FieldType = p,
-                        FieldOffset = -1,
-                        FieldName = 'a' + (i + 1).ToString(),
-                        Bits = []
-                    };
-                }).ToArray(),
-                Bits = []
-            };
-        }
-        if (field.FieldType.IsFixedBuffer()) {
-            var arr = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("FixedSizeArrayAttribute")).ToArray();
-            var size = field.FieldType.StructLayoutAttribute!.Size;
-            if (arr.Length != 0) {
-                var type = arr[0].GetType();
-                size = (int)type.GetProperty("Count")!.GetValue(arr[0])!;
-                var elementType = type.GenericTypeArguments[0];
-                _processType.Add(elementType);
-                return new ProcessedFixedField {
-                    FieldType = elementType,
-                    FieldOffset = field.GetFieldOffset() - offset,
-                    FieldName = field.Name,
-                    FixedSize = size,
-                    Bits = []
-                };
-            }
-            var fixedType = field.FieldType.GetFields()[0].FieldType;
-            _processType.Add(fixedType);
-            if (fixedType.IsBaseType())
-                size /= fixedType.SizeOf();
-            var fieldOverrideType = fixedType == typeof(nint) ? field.GetCustomAttribute<CExporterExcelAttribute>()?.SheetName ?? null : null;
-            if (fieldOverrideType != null)
-                fieldOverrideType = $"Component::Exd::Sheets::{fieldOverrideType}*";
-            return new ProcessedFixedField {
-                FieldType = fixedType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                FixedSize = size,
-                FieldTypeOverride = fieldOverrideType,
-                Bits = []
-            };
-        }
-        if (field.FieldType.GetCustomAttribute<InlineArrayAttribute>() != null) {
-            var arrLength = field.FieldType.GetCustomAttribute<InlineArrayAttribute>()!.Length;
-            var elementType = field.FieldType.GetGenericArguments()[0];
-            var isString = field.GetCustomAttribute<FixedSizeArrayAttribute>()?.IsString ?? false;
-            var fieldOverrideType = elementType == typeof(nint) ? field.GetCustomAttribute<CExporterExcelAttribute>()?.SheetName ?? null : null;
-            if (fieldOverrideType != null)
-                fieldOverrideType = $"Component::Exd::Sheets::{fieldOverrideType}*";
-            if (isString && elementType == typeof(byte))
-                fieldOverrideType = "char";
-            _processType.Add(elementType);
-            return new ProcessedFixedField {
-                FieldType = elementType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
-                FixedSize = arrLength,
-                FixedString = isString,
-                FieldTypeOverride = fieldOverrideType,
-                Bits = []
-            };
-        }
-        if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
-            var sheetName = field.GetCustomAttribute<CExporterExcelBeginAttribute>()!.SheetName;
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = $"{sheetName}Sheet",
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}",
-                Bits = []
-            };
-        }
-        if (field.GetCustomAttribute<CExporterExcelAttribute>() != null) {
-            var sheetName = field.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*",
-                Bits = []
-            };
-        }
-        if (field.GetCustomAttribute<CExporterTypeForceAttribute>() is { } typeForceAttribute) {
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                FieldTypeOverride = typeForceAttribute.TypeName,
-                FieldTypeOverrideCheck = typeForceAttribute.DontCheck,
-                Bits = []
-            };
-        }
-        if (field.IsBitArray()) {
-            var bitsDefinition = field.GetCustomAttributes().Where(t => t.GetType().Name.Contains("BitFieldAttribute`1")).Select(t => {
-                var attrType = t.GetType();
-                var name = (string)attrType.GetProperty("Name")!.GetValue(t)!;
-                var offset = (int)attrType.GetProperty("Index")!.GetValue(t)!;
-                var size = (int)attrType.GetProperty("Length")!.GetValue(t)!;
-                var type = attrType.GenericTypeArguments[0];
-                _processType.Add(type);
-                return new ProcessedBitField {
-                    Name = name,
-                    Offset = offset,
-                    Size = size,
-                    Type = ExporterStatics.GetBestMatchFromSize(size)
-                };
-            }).ToArray();
-            var bits = new List<ProcessedBitField>();
-            foreach (var bit in bitsDefinition) {
-                if (bits.Count == 0 && bit.Offset != 0)
-                    bits.Add(new ProcessedBitField {
-                        Name = "UnkBits0",
-                        Offset = 0,
-                        Size = bit.Offset,
-                        Type = ExporterStatics.GetBestMatchFromSize(bit.Offset)
-                    });
-                else if (bit.Offset == 0) {
-                    bits.Add(bit);
-                    continue;
-                }
-                var last = bits.Last();
-                if (last.Offset + last.Size != bit.Offset) {
-                    var newOffset = last.Offset + last.Size;
-                    var size = bit.Offset - newOffset;
-
-                    bits.Add(new ProcessedBitField {
-                        Name = $"UnkBits{newOffset}",
-                        Offset = newOffset,
-                        Size = size,
-                        Type = ExporterStatics.GetBestMatchFromSize(size)
-                    });
-                }
-                bits.Add(bit);
-            }
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                IsBase = field.IsDirectBase(),
-                Bits = bits.ToArray()
-            };
-        }
-        _processType.Add(field.FieldType);
-        return new ProcessedField {
-            FieldType = field.FieldType,
-            FieldOffset = field.GetFieldOffset() - offset,
-            FieldName = field.Name,
-            IsBase = field.IsDirectBase(),
-            Bits = []
-        };
-    }
-
-    private static ProcessedField ProcessParameter(ParameterInfo parameter) {
-        if (parameter.ParameterType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.ParameterType.GetGenericArguments()[0].FixTypeName()}>*";
-            _processType.Add(new ProcessingType(parameter.ParameterType, fieldTypeOverride[..^1]));
-            return new ProcessedField {
-                FieldType = parameter.ParameterType,
-                FieldOffset = -1,
-                FieldName = parameter.Name!,
-                FieldTypeOverride = fieldTypeOverride,
-                Bits = []
-            };
-        }
-        if (parameter.GetCustomAttribute<CExporterExcelAttribute>() != null) {
-            var sheetName = parameter.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
-            return new ProcessedField {
-                FieldType = parameter.ParameterType,
-                FieldOffset = -1,
-                FieldName = parameter.Name!,
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*",
-                Bits = []
-            };
-        }
-        if (parameter.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
-            return new ProcessedField {
-                FieldType = parameter.ParameterType,
-                FieldOffset = -1,
-                FieldName = parameter.Name!,
-                FieldTypeOverride = parameter.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName,
-                Bits = []
-            };
-        }
-        _processType.Add(parameter.ParameterType);
-        return new ProcessedField {
-            FieldType = parameter.ParameterType,
-            FieldOffset = -1,
-            FieldName = parameter.Name!,
-            Bits = []
-        };
-    }
-
-    private static ProcessedField ProcessVirtualParameter(Type parameter, int i, ParameterInfo[]? parameters) {
-        if (parameter is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.GetGenericArguments()[0].FixTypeName()}>*";
-            _processType.Add(new ProcessingType(parameter, fieldTypeOverride[..^1]));
-            return new ProcessedField {
-                FieldType = parameter,
-                FieldOffset = -1,
-                FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = fieldTypeOverride,
-                Bits = []
-            };
-        }
-        if (parameter.GetCustomAttribute<CExporterExcelAttribute>() != null) {
-            var sheetName = parameter.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
-            return new ProcessedField {
-                FieldType = parameter,
-                FieldOffset = -1,
-                FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*",
-                Bits = []
-            };
-        }
-        if (i != 0 && parameters?[i - 1] is not null && parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
-            return new ProcessedField {
-                FieldType = parameter,
-                FieldOffset = -1,
-                FieldName = parameters[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName,
-                Bits = []
-            };
-        }
-        _processType.Add(parameter);
-        return new ProcessedField {
-            FieldType = parameter,
-            FieldOffset = -1,
-            FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
-            Bits = []
-        };
-    }
-
-    private static object? PreProcessType(ProcessingType processingType, bool quiet) {
-        var (type, overrideType) = processingType;
-        if (type.IsFixedBuffer() || type.IsBaseType()) return null;
-        while (type.IsPointer) type = type.GetElementType()!;
-        while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
-
-        if (type.IsEnum) {
-            if (_enums.Any(t => t.EnumType == type)) return null;
-            var processedEnum = new ProcessedEnum {
-                EnumType = type,
-                EnumName = type.Name,
-                EnumNamespace = type.GetNamespace(),
-                IsFlags = type.GetCustomAttribute<FlagsAttribute>() != null,
-                EnumValues = type.GetFields().Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.FieldType == type).ToDictionary(f => f.Name, f => f.GetRawConstantValue()!.ToString()!)
-            };
-
-            if (!quiet) Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
-            _enums.Add(processedEnum);
-        } else if (type.IsStruct()) {
-            while (type.IsPointer) type = type.GetElementType()!;
-            while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
-            if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) {
-                foreach (var functionPointerParameterType in type.GetFunctionPointerParameterTypes()) {
-                    ProcessType(functionPointerParameterType, quiet);
-                    type = type.GetFunctionPointerReturnType();
-                }
-            }
-            if (!type.IsStruct() || type.IsEnum) return null;
-            if (type.IsInStructList(_structs) || (overrideType?.IsInStructList(_structs) ?? false)) return null;
-            var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
-            var vtableSize = 0;
-            ProcessedVirtualFunction[]? virtualFunctions = null;
-            if (vtable != null) {
-                vtable = vtable.GetElementType()!;
-                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Select(t => Tuple.Create(t.Name, t.GetParameters(), t.ReturnType)).ToArray();
-                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).Select(f => {
-                    var parameterTypes = f.FieldType.GetFunctionPointerParameterTypes();
-                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Item1 == f.Name && t.Item2.Length == parameterTypes.Length - 1);
-                    var returnType = f.FieldType.GetFunctionPointerReturnType();
-                    if (memberFunction?.Item3 != returnType) memberFunction = null;
-                    _processType.Add(f.FieldType.GetFunctionPointerReturnType());
-                    var vfName = f.Name;
-                    if (vfName.StartsWith("Ctor") || vfName.StartsWith("Dtor"))
-                        vfName = char.ToLowerInvariant(vfName[0]) + vfName[1..]; // lowercase ctor/dtor
-                    return new ProcessedVirtualFunction {
-                        VirtualFunctionName = vfName,
-                        Offset = f.GetFieldOffset(),
-                        VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
-                        VirtualFunctionParameters = parameterTypes.Select((p, i) => ProcessVirtualParameter(p, i, memberFunction?.Item2)).ToArray()
-                    };
-                }).ToArray();
-                vtableSize = vtable.StructLayoutAttribute?.Size ?? vtableSize;
-            }
-
-            var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
-            ProcessedMemberFunction[] memberFunctionsArray = [];
-            //if (type == typeof(lua_State)) Debugger.Break();
-            if (memberFunctionClass != null) {
-                var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
-                foreach (var memberFunction in memberFunctions) {
-                    var memberFunctionAddress = memberFunction.GetCustomAttribute<MemberFunctionAttribute>();
-                    if (memberFunctionAddress == null) continue;
-                    var memberFunctionParameters = memberFunction.GetParameters();
-                    string? memberFunctionOverrideType = null;
-                    if (memberFunction.ReturnType.IsFunctionPointer) {
-                        memberFunctionOverrideType = "__int64";
-                    }
-                    var memberFunctionReturnType = new ProcessedMemberFunctionReturn(memberFunction.ReturnType, memberFunctionOverrideType);
-                    if (memberFunction.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
-                        _processType.Add(memberFunctionReturnType.Type);
-                    else
-                        memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
-                    var funcName = memberFunction.Name;
-                    if (funcName.StartsWith("Ctor") || funcName.StartsWith("Dtor"))
-                        funcName = char.ToLowerInvariant(funcName[0]) + funcName[1..]; // lowercase ctor/dtor
-                    memberFunctionsArray =
-                    [
-                        .. memberFunctionsArray,
-                        new ProcessedMemberFunction {
-                            MemberFunctionSignature = memberFunctionAddress!.Signature,
-                            MemberFunctionName = funcName,
-                            MemberFunctionReturnType = memberFunctionReturnType,
-                            MemberFunctionParameters = [
-                                new ProcessedField {
-                                    FieldTypeOverride = memberFunctionClass.FixTypeName() + "*",
-                                    FieldType = memberFunctionClass,
-                                    FieldOffset = -1,
-                                    FieldName = "this",
-                                    Bits = []
-                                },
-                                .. memberFunctionParameters.Select(ProcessParameter).ToArray()]
-                        },
-                    ];
-                }
-            }
-
-            var fields = type.GetFields(ExporterStatics.BindingFlags).Where(t => !type.IsInheritance(t)).ToArray();
-            var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).ToArray();
-
-            var unionOffsets = new Dictionary<CExporterUnionAttribute, FieldInfo>(new CExporterUnionCompare());
-
-            if (unionFields.Any()) {
-                var unions = new List<ProcessedStruct>();
-                foreach (var unionField in unionFields) {
-                    var attr = unionField.GetCustomAttribute<CExporterUnionAttribute>()!;
-                    if (!unionOffsets.TryGetValue(attr, out var unionStartField)) {
-                        unionOffsets[attr] = unionField;
-                        unionStartField = unionField;
-                    }
-                    var index = attr.IsStruct ? unions.FindIndex(t => t.StructName == attr.Struct) : unions.FindIndex(t => t.StructName == attr.Union);
-                    if (index == -1) {
-                        unions.Add(new ProcessedStruct {
-                            StructType = type,
-                            IsUnion = !attr.IsStruct,
-                            StructName = attr.IsStruct ? attr.Struct : attr.Union,
-                            StructNamespace = type.FixTypeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
-                            StructTypeName = type.FixTypeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}",
-                            StructSize = 0,
-                            VirtualFunctionSize = 0,
-                            Fields = [
-                                ProcessField(unionField, unionStartField.GetFieldOffset())
-                            ],
-                            MemberFunctions = [],
-                            StructTypeOverride = type.FixTypeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
-                        });
-                    } else
-                        unions[index].Fields = [
-                            .. unions[index].Fields,
-                            ProcessField(unionField, unionStartField.GetFieldOffset())
-                        ];
-                    _processType.Add(unionField.FieldType);
-                }
-                foreach (var t1 in unions) {
-                    t1.StructSize = t1.Fields.Max(t => t.FieldOffset + t.FieldType.SizeOf());
-                }
-                var subUnions = unions.Where(t => !t.IsUnion).ToArray();
-                foreach (var subStruct in subUnions) {
-                    var unionName = subStruct.StructNamespace.Split(ExporterStatics.Separator)[^1];
-                    var unionNamespace = subStruct.StructNamespace[..subStruct.StructNamespace.LastIndexOf(ExporterStatics.Separator, StringComparison.Ordinal)];
-                    var unionStructIndex = unions.FindIndex(t => t.StructNamespace == unionNamespace && t.StructName == unionName);
-                    var unionStruct = unions[unionStructIndex];
-                    unionStruct.Fields = [
-                        .. unionStruct.Fields,
-                        new ProcessedField {
-                            FieldTypeOverride = subStruct.StructTypeOverride,
-                            FieldType = type,
-                            FieldOffset = 0,
-                            FieldName = subStruct.StructName,
-                            Bits = []
-                        }
-                    ];
-                    if (!quiet) Console.WriteLine($"Processed {unionStruct.StructTypeOverride} with {unionStruct.Fields.Length} fields and methods");
-                    unions[unionStructIndex] = unionStruct;
-                }
-                _structs.AddRange(unions);
-            }
-
-            var processedStruct = new ProcessedStruct {
-                StructType = type,
-                IsUnion = type.GetCustomAttribute<CExporterStructUnionAttribute>() != null,
-                StructName = type.Name,
-                StructNamespace = type.GetNamespace(),
-                StructTypeName = overrideType ?? type.FixTypeName(),
-                StructSize = type.SizeOf(),
-                VirtualFunctionSize = vtableSize,
-                Fields = ProcessFields(fields),
-                VirtualFunctions = virtualFunctions,
-                MemberFunctions = memberFunctionsArray,
-                StructTypeOverride = overrideType
-            };
-
-            foreach (var (unionAttr, fieldInfo) in unionOffsets.Where(t => !t.Key.IsStruct)) {
-                processedStruct.Fields = [
-                    .. processedStruct.Fields,
-                    new ProcessedField {
-                        FieldType = fieldInfo.FieldType,
-                        FieldOffset = fieldInfo.GetFieldOffset(),
-                        FieldName = unionAttr.Union,
-                        FieldTypeOverride = type.FixTypeName() + $"{ExporterStatics.Separator}{unionAttr.Union}",
-                        Bits = []
-                    }
-                ];
-                processedStruct.Fields = [.. processedStruct.Fields.OrderBy(t => t.FieldOffset)];
-            }
-
-            if (!quiet) Console.WriteLine($"Processed {processedStruct.StructTypeName} with {processedStruct.Fields.Length + (processedStruct.VirtualFunctions?.Length ?? 0) + processedStruct.MemberFunctions.Length} fields and methods");
-            _structs.Add(processedStruct);
-        }
-        return null;
-    }
-
-    public static ProcessedField[] ProcessFields(FieldInfo[] fields) {
-        FieldInfo[] fieldsToProcess = fields.Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() == null).ToArray();
-        int[][] fieldsToUse = [];
-        bool isExcel = false;
-        int currentField = 0;
-        while (fieldsToProcess is [{ Name: "WithOps" }] or [{ Name: "Tree" }]) {
-            fieldsToProcess = fieldsToProcess[0].FieldType.GetFields(ExporterStatics.BindingFlags).Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() == null).ToArray();
-        }
-        for (var i = 0; i < fieldsToProcess.Length; i++) {
-            var field = fieldsToProcess[i];
-            if (field.GetCustomAttribute<CExporterForceAttribute>() != null)
-                _processType.Add(field.FieldType);
-            if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
-                isExcel = true;
-                fieldsToUse = [.. fieldsToUse, [currentField, i + 1]];
-                continue;
-            }
-            if (field.GetCustomAttribute<CExporterExcelEndAttribute>() != null) {
-                if (isExcel)
-                    currentField = i + 1;
-
-                isExcel = false;
-                continue;
-            }
-        }
-        if (fieldsToUse.Length == 0) return fieldsToProcess.Select(f => ProcessField(f, 0)).ToArray();
-        fieldsToUse = [.. fieldsToUse, [currentField, fieldsToProcess.Length]];
-        return fieldsToUse.SelectMany(t => fieldsToProcess[t[0]..t[1]].Select(f => ProcessField(f, 0))).ToArray();
-    }
-}
-
-public class YamlExport {
-    public required ProcessedEnum[] Enums;
-    public required ProcessedStruct[] Structs;
-}
-
-public class ProcessedBitField {
-    public required int Size;
-    public required int Offset;
-    public required Type Type;
-    public required string Name;
-}
-
-public class ProcessedField {
-    public string? FieldTypeOverride;
-    public bool? FieldTypeOverrideCheck;
-    public required Type FieldType;
-    public required string FieldName;
-    public required int FieldOffset;
-    public bool IsBase;
-    public required ProcessedBitField[] Bits;
-    public virtual int FieldSize => FieldType.SizeOf();
-}
-
-public class ProcessedFixedField : ProcessedField {
-    public required int FixedSize;
-    public bool FixedString;
-
-    public override int FieldSize => FixedSize * FieldType.SizeOf();
-}
-
-public class ProcessedFunctionField : ProcessedField {
-    public required Type FunctionReturnType;
-    public required ProcessedField[] FunctionParameters;
-}
-
-public class ProcessedStaticMembers {
-    public required string Name;
-    public required string Signature;
-    public required ushort[] RelativeFollowOffsets;
-    public bool IsPointer;
-    public required Type ReturnType;
-}
-
-public class ProcessedStruct {
-    public string? StructTypeOverride;
-    public bool IsUnion;
-    public required Type StructType;
-    public required string StructName;
-    public required string StructNamespace;
-    public required int StructSize;
-    public required ProcessedField[] Fields;
-    public required int VirtualFunctionSize;
-    public ProcessedVirtualFunction[]? VirtualFunctions; // null if there are no virtual functions, empty if there's a vtable with unknown contents
-    public required ProcessedMemberFunction[] MemberFunctions;
-    public ProcessedMemberFunction[]? StaticMemberFunctions;
-    public ProcessedStaticMembers[]? StaticMembers;
-    [YamlIgnore]
-    public required string StructTypeName;
-    [YamlIgnore]
-    private string[] _dependencyNames = [];
-    [YamlIgnore]
-    public string[] DependencyNames {
-        get {
-            if (_dependencyNames.Length == 0) {
-                _dependencyNames = Fields
-                    .Where(t => {
-                        if (t.FieldTypeOverride != null) {
-                            if (t.FieldTypeOverride.EndsWith('*') || t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::") || ExporterStatics.BaseTypeNames.Contains(t.FieldTypeOverride))
-                                return false;
-                            return !t.FieldTypeOverrideCheck.HasValue || !t.FieldTypeOverrideCheck.Value;
-                        }
-                        return (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!(t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()));
-                    })
-                    .Select(t => t.FieldTypeOverride ?? t.FieldType.FixTypeName()).Distinct().ToArray();
-            }
-            return _dependencyNames;
-        }
-    }
-    public ProcessedStruct FixOrder() {
-        Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
-        return this;
-    }
-}
-
-public class ProcessedEnum {
-    public required Type EnumType;
-    public required string EnumName;
-    public required string EnumNamespace;
-    public required bool IsFlags;
-    public required Dictionary<string, string> EnumValues;
-}
-
-public class ProcessedVirtualFunction {
-    public required string VirtualFunctionName;
-    public required int Offset;
-    public Type? VirtualFunctionReturnType;
-    public ProcessedField[]? VirtualFunctionParameters;
-}
-
-public class ProcessedMemberFunction {
-    public required string MemberFunctionSignature;
-    public required string MemberFunctionName;
-    public required ProcessedMemberFunctionReturn MemberFunctionReturnType;
-    public required ProcessedField[] MemberFunctionParameters;
-}
-
-public class ProcessedMemberFunctionReturn(Type type, string? overrideType) {
-    public Type Type = type;
-    public string? OverrideType = overrideType;
-    public static implicit operator ProcessedMemberFunctionReturn((Type Type, string OverrideType) value) => new(value.Type, value.OverrideType);
-    public static implicit operator (Type Type, string? OverrideType)(ProcessedMemberFunctionReturn value) => (value.Type, value.OverrideType);
-    public static implicit operator ProcessedMemberFunctionReturn(Type type) => new(type, null);
-    public static implicit operator Type(ProcessedMemberFunctionReturn value) => value.Type;
-    public static implicit operator string(ProcessedMemberFunctionReturn value) => value.OverrideType ?? value.Type.FixTypeName();
-}
-
-public class ProcessedEnumConverter : IYamlTypeConverter {
-    public bool Accepts(Type type) => type == typeof(ProcessedEnum);
-    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
-        if (value is not ProcessedEnum e) return;
-        emitter.Emit(new MappingStart());
-        emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(e.EnumType.FixTypeName()));
-        emitter.Emit(new Scalar("name"));
-        emitter.Emit(new Scalar(e.EnumName));
-        emitter.Emit(new Scalar("underlying"));
-        emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FixTypeName()));
-        emitter.Emit(new Scalar("namespace"));
-        emitter.Emit(new Scalar(e.EnumNamespace));
-        emitter.Emit(new Scalar("flags"));
-        emitter.Emit(e.IsFlags ? new Scalar("True") : new Scalar("False"));
-        emitter.Emit(new Scalar("values"));
-        emitter.Emit(new MappingStart());
-        foreach (var (key, val) in e.EnumValues) {
-            emitter.Emit(new Scalar(AnchorName.Empty, TagName.Empty, key, ScalarStyle.DoubleQuoted, true, false));
-            emitter.Emit(new Scalar(val));
-        }
-        emitter.Emit(new MappingEnd());
-        emitter.Emit(new MappingEnd());
-    }
-
-    public static readonly IYamlTypeConverter Instance = new ProcessedEnumConverter();
-}
-
-public class ProcessedFieldConverter : IYamlTypeConverter {
-    public bool Accepts(Type type) => type == typeof(ProcessedField);
-    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
-        if (value is not ProcessedField f) return;
-        emitter.Emit(new MappingStart());
-        emitter.Emit(new Scalar("type"));
-        if (f.FieldType.IsFunctionPointer || f.FieldType.IsUnmanagedFunctionPointer) {
-            emitter.Emit(new Scalar("__fastcall"));
-        } else {
-            emitter.Emit(new Scalar(f.FieldTypeOverride ?? f.FieldType.FixTypeName()));
-        }
-        emitter.Emit(new Scalar("name"));
-        emitter.Emit(new Scalar(f.FieldName));
-        if (f.FieldOffset >= 0) {
-            emitter.Emit(new Scalar("offset"));
-            emitter.Emit(new Scalar(f.FieldOffset.ToString()));
-        }
-        if (f.Bits.Length > 0) {
-            emitter.Emit(new Scalar("bits"));
-            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var bit in f.Bits) {
-                emitter.Emit(new MappingStart());
-                emitter.Emit(new Scalar("type"));
-                emitter.Emit(new Scalar(bit.Type.FixTypeName()));
-                emitter.Emit(new Scalar("offset"));
-                emitter.Emit(new Scalar(bit.Offset.ToString()));
-                emitter.Emit(new Scalar("size"));
-                emitter.Emit(new Scalar(bit.Size.ToString()));
-                emitter.Emit(new Scalar("name"));
-                emitter.Emit(new Scalar(bit.Name));
-                emitter.Emit(new MappingEnd());
-            }
-            emitter.Emit(new SequenceEnd());
-        }
-        if (f.IsBase) {
-            emitter.Emit(new Scalar("base"));
-            emitter.Emit(new Scalar("true"));
-        }
-        switch (f) {
-            case ProcessedFunctionField func: {
-                    emitter.Emit(new Scalar("return_type"));
-                    emitter.Emit(new Scalar(func.FunctionReturnType.FixTypeName()));
-                    emitter.Emit(new Scalar("parameters"));
-                    emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-                    foreach (var p in func.FunctionParameters) {
-                        emitter.Emit(new MappingStart());
-                        emitter.Emit(new Scalar("type"));
-                        emitter.Emit(new Scalar(p.FieldTypeOverride ?? p.FieldType.FixTypeName()));
-                        emitter.Emit(new Scalar("name"));
-                        emitter.Emit(new Scalar(p.FieldName));
-                        emitter.Emit(new MappingEnd());
-                    }
-                    emitter.Emit(new SequenceEnd());
-                    break;
-                }
-            case ProcessedFixedField fix:
-                emitter.Emit(new Scalar("size"));
-                emitter.Emit(new Scalar(fix.FixedSize.ToString()));
-                emitter.Emit(new Scalar("is_string"));
-                emitter.Emit(new Scalar(fix.FixedString.ToString()));
-                break;
-        }
-        emitter.Emit(new MappingEnd());
-    }
-
-    public static readonly IYamlTypeConverter Instance = new ProcessedFieldConverter();
-}
-
-public class ProcessedStructConverter : IYamlTypeConverter {
-    public bool Accepts(Type type) => type == typeof(ProcessedStruct);
-    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
-        if (value is not ProcessedStruct s) return;
-        emitter.Emit(new MappingStart());
-        emitter.Emit(new Scalar("type"));
-        emitter.Emit(new Scalar(!string.IsNullOrWhiteSpace(s.StructTypeOverride) ? s.StructTypeOverride : s.StructType.FixTypeName()));
-        emitter.Emit(new Scalar("name"));
-        emitter.Emit(new Scalar(s.StructName));
-        emitter.Emit(new Scalar("namespace"));
-        emitter.Emit(new Scalar(s.StructNamespace));
-        emitter.Emit(new Scalar("union"));
-        emitter.Emit(new Scalar(s.IsUnion.ToString()));
-        if (s.StructType.StructLayoutAttribute?.Value == LayoutKind.Explicit && s.StructSize != 0) {
-            emitter.Emit(new Scalar("size"));
-            emitter.Emit(new Scalar(s.StructSize.ToString()));
-        }
-        emitter.Emit(new Scalar("fields"));
-        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-        foreach (var field in s.Fields) {
-            ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType(), serializer);
-        }
-        emitter.Emit(new SequenceEnd());
-        if (s.VirtualFunctionSize != 0) {
-            emitter.Emit(new Scalar("vtable_size"));
-            emitter.Emit(new Scalar(s.VirtualFunctionSize.ToString()));
-        }
-        if (s.VirtualFunctions != null) {
-            emitter.Emit(new Scalar("virtual_functions"));
-            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var virtualFunction in s.VirtualFunctions) {
-                ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType(), serializer);
-            }
-            emitter.Emit(new SequenceEnd());
-        }
-        emitter.Emit(new Scalar("member_functions"));
-        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-        foreach (var memberFunction in s.MemberFunctions) {
-            ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, memberFunction, memberFunction.GetType(), serializer);
-        }
-        emitter.Emit(new SequenceEnd());
-        if (s.StaticMembers != null) {
-            emitter.Emit(new Scalar("static_members"));
-            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var staticMember in s.StaticMembers) {
-                ProcessedStaticMembersConverter.Instance.WriteYaml(emitter, staticMember, staticMember.GetType(), serializer);
-            }
-            emitter.Emit(new SequenceEnd());
-        }
-        if (s.StaticMemberFunctions != null) {
-            emitter.Emit(new Scalar("static_member_functions"));
-            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var staticMemberFunction in s.StaticMemberFunctions) {
-                ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, staticMemberFunction, staticMemberFunction.GetType(), serializer);
-            }
-            emitter.Emit(new SequenceEnd());
-        }
-        emitter.Emit(new MappingEnd());
-    }
-
-    public static readonly IYamlTypeConverter Instance = new ProcessedStructConverter();
-}
-
-public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
-    public bool Accepts(Type type) => type == typeof(ProcessedMemberFunction);
-    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
-        if (value is not ProcessedMemberFunction m) return;
-        emitter.Emit(new MappingStart());
-        emitter.Emit(new Scalar("signature"));
-        emitter.Emit(new Scalar(m.MemberFunctionSignature));
-        emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(m.MemberFunctionReturnType));
-        emitter.Emit(new Scalar("name"));
-        emitter.Emit(new Scalar(m.MemberFunctionName));
-        emitter.Emit(new Scalar("parameters"));
-        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-        foreach (var parameter in m.MemberFunctionParameters) {
-            ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType(), serializer);
-        }
-        emitter.Emit(new SequenceEnd());
-        emitter.Emit(new MappingEnd());
-    }
-
-    public static readonly IYamlTypeConverter Instance = new ProcessedMemberFunctionConverter();
-}
-
-public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
-
-    public bool Accepts(Type type) => type == typeof(ProcessedVirtualFunction);
-    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
-        if (value is not ProcessedVirtualFunction v) return;
-        emitter.Emit(new MappingStart());
-        emitter.Emit(new Scalar("name"));
-        emitter.Emit(new Scalar(v.VirtualFunctionName));
-        emitter.Emit(new Scalar("offset"));
-        emitter.Emit(new Scalar(v.Offset.ToString()));
-        if (v.VirtualFunctionReturnType != null) {
-            emitter.Emit(new Scalar("return_type"));
-            emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FixTypeName()));
-        }
-        if (v.VirtualFunctionParameters != null) {
-            emitter.Emit(new Scalar("parameters"));
-            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-            foreach (var parameter in v.VirtualFunctionParameters) {
-                ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType(), serializer);
-            }
-            emitter.Emit(new SequenceEnd());
-        }
-        emitter.Emit(new MappingEnd());
-    }
-
-    public static readonly IYamlTypeConverter Instance = new ProcessedVirtualFunctionConverter();
-}
-
-public class ProcessedStaticMembersConverter : IYamlTypeConverter {
-    public bool Accepts(Type type) => type == typeof(ProcessedStaticMembers);
-    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
-        if (value is not ProcessedStaticMembers s) return;
-        emitter.Emit(new MappingStart());
-        emitter.Emit(new Scalar("name"));
-        emitter.Emit(new Scalar(s.Name));
-        emitter.Emit(new Scalar("signature"));
-        emitter.Emit(new Scalar(s.Signature));
-        emitter.Emit(new Scalar("relative_follow_offsets"));
-        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-        foreach (var offset in s.RelativeFollowOffsets) {
-            emitter.Emit(new Scalar(offset.ToString()));
-        }
-        emitter.Emit(new SequenceEnd());
-        emitter.Emit(new Scalar("is_pointer"));
-        emitter.Emit(new Scalar(s.IsPointer.ToString()));
-        emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(s.ReturnType.FixTypeName()));
-        emitter.Emit(new MappingEnd());
-    }
-
-    public static readonly IYamlTypeConverter Instance = new ProcessedStaticMembersConverter();
-}
-
-public record ProcessingType(Type Type, string? OverrideTypeName) {
-    public static implicit operator Type(ProcessingType t) => t.Type;
-    public static implicit operator ProcessingType(Type t) => new(t, null);
 }

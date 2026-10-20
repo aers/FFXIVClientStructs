@@ -30,7 +30,7 @@ jobs:
       - name: Check error txt file for content
         id: check_error
         run: |
-          if [ -s ./ida/errors.txt ]; then
+          if [ -s ./scripts/errors.txt ]; then
             echo "error=true" >> $GITHUB_OUTPUT
           else
             echo "error=false" >> $GITHUB_OUTPUT
@@ -41,7 +41,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const content = fs.readFileSync('./ida/errors.txt', 'utf8');
+            const content = fs.readFileSync('./scripts/errors.txt', 'utf8');
             const comments = (await github.rest.issues.listComments({
               issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
@@ -109,7 +109,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: structs.yml
-          path: ./ida/ffxiv_structs.yml
+          path: ./scripts/structs.yml
           retention-days: 7
 
   build-pr:
@@ -179,7 +179,7 @@ jobs:
       run: |
         dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
         dotnet run --project CompatChecker/CompatChecker.csproj -c Release -- ida/cs-main/FFXIVClientStructs.dll ida/cs-pr/FFXIVClientStructs.dll ida/errors.txt
-        if [ -s ./ida/errors.txt ]; then
+        if [ -s ./scripts/errors.txt ]; then
           echo "breaking=true" >> $GITHUB_OUTPUT
         else
           echo "breaking=false" >> $GITHUB_OUTPUT
@@ -190,7 +190,7 @@ jobs:
       with:
         script: |
           const fs = require('fs');
-          const content = fs.readFileSync('./ida/errors.txt', 'utf8');
+          const content = fs.readFileSync('./scripts/errors.txt', 'utf8');
           github.rest.issues.addLabels({
             issue_number: context.payload.pull_request.number,
             owner: context.repo.owner,
