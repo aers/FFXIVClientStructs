@@ -15,7 +15,7 @@ public unsafe partial struct AgentEmj {
     [FieldOffset(0x28)] public EmjGame* Game;
     [FieldOffset(0x30)] public uint MatchType;
 
-    [GenerateInterop]
+    [GenerateInterop(isInherited: true)]
     [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x330)]
     public partial struct EmjCharaView {
@@ -30,7 +30,7 @@ public unsafe partial struct AgentEmj {
         [FieldOffset(0x8)] internal FixedSizeArray5<int> _unk8; // Not sure exactly what this is which is why it doesn't have FixedSizeArray in the attributes list.
         [FieldOffset(0x1C)] internal FixedSizeArray4<byte> _unk1C; // Not sure exactly what this is which is why it doesn't have FixedSizeArray in the attributes list.
         [FieldOffset(0x20)] public EmjGameMemoryManager MemoryManager;
-        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray4<CharaViewContainers> _charaViewContainers;
+        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray4<CharaViewContainer> _charaViewContainers;
 
         [FieldOffset(0xD50)] private Utf8String UnkD50;
         [FieldOffset(0xDB8), FixedSizeArray] internal FixedSizeArray4<Utf8String> _playerNames;
@@ -45,8 +45,8 @@ public unsafe partial struct AgentEmj {
         [GenerateInterop]
         [Inherits<EmjCharaView>]
         [StructLayout(LayoutKind.Explicit, Size = 0x338)]
-        public partial struct CharaViewContainers {
-            [FieldOffset(0x330)] public LoadState State;
+        public partial struct CharaViewContainer {
+            [FieldOffset(0x330)] public LoadState ContainerState;
             [FieldOffset(0x334)] public byte SeatOffset;
 
             public enum LoadState {
