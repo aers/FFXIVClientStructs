@@ -1826,11 +1826,15 @@ classes:
       0x141ADEBC0: HasLocalEngine
       0x141ADEC00: GetLocalEngine
       0x141ADECF0: SetGame
+  Client::Game::Emj::EmjEngineCoreInterface:
+    vtbls:
+      - ea: 0x14243EC90
+    vfuncs:
+      0: dtor
   Client::Game::Emj::EmjEngineCore:
     vtbls:
       - ea: 0x14243EE10
-    vfuncs:
-      0: dtor
+        base: Client::Game::Emj::EmjEngineCoreInterface
     funcs:
       0x141ADFBB0: ctor
   Client::Game::Emj::Table:
@@ -15509,6 +15513,17 @@ classes:
         base: Client::UI::Misc::CharaView
     funcs:
       0x1409D01E0: ctor
+  Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface:
+    vtbls:
+      - ea: 0x1421FF0A8
+    vfuncs:
+      0: dtor
+      1: Malloc
+      2: Free
+  Client::UI::Agent::AgentEmj::EmjGameMemoryManager:
+    vtbls:
+      - ea: 0x1421FF150
+        base: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface
   Client::UI::Agent::AgentEmj::EmjGameInterface:
     vtbls:
       - ea: 0x1421FF0C0
