@@ -6017,6 +6017,25 @@ enums:
     "Maelstrom": 3
     "OrderOfTheTwinAdder": 4
     "ImmortalFlames": 5
+- type: Client::Game::Emj::MeldType
+  name: MeldType
+  underlying: unsigned int
+  namespace: Client.Game.Emj
+  flags: True
+  values:
+    "None": 0
+    "Claimed": 256
+    "WaitKanchan": 65536
+    "WaitPenchan": 131072
+    "WaitRyanmen": 262144
+    "Open": 4194304
+    "Unknown": 16777216
+    "Sequence": 33554432
+    "Pair": 67108864
+    "Triplet": 134217728
+    "Quad": 268435456
+    "AddedQuad": 536870912
+    "ConcealedQuad": 1073741824
 - type: Client::Game::Control::CharacterLookAtTargetParam::TargetInfoType
   name: TargetInfoType
   underlying: int
@@ -7932,6 +7951,16 @@ enums:
     "Wearable": 1
     "Impossible": 2
     "Unavailable": 3
+- type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer::LoadState
+  name: LoadState
+  underlying: int
+  namespace: Client.UI.Agent
+  flags: False
+  values:
+    "None": 0
+    "Loading": 1
+    "Ready": 2
+    "HandedOff": 3
 - type: Common::Base::Types::hkResult::hkResultEnum
   name: hkResultEnum
   underlying: int
@@ -9827,6 +9856,148 @@ structs:
   - type: unsigned __int16
     name: Allowance
     offset: 6
+  member_functions: []
+- type: Client::Game::Emj::Board::DiscardPile
+  name: DiscardPile
+  namespace: Client.Game.Emj
+  union: False
+  size: 252
+  fields:
+  - type: int
+    name: Count
+    offset: 0
+  - type: unsigned int
+    name: Tiles
+    offset: 4
+    size: 31
+    is_string: False
+  - type: unsigned int
+    name: Flags
+    offset: 128
+    size: 31
+    is_string: False
+  member_functions: []
+- type: Client::Game::Emj::EmjEngine
+  name: EmjEngine
+  namespace: Client.Game.Emj
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Emj::EmjEngineCore*
+    name: Core
+    offset: 8
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  member_functions: []
+- type: Client::Game::Emj::EmjEngineCore
+  name: EmjEngineCore
+  namespace: Client.Game.Emj
+  union: False
+  size: 1248
+  fields:
+  - type: Client::Game::Emj::ClientTable*
+    name: Table
+    offset: 1128
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Emj::Meld
+  name: Meld
+  namespace: Client.Game.Emj
+  union: False
+  size: 84
+  fields:
+  - type: Client::Game::Emj::MeldType
+    name: Type
+    offset: 4
+  - type: unsigned int
+    name: Tiles
+    offset: 20
+    size: 4
+    is_string: False
+  member_functions: []
+- type: Client::Game::Emj::Player
+  name: Player
+  namespace: Client.Game.Emj
+  union: False
+  size: 904
+  fields:
+  - type: unsigned int
+    name: Seat
+    offset: 4
+  - type: int
+    name: HandTileCount
+    offset: 8
+  - type: unsigned int
+    name: HandTiles
+    offset: 284
+    size: 14
+    is_string: False
+  - type: char
+    name: CanRiichi
+    offset: 400
+  member_functions: []
+- type: Client::Game::Emj::RoundState
+  name: RoundState
+  namespace: Client.Game.Emj
+  union: False
+  size: 872
+  fields:
+  - type: int
+    name: Points
+    offset: 40
+    size: 4
+    is_string: False
+  - type: int
+    name: RoundWind
+    offset: 60
+  - type: int
+    name: Dealer
+    offset: 64
+  - type: int
+    name: Honba
+    offset: 68
+  - type: int
+    name: RiichiSticks
+    offset: 76
+  - type: int
+    name: IsRiichi
+    offset: 180
+    size: 4
+    is_string: False
+  - type: int
+    name: WallTilesRemaining
+    offset: 232
+  - type: int
+    name: DoraIndicatorCount
+    offset: 240
+  - type: unsigned int
+    name: DoraIndicators
+    offset: 244
+    size: 5
+    is_string: False
+  - type: int
+    name: StartSeatOffset
+    offset: 788
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  member_functions: []
+- type: Client::Game::Emj::TileInfo
+  name: TileInfo
+  namespace: Client.Game.Emj
+  union: False
+  size: 28
+  fields:
+  - type: unsigned int
+    name: Seat
+    offset: 0
+  - type: unsigned int
+    name: Tile
+    offset: 8
+  - type: unsigned int
+    name: Flags
+    offset: 12
   member_functions: []
 - type: Client::Game::Event::ActionTimelineCallbackInterface
   name: ActionTimelineCallbackInterface
@@ -17589,11 +17760,146 @@ structs:
   union: False
   size: 1424
   fields:
-  - type: Client::System::Resource::Handle::ResourceHandle*
-    name: ResourceHandles
+  - type: Client::System::Resource::Handle::EquipmentParameterResourceHandle*
+    name: EquipmentParameterResourceHandle
     offset: 8
-    size: 115
+  - type: Client::System::Resource::Handle::EquipmentVfxParameterResourceHandle*
+    name: EquipmentVfxParameterResourceHandle
+    offset: 16
+  - type: Client::System::Resource::Handle::GimmickParameterResourceHandle*
+    name: GimmickParameterResourceHandle
+    offset: 24
+  - type: Client::System::Resource::Handle::EquipmentDeformerParameterResourceHandle*
+    name: EquipmentDeformerParameterResourceHandles
+    offset: 32
+    size: 28
     is_string: False
+  - type: Client::System::Resource::Handle::EquipmentDeformerParameterResourceHandle*
+    name: AccessoryDeformerParameterResourceHandles
+    offset: 256
+    size: 28
+    is_string: False
+  - type: Client::System::Resource::Handle::WeaponAttachOffsetExistResourceHandle*
+    name: AttachOffsetExistResourceHandle
+    offset: 480
+  - type: Client::System::Resource::Handle::WeaponTypeDataResourceHandle*
+    name: WeaponTypeAttachResourceHandle
+    offset: 488
+  - type: Client::System::Resource::Handle::WeaponTypeDataResourceHandle*
+    name: WeaponTypeMotionResourceHandle
+    offset: 496
+  - type: Client::System::Resource::Handle::WeaponTypeDataResourceHandle*
+    name: WeaponTypeSeResourceHandle
+    offset: 504
+  - type: Client::System::Resource::Handle::PreBoneDeformerResourceHandle*
+    name: HumanBoneDeformerResourceHandle
+    offset: 512
+  - type: Client::System::Resource::Handle::SkeletonResourceHandle*
+    name: RetargetSkeletonResourceHandles
+    offset: 520
+    size: 7
+    is_string: False
+  - type: Client::System::Resource::Handle::CharaMakeParameterResourceHandle*
+    name: HumanParameterResourceHandle
+    offset: 576
+  - type: Client::System::Resource::Handle::ExSkeletonTableResourceHandle*
+    name: FaceSkeletonTemplateResourceHandle
+    offset: 584
+  - type: Client::System::Resource::Handle::ExSkeletonTableResourceHandle*
+    name: HairSkeletonTemplateResourceHandle
+    offset: 592
+  - type: Client::System::Resource::Handle::ExSkeletonTableResourceHandle*
+    name: HeadSkeletonTemplateResourceHandle
+    offset: 600
+  - type: Client::System::Resource::Handle::ExSkeletonTableResourceHandle*
+    name: BodySkeletonTemplateResourceHandle
+    offset: 608
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: DummyTextureResourceHandle
+    offset: 616
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: BlackTextureResourceHandle
+    offset: 624
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: WhiteTextureResourceHandle
+    offset: 632
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: TransparentTextureResourceHandle
+    offset: 640
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: LegacyTattooTextureResourceHandle
+    offset: 648
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: TileOrbArrayTextureResourceHandle
+    offset: 656
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: TileNormArrayTextureResourceHandle
+    offset: 664
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: IrisShaderPackageResourceHandle
+    offset: 672
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: SkinShaderPackageResourceHandle
+    offset: 680
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: StockingsShaderPackageResourceHandle
+    offset: 688
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: LegacyCharacterShaderPackageResourceHandle
+    offset: 696
+  - type: Client::System::Resource::Handle::PapLoadTableResourceHandle*
+    name: PapLoadTableResourceHandle
+    offset: 704
+  - type: Client::System::Resource::Handle::AnimationExchangeTableResourceHandle*
+    name: AnimationExchangeTableResourceHandle
+    offset: 712
+  - type: Client::System::Resource::Handle::MotionLineTableResourceHandle*
+    name: MotionLineTableResourceHandle
+    offset: 720
+  - type: Client::System::Resource::Handle::SkeletonResourceHandle*
+    name: MaterialAnimationSkeletonResourceHandle
+    offset: 728
+  - type: Client::System::Resource::Handle::AnimationWorkTableResourceHandle*
+    name: AnimationWorkTables
+    offset: 736
+    size: 4
+    is_string: False
+  - type: Client::System::Resource::Handle::StainingTemplateResourceHandle*
+    name: StainingTemplateGudResourceHandle
+    offset: 768
+  - type: Client::System::Resource::Handle::StainingTemplateResourceHandle*
+    name: StainingTemplateResourceHandle
+    offset: 776
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: SphereMapArrayTextureResourceHandle
+    offset: 784
+  - type: Client::System::Resource::Handle::ExtraSkeletonLoadResourceHandle*
+    name: ExtraSkeletonLoadResourceHandles
+    offset: 792
+    size: 1
+    is_string: False
+  - type: Client::System::Resource::Handle::FacialParameterEditResourceHandle*
+    name: FacialParameterEditResourceHandle
+    offset: 800
+  - type: Client::System::Resource::Handle::EyeAnimationResourceHandle*
+    name: EyeAnimationResourceHandle
+    offset: 808
+  - type: Client::System::Resource::Handle::KineDriverLoadResourceHandle*
+    name: KineDriverLoadResourceHandles
+    offset: 816
+    size: 7
+    is_string: False
+  - type: Client::System::Resource::Handle::BonamikLoadResourceHandle*
+    name: BonamikLoadResourceHandles
+    offset: 872
+    size: 7
+    is_string: False
+  - type: Client::System::Resource::Handle::MaterialResourceHandle*
+    name: ReaperEyeMaterialResourceHandle
+    offset: 992
+  - type: Client::Graphics::Render::Material*
+    name: ReaperEyeMaterial
+    offset: 1000
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: LegacyBodyDecalColorCBuffer
     offset: 1016
@@ -18351,7 +18657,7 @@ structs:
       name: targetId
     - type: char
       name: isRecorded
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 57
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F
     return_type: void
     name: HandlePrepareZoningPacket
     parameters:
@@ -18529,7 +18835,7 @@ structs:
       name: entityId
     - type: Client::Game::Network::ActorCastPacket*
       name: packet
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 0F B6 7B
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 0F B6 7B
     return_type: void
     name: HandleMapEffectPacket
     parameters:
@@ -23535,6 +23841,38 @@ structs:
   - type: byte
     name: Role
     offset: 1
+  member_functions: []
+- type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface
+  name: EmjGameMemoryManagerInterface
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Malloc
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface*
+      name: this
+    - type: unsigned __int64
+      name: size
+  - name: Free
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface*
+      name: this
+    - type: __int64
+      name: ptr
   member_functions: []
 - type: Client::UI::Agent::AgentEmjVoiceCharacter::EmjCostume
   name: EmjCostume
@@ -41849,6 +42187,21 @@ structs:
     parameters:
     - type: unsigned __int16
       name: dutyActionSlot
+- type: Client::Game::Emj::MeldList
+  name: MeldList
+  namespace: Client.Game.Emj
+  union: False
+  size: 344
+  fields:
+  - type: int
+    name: Count
+    offset: 4
+  - type: Client::Game::Emj::Meld
+    name: Melds
+    offset: 8
+    size: 4
+    is_string: False
+  member_functions: []
 - type: Client::Game::Event::ActionTimelineCallback
   name: ActionTimelineCallback
   namespace: Client.Game.Event
@@ -54860,6 +55213,42 @@ structs:
     name: EffectName
     offset: 8
   member_functions: []
+- type: Client::UI::Agent::AgentEmj::EmjGameMemoryManager
+  name: EmjGameMemoryManager
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields:
+  - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface
+    name: EmjGameMemoryManagerInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::UI::Agent::AgentEmj::EmjGameMemoryManagerInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManager*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Malloc
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManager*
+      name: this
+    - type: unsigned __int64
+      name: size
+  - name: Free
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManager*
+      name: this
+    - type: __int64
+      name: ptr
+  member_functions: []
 - type: Client::UI::Agent::AgentFishGuide::FishGuideSearchData::SearchResult
   name: SearchResult
   namespace: Client.UI.Agent
@@ -65390,6 +65779,44 @@ structs:
       name: force
     - type: char
       name: suppressUpdates
+  - signature: E8 ?? ?? ?? ?? 8B 84 1E
+    return_type: void
+    name: SetValueIfDifferent
+    parameters:
+    - type: Component::GUI::NumberArrayData*
+      name: this
+    - type: int
+      name: index
+    - type: int
+      name: value
+  - signature: E8 ?? ?? ?? ?? EB ?? 81 BF
+    return_type: void
+    name: SetValueUnsuppressable
+    parameters:
+    - type: Component::GUI::NumberArrayData*
+      name: this
+    - type: int
+      name: index
+    - type: int
+      name: value
+    - type: char
+      name: force
+  - signature: E8 ?? ?? ?? ?? F7 D7 21 BE
+    return_type: void
+    name: SetValueForced
+    parameters:
+    - type: Component::GUI::NumberArrayData*
+      name: this
+    - type: int
+      name: index
+    - type: int
+      name: value
+  - signature: E8 ?? ?? ?? ?? 8B DD 8B F5
+    return_type: void
+    name: Initialize
+    parameters:
+    - type: Component::GUI::NumberArrayData*
+      name: this
 - type: Component::GUI::StringArrayData
   name: StringArrayData
   namespace: Component.GUI
@@ -67447,6 +67874,30 @@ structs:
     offset: 0
   - type: Common::Math::Vector3
     name: Unk10
+    offset: 0
+  member_functions: []
+- type: Client::Game::Emj::Table
+  name: Table
+  namespace: Client.Game.Emj
+  union: False
+  size: 5144
+  fields:
+  - type: Client::Game::Emj::Player
+    name: Players
+    offset: 8
+    size: 4
+    is_string: False
+  - type: Client::Game::Emj::Board*
+    name: Board
+    offset: 4800
+  - type: Client::Game::Emj::TileInfo
+    name: DrawnTile
+    offset: 4944
+  - type: Client::Game::Emj::TileInfo
+    name: LastDiscard
+    offset: 4972
+  virtual_functions:
+  - name: dtor
     offset: 0
   member_functions: []
 - type: Client::Game::Event::EventFramework::QueuedFormatStringCallback
@@ -80929,6 +81380,136 @@ structs:
       name: updateDataPacket
     - type: int
       name: ownerAddonId
+- type: Client::UI::Agent::AgentEmj
+  name: AgentEmj
+  namespace: Client.UI.Agent
+  union: False
+  size: 64
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentEmj::EmjGame*
+    name: Game
+    offset: 40
+  - type: unsigned int
+    name: MatchType
+    offset: 48
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEventWithResult
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: dtor
+    offset: 16
+    return_type: Client::UI::Agent::AgentInterface*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+  - name: ShowFromLua
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: int
+      name: id
+    - type: int*
+      name: args
+    - type: __int64
+      name: argCount
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: char
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: Client::UI::Agent::AgentGameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions: []
 - type: Client::UI::Agent::AgentEmote
   name: AgentEmote
   namespace: Client.UI.Agent
@@ -94318,6 +94899,21 @@ structs:
     - 3
     is_pointer: True
     return_type: Client::Game::CurrencyManager
+- type: Client::Game::Emj::ClientTable
+  name: ClientTable
+  namespace: Client.Game.Emj
+  union: False
+  size: 5152
+  fields:
+  - type: Client::Game::Emj::Table
+    name: Table
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: LocalSeat
+    offset: 5144
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Event::EventFramework::QueuedActionTimelineCallback
   name: QueuedActionTimelineCallback
   namespace: Client.Game.Event
@@ -110492,6 +111088,26 @@ structs:
     name: TargetParam
     offset: 16
   virtual_functions: []
+  member_functions: []
+- type: Client::Game::Emj::Board
+  name: Board
+  namespace: Client.Game.Emj
+  union: False
+  size: 3320
+  fields:
+  - type: Client::Game::Emj::MeldList
+    name: MeldLists
+    offset: 0
+    size: 4
+    is_string: False
+  - type: Client::Game::Emj::Board::DiscardPile
+    name: DiscardPiles
+    offset: 1376
+    size: 4
+    is_string: False
+  - type: Client::Game::Emj::RoundState
+    name: RoundState
+    offset: 2448
   member_functions: []
 - type: Client::Game::Event::LuaBattleNpc
   name: LuaBattleNpc
@@ -153630,6 +154246,100 @@ structs:
     name: ItemRewardCount
     offset: 5568
   member_functions: []
+- type: Client::UI::Agent::AgentEmj::EmjCharaView
+  name: EmjCharaView
+  namespace: Client.UI.Agent
+  union: False
+  size: 816
+  fields:
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: EntityId
+    offset: 792
+  - type: float
+    name: Unk328
+    offset: 808
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::UI::Misc::CharaView*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: agent
+    - type: unsigned int
+      name: clientObjectId
+    - type: __int64
+      name: agentCallbackReady
+  - name: Release
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+  - name: ResetPositions
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+    - type: float
+      name: deltaDistance
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+    - type: float
+      name: deltaRotation
+    - type: float
+      name: deltaPitch
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+    - type: float
+      name: deltaX
+    - type: float
+      name: deltaY
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjCharaView*
+      name: this
+    - type: unsigned int
+      name: frameIndex
+    - type: Client::Game::Character::Character*
+      name: character
+  member_functions: []
 - type: Client::UI::Agent::AgentFashion::FashionCharaView
   name: FashionCharaView
   namespace: Client.UI.Agent
@@ -159835,6 +160545,100 @@ structs:
       name: this
     - type: Common::Math::OrientedBounds*
       name: outOrientedBounds
+  member_functions: []
+- type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer
+  name: CharaViewContainer
+  namespace: Client.UI.Agent
+  union: False
+  size: 824
+  fields:
+  - type: Client::UI::Agent::AgentEmj::EmjCharaView
+    name: EmjCharaView
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer::LoadState
+    name: ContainerState
+    offset: 816
+  - type: byte
+    name: SeatOffset
+    offset: 820
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::UI::Misc::CharaView*
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: agent
+    - type: unsigned int
+      name: clientObjectId
+    - type: __int64
+      name: agentCallbackReady
+  - name: Release
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+  - name: ResetPositions
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+    - type: float
+      name: deltaDistance
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+    - type: float
+      name: deltaRotation
+    - type: float
+      name: deltaPitch
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+    - type: float
+      name: deltaX
+    - type: float
+      name: deltaY
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer*
+      name: this
+    - type: unsigned int
+      name: frameIndex
+    - type: Client::Game::Character::Character*
+      name: character
   member_functions: []
 - type: Client::UI::Agent::AgentInventoryContext
   name: AgentInventoryContext
@@ -169038,7 +169842,7 @@ structs:
     - type: Client::Game::Character::EquipmentModelId*
       name: equipData
     - type: byte
-      name: unk
+      name: characterUsage
 - type: Client::System::Resource::Handle::SkeletonParamResourceHandle
   name: SkeletonParamResourceHandle
   namespace: Client.System.Resource.Handle
@@ -233107,6 +233911,55 @@ structs:
       name: inputId
     - type: char
       name: a3
+  member_functions: []
+- type: Client::UI::Agent::AgentEmj::EmjGame
+  name: EmjGame
+  namespace: Client.UI.Agent
+  union: False
+  size: 4024
+  fields:
+  - type: int
+    name: Unk8
+    offset: 8
+    size: 5
+    is_string: False
+  - type: byte
+    name: Unk1C
+    offset: 28
+    size: 4
+    is_string: False
+  - type: Client::UI::Agent::AgentEmj::EmjGameMemoryManager
+    name: MemoryManager
+    offset: 32
+  - type: Client::UI::Agent::AgentEmj::EmjGame::CharaViewContainer
+    name: CharaViewContainers
+    offset: 40
+    size: 4
+    is_string: False
+  - type: Client::System::String::Utf8String
+    name: UnkD50
+    offset: 3408
+  - type: Client::System::String::Utf8String
+    name: PlayerNames
+    offset: 3512
+    size: 4
+    is_string: False
+  - type: Client::UI::Agent::AgentEmj*
+    name: Agent
+    offset: 3944
+  - type: Client::UI::UIModuleInterface*
+    name: UIModule
+    offset: 3952
+  - type: Client::Game::Emj::EmjEngine*
+    name: Engine
+    offset: 3968
+  - type: byte
+    name: EmjVoiceNpc
+    offset: 4009
+  - type: byte
+    name: EmjCostumeId
+    offset: 4011
+  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkComponentNumericInput
   name: AtkComponentNumericInput
