@@ -514,6 +514,7 @@ classes:
       0x140602F80: Update
       0x140603750: StartTerritoryTransition
       0x140603B80: QueueActiveFestivals
+      0x140604330: LoadCutscene
       0x140605300: IsInGPose  # (probably) static
       0x140605340: IsInIdleCam  # static
       0x140605570: IsInInstanceArea
