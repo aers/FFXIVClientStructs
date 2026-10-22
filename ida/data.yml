@@ -8058,6 +8058,13 @@ classes:
       0x14035C490: SetEffectEnabled
       0x14035C580: Prepare
       0x14035E680: Submit
+  Client::Graphics::PostEffect::Dlss:
+    funcs:
+      0x140374590: UpdateSettings
+      0x140374860: Shutdown
+      0x140374EC0: ReleaseFeature
+      0x140374F10: QueryRenderSettings
+      0x1403758F0: ctor
   Client::Graphics::PostEffect::PostEffectColorFilterDarkBlend:
     vtbls:
       - ea: 0x14215C000

@@ -171,11 +171,26 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x698)] internal Texture* Unk698;
     [FieldOffset(0x6A0)] internal nint Unk6A0; // Unknown class, implements C::G::K::Notifier, holds a bunch of D3D11 objects
     [FieldOffset(0x6A8)] internal nint Unk6A8; // Same class as Unk6A0
+    /// <summary> Height the scene targets are rendered at. </summary>
+    [FieldOffset(0x702)] public ushort RenderHeight;
+    /// <summary> Display height times GraphicsRezoScale, or the maximum of <see cref="RenderSizeCallback"/>. </summary>
+    [FieldOffset(0x704)] public ushort MaxRenderHeight;
+    /// <summary> Two thirds of <see cref="MaxRenderHeight"/>, or the minimum of <see cref="RenderSizeCallback"/>. </summary>
+    [FieldOffset(0x706)] public ushort MinRenderHeight;
+
     // bunch of floats
     [FieldOffset(0x710)] public float FrametimeAverage;
 
+    /// <summary> <see cref="MaxRenderHeight"/> over the display height, from <see cref="RenderSizeCallback"/>. </summary>
+    [FieldOffset(0x71C)] public float UpscalerRenderScale;
     [FieldOffset(0x720)] public float GraphicsRezoScale;
     [FieldOffset(0x724)] public float GraphicsRezoScaleY;
+
+    /// <summary>
+    /// Size query of <see cref="PostEffect.Dlss"/>, set with DLSS support. Takes the display size and fills the
+    /// optimal, minimum and maximum render size (width, height each). Returns false without a size.
+    /// </summary>
+    [FieldOffset(0x730)] public delegate* unmanaged<uint*, uint*, uint*, uint*, bool> RenderSizeCallback;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 8B D0 FF D3")]
     public partial Texture* GetCharaViewTexture(uint clientObjectIndex);

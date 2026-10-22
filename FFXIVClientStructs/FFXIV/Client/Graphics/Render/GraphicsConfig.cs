@@ -51,7 +51,14 @@ public unsafe partial struct GraphicsConfig {
     [FieldOffset(0x40)] public byte CharaLight;
     [FieldOffset(0x41)] public byte ShadowLightValidType;
 
+    /// <summary> Set when the DynamicRezoType option is not 0. </summary>
     [FieldOffset(0x44)] public byte DynamicRezoEnable;
+    /// <summary>
+    /// Enables render scaling together with <see cref="DynamicRezoEnable"/> or DLSS.
+    /// While false the render height stays at <see cref="RenderTargetManager.MaxRenderHeight"/> and DLSS uses DLAA.
+    /// Set from the flags of the scene. False when a scene starts.
+    /// </summary>
+    [FieldOffset(0x45)] public bool DynamicRezoActive;
 
     [FieldOffset(0x46)] public bool DynamicRezoEnableCutScene;
 
@@ -59,7 +66,13 @@ public unsafe partial struct GraphicsConfig {
 
     [FieldOffset(0x4C)] public float GraphicsRezoScale;
 
+    /// <summary> The option value plus one: 1 = AMD FSR, 2 = NVIDIA DLSS. Reset to 1 without <see cref="Kernel.Device.IsDlssSupported"/>. </summary>
     [FieldOffset(0x54)] public byte GraphicsRezoUpscaleType;
+    /// <summary>
+    /// Quality mode of <see cref="PostEffect.Dlss.UpdateSettings"/>. Set to <see cref="DlssQualityPreset.Balanced"/>
+    /// when <see cref="GraphicsRezoUpscaleType"/> changes. Ignored while <see cref="DynamicRezoActive"/> is false.
+    /// </summary>
+    [FieldOffset(0x55)] public DlssQualityPreset DlssQuality;
 
     [FieldOffset(0x56)] public bool GrassEnableDynamicInterference;
 
@@ -74,4 +87,22 @@ public unsafe partial struct GraphicsConfig {
     [FieldOffset(0x88)] private ulong EventFlags;
 
     public bool ResetTemporalHistory => (EventFlags & 1) != 0;
+}
+
+/// <summary>
+/// Value of <see cref="GraphicsConfig.DlssQuality"/>. 1 to 6 select an NGX quality mode, other values make
+/// <see cref="PostEffect.Dlss.UpdateSettings"/> fail.
+/// </summary>
+public enum DlssQualityPreset : byte {
+    /// <summary>
+    /// Picks a mode from the output pixel count: DLAA below 2,073,600 (1920x1080), Quality up to 3,686,400 (2560x1440),
+    /// Performance up to 8,294,400 (3840x2160), Ultra Performance above.
+    /// </summary>
+    Automatic = 0,
+    DLAA = 1,
+    UltraQuality = 2,
+    Quality = 3,
+    Balanced = 4,
+    Performance = 5,
+    UltraPerformance = 6,
 }

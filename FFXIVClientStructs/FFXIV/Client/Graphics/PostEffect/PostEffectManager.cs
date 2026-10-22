@@ -27,6 +27,8 @@ public unsafe partial struct PostEffectManager {
     [FieldOffset(0x40B8)] private Texture* Unk40B8;
     [FieldOffset(0x40C8)] private Texture* Unk40C8;
     [FieldOffset(0x40D0)] private Texture* Unk40D0;
+    /// <summary> Null without <see cref="Device.IsDlssSupported"/>. </summary>
+    [FieldOffset(0x4220)] public Dlss* Dlss;
     [FieldOffset(0x4410)] public ulong InitializedEffects;
     [FieldOffset(0x4470)] public PostEffectFlags Flags;
     [FieldOffset(0x46E8)] public PostEffectDepthOfFieldParameters DepthOfField;
