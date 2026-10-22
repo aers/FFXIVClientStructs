@@ -6621,6 +6621,9 @@ classes:
     vtbls:
       - ea: 0x1421535A8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x140327300: HasLookAtData
+      0x140327320: HasSlopeData
   Client::System::Resource::Handle::SkeletonParamResourceHandleFactory:
     vtbls:
       - ea: 0x142153710
