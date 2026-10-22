@@ -7484,6 +7484,8 @@ classes:
     vtbls:
       - ea: 0x142141568
         base: Client::Graphics::Animation::IAnimationControllerListener
+    funcs:
+      0x14020B490: GetSkeletonParameterResourceHandle
   Client::Graphics::Kernel::Resource:
     vtbls:
       - ea: 0x142143348
