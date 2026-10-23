@@ -23,7 +23,7 @@ public unsafe partial struct Device {
     [FieldOffset(0x70)] public SwapChain* SwapChain;
     [FieldOffset(0x7A)] public byte RequestResolutionChange;
     [FieldOffset(0x7C)] public byte LastResolutionChangeRequest;
-    /// <summary> Bit 12 is <see cref="IsDlssSupported"/>. </summary>
+    [BitField<bool>(nameof(IsDlssSupported), 12)]
     [FieldOffset(0x84)] public uint CapabilityFlags;
     [FieldOffset(0x8C)] public uint Width;
     [FieldOffset(0x90)] public uint Height;
