@@ -82,7 +82,7 @@ public unsafe partial struct Device {
     [FieldOffset(0xE0AC0)] public ImmediateContext* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
     /// <summary> NVIDIA adapter that meets the NGX requirements for DLSS. </summary>
-    public bool IsDlssSupported => (CapabilityFlags & 0x1000) != 0;
+    public partial bool IsDlssSupported { get; }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? B0")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
