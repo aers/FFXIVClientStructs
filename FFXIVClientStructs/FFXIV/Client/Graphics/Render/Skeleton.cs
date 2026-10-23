@@ -158,14 +158,14 @@ public unsafe partial struct LookAtIkModule {
         [FieldOffset(0x30)] public Skeleton* Skeleton;
         [FieldOffset(0x38)] public uint BoneCount;
         [FieldOffset(0x3C)] public float Amount; // Multiplied by each bone's BaseWeight to produce its FinalWeight
-        [FieldOffset(0x40)] internal uint Unk40; // Might be flags?
+        [FieldOffset(0x40)] public GroupFlags Flags;
         [FieldOffset(0x48)] public LookAtBone* Bones;
 
         public Span<LookAtBone> BonesSpan => new(Bones, (int)BoneCount);
     }
 
     [Flags]
-    public enum GroupFlags : byte {
+    public enum GroupFlags : uint {
         None = 0,
         /// <summary>
         /// The group is valid and has data.
