@@ -7659,6 +7659,36 @@ classes:
       0x140258300: Finalizer
       0x140259090: FinishAnimation
       0x14025C8E0: UpdateAnimations
+      0x140259BB0: CreateLookAtIkModule
+      0x14025A490: CreateChainIkModule
+      0x14025A6E0: CreateSlopeIkModule
+      0x140258E70: UpdateIK
+  Client::Graphics::Render::LookAtIkModule:
+    funcs:
+      0x140203180: dtor
+      0x140203130: ctor
+      0x1402031C0: Create
+      0x1402048B0: FindGroup
+      0x1402035B0: Solve
+      0x1402036A0: SolveSingleGroup
+      0x140204960: InvokeFinishedCallback
+  Client::Graphics::Render::LookAtIkModule::LookAtGroupJob:
+    funcs:
+      0x140202E30: Solve
+  Client::Graphics::Render::LookAtIkModule::LookAtBone:
+    funcs:
+      0x140205200: Solve
+  Client::Graphics::Render::ChainIkModule:
+    funcs:
+      0x140200F80: dtor
+      0x140200F10: ctor
+      0x140200FA0: Create
+      0x140200FC0: Solve
+  Client::Graphics::Render::SlopeIkModule:
+    funcs:
+      0x140210F90: dtor
+      0x140210F60: ctor
+      0x140210FF0: Create
   Client::Graphics::Render::SkeletonHelper:
     funcs:
       0x14025D030: SyncModelSpacePoses
