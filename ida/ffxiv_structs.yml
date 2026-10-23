@@ -68131,23 +68131,16 @@ structs:
   - type: unsigned int
     name: CutsceneId
     offset: 120
-  - type: unsigned int
-    name: Unk7C
+  - type: int
+    name: CutsceneArgs
     offset: 124
-  - type: unsigned int
-    name: Unk80
-    offset: 128
-  - type: unsigned int
-    name: Unk84
-    offset: 132
-  - type: unsigned int
-    name: Unk88
-    offset: 136
+    size: 4
+    is_string: False
   - type: char
     name: IsCutSceneControllerCreated
     offset: 140
   - type: char
-    name: Unk8D
+    name: HasPlaybackBegun
     offset: 141
   - type: char
     name: Unk8F
