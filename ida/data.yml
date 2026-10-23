@@ -8484,6 +8484,13 @@ classes:
       0x14046A6D0: Destroy
       0x1408D3C00: Create
       0x1404492A0: CreateSlotStorage
+      0x1404336B0: SetLookAtTargetPosition
+      0x1404337F0: SetLookAtInfluence
+      0x140433750: GetLookAtGroupCount
+      0x1404339B0: GetLookAtGroupTransform
+      0x140433A70: TransformLookAtModelSpaceToWorldSpace
+      0x140433B60: FindLookAtGroup
+      0x140433B40: SetupLookAtCallbacks
   Client::Graphics::Scene::Human:
     vtbls:
       - ea: 0x14216D098
