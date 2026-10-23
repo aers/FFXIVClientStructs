@@ -27,7 +27,10 @@ from exdschema_wrapper import (
 )
 from src_wrapper import SrcInterface
 from ghidra_wrapper import GhidraInterface
+from ghidra_logging import start_logging, stop_logging
 from structs_schema import get_yaml, DefinedStructFuncParam
+
+start_logging("struct_import.py", monitor, isRunningHeadless())  # noqa
 
 src = SrcInterface()
 # one filler field per gap, clang gets slow on a struct with a field for every unknown qword
@@ -213,3 +216,5 @@ if _function_update_options["member"]:
             print(f"Updating static members for {struct.type}")
             for member in struct.static_members:
                 ghidra.update_static_member(member, struct)
+
+stop_logging()

@@ -16,6 +16,7 @@ for import_path in (script_dir, join(script_dir, "..", "shared")):
         sys.path.append(import_path)
 
 from ghidra_wrapper import GhidraInterface
+from ghidra_logging import start_logging, stop_logging
 from class_factory import apply_data
 
 lua_namespace = "Client::Game::Event::Lua"
@@ -58,6 +59,8 @@ def apply_lua_funcs():
             func_name = regs['r8']
             ghidra.set_func_name(regs['r9']['val'], f"{name}.{func_name}", unique=True)
 
+start_logging("rename.py", monitor, isRunningHeadless())  # noqa
+
 ghidra = GhidraInterface(currentProgram, monitor)  # noqa
 print("Loading data.yml")
 ghidra.load_data_yml()
@@ -67,3 +70,5 @@ apply_data(ghidra, ghidra.data_yaml)
 print("Naming lua functions")
 apply_lua_funcs()
 print("Done")
+
+stop_logging()
