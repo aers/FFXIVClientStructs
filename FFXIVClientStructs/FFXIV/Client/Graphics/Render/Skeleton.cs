@@ -168,13 +168,21 @@ public unsafe partial struct LookAtIkModule {
     public enum GroupFlags : uint {
         None = 0,
         /// <summary>
-        /// The group is valid and has data.
+        /// The group should be applied.
         /// </summary>
-        Exists = 1 << 0,
+        IsEnabled = 1 << 0,
         /// <summary>
         /// The group is named <c>"eyes"</c> or <c>"Eyes"</c>
         /// </summary>
         IsEyes = 1 << 1,
+        /// <summary>
+        /// Set when the angle between the line from the world origin to the group's new target position and the origin to the group's old target position is large enough.
+        /// </summary>
+        /// <remarks>
+        /// Honestly I'm not really sure what purpose this serves. Could it be a mistake where it's meant to be the angle to the new and old targets *relative to the character*?
+        /// </remarks>
+        DiscontinuousJump = 1 << 2,
+        Unk4 = 1 << 3,
     }
 
     /// <summary>
@@ -198,9 +206,10 @@ public unsafe partial struct LookAtIkModule {
         [FieldOffset(0x48)] public ushort BoneIndexRangeLimits;
 
         [FieldOffset(0x50)] public float FinalWeight; // The final weight including any runtime modifications
-        [FieldOffset(0x54)] internal float Unk54;
+        [FieldOffset(0x54)] public uint Unk54;
         [FieldOffset(0x58)] public Skeleton* Skeleton;
-        [FieldOffset(0x60)] internal byte Unk60; // Might be an enabled bool?
+        [FieldOffset(0x60)] public bool IsEnabled;
+        [FieldOffset(0x61)] internal bool Unk61;
     }
 
     [Flags]

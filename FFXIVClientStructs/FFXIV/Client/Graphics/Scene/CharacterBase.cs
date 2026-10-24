@@ -146,6 +146,28 @@ public unsafe partial struct CharacterBase {
     public partial nint SetupSlotModel(uint slot); // TODO: change return type to void
 
     /// <summary>
+    /// Returns whether the given look-at group is currently enabled.
+    /// </summary>
+    /// <param name="groupIndex">The index of the group, in <see cref="LookAtIkModule.Groups"/>.</param>
+    /// <returns>Whether the group is enabled.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 79 8B C7")]
+    public partial bool IsLookAtEnabled(int groupIndex);
+
+    /// <summary>
+    /// Enables the given look-at group.
+    /// </summary>
+    /// <param name="groupIndex">The index of the look-at group to enable, in <see cref="LookAtIkModule.Groups"/>, or negative to enable all the groups.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? F6 44 24 ?? ?? 0F 84 ?? ?? ?? ?? F3 0F 10 84 3B")]
+    public partial void EnableLookAt(int groupIndex);
+
+    /// <summary>
+    /// Disables the given look-at group.
+    /// </summary>
+    /// <param name="groupIndex">The index of the look-at group to disable, in <see cref="LookAtIkModule.Groups"/>, or negative to disable all the groups.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 0F BE 9F")]
+    public partial void DisableLookAt(int groupIndex);
+
+    /// <summary>
     /// Sets the position for the character to look towards, if its skeleton has a <see cref="LookAtIkModule"/>.
     /// </summary>
     /// <remarks>

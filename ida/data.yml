@@ -8484,6 +8484,9 @@ classes:
       0x14046A6D0: Destroy
       0x1408D3C00: Create
       0x1404492A0: CreateSlotStorage
+      0x140433790: IsLookAtEnabled
+      0x140433770: EnableLookAt
+      0x1404337B0: DisableLookAt
       0x1404336B0: SetLookAtTargetPosition
       0x1404337F0: SetLookAtInfluence
       0x140433750: GetLookAtGroupCount
