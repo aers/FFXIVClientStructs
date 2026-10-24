@@ -213,7 +213,7 @@ public unsafe partial struct LookAtIkModule {
     }
 
     [Flags]
-    public enum BoneFlags {
+    public enum BoneFlags : byte {
         None = 0,
         HasRangeLimits = 1 << 0,
     }
