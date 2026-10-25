@@ -179,6 +179,30 @@ public unsafe partial struct CharacterBase {
     public partial void SetLookAtTargetPosition(int groupIndex, Vector3* position);
 
     /// <summary>
+    /// Gets the amount of influence a look-at group has.
+    /// </summary>
+    /// <remarks>
+    /// The native version of this function has no xrefs (it's probably inlined) and it's too small to get a decent sig so it is copied here.
+    /// </remarks>
+    /// <param name="groupIndex">The index of the look-at group to get the influence of, in <see cref="LookAtIkModule.Groups"/>.</param>
+    /// <returns>The influence of the look-at group.</returns>
+    public float GetLookAtInfluence(int groupIndex) {
+        var skeleton = Skeleton;
+        if (skeleton != null) {
+            var lookAtIkModule = skeleton->LookAtIkModule;
+            if (lookAtIkModule != null) {
+                return lookAtIkModule->Groups[groupIndex][0].Amount;
+            }
+            else {
+                return 0.0f;
+            }
+        }
+        else {
+            return 0.0f;
+        }
+    }
+
+    /// <summary>
     /// Sets the amount of influence a look-at group has.
     /// </summary>
     /// <param name="newInfluence">How much influence the group(s) will have.</param>
