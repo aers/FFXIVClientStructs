@@ -4226,6 +4226,19 @@ enums:
     "Orange": 5
     "Magenta": 6
     "Black": 7
+- type: Client::Graphics::Render::DlssQualityPreset
+  name: DlssQualityPreset
+  underlying: byte
+  namespace: Client.Graphics.Render
+  flags: False
+  values:
+    "Automatic": 0
+    "DLAA": 1
+    "UltraQuality": 2
+    "Quality": 3
+    "Balanced": 4
+    "Performance": 5
+    "UltraPerformance": 6
 - type: Client::Graphics::Render::LightFlags
   name: LightFlags
   underlying: int
@@ -4306,6 +4319,15 @@ enums:
     "Snow": 1
     "Dust": 2
     "Unk3": 3
+- type: Client::Graphics::PostEffect::DlssFlags
+  name: DlssFlags
+  underlying: byte
+  namespace: Client.Graphics.PostEffect
+  flags: True
+  values:
+    "None": 0
+    "NgxInitialized": 1
+    "FeatureCreated": 2
 - type: Client::Graphics::PostEffect::PostEffectFlags
   name: PostEffectFlags
   underlying: unsigned int
@@ -7854,6 +7876,15 @@ enums:
   values:
     "HasModel": 2
     "HasMaterials": 8
+- type: Client::Graphics::PostEffect::Dlss::QualityModeFlags
+  name: QualityModeFlags
+  underlying: byte
+  namespace: Client.Graphics.PostEffect
+  flags: True
+  values:
+    "None": 0
+    "Supported": 1
+    "DynamicResolution": 2
 - type: Client::Game::BGMSystem::PlayState
   name: PlayState
   underlying: unsigned int
@@ -16341,6 +16372,18 @@ structs:
     name: LastResolutionChangeRequest
     offset: 124
   - type: unsigned int
+    name: CapabilityFlags
+    offset: 132
+    bits:
+    - type: unsigned __int16
+      offset: 0
+      size: 12
+      name: UnkBits0
+    - type: byte
+      offset: 12
+      size: 1
+      name: IsDlssSupported
+  - type: unsigned int
     name: Width
     offset: 140
   - type: unsigned int
@@ -16376,6 +16419,12 @@ structs:
   - type: unsigned int
     name: RenderCommandBufferCount
     offset: 2320
+  - type: unsigned int
+    name: VendorId
+    offset: 2496
+  - type: unsigned int
+    name: DeviceId
+    offset: 2500
   - type: __int64
     name: hWnd
     offset: 2520
@@ -17037,6 +17086,84 @@ structs:
       name: this
     - type: Client::Graphics::Render::Skeleton*
       name: skeleton
+- type: Client::Graphics::PostEffect::Dlss::QualityMode
+  name: QualityMode
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: Value
+    offset: 0
+  - type: byte*
+    name: Name
+    offset: 8
+  - type: Client::Graphics::PostEffect::Dlss::QualityModeFlags
+    name: Flags
+    offset: 16
+  member_functions: []
+- type: Client::Graphics::PostEffect::Dlss::RenderSettings
+  name: RenderSettings
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 28
+  fields:
+  - type: unsigned int
+    name: OptimalWidth
+    offset: 0
+  - type: unsigned int
+    name: OptimalHeight
+    offset: 4
+  - type: unsigned int
+    name: MinWidth
+    offset: 8
+  - type: unsigned int
+    name: MinHeight
+    offset: 12
+  - type: unsigned int
+    name: MaxWidth
+    offset: 16
+  - type: unsigned int
+    name: MaxHeight
+    offset: 20
+  - type: float
+    name: Sharpness
+    offset: 24
+  member_functions: []
+- type: Client::Graphics::PostEffect::Dlss::Settings
+  name: Settings
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 44
+  fields:
+  - type: unsigned int
+    name: OutputWidth
+    offset: 0
+  - type: unsigned int
+    name: OutputHeight
+    offset: 4
+  - type: unsigned int
+    name: OptimalWidth
+    offset: 8
+  - type: unsigned int
+    name: OptimalHeight
+    offset: 12
+  - type: unsigned int
+    name: MinWidth
+    offset: 16
+  - type: unsigned int
+    name: MinHeight
+    offset: 20
+  - type: unsigned int
+    name: MaxWidth
+    offset: 24
+  - type: unsigned int
+    name: MaxHeight
+    offset: 28
+  - type: int
+    name: Mode
+    offset: 32
+  member_functions: []
 - type: Client::Graphics::PostEffect::PostEffectChain
   name: PostEffectChain
   namespace: Client.Graphics.PostEffect
@@ -17424,6 +17551,9 @@ structs:
     name: DynamicRezoEnable
     offset: 68
   - type: char
+    name: DynamicRezoActive
+    offset: 69
+  - type: char
     name: DynamicRezoEnableCutScene
     offset: 70
   - type: byte
@@ -17435,6 +17565,9 @@ structs:
   - type: byte
     name: GraphicsRezoUpscaleType
     offset: 84
+  - type: Client::Graphics::Render::DlssQualityPreset
+    name: DlssQuality
+    offset: 85
   - type: char
     name: GrassEnableDynamicInterference
     offset: 86
@@ -37414,6 +37547,18 @@ structs:
   union: False
   fields:
   - type: RedBlackTree::Node<StdPair<char*, __int16>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: StdMap<int, Client::Graphics::PostEffect::Dlss::RenderSettings>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>>*
     name: Head
     offset: 0
   - type: __int64
@@ -67237,6 +67382,18 @@ structs:
     name: Item2
     offset: 4
   member_functions: []
+- type: StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: int
+    name: Item1
+    offset: 0
+  - type: Client::Graphics::PostEffect::Dlss::RenderSettings
+    name: Item2
+    offset: 4
+  member_functions: []
 - type: StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>
   name: StdPair`2
   namespace: ''
@@ -73036,15 +73193,40 @@ structs:
   - type: __int64
     name: Unk6A8
     offset: 1704
+  - type: unsigned __int16
+    name: RenderHeight
+    offset: 1794
+  - type: unsigned __int16
+    name: MaxRenderHeight
+    offset: 1796
+  - type: unsigned __int16
+    name: MinRenderHeight
+    offset: 1798
   - type: float
     name: FrametimeAverage
     offset: 1808
+  - type: float
+    name: UpscalerRenderScale
+    offset: 1820
   - type: float
     name: GraphicsRezoScale
     offset: 1824
   - type: float
     name: GraphicsRezoScaleY
     offset: 1828
+  - type: __fastcall
+    name: RenderSizeCallback
+    offset: 1840
+    return_type: char
+    parameters:
+    - type: unsigned int*
+      name: a1
+    - type: unsigned int*
+      name: a2
+    - type: unsigned int*
+      name: a3
+    - type: unsigned int*
+      name: a4
   virtual_functions:
   - name: dtor
     offset: 0
@@ -93927,6 +94109,30 @@ structs:
     name: _Myval
     offset: 28
   member_functions: []
+- type: RedBlackTree::Node<StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>>*
+    name: _Left
+    offset: 0
+  - type: RedBlackTree::Node<StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>>*
+    name: _Parent
+    offset: 8
+  - type: RedBlackTree::Node<StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: char
+    name: _Isnil
+    offset: 25
+  - type: StdPair<int, Client::Graphics::PostEffect::Dlss::RenderSettings>
+    name: _Myval
+    offset: 28
+  member_functions: []
 - type: RedBlackTree::Node<StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>>
   name: Node
   namespace: Helper
@@ -97354,6 +97560,78 @@ structs:
     name: ctor
     parameters:
     - type: Client::Graphics::Physics::CollisionThreePointPlane*
+      name: this
+- type: Client::Graphics::PostEffect::Dlss
+  name: Dlss
+  namespace: Client.Graphics.PostEffect
+  union: False
+  size: 392
+  fields:
+  - type: Client::Graphics::PostEffect::Dlss::QualityMode
+    name: QualityModes
+    offset: 0
+    size: 6
+    is_string: False
+  - type: StdMap<int, Client::Graphics::PostEffect::Dlss::RenderSettings>
+    name: RenderSettingsByMode
+    offset: 144
+  - type: Client::Graphics::PostEffect::Dlss::Settings
+    name: Requested
+    offset: 160
+  - type: Client::Graphics::PostEffect::Dlss::Settings
+    name: Applied
+    offset: 204
+  - type: unsigned int
+    name: QueriedOutputWidth
+    offset: 336
+  - type: unsigned int
+    name: QueriedOutputHeight
+    offset: 340
+  - type: __int64
+    name: NgxParameters
+    offset: 344
+  - type: __int64
+    name: NgxFeature
+    offset: 352
+  - type: Client::Graphics::PostEffect::DlssFlags
+    name: Flags
+    offset: 385
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB 03 49 8B C7 48 89 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ??
+    return_type: void
+    name: ctor
+    parameters:
+    - type: Client::Graphics::PostEffect::Dlss*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 32 C0 48 83 C4 38 41 5E 5F
+    return_type: void
+    name: Shutdown
+    parameters:
+    - type: Client::Graphics::PostEffect::Dlss*
+      name: this
+  - signature: 40 57 41 56 48 83 EC 38 F6 81 ?? ?? ?? ?? ??
+    return_type: char
+    name: UpdateSettings
+    parameters:
+    - type: Client::Graphics::PostEffect::Dlss*
+      name: this
+    - type: unsigned int*
+      name: outputSize
+    - type: char
+      name: unk
+  - signature: E8 ?? ?? ?? ?? 4C 8B 05 ?? ?? ?? ?? 45 33 E4
+    return_type: void
+    name: QueryRenderSettings
+    parameters:
+    - type: Client::Graphics::PostEffect::Dlss*
+      name: this
+    - type: unsigned int*
+      name: outputSize
+  - signature: E8 ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 0F 10 06
+    return_type: void
+    name: ReleaseFeature
+    parameters:
+    - type: Client::Graphics::PostEffect::Dlss*
       name: this
 - type: Client::Graphics::Render::Camera
   name: Camera
@@ -161930,6 +162208,9 @@ structs:
   - type: Client::Graphics::Kernel::Texture*
     name: Unk40D0
     offset: 16592
+  - type: Client::Graphics::PostEffect::Dlss*
+    name: Dlss
+    offset: 16928
   - type: unsigned __int64
     name: InitializedEffects
     offset: 17424
