@@ -21,6 +21,8 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x31)] public bool Disabled;
     [FieldOffset(0x34)] public float MasterVolume;
     [FieldOffset(0x38)] public float ActiveVolume;
+    /// <summary> The volume of each bus, indexed by <see cref="SoundBus"/>. It is the user's volume slider divided by 100. </summary>
+    /// <remarks> <see cref="GetEffectiveVolume"/> multiplies this array with the four below, the mute flag of the bus and the window inactive state. </remarks>
     [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray21<float> _volume;
     [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume2; // All are 1.0f
     [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f
@@ -56,7 +58,9 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x1BF4), FixedSizeArray(isString: true)] internal FixedSizeArray260<byte> _orchestrionPath;
 
     /// <summary>
-    /// Calculates effective volume
+    /// Calculates effective volume: the five volume arrays multiplied for the bus. The result is 0 if the mute flag of the bus is set, or if
+    /// <see cref="WindowInactive"/> is set and either <see cref="PlaySoundsWhenWindowInactive"/> or the entry of the bus in the array at 0x1F5 is set.
+    /// The game sets the result as the volume of the <c>Bus</c> of the category.
     /// </summary>
     /// <param name="bus">The specific sound bus. This is different from the buses visible to the user</param>
     /// <returns>Volume in the ange 0-1</returns>
