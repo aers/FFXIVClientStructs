@@ -28379,6 +28379,13 @@ classes:
     vtbls:
       - ea: 0x142543890
         base: SQEX::CDev::Engine::Sd::Driver::ISound
+    vfuncs:
+      23: ApplyBusVolume
+      48: GetPlayerCategory
+      52: GetBusId
+      109: GetUseWaterRouting
+    funcs:
+      0x141E898F0: CalculateVolume
   SQEX::CDev::Engine::Sd::Driver::RandomSound:
     vtbls:
       - ea: 0x142543C88
