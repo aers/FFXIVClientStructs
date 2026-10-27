@@ -37,6 +37,10 @@ public unsafe partial struct RootSound {
     [FieldOffset(0x30)] public uint ExtendedFlags;
 
     /// <summary> <see cref="ApplyBusVolume"/> stores the volume of the sound's <see cref="Bus"/> in <see cref="DynamicValue.Scale"/>. </summary>
+    /// <remarks>
+    /// Multiplied with the other volume terms of the sound when the volume of its voice is calculated.
+    /// Stays at 1.0f for a sound that <see cref="Bus.AddSound"/> could not add.
+    /// </remarks>
     [FieldOffset(0x38)] public DynamicValue BusVolume;
     [FieldOffset(0x60)] private DynamicValue Unk60;
 
@@ -71,6 +75,11 @@ public unsafe partial struct RootSound {
     /// <summary> Called by the <see cref="Bus"/> for every sound on it when its volume changes. </summary>
     [VirtualFunction(23)]
     public partial void ApplyBusVolume(float volume);
+
+    /// <summary> Stops the sound, fading out over <paramref name="fadeTicks"/>. </summary>
+    /// <remarks> Stops all tracks at once when <paramref name="fadeTicks"/> is 0, the state has bit 0x10 or <see cref="BusVolume"/> is 0, so a muted sound has no fade-out. </remarks>
+    [VirtualFunction(4)]
+    public partial void Stop(uint fadeTicks);
 
     [VirtualFunction(48)]
     public partial int GetPlayerCategory();

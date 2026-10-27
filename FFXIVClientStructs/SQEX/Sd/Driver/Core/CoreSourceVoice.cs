@@ -11,7 +11,8 @@ namespace FFXIVClientStructs.SQEX.Sd.Driver.Core;
 /// <remarks>
 /// Changes made through <see cref="SetVolume"/>, <see cref="SetPitch"/> and <see cref="SetOutputMatrix"/> go to
 /// <see cref="PendingParams"/> and only reach the mixer when <see cref="CommitChanges"/> copies them to <see cref="CurrentParams"/>.
-/// A voice with a volume of (almost) 0 sends nothing.
+/// A voice with a volume of (almost) 0 sends nothing, but still consumes its buffers at the normal rate, so the owner keeps submitting
+/// decoded samples to it. The input of <see cref="SubmitBuffer"/> is before any volume, panning, effect or master volume.
 /// </remarks>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xA48)]
@@ -21,7 +22,20 @@ public unsafe partial struct CoreSourceVoice {
 
     /// <summary> The callback object of the owner, the owner (<c>VoiceSead</c>) starts 8 bytes before it. </summary>
     [FieldOffset(0xB0)] public nint Callback;
+
+    /// <summary> 1 for 16-bit samples, otherwise samples are 4 bytes. </summary>
+    [FieldOffset(0xB8)] public int SampleType;
+    [FieldOffset(0xBC)] public int SampleRate;
+
+    /// <summary> The read position in samples, advanced by the resampling step every frame. Set to the start position of a buffer submitted to an empty queue. </summary>
+    [FieldOffset(0xC0)] public double Position;
     [FieldOffset(0xD4)] public int InputChannels;
+    [FieldOffset(0xD8)] public int QueuedBufferCount;
+    [FieldOffset(0xDC)] public int CurrentBufferIndex;
+
+    /// <summary> The read offset in the current buffer. </summary>
+    [FieldOffset(0xE0)] public int BufferReadOffset;
+    [FieldOffset(0xE8), FixedSizeArray] internal FixedSizeArray2<QueuedBuffer> _buffers;
 
     /// <summary> The parameters written by the setters, applied by <see cref="CommitChanges"/>. </summary>
     [FieldOffset(0x128)] public VoiceParams PendingParams;
@@ -48,6 +62,23 @@ public unsafe partial struct CoreSourceVoice {
 
     [VirtualFunction(11)]
     public partial int CommitChanges();
+
+    /// <summary> Queues decoded samples for the voice. </summary>
+    /// <param name="data">Interleaved samples of <see cref="InputChannels"/> channels in the format of <see cref="SampleType"/>.</param>
+    /// <param name="size">The size in bytes, a multiple of the frame size.</param>
+    /// <param name="context">Passed back to the callback when the buffer is started and when it is finished.</param>
+    /// <param name="startPosition">Written to <see cref="Position"/> when the queue was empty.</param>
+    /// <returns> 0, or -1 if the voice is not usable, two buffers are already queued or the size is not a multiple of the frame size. </returns>
+    [VirtualFunction(12)]
+    public partial int SubmitBuffer(void* data, ulong size, nint context, int startPosition);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public unsafe struct QueuedBuffer {
+        [FieldOffset(0x00)] public void* Data;
+        [FieldOffset(0x08)] public ulong Size;
+        [FieldOffset(0x10)] public int StartPosition;
+        [FieldOffset(0x18)] public nint Context;
+    }
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x408)]

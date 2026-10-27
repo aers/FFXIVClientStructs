@@ -8,7 +8,8 @@ namespace FFXIVClientStructs.SQEX.CDev.Engine.Sd.Driver;
 [Inherits<SdMemoryAllocator>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct SoundController {
-    [FieldOffset(0x08)] private int Unk08;
+    /// <summary> The id the driver finds the sound by, the result of virtual function 63 of the sound. </summary>
+    [FieldOffset(0x08)] public int SoundId;
     [FieldOffset(0x10)] private nint Unk10; // CDev.Engine.Sd.SoundLayout*?
     [FieldOffset(0x18)] private nint SharedMutex; // std::shared_mutex?
 

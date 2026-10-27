@@ -24,7 +24,7 @@ public unsafe partial struct DynamicValue {
     /// <summary> Multiplied into the result of <see cref="GetValue"/>, 1.0f by default. </summary>
     /// <remarks> <c>RootSound.ApplyBusVolume</c> sets this. </remarks>
     [FieldOffset(0x20)] public float Scale;
-    [FieldOffset(0x24)] private bool Unk24;
+    [FieldOffset(0x24)] private bool Unk24; // set by SetScale, cleared by Update
 
     /// <summary> The upper 4 bits of the tick argument of <see cref="StartFade"/>. </summary>
     [FieldOffset(0x25)] public byte Curve;
@@ -52,6 +52,10 @@ public unsafe partial struct DynamicValue {
     /// <summary> Advances the fade by <paramref name="ticks"/> without clearing the flags at 0x24 and 0x26 like <see cref="Update"/> does. </summary>
     [VirtualFunction(5)]
     public partial void Advance(int ticks);
+
+    /// <summary> Sets <see cref="Scale"/> and the flag at 0x24. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 83 A6 ?? ?? ?? ?? ?? 48 8B C6")]
+    public partial void SetScale(float scale);
 
     /// <summary> Sets <see cref="Current"/> and <see cref="Target"/> to <paramref name="value"/> without a fade. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 39 9D")]

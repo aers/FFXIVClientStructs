@@ -28369,6 +28369,7 @@ classes:
       4: GetValue
       5: Advance
     funcs:
+      0x141E87CC0: SetScale
       0x141E87C80: SetImmediate
       0x141E87C30: StartFade
   SQEX::CDev::Engine::Sd::Driver::ISound:
@@ -28380,6 +28381,7 @@ classes:
       - ea: 0x142543890
         base: SQEX::CDev::Engine::Sd::Driver::ISound
     vfuncs:
+      4: Stop
       23: ApplyBusVolume
       48: GetPlayerCategory
       52: GetBusId
@@ -28415,6 +28417,7 @@ classes:
       - ea: 0x142545478
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
     vfuncs:
+      2: AddSound
       3: SetVolume
     funcs:
       0x141E818B0: GetById
@@ -28541,6 +28544,7 @@ classes:
     vtbls:
       - ea: 0x142547770
     vfuncs:
+      13: SetVolume
       15: MixIn
   SQEX::Sd::Driver::Core::CoreSubmixVoice: # SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
     vtbls:
@@ -28555,6 +28559,7 @@ classes:
       9: SetPitch
       10: SetOutputMatrix
       11: CommitChanges
+      12: SubmitBuffer
   SQEX::Sd::Driver::SeadFilter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::WahWah: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::Filter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect

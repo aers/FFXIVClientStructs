@@ -17,7 +17,11 @@ public unsafe partial struct Bus {
     /// <summary> 1-based, the same as <c>SoundBus</c>. </summary>
     [FieldOffset(0x08)] public int Id;
 
-    /// <summary> The first number of the <c>BUS</c> line of the driver config, the number of voices the category may play at the same time. </summary>
+    /// <summary> The first number of the <c>BUS</c> line of the driver config. </summary>
+    /// <remarks>
+    /// When positive, the bus gets its own pool of <c>2 * TrackCount</c> entries for the sounds added by <see cref="AddSound"/>.
+    /// It is not a voice limit: the sound start compares it with <see cref="SoundCount"/>, but the check that follows always passes.
+    /// </remarks>
     [FieldOffset(0x0C)] public ushort TrackCount;
 
     /// <summary> Set when the <c>BUS</c> line of the driver config has <c>3D</c>, clear for <c>2D</c>. </summary>
@@ -48,6 +52,9 @@ public unsafe partial struct Bus {
     [FieldOffset(0x90)] public DynamicValue Volume4;
     [FieldOffset(0xB8)] public int Volume2RefCount;
 
+    /// <summary> The number of sounds added by <see cref="AddSound"/>, counted on the bus that owns the pool (0 when <see cref="Parent"/> is set). </summary>
+    [FieldOffset(0x138)] public int SoundCount;
+
     [FieldOffset(0x17C)] private bool Unk17C; // set and cleared by the virtual functions 4-6
     [FieldOffset(0x17D)] private bool Unk17D;
 
@@ -58,6 +65,14 @@ public unsafe partial struct Bus {
     /// <summary> The product of the values of the four faders. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C8 48 8B CB E8 ?? ?? ?? ?? 48 8B D3 48 8D 8F")]
     public partial float GetTotalVolume();
+
+    /// <summary> Adds the sound to the bus and applies the bus volume to it with <see cref="RootSound.ApplyBusVolume"/>. </summary>
+    /// <remarks>
+    /// When the pool is full the entries of sounds whose state has bit 0x08 or 0x20, or that no longer exist, are freed first. If no entry is free the sound is not added
+    /// and keeps a <see cref="RootSound.BusVolume"/> scale of 1.0f, so it ignores the category volume. Nothing is returned.
+    /// </remarks>
+    [VirtualFunction(2)]
+    public partial void AddSound(SoundController* controller);
 
     /// <summary> Sets <see cref="Volume"/> (fading if <paramref name="fadeTicks"/> is not 0) and re-applies the bus volume to every sound on the bus. </summary>
     [VirtualFunction(3)]

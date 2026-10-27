@@ -20,6 +20,7 @@ public unsafe partial struct SoundManager {
 
     [FieldOffset(0x31)] public bool Disabled;
     [FieldOffset(0x34)] public float MasterVolume;
+    /// <summary> 1.0f, set to 0.6675f by <see cref="Initialize"/> unless <see cref="Disabled"/>. Multiplied into the master volume. </summary>
     [FieldOffset(0x38)] public float ActiveVolume;
     /// <summary> The volume of each bus, indexed by <see cref="SoundBus"/>. It is the user's volume slider divided by 100. </summary>
     /// <remarks> <see cref="GetEffectiveVolume"/> multiplies this array with the four below, the mute flag of the bus and the window inactive state. </remarks>
