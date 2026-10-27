@@ -11,11 +11,20 @@ namespace FFXIVClientStructs.SQEX.Sd.Driver.Core;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
 public unsafe partial struct CoreMasterVoice {
+    /// <summary> Master bed and Master ambisonics get a low-pass filter and the equalizer selected by <c>SoundManager.SetEqualizerType</c>. </summary>
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray4<Pointer<ICoreEffect>> _effects;
+    [FieldOffset(0xB0)] public int EffectCount;
+
     /// <summary> The master volume, the user's master volume slider multiplied by <c>SoundManager.ActiveVolume</c>, applied after every submix. </summary>
     [FieldOffset(0xB4)] public float Volume;
     [FieldOffset(0xD8)] public uint Format;
     [FieldOffset(0xDC)] public MasterBusId BusId;
     [FieldOffset(0xE5), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+
+    /// <summary> Replaces the effects with the first <paramref name="count"/> entries of <paramref name="effects"/>. </summary>
+    /// <returns> 0. </returns>
+    [VirtualFunction(2)]
+    public partial int SetEffects(ICoreEffect** effects, int count);
 
     /// <summary> Sets <see cref="Volume"/>. </summary>
     /// <returns> 0, or -1 without changing it if <paramref name="fadeTicks"/> is not 0. </returns>

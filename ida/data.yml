@@ -28492,6 +28492,10 @@ classes:
   SQEX::Sd::Driver::Core::ICoreEffect:
     vtbls:
       - ea: 0x1425463B0
+    vfuncs:
+      2: IsBypassed
+      3: RunsWithoutInput
+      5: Process
   SQEX::Sd::SeadObject<2,16>:
     vtbls:
       - ea: 0x1425463E0
@@ -28514,6 +28518,9 @@ classes:
         base: SQEX::Sd::Driver::Effect
       - ea: 0x1425464A8
         base: SQEX::Sd::Driver::Core::ICoreEffect
+    vfuncs:
+      3: SetParameter
+      4: GetParameter
   SQEX::CDev::Engine::Sd::Driver::WahWahBase:
     vtbls:
       - ea: 0x142546570
@@ -28544,6 +28551,7 @@ classes:
     vtbls:
       - ea: 0x142547770
     vfuncs:
+      2: SetEffects
       13: SetVolume
       15: MixIn
   SQEX::Sd::Driver::Core::CoreSubmixVoice: # SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>

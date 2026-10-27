@@ -15,8 +15,13 @@ namespace FFXIVClientStructs.SQEX.Sd.Driver.Core;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public unsafe partial struct CoreSubmixVoice {
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray5<VoiceSend> _sends;
+
     /// <summary> The number of voices this submix sends its output to. </summary>
     [FieldOffset(0xE0)] public int SendCount;
+
+    /// <summary> Run in order on the sum of the inputs, before the sends. </summary>
+    [FieldOffset(0xE8), FixedSizeArray] internal FixedSizeArray4<Pointer<ICoreEffect>> _effects;
     [FieldOffset(0x108)] public int EffectCount;
     [FieldOffset(0x138)] public uint Format;
     [FieldOffset(0x13E), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;

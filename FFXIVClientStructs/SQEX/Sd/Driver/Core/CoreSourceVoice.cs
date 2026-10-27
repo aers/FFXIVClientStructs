@@ -46,6 +46,13 @@ public unsafe partial struct CoreSourceVoice {
     /// <summary> The volume of the previous period. The mixer ramps linearly from it to the current volume over one period. </summary>
     [FieldOffset(0x938)] public float PreviousVolume;
 
+    [FieldOffset(0x940), FixedSizeArray] internal FixedSizeArray5<VoiceSend> _sends;
+    [FieldOffset(0x990)] public int SendCount;
+
+    /// <summary> Run on the voice's buffer after the volume and the output matrix. Only sounds on a 3D <c>Bus</c> get one, a filter. </summary>
+    [FieldOffset(0x998), FixedSizeArray] internal FixedSizeArray4<Pointer<ICoreEffect>> _effects;
+    [FieldOffset(0x9B8)] public int EffectCount;
+
     /// <summary> The format of the voice the output goes to, it gives the number of output channels. </summary>
     [FieldOffset(0xA40)] public uint OutputFormat;
 
