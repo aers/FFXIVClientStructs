@@ -1,0 +1,27 @@
+namespace FFXIVClientStructs.SQEX.Sd.Driver.Core;
+
+// SQEX::Sd::Driver::Core::CoreSubmixVoice
+//   SQEX::Sd::Driver::Core::ICoreSubmixVoice
+//   SQEX::Sd::Driver::Core::ICoreVoice
+//   SQEX::Sd::SeadObject<1,16>
+/// <summary>
+/// A submix of the software mixer. Source voices and other submixes add their output to it, it runs its effects and sends the result on to
+/// other submixes or to a <see cref="CoreMasterVoice"/>.
+/// </summary>
+/// <remarks>
+/// The game creates 14 of them: No effect, Reverb, Premaster, Water, Water depth, Analyze SE, Analyze Env/Voice, Analyze BGM, Vibration,
+/// Stringendo, Player, Party, Other and Music.
+/// </remarks>
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
+public unsafe partial struct CoreSubmixVoice {
+    /// <summary> The number of voices this submix sends its output to. </summary>
+    [FieldOffset(0xE0)] public int SendCount;
+    [FieldOffset(0x108)] public int EffectCount;
+    [FieldOffset(0x138)] public uint Format;
+    [FieldOffset(0x13E), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+
+    /// <summary> Adds <paramref name="frames"/> frames of interleaved samples in <paramref name="format"/> to this voice, scaled by <paramref name="gain"/>. </summary>
+    [VirtualFunction(15)]
+    public partial void MixIn(float* buffer, uint frames, float gain, uint format);
+}

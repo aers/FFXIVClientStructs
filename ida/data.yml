@@ -28538,8 +28538,23 @@ classes:
   SQEX::Sd::Driver::WASAPI::AudioRenderer: # SQEX::Sd::SeadObject<1,8>
   SQEX::Sd::SeadObject<1,16>:
   SQEX::Sd::Driver::Core::CoreMasterVoice: # SQEX::Sd::Driver::Core::ICoreMasterVoice, SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
+    vtbls:
+      - ea: 0x142547770
+    vfuncs:
+      15: MixIn
   SQEX::Sd::Driver::Core::CoreSubmixVoice: # SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
+    vtbls:
+      - ea: 0x142547820
+    vfuncs:
+      15: MixIn
   SQEX::Sd::Driver::Core::CoreSourceVoice: # SQEX::Sd::Driver::Core::ICoreSourceVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
+    vtbls:
+      - ea: 0x142547960
+    vfuncs:
+      8: SetVolume
+      9: SetPitch
+      10: SetOutputMatrix
+      11: CommitChanges
   SQEX::Sd::Driver::SeadFilter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::WahWah: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::Filter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
