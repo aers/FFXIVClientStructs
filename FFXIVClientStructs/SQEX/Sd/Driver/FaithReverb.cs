@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.SQEX.Sd.Driver;
 /// The game sets all parameters once when the mixer is created; after that only 4115 (dry level) and 4116 (wet level) change.
 /// </remarks>
 [GenerateInterop]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 49 89 06 49 8D 4E 18 48 8D 05 ?? ?? ?? ?? 49 89 46 08 E8 ?? ?? ?? ??", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x10C0)]
 public unsafe partial struct FaithReverb {
     /// <summary> The interface held by the submix. </summary>

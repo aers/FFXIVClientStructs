@@ -5,8 +5,20 @@ globals:
   0x14211DEAC: g_Common::Math::PI
   0x14211DEC8: g_Common::Math::TwoPI
   0x14211EF50: g_MemoryPoolConfig # { int BlockSize; int BlockCount; }[10], last entry is special for the lookup table
+  0x1428ED17C: g_SQEX::CDev::Engine::Sd::Driver::RootSound_PlayerCategoryVolumes
   0x14290E5C0: g_MemoryPoolsStart
   0x14290E610: g_MemoryPoolsEnd
+  0x142C7B538: g_SQEX::CDev::Engine::Sd::Driver::Bus_Buses
+  0x142C7B548: g_SQEX::CDev::Engine::Sd::Driver::Bus_BusCount
+  0x142C7B7A0: g_SQEX::Sd::Driver::Core::CoreMasterVoice_Instances
+  0x142C7B7D0: g_SQEX::Sd::Driver::Core::CoreSubmixVoice_Instances
+  0x142F6A31C: g_SQEX::Sd::Driver::Core::CoreSystem_SampleRate
+  0x142F6A38C: g_SQEX::Sd::Driver::Core::CoreSystem_ChannelCount
+  0x142F6A3A0: g_SQEX::Sd::Driver::Core::CoreSystem_FrameCount
+  0x142F6A420: g_SQEX::Sd::Driver::Core::CoreSystem_SpatialAudioActive
+  0x142F6A440: g_SQEX::Sd::Driver::Core::CoreSystem_CaptureMode
+  0x142F6A9B0: g_SQEX::Sd::Driver::WASAPI::AudioRenderer_Instances
+  0x142F6C0A8: g_SQEX::CDev::Engine::Sd::Driver::RootSound_IgnorePlayerCategoryVolume
 #fail   0x141F0C404: g_ConfigFileName
   0x142128EB0: g_NumberArraySizes
   0x1421290C0: g_StringArraySizes
@@ -28534,6 +28546,11 @@ classes:
       - ea: 0x1425466F0
         base: SQEX::Sd::Driver::Effect
   SQEX::Sd::Driver::Stringendo: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+    vtbls:
+      - ea: 0x1425467F0
+        base: SQEX::Sd::Driver::Effect
+      - ea: 0x142546830
+        base: SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::CDev::Engine::Sd::Driver::Sead::EqualizerSead: # SQEX::CDev::Engine::Sd::Driver::EqualizerBase, SQEX::CDev::Engine::Sd::Driver::IEffect, SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::MasterBus:
     vtbls:
@@ -28544,8 +28561,17 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::Sead::VoiceSead: # SQEX::CDev::Engine::Sd::Driver::IVoice, SQEX::CDev::Engine::Sd::SdMemoryAllocator, SQEX::Sd::Driver::Core::ICoreSourceVoiceCallback
   SQEX::Sd::Driver::WASAPI::DeviceEventHandler: # SQEX::Sd::SeadObject<1,8>, struct IMMNotificationClient, struct IUnknown
   SQEX::Sd::Driver::WASAPI::WASAPIDevice: # SQEX::Sd::Driver::WASAPI::AudioDevice, SQEX::Sd::SeadObject<1,8>
+    vtbls:
+      - ea: 0x1425474B8
+        base: SQEX::Sd::Driver::WASAPI::AudioDevice
   SQEX::Sd::Driver::WASAPI::MockDevice: # SQEX::Sd::Driver::WASAPI::AudioDevice, SQEX::Sd::SeadObject<1,8>
+    vtbls:
+      - ea: 0x142547590
+        base: SQEX::Sd::Driver::WASAPI::AudioDevice
   SQEX::Sd::Driver::WASAPI::AudioRenderer: # SQEX::Sd::SeadObject<1,8>
+    vtbls:
+      - ea: 0x142547600
+        base: SQEX::Sd::SeadObject<1,8>
   SQEX::Sd::SeadObject<1,16>:
   SQEX::Sd::Driver::Core::CoreMasterVoice: # SQEX::Sd::Driver::Core::ICoreMasterVoice, SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
     vtbls:
@@ -28568,12 +28594,40 @@ classes:
       10: SetOutputMatrix
       11: CommitChanges
       12: SubmitBuffer
+    funcs:
+      0x141EB84F0: Render
+  SQEX::Sd::Driver::Core::CoreSystem:
+    funcs:
+      0x141E9EE20: Render
   SQEX::Sd::Driver::SeadFilter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::WahWah: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+    vtbls:
+      - ea: 0x14254D018
+        base: SQEX::Sd::Driver::Effect
+      - ea: 0x14254D060
+        base: SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::Filter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+    vtbls:
+      - ea: 0x14254D098
+        base: SQEX::Sd::Driver::Effect
+      - ea: 0x14254D0E0
+        base: SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::CDev::Engine::Sd::Driver::EqualizerBase: # SQEX::CDev::Engine::Sd::Driver::IEffect, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbls:
+      - ea: 0x14254D118
+        base: SQEX::CDev::Engine::Sd::Driver::IEffect
   SQEX::Sd::Driver::Equalizer4Band: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+    vtbls:
+      - ea: 0x14254D180
+        base: SQEX::Sd::Driver::Effect
+      - ea: 0x14254D1C8
+        base: SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::Sd::Driver::SimpleFilter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+    vtbls:
+      - ea: 0x14254D748
+        base: SQEX::Sd::Driver::Effect
+      - ea: 0x14254D790
+        base: SQEX::Sd::Driver::Core::ICoreEffect
   SQEX::CDev::Engine::Sd::Layout::ILayoutManager: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Layout::LayoutManager: # SQEX::CDev::Engine::Sd::Layout::ILayoutManager, SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Layout::PageController: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
