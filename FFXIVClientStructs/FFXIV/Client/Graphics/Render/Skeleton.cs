@@ -52,7 +52,7 @@ public unsafe partial struct Skeleton {
 
     /// <summary> Blend timers and pose copies after sampling. Run by <see cref="UpdateAnimations"/> in attach depth order, parents first. </summary>
     [MemberFunction("48 89 5C 24 18 55 48 83 EC 30 48 8B E9")]
-    public partial void FinishAnimation();
+    public partial void FinishAnimation(float deltaTime);
 
     /// <summary> Skeletons in attach depth order, parents first. Rebuilt by <see cref="UpdateAnimations"/>. </summary>
     [StaticAddress("89 35 ?? ?? ?? ?? 48 8D 3D ?? ?? ?? ?? 83 FE 01", 9)]

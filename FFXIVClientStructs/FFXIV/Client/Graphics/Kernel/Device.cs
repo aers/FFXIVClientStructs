@@ -23,6 +23,8 @@ public unsafe partial struct Device {
     [FieldOffset(0x70)] public SwapChain* SwapChain;
     [FieldOffset(0x7A)] public byte RequestResolutionChange;
     [FieldOffset(0x7C)] public byte LastResolutionChangeRequest;
+    [BitField<bool>(nameof(IsDlssSupported), 12)]
+    [FieldOffset(0x84)] public uint CapabilityFlags;
     [FieldOffset(0x8C)] public uint Width;
     [FieldOffset(0x90)] public uint Height;
     [FieldOffset(0x94)] public float AspectRatio;
@@ -55,6 +57,11 @@ public unsafe partial struct Device {
     [FieldOffset(0x908)] internal RenderCommandBufferGroup* RenderCommandBuffer;
     [FieldOffset(0x910)] public uint RenderCommandBufferCount;
 
+    /// <summary> <c>DXGI_ADAPTER_DESC.VendorId</c>. 0x10DE is NVIDIA. </summary>
+    [FieldOffset(0x9C0)] public uint VendorId;
+    /// <summary> <c>DXGI_ADAPTER_DESC.DeviceId</c>. </summary>
+    [FieldOffset(0x9C4)] public uint DeviceId;
+
     [FieldOffset(0x9D8)] public void* hWnd;
     [FieldOffset(0x9E8)] public uint NewWidth;
     [FieldOffset(0x9EC)] public uint NewHeight;
@@ -73,6 +80,9 @@ public unsafe partial struct Device {
     [FieldOffset(0xE0AB0), CExporterTypeForce("ID3D11DeviceContext4*", true)] public void* D3D11DeviceContext;
 
     [FieldOffset(0xE0AC0)] public ImmediateContext* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
+
+    /// <summary> NVIDIA adapter that meets the NGX requirements for DLSS. </summary>
+    public partial bool IsDlssSupported { get; }
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? B0")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);

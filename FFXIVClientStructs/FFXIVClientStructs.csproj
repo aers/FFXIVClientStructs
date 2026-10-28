@@ -31,6 +31,8 @@
 
     <!-- Overide assembly version -->
     <GitVersion>false</GitVersion>
+    <UseTemplatedCode>true</UseTemplatedCode>
+    <GitRepositoryUrl>https://github.com/aers/FFXIVClientStructs</GitRepositoryUrl>
   </PropertyGroup>
 
   <Target Name="PopulateInfo" DependsOnTargets="GitVersion" BeforeTargets="GetAssemblyVersion">

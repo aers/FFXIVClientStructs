@@ -23,4 +23,5 @@ public class Instance {
 public class Vtbl {
     public string Ea { get; set; } = string.Empty;
     public string Base { get; set; } = string.Empty;
+    public int Size { get; set; } = 0;
 }

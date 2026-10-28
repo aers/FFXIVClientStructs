@@ -118,8 +118,18 @@ public unsafe partial struct CharacterBase {
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
     public Span<Pointer<MaterialResourceHandle>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
 
+    /// <summary>
+    /// Creates a new character based on the given model ID, customization data, and equipment IDs.
+    /// </summary>
+    /// <param name="modelId">The model ID, corresponding to a row in the <c>ModelChara</c> Excel sheet.</param>
+    /// <param name="customize">The customization data to use if the model is a <see cref="Human"/>.</param>
+    /// <param name="equipData">The equipment models to use. <see cref="Human"/> characters use 10, <see cref="Demihuman"/> characters use 5,
+    ///     and <see cref="Monster"/> characters don't use any.</param>
+    /// <param name="characterUsage">0 for a normal character, 1 for a mount, and 2 for an ornament. Affects the animation sets loaded.</param>
+    /// <returns>The newly created <see cref="Human"/>, <see cref="Demihuman"/>, or <see cref="Monster"/> based on the
+    ///     <c>Type</c> of the <c>ModelChara</c> for this model ID.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01")]
-    public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 80 byte */, byte unk);
+    public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData, byte characterUsage);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();

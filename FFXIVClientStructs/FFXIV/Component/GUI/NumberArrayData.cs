@@ -21,4 +21,37 @@ public unsafe partial struct NumberArrayData {
     /// </param>
     [MemberFunction("3B 51 08 7D 20")]
     public partial void SetValue(int index, int value, bool force = false, bool suppressUpdates = false);
+
+    /// <summary>
+    /// Set a value at the specified index of the IntArray if different.
+    /// </summary>
+    /// <param name="index"> The index in the array. </param>
+    /// <param name="value"> The integer value. </param>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 84 1E")]
+    public partial void SetValueIfDifferent(int index, int value);
+
+    /// <summary>
+    /// Set a value at the specified index of the IntArray always setting <see cref="UpdateState"/> to <c>true</c>.
+    /// </summary>
+    /// <param name="index"> The index in the array. </param>
+    /// <param name="value"> The integer value. </param>
+    /// <param name="force">
+    /// If <c>true</c> it bypasses the check if the value is different from what is stored.
+    /// </param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 81 BF")]
+    public partial void SetValueUnsuppressable(int index, int value, bool force = false);
+
+    /// <summary>
+    /// Force set a value at the specified index of the IntArray.
+    /// </summary>
+    /// <param name="index"> The index in the array. </param>
+    /// <param name="value"> The integer value. </param>
+    [MemberFunction("E8 ?? ?? ?? ?? F7 D7 21 BE")]
+    public partial void SetValueForced(int index, int value);
+
+    /// <summary>
+    /// Initialize the IntArray with the specified <see cref="Size"/>.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B DD 8B F5")]
+    public partial void Initialize();
 }

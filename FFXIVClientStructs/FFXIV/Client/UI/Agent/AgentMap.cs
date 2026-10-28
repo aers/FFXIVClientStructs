@@ -74,6 +74,8 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5B01)] public byte WarpMarkerFlags;
     [FieldOffset(0x5B08)] public bool IsPlayerMoving;
     [FieldOffset(0x5B10)] public bool IsControlKeyPressed;
+    [FieldOffset(0x5B20)] public Utf8String TooltipString; // String value when mousing overing map icons
+    [FieldOffset(0x5B88), FixedSizeArray(isString: true)] internal FixedSizeArray512<byte> _rawTooltip; // 0x200 bytes are reserved here for tooltip string.
 
     [FieldOffset(0x5F20)] public QuestLinkContainer MapQuestLinkContainer;
     [FieldOffset(0x6A78)] public QuestLinkContainer MiniMapQuestLinkContainer;
