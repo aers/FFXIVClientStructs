@@ -79,6 +79,11 @@ public unsafe partial struct CoreSourceVoice {
     [VirtualFunction(12)]
     public partial int SubmitBuffer(void* data, ulong size, nint context, int startPosition);
 
+    /// <summary> Renders one period of the voice and mixes it into its sends. Called by the mix pass for every voice whose <see cref="State"/> is 3. </summary>
+    /// <param name="scratch">The buffer the voice is resampled into, in the output layout, before its effects run on it.</param>
+    [MemberFunction("48 8B C4 48 89 58 18 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 D8 F9 FF FF")]
+    public partial void Render(float* scratch);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe struct QueuedBuffer {
         [FieldOffset(0x00)] public void* Data;

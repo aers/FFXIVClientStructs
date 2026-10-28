@@ -58,6 +58,13 @@ public unsafe partial struct Bus {
     [FieldOffset(0x17C)] private bool Unk17C; // set and cleared by the virtual functions 4-6
     [FieldOffset(0x17D)] private bool Unk17D;
 
+    /// <summary> <see cref="BusCount"/> entries, indexed by the id minus 1. </summary>
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 63 C9 48 8B 44 C8 F8", 3, isPointer: true)]
+    public static partial Bus** Buses();
+
+    [StaticAddress("3B 0D ?? ?? ?? ?? 7F ?? 48 8B 05 ?? ?? ?? ??", 2)]
+    public static partial int* BusCount();
+
     /// <param name="id">The bus id, 1-based.</param>
     [MemberFunction("3B 0D ?? ?? ?? ?? 75 ?? 48 8B 05")]
     public static partial Bus* GetById(int id);

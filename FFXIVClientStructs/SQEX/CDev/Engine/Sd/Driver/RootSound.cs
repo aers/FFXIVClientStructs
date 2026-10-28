@@ -63,6 +63,15 @@ public unsafe partial struct RootSound {
     /// <summary> 0 selects the player's volume and equalizer submix, 1 the party's, 3 the other players'. </summary>
     [FieldOffset(0x450)] public int PlayerCategory;
 
+    /// <summary> The player, party and other volumes the volume of the sound is scaled by when it has <see cref="UsesPlayerCategoryVolume"/>, selected by <see cref="PlayerCategory"/> (0, 1, 3). </summary>
+    /// <remarks> Not applied while <see cref="IgnorePlayerCategoryVolume"/> is 1. </remarks>
+    [StaticAddress("F3 44 0F 10 05 ?? ?? ?? ?? EB ?? 83 F8 01", 5)]
+    public static partial float* PlayerCategoryVolumes();
+
+    /// <summary> 1 while the mode of <c>SoundManager</c> at 0x268 is 1. </summary>
+    [StaticAddress("8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC C2 00 00 CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53", 2)]
+    public static partial int* IgnorePlayerCategoryVolume();
+
     /// <summary> The volume sent to the voice of the sound. </summary>
     /// <remarks>
     /// Calls <see cref="DynamicValue.GetValue"/> on <see cref="Volume"/> and on the object at 0x128 and multiplies the results with

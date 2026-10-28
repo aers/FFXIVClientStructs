@@ -21,6 +21,10 @@ public unsafe partial struct CoreMasterVoice {
     [FieldOffset(0xDC)] public MasterBusId BusId;
     [FieldOffset(0xE5), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
 
+    /// <summary> 5 entries; unused entries are null. </summary>
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 8B E8", 3)]
+    public static partial CoreMasterVoice** Instances();
+
     /// <summary> Replaces the effects with the first <paramref name="count"/> entries of <paramref name="effects"/>. </summary>
     /// <returns> 0. </returns>
     [VirtualFunction(2)]

@@ -26,6 +26,10 @@ public unsafe partial struct CoreSubmixVoice {
     [FieldOffset(0x138)] public uint Format;
     [FieldOffset(0x13E), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
 
+    /// <summary> 15 entries, in the order listed above; unused entries are null. </summary>
+    [StaticAddress("48 83 EC 28 48 63 D1 48 8D 0D ?? ?? ?? ??", 10)]
+    public static partial CoreSubmixVoice** Instances();
+
     /// <summary> Adds <paramref name="frames"/> frames of interleaved samples in <paramref name="format"/> to this voice, scaled by <paramref name="gain"/>. </summary>
     [VirtualFunction(15)]
     public partial void MixIn(float* buffer, uint frames, float gain, uint format);
