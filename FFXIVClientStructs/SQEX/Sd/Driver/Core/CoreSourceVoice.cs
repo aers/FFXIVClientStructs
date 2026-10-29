@@ -20,7 +20,7 @@ public unsafe partial struct CoreSourceVoice {
     /// <summary> The voice is rendered while this is 3. </summary>
     [FieldOffset(0xA8)] public int State;
 
-    /// <summary> The callback object of the owner, the owner (<c>VoiceSead</c>) starts 8 bytes before it. </summary>
+    /// <summary> The callback object of the owner, the owner (<see cref="CDev.Engine.Sd.Driver.Sead.VoiceSead"/>) starts 8 bytes before it. </summary>
     [FieldOffset(0xB0)] public nint Callback;
 
     /// <summary> 1 for 16-bit samples, otherwise samples are 4 bytes. </summary>
@@ -29,6 +29,9 @@ public unsafe partial struct CoreSourceVoice {
 
     /// <summary> The read position in samples, advanced by the resampling step every frame. Set to the start position of a buffer submitted to an empty queue. </summary>
     [FieldOffset(0xC0)] public double Position;
+
+    /// <summary> While negative, the voice outputs silence and adds the resampling step every frame, so it starts that many frames later. </summary>
+    [FieldOffset(0xC8)] public double StartDelay;
     [FieldOffset(0xD4)] public int InputChannels;
     [FieldOffset(0xD8)] public int QueuedBufferCount;
     [FieldOffset(0xDC)] public int CurrentBufferIndex;
@@ -52,6 +55,12 @@ public unsafe partial struct CoreSourceVoice {
     /// <summary> Run on the voice's buffer after the volume and the output matrix. Only sounds on a 3D <c>Bus</c> get one, a filter. </summary>
     [FieldOffset(0x998), FixedSizeArray] internal FixedSizeArray4<Pointer<ICoreEffect>> _effects;
     [FieldOffset(0x9B8)] public int EffectCount;
+
+    /// <summary> The position between <see cref="PreviousFrame"/> and the next input frame, from 0 to 1. The samples are interpolated linearly. </summary>
+    [FieldOffset(0x9BC)] public float InterpolationFraction;
+
+    /// <summary> The previous input frame, up to 16 samples in the format of <see cref="SampleType"/>. </summary>
+    [FieldOffset(0x9C0), FixedSizeArray] internal FixedSizeArray64<byte> _previousFrame;
 
     /// <summary> The format of the voice the output goes to, it gives the number of output channels. </summary>
     [FieldOffset(0xA40)] public uint OutputFormat;
