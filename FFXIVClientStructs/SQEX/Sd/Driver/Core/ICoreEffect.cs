@@ -12,6 +12,10 @@ namespace FFXIVClientStructs.SQEX.Sd.Driver.Core;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct ICoreEffect {
+    /// <summary> Clears the state of the effect, like the delay lines of the reverb. </summary>
+    [VirtualFunction(1)]
+    public partial void Reset();
+
     /// <summary> While this returns true the voice skips the effect. </summary>
     [VirtualFunction(2)]
     public partial bool IsBypassed();

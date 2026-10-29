@@ -55,10 +55,10 @@ public unsafe partial struct RootSound {
     /// <summary> The float at byte 8 of the SCD sound entry, copied when the version of the bank is 2 or more. Stream sounds set it from their stream. </summary>
     [FieldOffset(0x12C)] public float EntryVolume;
 
-    /// <summary> Set by virtual function 25. The layout sounds (<c>SQEX::CDev::Engine::Sd::Layout</c>) set it through their <c>SoundController</c> from the position of the listener. </summary>
+    /// <summary> Set by <see cref="SetLayoutVolume"/>. The layout sounds (<c>SQEX::CDev::Engine::Sd::Layout</c>) set it through their <c>SoundController</c> from the position of the listener. </summary>
     [FieldOffset(0x130)] public float LayoutVolume;
 
-    /// <summary> Faded by virtual function 16. Volume command 7 of a stream sound fades it on every sound that matches the command. </summary>
+    /// <summary> Faded by <see cref="SetCommandVolume"/>. Command 7 of a stream sound fades it on every sound that matches the command. </summary>
     [FieldOffset(0x160)] public DynamicValue CommandVolume;
 
     /// <summary> Routes the sound like the listener was underwater. </summary>
@@ -73,7 +73,7 @@ public unsafe partial struct RootSound {
     /// <summary> 0 selects the player's volume and equalizer submix, 1 the party's, 3 the other players'. </summary>
     [FieldOffset(0x450)] public int PlayerCategory;
 
-    /// <summary> Faded by virtual function 35 to the volume of an entry of the level table, with its fade-up or fade-down time. </summary>
+    /// <summary> Faded by <see cref="SetLevel"/> to the volume of an entry of the level table, with its fade-up or fade-down time. </summary>
     [FieldOffset(0x458)] public DynamicValue LevelVolume;
 
     /// <summary> The player, party and other volumes the volume of the sound is scaled by when it has <see cref="UsesPlayerCategoryVolume"/>, selected by <see cref="PlayerCategory"/> (0, 1, 3). </summary>
@@ -96,6 +96,26 @@ public unsafe partial struct RootSound {
     /// <summary> Called by the <see cref="Bus"/> for every sound on it when its volume changes. </summary>
     [VirtualFunction(23)]
     public partial void ApplyBusVolume(float volume);
+
+    /// <summary> Fades <see cref="PauseVolume"/> to 0 over <paramref name="fadeTicks"/>, then pauses the tracks. </summary>
+    [VirtualFunction(6)]
+    public partial void Pause(uint fadeTicks);
+
+    /// <summary> Resumes the tracks and fades <see cref="PauseVolume"/> back to 1 over <paramref name="fadeTicks"/>. </summary>
+    [VirtualFunction(8)]
+    public partial void Resume(uint fadeTicks);
+
+    [VirtualFunction(16)]
+    public partial void SetCommandVolume(float volume, uint fadeTicks);
+
+    [VirtualFunction(25)]
+    public partial void SetLayoutVolume(float volume);
+
+    /// <summary> Fades <see cref="LevelVolume"/> to the entry <paramref name="level"/> of the level table, with the fade-up time of the current entry when the level rises and its fade-down time when it falls. </summary>
+    /// <param name="level">Ignored when it is not below the number of entries, or when it is the current <see cref="Level"/> and <paramref name="immediate"/> is false.</param>
+    /// <param name="immediate">Sets the volume without a fade.</param>
+    [VirtualFunction(35)]
+    public partial void SetLevel(uint level, bool immediate);
 
     /// <summary> Stops the sound, fading out over <paramref name="fadeTicks"/>. </summary>
     /// <remarks> Stops all tracks at once when <paramref name="fadeTicks"/> is 0, the state has bit 0x10 or <see cref="BusVolume"/> is 0, so a muted sound has no fade-out. </remarks>

@@ -79,6 +79,15 @@ public unsafe partial struct SoundManager {
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 ?? ?? 75 ?? EB")]
     public partial void SetVolume(SoundBus bus, float volume, int p3 = 100);
 
+    /// <summary> Sets the entry of <see cref="CutsceneVolume"/> for the bus and applies the volume of the bus. </summary>
+    /// <param name="volume">A negative value keeps the current entry and only applies the volume.</param>
+    [MemberFunction("85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 49 89 5B 08 45 89 4B 20 F3 0F 11 54 24 18 57 48 81 EC 80 00 00 00 48 63 DA 48 8B F9 83 FB 15 0F 8D ?? ?? ?? ?? 0F 57 C0")]
+    public partial void SetCutsceneVolume(SoundBus bus, float volume, int fadeTicks);
+
+    /// <summary> Sets <see cref="ReplayVolume"/> for its buses and applies their volumes. </summary>
+    [MemberFunction("48 8B C4 48 89 58 08 48 89 78 18 55 48 8D 68 A1 48 81 EC A0 00 00 00")]
+    public partial void SetReplayVolume(float volume);
+
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 31 00 0F B6 FA 48 8B D9 75 2B")]
     public partial void SetMasterEnabled(bool enabled);
 

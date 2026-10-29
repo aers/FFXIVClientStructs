@@ -18,4 +18,12 @@ public unsafe partial struct SoundController {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4B 38 40 84 FF")]
     public partial void SetIsNonPositional(bool isNonPositional);
+
+    /// <summary> Sets <see cref="RootSound.LayoutVolume"/> of the sound. Used by the layout sounds. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 55 88 49 8D 4E 08")]
+    public partial void SetLayoutVolume(float volume);
+
+    /// <summary> Calls <see cref="RootSound.SetLevel"/> on the sound. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 96 D4 00 00 00 48 8B CD")]
+    public partial void SetLevel(uint level);
 }

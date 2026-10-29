@@ -4337,6 +4337,8 @@ classes:
       0x140413450: SetPerformAlways
       0x1404134A0: SetMicPosition
       0x140414220: SetVolume #(this, type, float: volume
+      0x140414320: SetCutsceneVolume
+      0x140415160: SetReplayVolume
       0x140415780: PlaySound
       0x140415A40: PlayClipSound
       0x140415C90: PlayLayoutSound
@@ -28337,6 +28339,8 @@ classes:
       0x141E792D0: SetPlaybackSpeed
       0x141E79280: SetPlaybackSpeed2 # something with speed of sound?
       0x141E79980: SetMidiNote
+      0x141E799E0: SetLevel
+      0x141E7A180: SetLayoutVolume
   SQEX::CDev::Engine::Sd::Driver::EffectController:
     vtbls:
       - ea: 0x142542D48
@@ -28394,7 +28398,12 @@ classes:
         base: SQEX::CDev::Engine::Sd::Driver::ISound
     vfuncs:
       4: Stop
+      6: Pause
+      8: Resume
+      16: SetCommandVolume
       23: ApplyBusVolume
+      25: SetLayoutVolume
+      35: SetLevel
       48: GetPlayerCategory
       52: GetBusId
       109: GetUseWaterRouting
@@ -28508,6 +28517,7 @@ classes:
     vtbls:
       - ea: 0x1425463B0
     vfuncs:
+      1: Reset
       2: IsBypassed
       3: RunsWithoutInput
       5: Process
@@ -28567,6 +28577,12 @@ classes:
         base: SQEX::CDev::Engine::Sd::Driver::IVoice
       - ea: 0x142547330
         base: SQEX::Sd::Driver::Core::ICoreSourceVoiceCallback
+    vfuncs:
+      4: SetTrack
+      19: SetVolume
+      34: SetReleaseFadeTicks
+      35: GetReleaseFadeTicks
+      36: SetReleaseVolume
   SQEX::Sd::Driver::WASAPI::DeviceEventHandler: # SQEX::Sd::SeadObject<1,8>, struct IMMNotificationClient, struct IUnknown
   SQEX::Sd::Driver::WASAPI::WASAPIDevice: # SQEX::Sd::Driver::WASAPI::AudioDevice, SQEX::Sd::SeadObject<1,8>
     vtbls:
