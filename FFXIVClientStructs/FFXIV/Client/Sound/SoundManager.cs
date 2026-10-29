@@ -25,10 +25,12 @@ public unsafe partial struct SoundManager {
     /// <summary> The volume of each bus, indexed by <see cref="SoundBus"/>. It is the user's volume slider divided by 100. </summary>
     /// <remarks> <see cref="GetEffectiveVolume"/> multiplies this array with the four below, the mute flag of the bus and the window inactive state. </remarks>
     [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray21<float> _volume;
-    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume2; // All are 1.0f
-    [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f
-    [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume4; // All are 1.0f
-    [FieldOffset(0x18C), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume5;
+    /// <summary> 1.0f. A sound command of a cutscene changes the volume of a bus with a fade, the <c>CutSceneController</c> restores the saved values when it ends. </summary>
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _cutsceneVolume;
+    [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f, only written by the constructor
+    [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume4; // All are 1.0f, only written by the constructor
+    /// <summary> 1.0f. Set to 0 or 1 by <see cref="Game.ContentsReplayManager"/> during the playback of a recording, for SE, Voice, BG, Foot, PlacedNPC, TimeStretchBGM, Zingle, CommonVFX, BGEnv, Walla and Instruments. </summary>
+    [FieldOffset(0x18C), FixedSizeArray] internal FixedSizeArray21<float> _replayVolume;
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray21<bool> _busMuted;
     [FieldOffset(0x1F5), FixedSizeArray] internal FixedSizeArray21<bool> _busAlwaysOn;
 
