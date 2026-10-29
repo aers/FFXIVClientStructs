@@ -44,24 +44,37 @@ public unsafe partial struct RootSound {
     [FieldOffset(0x38)] public DynamicValue BusVolume;
     [FieldOffset(0x60)] private DynamicValue Unk60;
 
-    /// <summary> One of the volume terms of <see cref="CalculateVolume"/>. </summary>
-    [FieldOffset(0x88)] public DynamicValue Volume;
+    [FieldOffset(0x88)] private DynamicValue Unk88;
 
     /// <summary> One of the two playback speed terms, the other one is the object at 0x280. </summary>
     [FieldOffset(0xB0)] public DynamicValue Pitch;
-    [FieldOffset(0xD8)] private DynamicValue UnkD8;
 
-    /// <summary> Multiplied into the result of <see cref="CalculateVolume"/>. </summary>
-    [FieldOffset(0x220)] public float VolumeScale;
+    /// <summary> Faded to 0 when the sound is paused and back to 1 when it resumes, over the fade ticks of the request. The tracks pause when it reaches 0. </summary>
+    [FieldOffset(0xD8)] public DynamicValue PauseVolume;
+
+    /// <summary> The float at byte 8 of the SCD sound entry, copied when the version of the bank is 2 or more. Stream sounds set it from their stream. </summary>
+    [FieldOffset(0x12C)] public float EntryVolume;
+
+    /// <summary> Set by virtual function 25. The layout sounds (<c>SQEX::CDev::Engine::Sd::Layout</c>) set it through their <c>SoundController</c> from the position of the listener. </summary>
+    [FieldOffset(0x130)] public float LayoutVolume;
+
+    /// <summary> Faded by virtual function 16. Volume command 7 of a stream sound fades it on every sound that matches the command. </summary>
+    [FieldOffset(0x160)] public DynamicValue CommandVolume;
 
     /// <summary> Routes the sound like the listener was underwater. </summary>
     [FieldOffset(0x225)] public bool UseWaterRouting;
 
-    /// <summary> The product of three values the sound start picks from the volume parameters of the SCD entry. </summary>
-    [FieldOffset(0x23C)] public float ParameterVolume;
+    [FieldOffset(0x31C)] public int TrackCount;
+    [FieldOffset(0x320), FixedSizeArray] internal FixedSizeArray32<Pointer<SoundTrack>> _tracks;
+
+    /// <summary> The entry of the level table (block 3 of the SCD sound entry) <see cref="LevelVolume"/> was last faded to. </summary>
+    [FieldOffset(0x44D)] public byte Level;
 
     /// <summary> 0 selects the player's volume and equalizer submix, 1 the party's, 3 the other players'. </summary>
     [FieldOffset(0x450)] public int PlayerCategory;
+
+    /// <summary> Faded by virtual function 35 to the volume of an entry of the level table, with its fade-up or fade-down time. </summary>
+    [FieldOffset(0x458)] public DynamicValue LevelVolume;
 
     /// <summary> The player, party and other volumes the volume of the sound is scaled by when it has <see cref="UsesPlayerCategoryVolume"/>, selected by <see cref="PlayerCategory"/> (0, 1, 3). </summary>
     /// <remarks> Not applied while <see cref="IgnorePlayerCategoryVolume"/> is 1. </remarks>
@@ -72,13 +85,12 @@ public unsafe partial struct RootSound {
     [StaticAddress("8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC C2 00 00 CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53", 2)]
     public static partial int* IgnorePlayerCategoryVolume();
 
-    /// <summary> The volume sent to the voice of the sound. </summary>
+    /// <summary> The volume of the sound, set as the scale of <see cref="SoundTrack.Volume"/> on every track. </summary>
     /// <remarks>
-    /// Calls <see cref="DynamicValue.GetValue"/> on <see cref="Volume"/> and on the object at 0x128 and multiplies the results with
-    /// <see cref="ParameterVolume"/>. The product goes through the volume curve of the driver (the identity with <c>VOLUME_CURVE OLD</c> from the
-    /// driver config, which the game uses) and is multiplied with <see cref="VolumeScale"/>.
+    /// The product of <see cref="LevelVolume"/>, <see cref="BusVolume"/>, <see cref="EntryVolume"/>, <see cref="LayoutVolume"/>, <see cref="CommandVolume"/>,
+    /// <see cref="PauseVolume"/> and, for a sound with <see cref="UsesPlayerCategoryVolume"/>, the entry of <see cref="PlayerCategoryVolumes"/>.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C8 49 8B CF FF 93 ?? ?? ?? ?? 49 8B 4F")]
+    [MemberFunction("40 53 48 83 EC 50 0F 29 74 24 40 48 8B D9 0F 29 7C 24 30 44 0F 29 44 24 20 F3 44 0F 10 05 ?? ?? ?? ??")]
     public partial float CalculateVolume();
 
     /// <summary> Called by the <see cref="Bus"/> for every sound on it when its volume changes. </summary>
