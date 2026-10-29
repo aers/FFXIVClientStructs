@@ -40,7 +40,7 @@ public unsafe partial struct AudioDevice;
 [StructLayout(LayoutKind.Explicit, Size = 0x128)]
 public unsafe partial struct WASAPIDevice {
     /// <summary> The <c>WAVEFORMATEX</c> of the shared-mode stream: the mix format of the endpoint, or IEEE float at the mixer rate if that was not usable. </summary>
-    [FieldOffset(0x08)] public void* Format;
+    [FieldOffset(0x08), CExporterTypeForce("WAVEFORMATEX*", true)] public void* Format;
 }
 
 // SQEX::Sd::Driver::WASAPI::MockDevice
