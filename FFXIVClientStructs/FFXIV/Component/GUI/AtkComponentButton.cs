@@ -53,8 +53,9 @@ public unsafe partial struct AtkComponentButton : ICreatable<AtkComponentButton>
     }
 
     public void SetText(ReadOnlySpan<byte> str) {
+        byte zero = 0;
         fixed (byte* strPtr = str) {
-            SetText(strPtr);
+            SetText(strPtr == null ? &zero : strPtr);
         }
         if (ButtonTextNode != null)
             ButtonTextNode->OriginalTextPointer = ButtonTextNode->NodeText.StringPtr;
