@@ -80,7 +80,9 @@ public unsafe partial struct SoundManager {
     public partial void SetVolume(SoundBus bus, float volume, int p3 = 100);
 
     /// <summary> Sets the entry of <see cref="CutsceneVolume"/> for the bus and applies the volume of the bus. </summary>
+    /// <param name="bus">The bus.</param>
     /// <param name="volume">A negative value keeps the current entry and only applies the volume.</param>
+    /// <param name="fadeTicks">The duration of the fade to the new volume.</param>
     [MemberFunction("85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 49 89 5B 08 45 89 4B 20 F3 0F 11 54 24 18 57 48 81 EC 80 00 00 00 48 63 DA 48 8B F9 83 FB 15 0F 8D ?? ?? ?? ?? 0F 57 C0")]
     public partial void SetCutsceneVolume(SoundBus bus, float volume, int fadeTicks);
 
