@@ -15,7 +15,7 @@ function toHex(str) {
     return !isNaN(str) ? toHexStringFromNumber(parseInt(str)) : str;
 }
 try {
-    const doc = yaml.load(fs.readFileSync('./ida/data.yml', 'utf8'));
+    const doc = yaml.load(fs.readFileSync('./scripts/data.yml', 'utf8'));
     if (versionRegex.test(doc.version) === false)
         errors.push('Invalid version format');
     if (typeof doc.globals == "object")
