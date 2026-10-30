@@ -74,12 +74,12 @@ public unsafe partial struct ExcelSheet {
     public struct WaiterContainer {
         [FieldOffset(0x00), CExporterBaseType] public LinkList<WaiterEntry> Base;
         [FieldOffset(0x18)] public int Count;
+    }
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-        public struct WaiterEntry {
-            [FieldOffset(0x00)] public ExcelSheetWaiter* Waiter;
-            [FieldOffset(0x08)] public int Index; // ?
-            [FieldOffset(0x10)] public WaiterEntry* Next;
-        }
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct WaiterEntry {
+        [FieldOffset(0x00)] public ExcelSheetWaiter* Waiter;
+        [FieldOffset(0x08)] public int Index; // ?
+        [FieldOffset(0x10)] public WaiterEntry* Next;
     }
 }

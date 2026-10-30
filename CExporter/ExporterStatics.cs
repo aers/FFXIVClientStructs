@@ -9,45 +9,38 @@ namespace CExporter;
 public static class ExporterStatics {
 #pragma warning disable CA2211
     // ReSharper disable once InconsistentNaming
-    public static readonly string FFXIVNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV));
-    public static readonly string StdNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD));
-    public static readonly string InteropNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop));
-    public static readonly string HavokNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Havok));
+    public const string FFXIVNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.FFXIV)}";
+    public const string StdNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.STD)}";
+    public const string StdHelperNamespacePrefix = $"{StdNamespacePrefix}.{nameof(FFXIVClientStructs.STD.Helper)}";
+    public const string InteropNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.Interop)}";
+    public const string HavokNamespacePrefix = $"{nameof(FFXIVClientStructs)}.{nameof(FFXIVClientStructs.Havok)}";
+    public const string StdCppNamespace = "std::";
     public static readonly BindingFlags BindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
     public static readonly BindingFlags StaticBindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
     public static readonly string[] IgnoredTypeNames = ["MemberFunctionPointers", "StaticAddressPointers", "Addresses", "VirtualTable"];
-    public static readonly string[] BaseTypeNames = ["byte", "wchar_t", "char", "float", "double", "__int16", "int", "__int64", "unsigned __int16", "unsigned int", "unsigned __int64", "__int8", "unsigned __int8"];
+    public static readonly string[] BaseTypeNames = ["byte", "wchar_t", "char", "float", "double", "bool", "int8_t", "uint8_t", "int16_t", "uint16_t", "int32_t", "uint32_t", "int64_t", "uint64_t"];
     public static readonly List<string> WarningList = [];
     public static readonly List<string> ErrorList = [];
 
     public static readonly string Separator = "::";
 #pragma warning restore CA2211
 
-    public static Type[] GetXIVTypes() {
+    public static Type[] GetXIVTypes() => GetTypes(FFXIVNamespacePrefix);
+
+    public static Type[] GetHavokTypes() => GetTypes(HavokNamespacePrefix);
+
+    private static Type[] GetTypes(string namespacePrefix) {
         var assembly = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs));
 
         Type[] definedTypes;
         try {
-            definedTypes = assembly.DefinedTypes.Select(ti => ti.AsType()).ToArray();
+            definedTypes = assembly.DefinedTypes.Where(ti => ti.IsValueType && !ti.IsEnum && !ti.IsNested).Select(ti => ti.AsType()).ToArray();
         } catch (ReflectionTypeLoadException ex) {
             definedTypes = ex.Types.Where(t => t != null).ToArray()!;
         }
 
-        return definedTypes.Where(t => t.FullName!.StartsWith(FFXIVNamespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
-    }
-
-    public static Type[] GetHavokTypes() {
-        var assembly = AppDomain.CurrentDomain.Load(nameof(FFXIVClientStructs));
-
-        Type[] definedTypes;
-        try {
-            definedTypes = assembly.DefinedTypes.Select(ti => ti.AsType()).ToArray();
-        } catch (ReflectionTypeLoadException ex) {
-            definedTypes = ex.Types.Where(t => t != null).ToArray()!;
-        }
-
-        return definedTypes.Where(t => t.FullName!.StartsWith(HavokNamespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
+        return definedTypes.Where(t => t.FullName!.StartsWith(namespacePrefix) && !t.FullName.EndsWith("VirtualTable") && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
     }
 
     public static Type GetBestMatchFromSize(int size) => size switch {
