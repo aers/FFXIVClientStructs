@@ -60,6 +60,12 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x1BF0)] public float OrchestrionPosZ;
     [FieldOffset(0x1BF4), FixedSizeArray(isString: true)] internal FixedSizeArray260<byte> _orchestrionPath;
 
+    /// <summary> Called once by <c>Framework.Setup</c> after the constructor. </summary>
+    /// <param name="initializeDriver">Initializes the sound driver with <paramref name="driverConfig"/>.</param>
+    /// <param name="driverConfig">The config text of the driver. When null, a default one is formatted with the track counts of the buses.</param>
+    [MemberFunction("48 89 5C 24 10 55 56 57 41 56 41 57 48 8D AC 24 B0 FA FF FF")]
+    public partial void Initialize(bool initializeDriver, CStringPointer driverConfig);
+
     /// <summary>
     /// Calculates effective volume: the five volume arrays multiplied for the bus. The result is 0 if the mute flag of the bus is set, or if
     /// <see cref="WindowInactive"/> is set and either <see cref="PlaySoundsWhenWindowInactive"/> or the entry of the bus in the array at 0x1F5 is set.
