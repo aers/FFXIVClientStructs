@@ -3,4 +3,5 @@
 *.png binary
 
 ida/ffxiv_client_structs*.h linguist-generated=true
-ida/ffxiv_structs.yml linguist-generated=true
+scripts/ffxiv_structs.yml linguist-generated=true
+scripts/structs.yml linguist-generated=true
