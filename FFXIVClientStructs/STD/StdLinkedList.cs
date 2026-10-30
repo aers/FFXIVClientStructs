@@ -15,6 +15,7 @@ public unsafe struct StdLinkedList<T> where T : unmanaged {
 
     public Enumerator GetEnumerator() => new(this);
 
+    [CExporterIgnore]
     public struct Enumerator(StdLinkedList<T> list) {
         private Node* _current = list.Start;
 

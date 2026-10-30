@@ -10,7 +10,7 @@ public unsafe partial struct ContentsFinder {
     [StaticAddress("0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02", 6)]
     public static partial ContentsFinder* Instance();
 
-    [FieldOffset(0x18)] public LootRule LootRules;
+    [FieldOffset(0x18)] public ContentsFinderQueueInfo.LootRule LootRules;
 
     [FieldOffset(0x19)] public bool IsUnrestrictedParty;
     [FieldOffset(0x1A)] public bool IsMinimalIL;
@@ -22,12 +22,6 @@ public unsafe partial struct ContentsFinder {
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 0F B6 48")]
     public partial ContentsFinderQueueInfo* GetQueueInfo();
-
-    public enum LootRule : byte {
-        Normal = 0,
-        GreedOnly = 1,
-        Lootmaster = 2
-    }
 }
 
 [GenerateInterop]
@@ -48,7 +42,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x5A)] public byte QueuedContentRouletteId;
     [FieldOffset(0x5B)] public sbyte ClampedPositionInQueue;
     [FieldOffset(0x5C)] public sbyte PositionInQueue;
-    [FieldOffset(0x5D)] public ContentsFinder.LootRule PoppedContentLootRule;
+    [FieldOffset(0x5D)] public LootRule PoppedContentLootRule;
 
     [FieldOffset(0x60)] public bool PoppedContentIsInProgress;
 
@@ -101,7 +95,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
         uint contentId,
         nint a4,
         bool isInProgressParty,
-        ContentsFinder.LootRule lootRule,
+        LootRule lootRule,
         ulong inProgressPartyStartTimestamp,
         nint a8,
         bool isUnrestrictedParty,
@@ -110,6 +104,12 @@ public unsafe partial struct ContentsFinderQueueInfo {
         bool isExplorerMode,
         bool isLevelSync,
         bool isLimitedLeveling);
+
+    public enum LootRule : byte {
+        Normal = 0,
+        GreedOnly = 1,
+        Lootmaster = 2
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

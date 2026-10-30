@@ -40,18 +40,23 @@ Note that after each patch, you'll have to re-import, re-analyze, and re-run any
 <p align="center"><img src=".\images\Project Window Multi.png"></p>
 
 # Script dependency installation:
-We use [..\ida\ffxiv_idarename.py](../ida/ffxiv_idarename.py) to apply data.yml.  The same script works for both IDA and Ghidra, howver it's slightly more complicated in Ghidra as we need to add dependencies to the PyGhidra environment manually.
+We use [rename.py](../scripts/ghidra/rename.py) to apply data.yml and [struct_import.py](../scripts/ghidra/struct_import.py) to import the structs.  They follow the same flow as their IDA counterparts in `scripts/ida`, however it's slightly more complicated in Ghidra as we need to add dependencies to the PyGhidra environment manually.
 
 - Install a copy of [Python 3](https://www.python.org/downloads/).<br>
-Note: it has to be major version 3, so something like [Python 3.14.3](https://www.python.org/downloads/release/python-3143/) works.<br>
+Note: any Python version that is still listed on the [Python versions status page](https://devguide.python.org/versions/) is supported, so something like [Python 3.14.3](https://www.python.org/downloads/release/python-3143/) works.<br>
+Ghidra only ships JPype wheels up to Python 3.13, on newer versions PyGhidra builds JPype from source and needs a C++ compiler for that (the MSVC Build Tools on Windows).<br>
 
 - **Check your PyGhidra log for which environment is being used.** For example, if you've using a "virtual environment", it should be something similar to either of the following two paths:<br>
 Windows: `%AppData%\ghidra\ghidra_VERSION\venv`<br>
 Linux: `/home/user/.config/ghidra/ghidra_VERSION/venv`
 
 - Execute the following in your terminal, using Python from the same environment as PyGhidra:<br>
-venv: `.../venv/bin/python -m pip install pyyaml==6.0.3 anytree==2.13.0`<br>
-system: `python -m pip install pyyaml==6.0.3 anytree==2.13.0`
+venv: `.../venv/bin/python -m pip install pyyaml anytree pythonnet libclang`<br>
+system: `python -m pip install pyyaml anytree pythonnet libclang`<br>
+`pythonnet` is only used by struct_import.py to read the Excel headers with Lumina, it needs the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0) installed, the same version FFXIVClientStructs uses.<br>
+`libclang` is only used by struct_import.py to work out the layout of the structs.  Outside of Windows it also needs the MSVC and Windows SDK headers, download them with [mstorsjo/msvc-wine](https://github.com/mstorsjo/msvc-wine)'s `vsdownload.sh`.<br>
+The `libclang` package ships libclang 18 while the MSVC headers want clang 20 or newer, set the `LIBCLANG_LIBRARY_FILE` environment variable to a libclang 20 or newer (ex. `/usr/lib/llvm-20/lib/libclang-20.so.1`) to avoid the errors this reports.<br>
+struct_import.py looks for the game in the [XIVLauncher](https://goatcorp.github.io/) or XLCore config, the default install folder and the Steam libraries, and asks for the folder holding both `game` and `boot` if it is not found. It also needs internet access to download Lumina and [EXDSchema](https://github.com/xivdev/EXDSchema).
 
 - Open the Script Manager <p align="center"><img src=".\images\Open Script Manager.png"></p>
 
@@ -59,13 +64,13 @@ system: `python -m pip install pyyaml==6.0.3 anytree==2.13.0`
 
 - Click the plus to add a directory <p align="center"><img src=".\images\Script Manager Add Directory.png"></p>
 
-- Add both `FFXIVClientStructs/ida` (for ffxiv_idarename.py) and `FFXIVClientStructs/Ghidra/scripts` (for ffxiv_exdgetters and SigScanner)
+- Add `FFXIVClientStructs/scripts/ghidra` (for rename.py, struct_import.py and full_run.py)
 
 After adding both, select `__UserScripts` and you should see all of the scripts.  SigScanner should already have a key binding assigned of `Ctrl-Alt-S`.  Assign any others you wish, and ensure the checkbox is ticked.
 <p align="center"><img src=".\images\User Scripts.png"></p>
 
 # The Scripts
-## ffxiv_idarename.py
+## rename.py
 First a quick intro.  The analyzer reads through the code and attempts to determine things like what blocks of code are instructions vs pointers vs data, etc.  When it identifies things, it'll add labels to them:
 - FUN_14#######: for what it believes to be functions
 - PTR_FUN_14#######: for what it believes to be pointers to functions
@@ -81,7 +86,7 @@ As an example, if you look in Dalamud's Data window
 
 You'll see the vtbl has an address like`7FF6DDEAD480 ffxiv_dx11.exe+1A0D480`.  In Ghidra, if you were to `Navigation -> Go To...` (or simply press `g`) and typed 141A0D480, you'd arrive at the vtable.
 
-What you'll find in [data.yml](../ida/data.yml) are definitions like:
+What you'll find in [data.yml](../scripts/data.yml) are definitions like:
 ```yaml
   Client::System::Framework::Framework:
     instances:
@@ -101,7 +106,7 @@ What you'll find in [data.yml](../ida/data.yml) are definitions like:
       ...
 ```
 
-When you run the ffxiv_idarename.py script, it'll rename `FUN_1400901d0` to `Client::System::Framework::Framework.ctor` (per the first line under `funcs:`).  It'll turn:
+When you run the rename.py script, it'll rename `FUN_1400901d0` to `Client::System::Framework::Framework.ctor` (per the first line under `funcs:`).  It'll turn:
 <p align="center"><img src=".\images\Framework Before.png"></p>
 
 Into:
@@ -111,8 +116,8 @@ And much more.  So go ahead and run it.  Either by opening the script manager, r
 
 You can re-run this script as many times as you like, it'll just re-process data.yml, so it's much easier to update data.yml when you map out a new vtable and re-run than to try and set all the labels yourself.
 
-## ffxiv_exdgetters.java
-After having run ffxiv_idarename.py, we'll have a bunch of functions referencing Exd methods like:
+## struct_import.py
+After having run rename.py, we'll have a bunch of functions referencing Exd methods like:
 ```cpp
 undefined8 FUN_1406cb6c0(undefined4 param_1)
 {
@@ -129,7 +134,12 @@ undefined8 FUN_1406cb6c0(undefined4 param_1)
 }
 ```
 
-The label `Component::Exd::ExdModule.GetRowBySheetIndexAndRowIndex` came from data.yml, but unfortunately it's still not obvious exactly what that method is fetching.  The sheet indexes are fairly well-known, and this script parses these and relabels the function from `FUN_1406cb6c0` to `undefined8 Client::ExdData::GetClassJob(undefined4 param_1)`, which is much more useful.  Go ahead and run this too.
+The label `Component::Exd::ExdModule.GetRowBySheetIndexAndRowIndex` came from data.yml, but unfortunately it's still not obvious exactly what that method is fetching.  The sheet indexes are fairly well-known, and this script parses these and relabels the function from `FUN_1406cb6c0` to `Component::Exd::ExdModule_GetClassJobRow_1`, returning a `Component::Exd::Sheets::ClassJob*`, which is much more useful.
+
+It also imports the Excel sheets and everything in [structs.yml](../scripts/structs.yml) as data types, and can apply the types of the virtual and member functions.  It asks you to confirm the game version of data.yml, for the folder of the MSVC headers (outside of Windows) and which function types to update.  Go ahead and run this too.
+
+## full_run.py
+Runs rename.py and struct_import.py in sequence, then lets Ghidra analyze the changes.
 
 ## SigScanner.java
 In plugins (and FFXIVClientStructs) we use signatures rather than offsets.  This is because offsets change with every patch, while signatures are far more durable.
