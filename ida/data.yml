@@ -9088,10 +9088,11 @@ classes:
       0x1405F4300: GetRowCountBySheetName  # (ExdModule* this, char* pcszName) -> int
       0x1405F4350: GetRowCountBySheet  # (ExdModule* this, ExcelSheet* pShet) -> int
       0x1405F4370: GetRowCountBySheetIndex  # (ExdModule* this, int nSheetIndex) -> int
-      0x1409AC620: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x140836600: GetItemRowById
       0x140837CD0: GetRoleForClassJobId
       0x1408428B0: GetBannerConditionByIndex
+      0x1408435E0: GetMirageStoreSetItemRowByItemId
+      0x1409AC620: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
   Component::Exd::Sheets::BannerCondition:
     funcs:
       0x140BC5930: GetUnlockState # In CS as ExdModule.GetBannerConditionUnlockState
