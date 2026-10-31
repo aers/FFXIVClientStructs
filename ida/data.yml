@@ -10117,6 +10117,7 @@ classes:
       9: HandleMouseUpEvent
       12: GetPayloadContainer
       14: Cancel
+      15: CreateDragDropPreview
   Component::GUI::AtkDragDropPayloadContainer:
     funcs:
       0x1406443F0: ctor

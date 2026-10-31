@@ -18,4 +18,5 @@ public unsafe partial struct InventoryRetainerStringArray {
     /// <remarks>Formatted as used/total.</remarks>
     [FieldOffset(158 * 8)] public CStringPointer UsedSlotsText;
     [FieldOffset(160 * 8)] public CStringPointer GilText;
+    [FieldOffset(161 * 8), FixedSizeArray] internal FixedSizeArray6<CStringPointer> _tabLabels;
 }
