@@ -20,12 +20,17 @@ public unsafe partial struct SoundManager {
 
     [FieldOffset(0x31)] public bool Disabled;
     [FieldOffset(0x34)] public float MasterVolume;
+    /// <summary> 1.0f, set to 0.6675f by <see cref="Initialize"/> unless <see cref="Disabled"/>. Multiplied into the master volume. </summary>
     [FieldOffset(0x38)] public float ActiveVolume;
+    /// <summary> The volume of each bus, indexed by <see cref="SoundBus"/>. It is the user's volume slider divided by 100. </summary>
+    /// <remarks> <see cref="GetEffectiveVolume"/> multiplies this array with the four below, the mute flag of the bus and the window inactive state. </remarks>
     [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray21<float> _volume;
-    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume2; // All are 1.0f
-    [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f
-    [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume4; // All are 1.0f
-    [FieldOffset(0x18C), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume5;
+    /// <summary> 1.0f. A sound command of a cutscene changes the volume of a bus with a fade, the <c>CutSceneController</c> restores the saved values when it ends. </summary>
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _cutsceneVolume;
+    [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f, only written by the constructor
+    [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume4; // All are 1.0f, only written by the constructor
+    /// <summary> 1.0f. Set to 0 or 1 by <see cref="Game.ContentsReplayManager"/> during the playback of a recording, for SE, Voice, BG, Foot, PlacedNPC, TimeStretchBGM, Zingle, CommonVFX, BGEnv, Walla and Instruments. </summary>
+    [FieldOffset(0x18C), FixedSizeArray] internal FixedSizeArray21<float> _replayVolume;
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray21<bool> _busMuted;
     [FieldOffset(0x1F5), FixedSizeArray] internal FixedSizeArray21<bool> _busAlwaysOn;
 
@@ -55,8 +60,16 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x1BF0)] public float OrchestrionPosZ;
     [FieldOffset(0x1BF4), FixedSizeArray(isString: true)] internal FixedSizeArray260<byte> _orchestrionPath;
 
+    /// <summary> Called once by <c>Framework.Setup</c> after the constructor. </summary>
+    /// <param name="initializeDriver">Initializes the sound driver with <paramref name="driverConfig"/>.</param>
+    /// <param name="driverConfig">The config text of the driver. When null, a default one is formatted with the track counts of the buses.</param>
+    [MemberFunction("48 89 5C 24 10 55 56 57 41 56 41 57 48 8D AC 24 B0 FA FF FF")]
+    public partial void Initialize(bool initializeDriver, CStringPointer driverConfig);
+
     /// <summary>
-    /// Calculates effective volume
+    /// Calculates effective volume: the five volume arrays multiplied for the bus. The result is 0 if the mute flag of the bus is set, or if
+    /// <see cref="WindowInactive"/> is set and either <see cref="PlaySoundsWhenWindowInactive"/> or the entry of the bus in the array at 0x1F5 is set.
+    /// The game sets the result as the volume of the <c>Bus</c> of the category.
     /// </summary>
     /// <param name="bus">The specific sound bus. This is different from the buses visible to the user</param>
     /// <returns>Volume in the ange 0-1</returns>
@@ -71,6 +84,17 @@ public unsafe partial struct SoundManager {
     /// <param name="p3">unknown</param>
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 ?? ?? 75 ?? EB")]
     public partial void SetVolume(SoundBus bus, float volume, int p3 = 100);
+
+    /// <summary> Sets the entry of <see cref="CutsceneVolume"/> for the bus and applies the volume of the bus. </summary>
+    /// <param name="bus">The bus.</param>
+    /// <param name="volume">A negative value keeps the current entry and only applies the volume.</param>
+    /// <param name="fadeTicks">The duration of the fade to the new volume.</param>
+    [MemberFunction("85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 49 89 5B 08 45 89 4B 20 F3 0F 11 54 24 18 57 48 81 EC 80 00 00 00 48 63 DA 48 8B F9 83 FB 15 0F 8D ?? ?? ?? ?? 0F 57 C0")]
+    public partial void SetCutsceneVolume(SoundBus bus, float volume, int fadeTicks);
+
+    /// <summary> Sets <see cref="ReplayVolume"/> for its buses and applies their volumes. </summary>
+    [MemberFunction("48 8B C4 48 89 58 08 48 89 78 18 55 48 8D 68 A1 48 81 EC A0 00 00 00")]
+    public partial void SetReplayVolume(float volume);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 31 00 0F B6 FA 48 8B D9 75 2B")]
     public partial void SetMasterEnabled(bool enabled);
