@@ -6636,6 +6636,9 @@ classes:
     vtbls:
       - ea: 0x1421535A8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x140327300: HasLookAtData
+      0x140327320: HasSlopeData
   Client::System::Resource::Handle::SkeletonParamResourceHandleFactory:
     vtbls:
       - ea: 0x142153710
@@ -7496,6 +7499,8 @@ classes:
     vtbls:
       - ea: 0x142141568
         base: Client::Graphics::Animation::IAnimationControllerListener
+    funcs:
+      0x14020B490: GetSkeletonParameterResourceHandle
   Client::Graphics::Kernel::Resource:
     vtbls:
       - ea: 0x142143348
@@ -7669,6 +7674,36 @@ classes:
       0x140258300: Finalizer
       0x140259090: FinishAnimation
       0x14025C8E0: UpdateAnimations
+      0x140259BB0: CreateLookAtIkModule
+      0x14025A490: CreateChainIkModule
+      0x14025A6E0: CreateSlopeIkModule
+      0x140258E70: UpdateIK
+  Client::Graphics::Render::LookAtIkModule:
+    funcs:
+      0x140203180: dtor
+      0x140203130: ctor
+      0x1402031C0: Create
+      0x1402048B0: FindGroup
+      0x1402035B0: Solve
+      0x1402036A0: SolveSingleGroup
+      0x140204960: InvokeFinishedCallback
+  Client::Graphics::Render::LookAtIkModule::LookAtGroupJob:
+    funcs:
+      0x140202E30: Solve
+  Client::Graphics::Render::LookAtIkModule::LookAtBone:
+    funcs:
+      0x140205200: Solve
+  Client::Graphics::Render::ChainIkModule:
+    funcs:
+      0x140200F80: dtor
+      0x140200F10: ctor
+      0x140200FA0: Create
+      0x140200FC0: Solve
+  Client::Graphics::Render::SlopeIkModule:
+    funcs:
+      0x140210F90: dtor
+      0x140210F60: ctor
+      0x140210FF0: Create
   Client::Graphics::Render::SkeletonHelper:
     funcs:
       0x14025D030: SyncModelSpacePoses
@@ -8471,6 +8506,16 @@ classes:
       0x14046A6D0: Destroy
       0x1408D3C00: Create
       0x1404492A0: CreateSlotStorage
+      0x140433790: IsLookAtEnabled
+      0x140433770: EnableLookAt
+      0x1404337B0: DisableLookAt
+      0x1404336B0: SetLookAtTargetPosition
+      0x1404337F0: SetLookAtInfluence
+      0x140433750: GetLookAtGroupCount
+      0x1404339B0: GetLookAtGroupTransform
+      0x140433A70: TransformLookAtModelSpaceToWorldSpace
+      0x140433B60: FindLookAtGroup
+      0x140433B40: SetupLookAtCallbacks
   Client::Graphics::Scene::Human:
     vtbls:
       - ea: 0x14216D098
