@@ -16230,7 +16230,9 @@ classes:
       0x140C8FC60: SearchRecipeByItemId
       0x140C94470: CanCraft
       0x140C95E90: IsNoteBookDivisionUnlocked
+      0x140C95F30: AddRecipeSearchHistoryTerm
       0x140C95FB0: SearchRecipe
+      0x140D1D590: ClearStdDequeUtf8String # std::deque<Client::System::String::Utf8String>::clear() ?!
   Client::UI::Agent::RecipeSearchContext:
     vtbls:
       - ea: 0x1421C6018
