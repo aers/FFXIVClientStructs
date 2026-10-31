@@ -93,6 +93,9 @@ public unsafe partial struct PacketDispatcher {
     [MemberFunction("40 53 57 48 81 EC ?? ?? ?? ?? 48 8B FA 8B")]
     public static partial void HandleActorCastPacket(uint entityId, ActorCastPacket* packet);
 
+    [MemberFunction("48 8B C4 44 88 40 18 89 48 08")]
+    public static partial void HandleEffectResultPacket(uint entityId, EffectResultPacket* packet, bool isRecorded);
+
     [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 0F B6 7B")]
     public static partial void HandleMapEffectPacket(MapEffectPacket* packet);
 
