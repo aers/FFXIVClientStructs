@@ -268,7 +268,7 @@ public enum StringArrayType {
     PvPTeamResult = 84,
     PvPTeamActivity = 85,
     ContentMemberList = 86,
-
+    InventoryBuddy = 87,
     CrossWorldLinkShell = 88,
     LovmNamePlate = 89,
     LovmActionDetail = 90,
