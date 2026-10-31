@@ -15362,6 +15362,7 @@ classes:
       0x140DB7200: OpenPreview
       0x140DB85A0: PopulateHandInItem
       0x140DB9070: ValidateItems
+      0x140DB9090: UpdateAddon
   Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
     funcs:
 #fail       0x140C36B10: ctor # inlined (7.3)

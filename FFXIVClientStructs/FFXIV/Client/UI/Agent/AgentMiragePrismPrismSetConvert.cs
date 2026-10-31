@@ -26,6 +26,9 @@ public unsafe partial struct AgentMiragePrismPrismSetConvert {
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 C4 28 41 5E 5D E9 ?? ?? ?? ?? 48 83 C4 28")]
     public partial void ValidateItems();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 ?? 33 DB")]
+    public partial void UpdateAddon(uint flags);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1940)]
     public partial struct AgentData {
