@@ -16,7 +16,7 @@ public unsafe partial struct CoreSystem {
     public static partial int* ChannelCount();
 
     /// <summary> The number of frames the mixer renders per period, 256. </summary>
-    [StaticAddress("8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC 48 89 6C 24 18", 2)]
+    [StaticAddress("48 63 1D ?? ?? ?? ?? E8 ?? ?? ?? ??", 3)]
     public static partial int* FrameCount();
 
     /// <summary> 1 while spatial audio is active. Copied from the request at the start of the mix pass. </summary>

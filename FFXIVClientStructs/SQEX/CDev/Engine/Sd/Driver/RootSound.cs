@@ -82,7 +82,7 @@ public unsafe partial struct RootSound {
     public static partial float* PlayerCategoryVolumes();
 
     /// <summary> 1 while the mode of <c>SoundManager</c> at 0x268 is 1. </summary>
-    [StaticAddress("8B 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC C2 00 00 CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53", 2)]
+    [StaticAddress("E8 ?? ?? ?? ?? 83 F8 01 74 ?? 48 8B 03", [1, 2])]
     public static partial int* IgnorePlayerCategoryVolume();
 
     /// <summary> The volume of the sound, set as the scale of <see cref="SoundTrack.Volume"/> on every track. </summary>
