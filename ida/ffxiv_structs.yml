@@ -3756,10 +3756,10 @@ enums:
     "DPadDown": 2
     "DPadLeft": 4
     "DPadRight": 8
-    "Triangle": 16
-    "Cross": 32
-    "Square": 64
-    "Circle": 128
+    "North": 16
+    "South": 32
+    "West": 64
+    "East": 128
     "L1": 256
     "L2": 512
     "L3": 1024
