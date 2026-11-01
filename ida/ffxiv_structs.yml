@@ -26197,6 +26197,21 @@ structs:
     name: ConeRotation
     offset: 12
   member_functions: []
+- type: Client::UI::Arrays::ArmouryBoardStringArray
+  name: ArmouryBoardStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 408
+  fields:
+  - type: char*
+    name: ItemNames
+    offset: 0
+    size: 50
+    is_string: False
+  - type: char*
+    name: SelectedCategoryName
+    offset: 400
+  member_functions: []
 - type: Client::UI::Arrays::BlackListNumberArray
   name: BlackListNumberArray
   namespace: Client.UI.Arrays
@@ -26350,6 +26365,21 @@ structs:
   - type: char*
     name: CastName
     offset: 0
+  member_functions: []
+- type: Client::UI::Arrays::CharacterItemsStringArray
+  name: CharacterItemsStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 216
+  fields:
+  - type: char*
+    name: ItemNames
+    offset: 0
+    size: 13
+    is_string: False
+  - type: char*
+    name: DisplayedItemLevelText
+    offset: 208
   member_functions: []
 - type: Client::UI::Arrays::ChatLog2NumberArray::ChatLog2ChatMessageNumberArray
   name: ChatLog2ChatMessageNumberArray
@@ -26522,6 +26552,27 @@ structs:
   - type: char*
     name: GrandCompanyName
     offset: 32
+  member_functions: []
+- type: Client::UI::Arrays::CommonCurrenciesStringArray
+  name: CommonCurrenciesStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 88
+  fields:
+  - type: char*
+    name: GilText
+    offset: 0
+  - type: char*
+    name: GrandCompanySealsText
+    offset: 8
+  - type: char*
+    name: GrandCompanySealsWithMaxText
+    offset: 16
+  - type: char*
+    name: SelfRepairDarkMatterText
+    offset: 24
+    size: 8
+    is_string: False
   member_functions: []
 - type: Client::UI::Arrays::ConfigSystemNumberArray
   name: ConfigSystemNumberArray
@@ -26866,6 +26917,21 @@ structs:
     name: CombatTypeIndicator
     offset: 568
   member_functions: []
+- type: Client::UI::Arrays::InventoryBuddyStringArray
+  name: InventoryBuddyStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 1136
+  fields:
+  - type: char*
+    name: UsedSlotsText
+    offset: 0
+  - type: char*
+    name: ItemNames
+    offset: 8
+    size: 140
+    is_string: False
+  member_functions: []
 - type: Client::UI::Arrays::InventoryNumberArray::InventoryCrystalNumberArray
   name: InventoryCrystalNumberArray
   namespace: Client.UI.Arrays
@@ -26944,6 +27010,102 @@ structs:
   - type: byte
     name: UnkFlags1
     offset: 3
+  member_functions: []
+- type: Client::UI::Arrays::InventoryRetainerNumberArray::InventoryRetainerCrystalNumberArray
+  name: InventoryRetainerCrystalNumberArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 12
+  fields:
+  - type: unsigned int
+    name: IconId
+    offset: 0
+  - type: unsigned int
+    name: _stackCount
+    offset: 4
+    bits:
+    - type: unsigned __int16
+      offset: 0
+      size: 16
+      name: UnkBits0
+    - type: unsigned __int16
+      offset: 16
+      size: 16
+      name: StackCount
+  - type: unsigned __int16
+    name: SlotIndex
+    offset: 8
+  member_functions: []
+- type: Client::UI::Arrays::InventoryRetainerStringArray
+  name: InventoryRetainerStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 1336
+  fields:
+  - type: char*
+    name: ItemNames
+    offset: 0
+    size: 140
+    is_string: False
+  - type: char*
+    name: CrystalNames
+    offset: 1120
+    size: 18
+    is_string: False
+  - type: char*
+    name: UsedSlotsText
+    offset: 1264
+  - type: char*
+    name: GilText
+    offset: 1280
+  - type: char*
+    name: TabLabels
+    offset: 1288
+    size: 6
+    is_string: False
+  member_functions: []
+- type: Client::UI::Arrays::InventoryStringArray
+  name: InventoryStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 2592
+  fields:
+  - type: char*
+    name: ItemNames
+    offset: 0
+    size: 140
+    is_string: False
+  - type: char*
+    name: KeyItemNames
+    offset: 1120
+    size: 124
+    is_string: False
+  - type: char*
+    name: CrystalNames
+    offset: 2320
+    size: 18
+    is_string: False
+  - type: char*
+    name: UsedSlotsText
+    offset: 2464
+  - type: char*
+    name: TabLabels
+    offset: 2472
+    size: 5
+    is_string: False
+  - type: char*
+    name: KeyItemTabLabels
+    offset: 2512
+    size: 5
+    is_string: False
+  - type: char*
+    name: GilText
+    offset: 2552
+  - type: char*
+    name: PageUsedSlotsText
+    offset: 2560
+    size: 4
+    is_string: False
   member_functions: []
 - type: Client::UI::Arrays::LetterNumberArray::LetterLetterNumberArray
   name: LetterLetterNumberArray
@@ -33383,6 +33545,12 @@ structs:
     parameters:
     - type: unsigned int
       name: itemId
+  - signature: E8 ?? ?? ?? ?? 33 F6 4C 8B D0
+    return_type: Component::Exd::Sheets::MirageStoreSetItem*
+    name: GetMirageStoreSetItemRowByItemId
+    parameters:
+    - type: unsigned int
+      name: itemId
   - signature: E8 ?? ?? ?? ?? 0F B6 48 ?? 84 C9 75
     return_type: Component::Exd::Sheets::BannerCondition*
     name: GetBannerConditionByIndex
@@ -34091,6 +34259,12 @@ structs:
   - name: Cancel
     offset: 112
     return_type: void
+    parameters:
+    - type: Component::GUI::AtkDragDropInterface*
+      name: this
+  - name: CreateDragDropPreview
+    offset: 120
+    return_type: Component::GUI::AtkComponentDragDrop*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
@@ -66540,7 +66714,7 @@ structs:
     offset: 0
     base: true
   - type: int
-    name: Unk08
+    name: SoundId
     offset: 8
   - type: __int64
     name: Unk10
@@ -66565,6 +66739,22 @@ structs:
       name: this
     - type: char
       name: isNonPositional
+  - signature: E8 ?? ?? ?? ?? 48 8D 55 88 49 8D 4E 08
+    return_type: void
+    name: SetLayoutVolume
+    parameters:
+    - type: FFXIVClientStructs::SQEX::CDev::Engine::Sd::Driver::SoundController*
+      name: this
+    - type: float
+      name: volume
+  - signature: E8 ?? ?? ?? ?? 8B 96 D4 00 00 00 48 8B CD
+    return_type: void
+    name: SetLevel
+    parameters:
+    - type: FFXIVClientStructs::SQEX::CDev::Engine::Sd::Driver::SoundController*
+      name: this
+    - type: unsigned int
+      name: level
 - type: Helper::HashTable::Node<StdPair<unsigned int, Component::GUI::AtkFontManager::Glyph*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Component::GUI::AtkFontManager::Glyph*>, Helper::DefaultHasher<unsigned int>>
   name: Node
   namespace: Helper
@@ -76468,7 +76658,7 @@ structs:
     size: 21
     is_string: False
   - type: float
-    name: UnkVolume2
+    name: CutsceneVolume
     offset: 144
     size: 21
     is_string: False
@@ -76483,7 +76673,7 @@ structs:
     size: 21
     is_string: False
   - type: float
-    name: UnkVolume5
+    name: ReplayVolume
     offset: 396
     size: 21
     is_string: False
@@ -76581,6 +76771,16 @@ structs:
     - type: Client::System::Resource::Handle::ResourceHandle*
       name: handle
   member_functions:
+  - signature: 48 89 5C 24 10 55 56 57 41 56 41 57 48 8D AC 24 B0 FA FF FF
+    return_type: void
+    name: Initialize
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: char
+      name: initializeDriver
+    - type: char*
+      name: driverConfig
   - signature: F3 0F 10 0D ?? ?? ?? ?? 48 63 C2
     return_type: float
     name: GetEffectiveVolume
@@ -76601,6 +76801,26 @@ structs:
       name: volume
     - type: int
       name: p3
+  - signature: 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 49 89 5B 08 45 89 4B 20 F3 0F 11 54 24 18 57 48 81 EC 80 00 00 00 48 63 DA 48 8B F9 83 FB 15 0F 8D ?? ?? ?? ?? 0F 57 C0
+    return_type: void
+    name: SetCutsceneVolume
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: Client::Sound::SoundBus
+      name: bus
+    - type: float
+      name: volume
+    - type: int
+      name: fadeTicks
+  - signature: 48 8B C4 48 89 58 08 48 89 78 18 55 48 8D 68 A1 48 81 EC A0 00 00 00
+    return_type: void
+    name: SetReplayVolume
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
+    - type: float
+      name: volume
   - signature: 48 89 5C 24 ?? 57 48 83 EC 20 80 79 31 00 0F B6 FA 48 8B D9 75 2B
     return_type: void
     name: SetMasterEnabled
@@ -86102,6 +86322,14 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert*
       name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 47 ?? 33 DB
+    return_type: void
+    name: UpdateAddon
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert*
+      name: this
+    - type: unsigned int
+      name: flags
 - type: Client::UI::Agent::AgentMycBattleAreaInfo
   name: AgentMycBattleAreaInfo
   namespace: Client.UI.Agent
@@ -106163,6 +106391,18 @@ structs:
     name: DeletedFlag
     offset: 1872
   member_functions: []
+- type: Client::UI::Arrays::InventoryBuddyNumberArray
+  name: InventoryBuddyNumberArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 3360
+  fields:
+  - type: Client::UI::Arrays::InventoryNumberArray::InventoryItemNumberArray
+    name: Items
+    offset: 0
+    size: 140
+    is_string: False
+  member_functions: []
 - type: Client::UI::Info::InfoProxyCrossRealm
   name: InfoProxyCrossRealm
   namespace: Client.UI.Info
@@ -111332,6 +111572,9 @@ structs:
   - type: float
     name: PlaybackSpeed
     offset: 1836
+  - type: float
+    name: SoundVolume
+    offset: 1840
   - type: unsigned __int16
     name: Level
     offset: 1856
@@ -118854,6 +119097,41 @@ structs:
     name: StringPointerListCount
     offset: 15528
   member_functions: []
+- type: Client::UI::Arrays::InventoryRetainerNumberArray
+  name: InventoryRetainerNumberArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 3588
+  fields:
+  - type: unsigned int
+    name: _tabIndices
+    offset: 0
+    bits:
+    - type: byte
+      offset: 0
+      size: 8
+      name: SelectedTabIndex
+    - type: unsigned __int16
+      offset: 8
+      size: 16
+      name: FirstTabIndex
+  - type: Client::UI::Arrays::InventoryNumberArray::InventoryItemNumberArray
+    name: Items
+    offset: 4
+    size: 140
+    is_string: False
+  - type: Client::UI::Arrays::InventoryRetainerNumberArray::InventoryRetainerCrystalNumberArray
+    name: Crystals
+    offset: 3364
+    size: 18
+    is_string: False
+  - type: unsigned int
+    name: Gil
+    offset: 3580
+  - type: int
+    name: MarketItemCount
+    offset: 3584
+  member_functions: []
 - type: Client::UI::Info::InfoProxy26
   name: InfoProxy26
   namespace: Client.UI.Info
@@ -125623,6 +125901,12 @@ structs:
     offset: 40
     base: true
   - type: unsigned int
+    name: State
+    offset: 56
+  - type: unsigned int
+    name: ConfirmationAddonId
+    offset: 60
+  - type: unsigned int
     name: ContextAddonId
     offset: 64
   - type: unsigned int
@@ -126280,6 +126564,21 @@ structs:
       name: noteBookDivisionId
     - type: int
       name: craftType
+  - signature: E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8B D6 E8 ?? ?? ?? ?? 4C 8D B7
+    return_type: void
+    name: AddRecipeSearchHistoryTerm
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeNote*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: term
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 8D 55 ?? 41 B8
+    return_type: void
+    name: ClearStdDequeUtf8String
+    parameters:
+    - type: StdDeque<Client::System::String::Utf8String>*
+      name: deque
 - type: Client::UI::Agent::AgentRepair
   name: AgentRepair
   namespace: Client.UI.Agent
