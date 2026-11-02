@@ -68680,7 +68680,7 @@ structs:
   name: MapDiscoveryManager
   namespace: Client.Game
   union: False
-  size: 4132
+  size: 4164
   fields:
   - type: Client::Game::MapDiscoveryManager::DiscoveryTable16
     name: MapsWithUpTo16Regions
@@ -68690,11 +68690,11 @@ structs:
   - type: Client::Game::MapDiscoveryManager::DiscoveryTable32
     name: MapsWithUpTo32Regions
     offset: 2592
-    size: 48
+    size: 49
     is_string: False
   - type: float
     name: ReportCooldown
-    offset: 4128
+    offset: 4160
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 8B FA
     return_type: char
