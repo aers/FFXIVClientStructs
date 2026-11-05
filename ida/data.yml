@@ -678,6 +678,7 @@ classes:
       0x141CFC4A0: DtorHelper
       0x141D01730: Update
       0x141CFD0D0: SendPacket
+      0x141D01FD0: UpdateZoneClient
   Application::Network::ZoneClient:
     funcs:
       0x141D02BF0: ctor
@@ -1461,6 +1462,8 @@ classes:
     vtbls:
       - ea: 0x1424B5130
         base: Component::Network::IpcChannel::ChannelManagerOnSingleConnectionTmpl<Application::Network::ZoneProtoChannel::ZoneProtoUp,Application::Network::ZoneProtoChannel::ZoneProtoDown>
+    funcs:
+      0x141D72650: PopPacket
   Component::Network::IpcChannel::ChannelManagerOnSingleConnectionTmpl<Application::Network::ZoneProtoChannel::ZoneProtoUp,Application::Network::ZoneProtoChannel::ZoneProtoDown>:
     vtbls:
       - ea: 0x1424B5060
