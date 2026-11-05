@@ -46,20 +46,21 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xB54)] public int CurrentDeviceTime; //Timestamp
     [FieldOffset(0xB58)] public int CurrentDeviceTimeMillis; //Milliseconds for CurrentDeviceTime
 
-    [FieldOffset(0xB68)] private TimePoint UnkTimeB68;
-    [FieldOffset(0xB88)] private TimePoint UnkTimeB88;
-    [FieldOffset(0xBB0)] private TimePoint UnkTimeBB0;
-    [FieldOffset(0xBC8)] private uint UnkTimeBB0_UpdateFrequency;
+    [FieldOffset(0xB68)] public TimePoint ServerClockLastAdvance;
+    [FieldOffset(0xB88)] public TimePoint LastKeepAliveSentTime;
+    [FieldOffset(0xBB0)] public TimePoint StatsWindowStart;
+    [FieldOffset(0xBC8)] public uint StatsWindowMs;
+    [FieldOffset(0xBCC)] public uint LastPongRttMs;
 
-    [FieldOffset(0xBD0)] private TimePoint UnkTimeBD0;
-    [FieldOffset(0xBE8)] private TimePoint UnkTimeBE8;
+    [FieldOffset(0xBD0)] public TimePoint LastPacketReceivedTime;
+    [FieldOffset(0xBE8)] public TimePoint LastServerClockTick;
     [FieldOffset(0xC06)] public short CurrentInstance;
 
     [FieldOffset(0xC10)] public int KeepAliveZone;
     [FieldOffset(0xC14)] public int KeepAliveIntervalZone;
     [FieldOffset(0xC18)] public int KeepAliveChat;
     [FieldOffset(0xC1C)] public int KeepAliveIntervalChat;
-    [FieldOffset(0xC20)] private TimePoint UnkTimeC20;
+    [FieldOffset(0xC20)] public TimePoint LastReceivedPassTime;
 
     [FieldOffset(0xC38)] public bool IsInCrossWorldDuty;
 }
