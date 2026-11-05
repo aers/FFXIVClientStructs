@@ -55,11 +55,11 @@ public unsafe partial struct InputData {
     [MemberFunction("E8 ?? ?? ?? ?? 88 43 0F")]
     public partial bool IsInputIdReleased(InputId inputId);
 
-    /// <remarks> Same as <see cref="IsInputIdDown"/>, except <see cref="CurrentGamepadModifier"/> doesn't need to match <see cref="inputId"/> </remarks>
+    /// <remarks> Same as <see cref="IsInputIdDown"/>, except <see cref="CurrentGamepadModifier"/> doesn't need to match <c>inputId</c> </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? BA 29 00 00 00")]
     public partial bool IsInputIdDownIgnoreGamepadModifier(InputId inputId);
 
-    /// <remarks> Same as <see cref="IsInputIdPressed"/>, except <see cref="CurrentGamepadModifier"/> doesn't need to match <see cref="inputId"/> </remarks>
+    /// <remarks> Same as <see cref="IsInputIdPressed"/>, except <see cref="CurrentGamepadModifier"/> doesn't need to match <c>inputId</c> </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 68")]
     public partial bool IsInputIdPressedIgnoreGamepadModifier(InputId inputId);
 
