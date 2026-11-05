@@ -1254,6 +1254,29 @@ class SrcInterface(object):
                     fastcall_field_define = fastcall_field_define[:-2]
                 struct_string_define += fastcall_field_define + ");"
                 prev_size += 8
+            elif field.bits:
+                field_define, field_define_size = self.get_string_define_and_size(
+                    field,
+                    struct.namespace,
+                    struct_lookup,
+                    enum_lookup,
+                    template_struct_lookup,
+                    list(template_parameters),
+                    struct_definition_lookup,
+                    "Value",
+                    opaque_pointer_types,
+                )
+                struct_string_define += f"union {field_name}Union {{"
+                struct_string_define.indent()
+                bits_enum = DefinedStructEnum(
+                    f"{field_name}Bits", f"{field_name}Bits", struct.namespace, field.type, True, field.bits
+                )
+                append_chunk(self.build_enum_string(bits_enum))
+                struct_string_define += field_define
+                struct_string_define += f"{bits_enum.name} Bits;"
+                struct_string_define.unindent()
+                struct_string_define += f"}} {field_name};"
+                prev_size += field_define_size
             elif union_members := self._get_union_members(field):
                 struct_string_define += "union {"
                 struct_string_define.indent()

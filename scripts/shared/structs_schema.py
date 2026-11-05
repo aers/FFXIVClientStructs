@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field as dataclass_field
 from typing import TypeAlias, Union
 from yaml import load
 
@@ -53,6 +53,7 @@ class DefinedStructField(DefinedStructFuncParam):
     base: bool
     template_args: list[str]
     union_values: list[DefinedStructFuncParam]
+    bits: dict[str, int] = dataclass_field(default_factory=dict, kw_only=True)
 
 
 @dataclass
@@ -147,6 +148,10 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
                 union_values.append(
                     DefinedStructFuncParam(union_value["name"], union_value["type"])
                 )
+        bits = {
+            bit["name"]: ((1 << bit["size"]) - 1) << bit["offset"]
+            for bit in field.get("bits", [])
+        }
         if "size" in field:
             fields.append(
                 DefinedStructFixedField(
@@ -187,6 +192,7 @@ def parse_struct(struct: YamlStructExport) -> DefinedStruct:
                     base,
                     template_args,
                     union_values,
+                    bits=bits,
                 )
             )
     if "virtual_functions" in struct:
