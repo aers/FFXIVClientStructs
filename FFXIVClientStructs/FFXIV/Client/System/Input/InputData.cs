@@ -55,6 +55,18 @@ public unsafe partial struct InputData {
     [MemberFunction("E8 ?? ?? ?? ?? 88 43 0F")]
     public partial bool IsInputIdReleased(InputId inputId);
 
+    /// <remarks> Same as <see cref="IsInputIdDown"/>, except <see cref="CurrentGamepadModifier"/> doesn't need to match <see cref="inputId"/> </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? BA 29 00 00 00")]
+    public partial bool IsInputIdDownIgnoreGamepadModifier(InputId inputId);
+
+    /// <remarks> Same as <see cref="IsInputIdPressed"/>, except <see cref="CurrentGamepadModifier"/> doesn't need to match <see cref="inputId"/> </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 68")]
+    public partial bool IsInputIdPressedIgnoreGamepadModifier(InputId inputId);
+
+    /// <remarks> Axis 3 and 4 are the movement stick X and Y, scaled to -100..100. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? BA 01 00 00 00 49 8B CD 44 8B F8")]
+    public partial int GetAxisInput(int axis);
+
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 0F B6 DB")]
     public partial Keybind* GetKeybind(InputId inputId);
 

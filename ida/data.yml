@@ -1736,6 +1736,11 @@ classes:
         base: Client::Game::Event::GoldSaucerDirector
     funcs:
       0x140E5B9A0: ctor
+      0x140E5CBF0: UseItem
+      0x140E5CC10: UseAbility
+      0x140E5CC70: CanUseItem
+      0x140E5CCC0: CanUseAbility
+      0x140E5EE10: HandleInput
   Client::Game::GoldSaucer::GFateClimbingDirector: # Cliffhanger
     vtbls:
       - ea: 0x1421D53C0
@@ -1793,6 +1798,7 @@ classes:
       - ea: 0x142AFE878
     funcs:
       0x140E54A40: ctor
+      0x140E54A90: GetDirector
       0x140E54A70: dtor
       0x140E54B70: RequestParameters
       0x140E55300: GetAbility #(this,index)
@@ -9296,7 +9302,10 @@ classes:
       0x140634CB0: IsInputIdDown
       0x140634DD0: IsInputIdPressed
       0x140634F30: IsInputIdHeld
+      0x140635050: IsInputIdDownIgnoreGamepadModifier
+      0x140635140: IsInputIdPressedIgnoreGamepadModifier
       0x140635320: IsInputIdReleased
+      0x1406354D0: GetAxisInput
       0x1406355F0: HasCursorPositionChanged
       0x140635600: HasGamepadInputs2ButtonsChanged
       0x140635610: HasKeyboardInputsChanged
@@ -17301,6 +17310,7 @@ classes:
       0x140B55B80: ctor
       0x140B5A160: QueueFormatStringCallback
       0x140B5A210: QueueActionTimelineCallback
+      0x140B5AB30: SendEventCommand
       0x140B5B460: DispatchEvent
       0x140B59D50: LoadCustomDefineSheet
     vfuncs:
