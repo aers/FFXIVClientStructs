@@ -7,7 +7,11 @@ public partial struct ChatClient {
     [FieldOffset(0x0)] public Utf8String Host;
     [FieldOffset(0x68)] public ushort Port;
     [FieldOffset(0x6C)] public TransportLayers TransportLayer;
-    [FieldOffset(0x72)] private short Unk72; // value set to 333 in function E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? (7.41)
+    /// <summary>
+    /// The interval in milliseconds between reconnect attempts.
+    /// </summary>
+    [FieldOffset(0x70)] public ushort ReconnectInterval;
+    [FieldOffset(0x72)] public ushort ReadyDelay;
     /// <remarks>
     /// Contains the string bytes %u of LocalPlayer.EntityId
     /// </remarks>
