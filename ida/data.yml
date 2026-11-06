@@ -8583,6 +8583,7 @@ classes:
       0x140451240: ctor
       0x140799380: Create
       0x1404537F0: LoadAnimationData
+      0x1404552A0: PlayAnimation
       0x1404512E0: ResetFlags
       0x140451700: SetModel
   Client::Graphics::Scene::BgObjectStainBuffer:
