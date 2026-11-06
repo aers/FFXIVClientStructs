@@ -16,6 +16,12 @@ public unsafe partial struct SkeletonParamResourceHandle {
     [FieldOffset(0x100)] public SklpSlope Slope;
     [FieldOffset(0x128)] public SklpFeet Feet;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 89 6C 24 ?? 48 8B 6B 70")]
+    public partial bool HasLookAtData();
+
+    [MemberFunction("8B 81 ?? ?? ?? ?? C1 E8 04 24 01 C3")]
+    public partial bool HasSlopeData();
+
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct SklpHeader {
         [FieldOffset(0x00), FixedSizeArray(isString: true)] internal FixedSizeArray4<byte> _magic;
@@ -75,7 +81,15 @@ public unsafe partial struct SkeletonParamResourceHandle {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct SklpSlope;
+    public struct SklpSlope {
+        [FieldOffset(0x1C)] public int ElementCount;
+        [FieldOffset(0x20)] public SlopeElement* Elements;
+
+        public Span<SlopeElement> ElementsSpan => new(Elements, ElementCount);
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+    public struct SlopeElement;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct SklpFeet;

@@ -24,6 +24,9 @@ public unsafe partial struct Skeleton {
     // Client::Graphics::Animation::PartialSkeleton array, size = PartialSkeletonCount
     [FieldOffset(0x68)] public PartialSkeleton* PartialSkeletons;
 
+    [FieldOffset(0x70)] public LookAtIkModule* LookAtIkModule;
+    [FieldOffset(0x78)] public ChainIkModule* ChainIkModule;
+    [FieldOffset(0x80)] public SlopeIkModule* SlopeIkModule;
     // Used by attach execute type 3
     // 1. OwnerCharacter->Skeleton->AttachBonesSpan; find bone by BoneIndex matching Attach.BoneIdx
     // 2. Use the found bone's index to get the BoneIndexMask from OwnerCharacter->Skeleton->BoneMasksSpan
@@ -43,8 +46,27 @@ public unsafe partial struct Skeleton {
 
     [FieldOffset(0xB8)] public CharacterBase* Owner;
 
+    /// <summary>
+    /// The index of the <c>"eyes"</c> or <c>"Eyes"</c> group in <see cref="LookAtIkModule"/>, or <c>-1</c>.
+    /// </summary>
+    [FieldOffset(0xE8)] public sbyte EyesLookAtGroupIndex;
+    /// <summary>
+    /// The index of the <c>"eyes2"</c> or <c>"Eyes2"</c> group in <see cref="LookAtIkModule"/>, or <c>-1</c>.
+    /// </summary>
+    [FieldOffset(0xE9)] public sbyte Eyes2LookAtGroupIndex;
+    [FieldOffset(0xEC)] public int IsUpdatingIk; // InterlockExchange this value as a mutex for the IK update task
+
     public Span<Bone> AttachBonesSpan => new(AttachBones, (int)AttachBoneCount);
     public Span<BoneIndexMask> BoneMasksSpan => new(AttachBoneMasks, (int)AttachBoneCount);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 5D")]
+    public partial void CreateLookIkModule();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 8B ?? ?? ?? ?? C1 E9 09")]
+    public partial void CreateChainIkModule();
+
+    [MemberFunction("E8 ?? ?? ?? ?? B0 01 48 83 C4 60 5B C3 32 C0")]
+    public partial void CreateSlopeIkModule();
 
     /// <summary> Samples and finishes the animation of every skeleton from <paramref name="first"/> on. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B 6C 24 58")]
