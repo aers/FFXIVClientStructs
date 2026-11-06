@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Animation;
 using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
@@ -33,6 +34,10 @@ public unsafe partial struct BgObject {
     [GenerateStringOverloads]
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 8B ?? ?? ?? ?? 84 C0 74 21")]
     public partial bool LoadAnimationData(CStringPointer modelResourcePath);
+
+    [GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 10 48 3B FB 75 BB 48 8B BD")]
+    public partial void PlayAnimation(CStringPointer animationName, PlayAnimationParams* playParams, AnimationControllerHandle** controllerHandle = null);
 
     /// <summary>
     /// Resets the <see cref="BgObject.Flags"/>, <see cref="BgObject.OutlineFlags"/>, and <see cref="BgObject.ObjectFlags"/>
@@ -121,4 +126,5 @@ public unsafe struct BgObjectAnimationData {
     [FieldOffset(0x100)] public SkeletonResourceHandle* AsyncSkeletonResourceHandle;
     [FieldOffset(0x108)] public ResourceHandle* AsyncPapResourceHandle; // TODO: use PartialAnimationPackResourceHandle*
     [FieldOffset(0x110)] public Render.Skeleton* RenderSkeleton;
+    [FieldOffset(0x118)] public AnimationControllerHandle* AnimationControllerHandle;
 }
