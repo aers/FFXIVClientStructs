@@ -526,7 +526,7 @@ classes:
       0x140602F80: Update
       0x140603750: StartTerritoryTransition
       0x140603B80: QueueActiveFestivals
-      0x140604330: LoadCutscene
+      0x140604580: LoadCutscene
       0x140605300: IsInGPose  # (probably) static
       0x140605340: IsInIdleCam  # static
       0x140605570: IsInInstanceArea
@@ -15366,7 +15366,7 @@ classes:
       0x140DB7200: OpenPreview
       0x140DB85A0: PopulateHandInItem
       0x140DB9070: ValidateItems
-      0x140DB9090: UpdateAddon
+      0x140DB9670: UpdateAddon
   Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
     funcs:
 #fail       0x140C36B10: ctor # inlined (7.3)
@@ -16234,9 +16234,9 @@ classes:
       0x140C8FC60: SearchRecipeByItemId
       0x140C94470: CanCraft
       0x140C95E90: IsNoteBookDivisionUnlocked
-      0x140C95F30: AddRecipeSearchHistoryTerm
+      0x140C96520: AddRecipeSearchHistoryTerm
       0x140C95FB0: SearchRecipe
-      0x140D1D590: ClearStdDequeUtf8String # std::deque<Client::System::String::Utf8String>::clear() ?!
+      0x140D1DB80: ClearStdDequeUtf8String # std::deque<Client::System::String::Utf8String>::clear() ?!
   Client::UI::Agent::RecipeSearchContext:
     vtbls:
       - ea: 0x1421C6018
@@ -28592,6 +28592,9 @@ classes:
       35: GetReleaseFadeTicks
       36: SetReleaseVolume
   SQEX::Sd::Driver::WASAPI::DeviceEventHandler: # SQEX::Sd::SeadObject<1,8>, struct IMMNotificationClient, struct IUnknown
+  SQEX::Sd::Driver::WASAPI::AudioDevice:
+    vtbls:
+      - ea: 0x142547458
   SQEX::Sd::Driver::WASAPI::WASAPIDevice: # SQEX::Sd::Driver::WASAPI::AudioDevice, SQEX::Sd::SeadObject<1,8>
     vtbls:
       - ea: 0x1425474B8
