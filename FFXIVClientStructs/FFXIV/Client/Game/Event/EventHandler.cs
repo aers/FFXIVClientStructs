@@ -164,6 +164,9 @@ public unsafe partial struct EventHandler {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4D ?? 8B C1")]
     public partial bool QueueActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 88 AB 83 20 00 00 EB")]
+    public partial void SendEventCommand(int command, int param1 = 0, int param2 = 0);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
