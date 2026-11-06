@@ -7483,6 +7483,7 @@ classes:
       0x140200560: RemoveController
       0x1402005A0: Pause
       0x140200660: Unpause
+      0x1401FF730: Stop
       0x1401FF530: ctor
       0x1402147E0: dtor
   Client::Graphics::Animation::IAnimationControllerListener:
