@@ -8588,6 +8588,9 @@ classes:
   Client::Graphics::Scene::BgObjectStainBuffer:
     funcs:
       0x140277570: Initialize
+      0x1402778F0: Update
+      0x1402777A0: SetCustomMaterialResource
+      0x140277730: Dispose
   Client::Graphics::Scene::EnvScene:
     vtbls:
       - ea: 0x14216E678
