@@ -7662,7 +7662,7 @@ classes:
       0x140259BB0: CreateLookAtIkModule
       0x14025A490: CreateChainIkModule
       0x14025A6E0: CreateSlopeIkModule
-      0x140258E70: UpdateIK
+      0x140258E70: UpdateIk
   Client::Graphics::Animation::LookAtIkModule:
     funcs:
       0x140203180: dtor
