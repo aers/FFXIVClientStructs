@@ -57,6 +57,9 @@ public unsafe partial struct AnimationControllerHandle {
     [MemberFunction("40 56 48 83 EC 30 33 F6")]
     public partial ushort GetLongestAnimationDuration();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 20 48 8B 01 FF 50 18 B8")]
+    public partial void Stop(StopControllerParams* stopParams);
+
     // Averaging an enum is... kinda cursed
     [MemberFunction("44 8B 51 20 45 85 D2 0F 84 ?? ?? ?? ?? 48 8B 49 18 45 33 C9 48 8B 01 48 3B C1 74 78")]
     public partial hkaAnimationBinding.BlendHintEnum GetAverageBlendHint();

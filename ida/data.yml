@@ -7489,6 +7489,7 @@ classes:
       0x140200560: RemoveController
       0x1402005A0: Pause
       0x140200660: Unpause
+      0x1401FF730: Stop
       0x1401FF530: ctor
       0x1402147E0: dtor
   Client::Graphics::Animation::IAnimationControllerListener:
@@ -8631,6 +8632,7 @@ classes:
       0x140451240: ctor
       0x140799380: Create
       0x1404537F0: LoadAnimationData
+      0x1404552A0: PlayAnimation
       0x1404512E0: ResetFlags
       0x140451700: SetModel
   Client::Graphics::Scene::BgObjectStainBuffer:
