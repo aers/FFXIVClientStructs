@@ -192,12 +192,10 @@ public unsafe partial struct CharacterBase {
             var lookAtIkModule = skeleton->LookAtIkModule;
             if (lookAtIkModule != null) {
                 return lookAtIkModule->Groups[groupIndex][0].Amount;
-            }
-            else {
+            } else {
                 return 0.0f;
             }
-        }
-        else {
+        } else {
             return 0.0f;
         }
     }
@@ -231,7 +229,7 @@ public unsafe partial struct CharacterBase {
     /// <param name="outWorldSpaceTransform">The matrix to store the resulting transform in.</param>
     /// <param name="inModelSpaceTransform">The input transform relative to the model.</param>
     /// <returns><paramref name="outWorldSpaceTransform"/></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 45 C7")] 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 45 C7")]
     public partial Matrix4x4* TransformLookAtModelSpaceToWorldSpace(Matrix4x4* outWorldSpaceTransform, Matrix4x4* inModelSpaceTransform);
 
     /// <summary>
