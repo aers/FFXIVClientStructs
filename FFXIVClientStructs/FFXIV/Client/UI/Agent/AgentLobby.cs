@@ -120,6 +120,12 @@ public unsafe partial struct AgentLobby {
     /// <param name="previousState">The lobby request state the error replaced.</param>
     [MemberFunction("40 53 41 54 41 55 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4C 8B E2 4C 8B F9 41 83 F8 1A")]
     public partial void ShowLobbyStatusDialog(LobbyStatusCode* status, int previousState);
+
+    [GenerateInterop]
+    [Inherits<AtkMessageBoxManager.AtkMessageBoxEvent>]
+    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 51 10 48 89 41 28 4C", 3)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public partial struct MessageBoxEvent;
 }
 
 /// <summary>

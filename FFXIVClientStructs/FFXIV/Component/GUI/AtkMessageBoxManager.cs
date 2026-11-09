@@ -20,7 +20,6 @@ public unsafe partial struct AtkMessageBoxManager {
 
     // Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
     [GenerateInterop(isInherited: true)]
-    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 51 10 48 89 41 28 4C", 3)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public unsafe partial struct AtkMessageBoxEvent {
         /// <remarks> A <see cref="LobbyDialogValue.CodeType"/> >= 4 on a row w/o handling exits the game </remarks>
