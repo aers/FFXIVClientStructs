@@ -6369,6 +6369,9 @@ classes:
     vtbls:
       - ea: 0x142150DF0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+    funcs:
+      0x14030F890: GetFinalAnimationPack
+      0x140311050: MakeAnimationPackPath
   Client::System::Resource::Handle::PapLoadTableResourceHandleFactory:
     vtbls:
       - ea: 0x142150F58
