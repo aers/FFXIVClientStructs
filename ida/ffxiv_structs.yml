@@ -7885,6 +7885,25 @@ enums:
     "None": 0
     "Supported": 1
     "DynamicResolution": 2
+- type: Client::Graphics::Animation::LookAtIkModule::GroupFlags
+  name: GroupFlags
+  underlying: unsigned int
+  namespace: Client.Graphics.Animation
+  flags: True
+  values:
+    "None": 0
+    "IsEnabled": 1
+    "IsEyes": 2
+    "DiscontinuousJump": 4
+    "Unk4": 8
+- type: Client::Graphics::Animation::LookAtIkModule::BoneFlags
+  name: BoneFlags
+  underlying: byte
+  namespace: Client.Graphics.Animation
+  flags: True
+  values:
+    "None": 0
+    "HasRangeLimits": 1
 - type: Client::Game::BGMSystem::PlayState
   name: PlayState
   underlying: unsigned int
@@ -8173,6 +8192,26 @@ structs:
   - type: byte
     name: BlendHint
     offset: 24
+  member_functions: []
+- type: Animation::Ik::Ccd::hkaCcdIkSolver
+  name: hkaCcdIkSolver
+  namespace: Animation.Ik.Ccd
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: m_iterations
+    offset: 16
+  - type: float
+    name: m_gain
+    offset: 20
+  member_functions: []
+- type: Animation::Ik::LookAt::hkaLookAtIkSolver
+  name: hkaLookAtIkSolver
+  namespace: Animation.Ik.LookAt
+  union: False
+  size: 16
+  fields: []
   member_functions: []
 - type: Animation::Mapper::hkaSkeletonMapperData::PartitionMappingRange
   name: PartitionMappingRange
@@ -15962,6 +16001,58 @@ structs:
     - type: Client::Graphics::Animation::AnimationController*
       name: controller
   member_functions: []
+- type: Client::Graphics::Animation::LookAtIkModule
+  name: LookAtIkModule
+  namespace: Client.Graphics.Animation
+  union: False
+  size: 928
+  fields:
+  - type: unsigned int
+    name: GroupCount
+    offset: 0
+  - type: unsigned int
+    name: PartialSkeletonCount
+    offset: 4
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 8
+  - type: Client::Graphics::Animation::LookAtIkModule::LookAtGroupJob**
+    name: Groups
+    offset: 16
+  - type: __int64
+    name: CallbackParam
+    offset: 24
+  - type: __fastcall
+    name: PrepareGroupCallback
+    offset: 32
+    return_type: void
+    parameters:
+    - type: __int64
+      name: a1
+    - type: unsigned int
+      name: a2
+  - type: __fastcall
+    name: FinishedCallback
+    offset: 40
+    return_type: void
+    parameters:
+    - type: __int64
+      name: a1
+  - type: unsigned __int64
+    name: UnkHumanEyeThing
+    offset: 48
+  - type: unsigned __int64
+    name: UnkEyeThing
+    offset: 592
+  member_functions:
+  - signature: 48 89 5C 24 ?? 44 8B 11
+    return_type: int
+    name: FindGroup
+    parameters:
+    - type: Client::Graphics::Animation::LookAtIkModule*
+      name: this
+    - type: char*
+      name: groupId
 - type: Client::Graphics::Animation::PlayAnimationParams
   name: PlayAnimationParams
   namespace: Client.Graphics.Animation
@@ -15989,6 +16080,22 @@ structs:
   - type: byte
     name: Unk16
     offset: 22
+  member_functions: []
+- type: Client::Graphics::Animation::SlopeIkModule
+  name: SlopeIkModule
+  namespace: Client.Graphics.Animation
+  union: False
+  size: 48
+  fields:
+  - type: float
+    name: Unk4
+    offset: 4
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 24
+  - type: Client::System::Resource::Handle::SkeletonParamResourceHandle::SklpSlope*
+    name: SlopeParamsCopy
+    offset: 32
   member_functions: []
 - type: Client::Graphics::Animation::StopControllerParams
   name: StopControllerParams
@@ -21133,6 +21240,19 @@ structs:
   namespace: Client.System.Resource.Handle
   union: False
   size: 40
+  fields:
+  - type: int
+    name: ElementCount
+    offset: 28
+  - type: Client::System::Resource::Handle::SkeletonParamResourceHandle::SlopeElement*
+    name: Elements
+    offset: 32
+  member_functions: []
+- type: Client::System::Resource::Handle::SkeletonParamResourceHandle::SlopeElement
+  name: SlopeElement
+  namespace: Client.System.Resource.Handle
+  union: False
+  size: 12
   fields: []
   member_functions: []
 - type: Client::System::Resource::Handle::SkeletonResourceHandle::SkeletonHeader
@@ -40660,6 +40780,63 @@ structs:
     name: _Mapping
     offset: 0
   member_functions: []
+- type: Animation::Ik::Ccd::hkaCcdIkSolver::IkConstraint
+  name: IkConstraint
+  namespace: Animation.Ik.Ccd
+  union: False
+  size: 20
+  fields:
+  - type: __int16
+    name: m_startBone
+    offset: 0
+  - type: __int16
+    name: m_endBone
+    offset: 2
+  - type: Common::Base::Math::Vector::hkVector4f
+    name: m_targetMS
+    offset: 4
+  member_functions: []
+- type: Animation::Ik::LookAt::hkaLookAtIkSolver::RangeLimits
+  name: RangeLimits
+  namespace: Animation.Ik.LookAt
+  union: False
+  size: 32
+  fields:
+  - type: float
+    name: m_limitAngleUp
+    offset: 0
+  - type: float
+    name: m_limitAngleDown
+    offset: 4
+  - type: float
+    name: m_limitAngleLeft
+    offset: 8
+  - type: float
+    name: m_limitAngleRight
+    offset: 12
+  - type: Common::Base::Math::Vector::hkVector4f
+    name: m_upAxisMS
+    offset: 16
+  member_functions: []
+- type: Animation::Ik::LookAt::hkaLookAtIkSolver::Setup
+  name: Setup
+  namespace: Animation.Ik.LookAt
+  union: False
+  size: 52
+  fields:
+  - type: Common::Base::Math::Vector::hkVector4f
+    name: m_fwdLS
+    offset: 0
+  - type: Common::Base::Math::Vector::hkVector4f
+    name: m_eyePositionLS
+    offset: 16
+  - type: Common::Base::Math::Vector::hkVector4f
+    name: m_limitAxisMS
+    offset: 32
+  - type: float
+    name: m_limitAngle
+    offset: 48
+  member_functions: []
 - type: Animation::Playback::SampleAndBlend::hkaSampleBlendJob::SingleAnimation
   name: SingleAnimation
   namespace: Animation.Playback.SampleAndBlend
@@ -48660,6 +48837,119 @@ structs:
     offset: 8
     size: 10
     is_string: False
+  member_functions: []
+- type: Client::Graphics::Animation::ChainIkModule::IkChain
+  name: IkChain
+  namespace: Client.Graphics.Animation
+  union: False
+  size: 48
+  fields:
+  - type: __int16
+    name: StartBone
+    offset: 0
+  - type: __int16
+    name: EndBone
+    offset: 2
+  - type: Common::Math::Vector4
+    name: TargetPosition
+    offset: 16
+  - type: float
+    name: Unk20
+    offset: 32
+  - type: float
+    name: Unk24
+    offset: 36
+  - type: byte
+    name: Flags
+    offset: 40
+  member_functions: []
+- type: Client::Graphics::Animation::LookAtIkModule::LookAtBone
+  name: LookAtBone
+  namespace: Client.Graphics.Animation
+  union: False
+  size: 112
+  fields:
+  - type: float
+    name: LimitAngleUp
+    offset: 0
+  - type: float
+    name: LimitAngleDown
+    offset: 4
+  - type: float
+    name: LimitAngleLeft
+    offset: 8
+  - type: float
+    name: LimitAngleRight
+    offset: 12
+  - type: Common::Math::Vector4
+    name: EyePositionLocalSpace
+    offset: 32
+  - type: Animation::Rig::hkaPose*
+    name: Pose
+    offset: 48
+  - type: float
+    name: LimitAngleRadians
+    offset: 56
+  - type: float
+    name: BaseWeight
+    offset: 60
+  - type: Client::Graphics::Animation::LookAtIkModule::BoneFlags
+    name: Flags
+    offset: 64
+  - type: unsigned __int16
+    name: PartialSkeletonIndex
+    offset: 68
+  - type: unsigned __int16
+    name: BoneIndexToRotate
+    offset: 70
+  - type: unsigned __int16
+    name: BoneIndexRangeLimits
+    offset: 72
+  - type: float
+    name: FinalWeight
+    offset: 80
+  - type: unsigned int
+    name: Unk54
+    offset: 84
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 88
+  - type: char
+    name: IsEnabled
+    offset: 96
+  - type: char
+    name: Unk61
+    offset: 97
+  member_functions: []
+- type: Client::Graphics::Animation::LookAtIkModule::LookAtGroupJob
+  name: LookAtGroupJob
+  namespace: Client.Graphics.Animation
+  union: False
+  size: 80
+  fields:
+  - type: char
+    name: GroupId
+    offset: 0
+    size: 16
+    is_string: True
+  - type: Common::Math::Vector3
+    name: TargetPosition
+    offset: 32
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 48
+  - type: unsigned int
+    name: BoneCount
+    offset: 56
+  - type: float
+    name: Amount
+    offset: 60
+  - type: Client::Graphics::Animation::LookAtIkModule::GroupFlags
+    name: Flags
+    offset: 64
+  - type: Client::Graphics::Animation::LookAtIkModule::LookAtBone*
+    name: Bones
+    offset: 72
   member_functions: []
 - type: Client::Graphics::Culling::CullingGridManager
   name: CullingGridManager
@@ -97223,6 +97513,24 @@ structs:
     name: UnkC7
     offset: 199
   member_functions: []
+- type: Client::Graphics::Animation::ChainIkModule
+  name: ChainIkModule
+  namespace: Client.Graphics.Animation
+  union: False
+  size: 224
+  fields:
+  - type: Animation::Ik::Ccd::hkaCcdIkSolver
+    name: Solver
+    offset: 0
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 24
+  - type: Client::Graphics::Animation::ChainIkModule::IkChain
+    name: Chains
+    offset: 32
+    size: 4
+    is_string: False
+  member_functions: []
 - type: Client::Graphics::Environment::EnvState
   name: EnvState
   namespace: Client.Graphics.Environment
@@ -113740,6 +114048,15 @@ structs:
   - type: Client::Graphics::Render::PartialSkeleton*
     name: PartialSkeletons
     offset: 104
+  - type: Client::Graphics::Animation::LookAtIkModule*
+    name: LookAtIkModule
+    offset: 112
+  - type: Client::Graphics::Animation::ChainIkModule*
+    name: ChainIkModule
+    offset: 120
+  - type: Client::Graphics::Animation::SlopeIkModule*
+    name: SlopeIkModule
+    offset: 128
   - type: Client::Graphics::Render::Skeleton::Bone*
     name: AttachBones
     offset: 136
@@ -113752,6 +114069,15 @@ structs:
   - type: Client::Graphics::Scene::CharacterBase*
     name: Owner
     offset: 184
+  - type: __int8
+    name: EyesLookAtGroupIndex
+    offset: 232
+  - type: __int8
+    name: Eyes2LookAtGroupIndex
+    offset: 233
+  - type: int
+    name: IsUpdatingIk
+    offset: 236
   virtual_functions:
   - name: dtor
     offset: 0
@@ -113780,6 +114106,24 @@ structs:
     - type: Client::Graphics::Render::Skeleton*
       name: this
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 5D
+    return_type: void
+    name: CreateLookIkModule
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B 8B ?? ?? ?? ?? C1 E9 09
+    return_type: void
+    name: CreateChainIkModule
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
+  - signature: E8 ?? ?? ?? ?? B0 01 48 83 C4 60 5B C3 32 C0
+    return_type: void
+    name: CreateSlopeIkModule
+    parameters:
+    - type: Client::Graphics::Render::Skeleton*
+      name: this
   - signature: 48 89 5C 24 18 55 48 83 EC 30 48 8B E9
     return_type: void
     name: FinishAnimation
@@ -170391,6 +170735,96 @@ structs:
       name: this
     - type: unsigned int
       name: slot
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 79 8B C7
+    return_type: char
+    name: IsLookAtEnabled
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: int
+      name: groupIndex
+  - signature: E8 ?? ?? ?? ?? F6 44 24 ?? ?? 0F 84 ?? ?? ?? ?? F3 0F 10 84 3B
+    return_type: void
+    name: EnableLookAt
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: int
+      name: groupIndex
+  - signature: E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 0F BE 9F
+    return_type: void
+    name: DisableLookAt
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: int
+      name: groupIndex
+  - signature: 48 8B 89 ?? ?? ?? ?? 49 8B C0
+    return_type: void
+    name: SetLookAtTargetPosition
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: int
+      name: groupIndex
+    - type: Common::Math::Vector3*
+      name: position
+  - signature: E8 ?? ?? ?? ?? 44 38 A7 ?? ?? ?? ?? 75 19
+    return_type: void
+    name: SetLookAtInfluence
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: float
+      name: newInfluence
+    - type: int
+      name: groupIndex
+  - signature: E8 ?? ?? ?? ?? 41 89 86 ?? ?? ?? ?? 48 8D 3D
+    return_type: unsigned int
+    name: GetLookAtGroupCount
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F 28 44 24 ?? 33 DB
+    return_type: Common::Math::Matrix4x4*
+    name: GetLookAtGroupTransform
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: Common::Math::Matrix4x4*
+      name: outTransform
+    - type: unsigned int
+      name: groupIndex
+  - signature: E8 ?? ?? ?? ?? 0F 28 45 C7
+    return_type: Common::Math::Matrix4x4*
+    name: TransformLookAtModelSpaceToWorldSpace
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: Common::Math::Matrix4x4*
+      name: outWorldSpaceTransform
+    - type: Common::Math::Matrix4x4*
+      name: inModelSpaceTransform
+  - signature: E8 ?? ?? ?? ?? 89 03 48 8D 5B 04
+    return_type: int
+    name: FindLookAtGroup
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: char*
+      name: groupId
+  - signature: E8 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 83 E8 01 74 59
+    return_type: void
+    name: SetupLookAtCallbacks
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: __int64
+      name: callbackParameter
+    - type: __int64
+      name: prepareGroupCallback
+    - type: __int64
+      name: finishedCallback
   - signature: E8 ?? ?? ?? ?? 48 8B 44 24 ?? 48 85 C0 75 19
     return_type: void
     name: PlayAnimation
@@ -170519,7 +170953,19 @@ structs:
       name: this
     - type: byte
       name: loadResult
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 89 6C 24 ?? 48 8B 6B 70
+    return_type: char
+    name: HasLookAtData
+    parameters:
+    - type: Client::System::Resource::Handle::SkeletonParamResourceHandle*
+      name: this
+  - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 24 01 C3
+    return_type: char
+    name: HasSlopeData
+    parameters:
+    - type: Client::System::Resource::Handle::SkeletonParamResourceHandle*
+      name: this
 - type: Client::UI::AddonActionCrossEditor
   name: AddonActionCrossEditor
   namespace: Client.UI
