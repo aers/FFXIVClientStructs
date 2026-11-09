@@ -95,9 +95,10 @@ public unsafe partial struct BgObjectStainBuffer {
     /// </remarks>
     [FieldOffset(0x04)] public Vector4 LinearFloatColor;
 
-    // Unclear what kind of resource handle these are. They are loaded from a path in the mdl file, and I haven't seen them actually used.
-    [FieldOffset(0x18)] public ResourceHandle* LoadedResource;
-    [FieldOffset(0x20)] public ResourceHandle* LoadingResource;
+    [FieldOffset(0x18), Obsolete("Use LoadedCustomMaterialResource")] public ResourceHandle* LoadedResource;
+    [FieldOffset(0x18)] public MaterialResourceHandle* LoadedCustomMaterialResource;
+    [FieldOffset(0x20), Obsolete("Use LoadingCustomMaterialResource")] public ResourceHandle* LoadingResource;
+    [FieldOffset(0x20)] public MaterialResourceHandle* LoadingCustomMaterialResource;
 
     /// <summary>
     /// Three flags populated from the model resource.
@@ -118,6 +119,9 @@ public unsafe partial struct BgObjectStainBuffer {
     /// <returns>Always true.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 41 0F B6 D6")]
     public partial bool Initialize(ModelResourceHandle* modelResource);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 F6 41 30 02"), GenerateStringOverloads]
+    public partial void SetCustomMaterialResource(CStringPointer materialResourcePath);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
