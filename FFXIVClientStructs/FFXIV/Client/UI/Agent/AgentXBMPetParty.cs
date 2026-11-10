@@ -48,7 +48,7 @@ public unsafe partial struct AgentXBMPetParty {
     [MemberFunction("40 56 57 48 83 EC ?? 83 79 ?? ?? 8B F2")]
     public partial void TogglePet(uint petId);
 
-    [MemberFunction("40 53 55 57 48 83 EC ?? 83 79")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 83 79 ?? ?? 8B F2 48 8B D9 76")]
     public partial void OpenPetListAddon(int source);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 84 C0 74 ?? 48 8B CB E8 ?? ?? ?? ?? 4C 8D 9C 24")]
@@ -60,7 +60,7 @@ public unsafe partial struct AgentXBMPetParty {
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 44 8B E9")]
     public partial uint GetSyncedRank(uint petId);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8D 42 ?? 8B FA 48 8B D9 83 F8 ?? 0F 87")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 8D 42 ?? 41 0F B6 E9")]
     public partial bool IsPetOverSyncedRank(uint petId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 41 ?? 48 8B F1 FF C8")]
