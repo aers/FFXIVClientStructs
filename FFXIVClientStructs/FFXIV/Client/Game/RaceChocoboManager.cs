@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
+using FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -29,19 +30,19 @@ public unsafe partial struct RaceChocoboManager {
     [FieldOffset(0x0D)] public byte Parameters;
 
     // The attributes are represented as Stars-1
-    [BitField<byte>(nameof(FatherCunning), 0, 2)]
-    [BitField<byte>(nameof(FatherStamina), 2, 2)]
+    [BitField<byte>(nameof(FatherMaximumSpeed), 0, 2)]
+    [BitField<byte>(nameof(FatherAcceleration), 2, 2)]
     [BitField<byte>(nameof(FatherEndurance), 4, 2)]
-    [BitField<byte>(nameof(FatherAcceleration), 6, 2)]
-    [BitField<byte>(nameof(FatherMaximumSpeed), 8, 2)]
+    [BitField<byte>(nameof(FatherStamina), 6, 2)]
+    [BitField<byte>(nameof(FatherCunning), 8, 2)]
     [BitField<byte>(nameof(FatherPedigree), 12, 4)]
     [FieldOffset(0x0E)] public ushort FatherParameters;
 
-    [BitField<byte>(nameof(MotherCunning), 0, 2)]
-    [BitField<byte>(nameof(MotherStamina), 2, 2)]
+    [BitField<byte>(nameof(MotherMaximumSpeed), 0, 2)]
+    [BitField<byte>(nameof(MotherAcceleration), 2, 2)]
     [BitField<byte>(nameof(MotherEndurance), 4, 2)]
-    [BitField<byte>(nameof(MotherAcceleration), 6, 2)]
-    [BitField<byte>(nameof(MotherMaximumSpeed), 8, 2)]
+    [BitField<byte>(nameof(MotherStamina), 6, 2)]
+    [BitField<byte>(nameof(MotherCunning), 8, 2)]
     [BitField<byte>(nameof(MotherPedigree), 12, 4)]
     [FieldOffset(0x10)] public ushort MotherParameters;
 
@@ -69,6 +70,12 @@ public unsafe partial struct RaceChocoboManager {
     [FieldOffset(0x23)] public byte GearLegs;
     [FieldOffset(0x24)] public byte SessionsAvailable;
     [FieldOffset(0x25)] private byte Unk25;
+
+    [MemberFunction("48 83 EC 38 C7 41 04 01 00 00 00 45 33 C9 B9 6C 07 00 00")]
+    public partial bool RequestParameters(); // sets State to Loaded
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 0F 84 ?? ?? ?? ?? 8B 57 78")]
+    public partial RaceChocoboDirector* GetDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 55 ?? 48 8B CF E8 ?? ?? ?? ?? 48 8D 77")]
     public partial void GetAttributesCurrent(RaceChocoboAttributeValues* outValues);
