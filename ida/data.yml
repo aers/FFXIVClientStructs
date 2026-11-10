@@ -18950,12 +18950,15 @@ classes:
         base: Client::Game::InstanceContent::ContentTalkEventHandler
     funcs:
       0x1419C20A0: ctor
+      0x1419C2180: SelectGuildOrderList
   Client::Game::InstanceContent::GuildOrderOfficerEventHandler: # 0x18
     vtbls:
       - ea: 0x142376648
         base: Client::Game::InstanceContent::ContentTalkEventHandler
     funcs:
       0x1419C2D00: ctor
+      0x1419C2E50: SetGuildOrderReward
+      0x1419C3070: IsGuildOrderRewardBonus
   Client::Game::InstanceContent::ContentNpcEventHandler: # 0x19
     vtbls:
       - ea: 0x142375408
@@ -18974,6 +18977,18 @@ classes:
     vtbls:
       - ea: 0x14239D008
         base: Client::Game::InstanceContent::ContentTalkEventHandler
+    funcs:
+      0x1419D3940: OpenSaveSelectMenu
+      0x1419D3A20: IsSolo
+      0x1419D3A80: GetCFLanguage
+      0x1419D3AD0: GetCFHalfway
+      0x1419D3B30: IsVer345
+      0x1419D3BB0: DDSystemTalk
+      0x1419D3E60: DDMenu
+      0x1419D4200: DDTopMenu
+      0x1419D44A0: IsOpenedB50After
+      0x1419D4520: IsOpened2B30After
+      0x1419D45A0: OpenScoreUI
   Client::Game::InstanceContent::InstanceContentGuideEventHandler: # 0x1D
     vtbls:
       - ea: 0x142376F60
@@ -19071,6 +19086,8 @@ classes:
         base: Client::Game::InstanceContent::ContentTalkEventHandler
     funcs:
       0x140E50310: ctor
+      0x140E50380: OpenSkyIslandEntrance
+      0x140E50440: CloseSkyIslandEntrance
   Client::Game::Event::DpsChallengeOfficerEventHandler: # 0x2F
     vtbls:
       - ea: 0x1421A98F0
@@ -19097,6 +19114,14 @@ classes:
     vtbls:
       - ea: 0x1422D73E0
         base: Client::Game::Event::LuaEventHandler
+    funcs:
+      0x14176E600: OpenWidget
+      0x14176E6F0: OpenWaiting
+      0x14176E770: OpenResult
+      0x14176EA50: SetWidgetText
+      0x14176EBC0: SetResultWidgetText
+      0x14176ED30: SetConfirmMessage
+      0x14176EE40: SetItemCompareBaseValue
   Client::Game::Event::DisposalShopEventHandler: # 0x35
     vtbls:
       - ea: 0x1422D7CC0
@@ -20462,6 +20487,8 @@ classes:
     vtbls:
       - ea: 0x14239E618
         base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
+    funcs:
+      0x1419D5C60: IsGameOverOpenDoorFailed
   Client::Game::InstanceContent::InstanceContentSeasonalDungeon1: # The Haunted Manor
     vtbls:
       - ea: 0x14239F308
@@ -22231,9 +22258,9 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141341760: ctor
-  Client::UI::AddonMovieSubtitleOpening: # 209, inherits from Client::UI::AddonMovieSubtitle
+  Client::UI::AddonMovieSubtitleOpening: # 209
   Client::UI::AddonCasting: # 210
-  Client::UI::AddonMovieSubtitleVoyage: # 2119, inherits from Client::UI::AddonMovieSubtitle
+  Client::UI::AddonMovieSubtitleVoyage: # 211
   Client::UI::AddonMovieSubtitleVer500: # 212
   Client::UI::AddonAddonPadMouseMode: # 213
     vtbls:
@@ -22241,6 +22268,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413454E0: ctor
+  Client::UI::AddonPadMouseMode: # 213
   Client::UI::AddonCharacterStatus: # 214
     vtbls:
       - ea: 0x1422312A0
@@ -22570,6 +22598,7 @@ classes:
     vtbls:
       - ea: 0x1422089F0
         base: Client::UI::AddonContextMenu
+  Client::UI::AddonContextMenuTitle: # 272
   Client::UI::AddonBuddyInspect: # 273
     vtbls:
       - ea: 0x14224EA98
@@ -22594,7 +22623,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141646ED0: ctor
-  Client::UI::AddonLookingForGroupSearch: # 277, inherits from Client::UI::AddonLookingForGroupCondition
+  Client::UI::AddonLookingForGroupSearch: # 277
   Client::UI::AddonLookingForGroupSelectRole: # 278
     vtbls:
       - ea: 0x1422B2A60
@@ -22793,7 +22822,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141248990: ctor
-  Client::UI::AddonTryon: # 312 aka MiragePrismMiragePlate, FittingRoom
+  Client::UI::AddonTryon: # 312
     vtbls:
       - ea: 0x14224FD58
         base: Component::GUI::AtkUnitBase
@@ -23587,6 +23616,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141392A50: ctor
+  Client::UI::AddonSkyIslandExchange2: # 447
   Client::UI::AddonSkyIsland2Result: # 448
     vtbls:
       - ea: 0x142259208
@@ -23655,6 +23685,7 @@ classes:
       0x1416557F0: ctor
   Client::UI::AddonOrchestrionFurniture: # 459
   Client::UI::AddonAddonContextSub: # 460
+  Client::UI::AddonContextSub: # 460
   Client::UI::AddonHousingEditVase: # 461
     vtbls:
       - ea: 0x1422AC618
@@ -26506,6 +26537,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141530050: ctor
+  Client::UI::AddonXBMMonsterNotebookDetail: # 975
   Client::UI::AddonXBMMonsterNotebookFilterSetting: # 976
     vtbls:
       - ea: 0x142287440
