@@ -18863,7 +18863,7 @@ classes:
         276: PlayAnimation
     funcs:
       0x140E91E10: ctor
-      0x140E973E0: CheckCastSurface
+      0x140E97AB0: CheckCastSurface
       0x140E98040: Create
   Client::Game::Event::GCShopEventHandler: # 0x16
     vtbls:

@@ -22,9 +22,8 @@ public unsafe partial struct AtkMessageBoxManager {
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public unsafe partial struct AtkMessageBoxEvent {
-        /// <remarks> A <see cref="LobbyDialogValue.CodeType"/> >= 4 on a row w/o handling exits the game </remarks>
         /// <returns><c>false</c> if the game is exiting, otherwise <c>true</c>.</returns>
         [VirtualFunction(0)]
-        public partial bool OnDismissed(void* a2, LobbyDialogValue* value);
+        public partial bool OnDismissed(void* a2, AtkValue* value);
     }
 }
