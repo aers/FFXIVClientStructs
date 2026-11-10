@@ -106,7 +106,7 @@ public unsafe partial struct PapLoadTableResourceHandle {
         /// How far into <see cref="RedirectEntries"/> this entry's redirects start at, measured in groups of 4.
         /// </summary>
         [FieldOffset(0x6)] public ushort RedirectStartOffsetGroups;
-        
+
         /// <summary>
         /// Which of the groups of 4 animation entries are overridden for this character
         /// </summary>

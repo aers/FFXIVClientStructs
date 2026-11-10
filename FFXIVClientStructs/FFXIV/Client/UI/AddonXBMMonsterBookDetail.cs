@@ -25,7 +25,7 @@ public unsafe partial struct AddonXBMMonsterBookDetail {
     [FieldOffset(0x300)] public AtkTextNode* EntryHabitat;
     [FieldOffset(0x308)] public AtkTextNode* EntryHPCount;
     [FieldOffset(0x310)] public AtkTextNode* EntryExpCount;
-    
+
     [FieldOffset(0x320)] public AtkComponentGaugeBar* EntryExpGaugeBar;
     [FieldOffset(0x328)] public AtkTextNode* EntrySatietyCount;
     [FieldOffset(0x330)] public AtkTextNode* EntryStrengthHeader;
