@@ -102,20 +102,4 @@ public unsafe partial struct RaceChocoboDirector {
         Left = 1,
         Right = 2,
     }
-
-    public enum RaceCommand {
-        AccelerateStart = 10,
-        AccelerateStop = 11,
-        TurnLeftStart = 12,
-        TurnLeftStop = 13,
-        TurnRightStart = 14,
-        TurnRightStop = 15,
-        Jump = 16,
-        UseItem = 17,
-        UseAbility = 18,
-        RacersLoaded = 19,
-        Unk20 = 20,
-        DecelerateStart = 22,
-        DecelerateStop = 23,
-    }
 }
