@@ -249,12 +249,6 @@ public unsafe partial struct CharacterBase {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 83 E8 01 74 59")]
     public partial void SetupLookAtCallbacks(void* callbackParameter, void* prepareGroupCallback, void* finishedCallback);
 
-    /// <inheritdoc cref="SetupLookAtCallbacks(void*, void*, void*)"/>
-    public void SetupLookAtCallbacks<TParam>(TParam* callbackParameter, delegate* unmanaged<TParam*, uint, void> prepareGroupCallback, delegate* unmanaged<TParam*, void> finishedCallback)
-        where TParam : unmanaged {
-        SetupLookAtCallbacks((void*)callbackParameter, (void*)prepareGroupCallback, (void*)finishedCallback);
-    }
-
     /// <summary>
     /// Begins playing the specified animation, adding to the given animation controller handle or creating a new one as needed.
     /// </summary>
