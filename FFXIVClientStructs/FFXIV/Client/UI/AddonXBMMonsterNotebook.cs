@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("XBMMonsterNotebook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x880)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8A0)]
 public partial struct AddonXBMMonsterNotebook {
-    [FieldOffset(0x6E8)] public TabController TabController;
+    [FieldOffset(0x708)] public TabController TabController;
 }
