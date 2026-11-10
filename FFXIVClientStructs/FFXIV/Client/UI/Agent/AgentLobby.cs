@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Application.Network;
+using FFXIVClientStructs.FFXIV.Application.Network.LobbyClient;
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
@@ -111,6 +112,14 @@ public unsafe partial struct AgentLobby {
     /// </summary>
     [MemberFunction("40 56 41 56 41 57 48 83 EC 40 80 B9")]
     public partial void HandleLogout(bool isExiting, byte framesUntilLogout);
+
+    /// <summary>
+    /// Builds/opens the <see cref="AddonDialogue"/> for a lobby status. Every lobby error passes through here.
+    /// </summary>
+    /// <param name="status">The status to display.</param>
+    /// <param name="previousState">The lobby request state the error replaced.</param>
+    [MemberFunction("40 53 41 54 41 55 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4C 8B E2 4C 8B F9 41 83 F8 1A")]
+    public partial void ShowLobbyStatusDialog(LobbyStatusCode* status, int previousState);
 }
 
 [GenerateInterop]

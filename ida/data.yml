@@ -7312,6 +7312,8 @@ classes:
   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
     vtbls:
       - ea: 0x1421709E0
+    vfuncs:
+      0: OnDismissed
   Application::Network::LogoutCallbackInterface:
     vtbls:
       - ea: 0x1421710E0
@@ -7354,6 +7356,7 @@ classes:
       0x1404E0DE0: ShowCharacterNotFoundWarning
       0x1404E1560: GetLobbyText
       0x1404E6E00: UpdateLoginPosition
+      0x1404E7AC0: ShowLobbyStatusDialog
       0x1405C1460: SetupLobbyCamera
   Client::UI::Agent::LobbyData:
     funcs:
@@ -18916,6 +18919,7 @@ classes:
         276: PlayAnimation
     funcs:
       0x140E91E10: ctor
+      0x140E97AB0: CheckCastSurface
       0x140E98040: Create
   Client::Game::Event::GCShopEventHandler: # 0x16
     vtbls:
