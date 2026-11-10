@@ -52,7 +52,7 @@ public unsafe partial struct AgentXBMStageDetailList {
     [MemberFunction("40 53 48 83 EC ?? 83 79 ?? ?? 75 ?? E8")]
     public partial uint GetSelectedEntryIndex();
 
-    [MemberFunction("40 53 48 83 EC ?? 83 79 ?? ?? 48 8B D9 75 ?? 80 49")]
+    [MemberFunction("40 53 48 83 EC ?? 83 79 ?? ?? 48 8B D9 0F 85 ?? ?? ?? ?? 80 49")]
     public partial void StartBattle();
 
     // Type 3 rows are the battle details of the preceding stage row.

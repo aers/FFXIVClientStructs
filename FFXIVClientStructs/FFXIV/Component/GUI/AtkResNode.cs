@@ -176,7 +176,7 @@ public unsafe partial struct AtkResNode : ICreatable<AtkResNode> {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4C 3D 80")]
     public partial AtkComponentSlider* GetAsAtkComponentSlider();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 0D 48 89 83")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 03 48 89 B0")]
     public partial AtkComponentTextInput* GetAsAtkComponentTextInput();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 33 C0")]

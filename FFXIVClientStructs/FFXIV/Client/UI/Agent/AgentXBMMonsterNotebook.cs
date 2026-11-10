@@ -67,7 +67,7 @@ public unsafe partial struct AgentXBMMonsterNotebook {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 0F B6 DA 48 8B 49 ?? 48 8B 01")]
     public partial XBMPetMirage GetPetMirage(byte petId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? C6 43 ?? ?? 48 8B 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 88 73 ?? 48 8B 03")]
     public partial void RebuildPetList();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
