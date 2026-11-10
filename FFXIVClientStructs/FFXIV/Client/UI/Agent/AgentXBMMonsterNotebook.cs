@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.XBMMonsterNotebook)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x128)]
+[StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct AgentXBMMonsterNotebook {
     [FieldOffset(0x28)] public ExcelSheet* PetParamGrowSheet; // XBMPetParamGrow
     [FieldOffset(0x30)] public ExcelSheetWaiter* PetParamGrowSheetWaiter;
