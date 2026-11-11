@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyDetail
@@ -64,8 +66,7 @@ public unsafe partial struct InfoProxyDetail {
         [FieldOffset(0x100), FixedSizeArray] internal FixedSizeArray43<ClassJobEntry> _classJobEntries;
 
         [StructLayout(LayoutKind.Explicit, Size = 4)]
-        public struct ClassJobEntry
-        {
+        public struct ClassJobEntry {
             [FieldOffset(0)] public byte ClassJobId;
             [FieldOffset(1)] private byte Unk1;
             [FieldOffset(2)] public ushort Level;
