@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyDetail
@@ -46,5 +48,28 @@ public unsafe partial struct InfoProxyDetail {
         [FieldOffset(0x10)] public byte ClassJobId;
         [FieldOffset(0x11)] public InfoProxyCommonList.CharacterData.LanguageMask LanguageMask;
         [FieldOffset(0x12), FixedSizeArray(isString: true)] internal FixedSizeArray193<byte> _searchComment;
+    }
+
+    /// <remarks> Packet for InfoProxyDetail.AddData </remarks>
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1AC)]
+    public partial struct AddDataPacket {
+        [FieldOffset(0x000)] public ulong ContentId;
+        [FieldOffset(0x010)] public ulong LookingForPartyClassJobIdMask;
+        [FieldOffset(0x018)] public CrestData FCCrest;
+        [FieldOffset(0x020)] private ushort Unk020;
+        [FieldOffset(0x022)] public ushort WorldId;
+        [FieldOffset(0x024), FixedSizeArray(isString: true)] internal FixedSizeArray193<byte> _searchComment;
+        [FieldOffset(0x0E5), FixedSizeArray(isString: true)] internal FixedSizeArray22<byte> _fcName;
+        /// <remarks> [0] Unused, [1] Maelstrom, [2] Order of the Twin Adder, [3] Immortal Flames </remarks>
+        [FieldOffset(0x0FB), FixedSizeArray] internal FixedSizeArray4<byte> _grandCompanyRanks;
+        [FieldOffset(0x100), FixedSizeArray] internal FixedSizeArray43<ClassJobEntry> _classJobEntries;
+
+        [StructLayout(LayoutKind.Explicit, Size = 4)]
+        public struct ClassJobEntry {
+            [FieldOffset(0)] public byte ClassJobId;
+            [FieldOffset(1)] private byte Unk1;
+            [FieldOffset(2)] public ushort Level;
+        }
     }
 }
