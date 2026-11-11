@@ -42,13 +42,13 @@ public unsafe partial struct HudNumberArray {
     [FieldOffset(21 * 4)] public bool ShowRestedAreaIndicator;
     [FieldOffset(22 * 4)] public bool ShowCombatAreaIndicator;
     [FieldOffset(23 * 4)] public bool ShowExpBar;
-    [FieldOffset(24 * 4)] public uint CurrentLevel; // TODO: rename to LocalPlayerLevel
-    [FieldOffset(25 * 4)] public uint CurrentLevel2; // TODO: rename to DisplayedPlayerLevel
-    [FieldOffset(26 * 4)] public uint CurrentJobId; // TODO: rename to LocalPlayerJobId
-    [FieldOffset(27 * 4)] public uint CurrentJobId2; // TODO: rename to DisplayedJobId
+    [FieldOffset(24 * 4)] public uint LocalPlayerLevel;
+    [FieldOffset(25 * 4)] public uint DisplayedPlayerLevel;
+    [FieldOffset(26 * 4)] public uint LocalPlayerJobId;
+    [FieldOffset(27 * 4)] public uint DisplayedJobId;
     [FieldOffset(28 * 4)] public uint CurrentJobIconId;
-    [FieldOffset(29 * 4)] public HudJobType JobType; // TODO: rename to LocalPlayerJobType
-    [FieldOffset(30 * 4)] public HudJobType JobType2; // TODO: rename to DisplayedJobType
+    [FieldOffset(29 * 4)] public HudJobType LocalPlayerJobType;
+    [FieldOffset(30 * 4)] public HudJobType DisplayedJobType;
     [FieldOffset(31 * 4)] public HudStatusElementLayout StatusElementLayout;
     [FieldOffset(32 * 4), FixedSizeArray] internal FixedSizeArray20<int> _positiveStatusIndexes;
     [FieldOffset(52 * 4), FixedSizeArray] internal FixedSizeArray20<int> _negativeStatusIndexes;

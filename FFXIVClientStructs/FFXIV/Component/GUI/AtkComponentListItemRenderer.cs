@@ -34,7 +34,7 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkCompon
     [FieldOffset(0x19E)] public short DragDropMouseDownPosY;
     [FieldOffset(0x1A0)] private short Unk1A0DragDropOwnerNodeScreenX;
     [FieldOffset(0x1A2)] private short Unk1A2DragDropOwnerNodeScreenY;
-    // [BitField<byte>(nameof(RowTemplateNodeCount), 0)] // TODO: uncomment
+    [BitField<byte>(nameof(RowTemplateNodeCount), 0)]
     [BitField<bool>(nameof(HasRequestedPayload), 8)]
     [BitField<bool>(nameof(EnableDragDrop), 9)]
     [BitField<bool>(nameof(UsesIconComponent), 10)]
@@ -44,8 +44,7 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable<AtkCompon
     [BitField<bool>(nameof(EnableChildAutoFocus), 14)]
     [BitField<bool>(nameof(StopNavigationAtEnd), 15)]
     [FieldOffset(0x1A4)] internal uint BitFields1A4;
-    [FieldOffset(0x1A4), Obsolete("Use RowTemplateNodeCountByte")] public int RowTemplateNodeCount; // TODO: remove
-    [FieldOffset(0x1A4), CExporterIgnore] public byte RowTemplateNodeCountByte; // TODO: obsolete with a note that it was renamed back to RowTemplateNodeCount
+    [FieldOffset(0x1A4), Obsolete("Use RowTemplateNodeCount")] public byte RowTemplateNodeCountByte;
 
     public Span<Pointer<AtkResNode>> CollisionNodes => new(CollisionNodeList, CollisionNodeListCount);
 

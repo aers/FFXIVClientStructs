@@ -56,21 +56,6 @@ public unsafe partial struct AgentRepair {
         [FieldOffset(0x4)] public int Slot;
     }
 
-    // TODO: remove (was replaced by InventoryItemRef)
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct RepairItemInfo {
-        [FieldOffset(0x0)] public int InventoryType;
-        [FieldOffset(0x4)] public ushort Slot;
-        [FieldOffset(0x8)] public int ItemId;
-    }
-
-    // TODO: remove with ChangeInventoryContainer (was replaced by ItemEntry)
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct RepairEntry {
-        [FieldOffset(0x0)] public uint InventoryType;
-        [FieldOffset(0x4)] public uint Slot;
-    }
-
     public enum ItemFilter {
         None = -1,
         Equipped,

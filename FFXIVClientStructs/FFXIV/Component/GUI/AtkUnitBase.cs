@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
@@ -181,10 +182,10 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial void SetSize(ushort width, ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 2A C7")]
-    public partial float GetScaledWidth(bool scaled); // TODO: return ushort
+    public partial ushort GetScaledWidth(bool scaled);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 2B DE")]
-    public partial float GetScaledHeight(bool scaled); // TODO: return ushort
+    public partial ushort GetScaledHeight(bool scaled);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 84 B7")]
     public partial AtkResNode* GetNodeById(uint nodeId);
@@ -242,7 +243,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]
-    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6); // TODO: a4 type should be ResourceCategory default to `ResourceCategory.Ui`
+    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, ResourceCategory a4 = ResourceCategory.Ui);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 45 33 C9 F3 0F 59 0D")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);

@@ -26,12 +26,12 @@ public unsafe partial struct AddonCharacterClass {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct ClassEntry {
-        [FieldOffset(0x00)] public uint Level; // TODO: use int, it comes from the number array
-        [FieldOffset(0x04)] public uint CurrentXP; // TODO: use int
+        [FieldOffset(0x00)] public int Level;
+        [FieldOffset(0x04)] public int CurrentXP;
         [FieldOffset(0x08), Obsolete("Renamed to NeededXP")] public uint LevelMaxXP;
         [FieldOffset(0x08)] public int NeededXP;
-        [FieldOffset(0x10)] public nint DesynthesisLevel; // TODO: use CStringPointer
-        [FieldOffset(0x18)] public nint TooltipText; // TODO: use CStringPointer
+        [FieldOffset(0x10)] public CStringPointer DesynthesisLevel;
+        [FieldOffset(0x18)] public CStringPointer TooltipText;
         [FieldOffset(0x20)] public bool IsMaxLevel;
     }
 }

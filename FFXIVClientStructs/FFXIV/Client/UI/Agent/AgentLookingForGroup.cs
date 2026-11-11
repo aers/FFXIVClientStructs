@@ -36,8 +36,7 @@ public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0x35F0)] public uint OwnListingId;
 
     [FieldOffset(0x3620)] public ulong ListingContentId; // Only populated while a Detailed listing is opened
-    [FieldOffset(0x3628), Obsolete("Use ListingAccountIdUInt64", true)] public uint ListingAccountId;
-    [FieldOffset(0x3628)] public ulong ListingAccountIdUInt64; // Only populated while a Detailed listing is opened // TODO: rename back to ListingAccountId...
+    [FieldOffset(0x3628)] public ulong ListingAccountId; // Only populated while a Detailed listing is opened
 
     [FieldOffset(0x3638)] public uint JoinConfirmAddonId; // SelectYesno
 

@@ -35,7 +35,7 @@ public unsafe partial struct AgentFishGuide {
     [FieldOffset(0x140)] public Utf8String DetailsCategoryTitle2; // Addon#14367, lnum1 is Mode
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 C3 33 D2")]
-    public partial void OpenForItemId(uint itemId, bool isSpearfishing); // TODO: change `bool isSpearfishing` to `byte mode`
+    public partial void OpenForItemId(uint itemId, bool mode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 48")]
     public partial void UpdateFishList(); // sets entries to NumberArray #67 and then refreshes the icons
