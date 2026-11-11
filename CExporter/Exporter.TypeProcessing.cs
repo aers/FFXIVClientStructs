@@ -312,7 +312,7 @@ public partial class Exporter {
                     Size = size,
                     Type = ExporterStatics.GetBestMatchFromSize(size)
                 };
-            }).ToArray();
+            }).OrderBy(bit => bit.Offset).ToArray();
             var bits = new List<ProcessedBitField>();
             foreach (var bit in bitsDefinition) {
                 if (bits.Count == 0 && bit.Offset != 0)
