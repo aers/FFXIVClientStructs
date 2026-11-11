@@ -23,14 +23,14 @@ jobs:
         id: git-check
         run: |
           echo "========== check paths of modified files =========="
-          git diff --name-only -- ida > files.txt
+          git diff --name-only -- scripts > files.txt
           echo "=============== list modified files ==============="
           tail files.txt
           while IFS= read -r file
           do
             echo $file
-            if [[ $file != ida/* ]]; then
-              echo "This modified file is not under the 'ida' folder."
+            if [[ $file != scripts/* ]]; then
+              echo "This modified file is not under the 'scripts' folder."
               echo "has_changes=false" >> $GITHUB_OUTPUT
               break
             else

@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="ida/data.yml" />
+    <File Path="scripts/data.yml" />
   </Folder>
   <Project Path="CExporter/CExporter.csproj" />
   <Project Path="CompatChecker/CompatChecker.csproj" />

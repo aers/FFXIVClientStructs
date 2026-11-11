@@ -46,7 +46,7 @@ unsafe {
     }
 }
 
-using StreamReader dataReader = new StreamReader("ida/data.yml");
+using StreamReader dataReader = new StreamReader("scripts/data.yml");
 
 var deserializer = new YamlDotNet.Serialization.DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
 var data = deserializer.Deserialize<Data>(dataReader);
@@ -190,4 +190,4 @@ foreach (string line in notfoundOutputs)
     sb.AppendLine(line);
 
 Console.WriteLine(sb.ToString());
-File.WriteAllText("ida/data-missmatch2.txt", sb.ToString());
+File.WriteAllText("scripts/data-missmatch2.txt", sb.ToString());
