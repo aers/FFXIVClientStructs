@@ -102,7 +102,7 @@ public partial struct RaptureHotbarModule {
         /// - 6: Blue (Job Gauge?)
         /// - 7: Bright Yellow (Rival Wings - CE)
         /// - All others: Grey
-        [FieldOffset(0xCB)] public byte CostType; // TODO: Change type to SlotCostType
+        [FieldOffset(0xCB)] public SlotCostType CostType;
 
         /// Appears to control display of the primary cost of the action (0xCA).
         ///

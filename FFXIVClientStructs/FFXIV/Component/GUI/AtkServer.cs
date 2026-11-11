@@ -68,13 +68,12 @@ public unsafe partial struct AtkServer {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 54 41 56 41 57 48 83 EC ?? 44 8B 05")]
     public partial void Draw(bool a2);
 
-    // TODO: ProcessUICommands is used for 16-bit indexes in the index buffer, Alt is used for 32-bit indexes, should rename
     // AtkServer is created with a 16-bit IndexBuffer, unsure if the game ever resizes it
     [MemberFunction("E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 56")]
-    public partial void ProcessUICommands(bool a2);
+    public partial void ProcessUICommands16(bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 4C 8D 5C 24")]
-    public partial void ProcessUICommandsAlt(bool a2);
+    public partial void ProcessUICommands32(bool a2);
 
     [MemberFunction("48 85 C9 74 ?? E8 ?? ?? ?? ?? 84 C0 75 ?? B8 FF FF FF FF", 6)]
     public partial bool LoadShaders();

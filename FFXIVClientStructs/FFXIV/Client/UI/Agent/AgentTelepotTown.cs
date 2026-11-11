@@ -23,7 +23,7 @@ public partial struct AgentTelepotTownData {
     [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray64<AetheryteEntry> _entries;
 
     [FieldOffset(0x70E)] public byte SelectedAetheryte; // index selected in the aethernet list
-    [FieldOffset(0x710)] public byte Flags; // TODO: uint
+    [FieldOffset(0x710)] public uint Flags;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct AetheryteEntry {

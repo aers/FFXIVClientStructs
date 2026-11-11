@@ -155,8 +155,7 @@ public unsafe partial struct AtkFontManager {
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct GfdFont {
         [FieldOffset(0x00)] public TextureResourceHandle* TextureResourceHandle;
-        // TODO: use GaijiFontdataResourceHandle*
-        [FieldOffset(0x08)] private ResourceHandle* GfdResourceHandle; // probably only available during setup, because it's null afterwards
+        [FieldOffset(0x08)] private GaijiFontdataResourceHandle* GfdResourceHandle; // probably only available during setup, because it's null afterwards
         [FieldOffset(0x10)] public Texture* Texture;
     }
 

@@ -35,7 +35,7 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x11C)] public uint TypeOrId;
     [FieldOffset(0x120)] public uint Index; // The index of the item in the inventory. 0 for chat, ??? for KeyItems, position top-bottom inside a shop.
     [FieldOffset(0x124)] public int BuyQuantity; // The quantity selected for buying, which is previewed on the tooltip as "in bag" quantity, -1 outside shops
-    [FieldOffset(0x128)] public byte Flag1; // TODO: uint // Related to checking the inventory
+    [FieldOffset(0x128)] public uint Flag1; // Related to checking the inventory
     [FieldOffset(0x12C)] public uint UpdateFlags;
     [FieldOffset(0x130)] private uint Unk130Flags; // 1 = Has Name (Crafter or RaceChocobo), 2 = HousingYardObject.Unknown7
     [FieldOffset(0x134)] public int MaxStackSize;

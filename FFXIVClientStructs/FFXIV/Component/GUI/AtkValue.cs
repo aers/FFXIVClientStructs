@@ -53,10 +53,10 @@ public unsafe partial struct AtkValue {
         String.Value = null;
     }
 
-    public AtkValue(AtkValue* other) => CtorCopy(other);
+    public AtkValue(AtkValue* other) => Ctor_Copy(other);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45")]
-    public partial AtkValue* CtorCopy(AtkValue* other); // TODO: rename to Ctor_Copy
+    public partial AtkValue* Ctor_Copy(AtkValue* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF FE")]
     public partial void Dtor();

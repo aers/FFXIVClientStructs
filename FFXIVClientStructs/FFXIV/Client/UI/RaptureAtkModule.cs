@@ -86,7 +86,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial bool ChangeUIScene(GameUIScene scene);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA")]
-    public partial bool ChangeUiMode(uint uiMode); // TODO: fix capitalization -> ChangeUIMode, use GameUIMode enum
+    public partial bool ChangeUIMode(GameUIMode uiMode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4E 30")]
     public partial bool IncRefNumberArrayData(int index);

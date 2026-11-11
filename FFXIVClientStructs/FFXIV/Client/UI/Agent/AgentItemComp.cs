@@ -84,37 +84,37 @@ public unsafe partial struct AgentItemComp {
             [FieldOffset(0x53F)] public byte DyeCount;
         }
 
-        [StructLayout(LayoutKind.Sequential, Size = 0x14)]
-        public struct WeaponDataDelta { // TODO: Make layout explicit
-            public int PhysicalDamage;
-            public int MagicDamage;
-            public int Delay;
-            public int PhysicalDamageDelta;
-            public int MagicDamageDelta;
+        [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+        public struct WeaponDataDelta {
+            [FieldOffset(0x0)] public int PhysicalDamage;
+            [FieldOffset(0x4)] public int MagicDamage;
+            [FieldOffset(0x8)] public int Delay;
+            [FieldOffset(0xC)] public int PhysicalDamageDelta;
+            [FieldOffset(0x10)] public int MagicDamageDelta;
         }
 
-        [StructLayout(LayoutKind.Sequential, Size = 0x8)]
-        public struct ShieldDataDelta { // TODO: Make layout explicit
-            public int Block;
-            public int BlockDelta;
+        [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+        public struct ShieldDataDelta {
+            [FieldOffset(0x0)] public int Block;
+            [FieldOffset(0x4)] public int BlockDelta;
         }
 
-        [StructLayout(LayoutKind.Sequential, Size = 0x20)]
-        public struct GearDataDelta { // TODO: Make layout explicit
-            public int PhysicalDefense;
-            public int MagicDefense;
-            public int PhysicalDefenseDelta;
-            public int MagicDefenseDelta;
+        [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+        public struct GearDataDelta {
+            [FieldOffset(0x0)] public int PhysicalDefense;
+            [FieldOffset(0x4)] public int MagicDefense;
+            [FieldOffset(0x8)] public int PhysicalDefenseDelta;
+            [FieldOffset(0xC)] public int MagicDefenseDelta;
             /// <remarks>
             /// This is always the same as PhysicalDefense, but the game sets it separately
             /// </remarks>
-            public int LeftRingSlotPhysicalDefense;
+            [FieldOffset(0x10)] public int LeftRingSlotPhysicalDefense;
             /// <remarks>
             /// This is always the same as MagicDefense, but the game sets it separately
             /// </remarks>
-            public int LeftRingSlotMagicDefense;
-            public int LeftRingSlotPhysicalDefenseDelta;
-            public int LeftRingSlotMagicDefenseDelta;
+            [FieldOffset(0x14)] public int LeftRingSlotMagicDefense;
+            [FieldOffset(0x18)] public int LeftRingSlotPhysicalDefenseDelta;
+            [FieldOffset(0x1C)] public int LeftRingSlotMagicDefenseDelta;
         }
     }
 }

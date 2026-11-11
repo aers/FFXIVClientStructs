@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Common.Component.Environment;
+
 namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 // Common::Component::Excel::ExcelResourceListener
@@ -8,5 +10,5 @@ public unsafe partial struct ExcelResourceListener {
     public partial ExcelResourceListener* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
-    public partial void OnResourceLoad(nint unk); // TODO: change unk to Common::Component::Environment::ResourceInterface::ResourceHandleInterface* resource.
+    public partial void OnResourceLoad(ResourceInterface.ResourceHandleInterface* resource);
 }

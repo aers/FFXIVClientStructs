@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //       Component::GUI::AtkEventListener
 [Addon("MateriaRetrieveDialog")]
 [GenerateInterop]
-[Inherits<AtkUnitBase>] // TODO: replace with AddonMateriaDialogBase
+[Inherits<AddonMateriaDialogBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x238)]
 public partial struct AddonMateriaRetrieveDialog;

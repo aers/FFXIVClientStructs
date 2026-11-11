@@ -105,10 +105,10 @@ public enum ContentsType : byte {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x15C8)]
 public unsafe partial struct AgentContentsFinderReward {
-    [FieldOffset(0x00)] public RewardWrap NormalItems; // Actual items, e.g "Cracked Cluster"
+    [FieldOffset(0x00)] public AgentContentsFinderInterface.RewardsData NormalItems; // Actual items, e.g "Cracked Cluster"
     [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray5<InventoryItem> _unkItems;
-    [FieldOffset(0x388)] public RewardWrap BonusItems; // Actual items, e.g "Cracked Cluster"
-    [FieldOffset(0x5A8)] private RewardWrap UnkItemsWrap;
+    [FieldOffset(0x388)] public AgentContentsFinderInterface.RewardsData BonusItems; // Actual items, e.g "Cracked Cluster"
+    [FieldOffset(0x5A8)] private AgentContentsFinderInterface.RewardsData UnkItemsWrap;
 
     [FieldOffset(0x7D0)] public ExcelSheet* ItemSheet;
 
@@ -129,13 +129,5 @@ public unsafe partial struct AgentContentsFinderReward {
         [FieldOffset(0x50)] public int Quantity;
         [FieldOffset(0x54)] public uint IconId;
         [FieldOffset(0x58)] public Utf8String String;
-    }
-
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-    public partial struct RewardWrap { // TODO: this is the same as AgentContentsFinderInterface.RewardsData
-        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray7<InventoryItem> _items;
-        [FieldOffset(0x1F8), FixedSizeArray] internal FixedSizeArray9<int> _rewards;
-        [FieldOffset(0x21C)] public bool LimitedTimeBonus;
     }
 }
