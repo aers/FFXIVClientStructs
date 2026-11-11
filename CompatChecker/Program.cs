@@ -34,7 +34,7 @@ class Program {
             left = args[0];
             right = args[1];
         }
-        var outputFile = args.Length > 2 ? args[2] : Path.Combine(FallbackPath("ida"), "errors.txt");
+        var outputFile = args.Length > 2 ? args[2] : Path.Combine(FallbackPath("scripts"), "errors.txt");
 
         var p = new Process();
         p.StartInfo.FileName = "apicompat";

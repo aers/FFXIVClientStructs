@@ -136,11 +136,11 @@ jobs:
       - name: Install dependencies for PR branch
         run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Build PR branch
-        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output scripts/cs
       - uses: actions/upload-artifact@v4
         with:
           name: cs-pr
-          path: ida/cs/FFXIVClientStructs.dll
+          path: scripts/cs/FFXIVClientStructs.dll
           retention-days: 1
   
   build-main:
@@ -154,11 +154,11 @@ jobs:
       - name: Install dependencies for Main branch
         run: dotnet restore ./FFXIVClientStructs.slnx
       - name: Build Main branch
-        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output scripts/cs
       - uses: actions/upload-artifact@v4
         with:
           name: cs-main
-          path: ida/cs/FFXIVClientStructs.dll
+          path: scripts/cs/FFXIVClientStructs.dll
           retention-days: 1
 
   check-breaking-changes:
@@ -171,16 +171,16 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: cs-pr
-        path: ida/cs-pr
+        path: scripts/cs-pr
     - uses: actions/download-artifact@v4
       with:
         name: cs-main
-        path: ida/cs-main
+        path: scripts/cs-main
     - name: Check for breaking changes
       id: breaking_changes
       run: |
         dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
-        dotnet run --project CompatChecker/CompatChecker.csproj -c Release -- ida/cs-main/FFXIVClientStructs.dll ida/cs-pr/FFXIVClientStructs.dll ida/errors.txt
+        dotnet run --project CompatChecker/CompatChecker.csproj -c Release -- scripts/cs-main/FFXIVClientStructs.dll scripts/cs-pr/FFXIVClientStructs.dll scripts/errors.txt
         if [ -s ./scripts/errors.txt ]; then
           echo "breaking=true" >> $GITHUB_OUTPUT
         else

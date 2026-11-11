@@ -1,6 +1,8 @@
 *.dll
 ida/errors.txt
 ida/uld_names.txt
+scripts/errors.txt
+scripts/uld_names.txt
 .vscode/
 .idea/
 
