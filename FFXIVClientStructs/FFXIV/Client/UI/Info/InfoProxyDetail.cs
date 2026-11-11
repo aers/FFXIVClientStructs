@@ -50,9 +50,9 @@ public unsafe partial struct InfoProxyDetail {
         [FieldOffset(0x12), FixedSizeArray(isString: true)] internal FixedSizeArray193<byte> _searchComment;
     }
 
+    /// <remarks> Packet for InfoProxyDetail.AddData </remarks>
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1AC)]
-    /// <remarks> Packet for <see cref="InfoProxyDetail.AddData"/> </remarks>
     public partial struct AddDataPacket {
         [FieldOffset(0x000)] public ulong ContentId;
         [FieldOffset(0x010)] public ulong LookingForPartyClassJobIdMask;
