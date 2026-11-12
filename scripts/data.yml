@@ -18941,6 +18941,8 @@ classes:
     vtbls:
       - ea: 0x142374AF0
         base: Client::Game::Event::LuaEventHandler
+    vfuncs:
+      286: SetupLuaClass
     funcs:
       0x1419C0310: ctor
       0x1419C0620: ContentTalk
@@ -19410,6 +19412,7 @@ classes:
       330: GetContentTypeIconId
       335: SetExperience
       354: GetInstanceContentText
+      372: SetupLuaClass
     funcs:
       0x140B739D0: ctor
       0x140B70EA0: LoadInstanceContentTexts
