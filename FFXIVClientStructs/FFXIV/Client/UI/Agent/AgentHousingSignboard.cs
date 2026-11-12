@@ -10,6 +10,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AgentHousingSignboard {
+    [FieldOffset(0x48)] public HousingSignboardPurchaseDetailPacket SignboardPurchaseDetail;
+
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 7B ?? ?? 74 16")]
     public partial void ReadPacket(HousingSignboardPacket* packet);
 }
