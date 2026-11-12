@@ -330,6 +330,8 @@ class IdaInterface(object):
 
     def get_func_start(self, ea: int) -> int:
         """Start of the function containing ea."""
+        if hasattr(ida_funcs, 'get_func_start'):
+            return ida_funcs.get_func_start(ea)
         return ida_funcs.get_func(ea).start_ea
 
     def get_string_from_ptr(self, ea: int) -> str:
