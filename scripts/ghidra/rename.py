@@ -53,11 +53,15 @@ def apply_lua_funcs():
 
     for func_ea in eas:
         name = f"{lua_namespace}::{eas[func_ea]['name']}"
-        ghidra.set_func_name(func_ea, f"{name}.SetupLuaClass")
-        for call in eas[func_ea]['calls']:
-            regs = call['regs']
-            func_name = regs['r8']
-            ghidra.set_func_name(regs['r9']['val'], f"{name}.{func_name}", unique=True)
+        pre_name = ghidra.get_func_name(func_ea)
+        if pre_name.find('.') != -1:
+            [struct, func] = pre_name.split('.')
+        if pre_name.find('.') == -1 or (struct.split(':')[-1] != eas[func_ea]['name'] and func != 'SetupLuaClass'):
+            ghidra.set_func_name(func_ea, f"{name}.SetupLuaClass")
+            for call in eas[func_ea]['calls']:
+                regs = call['regs']
+                func_name = regs['r8']
+                ghidra.set_func_name(regs['r9']['val'], f"{name}.{func_name}", unique=True)
 
 start_logging("rename.py", monitor, isRunningHeadless())  # noqa
 
