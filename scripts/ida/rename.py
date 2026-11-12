@@ -42,11 +42,14 @@ def apply_lua_funcs():
 
     for func_ea in eas:
         name = f"{lua_namespace}::{eas[func_ea]['name']}"
-        ida.set_func_name(func_ea, f"{name}.SetupLuaClass")
-        for call in eas[func_ea]['calls']:
-            regs = call['regs']
-            func_name = regs['r8']
-            ida.set_func_name(regs['r9']['val'], f"{name}.{func_name}", unique=True)
+        pre_name = ida.get_func_name(func_ea)
+        [struct, func] = pre_name.split('.')
+        if struct.split(':')[-1] != eas[func_ea]['name'] and func != 'SetupLuaClass':
+            ida.set_func_name(func_ea, f"{name}.SetupLuaClass")
+            for call in eas[func_ea]['calls']:
+                regs = call['regs']
+                func_name = regs['r8']
+                ida.set_func_name(regs['r9']['val'], f"{name}.{func_name}", unique=True)
 
 ida = IdaInterface()
 ida.select_parser()
