@@ -75,6 +75,14 @@ public struct HousingSignboardPurchaseDetailPacket {
     [FieldOffset(0x1C)] public int GilToReceive; // Gil to receive for relocating if you won, the refund if you lost or your bid was forfeited
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
+public struct HousingSignboardPricePacket {
+    [FieldOffset(0x00)] public int Price;
+
+    /// <remarks> Unix timestamp. </remarks>
+    [FieldOffset(0x04)] public uint NextDevaluationTimestamp;
+}
+
 public enum PlotPurchaseType : byte {
     Unavailable = 0,
     FCFS = 1,

@@ -38,6 +38,9 @@ public unsafe partial struct AgentHousingSignboard {
     [FieldOffset(0xB8)] public uint AddonId0;
     [FieldOffset(0xBC)] public uint AddonId1;
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 48 8B F9 4C")]
+    public partial void ReadPricePacket(HousingSignboardPricePacket* packet);
+
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 7B ?? ?? 74 16")]
     public partial void ReadPacket(HousingSignboardPacket* packet);
 }

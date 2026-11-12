@@ -7084,6 +7084,7 @@ classes:
       0x140B4C330: HandleAchievementsPacket
       0x140B4C3A0: HandleFateProgressTabPacket
       0x140B4C5D0: HousingSignboardPurchaseDetailPacket
+      0x140B4C870: HousingSignboardPricePacket
       0x140B4C8B0: HandleHousingSignboardPacket
       0x140B4C8F0: HandleHousingPortalPacket
       0x140B4D840: HandleDeepDungeonMapInfoPacket
@@ -14425,6 +14426,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141731A60: ctor
+      0x141732C80: ReadPricePacket
       0x141732D60: ReadPacket
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
