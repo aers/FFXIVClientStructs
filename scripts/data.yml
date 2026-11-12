@@ -167,7 +167,6 @@ functions:
 #fail   0x1402404F0: HalfToFloat
   0x14005F4E0: GetStdOut
   0x14005F4F0: vsprintf_s
-  0x14005F550: vswprintf_s
   0x1400944F0: IsMacClient
   0x1400D4400: CheckOsTypeAndVersion
 #fail   0x1400683A0: GetMyDocumentsFolder #as UTF8String
