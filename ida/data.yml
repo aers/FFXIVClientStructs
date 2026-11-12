@@ -485,6 +485,7 @@ functions:
   0x1409752C0: FreeCompanyDialogPacketReceive # (InfoProxyInterface* ptr, byte* packetData)
   0x1417A3190: SnipeTask # ulong (EventSceneModuleImplBase* scene, lua_State* state)
   0x1419B1AC0: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
+  0x141DE4BFC: GetUnixTimestamp
 
 classes:
   Common::TimePoint:
@@ -17814,6 +17815,7 @@ classes:
       0x1417E2B30: IsItemObtainable
       0x1417E2B60: CheckItemsObtainable
       0x1417E2B90: CheckItemsObtainableRareCheck
+      0x141CA4D70: OpenSignboard
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x1422DCE08
