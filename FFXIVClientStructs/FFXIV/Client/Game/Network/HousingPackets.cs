@@ -30,6 +30,7 @@ public partial struct HousingPortalPacket {
 [StructLayout(LayoutKind.Explicit, Size = 0x118)] // at least this big
 public partial struct HousingSignboardPacket {
     [FieldOffset(0x00)] public HouseId HouseId;
+    [FieldOffset(0x08)] public ulong OwnerId; // Can be either a Player or an FC
 
     [FieldOffset(0x14)] public bool IsOpen;
     /// <remarks>
