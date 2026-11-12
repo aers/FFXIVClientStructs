@@ -64,10 +64,10 @@ public struct HousingSignboardPurchaseDetailPacket {
     [FieldOffset(0x04)] public PlotPurchaseOwnerType BidType;
 
     /// <remarks> Unix timestamp. </remarks>
-    [FieldOffset(0x08)] public long PhaseEndTimestamp;
+    [FieldOffset(0x08)] public uint PhaseEndTimestamp;
 
     /// <remarks> Unix timestamp. </remarks>
-    [FieldOffset(0x0C)] public long ClaimEndTimestamp;
+    [FieldOffset(0x0C)] public uint ClaimEndTimestamp;
 
     [FieldOffset(0x10)] public int BidEntryCount;
     [FieldOffset(0x14)] public int BidWinnerNumber1; // Used if BidStatus is PlotBidStatus.Won

@@ -23,7 +23,7 @@ public unsafe partial struct AgentHousingSignboard {
     [FieldOffset(0x48)] public HousingSignboardPurchaseDetailPacket SignboardPurchaseDetail;
     [FieldOffset(0x70)] public bool IsFirstComeFirstServed;
     [FieldOffset(0x71)] public bool OpenYesNoOkAddon;
-    [FieldOffset(0x80)] public TimePoint StartTime;
+    [FieldOffset(0x78)] public TimePoint StartTime;
 
     /// <remarks> Unix timestamp. </remarks>
     [FieldOffset(0x90)] public uint CurrentTimestamp;
