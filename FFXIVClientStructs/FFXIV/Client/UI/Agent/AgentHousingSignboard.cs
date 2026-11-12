@@ -46,8 +46,8 @@ public unsafe partial struct AgentHousingSignboard {
 }
 
 public enum PlotSignboardType : byte {
-    ForSale = 0,
-    Estate = 1,
+    Estate = 0,
+    ForSale = 1,
     PrivateChambers = 2, // FC Room
     Apartment = 3,
 }
