@@ -22,6 +22,17 @@ internal static class IParameterSymbolExtensions {
         if (defaultValue is float floatValue)
             return defaultValue + "f";
 
-        return defaultValue.ToString();
+        var type = symbol.Type;
+
+        if (type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } nullable)
+            type = nullable.TypeArguments[0];
+
+        if (type is not INamedTypeSymbol { TypeKind: TypeKind.Enum } enumType)
+            return defaultValue.ToString();
+
+        var member = enumType.GetMembers().OfType<IFieldSymbol>().FirstOrDefault(f => f.HasConstantValue && Equals(f.ConstantValue, defaultValue));
+        var enumNameFullyQualified = enumType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+        return member is not null ? $"{enumNameFullyQualified}.{member.Name}" : $"({enumNameFullyQualified}){defaultValue}";
     }
 }
