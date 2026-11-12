@@ -485,6 +485,7 @@ functions:
   0x1409752C0: FreeCompanyDialogPacketReceive # (InfoProxyInterface* ptr, byte* packetData)
   0x1417A3190: SnipeTask # ulong (EventSceneModuleImplBase* scene, lua_State* state)
   0x1419B1AC0: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
+  0x141DE4BFC: GetUnixTimestamp
 
 classes:
   Common::TimePoint:
@@ -2439,6 +2440,7 @@ classes:
       0x140E1DDE0: GetMovingHousingObject
       0x140E1E3E0: SetTemporaryObject
       0x140E1E4A0: SetTemporaryObjectStain
+      0x140E1E680: SetSignboardPurchaseDetail
       0x140E1D5F0: DepositItemInStoreroom
       0x140E20740: RequestWardInfo
   Client::Game::HouseId:
@@ -7081,6 +7083,8 @@ classes:
       0x140B4C150: HandleNPCYellPacket
       0x140B4C330: HandleAchievementsPacket
       0x140B4C3A0: HandleFateProgressTabPacket
+      0x140B4C5D0: HousingSignboardPurchaseDetailPacket
+      0x140B4C870: HousingSignboardPricePacket
       0x140B4C8B0: HandleHousingSignboardPacket
       0x140B4C8F0: HandleHousingPortalPacket
       0x140B4D840: HandleDeepDungeonMapInfoPacket
@@ -14422,6 +14426,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141731A60: ctor
+      0x141732C80: ReadPricePacket
       0x141732D60: ReadPacket
   Client::UI::Agent::AgentHousingPortal:
     vtbls:
@@ -17812,6 +17817,7 @@ classes:
       0x1417E2B30: IsItemObtainable
       0x1417E2B60: CheckItemsObtainable
       0x1417E2B90: CheckItemsObtainableRareCheck
+      0x141CA4D70: OpenSignboard
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x1422DCE08

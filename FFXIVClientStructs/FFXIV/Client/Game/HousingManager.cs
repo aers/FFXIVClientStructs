@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::HousingManager
@@ -58,6 +60,10 @@ public unsafe partial struct HousingManager {
     /// <remarks> Triggers server communication (possibly multiple requests). </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 45 32 F6 E9")]
     public partial bool MoveToEntry();
+
+    /// <remarks> Only effective when <see cref="OutdoorTerritory"/> is loaded. </remarks>
+    [MemberFunction("48 8B 41 08 48 85 C0 74 22 0F")]
+    public partial void SetSignboardPurchaseDetail(HousingSignboardPurchaseDetailPacket* packet);
 
     /// <summary>
     /// Gets the TerritoryTypeId of the house the player is currently standing at.<br/>
