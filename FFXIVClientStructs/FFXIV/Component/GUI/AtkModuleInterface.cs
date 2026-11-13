@@ -13,13 +13,13 @@ public unsafe partial struct AtkModuleInterface {
     public partial bool IsUIReady(bool ignoreHudInitialized = false);
 
     [VirtualFunction(9)]
-    public partial NumberArrayData* GetNumberArrayData(int index);
+    public partial NumberArrayData* GetNumberArrayData(NumberArrayType index);
 
     [VirtualFunction(10)]
-    public partial StringArrayData* GetStringArrayData(int index);
+    public partial StringArrayData* GetStringArrayData(StringArrayType index);
 
     [VirtualFunction(11)]
-    public partial ExtendArrayData* GetExtendArrayData(int index);
+    public partial ExtendArrayData* GetExtendArrayData(ExtendArrayType index);
 
     [VirtualFunction(12)]
     public partial void ClearNumberArrayData(int index);
