@@ -7083,8 +7083,8 @@ classes:
       0x140B4C150: HandleNPCYellPacket
       0x140B4C330: HandleAchievementsPacket
       0x140B4C3A0: HandleFateProgressTabPacket
-      0x140B4C5D0: HousingSignboardPurchaseDetailPacket
-      0x140B4C870: HousingSignboardPricePacket
+      0x140B4C5D0: HandleHousingSignboardPurchaseDetailPacket
+      0x140B4C870: HandleHousingSignboardPricePacket
       0x140B4C8B0: HandleHousingSignboardPacket
       0x140B4C8F0: HandleHousingPortalPacket
       0x140B4D840: HandleDeepDungeonMapInfoPacket
