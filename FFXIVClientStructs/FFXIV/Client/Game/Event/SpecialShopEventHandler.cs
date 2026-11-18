@@ -17,7 +17,7 @@ public unsafe partial struct SpecialShopEventHandler {
     [FieldOffset(0x248)] public Utf8String ShopName;
     [FieldOffset(0x2B0)] private int Unk2B0; // whether it's AgentShop or AgentFreeShop
     [FieldOffset(0x2B4)] private uint BuyItemIndex; // index into Items of the item currently being bought
-    [FieldOffset(0x2B8)] private int[] Unk2B8; // some other transaction state
+    // 0x2B8 some other transaction state, int[3]
     [FieldOffset(0x2C4)] public bool WaitingForTransactionToFinish;
     [FieldOffset(0x2D8)] private int BuyItemCount;
 
