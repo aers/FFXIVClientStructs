@@ -18970,6 +18970,9 @@ classes:
     vtbls:
       - ea: 0x1422D5068
         base: Client::Game::Event::EventHandler
+    funcs:
+      0x141764EF0: CreateInstance
+      0x141765070: ctor
   Client::Game::InstanceContent::DeepDungeonEventHandler: # 0x1C
     vtbls:
       - ea: 0x14239D008
