@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::MapDiscoveryManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1024)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1044)]
 public unsafe partial struct MapDiscoveryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 47", 3)]
     public static partial MapDiscoveryManager* Instance();
@@ -12,8 +12,8 @@ public unsafe partial struct MapDiscoveryManager {
     [FieldOffset(0x000), FixedSizeArray] internal FixedSizeArray162<DiscoveryTable16> _mapsWithUpTo16Regions;
     /// <summary> Maps with up to 32 discoverable regions </summary>
     /// <remarks> Index is DiscoveryIndex, used when DiscoveryArrayByte is false (from Map sheet) </remarks>
-    [FieldOffset(0xA20), FixedSizeArray] internal FixedSizeArray48<DiscoveryTable32> _mapsWithUpTo32Regions;
-    [FieldOffset(0x1020)] public float ReportCooldown;
+    [FieldOffset(0xA20), FixedSizeArray] internal FixedSizeArray49<DiscoveryTable32> _mapsWithUpTo32Regions;
+    [FieldOffset(0x1040)] public float ReportCooldown;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 8B FA")]
     public partial bool IsDiscoveryEnabledForMap(uint mapId);

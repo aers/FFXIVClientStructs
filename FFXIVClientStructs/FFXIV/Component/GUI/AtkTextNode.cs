@@ -65,8 +65,9 @@ public unsafe partial struct AtkTextNode : ICreatable<AtkTextNode> {
     }
 
     public void SetText(ReadOnlySpan<byte> str) {
+        byte zero = 0;
         fixed (byte* strPtr = str) {
-            SetText(strPtr);
+            SetText(strPtr == null ? &zero : strPtr);
         }
         OriginalTextPointer = NodeText.StringPtr;
     }

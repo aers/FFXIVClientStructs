@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Animation;
 using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
@@ -33,6 +34,10 @@ public unsafe partial struct BgObject {
     [GenerateStringOverloads]
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 8B ?? ?? ?? ?? 84 C0 74 21")]
     public partial bool LoadAnimationData(CStringPointer modelResourcePath);
+
+    [GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 10 48 3B FB 75 BB 48 8B BD")]
+    public partial void PlayAnimation(CStringPointer animationName, PlayAnimationParams* playParams, AnimationControllerHandle** controllerHandle = null);
 
     /// <summary>
     /// Resets the <see cref="BgObject.Flags"/>, <see cref="BgObject.OutlineFlags"/>, and <see cref="BgObject.ObjectFlags"/>
@@ -90,9 +95,10 @@ public unsafe partial struct BgObjectStainBuffer {
     /// </remarks>
     [FieldOffset(0x04)] public Vector4 LinearFloatColor;
 
-    // Unclear what kind of resource handle these are. They are loaded from a path in the mdl file, and I haven't seen them actually used.
-    [FieldOffset(0x18)] public ResourceHandle* LoadedResource;
-    [FieldOffset(0x20)] public ResourceHandle* LoadingResource;
+    [FieldOffset(0x18), Obsolete("Use LoadedCustomMaterialResource")] public ResourceHandle* LoadedResource;
+    [FieldOffset(0x18)] public MaterialResourceHandle* LoadedCustomMaterialResource;
+    [FieldOffset(0x20), Obsolete("Use LoadingCustomMaterialResource")] public ResourceHandle* LoadingResource;
+    [FieldOffset(0x20)] public MaterialResourceHandle* LoadingCustomMaterialResource;
 
     /// <summary>
     /// Three flags populated from the model resource.
@@ -113,6 +119,9 @@ public unsafe partial struct BgObjectStainBuffer {
     /// <returns>Always true.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 41 0F B6 D6")]
     public partial bool Initialize(ModelResourceHandle* modelResource);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 F6 41 30 02"), GenerateStringOverloads]
+    public partial void SetCustomMaterialResource(CStringPointer materialResourcePath);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
@@ -121,4 +130,5 @@ public unsafe struct BgObjectAnimationData {
     [FieldOffset(0x100)] public SkeletonResourceHandle* AsyncSkeletonResourceHandle;
     [FieldOffset(0x108)] public ResourceHandle* AsyncPapResourceHandle; // TODO: use PartialAnimationPackResourceHandle*
     [FieldOffset(0x110)] public Render.Skeleton* RenderSkeleton;
+    [FieldOffset(0x118)] public AnimationControllerHandle* AnimationControllerHandle;
 }

@@ -30,6 +30,9 @@ public unsafe partial struct ContentsReplayManager {
 
     [FieldOffset(0x72C)] public float PlaybackSpeed;
 
+    /// <summary> The value last set as the replay volume of the <c>SoundManager</c>, 0 or 1. </summary>
+    [FieldOffset(0x730)] public float SoundVolume;
+
     [FieldOffset(0x740)] public ushort Level;
     [FieldOffset(0x742)] public ContentsReplayStatus Status;
     [FieldOffset(0x743)] public ContentsReplayPlaybackControl PlaybackControls;

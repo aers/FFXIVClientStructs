@@ -38,6 +38,9 @@ public unsafe partial struct AtkDragDropInterface {
     [VirtualFunction(14)]
     public partial void Cancel(); // stops drag drop and preview flies back to its original spot
 
+    [VirtualFunction(15)]
+    public partial AtkComponentDragDrop* CreateDragDropPreview();
+
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct FlyBackAnimationData {
         [FieldOffset(0x00)] public float X;

@@ -5,4 +5,6 @@ public struct TimePoint {
     [FieldOffset(0x00)] public int Timestamp;
     [FieldOffset(0x08)] public ulong CpuMilliSeconds;
     [FieldOffset(0x10)] public ulong CpuMicroSeconds;
+
+    public static implicit operator TimeSpan(TimePoint timePoint) => TimeSpan.FromSeconds(timePoint.Timestamp);
 }

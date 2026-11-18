@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -20,5 +21,9 @@ public unsafe partial struct AtkMessageBoxManager {
     // Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-    public partial struct AtkMessageBoxEvent;
+    public unsafe partial struct AtkMessageBoxEvent {
+        /// <returns><c>false</c> if the game is exiting, otherwise <c>true</c>.</returns>
+        [VirtualFunction(0)]
+        public partial bool OnDismissed(void* a2, AtkValue* value);
+    }
 }
