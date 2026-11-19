@@ -61,7 +61,7 @@ public struct HousingSignboardPurchaseDetailPacket {
     [FieldOffset(0x01)] public PlotPurchaseOwnerType AvailabilityType;
     [FieldOffset(0x02)] public PlotLotteryPeriod LotteryPeriod;
     [FieldOffset(0x03)] public PlotBidStatus BidStatus;
-    [FieldOffset(0x04)] public PlotPurchaseOwnerType BidType;
+    [FieldOffset(0x04)] public PlotBidType BidType;
 
     /// <remarks> Unix timestamp. </remarks>
     [FieldOffset(0x08)] public uint PhaseEndTimestamp;
@@ -102,10 +102,16 @@ public enum PlotLotteryPeriod : byte {
 }
 
 public enum PlotBidStatus : byte {
-    None,
+    None = 0,
     Placed = 1,
     Won = 2,
     Forfeited = 3,
     Lost = 4,
     LostExpired = 5,
+}
+
+public enum PlotBidType : byte {
+    None = 0,
+    FreeCompany = 1,
+    Individual = 2,
 }
