@@ -34,7 +34,7 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0x1098), FixedSizeArray] internal FixedSizeArray800<ushort> _glamourDresserItemSetUnlockBits;
     [FieldOffset(0x16D8), FixedSizeArray] internal FixedSizeArray125<uint> _cabinetItemUnlockBits;
 
-    [FieldOffset(0x18D8)] public ItemFinderModuleResult* Result;
+    [FieldOffset(0x18E0)] public ItemFinderModuleResult* Result;
 
     /// <summary>
     /// Searches inventories for the specified item id and opens the Item Search List window to display the results.
