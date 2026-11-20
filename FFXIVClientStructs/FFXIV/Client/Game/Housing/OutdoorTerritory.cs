@@ -1,4 +1,5 @@
 // ReSharper disable once CheckNamespace
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
@@ -44,6 +45,8 @@ public unsafe partial struct OutdoorTerritory {
     [FieldOffset(0x130D4), FixedSizeArray] internal FixedSizeArray62<HousingMapMarkerInfo> _housingMapMarkerInfos;
 
     [FieldOffset(0x135C0)] public HousingGuestBookData GuestBook;
+
+    [FieldOffset(0x13D70)] public HousingSignboardPurchaseDetailPacket SignboardPurchaseDetail;
 
     /// <summary>
     /// Get the Icon ID used for map icons in housing areas.
