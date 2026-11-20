@@ -29,7 +29,7 @@ public unsafe partial struct AtkTooltipManager {
     [FieldOffset(0x1E8)] public ushort ParentAddonId; // the opener
 
     /// <remarks> See <see cref="AtkTooltipType"/>. </remarks>
-    [FieldOffset(0x1F4)] public byte TooltipType;
+    [FieldOffset(0x1F4)] public byte TooltipType; // TODO: use AtkTooltipType and remove comment
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
