@@ -108088,7 +108088,7 @@ structs:
     is_string: False
   - type: Client::UI::Misc::ItemFinderModuleResult*
     name: Result
-    offset: 6360
+    offset: 6368
   virtual_functions:
   - name: ReadFile
     offset: 8
