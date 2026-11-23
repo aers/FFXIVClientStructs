@@ -60,5 +60,5 @@ public unsafe partial struct TimelineContainer {
     public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? B2 12")]
-    public partial void PlayActionTimeline(ushort introId, ushort loopId = 0, void* a4 = null);
+    public partial bool PlayActionTimeline(ushort introId, ushort loopId = 0, void* a4 = null);
 }
