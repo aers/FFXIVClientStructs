@@ -17,7 +17,7 @@ public unsafe partial struct WorldHelper {
     [FieldOffset(0x48)] public bool IsLoaded;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 F6 75 17")]
-    public partial World GetWorldById(ushort world);
+    public partial World* GetWorldById(ushort world);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 F5")]
     public partial CStringPointer GetWorldNameById(ushort world);
