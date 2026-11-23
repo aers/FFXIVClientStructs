@@ -28,9 +28,7 @@ public unsafe partial struct AgentHousingSignboard {
     /// <remarks> Unix timestamp. </remarks>
     [FieldOffset(0x90)] public uint CurrentTimestamp;
 
-    /// <remarks> Unix timestamp. </remarks>
-    [FieldOffset(0x94)] public uint NextDevaluationTimestamp;
-
+    [FieldOffset(0x94)] public uint NextDevaluation; // Time until next devaluation
     [FieldOffset(0x98)] public int Price;
     [FieldOffset(0x9C)] public PlotSignboardBuyType SignboardBuyType;
     [FieldOffset(0xA0), FixedSizeArray] internal FixedSizeArray3<PlotSignboardBuyType> _unkA0;
