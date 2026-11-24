@@ -28293,6 +28293,19 @@ structs:
     name: MKDSupportJobLevel
     offset: 13
   member_functions: []
+- type: Client::UI::Info::InfoProxyDetail::AddDataPacket::ClassJobEntry
+  name: ClassJobEntry
+  namespace: Client.UI.Info
+  union: False
+  size: 4
+  fields:
+  - type: byte
+    name: ClassJobId
+    offset: 0
+  - type: unsigned __int16
+    name: Level
+    offset: 2
+  member_functions: []
 - type: Client::UI::Info::InfoProxyDetail::DetailUpdateData
   name: DetailUpdateData
   namespace: Client.UI.Info
@@ -64066,7 +64079,7 @@ structs:
     offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 85 F6 75 17
-    return_type: Client::UI::Misc::WorldHelper::World
+    return_type: Client::UI::Misc::WorldHelper::World*
     name: GetWorldById
     parameters:
     - type: Client::UI::Misc::WorldHelper*
@@ -68509,88 +68522,88 @@ structs:
   - type: unsigned __int16
     name: ClassLv
     offset: 42
-    size: 32
+    size: 33
     is_string: False
   - type: byte
     name: Race
-    offset: 106
-  - type: byte
-    name: Tribe
-    offset: 107
-  - type: byte
-    name: Sex
     offset: 108
   - type: byte
-    name: BirthMonth
+    name: Tribe
     offset: 109
   - type: byte
-    name: Birthday
+    name: Sex
     offset: 110
   - type: byte
-    name: GuardianDeity
+    name: BirthMonth
     offset: 111
   - type: byte
-    name: FirstClass
+    name: Birthday
     offset: 112
-  - type: unsigned __int16
-    name: ZoneId
+  - type: byte
+    name: GuardianDeity
+    offset: 113
+  - type: byte
+    name: FirstClass
     offset: 114
   - type: unsigned __int16
-    name: TerritoryType
+    name: ZoneId
     offset: 116
   - type: unsigned __int16
-    name: ContentFinderCondition
+    name: TerritoryType
     offset: 118
+  - type: unsigned __int16
+    name: ContentFinderCondition
+    offset: 120
   - type: Client::Game::Character::CustomizeData
     name: CustomizeData
-    offset: 120
+    offset: 122
   - type: unsigned __int64
     name: ModelMainWeapon
-    offset: 152
+    offset: 184
   - type: unsigned __int64
     name: ModelSubWeapon
-    offset: 160
+    offset: 192
   - type: unsigned int
     name: ModelEquip
-    offset: 168
+    offset: 200
     size: 10
     is_string: False
   - type: byte
     name: EquipStain1
-    offset: 208
+    offset: 240
     size: 10
     is_string: False
   - type: unsigned __int16
     name: Glasses
-    offset: 218
+    offset: 250
     size: 2
     is_string: False
   - type: unsigned int
     name: AdditionalTimeEndRemake
-    offset: 224
+    offset: 256
   - type: unsigned int
     name: RemakeFlag
-    offset: 228
+    offset: 260
   - type: Application::Network::WorkDefinitions::ClientSelectDataConfigFlags
     name: ConfigFlags
-    offset: 232
+    offset: 264
   - type: byte
     name: VoiceId
-    offset: 234
+    offset: 266
   - type: char
     name: IsNewGame
-    offset: 235
+    offset: 267
   - type: char
     name: WorldName
-    offset: 236
+    offset: 268
     size: 32
     is_string: True
   - type: unsigned __int64
     name: LoginStatus
-    offset: 272
+    offset: 304
   - type: char
     name: IsOutTerritory
-    offset: 280
+    offset: 312
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::CastInfo
@@ -90708,6 +90721,45 @@ structs:
     - type: Client::UI::Info::InfoProxyCircleFinder*
       name: this
   member_functions: []
+- type: Client::UI::Info::InfoProxyDetail::AddDataPacket
+  name: AddDataPacket
+  namespace: Client.UI.Info
+  union: False
+  size: 428
+  fields:
+  - type: unsigned __int64
+    name: ContentId
+    offset: 0
+  - type: unsigned __int64
+    name: LookingForPartyClassJobIdMask
+    offset: 16
+  - type: Client::UI::Agent::CrestData
+    name: Crest
+    offset: 24
+  - type: unsigned __int16
+    name: WorldId
+    offset: 34
+  - type: char
+    name: SearchComment
+    offset: 36
+    size: 193
+    is_string: True
+  - type: char
+    name: FcName
+    offset: 229
+    size: 22
+    is_string: True
+  - type: byte
+    name: GcRanks
+    offset: 251
+    size: 4
+    is_string: False
+  - type: Client::UI::Info::InfoProxyDetail::AddDataPacket::ClassJobEntry
+    name: ClassJobEntries
+    offset: 256
+    size: 43
+    is_string: False
+  member_functions: []
 - type: Client::UI::Misc::AddonConfig
   name: AddonConfig
   namespace: Client.UI.Misc
@@ -95696,7 +95748,7 @@ structs:
     - type: Client::Game::Character::TimelineContainer*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? B2 12
-    return_type: void
+    return_type: char
     name: PlayActionTimeline
     parameters:
     - type: Client::Game::Character::TimelineContainer*
@@ -107272,15 +107324,41 @@ structs:
     name: InfoProxyInterface
     offset: 0
     base: true
+  - type: unsigned __int64
+    name: RequestedContentId
+    offset: 24
+  - type: unsigned __int64
+    name: UnkRequestedContentId
+    offset: 32
   - type: Client::UI::Info::InfoProxyDetail::DetailUpdateData
     name: UpdateData
     offset: 40
   - type: Client::System::String::Utf8String
     name: SearchComment
     offset: 256
+  - type: Client::System::String::Utf8String
+    name: UnkUtf8Strings
+    offset: 360
+    size: 2
+    is_string: False
   - type: char
     name: HasUpdateData
     offset: 568
+  - type: char
+    name: Unk239
+    offset: 569
+  - type: char
+    name: Unk23A
+    offset: 570
+  - type: char
+    name: Unk23B
+    offset: 571
+  - type: char
+    name: Unk23C
+    offset: 572
+  - type: char
+    name: Unk23D
+    offset: 573
   virtual_functions:
   - name: AddData
     offset: 8
