@@ -27703,6 +27703,24 @@ classes:
     vtbls:
       - ea: 0x1422A70F8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
+  Client::UI::AddonQTEMash:
+    vtbls:
+      - ea: 0x142253608
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141368AE0: ctor
+  Client::UI::AddonQTEKeep:
+    vtbls:
+      - ea: 0x142253890
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141369680: ctor
+  Client::UI::AddonQTEKeepTime:
+    vtbls:
+      - ea: 0x142253B20
+        base: Client::UI::AddonQTEKeep
+    funcs:
+      0x14136A7E0: ctor
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x1422D8778
