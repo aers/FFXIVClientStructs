@@ -1,9 +1,11 @@
 using InteropGenerator.Helpers;
+using Microsoft.CodeAnalysis;
 
 namespace InteropGenerator.Models;
 
 internal sealed record FixedSizeArrayInfo(
     string FieldName,
+    Accessibility Accessibility,
     string Type,
     int Size,
     bool IsString,

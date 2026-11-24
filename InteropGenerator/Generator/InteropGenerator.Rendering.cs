@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace InteropGenerator.Generator;
@@ -317,6 +318,9 @@ public sealed partial class InteropGenerator {
 
     private static void RenderFixedSizeArrayAccessors(StructInfo structInfo, IndentedTextWriter writer) {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in structInfo.FixedSizeArrays) {
+            if (fixedSizeArrayInfo.Accessibility == Accessibility.Private) {
+                continue;
+            }
             writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
             foreach (string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes) {
                 writer.WriteLine(inheritedAttribute);

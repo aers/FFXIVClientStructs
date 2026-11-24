@@ -189,14 +189,14 @@ internal static class DiagnosticDescriptors {
         "A signature format is invalid (valid format is 2-character bytes seperated by spaces with ? as the wildcard character with no leading or trailign spaces)."
     );
 
-    public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustBeInternal = new(
+    public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustBeInternalOrPrivate = new(
         "CSIG0301",
-        "Fixed size array backing field must be internal",
-        "The field {0} marked as a fixed size array must be internal",
+        "Fixed size array backing field must be internal or private",
+        "The field {0} marked as a fixed size array must be internal or private",
         "InteropGenerator.Field",
         DiagnosticSeverity.Error,
         true,
-        "A field marked with the FixedSizeArray attribute is not marked internal.");
+        "A field marked with the FixedSizeArray attribute is not marked internal or private.");
 
     public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustHaveProperlyNamedType = new(
         "CSIG0302",
