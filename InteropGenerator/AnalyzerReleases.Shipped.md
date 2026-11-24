@@ -22,7 +22,7 @@
 | CSIG0110 | InteropGenerator.Method    | Error    | Method marked for virtual function generation has an index out of the bounds defined by the struct's virtual table  |
 | CSIG0201 | InteropGenerator.Signature | Error    | Signature contains invalid characters (valid characters are A-F 0-9 ? and space)                                    |
 | CSIG0202 | InteropGenerator.Signature | Error    | Signature format is invalid (must be 2 character bytes seperated by spaces with no leading or trailing space)       |
-| CSIG0301 | InteropGenerator.Field     | Error    | Field marked for fixed size array generation must be internal                                                       |
+| CSIG0301 | InteropGenerator.Field     | Error    | Field marked for fixed size array generation must be internal or private                                            |
 | CSIG0302 | InteropGenerator.Field     | Error    | Field marked for fixed size array generation must have a proper type name (FixedSizeArray#\<T>)                     |
 | CSIG0303 | InteropGenerator.Field     | Error    | Field marked for fixed size array generation must have a proper filed name                                          |
 | CSIG0304 | InteropGenerotor.Field     | Error    | Field marked for fixed size array generation with isString set to true must use byte or char as the underlying type |

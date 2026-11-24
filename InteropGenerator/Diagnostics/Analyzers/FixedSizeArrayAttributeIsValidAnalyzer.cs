@@ -10,7 +10,7 @@ namespace InteropGenerator.Diagnostics.Analyzers;
 public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer {
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [
-        FixedSizeArrayFieldMustBeInternal,
+        FixedSizeArrayFieldMustBeInternalOrPrivate,
         FixedSizeArrayFieldMustHaveProperlyNamedType,
         FixedSizeArrayFieldMustHaveProperNaming,
         FixedSizeArrayStringFieldMustBeByteOrChar,
@@ -82,9 +82,9 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
                     }
                 }
 
-                if (fieldSymbol.DeclaredAccessibility != Accessibility.Internal) {
+                if (fieldSymbol.DeclaredAccessibility is not (Accessibility.Internal or Accessibility.Private)) {
                     context.ReportDiagnostic(Diagnostic.Create(
-                        FixedSizeArrayFieldMustBeInternal,
+                        FixedSizeArrayFieldMustBeInternalOrPrivate,
                         fieldSymbol.Locations.FirstOrDefault(),
                         fieldSymbol.Name));
                 }

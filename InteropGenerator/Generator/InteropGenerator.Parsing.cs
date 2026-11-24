@@ -305,6 +305,7 @@ public sealed partial class InteropGenerator {
 
                 FixedSizeArrayInfo fixedSizeArrayInfo = new(
                     fieldSymbol.Name,
+                    fieldSymbol.DeclaredAccessibility,
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
                     size,
                     isString,

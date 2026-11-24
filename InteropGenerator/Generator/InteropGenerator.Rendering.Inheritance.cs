@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
+using Microsoft.CodeAnalysis;
 
 namespace InteropGenerator.Generator;
 
@@ -316,6 +317,9 @@ public sealed partial class InteropGenerator {
 
     private static void RenderInheritedFixedSizeArrayAccessors(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in inheritedStruct.FixedSizeArrays) {
+            if (fixedSizeArrayInfo.Accessibility == Accessibility.Private) {
+                continue;
+            }
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
             writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             foreach (string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes) {
