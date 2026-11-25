@@ -85,6 +85,7 @@ public unsafe partial struct EmoteController {
         Doze = 4,
         Umbrella = 5,
         Accessory = 6,
+        AvalancheGatlingGun = 7,
     }
 
     public enum Posture {
