@@ -152,6 +152,7 @@ globals:
   0x142F78FA0: ?s_instance@?$hkSingleton@VhkBuiltinTypeRegistry@@@@2PEAVhkBuiltinTypeRegistry@@EA
   0x142F78FF0: ?s_instance@?$hkSingleton@VhkSerializeDeprecated@@@@2PEAVhkSerializeDeprecated@@EA
   0x142F915B8: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
+  0x14217cc40: g_Client::Game::Control::PoseTypeInfoList
 
 functions:
   0x14005B120: VectorConstructorIterator
