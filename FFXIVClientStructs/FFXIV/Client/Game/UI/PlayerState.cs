@@ -125,6 +125,7 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="InstanceContent.IsRouletteComplete" />. Not a bit array. </remarks>
     [FieldOffset(0x520), FixedSizeArray] internal FixedSizeArray10<byte> _contentRouletteCompletion;
     [FieldOffset(0x52C)] public short PlayerCommendations;
+    /// <remarks> For the index, see <see cref="EmoteController.PoseType"/>. </remarks>
     [FieldOffset(0x52E), FixedSizeArray] internal FixedSizeArray8<byte> _selectedPoses;
     [FieldOffset(0x536), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
     // BitCount: SecretRecipeBookSheet.RowCount
