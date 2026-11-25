@@ -137,9 +137,9 @@ globals:
   0x142AA9128: g_MacroTime
   0x142ADDD40: g_LogoutCountdownAddonId
   0x142ADDD46: g_LogoutShouldCloseGame
-  0x142AFDD90: g_nvapi_Library
-  0x142AFDDA8: g_nvapi_pepQueryInterface
-  0x142AFDDA0: g_nvapi_QueryInterface
+  0x142AFDD90: g_NvAPI_Library
+  0x142AFDDA8: g_NvAPI_pepQueryInterface
+  0x142AFDDA0: g_NvAPI_QueryInterface
   0x142AFDDB0: g_NvAPI_Diag_ReportCallStart
   0x142AFDDB8: g_NvAPI_Diag_ReportCallReturn
   0x142F69640: ?hkaSkeletonMapperClass@@3VhkClass@@B
@@ -154,7 +154,6 @@ globals:
   0x142F915B8: ?s_instance@?$hkSingleton@VhkVtableClassRegistry@@@@2PEAVhkVtableClassRegistry@@EA
 
 functions:
-  0x140001370: GetOrInitNvAPI
   0x14005B120: VectorConstructorIterator
   0x14005B170: VectorDestructorIterator
   0x14005E020: WinMain
@@ -487,6 +486,9 @@ functions:
   0x1419B1AC0: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
 
 classes:
+  NvAPI:
+    funcs:
+      0x140001370: GetOrLoadModule
   Common::TimePoint:
     funcs:
       0x1400D5C20: Now2
