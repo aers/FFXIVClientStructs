@@ -21,7 +21,7 @@ public unsafe partial struct PoseTypeInfo {
     [FieldOffset(0x10)] public delegate* unmanaged<BattleChara*, bool> ShouldApplyPoseType;
     [FieldOffset(0x18)] public byte PoseCount;
     [FieldOffset(0x19)] public bool CanBeRandom;
-    
+
     /// <remarks>
     /// A span of emote ids the size of <see cref="PoseCount"/>.
     /// </remarks>
