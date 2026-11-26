@@ -6105,6 +6105,7 @@ enums:
     "Doze": 4
     "Umbrella": 5
     "Accessory": 6
+    "AvalancheGatlingGun": 7
 - type: Client::UI::Misc::ConfigOption
   name: ConfigOption
   underlying: __int16
@@ -9834,6 +9835,32 @@ structs:
     parameters:
     - type: Client::Game::Control::MoveControl::MoveController*
       name: this
+- type: Client::Game::Control::PoseTypeInfo
+  name: PoseTypeInfo
+  namespace: Client.Game.Control
+  union: False
+  size: 32
+  fields:
+  - type: unsigned __int16*
+    name: Emotes
+    offset: 0
+  - type: unsigned __int16
+    name: BaseTimelineId
+    offset: 8
+  - type: __fastcall
+    name: ShouldApplyPoseType
+    offset: 16
+    return_type: char
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: a1
+  - type: byte
+    name: PoseCount
+    offset: 24
+  - type: char
+    name: CanBeRandom
+    offset: 25
+  member_functions: []
 - type: Client::Game::Control::SpectatorSystem::SpectatorSpot
   name: SpectatorSpot
   namespace: Client.Game.Control
@@ -42767,6 +42794,25 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::Control::EmoteManager
+- type: Client::Game::Control::PoseTypeInfoList
+  name: PoseTypeInfoList
+  namespace: Client.Game.Control
+  union: False
+  size: 256
+  fields:
+  - type: Client::Game::Control::PoseTypeInfo
+    name: PoseTypeInfo
+    offset: 0
+    size: 8
+    is_string: False
+  member_functions: []
+  static_members:
+  - name: Instance
+    signature: 48 8D 15 ?? ?? ?? ?? 49 C1 E1
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Control::PoseTypeInfoList
 - type: Client::Game::Control::SpectatorSystem
   name: SpectatorSystem
   namespace: Client.Game.Control
